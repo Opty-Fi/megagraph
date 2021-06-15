@@ -1,0 +1,19 @@
+{
+  "name": "defi-protocol-subgraph",
+  "version": "1.0.0",
+  "description": "This package contains subgraph defi protocols that opty.fi's earn protocol integrates natively",
+  "author": "Opty-Fi <info@opty.fi>",
+  "license": "AGPL-3.0",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ opty-fi/defi-protocol-subgraph",
+    "create-local": "graph create --node http://localhost:8020/ opty-fi/defi-protocol-subgraph",
+    "remove-local": "graph remove --node http://localhost:8020/ opty-fi/defi-protocol-subgraph",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 opty-fi/defi-protocol-subgraph"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.20.0",
+    "@graphprotocol/graph-ts": "0.20.0"
+  }
+}
