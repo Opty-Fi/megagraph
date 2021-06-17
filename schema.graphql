@@ -7,8 +7,8 @@
 # compound start
 # compound end
 
-# CreamCelsius start
-type AccrueInterest @entity {
+# cream start
+type CreamAccrueInterest @entity {
   id: ID!
   cashPrior: BigInt! # uint256
   interestAccumulated: BigInt! # uint256
@@ -16,14 +16,14 @@ type AccrueInterest @entity {
   totalBorrows: BigInt! # uint256
 }
 
-type Approval @entity {
+type CreamApproval @entity {
   id: ID!
   owner: Bytes! # address
   spender: Bytes! # address
   amount: BigInt! # uint256
 }
 
-type Borrow @entity {
+type CreamBorrow @entity {
   id: ID!
   borrower: Bytes! # address
   borrowAmount: BigInt! # uint256
@@ -31,14 +31,14 @@ type Borrow @entity {
   totalBorrows: BigInt! # uint256
 }
 
-type Failure @entity {
+type CreamFailure @entity {
   id: ID!
   error: BigInt! # uint256
   info: BigInt! # uint256
   detail: BigInt! # uint256
 }
 
-type LiquidateBorrow @entity {
+type CreamLiquidateBorrow @entity {
   id: ID!
   liquidator: Bytes! # address
   borrower: Bytes! # address
@@ -47,57 +47,57 @@ type LiquidateBorrow @entity {
   seizeTokens: BigInt! # uint256
 }
 
-type Mint @entity {
+type CreamMint @entity {
   id: ID!
   minter: Bytes! # address
   mintAmount: BigInt! # uint256
   mintTokens: BigInt! # uint256
 }
 
-type NewAdmin @entity {
+type CreamNewAdmin @entity {
   id: ID!
   oldAdmin: Bytes! # address
   newAdmin: Bytes! # address
 }
 
-type NewComptroller @entity {
+type CreamNewComptroller @entity {
   id: ID!
   oldComptroller: Bytes! # address
   newComptroller: Bytes! # address
 }
 
-type NewImplementation @entity {
+type CreamNewImplementation @entity {
   id: ID!
   oldImplementation: Bytes! # address
   newImplementation: Bytes! # address
 }
 
-type NewMarketInterestRateModel @entity {
+type CreamNewMarketInterestRateModel @entity {
   id: ID!
   oldInterestRateModel: Bytes! # address
   newInterestRateModel: Bytes! # address
 }
 
-type NewPendingAdmin @entity {
+type CreamNewPendingAdmin @entity {
   id: ID!
   oldPendingAdmin: Bytes! # address
   newPendingAdmin: Bytes! # address
 }
 
-type NewReserveFactor @entity {
+type CreamNewReserveFactor @entity {
   id: ID!
   oldReserveFactorMantissa: BigInt! # uint256
   newReserveFactorMantissa: BigInt! # uint256
 }
 
-type Redeem @entity {
+type CreamRedeem @entity {
   id: ID!
   redeemer: Bytes! # address
   redeemAmount: BigInt! # uint256
   redeemTokens: BigInt! # uint256
 }
 
-type RepayBorrow @entity {
+type CreamRepayBorrow @entity {
   id: ID!
   payer: Bytes! # address
   borrower: Bytes! # address
@@ -106,30 +106,27 @@ type RepayBorrow @entity {
   totalBorrows: BigInt! # uint256
 }
 
-type ReservesAdded @entity {
+type CreamReservesAdded @entity {
   id: ID!
   benefactor: Bytes! # address
   addAmount: BigInt! # uint256
   newTotalReserves: BigInt! # uint256
 }
 
-type ReservesReduced @entity {
+type CreamReservesReduced @entity {
   id: ID!
   admin: Bytes! # address
   reduceAmount: BigInt! # uint256
   newTotalReserves: BigInt! # uint256
 }
 
-type Transfer @entity {
+type CreamTransfer @entity {
   id: ID!
   from: Bytes! # address
   to: Bytes! # address
   amount: BigInt! # uint256
 }
-# CreamCelsius end
-
-# CreamYcrv start
-# CreamYcrv end
+# cream end
 
 # curvev1 start
 # curvev1 end

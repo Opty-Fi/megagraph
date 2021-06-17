@@ -4,56 +4,55 @@
 
   "AaveV1Addess": "0x0000000000000000000000000000000000000000",
   "AaveV1StartBlock": 0,
-  "AaveV1PathABI": "",
-  "AaveV1PathMapping": "",
 
   "AaveV2Addess": "0x0000000000000000000000000000000000000000",
   "AaveV2StartBlock": 0,
-  "AaveV2PathABI": "",
-  "AaveV2PathMapping": "",
-  
+
   "CompoundAddess": "0x0000000000000000000000000000000000000000",
   "CompoundStartBlock": 0,
-  "CompoundPathABI": "",
-  "CompoundPathMapping": "",
-  
+
+  "CreamAaveAddess": "0x3225E3C669B39C7c8B3e204a8614bB218c5e31BC",
+  "CreamAaveStartBlock": 0,
+  "CreamBbtcAddess": "0x7ea9C63E216D5565c3940A2B3d150e59C2907Db3",
+  "CreamBbtcStartBlock": 0,
+  "CreamBondAddess": "0xf55BbE0255f7f4E70f63837Ff72A577fbDDbE924",
+  "CreamBondStartBlock": 0,
   "CreamCelsiusAddess": "0x2ba592F78dB6436527729929AAf6c908497cB200",
   "CreamCelsiusStartBlock": 0,
-  "CreamCelsiusPathABI": "./CreamCelsius/abis/",
-  "CreamCelsiusPathMapping": "./CreamCelsius/src/",
-  
+  "CreamCoverAddess": "0x21011BC93d9E515B9511A817A1eD1D6d468f49Fc",
+  "CreamCoverStartBlock": 0,
+  "CreamCreth2Addess": "0xfd609a03B393F1A1cFcAcEdaBf068CAD09a924E2",
+  "CreamCreth2StartBlock": 0,
+  "CreamDaiAddess": "0x92B767185fB3B04F881e3aC8e5B0662a027A1D9f",
+  "CreamDaiStartBlock": 0,
+  "CreamEsdAddess": "0x3C6C553A95910F9FC81c98784736bd628636D296",
+  "CreamEsdStartBlock": 0,
+  "CreamHbtcAddess": "0x054B7ed3F45714d3091e82aAd64A1588dC4096Ed",
+  "CreamHbtcStartBlock": 0,
+  "CreamHfilAddess": "0xd5103AfcD0B3fA865997Ef2984C66742c51b2a8b",
+  "CreamHfilStartBlock": 0,
+  "CreamKp3rAddess": "0x903560b1CcE601794C584F58898dA8a8b789Fc5d",
+  "CreamKp3rStartBlock": 0,
+  "CreamUniAddess": "0xe89a6D0509faF730BD707bf868d9A2A744a363C7",
+  "CreamUniStartBlock": 0,
   "CreamYcrvAddess": "0x9baF8a5236d44AC410c0186Fe39178d5AAD0Bb87",
   "CreamYcrvStartBlock": 0,
-  "CreamYcrvPathABI": "./CreamYcrv/abis/",
-  "CreamYcrvPathMapping": "./CreamYcrv/src/",
-  
+
   "CurveV1Addess": "0x0000000000000000000000000000000000000000",
   "CurveV1StartBlock": 0,
-  "CurveV1PathABI": "",
-  "CurveV1PathMapping": "",
-  
+
   "CurveV2Addess": "0x0000000000000000000000000000000000000000",
   "CurveV2StartBlock": 0,
-  "CurveV2PathABI": "",
-  "CurveV2PathMapping": "",
 
   "DydxAddess": "0x0000000000000000000000000000000000000000",
   "DydxStartBlock": 0,
-  "DydxPathABI": "",
-  "DydxPathMapping": "",
 
   "FulcrumAddess": "0x0000000000000000000000000000000000000000",
   "FulcrumStartBlock": 0,
-  "FulcrumPathABI": "",
-  "FulcrumPathMapping": "",
-  
+
   "HarvestFiAddess": "0x0000000000000000000000000000000000000000",
   "HarvestFiStartBlock": 0,
-  "HarvestFiPathABI": "",
-  "HarvestFiPathMapping": "",
 
   "YearnAddess": "0x0000000000000000000000000000000000000000",
-  "YearnStartBlock": 0,
-  "YearnPathABI": "",
-  "YearnPathMapping": ""
+  "YearnStartBlock": 0
 }

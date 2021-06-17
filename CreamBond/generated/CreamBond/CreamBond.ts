@@ -452,7 +452,7 @@ export class Transfer__Params {
   }
 }
 
-export class CreamCelsius__getAccountSnapshotResult {
+export class CreamBond__getAccountSnapshotResult {
   value0: BigInt;
   value1: BigInt;
   value2: BigInt;
@@ -475,9 +475,9 @@ export class CreamCelsius__getAccountSnapshotResult {
   }
 }
 
-export class CreamCelsius extends ethereum.SmartContract {
-  static bind(address: Address): CreamCelsius {
-    return new CreamCelsius("CreamCelsius", address);
+export class CreamBond extends ethereum.SmartContract {
+  static bind(address: Address): CreamBond {
+    return new CreamBond("CreamBond", address);
   }
 
   _acceptAdmin(): BigInt {
@@ -1003,14 +1003,14 @@ export class CreamCelsius extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
-  getAccountSnapshot(account: Address): CreamCelsius__getAccountSnapshotResult {
+  getAccountSnapshot(account: Address): CreamBond__getAccountSnapshotResult {
     let result = super.call(
       "getAccountSnapshot",
       "getAccountSnapshot(address):(uint256,uint256,uint256,uint256)",
       [ethereum.Value.fromAddress(account)]
     );
 
-    return new CreamCelsius__getAccountSnapshotResult(
+    return new CreamBond__getAccountSnapshotResult(
       result[0].toBigInt(),
       result[1].toBigInt(),
       result[2].toBigInt(),
@@ -1020,7 +1020,7 @@ export class CreamCelsius extends ethereum.SmartContract {
 
   try_getAccountSnapshot(
     account: Address
-  ): ethereum.CallResult<CreamCelsius__getAccountSnapshotResult> {
+  ): ethereum.CallResult<CreamBond__getAccountSnapshotResult> {
     let result = super.tryCall(
       "getAccountSnapshot",
       "getAccountSnapshot(address):(uint256,uint256,uint256,uint256)",
@@ -1031,7 +1031,7 @@ export class CreamCelsius extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      new CreamCelsius__getAccountSnapshotResult(
+      new CreamBond__getAccountSnapshotResult(
         value[0].toBigInt(),
         value[1].toBigInt(),
         value[2].toBigInt(),
