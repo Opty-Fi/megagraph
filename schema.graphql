@@ -1,31 +1,150 @@
-type _Schema_
-  @fulltext(
-    name: "metadataSearch",
-    language: en
-    algorithm: rank,
-    include: [
-      {
-        entity: "Token",
-        fields: [
-          { name: "metadataURI" }
-        ]
-      }
-    ]
-  )
+# aavev1 start
+# aavev1 end
 
+# aavev2 start
+# aavev2 end
 
-type Token @entity {
+# compound start
+# compound end
+
+# CreamCelsius start
+type AccrueInterest @entity {
   id: ID!
-  tokenID: BigInt!
-  contentURI: String!
-  metadataURI: String!
-  creator: User!
-  owner: User!
-  createdAtTimestamp: BigInt!
+  cashPrior: BigInt! # uint256
+  interestAccumulated: BigInt! # uint256
+  borrowIndex: BigInt! # uint256
+  totalBorrows: BigInt! # uint256
 }
 
-type User @entity {
+type Approval @entity {
   id: ID!
-  tokens: [Token!]! @derivedFrom(field: "owner")
-  created: [Token!]! @derivedFrom(field: "creator")
+  owner: Bytes! # address
+  spender: Bytes! # address
+  amount: BigInt! # uint256
 }
+
+type Borrow @entity {
+  id: ID!
+  borrower: Bytes! # address
+  borrowAmount: BigInt! # uint256
+  accountBorrows: BigInt! # uint256
+  totalBorrows: BigInt! # uint256
+}
+
+type Failure @entity {
+  id: ID!
+  error: BigInt! # uint256
+  info: BigInt! # uint256
+  detail: BigInt! # uint256
+}
+
+type LiquidateBorrow @entity {
+  id: ID!
+  liquidator: Bytes! # address
+  borrower: Bytes! # address
+  repayAmount: BigInt! # uint256
+  cTokenCollateral: Bytes! # address
+  seizeTokens: BigInt! # uint256
+}
+
+type Mint @entity {
+  id: ID!
+  minter: Bytes! # address
+  mintAmount: BigInt! # uint256
+  mintTokens: BigInt! # uint256
+}
+
+type NewAdmin @entity {
+  id: ID!
+  oldAdmin: Bytes! # address
+  newAdmin: Bytes! # address
+}
+
+type NewComptroller @entity {
+  id: ID!
+  oldComptroller: Bytes! # address
+  newComptroller: Bytes! # address
+}
+
+type NewImplementation @entity {
+  id: ID!
+  oldImplementation: Bytes! # address
+  newImplementation: Bytes! # address
+}
+
+type NewMarketInterestRateModel @entity {
+  id: ID!
+  oldInterestRateModel: Bytes! # address
+  newInterestRateModel: Bytes! # address
+}
+
+type NewPendingAdmin @entity {
+  id: ID!
+  oldPendingAdmin: Bytes! # address
+  newPendingAdmin: Bytes! # address
+}
+
+type NewReserveFactor @entity {
+  id: ID!
+  oldReserveFactorMantissa: BigInt! # uint256
+  newReserveFactorMantissa: BigInt! # uint256
+}
+
+type Redeem @entity {
+  id: ID!
+  redeemer: Bytes! # address
+  redeemAmount: BigInt! # uint256
+  redeemTokens: BigInt! # uint256
+}
+
+type RepayBorrow @entity {
+  id: ID!
+  payer: Bytes! # address
+  borrower: Bytes! # address
+  repayAmount: BigInt! # uint256
+  accountBorrows: BigInt! # uint256
+  totalBorrows: BigInt! # uint256
+}
+
+type ReservesAdded @entity {
+  id: ID!
+  benefactor: Bytes! # address
+  addAmount: BigInt! # uint256
+  newTotalReserves: BigInt! # uint256
+}
+
+type ReservesReduced @entity {
+  id: ID!
+  admin: Bytes! # address
+  reduceAmount: BigInt! # uint256
+  newTotalReserves: BigInt! # uint256
+}
+
+type Transfer @entity {
+  id: ID!
+  from: Bytes! # address
+  to: Bytes! # address
+  amount: BigInt! # uint256
+}
+# CreamCelsius end
+
+# CreamYcrv start
+# CreamYcrv end
+
+# curvev1 start
+# curvev1 end
+
+# curvev2 start
+# curvev2 end
+
+# dydx start
+# dydx end
+
+# fulcrum start
+# fulcrum end
+
+# harvest start
+# harvest end
+
+# yearn start
+# yearn end

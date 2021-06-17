@@ -1,0 +1,59 @@
+{
+  "blockchain": "ethereum",
+  "network": "builderevm",
+
+  "AaveV1Addess": "0x0000000000000000000000000000000000000000",
+  "AaveV1StartBlock": 0,
+  "AaveV1PathABI": "",
+  "AaveV1PathMapping": "",
+
+  "AaveV2Addess": "0x0000000000000000000000000000000000000000",
+  "AaveV2StartBlock": 0,
+  "AaveV2PathABI": "",
+  "AaveV2PathMapping": "",
+  
+  "CompoundAddess": "0x0000000000000000000000000000000000000000",
+  "CompoundStartBlock": 0,
+  "CompoundPathABI": "",
+  "CompoundPathMapping": "",
+  
+  "CreamCelsiusAddess": "0x2ba592F78dB6436527729929AAf6c908497cB200",
+  "CreamCelsiusStartBlock": 0,
+  "CreamCelsiusPathABI": "./CreamCelsius/abis/",
+  "CreamCelsiusPathMapping": "./CreamCelsius/src/",
+  
+  "CreamYcrvAddess": "0x9baF8a5236d44AC410c0186Fe39178d5AAD0Bb87",
+  "CreamYcrvStartBlock": 0,
+  "CreamYcrvPathABI": "./CreamYcrv/abis/",
+  "CreamYcrvPathMapping": "./CreamYcrv/src/",
+  
+  "CurveV1Addess": "0x0000000000000000000000000000000000000000",
+  "CurveV1StartBlock": 0,
+  "CurveV1PathABI": "",
+  "CurveV1PathMapping": "",
+  
+  "CurveV2Addess": "0x0000000000000000000000000000000000000000",
+  "CurveV2StartBlock": 0,
+  "CurveV2PathABI": "",
+  "CurveV2PathMapping": "",
+
+  "DydxAddess": "0x0000000000000000000000000000000000000000",
+  "DydxStartBlock": 0,
+  "DydxPathABI": "",
+  "DydxPathMapping": "",
+
+  "FulcrumAddess": "0x0000000000000000000000000000000000000000",
+  "FulcrumStartBlock": 0,
+  "FulcrumPathABI": "",
+  "FulcrumPathMapping": "",
+  
+  "HarvestFiAddess": "0x0000000000000000000000000000000000000000",
+  "HarvestFiStartBlock": 0,
+  "HarvestFiPathABI": "",
+  "HarvestFiPathMapping": "",
+
+  "YearnAddess": "0x0000000000000000000000000000000000000000",
+  "YearnStartBlock": 0,
+  "YearnPathABI": "",
+  "YearnPathMapping": ""
+}
