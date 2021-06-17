@@ -961,8 +961,508 @@ dataSources:
   # --------------------------------------
 
   # --------------------------------------
-  #      Fulcrum
+  #      FulcrumBzrx
   # --------------------------------------
+  - kind: ethereum/contract
+    name: FulcrumBzrx
+    network: {{network}}
+    source:
+      address: "{{FulcrumBzrxAddess}}"
+      startBlock: {{FulcrumBzrxStartBlock}}
+      abi: FulcrumBzrx
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - FulcrumApproval
+        - FulcrumBurn
+        - FulcrumMint
+        - FulcrumOwnershipTransferred
+        - FulcrumTransfer
+      abis:
+        - name: FulcrumBzrx
+          file: ./FulcrumBzrx/abis/FulcrumBzrx.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Burn(indexed address,uint256,uint256,uint256)
+          handler: handleBurn
+        - event: Mint(indexed address,uint256,uint256,uint256)
+          handler: handleMint
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./FulcrumBzrx/src/mapping.ts
+
+  # --------------------------------------
+  #      FulcrumIaave
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: FulcrumIaave
+    network: {{network}}
+    source:
+      address: "{{FulcrumIaaveAddess}}"
+      startBlock: {{FulcrumIaaveStartBlock}}
+      abi: FulcrumIaave
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - FulcrumApproval
+        - FulcrumBurn
+        - FulcrumMint
+        - FulcrumOwnershipTransferred
+        - FulcrumTransfer
+      abis:
+        - name: FulcrumIaave
+          file: ./FulcrumIaave/abis/FulcrumIaave.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Burn(indexed address,uint256,uint256,uint256)
+          handler: handleBurn
+        - event: Mint(indexed address,uint256,uint256,uint256)
+          handler: handleMint
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./FulcrumIaave/src/mapping.ts
+
+  # --------------------------------------
+  #      FulcrumIcomp
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: FulcrumIcomp
+    network: {{network}}
+    source:
+      address: "{{FulcrumIcompAddess}}"
+      startBlock: {{FulcrumIcompStartBlock}}
+      abi: FulcrumIcomp
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - FulcrumApproval
+        - FulcrumBurn
+        - FulcrumMint
+        - FulcrumOwnershipTransferred
+        - FulcrumTransfer
+      abis:
+        - name: FulcrumIcomp
+          file: ./FulcrumIcomp/abis/FulcrumIcomp.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Burn(indexed address,uint256,uint256,uint256)
+          handler: handleBurn
+        - event: Mint(indexed address,uint256,uint256,uint256)
+          handler: handleMint
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./FulcrumIcomp/src/mapping.ts
+
+  # --------------------------------------
+  #      FulcrumIdai
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: FulcrumIdai
+    network: {{network}}
+    source:
+      address: "{{FulcrumIdaiAddess}}"
+      startBlock: {{FulcrumIdaiStartBlock}}
+      abi: FulcrumIdai
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - FulcrumApproval
+        - FulcrumBurn
+        - FulcrumMint
+        - FulcrumOwnershipTransferred
+        - FulcrumTransfer
+      abis:
+        - name: FulcrumIdai
+          file: ./FulcrumIdai/abis/FulcrumIdai.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Burn(indexed address,uint256,uint256,uint256)
+          handler: handleBurn
+        - event: Mint(indexed address,uint256,uint256,uint256)
+          handler: handleMint
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./FulcrumIdai/src/mapping.ts
+
+  # --------------------------------------
+  #      FulcrumIeth
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: FulcrumIeth
+    network: {{network}}
+    source:
+      address: "{{FulcrumIethAddess}}"
+      startBlock: {{FulcrumIethStartBlock}}
+      abi: FulcrumIeth
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - FulcrumApproval
+        - FulcrumBurn
+        - FulcrumMint
+        - FulcrumOwnershipTransferred
+        - FulcrumTransfer
+      abis:
+        - name: FulcrumIeth
+          file: ./FulcrumIeth/abis/FulcrumIeth.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Burn(indexed address,uint256,uint256,uint256)
+          handler: handleBurn
+        - event: Mint(indexed address,uint256,uint256,uint256)
+          handler: handleMint
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./FulcrumIeth/src/mapping.ts
+
+  # --------------------------------------
+  #      FulcrumIknc
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: FulcrumIknc
+    network: {{network}}
+    source:
+      address: "{{FulcrumIkncAddess}}"
+      startBlock: {{FulcrumIkncStartBlock}}
+      abi: FulcrumIknc
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - FulcrumApproval
+        - FulcrumBurn
+        - FulcrumMint
+        - FulcrumOwnershipTransferred
+        - FulcrumTransfer
+      abis:
+        - name: FulcrumIknc
+          file: ./FulcrumIknc/abis/FulcrumIknc.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Burn(indexed address,uint256,uint256,uint256)
+          handler: handleBurn
+        - event: Mint(indexed address,uint256,uint256,uint256)
+          handler: handleMint
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./FulcrumIknc/src/mapping.ts
+
+  # --------------------------------------
+  #      FulcrumIlrc
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: FulcrumIlrc
+    network: {{network}}
+    source:
+      address: "{{FulcrumIlrcAddess}}"
+      startBlock: {{FulcrumIlrcStartBlock}}
+      abi: FulcrumIlrc
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - FulcrumApproval
+        - FulcrumBurn
+        - FulcrumMint
+        - FulcrumOwnershipTransferred
+        - FulcrumTransfer
+      abis:
+        - name: FulcrumIlrc
+          file: ./FulcrumIlrc/abis/FulcrumIlrc.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Burn(indexed address,uint256,uint256,uint256)
+          handler: handleBurn
+        - event: Mint(indexed address,uint256,uint256,uint256)
+          handler: handleMint
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./FulcrumIlrc/src/mapping.ts
+
+  # --------------------------------------
+  #      FulcrumImkr
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: FulcrumImkr
+    network: {{network}}
+    source:
+      address: "{{FulcrumImkrAddess}}"
+      startBlock: {{FulcrumImkrStartBlock}}
+      abi: FulcrumImkr
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - FulcrumApproval
+        - FulcrumBurn
+        - FulcrumMint
+        - FulcrumOwnershipTransferred
+        - FulcrumTransfer
+      abis:
+        - name: FulcrumImkr
+          file: ./FulcrumImkr/abis/FulcrumImkr.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Burn(indexed address,uint256,uint256,uint256)
+          handler: handleBurn
+        - event: Mint(indexed address,uint256,uint256,uint256)
+          handler: handleMint
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./FulcrumImkr/src/mapping.ts
+
+  # --------------------------------------
+  #      FulcrumIuni
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: FulcrumIuni
+    network: {{network}}
+    source:
+      address: "{{FulcrumIuniAddess}}"
+      startBlock: {{FulcrumIuniStartBlock}}
+      abi: FulcrumIuni
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - FulcrumApproval
+        - FulcrumBurn
+        - FulcrumMint
+        - FulcrumOwnershipTransferred
+        - FulcrumTransfer
+      abis:
+        - name: FulcrumIuni
+          file: ./FulcrumIuni/abis/FulcrumIuni.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Burn(indexed address,uint256,uint256,uint256)
+          handler: handleBurn
+        - event: Mint(indexed address,uint256,uint256,uint256)
+          handler: handleMint
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./FulcrumIuni/src/mapping.ts
+
+  # --------------------------------------
+  #      FulcrumIusdc
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: FulcrumIusdc
+    network: {{network}}
+    source:
+      address: "{{FulcrumIusdcAddess}}"
+      startBlock: {{FulcrumIusdcStartBlock}}
+      abi: FulcrumIusdc
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - FulcrumApproval
+        - FulcrumBurn
+        - FulcrumMint
+        - FulcrumOwnershipTransferred
+        - FulcrumTransfer
+      abis:
+        - name: FulcrumIusdc
+          file: ./FulcrumIusdc/abis/FulcrumIusdc.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Burn(indexed address,uint256,uint256,uint256)
+          handler: handleBurn
+        - event: Mint(indexed address,uint256,uint256,uint256)
+          handler: handleMint
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./FulcrumIusdc/src/mapping.ts
+
+  # --------------------------------------
+  #      FulcrumIusdt
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: FulcrumIusdt
+    network: {{network}}
+    source:
+      address: "{{FulcrumIusdtAddess}}"
+      startBlock: {{FulcrumIusdtStartBlock}}
+      abi: FulcrumIusdt
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - FulcrumApproval
+        - FulcrumBurn
+        - FulcrumMint
+        - FulcrumOwnershipTransferred
+        - FulcrumTransfer
+      abis:
+        - name: FulcrumIusdt
+          file: ./FulcrumIusdt/abis/FulcrumIusdt.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Burn(indexed address,uint256,uint256,uint256)
+          handler: handleBurn
+        - event: Mint(indexed address,uint256,uint256,uint256)
+          handler: handleMint
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./FulcrumIusdt/src/mapping.ts
+
+  # --------------------------------------
+  #      FulcrumIwbtc
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: FulcrumIwbtc
+    network: {{network}}
+    source:
+      address: "{{FulcrumIwbtcAddess}}"
+      startBlock: {{FulcrumIwbtcStartBlock}}
+      abi: FulcrumIwbtc
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - FulcrumApproval
+        - FulcrumBurn
+        - FulcrumMint
+        - FulcrumOwnershipTransferred
+        - FulcrumTransfer
+      abis:
+        - name: FulcrumIwbtc
+          file: ./FulcrumIwbtc/abis/FulcrumIwbtc.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Burn(indexed address,uint256,uint256,uint256)
+          handler: handleBurn
+        - event: Mint(indexed address,uint256,uint256,uint256)
+          handler: handleMint
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./FulcrumIwbtc/src/mapping.ts
+
+  # --------------------------------------
+  #      FulcrumIyfi
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: FulcrumIyfi
+    network: {{network}}
+    source:
+      address: "{{FulcrumIyfiAddess}}"
+      startBlock: {{FulcrumIyfiStartBlock}}
+      abi: FulcrumIyfi
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - FulcrumApproval
+        - FulcrumBurn
+        - FulcrumMint
+        - FulcrumOwnershipTransferred
+        - FulcrumTransfer
+      abis:
+        - name: FulcrumIyfi
+          file: ./FulcrumIyfi/abis/FulcrumIyfi.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Burn(indexed address,uint256,uint256,uint256)
+          handler: handleBurn
+        - event: Mint(indexed address,uint256,uint256,uint256)
+          handler: handleMint
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./FulcrumIyfi/src/mapping.ts
+
+  # --------------------------------------
+  #      FulcrumVbzrx
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: FulcrumVbzrx
+    network: {{network}}
+    source:
+      address: "{{FulcrumVbzrxAddess}}"
+      startBlock: {{FulcrumVbzrxStartBlock}}
+      abi: FulcrumVbzrx
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - FulcrumApproval
+        - FulcrumBurn
+        - FulcrumMint
+        - FulcrumOwnershipTransferred
+        - FulcrumTransfer
+      abis:
+        - name: FulcrumVbzrx
+          file: ./FulcrumVbzrx/abis/FulcrumVbzrx.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Burn(indexed address,uint256,uint256,uint256)
+          handler: handleBurn
+        - event: Mint(indexed address,uint256,uint256,uint256)
+          handler: handleMint
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./FulcrumVbzrx/src/mapping.ts
 
   # --------------------------------------
   #      Harvest

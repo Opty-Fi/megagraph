@@ -138,6 +138,41 @@ type CreamTransfer @entity {
 # dydx end
 
 # fulcrum start
+type FulcrumApproval @entity {
+  id: ID!
+  owner: Bytes! # address
+  spender: Bytes! # address
+  value: BigInt! # uint256
+}
+
+type FulcrumBurn @entity {
+  id: ID!
+  burner: Bytes! # address
+  tokenAmount: BigInt! # uint256
+  assetAmount: BigInt! # uint256
+  price: BigInt! # uint256
+}
+
+type FulcrumMint @entity {
+  id: ID!
+  minter: Bytes! # address
+  tokenAmount: BigInt! # uint256
+  assetAmount: BigInt! # uint256
+  price: BigInt! # uint256
+}
+
+type FulcrumOwnershipTransferred @entity {
+  id: ID!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+}
+
+type FulcrumTransfer @entity {
+  id: ID!
+  from: Bytes! # address
+  to: Bytes! # address
+  value: BigInt! # uint256
+}
 # fulcrum end
 
 # harvest start
