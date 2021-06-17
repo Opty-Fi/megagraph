@@ -13,13 +13,109 @@ dataSources:
   # --------------------------------------
 
   # --------------------------------------
+  #      AaveV2
+  # --------------------------------------
+
+  # --------------------------------------
+  #      AaveV2
+  # --------------------------------------
+
+  # --------------------------------------
+  #      AaveV2
+  # --------------------------------------
+
+  # --------------------------------------
+  #      AaveV2
+  # --------------------------------------
+
+  # --------------------------------------
+  #      AaveV2
+  # --------------------------------------
+
+  # --------------------------------------
+  #      AaveV2
+  # --------------------------------------
+
+  # --------------------------------------
+  #      AaveV2
+  # --------------------------------------
+
+  # --------------------------------------
+  #      AaveV2
+  # --------------------------------------
+
+  # --------------------------------------
+  #      AaveV2
+  # --------------------------------------
+
+  # --------------------------------------
+  #      AaveV2
+  # --------------------------------------
+
+  # --------------------------------------
+  #      AaveV2
+  # --------------------------------------
+
+  # --------------------------------------
+  #      AaveV2
+  # --------------------------------------
+
+  # --------------------------------------
+  #      AaveV2
+  # --------------------------------------
+
+  # --------------------------------------
+  #      AaveV2
+  # --------------------------------------
+
+  # --------------------------------------
+  #      AaveV2
+  # --------------------------------------
+
+  # --------------------------------------
+  #      AaveV2
+  # --------------------------------------
+
+  # --------------------------------------
+  #      AaveV2
+  # --------------------------------------
+
+  # --------------------------------------
+  #      AaveV2
+  # --------------------------------------
+
+  # --------------------------------------
+  #      AaveV2
+  # --------------------------------------
+
+  # --------------------------------------
+  #      AaveV2
+  # --------------------------------------
+
+  # --------------------------------------
+  #      AaveV2
+  # --------------------------------------
+
+  # --------------------------------------
+  #      AaveV2
+  # --------------------------------------
+
+  # --------------------------------------
+  #      AaveV2
+  # --------------------------------------
+
+  # --------------------------------------
+  #      AaveV2
+  # --------------------------------------
+
+  # --------------------------------------
   #      CreamAave
   # --------------------------------------
   - kind: ethereum/contract
     name: CreamAave
     network: {{network}}
     source:
-      address: "{{CreamAaveAddess}}"
+      address: "{{CreamAave}}"
       startBlock: {{CreamAaveStartBlock}}
       abi: CreamAave
     mapping:
@@ -91,7 +187,7 @@ dataSources:
     name: CreamBbtc
     network: {{network}}
     source:
-      address: "{{CreamBbtcAddess}}"
+      address: "{{CreamBbtc}}"
       startBlock: {{CreamBbtcStartBlock}}
       abi: CreamBbtc
     mapping:
@@ -163,7 +259,7 @@ dataSources:
     name: CreamBond
     network: {{network}}
     source:
-      address: "{{CreamBondAddess}}"
+      address: "{{CreamBond}}"
       startBlock: {{CreamBondStartBlock}}
       abi: CreamBond
     mapping:
@@ -235,7 +331,7 @@ dataSources:
     name: CreamCelsius
     network: {{network}}
     source:
-      address: "{{CreamCelsiusAddess}}"
+      address: "{{CreamCelsius}}"
       startBlock: {{CreamCelsiusStartBlock}}
       abi: CreamCelsius
     mapping:
@@ -307,7 +403,7 @@ dataSources:
     name: CreamCover
     network: {{network}}
     source:
-      address: "{{CreamCoverAddess}}"
+      address: "{{CreamCover}}"
       startBlock: {{CreamCoverStartBlock}}
       abi: CreamCover
     mapping:
@@ -379,7 +475,7 @@ dataSources:
     name: CreamCreth2
     network: {{network}}
     source:
-      address: "{{CreamCreth2Addess}}"
+      address: "{{CreamCreth2}}"
       startBlock: {{CreamCreth2StartBlock}}
       abi: CreamCreth2
     mapping:
@@ -451,7 +547,7 @@ dataSources:
     name: CreamDai
     network: {{network}}
     source:
-      address: "{{CreamDaiAddess}}"
+      address: "{{CreamDai}}"
       startBlock: {{CreamDaiStartBlock}}
       abi: CreamDai
     mapping:
@@ -523,7 +619,7 @@ dataSources:
     name: CreamEsd
     network: {{network}}
     source:
-      address: "{{CreamEsdAddess}}"
+      address: "{{CreamEsd}}"
       startBlock: {{CreamEsdStartBlock}}
       abi: CreamEsd
     mapping:
@@ -595,7 +691,7 @@ dataSources:
     name: CreamHbtc
     network: {{network}}
     source:
-      address: "{{CreamHbtcAddess}}"
+      address: "{{CreamHbtc}}"
       startBlock: {{CreamHbtcStartBlock}}
       abi: CreamHbtc
     mapping:
@@ -667,7 +763,7 @@ dataSources:
     name: CreamHfil
     network: {{network}}
     source:
-      address: "{{CreamHfilAddess}}"
+      address: "{{CreamHfil}}"
       startBlock: {{CreamHfilStartBlock}}
       abi: CreamHfil
     mapping:
@@ -739,7 +835,7 @@ dataSources:
     name: CreamKp3r
     network: {{network}}
     source:
-      address: "{{CreamKp3rAddess}}"
+      address: "{{CreamKp3r}}"
       startBlock: {{CreamKp3rStartBlock}}
       abi: CreamKp3r
     mapping:
@@ -811,7 +907,7 @@ dataSources:
     name: CreamUni
     network: {{network}}
     source:
-      address: "{{CreamUniAddess}}"
+      address: "{{CreamUni}}"
       startBlock: {{CreamUniStartBlock}}
       abi: CreamUni
     mapping:
@@ -883,7 +979,7 @@ dataSources:
     name: CreamYcrv
     network: {{network}}
     source:
-      address: "{{CreamYcrvAddess}}"
+      address: "{{CreamYcrv}}"
       startBlock: {{CreamYcrvStartBlock}}
       abi: CreamYcrv
     mapping:
@@ -967,7 +1063,7 @@ dataSources:
     name: FulcrumBzrx
     network: {{network}}
     source:
-      address: "{{FulcrumBzrxAddess}}"
+      address: "{{FulcrumBzrx}}"
       startBlock: {{FulcrumBzrxStartBlock}}
       abi: FulcrumBzrx
     mapping:
@@ -1003,7 +1099,7 @@ dataSources:
     name: FulcrumIaave
     network: {{network}}
     source:
-      address: "{{FulcrumIaaveAddess}}"
+      address: "{{FulcrumIaave}}"
       startBlock: {{FulcrumIaaveStartBlock}}
       abi: FulcrumIaave
     mapping:
@@ -1039,7 +1135,7 @@ dataSources:
     name: FulcrumIcomp
     network: {{network}}
     source:
-      address: "{{FulcrumIcompAddess}}"
+      address: "{{FulcrumIcomp}}"
       startBlock: {{FulcrumIcompStartBlock}}
       abi: FulcrumIcomp
     mapping:
@@ -1075,7 +1171,7 @@ dataSources:
     name: FulcrumIdai
     network: {{network}}
     source:
-      address: "{{FulcrumIdaiAddess}}"
+      address: "{{FulcrumIdai}}"
       startBlock: {{FulcrumIdaiStartBlock}}
       abi: FulcrumIdai
     mapping:
@@ -1111,7 +1207,7 @@ dataSources:
     name: FulcrumIeth
     network: {{network}}
     source:
-      address: "{{FulcrumIethAddess}}"
+      address: "{{FulcrumIeth}}"
       startBlock: {{FulcrumIethStartBlock}}
       abi: FulcrumIeth
     mapping:
@@ -1147,7 +1243,7 @@ dataSources:
     name: FulcrumIknc
     network: {{network}}
     source:
-      address: "{{FulcrumIkncAddess}}"
+      address: "{{FulcrumIknc}}"
       startBlock: {{FulcrumIkncStartBlock}}
       abi: FulcrumIknc
     mapping:
@@ -1183,7 +1279,7 @@ dataSources:
     name: FulcrumIlrc
     network: {{network}}
     source:
-      address: "{{FulcrumIlrcAddess}}"
+      address: "{{FulcrumIlrc}}"
       startBlock: {{FulcrumIlrcStartBlock}}
       abi: FulcrumIlrc
     mapping:
@@ -1219,7 +1315,7 @@ dataSources:
     name: FulcrumImkr
     network: {{network}}
     source:
-      address: "{{FulcrumImkrAddess}}"
+      address: "{{FulcrumImkr}}"
       startBlock: {{FulcrumImkrStartBlock}}
       abi: FulcrumImkr
     mapping:
@@ -1255,7 +1351,7 @@ dataSources:
     name: FulcrumIuni
     network: {{network}}
     source:
-      address: "{{FulcrumIuniAddess}}"
+      address: "{{FulcrumIuni}}"
       startBlock: {{FulcrumIuniStartBlock}}
       abi: FulcrumIuni
     mapping:
@@ -1291,7 +1387,7 @@ dataSources:
     name: FulcrumIusdc
     network: {{network}}
     source:
-      address: "{{FulcrumIusdcAddess}}"
+      address: "{{FulcrumIusdc}}"
       startBlock: {{FulcrumIusdcStartBlock}}
       abi: FulcrumIusdc
     mapping:
@@ -1327,7 +1423,7 @@ dataSources:
     name: FulcrumIusdt
     network: {{network}}
     source:
-      address: "{{FulcrumIusdtAddess}}"
+      address: "{{FulcrumIusdt}}"
       startBlock: {{FulcrumIusdtStartBlock}}
       abi: FulcrumIusdt
     mapping:
@@ -1363,7 +1459,7 @@ dataSources:
     name: FulcrumIwbtc
     network: {{network}}
     source:
-      address: "{{FulcrumIwbtcAddess}}"
+      address: "{{FulcrumIwbtc}}"
       startBlock: {{FulcrumIwbtcStartBlock}}
       abi: FulcrumIwbtc
     mapping:
@@ -1399,7 +1495,7 @@ dataSources:
     name: FulcrumIyfi
     network: {{network}}
     source:
-      address: "{{FulcrumIyfiAddess}}"
+      address: "{{FulcrumIyfi}}"
       startBlock: {{FulcrumIyfiStartBlock}}
       abi: FulcrumIyfi
     mapping:
@@ -1435,7 +1531,7 @@ dataSources:
     name: FulcrumVbzrx
     network: {{network}}
     source:
-      address: "{{FulcrumVbzrxAddess}}"
+      address: "{{FulcrumVbzrx}}"
       startBlock: {{FulcrumVbzrxStartBlock}}
       abi: FulcrumVbzrx
     mapping:
