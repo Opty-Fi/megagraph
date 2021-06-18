@@ -2,6 +2,10 @@
 # aavev1 end
 
 # aavev2 start
+type AaveV2Upgraded @entity {
+  id: ID!
+  implementation: Bytes! # address
+}
 # aavev2 end
 
 # compound start

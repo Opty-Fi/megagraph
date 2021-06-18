@@ -9,104 +9,604 @@ dataSources:
   # --------------------------------------
 
   # --------------------------------------
-  #      AaveV2
+  #      AaveV2Aaavev2
   # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV2Aaavev2
+    network: {{network}}
+    source:
+      address: "{{AaveV2Aaavev2Address}}"
+      startBlock: {{AaveV2Aaavev2StartBlock}}
+      abi: AaveV2Aaavev2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV2Upgraded
+      abis:
+        - name: AaveV2Aaavev2
+          file: ./AaveV2Aaavev2/abis/AaveV2Aaavev2.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./AaveV2Aaavev2/src/mapping.ts
 
   # --------------------------------------
-  #      AaveV2
+  #      AaveV2Abal
   # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV2Abal
+    network: {{network}}
+    source:
+      address: "{{AaveV2AbalAddress}}"
+      startBlock: {{AaveV2AbalStartBlock}}
+      abi: AaveV2Abal
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV2Upgraded
+      abis:
+        - name: AaveV2Abal
+          file: ./AaveV2Abal/abis/AaveV2Abal.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./AaveV2Abal/src/mapping.ts
 
   # --------------------------------------
-  #      AaveV2
+  #      AaveV2Abatv2
   # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV2Abatv2
+    network: {{network}}
+    source:
+      address: "{{AaveV2Abatv2Address}}"
+      startBlock: {{AaveV2Abatv2StartBlock}}
+      abi: AaveV2Abatv2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV2Upgraded
+      abis:
+        - name: AaveV2Abatv2
+          file: ./AaveV2Abatv2/abis/AaveV2Abatv2.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./AaveV2Abatv2/src/mapping.ts
 
   # --------------------------------------
-  #      AaveV2
+  #      AaveV2Abusdv2
   # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV2Abusdv2
+    network: {{network}}
+    source:
+      address: "{{AaveV2Abusdv2Address}}"
+      startBlock: {{AaveV2Abusdv2StartBlock}}
+      abi: AaveV2Abusdv2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV2Upgraded
+      abis:
+        - name: AaveV2Abusdv2
+          file: ./AaveV2Abusdv2/abis/AaveV2Abusdv2.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./AaveV2Abusdv2/src/mapping.ts
 
   # --------------------------------------
-  #      AaveV2
+  #      AaveV2Acrvv2
   # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV2Acrvv2
+    network: {{network}}
+    source:
+      address: "{{AaveV2Acrvv2Address}}"
+      startBlock: {{AaveV2Acrvv2StartBlock}}
+      abi: AaveV2Acrvv2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV2Upgraded
+      abis:
+        - name: AaveV2Acrvv2
+          file: ./AaveV2Acrvv2/abis/AaveV2Acrvv2.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./AaveV2Acrvv2/src/mapping.ts
 
   # --------------------------------------
-  #      AaveV2
+  #      AaveV2Adaiv2
   # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV2Adaiv2
+    network: {{network}}
+    source:
+      address: "{{AaveV2Adaiv2Address}}"
+      startBlock: {{AaveV2Adaiv2StartBlock}}
+      abi: AaveV2Adaiv2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV2Upgraded
+      abis:
+        - name: AaveV2Adaiv2
+          file: ./AaveV2Adaiv2/abis/AaveV2Adaiv2.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./AaveV2Adaiv2/src/mapping.ts
 
   # --------------------------------------
-  #      AaveV2
+  #      AaveV2Aenjv2
   # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV2Aenjv2
+    network: {{network}}
+    source:
+      address: "{{AaveV2Aenjv2Address}}"
+      startBlock: {{AaveV2Aenjv2StartBlock}}
+      abi: AaveV2Aenjv2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV2Upgraded
+      abis:
+        - name: AaveV2Aenjv2
+          file: ./AaveV2Aenjv2/abis/AaveV2Aenjv2.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./AaveV2Aenjv2/src/mapping.ts
 
   # --------------------------------------
-  #      AaveV2
+  #      AaveV2Agusdv2
   # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV2Agusdv2
+    network: {{network}}
+    source:
+      address: "{{AaveV2Agusdv2Address}}"
+      startBlock: {{AaveV2Agusdv2StartBlock}}
+      abi: AaveV2Agusdv2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV2Upgraded
+      abis:
+        - name: AaveV2Agusdv2
+          file: ./AaveV2Agusdv2/abis/AaveV2Agusdv2.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./AaveV2Agusdv2/src/mapping.ts
 
   # --------------------------------------
-  #      AaveV2
+  #      AaveV2Akncv2
   # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV2Akncv2
+    network: {{network}}
+    source:
+      address: "{{AaveV2Akncv2Address}}"
+      startBlock: {{AaveV2Akncv2StartBlock}}
+      abi: AaveV2Akncv2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV2Upgraded
+      abis:
+        - name: AaveV2Akncv2
+          file: ./AaveV2Akncv2/abis/AaveV2Akncv2.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./AaveV2Akncv2/src/mapping.ts
 
   # --------------------------------------
-  #      AaveV2
+  #      AaveV2Alinkv2
   # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV2Alinkv2
+    network: {{network}}
+    source:
+      address: "{{AaveV2Alinkv2Address}}"
+      startBlock: {{AaveV2Alinkv2StartBlock}}
+      abi: AaveV2Alinkv2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV2Upgraded
+      abis:
+        - name: AaveV2Alinkv2
+          file: ./AaveV2Alinkv2/abis/AaveV2Alinkv2.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./AaveV2Alinkv2/src/mapping.ts
 
   # --------------------------------------
-  #      AaveV2
+  #      AaveV2Amanav2
   # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV2Amanav2
+    network: {{network}}
+    source:
+      address: "{{AaveV2Amanav2Address}}"
+      startBlock: {{AaveV2Amanav2StartBlock}}
+      abi: AaveV2Amanav2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV2Upgraded
+      abis:
+        - name: AaveV2Amanav2
+          file: ./AaveV2Amanav2/abis/AaveV2Amanav2.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./AaveV2Amanav2/src/mapping.ts
 
   # --------------------------------------
-  #      AaveV2
+  #      AaveV2Amkrv2
   # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV2Amkrv2
+    network: {{network}}
+    source:
+      address: "{{AaveV2Amkrv2Address}}"
+      startBlock: {{AaveV2Amkrv2StartBlock}}
+      abi: AaveV2Amkrv2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV2Upgraded
+      abis:
+        - name: AaveV2Amkrv2
+          file: ./AaveV2Amkrv2/abis/AaveV2Amkrv2.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./AaveV2Amkrv2/src/mapping.ts
 
   # --------------------------------------
-  #      AaveV2
+  #      AaveV2Aren
   # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV2Aren
+    network: {{network}}
+    source:
+      address: "{{AaveV2ArenAddress}}"
+      startBlock: {{AaveV2ArenStartBlock}}
+      abi: AaveV2Aren
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV2Upgraded
+      abis:
+        - name: AaveV2Aren
+          file: ./AaveV2Aren/abis/AaveV2Aren.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./AaveV2Aren/src/mapping.ts
 
   # --------------------------------------
-  #      AaveV2
+  #      AaveV2Arenv2
   # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV2Arenv2
+    network: {{network}}
+    source:
+      address: "{{AaveV2Arenv2Address}}"
+      startBlock: {{AaveV2Arenv2StartBlock}}
+      abi: AaveV2Arenv2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV2Upgraded
+      abis:
+        - name: AaveV2Arenv2
+          file: ./AaveV2Arenv2/abis/AaveV2Arenv2.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./AaveV2Arenv2/src/mapping.ts
 
   # --------------------------------------
-  #      AaveV2
+  #      AaveV2Asnxv2
   # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV2Asnxv2
+    network: {{network}}
+    source:
+      address: "{{AaveV2Asnxv2Address}}"
+      startBlock: {{AaveV2Asnxv2StartBlock}}
+      abi: AaveV2Asnxv2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV2Upgraded
+      abis:
+        - name: AaveV2Asnxv2
+          file: ./AaveV2Asnxv2/abis/AaveV2Asnxv2.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./AaveV2Asnxv2/src/mapping.ts
 
   # --------------------------------------
-  #      AaveV2
+  #      AaveV2Asusdv2
   # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV2Asusdv2
+    network: {{network}}
+    source:
+      address: "{{AaveV2Asusdv2Address}}"
+      startBlock: {{AaveV2Asusdv2StartBlock}}
+      abi: AaveV2Asusdv2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV2Upgraded
+      abis:
+        - name: AaveV2Asusdv2
+          file: ./AaveV2Asusdv2/abis/AaveV2Asusdv2.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./AaveV2Asusdv2/src/mapping.ts
 
   # --------------------------------------
-  #      AaveV2
+  #      AaveV2Atusdv2
   # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV2Atusdv2
+    network: {{network}}
+    source:
+      address: "{{AaveV2Atusdv2Address}}"
+      startBlock: {{AaveV2Atusdv2StartBlock}}
+      abi: AaveV2Atusdv2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV2Upgraded
+      abis:
+        - name: AaveV2Atusdv2
+          file: ./AaveV2Atusdv2/abis/AaveV2Atusdv2.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./AaveV2Atusdv2/src/mapping.ts
 
   # --------------------------------------
-  #      AaveV2
+  #      AaveV2Auniv2
   # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV2Auniv2
+    network: {{network}}
+    source:
+      address: "{{AaveV2Auniv2Address}}"
+      startBlock: {{AaveV2Auniv2StartBlock}}
+      abi: AaveV2Auniv2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV2Upgraded
+      abis:
+        - name: AaveV2Auniv2
+          file: ./AaveV2Auniv2/abis/AaveV2Auniv2.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./AaveV2Auniv2/src/mapping.ts
 
   # --------------------------------------
-  #      AaveV2
+  #      AaveV2Ausdcv2
   # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV2Ausdcv2
+    network: {{network}}
+    source:
+      address: "{{AaveV2Ausdcv2Address}}"
+      startBlock: {{AaveV2Ausdcv2StartBlock}}
+      abi: AaveV2Ausdcv2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV2Upgraded
+      abis:
+        - name: AaveV2Ausdcv2
+          file: ./AaveV2Ausdcv2/abis/AaveV2Ausdcv2.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./AaveV2Ausdcv2/src/mapping.ts
 
   # --------------------------------------
-  #      AaveV2
+  #      AaveV2Ausdtv2
   # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV2Ausdtv2
+    network: {{network}}
+    source:
+      address: "{{AaveV2Ausdtv2Address}}"
+      startBlock: {{AaveV2Ausdtv2StartBlock}}
+      abi: AaveV2Ausdtv2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV2Upgraded
+      abis:
+        - name: AaveV2Ausdtv2
+          file: ./AaveV2Ausdtv2/abis/AaveV2Ausdtv2.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./AaveV2Ausdtv2/src/mapping.ts
 
   # --------------------------------------
-  #      AaveV2
+  #      AaveV2Awbtcv2
   # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV2Awbtcv2
+    network: {{network}}
+    source:
+      address: "{{AaveV2Awbtcv2Address}}"
+      startBlock: {{AaveV2Awbtcv2StartBlock}}
+      abi: AaveV2Awbtcv2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV2Upgraded
+      abis:
+        - name: AaveV2Awbtcv2
+          file: ./AaveV2Awbtcv2/abis/AaveV2Awbtcv2.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./AaveV2Awbtcv2/src/mapping.ts
 
   # --------------------------------------
-  #      AaveV2
+  #      AaveV2Awethv2
   # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV2Awethv2
+    network: {{network}}
+    source:
+      address: "{{AaveV2Awethv2Address}}"
+      startBlock: {{AaveV2Awethv2StartBlock}}
+      abi: AaveV2Awethv2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV2Upgraded
+      abis:
+        - name: AaveV2Awethv2
+          file: ./AaveV2Awethv2/abis/AaveV2Awethv2.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./AaveV2Awethv2/src/mapping.ts
 
   # --------------------------------------
-  #      AaveV2
+  #      AaveV2Axsushi
   # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV2Axsushi
+    network: {{network}}
+    source:
+      address: "{{AaveV2AxsushiAddress}}"
+      startBlock: {{AaveV2AxsushiStartBlock}}
+      abi: AaveV2Axsushi
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV2Upgraded
+      abis:
+        - name: AaveV2Axsushi
+          file: ./AaveV2Axsushi/abis/AaveV2Axsushi.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./AaveV2Axsushi/src/mapping.ts
 
   # --------------------------------------
-  #      AaveV2
+  #      AaveV2Ayfiv2
   # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV2Ayfiv2
+    network: {{network}}
+    source:
+      address: "{{AaveV2Ayfiv2Address}}"
+      startBlock: {{AaveV2Ayfiv2StartBlock}}
+      abi: AaveV2Ayfiv2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV2Upgraded
+      abis:
+        - name: AaveV2Ayfiv2
+          file: ./AaveV2Ayfiv2/abis/AaveV2Ayfiv2.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./AaveV2Ayfiv2/src/mapping.ts
 
   # --------------------------------------
-  #      AaveV2
+  #      AaveV2Azrxv2
   # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV2Azrxv2
+    network: {{network}}
+    source:
+      address: "{{AaveV2Azrxv2Address}}"
+      startBlock: {{AaveV2Azrxv2StartBlock}}
+      abi: AaveV2Azrxv2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV2Upgraded
+      abis:
+        - name: AaveV2Azrxv2
+          file: ./AaveV2Azrxv2/abis/AaveV2Azrxv2.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./AaveV2Azrxv2/src/mapping.ts
 
   # --------------------------------------
   #      CreamAave
