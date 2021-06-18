@@ -1,4 +1,76 @@
 # aavev1 start
+type AaveV1Approval @entity {
+  id: ID!
+  owner: Bytes! # address
+  spender: Bytes! # address
+  value: BigInt! # uint256
+}
+
+type AaveV1BalanceTransfer @entity {
+  id: ID!
+  _from: Bytes! # address
+  _to: Bytes! # address
+  _value: BigInt! # uint256
+  _fromBalanceIncrease: BigInt! # uint256
+  _toBalanceIncrease: BigInt! # uint256
+  _fromIndex: BigInt! # uint256
+  _toIndex: BigInt! # uint256
+}
+
+type AaveV1BurnOnLiquidation @entity {
+  id: ID!
+  _from: Bytes! # address
+  _value: BigInt! # uint256
+  _fromBalanceIncrease: BigInt! # uint256
+  _fromIndex: BigInt! # uint256
+}
+
+type AaveV1InterestRedirectionAllowanceChanged @entity {
+  id: ID!
+  _from: Bytes! # address
+  _to: Bytes! # address
+}
+
+type AaveV1InterestStreamRedirected @entity {
+  id: ID!
+  _from: Bytes! # address
+  _to: Bytes! # address
+  _redirectedBalance: BigInt! # uint256
+  _fromBalanceIncrease: BigInt! # uint256
+  _fromIndex: BigInt! # uint256
+}
+
+type AaveV1MintOnDeposit @entity {
+  id: ID!
+  _from: Bytes! # address
+  _value: BigInt! # uint256
+  _fromBalanceIncrease: BigInt! # uint256
+  _fromIndex: BigInt! # uint256
+}
+
+type AaveV1Redeem @entity {
+  id: ID!
+  _from: Bytes! # address
+  _value: BigInt! # uint256
+  _fromBalanceIncrease: BigInt! # uint256
+  _fromIndex: BigInt! # uint256
+}
+
+type AaveV1RedirectedBalanceUpdated @entity {
+  id: ID!
+  _targetAddress: Bytes! # address
+  _targetBalanceIncrease: BigInt! # uint256
+  _targetIndex: BigInt! # uint256
+  _redirectedBalanceAdded: BigInt! # uint256
+  _redirectedBalanceRemoved: BigInt! # uint256
+}
+
+type AaveV1Transfer @entity {
+  id: ID!
+  from: Bytes! # address
+  to: Bytes! # address
+  value: BigInt! # uint256
+}
 # aavev1 end
 
 # aavev2 start

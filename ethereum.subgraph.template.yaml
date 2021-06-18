@@ -5,8 +5,1111 @@ schema:
   file: ./schema.graphql
 dataSources:
   # --------------------------------------
-  #      AaveV1
+  #      AaveV1Aaave
   # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV1Aaave
+    network: {{network}}
+    source:
+      address: "{{AaveV1AaaveAddress}}"
+      startBlock: {{AaveV1AaaveStartBlock}}
+      abi: AaveV1Aaave
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV1Approval
+        - AaveV1BalanceTransfer
+        - AaveV1BurnOnLiquidation
+        - AaveV1InterestRedirectionAllowanceChanged
+        - AaveV1InterestStreamRedirected
+        - AaveV1MintOnDeposit
+        - AaveV1Redeem
+        - AaveV1RedirectedBalanceUpdated
+        - AaveV1Transfer
+      abis:
+        - name: AaveV1Aaave
+          file: ./AaveV1Aaave/abis/AaveV1Aaave.json
+      callHandlers:
+        - call: functionName()
+          handler: doAThing
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
+          handler: handleBurnOnLiquidation
+        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
+          handler: handleInterestRedirectionAllowanceChanged
+        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleInterestStreamRedirected
+        - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
+          handler: handleMintOnDeposit
+        - event: Redeem(indexed address,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleRedirectedBalanceUpdated
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./AaveV1Aaave/src/mapping.ts
+
+  # --------------------------------------
+  #      AaveV1Abat
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV1Abat
+    network: {{network}}
+    source:
+      address: "{{AaveV1AbatAddress}}"
+      startBlock: {{AaveV1AbatStartBlock}}
+      abi: AaveV1Abat
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV1Approval
+        - AaveV1BalanceTransfer
+        - AaveV1BurnOnLiquidation
+        - AaveV1InterestRedirectionAllowanceChanged
+        - AaveV1InterestStreamRedirected
+        - AaveV1MintOnDeposit
+        - AaveV1Redeem
+        - AaveV1RedirectedBalanceUpdated
+        - AaveV1Transfer
+      abis:
+        - name: AaveV1Abat
+          file: ./AaveV1Abat/abis/AaveV1Abat.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
+          handler: handleBurnOnLiquidation
+        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
+          handler: handleInterestRedirectionAllowanceChanged
+        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleInterestStreamRedirected
+        - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
+          handler: handleMintOnDeposit
+        - event: Redeem(indexed address,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleRedirectedBalanceUpdated
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./AaveV1Abat/src/mapping.ts
+
+  # --------------------------------------
+  #      AaveV1Abusd
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV1Abusd
+    network: {{network}}
+    source:
+      address: "{{AaveV1AbusdAddress}}"
+      startBlock: {{AaveV1AbusdStartBlock}}
+      abi: AaveV1Abusd
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV1Approval
+        - AaveV1BalanceTransfer
+        - AaveV1BurnOnLiquidation
+        - AaveV1InterestRedirectionAllowanceChanged
+        - AaveV1InterestStreamRedirected
+        - AaveV1MintOnDeposit
+        - AaveV1Redeem
+        - AaveV1RedirectedBalanceUpdated
+        - AaveV1Transfer
+      abis:
+        - name: AaveV1Abusd
+          file: ./AaveV1Abusd/abis/AaveV1Abusd.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
+          handler: handleBurnOnLiquidation
+        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
+          handler: handleInterestRedirectionAllowanceChanged
+        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleInterestStreamRedirected
+        - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
+          handler: handleMintOnDeposit
+        - event: Redeem(indexed address,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleRedirectedBalanceUpdated
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./AaveV1Abusd/src/mapping.ts
+
+  # --------------------------------------
+  #      AaveV1Adai
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV1Adai
+    network: {{network}}
+    source:
+      address: "{{AaveV1AdaiAddress}}"
+      startBlock: {{AaveV1AdaiStartBlock}}
+      abi: AaveV1Adai
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV1Approval
+        - AaveV1BalanceTransfer
+        - AaveV1BurnOnLiquidation
+        - AaveV1InterestRedirectionAllowanceChanged
+        - AaveV1InterestStreamRedirected
+        - AaveV1MintOnDeposit
+        - AaveV1Redeem
+        - AaveV1RedirectedBalanceUpdated
+        - AaveV1Transfer
+      abis:
+        - name: AaveV1Adai
+          file: ./AaveV1Adai/abis/AaveV1Adai.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
+          handler: handleBurnOnLiquidation
+        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
+          handler: handleInterestRedirectionAllowanceChanged
+        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleInterestStreamRedirected
+        - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
+          handler: handleMintOnDeposit
+        - event: Redeem(indexed address,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleRedirectedBalanceUpdated
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./AaveV1Adai/src/mapping.ts
+
+  # --------------------------------------
+  #      AaveV1Aenj
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV1Aenj
+    network: {{network}}
+    source:
+      address: "{{AaveV1AenjAddress}}"
+      startBlock: {{AaveV1AenjStartBlock}}
+      abi: AaveV1Aenj
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV1Approval
+        - AaveV1BalanceTransfer
+        - AaveV1BurnOnLiquidation
+        - AaveV1InterestRedirectionAllowanceChanged
+        - AaveV1InterestStreamRedirected
+        - AaveV1MintOnDeposit
+        - AaveV1Redeem
+        - AaveV1RedirectedBalanceUpdated
+        - AaveV1Transfer
+      abis:
+        - name: AaveV1Aenj
+          file: ./AaveV1Aenj/abis/AaveV1Aenj.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
+          handler: handleBurnOnLiquidation
+        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
+          handler: handleInterestRedirectionAllowanceChanged
+        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleInterestStreamRedirected
+        - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
+          handler: handleMintOnDeposit
+        - event: Redeem(indexed address,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleRedirectedBalanceUpdated
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./AaveV1Aenj/src/mapping.ts
+
+  # --------------------------------------
+  #      AaveV1Aeth
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV1Aeth
+    network: {{network}}
+    source:
+      address: "{{AaveV1AethAddress}}"
+      startBlock: {{AaveV1AethStartBlock}}
+      abi: AaveV1Aeth
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV1Approval
+        - AaveV1BalanceTransfer
+        - AaveV1BurnOnLiquidation
+        - AaveV1InterestRedirectionAllowanceChanged
+        - AaveV1InterestStreamRedirected
+        - AaveV1MintOnDeposit
+        - AaveV1Redeem
+        - AaveV1RedirectedBalanceUpdated
+        - AaveV1Transfer
+      abis:
+        - name: AaveV1Aeth
+          file: ./AaveV1Aeth/abis/AaveV1Aeth.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
+          handler: handleBurnOnLiquidation
+        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
+          handler: handleInterestRedirectionAllowanceChanged
+        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleInterestStreamRedirected
+        - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
+          handler: handleMintOnDeposit
+        - event: Redeem(indexed address,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleRedirectedBalanceUpdated
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./AaveV1Aeth/src/mapping.ts
+
+  # --------------------------------------
+  #      AaveV1Aknc
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV1Aknc
+    network: {{network}}
+    source:
+      address: "{{AaveV1AkncAddress}}"
+      startBlock: {{AaveV1AkncStartBlock}}
+      abi: AaveV1Aknc
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV1Approval
+        - AaveV1BalanceTransfer
+        - AaveV1BurnOnLiquidation
+        - AaveV1InterestRedirectionAllowanceChanged
+        - AaveV1InterestStreamRedirected
+        - AaveV1MintOnDeposit
+        - AaveV1Redeem
+        - AaveV1RedirectedBalanceUpdated
+        - AaveV1Transfer
+      abis:
+        - name: AaveV1Aknc
+          file: ./AaveV1Aknc/abis/AaveV1Aknc.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
+          handler: handleBurnOnLiquidation
+        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
+          handler: handleInterestRedirectionAllowanceChanged
+        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleInterestStreamRedirected
+        - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
+          handler: handleMintOnDeposit
+        - event: Redeem(indexed address,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleRedirectedBalanceUpdated
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./AaveV1Aknc/src/mapping.ts
+
+  # --------------------------------------
+  #      AaveV1Alend
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV1Alend
+    network: {{network}}
+    source:
+      address: "{{AaveV1AlendAddress}}"
+      startBlock: {{AaveV1AlendStartBlock}}
+      abi: AaveV1Alend
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV1Approval
+        - AaveV1BalanceTransfer
+        - AaveV1BurnOnLiquidation
+        - AaveV1InterestRedirectionAllowanceChanged
+        - AaveV1InterestStreamRedirected
+        - AaveV1MintOnDeposit
+        - AaveV1Redeem
+        - AaveV1RedirectedBalanceUpdated
+        - AaveV1Transfer
+      abis:
+        - name: AaveV1Alend
+          file: ./AaveV1Alend/abis/AaveV1Alend.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
+          handler: handleBurnOnLiquidation
+        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
+          handler: handleInterestRedirectionAllowanceChanged
+        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleInterestStreamRedirected
+        - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
+          handler: handleMintOnDeposit
+        - event: Redeem(indexed address,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleRedirectedBalanceUpdated
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./AaveV1Alend/src/mapping.ts
+
+  # --------------------------------------
+  #      AaveV1Alink
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV1Alink
+    network: {{network}}
+    source:
+      address: "{{AaveV1AlinkAddress}}"
+      startBlock: {{AaveV1AlinkStartBlock}}
+      abi: AaveV1Alink
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV1Approval
+        - AaveV1BalanceTransfer
+        - AaveV1BurnOnLiquidation
+        - AaveV1InterestRedirectionAllowanceChanged
+        - AaveV1InterestStreamRedirected
+        - AaveV1MintOnDeposit
+        - AaveV1Redeem
+        - AaveV1RedirectedBalanceUpdated
+        - AaveV1Transfer
+      abis:
+        - name: AaveV1Alink
+          file: ./AaveV1Alink/abis/AaveV1Alink.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
+          handler: handleBurnOnLiquidation
+        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
+          handler: handleInterestRedirectionAllowanceChanged
+        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleInterestStreamRedirected
+        - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
+          handler: handleMintOnDeposit
+        - event: Redeem(indexed address,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleRedirectedBalanceUpdated
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./AaveV1Alink/src/mapping.ts
+
+  # --------------------------------------
+  #      AaveV1Amana
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV1Amana
+    network: {{network}}
+    source:
+      address: "{{AaveV1AmanaAddress}}"
+      startBlock: {{AaveV1AmanaStartBlock}}
+      abi: AaveV1Amana
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV1Approval
+        - AaveV1BalanceTransfer
+        - AaveV1BurnOnLiquidation
+        - AaveV1InterestRedirectionAllowanceChanged
+        - AaveV1InterestStreamRedirected
+        - AaveV1MintOnDeposit
+        - AaveV1Redeem
+        - AaveV1RedirectedBalanceUpdated
+        - AaveV1Transfer
+      abis:
+        - name: AaveV1Amana
+          file: ./AaveV1Amana/abis/AaveV1Amana.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
+          handler: handleBurnOnLiquidation
+        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
+          handler: handleInterestRedirectionAllowanceChanged
+        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleInterestStreamRedirected
+        - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
+          handler: handleMintOnDeposit
+        - event: Redeem(indexed address,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleRedirectedBalanceUpdated
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./AaveV1Amana/src/mapping.ts
+
+  # --------------------------------------
+  #      AaveV1Amkr
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV1Amkr
+    network: {{network}}
+    source:
+      address: "{{AaveV1AmkrAddress}}"
+      startBlock: {{AaveV1AmkrStartBlock}}
+      abi: AaveV1Amkr
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV1Approval
+        - AaveV1BalanceTransfer
+        - AaveV1BurnOnLiquidation
+        - AaveV1InterestRedirectionAllowanceChanged
+        - AaveV1InterestStreamRedirected
+        - AaveV1MintOnDeposit
+        - AaveV1Redeem
+        - AaveV1RedirectedBalanceUpdated
+        - AaveV1Transfer
+      abis:
+        - name: AaveV1Amkr
+          file: ./AaveV1Amkr/abis/AaveV1Amkr.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
+          handler: handleBurnOnLiquidation
+        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
+          handler: handleInterestRedirectionAllowanceChanged
+        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleInterestStreamRedirected
+        - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
+          handler: handleMintOnDeposit
+        - event: Redeem(indexed address,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleRedirectedBalanceUpdated
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./AaveV1Amkr/src/mapping.ts
+
+  # --------------------------------------
+  #      AaveV1Aren
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV1Aren
+    network: {{network}}
+    source:
+      address: "{{AaveV1ArenAddress}}"
+      startBlock: {{AaveV1ArenStartBlock}}
+      abi: AaveV1Aren
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV1Approval
+        - AaveV1BalanceTransfer
+        - AaveV1BurnOnLiquidation
+        - AaveV1InterestRedirectionAllowanceChanged
+        - AaveV1InterestStreamRedirected
+        - AaveV1MintOnDeposit
+        - AaveV1Redeem
+        - AaveV1RedirectedBalanceUpdated
+        - AaveV1Transfer
+      abis:
+        - name: AaveV1Aren
+          file: ./AaveV1Aren/abis/AaveV1Aren.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
+          handler: handleBurnOnLiquidation
+        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
+          handler: handleInterestRedirectionAllowanceChanged
+        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleInterestStreamRedirected
+        - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
+          handler: handleMintOnDeposit
+        - event: Redeem(indexed address,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleRedirectedBalanceUpdated
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./AaveV1Aren/src/mapping.ts
+
+  # --------------------------------------
+  #      AaveV1Arep
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV1Arep
+    network: {{network}}
+    source:
+      address: "{{AaveV1ArepAddress}}"
+      startBlock: {{AaveV1ArepStartBlock}}
+      abi: AaveV1Arep
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV1Approval
+        - AaveV1BalanceTransfer
+        - AaveV1BurnOnLiquidation
+        - AaveV1InterestRedirectionAllowanceChanged
+        - AaveV1InterestStreamRedirected
+        - AaveV1MintOnDeposit
+        - AaveV1Redeem
+        - AaveV1RedirectedBalanceUpdated
+        - AaveV1Transfer
+      abis:
+        - name: AaveV1Arep
+          file: ./AaveV1Arep/abis/AaveV1Arep.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
+          handler: handleBurnOnLiquidation
+        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
+          handler: handleInterestRedirectionAllowanceChanged
+        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleInterestStreamRedirected
+        - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
+          handler: handleMintOnDeposit
+        - event: Redeem(indexed address,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleRedirectedBalanceUpdated
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./AaveV1Arep/src/mapping.ts
+
+  # --------------------------------------
+  #      AaveV1Asnx
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV1Asnx
+    network: {{network}}
+    source:
+      address: "{{AaveV1AsnxAddress}}"
+      startBlock: {{AaveV1AsnxStartBlock}}
+      abi: AaveV1Asnx
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV1Approval
+        - AaveV1BalanceTransfer
+        - AaveV1BurnOnLiquidation
+        - AaveV1InterestRedirectionAllowanceChanged
+        - AaveV1InterestStreamRedirected
+        - AaveV1MintOnDeposit
+        - AaveV1Redeem
+        - AaveV1RedirectedBalanceUpdated
+        - AaveV1Transfer
+      abis:
+        - name: AaveV1Asnx
+          file: ./AaveV1Asnx/abis/AaveV1Asnx.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
+          handler: handleBurnOnLiquidation
+        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
+          handler: handleInterestRedirectionAllowanceChanged
+        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleInterestStreamRedirected
+        - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
+          handler: handleMintOnDeposit
+        - event: Redeem(indexed address,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleRedirectedBalanceUpdated
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./AaveV1Asnx/src/mapping.ts
+
+  # --------------------------------------
+  #      AaveV1Asusd
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV1Asusd
+    network: {{network}}
+    source:
+      address: "{{AaveV1AsusdAddress}}"
+      startBlock: {{AaveV1AsusdStartBlock}}
+      abi: AaveV1Asusd
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV1Approval
+        - AaveV1BalanceTransfer
+        - AaveV1BurnOnLiquidation
+        - AaveV1InterestRedirectionAllowanceChanged
+        - AaveV1InterestStreamRedirected
+        - AaveV1MintOnDeposit
+        - AaveV1Redeem
+        - AaveV1RedirectedBalanceUpdated
+        - AaveV1Transfer
+      abis:
+        - name: AaveV1Asusd
+          file: ./AaveV1Asusd/abis/AaveV1Asusd.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
+          handler: handleBurnOnLiquidation
+        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
+          handler: handleInterestRedirectionAllowanceChanged
+        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleInterestStreamRedirected
+        - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
+          handler: handleMintOnDeposit
+        - event: Redeem(indexed address,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleRedirectedBalanceUpdated
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./AaveV1Asusd/src/mapping.ts
+
+  # --------------------------------------
+  #      AaveV1Atusd
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV1Atusd
+    network: {{network}}
+    source:
+      address: "{{AaveV1AtusdAddress}}"
+      startBlock: {{AaveV1AtusdStartBlock}}
+      abi: AaveV1Atusd
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV1Approval
+        - AaveV1BalanceTransfer
+        - AaveV1BurnOnLiquidation
+        - AaveV1InterestRedirectionAllowanceChanged
+        - AaveV1InterestStreamRedirected
+        - AaveV1MintOnDeposit
+        - AaveV1Redeem
+        - AaveV1RedirectedBalanceUpdated
+        - AaveV1Transfer
+      abis:
+        - name: AaveV1Atusd
+          file: ./AaveV1Atusd/abis/AaveV1Atusd.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
+          handler: handleBurnOnLiquidation
+        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
+          handler: handleInterestRedirectionAllowanceChanged
+        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleInterestStreamRedirected
+        - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
+          handler: handleMintOnDeposit
+        - event: Redeem(indexed address,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleRedirectedBalanceUpdated
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./AaveV1Atusd/src/mapping.ts
+
+  # --------------------------------------
+  #      AaveV1Auni
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV1Auni
+    network: {{network}}
+    source:
+      address: "{{AaveV1AuniAddress}}"
+      startBlock: {{AaveV1AuniStartBlock}}
+      abi: AaveV1Auni
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV1Approval
+        - AaveV1BalanceTransfer
+        - AaveV1BurnOnLiquidation
+        - AaveV1InterestRedirectionAllowanceChanged
+        - AaveV1InterestStreamRedirected
+        - AaveV1MintOnDeposit
+        - AaveV1Redeem
+        - AaveV1RedirectedBalanceUpdated
+        - AaveV1Transfer
+      abis:
+        - name: AaveV1Auni
+          file: ./AaveV1Auni/abis/AaveV1Auni.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
+          handler: handleBurnOnLiquidation
+        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
+          handler: handleInterestRedirectionAllowanceChanged
+        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleInterestStreamRedirected
+        - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
+          handler: handleMintOnDeposit
+        - event: Redeem(indexed address,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleRedirectedBalanceUpdated
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./AaveV1Auni/src/mapping.ts
+
+  # --------------------------------------
+  #      AaveV1Ausdc
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV1Ausdc
+    network: {{network}}
+    source:
+      address: "{{AaveV1AusdcAddress}}"
+      startBlock: {{AaveV1AusdcStartBlock}}
+      abi: AaveV1Ausdc
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV1Approval
+        - AaveV1BalanceTransfer
+        - AaveV1BurnOnLiquidation
+        - AaveV1InterestRedirectionAllowanceChanged
+        - AaveV1InterestStreamRedirected
+        - AaveV1MintOnDeposit
+        - AaveV1Redeem
+        - AaveV1RedirectedBalanceUpdated
+        - AaveV1Transfer
+      abis:
+        - name: AaveV1Ausdc
+          file: ./AaveV1Ausdc/abis/AaveV1Ausdc.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
+          handler: handleBurnOnLiquidation
+        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
+          handler: handleInterestRedirectionAllowanceChanged
+        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleInterestStreamRedirected
+        - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
+          handler: handleMintOnDeposit
+        - event: Redeem(indexed address,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleRedirectedBalanceUpdated
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./AaveV1Ausdc/src/mapping.ts
+
+  # --------------------------------------
+  #      AaveV1Ausdt
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV1Ausdt
+    network: {{network}}
+    source:
+      address: "{{AaveV1AusdtAddress}}"
+      startBlock: {{AaveV1AusdtStartBlock}}
+      abi: AaveV1Ausdt
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV1Approval
+        - AaveV1BalanceTransfer
+        - AaveV1BurnOnLiquidation
+        - AaveV1InterestRedirectionAllowanceChanged
+        - AaveV1InterestStreamRedirected
+        - AaveV1MintOnDeposit
+        - AaveV1Redeem
+        - AaveV1RedirectedBalanceUpdated
+        - AaveV1Transfer
+      abis:
+        - name: AaveV1Ausdt
+          file: ./AaveV1Ausdt/abis/AaveV1Ausdt.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
+          handler: handleBurnOnLiquidation
+        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
+          handler: handleInterestRedirectionAllowanceChanged
+        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleInterestStreamRedirected
+        - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
+          handler: handleMintOnDeposit
+        - event: Redeem(indexed address,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleRedirectedBalanceUpdated
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./AaveV1Ausdt/src/mapping.ts
+
+  # --------------------------------------
+  #      AaveV1Awbtc
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV1Awbtc
+    network: {{network}}
+    source:
+      address: "{{AaveV1AwbtcAddress}}"
+      startBlock: {{AaveV1AwbtcStartBlock}}
+      abi: AaveV1Awbtc
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV1Approval
+        - AaveV1BalanceTransfer
+        - AaveV1BurnOnLiquidation
+        - AaveV1InterestRedirectionAllowanceChanged
+        - AaveV1InterestStreamRedirected
+        - AaveV1MintOnDeposit
+        - AaveV1Redeem
+        - AaveV1RedirectedBalanceUpdated
+        - AaveV1Transfer
+      abis:
+        - name: AaveV1Awbtc
+          file: ./AaveV1Awbtc/abis/AaveV1Awbtc.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
+          handler: handleBurnOnLiquidation
+        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
+          handler: handleInterestRedirectionAllowanceChanged
+        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleInterestStreamRedirected
+        - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
+          handler: handleMintOnDeposit
+        - event: Redeem(indexed address,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleRedirectedBalanceUpdated
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./AaveV1Awbtc/src/mapping.ts
+
+  # --------------------------------------
+  #      AaveV1Ayfi
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV1Ayfi
+    network: {{network}}
+    source:
+      address: "{{AaveV1AyfiAddress}}"
+      startBlock: {{AaveV1AyfiStartBlock}}
+      abi: AaveV1Ayfi
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV1Approval
+        - AaveV1BalanceTransfer
+        - AaveV1BurnOnLiquidation
+        - AaveV1InterestRedirectionAllowanceChanged
+        - AaveV1InterestStreamRedirected
+        - AaveV1MintOnDeposit
+        - AaveV1Redeem
+        - AaveV1RedirectedBalanceUpdated
+        - AaveV1Transfer
+      abis:
+        - name: AaveV1Ayfi
+          file: ./AaveV1Ayfi/abis/AaveV1Ayfi.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
+          handler: handleBurnOnLiquidation
+        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
+          handler: handleInterestRedirectionAllowanceChanged
+        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleInterestStreamRedirected
+        - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
+          handler: handleMintOnDeposit
+        - event: Redeem(indexed address,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleRedirectedBalanceUpdated
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./AaveV1Ayfi/src/mapping.ts
+
+  # --------------------------------------
+  #      AaveV1Azrx
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV1Azrx
+    network: {{network}}
+    source:
+      address: "{{AaveV1AzrxAddress}}"
+      startBlock: {{AaveV1AzrxStartBlock}}
+      abi: AaveV1Azrx
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV1Approval
+        - AaveV1BalanceTransfer
+        - AaveV1BurnOnLiquidation
+        - AaveV1InterestRedirectionAllowanceChanged
+        - AaveV1InterestStreamRedirected
+        - AaveV1MintOnDeposit
+        - AaveV1Redeem
+        - AaveV1RedirectedBalanceUpdated
+        - AaveV1Transfer
+      abis:
+        - name: AaveV1Azrx
+          file: ./AaveV1Azrx/abis/AaveV1Azrx.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
+          handler: handleBurnOnLiquidation
+        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
+          handler: handleInterestRedirectionAllowanceChanged
+        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleInterestStreamRedirected
+        - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
+          handler: handleMintOnDeposit
+        - event: Redeem(indexed address,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleRedirectedBalanceUpdated
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./AaveV1Azrx/src/mapping.ts
+
+  # --------------------------------------
+  #      AaveV1Linkusd
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: AaveV1Linkusd
+    network: {{network}}
+    source:
+      address: "{{AaveV1LinkusdAddress}}"
+      startBlock: {{AaveV1LinkusdStartBlock}}
+      abi: AaveV1Linkusd
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV1Approval
+        - AaveV1BalanceTransfer
+        - AaveV1BurnOnLiquidation
+        - AaveV1InterestRedirectionAllowanceChanged
+        - AaveV1InterestStreamRedirected
+        - AaveV1MintOnDeposit
+        - AaveV1Redeem
+        - AaveV1RedirectedBalanceUpdated
+        - AaveV1Transfer
+      abis:
+        - name: AaveV1Linkusd
+          file: ./AaveV1Linkusd/abis/AaveV1Linkusd.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
+          handler: handleBurnOnLiquidation
+        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
+          handler: handleInterestRedirectionAllowanceChanged
+        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleInterestStreamRedirected
+        - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
+          handler: handleMintOnDeposit
+        - event: Redeem(indexed address,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleRedirectedBalanceUpdated
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./AaveV1Linkusd/src/mapping.ts
 
   # --------------------------------------
   #      AaveV2Aaavev2
@@ -615,7 +1718,7 @@ dataSources:
     name: CreamAave
     network: {{network}}
     source:
-      address: "{{CreamAave}}"
+      address: "{{CreamAaveAddress}}"
       startBlock: {{CreamAaveStartBlock}}
       abi: CreamAave
     mapping:
@@ -687,7 +1790,7 @@ dataSources:
     name: CreamBbtc
     network: {{network}}
     source:
-      address: "{{CreamBbtc}}"
+      address: "{{CreamBbtcAddress}}"
       startBlock: {{CreamBbtcStartBlock}}
       abi: CreamBbtc
     mapping:
@@ -759,7 +1862,7 @@ dataSources:
     name: CreamBond
     network: {{network}}
     source:
-      address: "{{CreamBond}}"
+      address: "{{CreamBondAddress}}"
       startBlock: {{CreamBondStartBlock}}
       abi: CreamBond
     mapping:
@@ -831,7 +1934,7 @@ dataSources:
     name: CreamCelsius
     network: {{network}}
     source:
-      address: "{{CreamCelsius}}"
+      address: "{{CreamCelsiusAddress}}"
       startBlock: {{CreamCelsiusStartBlock}}
       abi: CreamCelsius
     mapping:
@@ -903,7 +2006,7 @@ dataSources:
     name: CreamCover
     network: {{network}}
     source:
-      address: "{{CreamCover}}"
+      address: "{{CreamCoverAddress}}"
       startBlock: {{CreamCoverStartBlock}}
       abi: CreamCover
     mapping:
@@ -975,7 +2078,7 @@ dataSources:
     name: CreamCreth2
     network: {{network}}
     source:
-      address: "{{CreamCreth2}}"
+      address: "{{CreamCreth2Address}}"
       startBlock: {{CreamCreth2StartBlock}}
       abi: CreamCreth2
     mapping:
@@ -1047,7 +2150,7 @@ dataSources:
     name: CreamDai
     network: {{network}}
     source:
-      address: "{{CreamDai}}"
+      address: "{{CreamDaiAddress}}"
       startBlock: {{CreamDaiStartBlock}}
       abi: CreamDai
     mapping:
@@ -1119,7 +2222,7 @@ dataSources:
     name: CreamEsd
     network: {{network}}
     source:
-      address: "{{CreamEsd}}"
+      address: "{{CreamEsdAddress}}"
       startBlock: {{CreamEsdStartBlock}}
       abi: CreamEsd
     mapping:
@@ -1191,7 +2294,7 @@ dataSources:
     name: CreamHbtc
     network: {{network}}
     source:
-      address: "{{CreamHbtc}}"
+      address: "{{CreamHbtcAddress}}"
       startBlock: {{CreamHbtcStartBlock}}
       abi: CreamHbtc
     mapping:
@@ -1263,7 +2366,7 @@ dataSources:
     name: CreamHfil
     network: {{network}}
     source:
-      address: "{{CreamHfil}}"
+      address: "{{CreamHfilAddress}}"
       startBlock: {{CreamHfilStartBlock}}
       abi: CreamHfil
     mapping:
@@ -1335,7 +2438,7 @@ dataSources:
     name: CreamKp3r
     network: {{network}}
     source:
-      address: "{{CreamKp3r}}"
+      address: "{{CreamKp3rAddress}}"
       startBlock: {{CreamKp3rStartBlock}}
       abi: CreamKp3r
     mapping:
@@ -1407,7 +2510,7 @@ dataSources:
     name: CreamUni
     network: {{network}}
     source:
-      address: "{{CreamUni}}"
+      address: "{{CreamUniAddress}}"
       startBlock: {{CreamUniStartBlock}}
       abi: CreamUni
     mapping:
@@ -1479,7 +2582,7 @@ dataSources:
     name: CreamYcrv
     network: {{network}}
     source:
-      address: "{{CreamYcrv}}"
+      address: "{{CreamYcrvAddress}}"
       startBlock: {{CreamYcrvStartBlock}}
       abi: CreamYcrv
     mapping:
