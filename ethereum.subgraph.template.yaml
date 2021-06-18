@@ -1063,7 +1063,7 @@ dataSources:
     name: FulcrumBzrx
     network: {{network}}
     source:
-      address: "{{FulcrumBzrx}}"
+      address: "{{FulcrumBzrxAddress}}"
       startBlock: {{FulcrumBzrxStartBlock}}
       abi: FulcrumBzrx
     mapping:
@@ -1099,7 +1099,7 @@ dataSources:
     name: FulcrumIaave
     network: {{network}}
     source:
-      address: "{{FulcrumIaave}}"
+      address: "{{FulcrumIaaveAddress}}"
       startBlock: {{FulcrumIaaveStartBlock}}
       abi: FulcrumIaave
     mapping:
@@ -1135,7 +1135,7 @@ dataSources:
     name: FulcrumIcomp
     network: {{network}}
     source:
-      address: "{{FulcrumIcomp}}"
+      address: "{{FulcrumIcompAddress}}"
       startBlock: {{FulcrumIcompStartBlock}}
       abi: FulcrumIcomp
     mapping:
@@ -1171,7 +1171,7 @@ dataSources:
     name: FulcrumIdai
     network: {{network}}
     source:
-      address: "{{FulcrumIdai}}"
+      address: "{{FulcrumIdaiAddress}}"
       startBlock: {{FulcrumIdaiStartBlock}}
       abi: FulcrumIdai
     mapping:
@@ -1207,7 +1207,7 @@ dataSources:
     name: FulcrumIeth
     network: {{network}}
     source:
-      address: "{{FulcrumIeth}}"
+      address: "{{FulcrumIethAddress}}"
       startBlock: {{FulcrumIethStartBlock}}
       abi: FulcrumIeth
     mapping:
@@ -1243,7 +1243,7 @@ dataSources:
     name: FulcrumIknc
     network: {{network}}
     source:
-      address: "{{FulcrumIknc}}"
+      address: "{{FulcrumIkncAddress}}"
       startBlock: {{FulcrumIkncStartBlock}}
       abi: FulcrumIknc
     mapping:
@@ -1279,7 +1279,7 @@ dataSources:
     name: FulcrumIlrc
     network: {{network}}
     source:
-      address: "{{FulcrumIlrc}}"
+      address: "{{FulcrumIlrcAddress}}"
       startBlock: {{FulcrumIlrcStartBlock}}
       abi: FulcrumIlrc
     mapping:
@@ -1315,7 +1315,7 @@ dataSources:
     name: FulcrumImkr
     network: {{network}}
     source:
-      address: "{{FulcrumImkr}}"
+      address: "{{FulcrumImkrAddress}}"
       startBlock: {{FulcrumImkrStartBlock}}
       abi: FulcrumImkr
     mapping:
@@ -1351,7 +1351,7 @@ dataSources:
     name: FulcrumIuni
     network: {{network}}
     source:
-      address: "{{FulcrumIuni}}"
+      address: "{{FulcrumIuniAddress}}"
       startBlock: {{FulcrumIuniStartBlock}}
       abi: FulcrumIuni
     mapping:
@@ -1387,7 +1387,7 @@ dataSources:
     name: FulcrumIusdc
     network: {{network}}
     source:
-      address: "{{FulcrumIusdc}}"
+      address: "{{FulcrumIusdcAddress}}"
       startBlock: {{FulcrumIusdcStartBlock}}
       abi: FulcrumIusdc
     mapping:
@@ -1423,7 +1423,7 @@ dataSources:
     name: FulcrumIusdt
     network: {{network}}
     source:
-      address: "{{FulcrumIusdt}}"
+      address: "{{FulcrumIusdtAddress}}"
       startBlock: {{FulcrumIusdtStartBlock}}
       abi: FulcrumIusdt
     mapping:
@@ -1459,7 +1459,7 @@ dataSources:
     name: FulcrumIwbtc
     network: {{network}}
     source:
-      address: "{{FulcrumIwbtc}}"
+      address: "{{FulcrumIwbtcAddress}}"
       startBlock: {{FulcrumIwbtcStartBlock}}
       abi: FulcrumIwbtc
     mapping:
@@ -1495,7 +1495,7 @@ dataSources:
     name: FulcrumIyfi
     network: {{network}}
     source:
-      address: "{{FulcrumIyfi}}"
+      address: "{{FulcrumIyfiAddress}}"
       startBlock: {{FulcrumIyfiStartBlock}}
       abi: FulcrumIyfi
     mapping:
@@ -1531,7 +1531,7 @@ dataSources:
     name: FulcrumVbzrx
     network: {{network}}
     source:
-      address: "{{FulcrumVbzrx}}"
+      address: "{{FulcrumVbzrxAddress}}"
       startBlock: {{FulcrumVbzrxStartBlock}}
       abi: FulcrumVbzrx
     mapping:
