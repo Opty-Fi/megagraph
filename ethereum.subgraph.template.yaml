@@ -19,7 +19,7 @@ dataSources:
     name: CreamAave
     network: {{network}}
     source:
-      address: "{{CreamAaveAddess}}"
+      address: "{{CreamAaveAddress}}"
       startBlock: {{CreamAaveStartBlock}}
       abi: CreamAave
     mapping:
@@ -91,7 +91,7 @@ dataSources:
     name: CreamBbtc
     network: {{network}}
     source:
-      address: "{{CreamBbtcAddess}}"
+      address: "{{CreamBbtcAddress}}"
       startBlock: {{CreamBbtcStartBlock}}
       abi: CreamBbtc
     mapping:
@@ -163,7 +163,7 @@ dataSources:
     name: CreamBond
     network: {{network}}
     source:
-      address: "{{CreamBondAddess}}"
+      address: "{{CreamBondAddress}}"
       startBlock: {{CreamBondStartBlock}}
       abi: CreamBond
     mapping:
@@ -235,7 +235,7 @@ dataSources:
     name: CreamCelsius
     network: {{network}}
     source:
-      address: "{{CreamCelsiusAddess}}"
+      address: "{{CreamCelsiusAddress}}"
       startBlock: {{CreamCelsiusStartBlock}}
       abi: CreamCelsius
     mapping:
@@ -307,7 +307,7 @@ dataSources:
     name: CreamCover
     network: {{network}}
     source:
-      address: "{{CreamCoverAddess}}"
+      address: "{{CreamCoverAddress}}"
       startBlock: {{CreamCoverStartBlock}}
       abi: CreamCover
     mapping:
@@ -379,7 +379,7 @@ dataSources:
     name: CreamCreth2
     network: {{network}}
     source:
-      address: "{{CreamCreth2Addess}}"
+      address: "{{CreamCreth2Address}}"
       startBlock: {{CreamCreth2StartBlock}}
       abi: CreamCreth2
     mapping:
@@ -451,7 +451,7 @@ dataSources:
     name: CreamDai
     network: {{network}}
     source:
-      address: "{{CreamDaiAddess}}"
+      address: "{{CreamDaiAddress}}"
       startBlock: {{CreamDaiStartBlock}}
       abi: CreamDai
     mapping:
@@ -523,7 +523,7 @@ dataSources:
     name: CreamEsd
     network: {{network}}
     source:
-      address: "{{CreamEsdAddess}}"
+      address: "{{CreamEsdAddress}}"
       startBlock: {{CreamEsdStartBlock}}
       abi: CreamEsd
     mapping:
@@ -595,7 +595,7 @@ dataSources:
     name: CreamHbtc
     network: {{network}}
     source:
-      address: "{{CreamHbtcAddess}}"
+      address: "{{CreamHbtcAddress}}"
       startBlock: {{CreamHbtcStartBlock}}
       abi: CreamHbtc
     mapping:
@@ -667,7 +667,7 @@ dataSources:
     name: CreamHfil
     network: {{network}}
     source:
-      address: "{{CreamHfilAddess}}"
+      address: "{{CreamHfilAddress}}"
       startBlock: {{CreamHfilStartBlock}}
       abi: CreamHfil
     mapping:
@@ -739,7 +739,7 @@ dataSources:
     name: CreamKp3r
     network: {{network}}
     source:
-      address: "{{CreamKp3rAddess}}"
+      address: "{{CreamKp3rAddress}}"
       startBlock: {{CreamKp3rStartBlock}}
       abi: CreamKp3r
     mapping:
@@ -811,7 +811,7 @@ dataSources:
     name: CreamUni
     network: {{network}}
     source:
-      address: "{{CreamUniAddess}}"
+      address: "{{CreamUniAddress}}"
       startBlock: {{CreamUniStartBlock}}
       abi: CreamUni
     mapping:
@@ -883,7 +883,7 @@ dataSources:
     name: CreamYcrv
     network: {{network}}
     source:
-      address: "{{CreamYcrvAddess}}"
+      address: "{{CreamYcrvAddress}}"
       startBlock: {{CreamYcrvStartBlock}}
       abi: CreamYcrv
     mapping:
