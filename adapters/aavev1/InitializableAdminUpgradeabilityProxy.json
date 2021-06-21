@@ -31,22 +31,12 @@
     "name": "Upgraded",
     "type": "event"
   },
-  {
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "fallback"
-  },
+  { "payable": true, "stateMutability": "payable", "type": "fallback" },
   {
     "constant": false,
     "inputs": [],
     "name": "admin",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
@@ -54,11 +44,7 @@
   {
     "constant": false,
     "inputs": [
-      {
-        "internalType": "address",
-        "name": "newAdmin",
-        "type": "address"
-      }
+      { "internalType": "address", "name": "newAdmin", "type": "address" }
     ],
     "name": "changeAdmin",
     "outputs": [],
@@ -70,13 +56,7 @@
     "constant": false,
     "inputs": [],
     "name": "implementation",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
@@ -84,21 +64,9 @@
   {
     "constant": false,
     "inputs": [
-      {
-        "internalType": "address",
-        "name": "_logic",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_admin",
-        "type": "address"
-      },
-      {
-        "internalType": "bytes",
-        "name": "_data",
-        "type": "bytes"
-      }
+      { "internalType": "address", "name": "_logic", "type": "address" },
+      { "internalType": "address", "name": "_admin", "type": "address" },
+      { "internalType": "bytes", "name": "_data", "type": "bytes" }
     ],
     "name": "initialize",
     "outputs": [],
@@ -109,16 +77,8 @@
   {
     "constant": false,
     "inputs": [
-      {
-        "internalType": "address",
-        "name": "_logic",
-        "type": "address"
-      },
-      {
-        "internalType": "bytes",
-        "name": "_data",
-        "type": "bytes"
-      }
+      { "internalType": "address", "name": "_logic", "type": "address" },
+      { "internalType": "bytes", "name": "_data", "type": "bytes" }
     ],
     "name": "initialize",
     "outputs": [],
@@ -149,11 +109,7 @@
         "name": "newImplementation",
         "type": "address"
       },
-      {
-        "internalType": "bytes",
-        "name": "data",
-        "type": "bytes"
-      }
+      { "internalType": "bytes", "name": "data", "type": "bytes" }
     ],
     "name": "upgradeToAndCall",
     "outputs": [],

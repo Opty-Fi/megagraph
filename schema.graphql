@@ -1,207 +1,23 @@
 # aavev1 start
-type AaveV1Approval @entity {
+type AaveV1AdminChanged @entity {
   id: ID!
-  owner: Bytes! # address
-  spender: Bytes! # address
-  value: BigInt! # uint256
+  previousAdmin: Bytes! # address
+  newAdmin: Bytes! # address
 }
 
-type AaveV1BalanceTransfer @entity {
+type AaveV1Upgraded @entity {
   id: ID!
-  _from: Bytes! # address
-  _to: Bytes! # address
-  _value: BigInt! # uint256
-  _fromBalanceIncrease: BigInt! # uint256
-  _toBalanceIncrease: BigInt! # uint256
-  _fromIndex: BigInt! # uint256
-  _toIndex: BigInt! # uint256
-}
-
-type AaveV1BurnOnLiquidation @entity {
-  id: ID!
-  _from: Bytes! # address
-  _value: BigInt! # uint256
-  _fromBalanceIncrease: BigInt! # uint256
-  _fromIndex: BigInt! # uint256
-}
-
-type AaveV1InterestRedirectionAllowanceChanged @entity {
-  id: ID!
-  _from: Bytes! # address
-  _to: Bytes! # address
-}
-
-type AaveV1InterestStreamRedirected @entity {
-  id: ID!
-  _from: Bytes! # address
-  _to: Bytes! # address
-  _redirectedBalance: BigInt! # uint256
-  _fromBalanceIncrease: BigInt! # uint256
-  _fromIndex: BigInt! # uint256
-}
-
-type AaveV1MintOnDeposit @entity {
-  id: ID!
-  _from: Bytes! # address
-  _value: BigInt! # uint256
-  _fromBalanceIncrease: BigInt! # uint256
-  _fromIndex: BigInt! # uint256
-}
-
-type AaveV1Redeem @entity {
-  id: ID!
-  _from: Bytes! # address
-  _value: BigInt! # uint256
-  _fromBalanceIncrease: BigInt! # uint256
-  _fromIndex: BigInt! # uint256
-}
-
-type AaveV1RedirectedBalanceUpdated @entity {
-  id: ID!
-  _targetAddress: Bytes! # address
-  _targetBalanceIncrease: BigInt! # uint256
-  _targetIndex: BigInt! # uint256
-  _redirectedBalanceAdded: BigInt! # uint256
-  _redirectedBalanceRemoved: BigInt! # uint256
-}
-
-type AaveV1Transfer @entity {
-  id: ID!
-  from: Bytes! # address
-  to: Bytes! # address
-  value: BigInt! # uint256
+  implementation: Bytes! # address
 }
 # aavev1 end
 
 # aavev2 start
-type AaveV2Upgraded @entity {
-  id: ID!
-  implementation: Bytes! # address
-}
 # aavev2 end
 
 # compound start
 # compound end
 
 # cream start
-type CreamAccrueInterest @entity {
-  id: ID!
-  cashPrior: BigInt! # uint256
-  interestAccumulated: BigInt! # uint256
-  borrowIndex: BigInt! # uint256
-  totalBorrows: BigInt! # uint256
-}
-
-type CreamApproval @entity {
-  id: ID!
-  owner: Bytes! # address
-  spender: Bytes! # address
-  amount: BigInt! # uint256
-}
-
-type CreamBorrow @entity {
-  id: ID!
-  borrower: Bytes! # address
-  borrowAmount: BigInt! # uint256
-  accountBorrows: BigInt! # uint256
-  totalBorrows: BigInt! # uint256
-}
-
-type CreamFailure @entity {
-  id: ID!
-  error: BigInt! # uint256
-  info: BigInt! # uint256
-  detail: BigInt! # uint256
-}
-
-type CreamLiquidateBorrow @entity {
-  id: ID!
-  liquidator: Bytes! # address
-  borrower: Bytes! # address
-  repayAmount: BigInt! # uint256
-  cTokenCollateral: Bytes! # address
-  seizeTokens: BigInt! # uint256
-}
-
-type CreamMint @entity {
-  id: ID!
-  minter: Bytes! # address
-  mintAmount: BigInt! # uint256
-  mintTokens: BigInt! # uint256
-}
-
-type CreamNewAdmin @entity {
-  id: ID!
-  oldAdmin: Bytes! # address
-  newAdmin: Bytes! # address
-}
-
-type CreamNewComptroller @entity {
-  id: ID!
-  oldComptroller: Bytes! # address
-  newComptroller: Bytes! # address
-}
-
-type CreamNewImplementation @entity {
-  id: ID!
-  oldImplementation: Bytes! # address
-  newImplementation: Bytes! # address
-}
-
-type CreamNewMarketInterestRateModel @entity {
-  id: ID!
-  oldInterestRateModel: Bytes! # address
-  newInterestRateModel: Bytes! # address
-}
-
-type CreamNewPendingAdmin @entity {
-  id: ID!
-  oldPendingAdmin: Bytes! # address
-  newPendingAdmin: Bytes! # address
-}
-
-type CreamNewReserveFactor @entity {
-  id: ID!
-  oldReserveFactorMantissa: BigInt! # uint256
-  newReserveFactorMantissa: BigInt! # uint256
-}
-
-type CreamRedeem @entity {
-  id: ID!
-  redeemer: Bytes! # address
-  redeemAmount: BigInt! # uint256
-  redeemTokens: BigInt! # uint256
-}
-
-type CreamRepayBorrow @entity {
-  id: ID!
-  payer: Bytes! # address
-  borrower: Bytes! # address
-  repayAmount: BigInt! # uint256
-  accountBorrows: BigInt! # uint256
-  totalBorrows: BigInt! # uint256
-}
-
-type CreamReservesAdded @entity {
-  id: ID!
-  benefactor: Bytes! # address
-  addAmount: BigInt! # uint256
-  newTotalReserves: BigInt! # uint256
-}
-
-type CreamReservesReduced @entity {
-  id: ID!
-  admin: Bytes! # address
-  reduceAmount: BigInt! # uint256
-  newTotalReserves: BigInt! # uint256
-}
-
-type CreamTransfer @entity {
-  id: ID!
-  from: Bytes! # address
-  to: Bytes! # address
-  amount: BigInt! # uint256
-}
 # cream end
 
 # curvev1 start
@@ -214,41 +30,6 @@ type CreamTransfer @entity {
 # dydx end
 
 # fulcrum start
-type FulcrumApproval @entity {
-  id: ID!
-  owner: Bytes! # address
-  spender: Bytes! # address
-  value: BigInt! # uint256
-}
-
-type FulcrumBurn @entity {
-  id: ID!
-  burner: Bytes! # address
-  tokenAmount: BigInt! # uint256
-  assetAmount: BigInt! # uint256
-  price: BigInt! # uint256
-}
-
-type FulcrumMint @entity {
-  id: ID!
-  minter: Bytes! # address
-  tokenAmount: BigInt! # uint256
-  assetAmount: BigInt! # uint256
-  price: BigInt! # uint256
-}
-
-type FulcrumOwnershipTransferred @entity {
-  id: ID!
-  previousOwner: Bytes! # address
-  newOwner: Bytes! # address
-}
-
-type FulcrumTransfer @entity {
-  id: ID!
-  from: Bytes! # address
-  to: Bytes! # address
-  value: BigInt! # uint256
-}
 # fulcrum end
 
 # harvest start
