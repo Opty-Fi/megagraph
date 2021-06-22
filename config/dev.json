@@ -2,14 +2,16 @@
   "blockchain": "ethereum",
   "network": "builderevm",
 
-  "AaveV1Address": "0x0000000000000000000000000000000000000000",
-  "AaveV1StartBlock": 0,
-  "AaveV1Abi": "./adapters/aavev1/contract.json",
+  "AaveV1Address": "0x398eC7346DcD622eDc5ae82352F02bE94C62d119",
+  "AaveV1StartBlock": 9241022,
+  "AaveV1Abi": "./adapters/aavev1/InitializableAdminUpgradeabilityProxy.json",
   "AaveV1Mapping": "./adapters/aavev1/mapping.ts",
+  "AaveV1CoreAddress": "0x3dfd23A6c5E8BbcFc9581d2E864a68feb6a076d3",
+  "AaveV1CoreStartBlock": 9241022,
 
-  "AaveV2Address": "0x0000000000000000000000000000000000000000",
-  "AaveV2StartBlock": 0,
-  "AaveV2Abi": "./adapters/aavev2/contract.json",
+  "AaveV2Address": "0x7d2768de32b0b80b7a3454c06bdac94a69ddc7a9",
+  "AaveV2StartBlock": 11362579,
+  "AaveV2Abi": "./adapters/aavev2/InitializableImmutableAdminUpgradeabilityProxy.json",
   "AaveV2Mapping": "./adapters/aavev2/mapping.ts",
 
   "CompoundAddress": "0x0000000000000000000000000000000000000000",
@@ -37,10 +39,12 @@
   "DydxAbi": "./adapters/dydx/contract.json",
   "DydxMapping": "./adapters/dydx/mapping.ts",
 
-  "FulcrumAddress": "0x0000000000000000000000000000000000000000",
-  "FulcrumStartBlock": 0,
-  "FulcrumAbi": "./adapters/fulcrum/contract.json",
+  "FulcrumAddress": "0xD8Ee69652E4e4838f2531732a46d1f7F584F0b7f",
+  "FulcrumStartBlock": 10777787,
+  "FulcrumAbi": "./adapters/fulcrum/bZxProtocol.json",
   "FulcrumMapping": "./adapters/fulcrum/mapping.ts",
+  "FulcrumStakingAddress": "0x576773CD0B51294997Ec4E4ff96c93d5E3AE9038",
+  "FulcrumStakingStartBlock": 10773120,
 
   "HarvestFiAddress": "0x0000000000000000000000000000000000000000",
   "HarvestFiStartBlock": 0,

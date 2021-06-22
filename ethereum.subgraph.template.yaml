@@ -7,10 +7,53 @@ dataSources:
   # --------------------------------------
   #      AaveV1
   # --------------------------------------
+  - kind: ethereum/contract
+    name: InitializableAdminUpgradeabilityProxy
+    network: {{network}}
+    source:
+      address: "{{AaveV1Address}}"
+      startBlock: {{AaveV1StartBlock}}
+      abi: InitializableAdminUpgradeabilityProxy
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV1AdminChanged
+        - AaveV1Upgraded
+      abis:
+        - name: InitializableAdminUpgradeabilityProxy
+          file: {{{AaveV1Abi}}}
+      eventHandlers:
+        - event: AdminChanged(address,address)
+          handler: handleAdminChanged
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: {{{AaveV1Mapping}}}
 
   # --------------------------------------
   #      AaveV2
   # --------------------------------------
+  - kind: ethereum/contract
+    name: InitializableImmutableAdminUpgradeabilityProxy
+    network: {{network}}
+    source:
+      address: "{{AaveV2Address}}"
+      startBlock: {{AaveV2StartBlock}}
+      abi: InitializableImmutableAdminUpgradeabilityProxy
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveV2Upgraded
+      abis:
+        - name: InitializableImmutableAdminUpgradeabilityProxy
+          file: {{{AaveV2Abi}}}
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: {{{AaveV2Mapping}}}
 
   # --------------------------------------
   #      Cream
@@ -44,12 +87,36 @@ dataSources:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
       callHandlers:
+        # - function: allowance(address,address)
+        #   handler: handle_allowance
         - function: approve(address,uint256)
           handler: handle_approve
+        # - function: balanceOf(address)
+        #   handler: handle_balanceOf
+        # - function: checkpoints(address,uint32)
+        #   handler: handle_checkpoints
+        # - function: decimals()
+        #   handler: handle_decimals
         - function: delegate(address)
           handler: handle_delegate
         - function: delegateBySig(address,uint256,uint256,uint8,bytes32,bytes32)
           handler: handle_delegateBySig
+        # - function: delegates(address)
+        #   handler: handle_delegates
+        # - function: getCurrentVotes(address)
+        #   handler: handle_getCurrentVotes
+        # - function: getPriorVotes(address,uint256)
+        #   handler: handle_getPriorVotes
+        # - function: name()
+        #   handler: handle_name
+        # - function: nonces(address)
+        #   handler: handle_nonces
+        # - function: numCheckpoints(address)
+        #   handler: handle_numCheckpoints
+        # - function: symbol()
+        #   handler: handle_symbol
+        # - function: totalSupply()
+        #   handler: handle_totalSupply
         - function: transfer(address,uint256)
           handler: handle_transfer
         - function: transferFrom(address,address,uint256)
@@ -71,6 +138,26 @@ dataSources:
   # --------------------------------------
   #      Fulcrum
   # --------------------------------------
+  - kind: ethereum/contract
+    name: bZxProtocol
+    network: {{network}}
+    source:
+      address: "{{FulcrumAddress}}"
+      startBlock: {{FulcrumStartBlock}}
+      abi: bZxProtocol
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - FulcrumOwnershipTransferred
+      abis:
+        - name: bZxProtocol
+          file: {{{FulcrumAbi}}}
+      eventHandlers:
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+      file: {{{FulcrumMapping}}}
 
   # --------------------------------------
   #      Harvest

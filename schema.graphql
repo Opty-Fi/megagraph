@@ -1,7 +1,21 @@
 # aavev1 start
+type AaveV1AdminChanged @entity {
+  id: ID!
+  previousAdmin: Bytes! # address
+  newAdmin: Bytes! # address
+}
+
+type AaveV1Upgraded @entity {
+  id: ID!
+  implementation: Bytes! # address
+}
 # aavev1 end
 
 # aavev2 start
+type AaveV2Upgraded @entity {
+  id: ID!
+  implementation: Bytes! # address
+}
 # aavev2 end
 
 # compound start
@@ -47,6 +61,11 @@ type CreamTransfer @entity {
 # dydx end
 
 # fulcrum start
+type FulcrumOwnershipTransferred @entity {
+  id: ID!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+}
 # fulcrum end
 
 # harvest start
