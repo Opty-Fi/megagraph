@@ -110,105 +110,105 @@ export class CTokenData extends Entity {
     }
   }
 
-  get exchangeRate(): BigInt | null {
+  get exchangeRate(): BigDecimal | null {
     let value = this.get("exchangeRate");
     if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toBigInt();
+      return value.toBigDecimal();
     }
   }
 
-  set exchangeRate(value: BigInt | null) {
+  set exchangeRate(value: BigDecimal | null) {
     if (value === null) {
       this.unset("exchangeRate");
     } else {
-      this.set("exchangeRate", Value.fromBigInt(value as BigInt));
+      this.set("exchangeRate", Value.fromBigDecimal(value as BigDecimal));
     }
   }
 
-  get totalCash(): BigInt | null {
+  get totalCash(): BigDecimal | null {
     let value = this.get("totalCash");
     if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toBigInt();
+      return value.toBigDecimal();
     }
   }
 
-  set totalCash(value: BigInt | null) {
+  set totalCash(value: BigDecimal | null) {
     if (value === null) {
       this.unset("totalCash");
     } else {
-      this.set("totalCash", Value.fromBigInt(value as BigInt));
+      this.set("totalCash", Value.fromBigDecimal(value as BigDecimal));
     }
   }
 
-  get totalBorrows(): BigInt | null {
+  get totalBorrows(): BigDecimal | null {
     let value = this.get("totalBorrows");
     if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toBigInt();
+      return value.toBigDecimal();
     }
   }
 
-  set totalBorrows(value: BigInt | null) {
+  set totalBorrows(value: BigDecimal | null) {
     if (value === null) {
       this.unset("totalBorrows");
     } else {
-      this.set("totalBorrows", Value.fromBigInt(value as BigInt));
+      this.set("totalBorrows", Value.fromBigDecimal(value as BigDecimal));
     }
   }
 
-  get totalSupply(): BigInt | null {
+  get totalSupply(): BigDecimal | null {
     let value = this.get("totalSupply");
     if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toBigInt();
+      return value.toBigDecimal();
     }
   }
 
-  set totalSupply(value: BigInt | null) {
+  set totalSupply(value: BigDecimal | null) {
     if (value === null) {
       this.unset("totalSupply");
     } else {
-      this.set("totalSupply", Value.fromBigInt(value as BigInt));
+      this.set("totalSupply", Value.fromBigDecimal(value as BigDecimal));
     }
   }
 
-  get totalReserves(): BigInt | null {
+  get totalReserves(): BigDecimal | null {
     let value = this.get("totalReserves");
     if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toBigInt();
+      return value.toBigDecimal();
     }
   }
 
-  set totalReserves(value: BigInt | null) {
+  set totalReserves(value: BigDecimal | null) {
     if (value === null) {
       this.unset("totalReserves");
     } else {
-      this.set("totalReserves", Value.fromBigInt(value as BigInt));
+      this.set("totalReserves", Value.fromBigDecimal(value as BigDecimal));
     }
   }
 
-  get borrowIndex(): BigInt | null {
+  get borrowIndex(): BigDecimal | null {
     let value = this.get("borrowIndex");
     if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toBigInt();
+      return value.toBigDecimal();
     }
   }
 
-  set borrowIndex(value: BigInt | null) {
+  set borrowIndex(value: BigDecimal | null) {
     if (value === null) {
       this.unset("borrowIndex");
     } else {
-      this.set("borrowIndex", Value.fromBigInt(value as BigInt));
+      this.set("borrowIndex", Value.fromBigDecimal(value as BigDecimal));
     }
   }
 }

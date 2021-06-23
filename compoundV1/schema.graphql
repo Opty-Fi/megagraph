@@ -4,12 +4,12 @@ type CTokenData @entity {
   blockTimestamp: BigInt
   borrowRatePerBlock: BigInt
   supplyRatePerBlock: BigInt
-  exchangeRate: BigInt
-  totalCash: BigInt
-  totalBorrows: BigInt
-  totalSupply: BigInt
-  totalReserves: BigInt
-  borrowIndex: BigInt
+  exchangeRate: BigDecimal
+  totalCash: BigDecimal
+  totalBorrows: BigDecimal
+  totalSupply: BigDecimal
+  totalReserves: BigDecimal
+  borrowIndex: BigDecimal
 }
 
 type AccrueInterest @entity {

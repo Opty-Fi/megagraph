@@ -4,7 +4,7 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ deepcrazy/defi-protocols",
+    "deploy": "yarn codegen && yarn build && graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ deepcrazy/defi-protocols",
     "create-local": "graph create --node http://localhost:8020/ deepcrazy/defi-protocols",
     "remove-local": "graph remove --node http://localhost:8020/ deepcrazy/defi-protocols",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 deepcrazy/defi-protocols"
