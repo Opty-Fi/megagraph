@@ -1,0 +1,146 @@
+type CompApproval @entity {
+  id: ID!
+  owner: Bytes! # address
+  spender: Bytes! # address
+  amount: BigInt! # uint256
+}
+
+type CompDelegateChanged @entity {
+  id: ID!
+  delegator: Bytes! # address
+  fromDelegate: Bytes! # address
+  toDelegate: Bytes! # address
+}
+
+type CompDelegateVotesChanged @entity {
+  id: ID!
+  delegate: Bytes! # address
+  previousBalance: BigInt! # uint256
+  newBalance: BigInt! # uint256
+}
+
+type CompTransfer @entity {
+  id: ID!
+  from: Bytes! # address
+  to: Bytes! # address
+  amount: BigInt! # uint256
+}
+
+type AccrueInterest @entity {
+  id: ID!
+  cashPrior: BigInt! # uint256
+  interestAccumulated: BigInt! # uint256
+  borrowIndex: BigInt! # uint256
+  totalBorrows: BigInt! # uint256
+}
+
+type Approval @entity {
+  id: ID!
+  owner: Bytes! # address
+  spender: Bytes! # address
+  amount: BigInt! # uint256
+}
+
+type Borrow @entity {
+  id: ID!
+  borrower: Bytes! # address
+  borrowAmount: BigInt! # uint256
+  accountBorrows: BigInt! # uint256
+  totalBorrows: BigInt! # uint256
+}
+
+type Failure @entity {
+  id: ID!
+  error: BigInt! # uint256
+  info: BigInt! # uint256
+  detail: BigInt! # uint256
+}
+
+type LiquidateBorrow @entity {
+  id: ID!
+  liquidator: Bytes! # address
+  borrower: Bytes! # address
+  repayAmount: BigInt! # uint256
+  cTokenCollateral: Bytes! # address
+  seizeTokens: BigInt! # uint256
+}
+
+type Mint @entity {
+  id: ID!
+  minter: Bytes! # address
+  mintAmount: BigInt! # uint256
+  mintTokens: BigInt! # uint256
+}
+
+type NewAdmin @entity {
+  id: ID!
+  oldAdmin: Bytes! # address
+  newAdmin: Bytes! # address
+}
+
+type NewComptroller @entity {
+  id: ID!
+  oldComptroller: Bytes! # address
+  newComptroller: Bytes! # address
+}
+
+type NewImplementation @entity {
+  id: ID!
+  oldImplementation: Bytes! # address
+  newImplementation: Bytes! # address
+}
+
+type NewMarketInterestRateModel @entity {
+  id: ID!
+  oldInterestRateModel: Bytes! # address
+  newInterestRateModel: Bytes! # address
+}
+
+type NewPendingAdmin @entity {
+  id: ID!
+  oldPendingAdmin: Bytes! # address
+  newPendingAdmin: Bytes! # address
+}
+
+type NewReserveFactor @entity {
+  id: ID!
+  oldReserveFactorMantissa: BigInt! # uint256
+  newReserveFactorMantissa: BigInt! # uint256
+}
+
+type Redeem @entity {
+  id: ID!
+  redeemer: Bytes! # address
+  redeemAmount: BigInt! # uint256
+  redeemTokens: BigInt! # uint256
+}
+
+type RepayBorrow @entity {
+  id: ID!
+  payer: Bytes! # address
+  borrower: Bytes! # address
+  repayAmount: BigInt! # uint256
+  accountBorrows: BigInt! # uint256
+  totalBorrows: BigInt! # uint256
+}
+
+type ReservesAdded @entity {
+  id: ID!
+  benefactor: Bytes! # address
+  addAmount: BigInt! # uint256
+  newTotalReserves: BigInt! # uint256
+}
+
+type ReservesReduced @entity {
+  id: ID!
+  admin: Bytes! # address
+  reduceAmount: BigInt! # uint256
+  newTotalReserves: BigInt! # uint256
+}
+
+type Transfer @entity {
+  id: ID!
+  from: Bytes! # address
+  to: Bytes! # address
+  amount: BigInt! # uint256
+}

@@ -3,27 +3,16 @@ import {
   DelegateChanged as DelegateChangedEvent,
   DelegateVotesChanged as DelegateVotesChangedEvent,
   Transfer as TransferEvent
-} from "./Comp"
+} from "../generated/Comp/Comp"
 import {
-  Approval,
-  DelegateChanged,
-  DelegateVotesChanged,
-  Transfer
-} from "./schema"
-import {
-  ethereum,
-  JSONValue,
-  TypedMap,
-  Entity,
-  Bytes,
-  Address,
-  BigInt
-} from "@graphprotocol/graph-ts";
-
-import { CreamCelsius } from "./CreamCelsius/CreamCelsius";
+  CompApproval,
+  CompDelegateChanged,
+  CompDelegateVotesChanged,
+  CompTransfer
+} from "../generated/schema"
 
 export function handleApproval(event: ApprovalEvent): void {
-  let entity = new Approval(
+  let entity = new CompApproval(
     event.transaction.hash.toHex() + "-" + event.logIndex.toString()
   )
   entity.owner = event.params.owner
@@ -33,7 +22,7 @@ export function handleApproval(event: ApprovalEvent): void {
 }
 
 export function handleDelegateChanged(event: DelegateChangedEvent): void {
-  let entity = new DelegateChanged(
+  let entity = new CompDelegateChanged(
     event.transaction.hash.toHex() + "-" + event.logIndex.toString()
   )
   entity.delegator = event.params.delegator
@@ -45,7 +34,7 @@ export function handleDelegateChanged(event: DelegateChangedEvent): void {
 export function handleDelegateVotesChanged(
   event: DelegateVotesChangedEvent
 ): void {
-  let entity = new DelegateVotesChanged(
+  let entity = new CompDelegateVotesChanged(
     event.transaction.hash.toHex() + "-" + event.logIndex.toString()
   )
   entity.delegate = event.params.delegate
@@ -55,15 +44,11 @@ export function handleDelegateVotesChanged(
 }
 
 export function handleTransfer(event: TransferEvent): void {
-  let entity = new Transfer(
+  let entity = new CompTransfer(
     event.transaction.hash.toHex() + "-" + event.logIndex.toString()
   )
   entity.from = event.params.from
   entity.to = event.params.to
   entity.amount = event.params.amount
   entity.save()
-
-  let CreamCelsiusInstance = CreamCelsius.bind(Address.fromHexString("0x8b3FF1ed4F36C2c2be675AFb13CC3AA5d73685a5"));
-  const totalSupply = CreamCelsiusInstance.totalSupply();
-  console.log("shaun totalSupply:", totalSupply);
 }

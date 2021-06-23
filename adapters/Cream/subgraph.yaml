@@ -1,0 +1,917 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Comp
+    network: mainnet
+    source:
+      address: "0x2ba592f78db6436527729929aaf6c908497cb200"
+      startBlock: 10594024
+      abi: Comp
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - CompApproval
+        - CompDelegateChanged
+        - CompDelegateVotesChanged
+        - CompTransfer
+      abis:
+        - name: Comp
+          file: ./abis/Comp.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: DelegateChanged(indexed address,indexed address,indexed address)
+          handler: handleDelegateChanged
+        - event: DelegateVotesChanged(indexed address,uint256,uint256)
+          handler: handleDelegateVotesChanged
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.ts
+  - kind: ethereum/contract
+    name: CreamAave
+    network: mainnet
+    source:
+      address: "0x3225E3C669B39C7c8B3e204a8614bB218c5e31BC"
+      startBlock: 11222225
+      abi: CErc20Delegator
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AccrueInterest
+        - Approval
+        - Borrow
+        - Failure
+        - LiquidateBorrow
+        - Mint
+        - NewAdmin
+        - NewComptroller
+        - NewImplementation
+        - NewMarketInterestRateModel
+        - NewPendingAdmin
+        - NewReserveFactor
+        - Redeem
+        - RepayBorrow
+        - ReservesAdded
+        - ReservesReduced
+        - Transfer
+      abis:
+        - name: CErc20Delegator
+          file: ./tokens/CErc20Delegator.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: Failure(uint256,uint256,uint256)
+          handler: handleFailure
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewAdmin(address,address)
+          handler: handleNewAdmin
+        - event: NewComptroller(address,address)
+          handler: handleNewComptroller
+        - event: NewImplementation(address,address)
+          handler: handleNewImplementation
+        - event: NewMarketInterestRateModel(address,address)
+          handler: handleNewMarketInterestRateModel
+        - event: NewPendingAdmin(address,address)
+          handler: handleNewPendingAdmin
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./tokens/mapping.ts
+  - kind: ethereum/contract
+    name: CreamBbtc
+    network: mainnet
+    source:
+      address: "0x7ea9C63E216D5565c3940A2B3d150e59C2907Db3"
+      startBlock: 11202982
+      abi: CErc20Delegator
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AccrueInterest
+        - Approval
+        - Borrow
+        - Failure
+        - LiquidateBorrow
+        - Mint
+        - NewAdmin
+        - NewComptroller
+        - NewImplementation
+        - NewMarketInterestRateModel
+        - NewPendingAdmin
+        - NewReserveFactor
+        - Redeem
+        - RepayBorrow
+        - ReservesAdded
+        - ReservesReduced
+        - Transfer
+      abis:
+        - name: CErc20Delegator
+          file: ./tokens/CErc20Delegator.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: Failure(uint256,uint256,uint256)
+          handler: handleFailure
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewAdmin(address,address)
+          handler: handleNewAdmin
+        - event: NewComptroller(address,address)
+          handler: handleNewComptroller
+        - event: NewImplementation(address,address)
+          handler: handleNewImplementation
+        - event: NewMarketInterestRateModel(address,address)
+          handler: handleNewMarketInterestRateModel
+        - event: NewPendingAdmin(address,address)
+          handler: handleNewPendingAdmin
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./tokens/mapping.ts
+  - kind: ethereum/contract
+    name: CreamBond
+    network: mainnet
+    source:
+      address: "0xf55BbE0255f7f4E70f63837Ff72A577fbDDbE924"
+      startBlock: 11248400
+      abi: CErc20Delegator
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AccrueInterest
+        - Approval
+        - Borrow
+        - Failure
+        - LiquidateBorrow
+        - Mint
+        - NewAdmin
+        - NewComptroller
+        - NewImplementation
+        - NewMarketInterestRateModel
+        - NewPendingAdmin
+        - NewReserveFactor
+        - Redeem
+        - RepayBorrow
+        - ReservesAdded
+        - ReservesReduced
+        - Transfer
+      abis:
+        - name: CErc20Delegator
+          file: ./tokens/CErc20Delegator.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: Failure(uint256,uint256,uint256)
+          handler: handleFailure
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewAdmin(address,address)
+          handler: handleNewAdmin
+        - event: NewComptroller(address,address)
+          handler: handleNewComptroller
+        - event: NewImplementation(address,address)
+          handler: handleNewImplementation
+        - event: NewMarketInterestRateModel(address,address)
+          handler: handleNewMarketInterestRateModel
+        - event: NewPendingAdmin(address,address)
+          handler: handleNewPendingAdmin
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./tokens/mapping.ts
+  - kind: ethereum/contract
+    name: CreamCelsius
+    network: mainnet
+    source:
+      address: "0x2ba592F78dB6436527729929AAf6c908497cB200"
+      startBlock: 10594024
+      abi: CErc20Delegator
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AccrueInterest
+        - Approval
+        - Borrow
+        - Failure
+        - LiquidateBorrow
+        - Mint
+        - NewAdmin
+        - NewComptroller
+        - NewImplementation
+        - NewMarketInterestRateModel
+        - NewPendingAdmin
+        - NewReserveFactor
+        - Redeem
+        - RepayBorrow
+        - ReservesAdded
+        - ReservesReduced
+        - Transfer
+      abis:
+        - name: CErc20Delegator
+          file: ./tokens/CErc20Delegator.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: Failure(uint256,uint256,uint256)
+          handler: handleFailure
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewAdmin(address,address)
+          handler: handleNewAdmin
+        - event: NewComptroller(address,address)
+          handler: handleNewComptroller
+        - event: NewImplementation(address,address)
+          handler: handleNewImplementation
+        - event: NewMarketInterestRateModel(address,address)
+          handler: handleNewMarketInterestRateModel
+        - event: NewPendingAdmin(address,address)
+          handler: handleNewPendingAdmin
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./tokens/mapping.ts
+  - kind: ethereum/contract
+    name: CreamCover
+    network: mainnet
+    source:
+      address: "0x21011BC93d9E515B9511A817A1eD1D6d468f49Fc"
+      startBlock: 11658727
+      abi: CErc20Delegator
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AccrueInterest
+        - Approval
+        - Borrow
+        - Failure
+        - LiquidateBorrow
+        - Mint
+        - NewAdmin
+        - NewComptroller
+        - NewImplementation
+        - NewMarketInterestRateModel
+        - NewPendingAdmin
+        - NewReserveFactor
+        - Redeem
+        - RepayBorrow
+        - ReservesAdded
+        - ReservesReduced
+        - Transfer
+      abis:
+        - name: CErc20Delegator
+          file: ./tokens/CErc20Delegator.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: Failure(uint256,uint256,uint256)
+          handler: handleFailure
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewAdmin(address,address)
+          handler: handleNewAdmin
+        - event: NewComptroller(address,address)
+          handler: handleNewComptroller
+        - event: NewImplementation(address,address)
+          handler: handleNewImplementation
+        - event: NewMarketInterestRateModel(address,address)
+          handler: handleNewMarketInterestRateModel
+        - event: NewPendingAdmin(address,address)
+          handler: handleNewPendingAdmin
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./tokens/mapping.ts
+  - kind: ethereum/contract
+    name: CreamCreth2
+    network: mainnet
+    source:
+      address: "0xfd609a03B393F1A1cFcAcEdaBf068CAD09a924E2"
+      startBlock: 11326940
+      abi: CErc20Delegator
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AccrueInterest
+        - Approval
+        - Borrow
+        - Failure
+        - LiquidateBorrow
+        - Mint
+        - NewAdmin
+        - NewComptroller
+        - NewImplementation
+        - NewMarketInterestRateModel
+        - NewPendingAdmin
+        - NewReserveFactor
+        - Redeem
+        - RepayBorrow
+        - ReservesAdded
+        - ReservesReduced
+        - Transfer
+      abis:
+        - name: CErc20Delegator
+          file: ./tokens/CErc20Delegator.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: Failure(uint256,uint256,uint256)
+          handler: handleFailure
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewAdmin(address,address)
+          handler: handleNewAdmin
+        - event: NewComptroller(address,address)
+          handler: handleNewComptroller
+        - event: NewImplementation(address,address)
+          handler: handleNewImplementation
+        - event: NewMarketInterestRateModel(address,address)
+          handler: handleNewMarketInterestRateModel
+        - event: NewPendingAdmin(address,address)
+          handler: handleNewPendingAdmin
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./tokens/mapping.ts
+  - kind: ethereum/contract
+    name: CreamDai
+    network: mainnet
+    source:
+      address: "0x92B767185fB3B04F881e3aC8e5B0662a027A1D9f"
+      startBlock: 11371388
+      abi: CErc20Delegator
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AccrueInterest
+        - Approval
+        - Borrow
+        - Failure
+        - LiquidateBorrow
+        - Mint
+        - NewAdmin
+        - NewComptroller
+        - NewImplementation
+        - NewMarketInterestRateModel
+        - NewPendingAdmin
+        - NewReserveFactor
+        - Redeem
+        - RepayBorrow
+        - ReservesAdded
+        - ReservesReduced
+        - Transfer
+      abis:
+        - name: CErc20Delegator
+          file: ./tokens/CErc20Delegator.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: Failure(uint256,uint256,uint256)
+          handler: handleFailure
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewAdmin(address,address)
+          handler: handleNewAdmin
+        - event: NewComptroller(address,address)
+          handler: handleNewComptroller
+        - event: NewImplementation(address,address)
+          handler: handleNewImplementation
+        - event: NewMarketInterestRateModel(address,address)
+          handler: handleNewMarketInterestRateModel
+        - event: NewPendingAdmin(address,address)
+          handler: handleNewPendingAdmin
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./tokens/mapping.ts
+  - kind: ethereum/contract
+    name: CreamEsd
+    network: mainnet
+    source:
+      address: "0x3C6C553A95910F9FC81c98784736bd628636D296"
+      startBlock: 11554497
+      abi: CErc20Delegator
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AccrueInterest
+        - Approval
+        - Borrow
+        - Failure
+        - LiquidateBorrow
+        - Mint
+        - NewAdmin
+        - NewComptroller
+        - NewImplementation
+        - NewMarketInterestRateModel
+        - NewPendingAdmin
+        - NewReserveFactor
+        - Redeem
+        - RepayBorrow
+        - ReservesAdded
+        - ReservesReduced
+        - Transfer
+      abis:
+        - name: CErc20Delegator
+          file: ./tokens/CErc20Delegator.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: Failure(uint256,uint256,uint256)
+          handler: handleFailure
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewAdmin(address,address)
+          handler: handleNewAdmin
+        - event: NewComptroller(address,address)
+          handler: handleNewComptroller
+        - event: NewImplementation(address,address)
+          handler: handleNewImplementation
+        - event: NewMarketInterestRateModel(address,address)
+          handler: handleNewMarketInterestRateModel
+        - event: NewPendingAdmin(address,address)
+          handler: handleNewPendingAdmin
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./tokens/mapping.ts
+  - kind: ethereum/contract
+    name: CreamHbtc
+    network: mainnet
+    source:
+      address: "0x054B7ed3F45714d3091e82aAd64A1588dC4096Ed"
+      startBlock: 11287429
+      abi: CErc20Delegator
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AccrueInterest
+        - Approval
+        - Borrow
+        - Failure
+        - LiquidateBorrow
+        - Mint
+        - NewAdmin
+        - NewComptroller
+        - NewImplementation
+        - NewMarketInterestRateModel
+        - NewPendingAdmin
+        - NewReserveFactor
+        - Redeem
+        - RepayBorrow
+        - ReservesAdded
+        - ReservesReduced
+        - Transfer
+      abis:
+        - name: CErc20Delegator
+          file: ./tokens/CErc20Delegator.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: Failure(uint256,uint256,uint256)
+          handler: handleFailure
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewAdmin(address,address)
+          handler: handleNewAdmin
+        - event: NewComptroller(address,address)
+          handler: handleNewComptroller
+        - event: NewImplementation(address,address)
+          handler: handleNewImplementation
+        - event: NewMarketInterestRateModel(address,address)
+          handler: handleNewMarketInterestRateModel
+        - event: NewPendingAdmin(address,address)
+          handler: handleNewPendingAdmin
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./tokens/mapping.ts
+  - kind: ethereum/contract
+    name: CreamHfil
+    network: mainnet
+    source:
+      address: "0xd5103AfcD0B3fA865997Ef2984C66742c51b2a8b"
+      startBlock: 11287588
+      abi: CErc20Delegator
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AccrueInterest
+        - Approval
+        - Borrow
+        - Failure
+        - LiquidateBorrow
+        - Mint
+        - NewAdmin
+        - NewComptroller
+        - NewImplementation
+        - NewMarketInterestRateModel
+        - NewPendingAdmin
+        - NewReserveFactor
+        - Redeem
+        - RepayBorrow
+        - ReservesAdded
+        - ReservesReduced
+        - Transfer
+      abis:
+        - name: CErc20Delegator
+          file: ./tokens/CErc20Delegator.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: Failure(uint256,uint256,uint256)
+          handler: handleFailure
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewAdmin(address,address)
+          handler: handleNewAdmin
+        - event: NewComptroller(address,address)
+          handler: handleNewComptroller
+        - event: NewImplementation(address,address)
+          handler: handleNewImplementation
+        - event: NewMarketInterestRateModel(address,address)
+          handler: handleNewMarketInterestRateModel
+        - event: NewPendingAdmin(address,address)
+          handler: handleNewPendingAdmin
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./tokens/mapping.ts
+  - kind: ethereum/contract
+    name: CreamKp3r
+    network: mainnet
+    source:
+      address: "0x903560b1CcE601794C584F58898dA8a8b789Fc5d"
+      startBlock: 11248495
+      abi: CErc20Delegator
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AccrueInterest
+        - Approval
+        - Borrow
+        - Failure
+        - LiquidateBorrow
+        - Mint
+        - NewAdmin
+        - NewComptroller
+        - NewImplementation
+        - NewMarketInterestRateModel
+        - NewPendingAdmin
+        - NewReserveFactor
+        - Redeem
+        - RepayBorrow
+        - ReservesAdded
+        - ReservesReduced
+        - Transfer
+      abis:
+        - name: CErc20Delegator
+          file: ./tokens/CErc20Delegator.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: Failure(uint256,uint256,uint256)
+          handler: handleFailure
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewAdmin(address,address)
+          handler: handleNewAdmin
+        - event: NewComptroller(address,address)
+          handler: handleNewComptroller
+        - event: NewImplementation(address,address)
+          handler: handleNewImplementation
+        - event: NewMarketInterestRateModel(address,address)
+          handler: handleNewMarketInterestRateModel
+        - event: NewPendingAdmin(address,address)
+          handler: handleNewPendingAdmin
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./tokens/mapping.ts
+  - kind: ethereum/contract
+    name: CreamUni
+    network: mainnet
+    source:
+      address: "0xe89a6D0509faF730BD707bf868d9A2A744a363C7"
+      startBlock: 10877282
+      abi: CErc20Delegator
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AccrueInterest
+        - Approval
+        - Borrow
+        - Failure
+        - LiquidateBorrow
+        - Mint
+        - NewAdmin
+        - NewComptroller
+        - NewImplementation
+        - NewMarketInterestRateModel
+        - NewPendingAdmin
+        - NewReserveFactor
+        - Redeem
+        - RepayBorrow
+        - ReservesAdded
+        - ReservesReduced
+        - Transfer
+      abis:
+        - name: CErc20Delegator
+          file: ./tokens/CErc20Delegator.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: Failure(uint256,uint256,uint256)
+          handler: handleFailure
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewAdmin(address,address)
+          handler: handleNewAdmin
+        - event: NewComptroller(address,address)
+          handler: handleNewComptroller
+        - event: NewImplementation(address,address)
+          handler: handleNewImplementation
+        - event: NewMarketInterestRateModel(address,address)
+          handler: handleNewMarketInterestRateModel
+        - event: NewPendingAdmin(address,address)
+          handler: handleNewPendingAdmin
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./tokens/mapping.ts
+  - kind: ethereum/contract
+    name: CreamYcrv
+    network: mainnet
+    source:
+      address: "0x9baF8a5236d44AC410c0186Fe39178d5AAD0Bb87"
+      startBlock: 10580322
+      abi: CErc20Delegator
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AccrueInterest
+        - Approval
+        - Borrow
+        - Failure
+        - LiquidateBorrow
+        - Mint
+        - NewAdmin
+        - NewComptroller
+        - NewImplementation
+        - NewMarketInterestRateModel
+        - NewPendingAdmin
+        - NewReserveFactor
+        - Redeem
+        - RepayBorrow
+        - ReservesAdded
+        - ReservesReduced
+        - Transfer
+      abis:
+        - name: CErc20Delegator
+          file: ./tokens/CErc20Delegator.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: Failure(uint256,uint256,uint256)
+          handler: handleFailure
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewAdmin(address,address)
+          handler: handleNewAdmin
+        - event: NewComptroller(address,address)
+          handler: handleNewComptroller
+        - event: NewImplementation(address,address)
+          handler: handleNewImplementation
+        - event: NewMarketInterestRateModel(address,address)
+          handler: handleNewMarketInterestRateModel
+        - event: NewPendingAdmin(address,address)
+          handler: handleNewPendingAdmin
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./tokens/mapping.ts
