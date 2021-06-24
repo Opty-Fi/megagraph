@@ -1,17 +1,10 @@
 import { BigInt, log, Bytes, BigDecimal } from "@graphprotocol/graph-ts"
 import {
-  AccrueInterest as AccrueInterestEvent,
-  Approval as ApprovalEvent,
-  Borrow as BorrowEvent,
   CToken,
-  Failure as FailureEvent,
+  AccrueInterest as AccrueInterestEvent,
+  Borrow as BorrowEvent,
   LiquidateBorrow as LiquidateBorrowEvent,
   Mint as MintEvent,
-  NewAdmin as NewAdminEvent,
-  NewComptroller as NewComptrollerEvent,
-  NewImplementation as NewImplementationEvent,
-  NewMarketInterestRateModel as NewMarketInterestRateModelEvent,
-  NewPendingAdmin as NewPendingAdminEvent,
   NewReserveFactor as NewReserveFactorEvent,
   Redeem as RedeemEvent,
   RepayBorrow as RepayBorrowEvent,
@@ -20,24 +13,7 @@ import {
   Transfer as TransferEvent
 } from "../generated/CToken/CToken"
 import {
-  // AccrueInterest,
-  // Approval,
-  // Borrow,
   CTokenData,
-  // Failure,
-  // LiquidateBorrow,
-  // Mint,
-  // NewAdmin,
-  // NewComptroller,
-  // NewImplementation,
-  // NewMarketInterestRateModel,
-  // NewPendingAdmin,
-  // NewReserveFactor,
-  // Redeem,
-  // RepayBorrow,
-  // ReservesAdded,
-  // ReservesReduced,
-  // Transfer
 } from "../generated/schema"
 
 //  changing totalBorrows, borrowIndex, therefore capturing
@@ -81,17 +57,6 @@ export function handleAccrueInterest(event: AccrueInterestEvent): void {
   cTokenDataEntity.save()
 }
 
-// //  Not required
-// export function handleApproval(event: ApprovalEvent): void {
-//   let entity = new Approval(
-//     event.transaction.hash.toHex() + "-" + event.block.number.toString()
-//   )
-//   entity.owner = event.params.owner
-//   entity.spender = event.params.spender
-//   entity.amount = event.params.amount
-//   entity.save()
-// }
-
 //  Chaging totalBorrows, therefore capturing
 export function handleBorrow(event: BorrowEvent): void {
   // let entity = new Borrow(
@@ -126,17 +91,6 @@ export function handleBorrow(event: BorrowEvent): void {
   log.info("Logging Ctoken data into IPFS", [])
   cTokenDataEntity.save()
 }
-
-// //  Not needed
-// export function handleFailure(event: FailureEvent): void {
-//   let entity = new Failure(
-//     event.transaction.hash.toHex() + "-" + event.block.number.toString()
-//   )
-//   entity.error = event.params.error
-//   entity.info = event.params.info
-//   entity.detail = event.params.detail
-//   entity.save()
-// }
 
 //  calling accureInterest() internally in contract therefore, capturing
 export function handleLiquidateBorrow(event: LiquidateBorrowEvent): void {
@@ -207,58 +161,6 @@ export function handleMint(event: MintEvent): void {
   log.info("Logging Ctoken data into IPFS", [])
   cTokenDataEntity.save()
 }
-
-// //  Not required
-// export function handleNewAdmin(event: NewAdminEvent): void {
-//   let entity = new NewAdmin(
-//     event.transaction.hash.toHex() + "-" + event.block.number.toString()
-//   )
-//   entity.oldAdmin = event.params.oldAdmin
-//   entity.newAdmin = event.params.newAdmin
-//   entity.save()
-// }
-
-// //  Not required
-// export function handleNewComptroller(event: NewComptrollerEvent): void {
-//   let entity = new NewComptroller(
-//     event.transaction.hash.toHex() + "-" + event.block.number.toString()
-//   )
-//   entity.oldComptroller = event.params.oldComptroller
-//   entity.newComptroller = event.params.newComptroller
-//   entity.save()
-// }
-
-// //  Not required
-// export function handleNewImplementation(event: NewImplementationEvent): void {
-//   let entity = new NewImplementation(
-//     event.transaction.hash.toHex() + "-" + event.block.number.toString()
-//   )
-//   entity.oldImplementation = event.params.oldImplementation
-//   entity.newImplementation = event.params.newImplementation
-//   entity.save()
-// }
-
-// //  Not required
-// export function handleNewMarketInterestRateModel(
-//   event: NewMarketInterestRateModelEvent
-// ): void {
-//   let entity = new NewMarketInterestRateModel(
-//     event.transaction.hash.toHex() + "-" + event.block.number.toString()
-//   )
-//   entity.oldInterestRateModel = event.params.oldInterestRateModel
-//   entity.newInterestRateModel = event.params.newInterestRateModel
-//   entity.save()
-// }
-
-// //  Not required
-// export function handleNewPendingAdmin(event: NewPendingAdminEvent): void {
-//   let entity = new NewPendingAdmin(
-//     event.transaction.hash.toHex() + "-" + event.block.number.toString()
-//   )
-//   entity.oldPendingAdmin = event.params.oldPendingAdmin
-//   entity.newPendingAdmin = event.params.newPendingAdmin
-//   entity.save()
-// }
 
 // calling accureInterest internally, therefore capturing {May be it can be skipped as
 // it is being captured by accureInterest event}
@@ -465,14 +367,3 @@ export function handleTransfer(event: TransferEvent): void {
   log.info("Logging Ctoken data into IPFS", [])
   cTokenDataEntity.save()
 }
-
-// export function updateCommonCTokenEntity( transactionHash: string, blockNumber: string): CTokenData {
-//   let cTokenDataEntityId = transactionHash.concat('-').concat(blockNumber)
-//   let cTokenDataEntity = CTokenData.load(cTokenDataEntityId)
-
-//   if (cTokenDataEntity == null) {
-//     return
-//   } else {
-//   }
-//   return cTokenDataEntity as CTokenData
-// }
