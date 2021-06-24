@@ -12,9 +12,14 @@ import {
   ReservesReduced as ReservesReducedEvent,
   Transfer as TransferEvent
 } from "../generated/CToken/CToken"
+// import { MarketListed as MarketListedEvent } from "../generated/Comptroller/Comptroller"
 import {
   CTokenData,
 } from "../generated/schema"
+
+// export function handleMarketListed(event: MarketListedEvent): void {
+//   log.info("Do nothing in MarketListed event", [])
+// }
 
 //  changing totalBorrows, borrowIndex, therefore capturing
 export function handleAccrueInterest(event: AccrueInterestEvent): void {
