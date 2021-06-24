@@ -1,11 +1,7 @@
 [
   {
     "inputs": [
-      {
-        "internalType": "address",
-        "name": "_impl",
-        "type": "address"
-      }
+      { "internalType": "address", "name": "_impl", "type": "address" }
     ],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -30,22 +26,12 @@
     "name": "OwnershipTransferred",
     "type": "event"
   },
-  {
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "fallback"
-  },
+  { "payable": true, "stateMutability": "payable", "type": "fallback" },
   {
     "constant": true,
     "inputs": [],
     "name": "BZRX",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -54,34 +40,16 @@
     "constant": true,
     "inputs": [],
     "name": "LPToken",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
     "constant": true,
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "name": "delegate",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -90,13 +58,7 @@
     "constant": true,
     "inputs": [],
     "name": "implementation",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -105,13 +67,7 @@
     "constant": true,
     "inputs": [],
     "name": "initialCirculatingSupply",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -120,13 +76,7 @@
     "constant": true,
     "inputs": [],
     "name": "isActive",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -135,13 +85,7 @@
     "constant": true,
     "inputs": [],
     "name": "isInit",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -150,13 +94,7 @@
     "constant": true,
     "inputs": [],
     "name": "isOwner",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -165,13 +103,7 @@
     "constant": true,
     "inputs": [],
     "name": "lastUpdateTime",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -180,13 +112,7 @@
     "constant": true,
     "inputs": [],
     "name": "owner",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -195,13 +121,7 @@
     "constant": true,
     "inputs": [],
     "name": "periodFinish",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -209,25 +129,11 @@
   {
     "constant": true,
     "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
+      { "internalType": "address", "name": "", "type": "address" },
+      { "internalType": "address", "name": "", "type": "address" }
     ],
     "name": "repStakedPerToken",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -235,11 +141,7 @@
   {
     "constant": false,
     "inputs": [
-      {
-        "internalType": "address",
-        "name": "impl",
-        "type": "address"
-      }
+      { "internalType": "address", "name": "impl", "type": "address" }
     ],
     "name": "replaceImplementation",
     "outputs": [],
@@ -249,21 +151,9 @@
   },
   {
     "constant": true,
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "name": "reps",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -272,13 +162,7 @@
     "constant": true,
     "inputs": [],
     "name": "rewardPerTokenStored",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -287,34 +171,16 @@
     "constant": true,
     "inputs": [],
     "name": "rewardRate",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
     "constant": true,
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "name": "rewards",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -322,11 +188,7 @@
   {
     "constant": false,
     "inputs": [
-      {
-        "internalType": "address",
-        "name": "newOwner",
-        "type": "address"
-      }
+      { "internalType": "address", "name": "newOwner", "type": "address" }
     ],
     "name": "transferOwnership",
     "outputs": [],
@@ -336,21 +198,9 @@
   },
   {
     "constant": true,
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "name": "userRewardPerTokenPaid",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -359,13 +209,7 @@
     "constant": true,
     "inputs": [],
     "name": "vBZRX",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
