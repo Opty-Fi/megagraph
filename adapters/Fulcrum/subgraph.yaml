@@ -3,25 +3,70 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: bZxProtocol
+    name: LoanMaintenance
     network: mainnet
     source:
       address: "0xD8Ee69652E4e4838f2531732a46d1f7F584F0b7f"
       startBlock: 10777787
-      abi: bZxProtocol
+      abi: LoanMaintenance
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - bZxProtocolOwnershipTransferred
+        - LoanMaintenanceClaimReward
+        - LoanMaintenanceDepositCollateral
+        - LoanMaintenanceEarnReward
+        - LoanMaintenanceExtendLoanDuration
+        - LoanMaintenanceExternalSwap
+        - LoanMaintenanceLoanDeposit
+        - LoanMaintenanceLoanSwap
+        - LoanMaintenanceOwnershipTransferred
+        - LoanMaintenancePayBorrowingFee
+        - LoanMaintenancePayLendingFee
+        - LoanMaintenancePayTradingFee
+        - LoanMaintenanceReduceLoanDuration
+        - LoanMaintenanceSettleFeeRewardForInterestExpense
+        - LoanMaintenanceVaultDeposit
+        - LoanMaintenanceVaultWithdraw
+        - LoanMaintenanceWithdrawCollateral
       abis:
-        - name: bZxProtocol
-          file: ./abis/bZxProtocol.json
+        - name: LoanMaintenance
+          file: ./abis/LoanMaintenance.json
       eventHandlers:
+        - event: ClaimReward(indexed address,indexed address,indexed address,uint256)
+          handler: handleClaimReward
+        - event: DepositCollateral(indexed address,indexed address,indexed bytes32,uint256)
+          handler: handleDepositCollateral
+        - event: EarnReward(indexed address,indexed bytes32,indexed uint8,address,uint256)
+          handler: handleEarnReward
+        - event: ExtendLoanDuration(indexed address,indexed address,indexed bytes32,uint256,uint256,uint256)
+          handler: handleExtendLoanDuration
+        - event: ExternalSwap(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleExternalSwap
+        - event: LoanDeposit(indexed bytes32,uint256,uint256)
+          handler: handleLoanDeposit
+        - event: LoanSwap(indexed bytes32,indexed address,indexed address,address,uint256,uint256)
+          handler: handleLoanSwap
         - event: OwnershipTransferred(indexed address,indexed address)
           handler: handleOwnershipTransferred
-      file: ./src/mapping.ts
+        - event: PayBorrowingFee(indexed address,indexed address,indexed bytes32,uint256)
+          handler: handlePayBorrowingFee
+        - event: PayLendingFee(indexed address,indexed address,uint256)
+          handler: handlePayLendingFee
+        - event: PayTradingFee(indexed address,indexed address,indexed bytes32,uint256)
+          handler: handlePayTradingFee
+        - event: ReduceLoanDuration(indexed address,indexed address,indexed bytes32,uint256,uint256)
+          handler: handleReduceLoanDuration
+        - event: SettleFeeRewardForInterestExpense(indexed address,indexed address,indexed bytes32,uint256)
+          handler: handleSettleFeeRewardForInterestExpense
+        - event: VaultDeposit(indexed address,indexed address,uint256)
+          handler: handleVaultDeposit
+        - event: VaultWithdraw(indexed address,indexed address,uint256)
+          handler: handleVaultWithdraw
+        - event: WithdrawCollateral(indexed address,indexed address,indexed bytes32,uint256)
+          handler: handleWithdrawCollateral
+      file: ./src/mapping.LoanMaintenance.ts
   - kind: ethereum/contract
     name: StakingProxy
     network: mainnet
@@ -34,14 +79,23 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
+        - StakingProxyDelegateChanged
         - StakingProxyOwnershipTransferred
+        - StakingProxyRewardAdded
+        - StakingProxyStaked
       abis:
         - name: StakingProxy
           file: ./abis/StakingProxy.json
       eventHandlers:
+        - event: DelegateChanged(indexed address,indexed address,indexed address)
+          handler: handleDelegateChanged
         - event: OwnershipTransferred(indexed address,indexed address)
           handler: handleOwnershipTransferred
-      file: ./src/mapping.ts
+        - event: RewardAdded(indexed uint256,uint256)
+          handler: handleRewardAdded
+        - event: Staked(indexed address,indexed address,indexed address,uint256)
+          handler: handleStaked
+      file: ./src/mapping.StakingProxy.ts
   - kind: ethereum/contract
     name: FulcrumBzrx
     network: mainnet
@@ -61,7 +115,7 @@ dataSources:
         - Transfer
       abis:
         - name: LoanToken
-          file: ./tokens/LoanToken.json
+          file: ./abis/LoanToken.json
       eventHandlers:
         - event: Approval(indexed address,indexed address,uint256)
           handler: handleApproval
@@ -73,7 +127,7 @@ dataSources:
           handler: handleOwnershipTransferred
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumIaave
     network: mainnet
@@ -93,7 +147,7 @@ dataSources:
         - Transfer
       abis:
         - name: LoanToken
-          file: ./tokens/LoanToken.json
+          file: ./abis/LoanToken.json
       eventHandlers:
         - event: Approval(indexed address,indexed address,uint256)
           handler: handleApproval
@@ -105,7 +159,7 @@ dataSources:
           handler: handleOwnershipTransferred
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumIcomp
     network: mainnet
@@ -125,7 +179,7 @@ dataSources:
         - Transfer
       abis:
         - name: LoanToken
-          file: ./tokens/LoanToken.json
+          file: ./abis/LoanToken.json
       eventHandlers:
         - event: Approval(indexed address,indexed address,uint256)
           handler: handleApproval
@@ -137,7 +191,7 @@ dataSources:
           handler: handleOwnershipTransferred
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumIdai
     network: mainnet
@@ -157,7 +211,7 @@ dataSources:
         - Transfer
       abis:
         - name: LoanToken
-          file: ./tokens/LoanToken.json
+          file: ./abis/LoanToken.json
       eventHandlers:
         - event: Approval(indexed address,indexed address,uint256)
           handler: handleApproval
@@ -169,7 +223,7 @@ dataSources:
           handler: handleOwnershipTransferred
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumIeth
     network: mainnet
@@ -189,7 +243,7 @@ dataSources:
         - Transfer
       abis:
         - name: LoanToken
-          file: ./tokens/LoanToken.json
+          file: ./abis/LoanToken.json
       eventHandlers:
         - event: Approval(indexed address,indexed address,uint256)
           handler: handleApproval
@@ -201,7 +255,7 @@ dataSources:
           handler: handleOwnershipTransferred
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumIknc
     network: mainnet
@@ -221,7 +275,7 @@ dataSources:
         - Transfer
       abis:
         - name: LoanToken
-          file: ./tokens/LoanToken.json
+          file: ./abis/LoanToken.json
       eventHandlers:
         - event: Approval(indexed address,indexed address,uint256)
           handler: handleApproval
@@ -233,7 +287,7 @@ dataSources:
           handler: handleOwnershipTransferred
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumIlink
     network: mainnet
@@ -253,7 +307,7 @@ dataSources:
         - Transfer
       abis:
         - name: LoanToken
-          file: ./tokens/LoanToken.json
+          file: ./abis/LoanToken.json
       eventHandlers:
         - event: Approval(indexed address,indexed address,uint256)
           handler: handleApproval
@@ -265,7 +319,7 @@ dataSources:
           handler: handleOwnershipTransferred
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumIlrc
     network: mainnet
@@ -285,7 +339,7 @@ dataSources:
         - Transfer
       abis:
         - name: LoanToken
-          file: ./tokens/LoanToken.json
+          file: ./abis/LoanToken.json
       eventHandlers:
         - event: Approval(indexed address,indexed address,uint256)
           handler: handleApproval
@@ -297,7 +351,7 @@ dataSources:
           handler: handleOwnershipTransferred
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumImkr
     network: mainnet
@@ -317,7 +371,7 @@ dataSources:
         - Transfer
       abis:
         - name: LoanToken
-          file: ./tokens/LoanToken.json
+          file: ./abis/LoanToken.json
       eventHandlers:
         - event: Approval(indexed address,indexed address,uint256)
           handler: handleApproval
@@ -329,7 +383,7 @@ dataSources:
           handler: handleOwnershipTransferred
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumIuni
     network: mainnet
@@ -349,7 +403,7 @@ dataSources:
         - Transfer
       abis:
         - name: LoanToken
-          file: ./tokens/LoanToken.json
+          file: ./abis/LoanToken.json
       eventHandlers:
         - event: Approval(indexed address,indexed address,uint256)
           handler: handleApproval
@@ -361,7 +415,7 @@ dataSources:
           handler: handleOwnershipTransferred
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumIusdc
     network: mainnet
@@ -381,7 +435,7 @@ dataSources:
         - Transfer
       abis:
         - name: LoanToken
-          file: ./tokens/LoanToken.json
+          file: ./abis/LoanToken.json
       eventHandlers:
         - event: Approval(indexed address,indexed address,uint256)
           handler: handleApproval
@@ -393,7 +447,7 @@ dataSources:
           handler: handleOwnershipTransferred
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumIusdt
     network: mainnet
@@ -413,7 +467,7 @@ dataSources:
         - Transfer
       abis:
         - name: LoanToken
-          file: ./tokens/LoanToken.json
+          file: ./abis/LoanToken.json
       eventHandlers:
         - event: Approval(indexed address,indexed address,uint256)
           handler: handleApproval
@@ -425,7 +479,7 @@ dataSources:
           handler: handleOwnershipTransferred
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumIwbtc
     network: mainnet
@@ -445,7 +499,7 @@ dataSources:
         - Transfer
       abis:
         - name: LoanToken
-          file: ./tokens/LoanToken.json
+          file: ./abis/LoanToken.json
       eventHandlers:
         - event: Approval(indexed address,indexed address,uint256)
           handler: handleApproval
@@ -457,7 +511,7 @@ dataSources:
           handler: handleOwnershipTransferred
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumIyfi
     network: mainnet
@@ -477,7 +531,7 @@ dataSources:
         - Transfer
       abis:
         - name: LoanToken
-          file: ./tokens/LoanToken.json
+          file: ./abis/LoanToken.json
       eventHandlers:
         - event: Approval(indexed address,indexed address,uint256)
           handler: handleApproval
@@ -489,7 +543,7 @@ dataSources:
           handler: handleOwnershipTransferred
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumVbzrx
     network: mainnet
@@ -509,7 +563,7 @@ dataSources:
         - Transfer
       abis:
         - name: LoanToken
-          file: ./tokens/LoanToken.json
+          file: ./abis/LoanToken.json
       eventHandlers:
         - event: Approval(indexed address,indexed address,uint256)
           handler: handleApproval
@@ -521,4 +575,4 @@ dataSources:
           handler: handleOwnershipTransferred
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.LoanToken.ts

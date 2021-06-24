@@ -11,7 +11,7 @@ import {
   Mint,
   OwnershipTransferred,
   Transfer
-} from "./schema"
+} from "../generated/schema"
 
 export function handleApproval(event: ApprovalEvent): void {
   let entity = new Approval(

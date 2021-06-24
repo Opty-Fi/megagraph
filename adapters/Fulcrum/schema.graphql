@@ -1,13 +1,157 @@
-type bZxProtocolOwnershipTransferred @entity {
+type LoanMaintenanceClaimReward @entity {
+  id: ID!
+  user: Bytes! # address
+  receiver: Bytes! # address
+  token: Bytes! # address
+  amount: BigInt! # uint256
+}
+
+type LoanMaintenanceDepositCollateral @entity {
+  id: ID!
+  user: Bytes! # address
+  depositToken: Bytes! # address
+  loanId: Bytes! # bytes32
+  depositAmount: BigInt! # uint256
+}
+
+type LoanMaintenanceEarnReward @entity {
+  id: ID!
+  receiver: Bytes! # address
+  loanId: Bytes! # bytes32
+  feeType: Int! # uint8
+  token: Bytes! # address
+  amount: BigInt! # uint256
+}
+
+type LoanMaintenanceExtendLoanDuration @entity {
+  id: ID!
+  user: Bytes! # address
+  depositToken: Bytes! # address
+  loanId: Bytes! # bytes32
+  depositAmount: BigInt! # uint256
+  collateralUsedAmount: BigInt! # uint256
+  newEndTimestamp: BigInt! # uint256
+}
+
+type LoanMaintenanceExternalSwap @entity {
+  id: ID!
+  user: Bytes! # address
+  sourceToken: Bytes! # address
+  destToken: Bytes! # address
+  sourceAmount: BigInt! # uint256
+  destAmount: BigInt! # uint256
+}
+
+type LoanMaintenanceLoanDeposit @entity {
+  id: ID!
+  loanId: Bytes! # bytes32
+  depositValueAsLoanToken: BigInt! # uint256
+  depositValueAsCollateralToken: BigInt! # uint256
+}
+
+type LoanMaintenanceLoanSwap @entity {
+  id: ID!
+  loanId: Bytes! # bytes32
+  sourceToken: Bytes! # address
+  destToken: Bytes! # address
+  borrower: Bytes! # address
+  sourceAmount: BigInt! # uint256
+  destAmount: BigInt! # uint256
+}
+
+type LoanMaintenanceOwnershipTransferred @entity {
   id: ID!
   previousOwner: Bytes! # address
   newOwner: Bytes! # address
+}
+
+type LoanMaintenancePayBorrowingFee @entity {
+  id: ID!
+  payer: Bytes! # address
+  token: Bytes! # address
+  loanId: Bytes! # bytes32
+  amount: BigInt! # uint256
+}
+
+type LoanMaintenancePayLendingFee @entity {
+  id: ID!
+  payer: Bytes! # address
+  token: Bytes! # address
+  amount: BigInt! # uint256
+}
+
+type LoanMaintenancePayTradingFee @entity {
+  id: ID!
+  payer: Bytes! # address
+  token: Bytes! # address
+  loanId: Bytes! # bytes32
+  amount: BigInt! # uint256
+}
+
+type LoanMaintenanceReduceLoanDuration @entity {
+  id: ID!
+  user: Bytes! # address
+  withdrawToken: Bytes! # address
+  loanId: Bytes! # bytes32
+  withdrawAmount: BigInt! # uint256
+  newEndTimestamp: BigInt! # uint256
+}
+
+type LoanMaintenanceSettleFeeRewardForInterestExpense @entity {
+  id: ID!
+  payer: Bytes! # address
+  token: Bytes! # address
+  loanId: Bytes! # bytes32
+  amount: BigInt! # uint256
+}
+
+type LoanMaintenanceVaultDeposit @entity {
+  id: ID!
+  asset: Bytes! # address
+  from: Bytes! # address
+  amount: BigInt! # uint256
+}
+
+type LoanMaintenanceVaultWithdraw @entity {
+  id: ID!
+  asset: Bytes! # address
+  to: Bytes! # address
+  amount: BigInt! # uint256
+}
+
+type LoanMaintenanceWithdrawCollateral @entity {
+  id: ID!
+  user: Bytes! # address
+  withdrawToken: Bytes! # address
+  loanId: Bytes! # bytes32
+  withdrawAmount: BigInt! # uint256
+}
+
+type StakingProxyDelegateChanged @entity {
+  id: ID!
+  user: Bytes! # address
+  oldDelegate: Bytes! # address
+  newDelegate: Bytes! # address
 }
 
 type StakingProxyOwnershipTransferred @entity {
   id: ID!
   previousOwner: Bytes! # address
   newOwner: Bytes! # address
+}
+
+type StakingProxyRewardAdded @entity {
+  id: ID!
+  reward: BigInt! # uint256
+  duration: BigInt! # uint256
+}
+
+type StakingProxyStaked @entity {
+  id: ID!
+  user: Bytes! # address
+  token: Bytes! # address
+  delegate: Bytes! # address
+  amount: BigInt! # uint256
 }
 
 type Approval @entity {
