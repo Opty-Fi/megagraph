@@ -1,4 +1,4 @@
-import { BigInt, log, Bytes, BigDecimal } from "@graphprotocol/graph-ts"
+import { BigInt, log, Address, Bytes, BigDecimal } from "@graphprotocol/graph-ts"
 import {
   CToken,
   AccrueInterest as AccrueInterestEvent,
@@ -21,6 +21,39 @@ import {
 //   log.info("Do nothing in MarketListed event", [])
 // }
 
+function handleEntity(
+  cTokenAddress: Address,
+  transactionHash: Bytes,
+  borrowIndex: BigInt,
+  totalBorrows: BigInt,
+  blockNumber: BigInt,
+  blockTimestamp: BigInt
+) : void {
+  let cTokenDataEntity = CTokenData.load(transactionHash.toHex() + "-" + blockNumber.toString())
+  if (cTokenDataEntity == null) {
+    cTokenDataEntity =  new CTokenData(
+      transactionHash.toHex() + "-" + blockNumber.toString()
+    )
+  }
+  let cTokenContract = CToken.bind(cTokenAddress)
+  cTokenDataEntity.totalBorrows = totalBorrows == null ? cTokenContract.totalBorrows().toBigDecimal() : totalBorrows.toBigDecimal()
+  cTokenDataEntity.blockNumber = blockNumber
+  cTokenDataEntity.blockTimestamp = BigInt.fromI32(blockTimestamp.toI32())
+  
+  cTokenDataEntity.cTokenAddress = cTokenAddress.toHexString()
+  cTokenDataEntity.cTokenSymbol = cTokenContract.symbol()
+  cTokenDataEntity.borrowIndex = borrowIndex == null ? cTokenContract.borrowIndex().toBigDecimal() : borrowIndex.toBigDecimal()
+  cTokenDataEntity.totalCash = cTokenContract.getCash().toBigDecimal()
+  cTokenDataEntity.exchangeRate = cTokenContract.exchangeRateStored().toBigDecimal()
+  cTokenDataEntity.borrowRatePerBlock = cTokenContract.borrowRatePerBlock()
+  cTokenDataEntity.totalReserves = cTokenContract.totalReserves().toBigDecimal()
+  cTokenDataEntity.totalSupply = cTokenContract.totalSupply().toBigDecimal()
+  cTokenDataEntity.supplyRatePerBlock = cTokenContract.supplyRatePerBlock()
+  
+  log.info("Logging Ctoken data into IPFS", [])
+  cTokenDataEntity.save()
+} 
+
 //  changing totalBorrows, borrowIndex, therefore capturing
 export function handleAccrueInterest(event: AccrueInterestEvent): void {
   // let entity = new AccrueInterest(
@@ -32,34 +65,40 @@ export function handleAccrueInterest(event: AccrueInterestEvent): void {
   // entity.totalBorrows = event.params.totalBorrows
   // entity.save()
 
-  let cTokenDataEntity = CTokenData.load(event.transaction.hash.toHex() + "-" + event.block.number.toString())
-  if (cTokenDataEntity == null) {
-    cTokenDataEntity =  new CTokenData(
-      event.transaction.hash.toHex() + "-" + event.block.number.toString()
-    )
-  }
+  handleEntity(event.address, 
+    event.transaction.hash, 
+    event.params.borrowIndex, 
+    event.params.totalBorrows , 
+    event.block.number, 
+    event.block.timestamp);
+  // let cTokenDataEntity = CTokenData.load(event.transaction.hash.toHex() + "-" + event.block.number.toString())
+  // if (cTokenDataEntity == null) {
+  //   cTokenDataEntity =  new CTokenData(
+  //     event.transaction.hash.toHex() + "-" + event.block.number.toString()
+  //   )
+  // }
   // cTokenDataEntity.totalCash = event.params.cashPrior
   // cTokenDataEntity.interestAccumulated = event.params.interestAccumulated
-  cTokenDataEntity.borrowIndex = event.params.borrowIndex.toBigDecimal()
-  cTokenDataEntity.totalBorrows = event.params.totalBorrows.toBigDecimal()
-  cTokenDataEntity.blockNumber = event.block.number
-  cTokenDataEntity.blockTimestamp = BigInt.fromI32(event.block.timestamp.toI32())
+  // cTokenDataEntity.borrowIndex = event.params.borrowIndex.toBigDecimal()
+  // cTokenDataEntity.totalBorrows = event.params.totalBorrows.toBigDecimal()
+  // cTokenDataEntity.blockNumber = event.block.number
+  // cTokenDataEntity.blockTimestamp = BigInt.fromI32(event.block.timestamp.toI32())
   
-  let cTokenContract = CToken.bind(event.address)
-  log.info("Event address: {} ", [event.address.toHexString()])
-  cTokenDataEntity.cTokenAddress = event.address.toHexString()
-  log.info("Contract address: {} ", [cTokenContract._address.toHexString()])
-  cTokenDataEntity.cTokenSymbol = cTokenContract.symbol()
-  cTokenDataEntity.totalCash = cTokenContract.getCash().toBigDecimal()
-  cTokenDataEntity.exchangeRate = cTokenContract.exchangeRateStored().toBigDecimal()
-  cTokenDataEntity.borrowRatePerBlock = cTokenContract.borrowRatePerBlock()
-  cTokenDataEntity.totalReserves = cTokenContract.totalReserves().toBigDecimal()
-  cTokenDataEntity.totalSupply = cTokenContract.totalSupply().toBigDecimal()
-  cTokenDataEntity.supplyRatePerBlock = cTokenContract.supplyRatePerBlock()
+  // let cTokenContract = CToken.bind(event.address)
+  // log.info("Event address: {} ", [event.address.toHexString()])
+  // cTokenDataEntity.cTokenAddress = event.address.toHexString()
+  // log.info("Contract address: {} ", [cTokenContract._address.toHexString()])
+  // cTokenDataEntity.cTokenSymbol = cTokenContract.symbol()
+  // cTokenDataEntity.totalCash = cTokenContract.getCash().toBigDecimal()
+  // cTokenDataEntity.exchangeRate = cTokenContract.exchangeRateStored().toBigDecimal()
+  // cTokenDataEntity.borrowRatePerBlock = cTokenContract.borrowRatePerBlock()
+  // cTokenDataEntity.totalReserves = cTokenContract.totalReserves().toBigDecimal()
+  // cTokenDataEntity.totalSupply = cTokenContract.totalSupply().toBigDecimal()
+  // cTokenDataEntity.supplyRatePerBlock = cTokenContract.supplyRatePerBlock()
   
-  log.info("Logging Ctoken data into IPFS", [])
-  // cTokenDataEntity.exchangeRate = 
-  cTokenDataEntity.save()
+  // log.info("Logging Ctoken data into IPFS", [])
+  // // cTokenDataEntity.exchangeRate = 
+  // cTokenDataEntity.save()
 }
 
 //  Chaging totalBorrows, therefore capturing
@@ -73,28 +112,34 @@ export function handleBorrow(event: BorrowEvent): void {
   // entity.totalBorrows = event.params.totalBorrows
   // entity.save()
 
-  let cTokenDataEntity = CTokenData.load(event.transaction.hash.toHex() + "-" + event.block.number.toString())
-  if (cTokenDataEntity == null) {
-    cTokenDataEntity =  new CTokenData(
-      event.transaction.hash.toHex() + "-" + event.block.number.toString()
-    )
-  }
-  cTokenDataEntity.totalBorrows = event.params.totalBorrows.toBigDecimal()
-  cTokenDataEntity.blockNumber = event.block.number
-  cTokenDataEntity.blockTimestamp = BigInt.fromI32(event.block.timestamp.toI32())
+  handleEntity(event.address, 
+    event.transaction.hash, 
+    null, 
+    event.params.totalBorrows , 
+    event.block.number, 
+    event.block.timestamp);
+  // let cTokenDataEntity = CTokenData.load(event.transaction.hash.toHex() + "-" + event.block.number.toString())
+  // if (cTokenDataEntity == null) {
+  //   cTokenDataEntity =  new CTokenData(
+  //     event.transaction.hash.toHex() + "-" + event.block.number.toString()
+  //   )
+  // }
+  // cTokenDataEntity.totalBorrows = event.params.totalBorrows.toBigDecimal()
+  // cTokenDataEntity.blockNumber = event.block.number
+  // cTokenDataEntity.blockTimestamp = BigInt.fromI32(event.block.timestamp.toI32())
   
-  let cTokenContract = CToken.bind(event.address)
-  cTokenDataEntity.cTokenAddress = event.address.toHexString()
-  cTokenDataEntity.cTokenSymbol = cTokenContract.symbol()
-  cTokenDataEntity.borrowIndex = cTokenContract.borrowIndex().toBigDecimal()
-  cTokenDataEntity.totalCash = cTokenContract.getCash().toBigDecimal()
-  cTokenDataEntity.exchangeRate = cTokenContract.exchangeRateStored().toBigDecimal()
-  cTokenDataEntity.borrowRatePerBlock = cTokenContract.borrowRatePerBlock()
-  cTokenDataEntity.totalReserves = cTokenContract.totalReserves().toBigDecimal()
-  cTokenDataEntity.totalSupply = cTokenContract.totalSupply().toBigDecimal()
-  cTokenDataEntity.supplyRatePerBlock = cTokenContract.supplyRatePerBlock()
-  log.info("Logging Ctoken data into IPFS", [])
-  cTokenDataEntity.save()
+  // let cTokenContract = CToken.bind(event.address)
+  // cTokenDataEntity.cTokenAddress = event.address.toHexString()
+  // cTokenDataEntity.cTokenSymbol = cTokenContract.symbol()
+  // cTokenDataEntity.borrowIndex = cTokenContract.borrowIndex().toBigDecimal()
+  // cTokenDataEntity.totalCash = cTokenContract.getCash().toBigDecimal()
+  // cTokenDataEntity.exchangeRate = cTokenContract.exchangeRateStored().toBigDecimal()
+  // cTokenDataEntity.borrowRatePerBlock = cTokenContract.borrowRatePerBlock()
+  // cTokenDataEntity.totalReserves = cTokenContract.totalReserves().toBigDecimal()
+  // cTokenDataEntity.totalSupply = cTokenContract.totalSupply().toBigDecimal()
+  // cTokenDataEntity.supplyRatePerBlock = cTokenContract.supplyRatePerBlock()
+  // log.info("Logging Ctoken data into IPFS", [])
+  // cTokenDataEntity.save()
 }
 
 //  calling accureInterest() internally in contract therefore, capturing
@@ -109,28 +154,34 @@ export function handleLiquidateBorrow(event: LiquidateBorrowEvent): void {
   // entity.seizeTokens = event.params.seizeTokens
   // entity.save()
 
-  let cTokenDataEntity = CTokenData.load(event.transaction.hash.toHex() + "-" + event.block.number.toString())
-  if (cTokenDataEntity == null) {
-    cTokenDataEntity =  new CTokenData(
-      event.transaction.hash.toHex() + "-" + event.block.number.toString()
-    )
-  }
-  cTokenDataEntity.blockNumber = event.block.number
-  cTokenDataEntity.blockTimestamp = BigInt.fromI32(event.block.timestamp.toI32())
+  handleEntity(event.address, 
+    event.transaction.hash, 
+    null, 
+    null , 
+    event.block.number, 
+    event.block.timestamp);
+  // let cTokenDataEntity = CTokenData.load(event.transaction.hash.toHex() + "-" + event.block.number.toString())
+  // if (cTokenDataEntity == null) {
+  //   cTokenDataEntity =  new CTokenData(
+  //     event.transaction.hash.toHex() + "-" + event.block.number.toString()
+  //   )
+  // }
+  // cTokenDataEntity.blockNumber = event.block.number
+  // cTokenDataEntity.blockTimestamp = BigInt.fromI32(event.block.timestamp.toI32())
   
-  let cTokenContract = CToken.bind(event.address)
-  cTokenDataEntity.cTokenAddress = event.address.toHexString()
-  cTokenDataEntity.cTokenSymbol = cTokenContract.symbol()
-  cTokenDataEntity.totalBorrows = cTokenContract.totalBorrows().toBigDecimal()
-  cTokenDataEntity.borrowIndex = cTokenContract.borrowIndex().toBigDecimal()
-  cTokenDataEntity.totalCash = cTokenContract.getCash().toBigDecimal()
-  cTokenDataEntity.exchangeRate = cTokenContract.exchangeRateStored().toBigDecimal()
-  cTokenDataEntity.borrowRatePerBlock = cTokenContract.borrowRatePerBlock()
-  cTokenDataEntity.totalReserves = cTokenContract.totalReserves().toBigDecimal()
-  cTokenDataEntity.totalSupply = cTokenContract.totalSupply().toBigDecimal()
-  cTokenDataEntity.supplyRatePerBlock = cTokenContract.supplyRatePerBlock()
-  log.info("Logging Ctoken data into IPFS", [])
-  cTokenDataEntity.save()
+  // let cTokenContract = CToken.bind(event.address)
+  // cTokenDataEntity.cTokenAddress = event.address.toHexString()
+  // cTokenDataEntity.cTokenSymbol = cTokenContract.symbol()
+  // cTokenDataEntity.totalBorrows = cTokenContract.totalBorrows().toBigDecimal()
+  // cTokenDataEntity.borrowIndex = cTokenContract.borrowIndex().toBigDecimal()
+  // cTokenDataEntity.totalCash = cTokenContract.getCash().toBigDecimal()
+  // cTokenDataEntity.exchangeRate = cTokenContract.exchangeRateStored().toBigDecimal()
+  // cTokenDataEntity.borrowRatePerBlock = cTokenContract.borrowRatePerBlock()
+  // cTokenDataEntity.totalReserves = cTokenContract.totalReserves().toBigDecimal()
+  // cTokenDataEntity.totalSupply = cTokenContract.totalSupply().toBigDecimal()
+  // cTokenDataEntity.supplyRatePerBlock = cTokenContract.supplyRatePerBlock()
+  // log.info("Logging Ctoken data into IPFS", [])
+  // cTokenDataEntity.save()
 }
 
 //  Change of totalSupply variable, therefore catching
@@ -143,28 +194,34 @@ export function handleMint(event: MintEvent): void {
   // entity.mintTokens = event.params.mintTokens
   // entity.save()
 
-  let cTokenDataEntity = CTokenData.load(event.transaction.hash.toHex() + "-" + event.block.number.toString())
-  if (cTokenDataEntity == null) {
-    cTokenDataEntity =  new CTokenData(
-      event.transaction.hash.toHex() + "-" + event.block.number.toString()
-    )
-  }
-  cTokenDataEntity.blockNumber = event.block.number
-  cTokenDataEntity.blockTimestamp = BigInt.fromI32(event.block.timestamp.toI32())
+  handleEntity(event.address, 
+    event.transaction.hash, 
+    null, 
+    null, 
+    event.block.number, 
+    event.block.timestamp);
+  // let cTokenDataEntity = CTokenData.load(event.transaction.hash.toHex() + "-" + event.block.number.toString())
+  // if (cTokenDataEntity == null) {
+  //   cTokenDataEntity =  new CTokenData(
+  //     event.transaction.hash.toHex() + "-" + event.block.number.toString()
+  //   )
+  // }
+  // cTokenDataEntity.blockNumber = event.block.number
+  // cTokenDataEntity.blockTimestamp = BigInt.fromI32(event.block.timestamp.toI32())
   
-  let cTokenContract = CToken.bind(event.address)
-  cTokenDataEntity.cTokenAddress = event.address.toHexString()
-  cTokenDataEntity.cTokenSymbol = cTokenContract.symbol()
-  cTokenDataEntity.totalBorrows = cTokenContract.totalBorrows().toBigDecimal()
-  cTokenDataEntity.borrowIndex = cTokenContract.borrowIndex().toBigDecimal()
-  cTokenDataEntity.totalCash = cTokenContract.getCash().toBigDecimal()
-  cTokenDataEntity.exchangeRate = cTokenContract.exchangeRateStored().toBigDecimal()
-  cTokenDataEntity.borrowRatePerBlock = cTokenContract.borrowRatePerBlock()
-  cTokenDataEntity.totalReserves = cTokenContract.totalReserves().toBigDecimal()
-  cTokenDataEntity.totalSupply = cTokenContract.totalSupply().toBigDecimal()
-  cTokenDataEntity.supplyRatePerBlock = cTokenContract.supplyRatePerBlock()
-  log.info("Logging Ctoken data into IPFS", [])
-  cTokenDataEntity.save()
+  // let cTokenContract = CToken.bind(event.address)
+  // cTokenDataEntity.cTokenAddress = event.address.toHexString()
+  // cTokenDataEntity.cTokenSymbol = cTokenContract.symbol()
+  // cTokenDataEntity.totalBorrows = cTokenContract.totalBorrows().toBigDecimal()
+  // cTokenDataEntity.borrowIndex = cTokenContract.borrowIndex().toBigDecimal()
+  // cTokenDataEntity.totalCash = cTokenContract.getCash().toBigDecimal()
+  // cTokenDataEntity.exchangeRate = cTokenContract.exchangeRateStored().toBigDecimal()
+  // cTokenDataEntity.borrowRatePerBlock = cTokenContract.borrowRatePerBlock()
+  // cTokenDataEntity.totalReserves = cTokenContract.totalReserves().toBigDecimal()
+  // cTokenDataEntity.totalSupply = cTokenContract.totalSupply().toBigDecimal()
+  // cTokenDataEntity.supplyRatePerBlock = cTokenContract.supplyRatePerBlock()
+  // log.info("Logging Ctoken data into IPFS", [])
+  // cTokenDataEntity.save()
 }
 
 // calling accureInterest internally, therefore capturing {May be it can be skipped as
@@ -177,28 +234,34 @@ export function handleNewReserveFactor(event: NewReserveFactorEvent): void {
   // entity.newReserveFactorMantissa = event.params.newReserveFactorMantissa
   // entity.save()
 
-  let cTokenDataEntity = CTokenData.load(event.transaction.hash.toHex() + "-" + event.block.number.toString())
-  if (cTokenDataEntity == null) {
-    cTokenDataEntity =  new CTokenData(
-      event.transaction.hash.toHex() + "-" + event.block.number.toString()
-    )
-  }
-  cTokenDataEntity.blockNumber = event.block.number
-  cTokenDataEntity.blockTimestamp = BigInt.fromI32(event.block.timestamp.toI32())
+  handleEntity(event.address, 
+    event.transaction.hash, 
+    null, 
+    null, 
+    event.block.number, 
+    event.block.timestamp);
+  // let cTokenDataEntity = CTokenData.load(event.transaction.hash.toHex() + "-" + event.block.number.toString())
+  // if (cTokenDataEntity == null) {
+  //   cTokenDataEntity =  new CTokenData(
+  //     event.transaction.hash.toHex() + "-" + event.block.number.toString()
+  //   )
+  // }
+  // cTokenDataEntity.blockNumber = event.block.number
+  // cTokenDataEntity.blockTimestamp = BigInt.fromI32(event.block.timestamp.toI32())
   
-  let cTokenContract = CToken.bind(event.address)
-  cTokenDataEntity.cTokenAddress = event.address.toHexString()
-  cTokenDataEntity.cTokenSymbol = cTokenContract.symbol()
-  cTokenDataEntity.totalBorrows = cTokenContract.totalBorrows().toBigDecimal()
-  cTokenDataEntity.borrowIndex = cTokenContract.borrowIndex().toBigDecimal()
-  cTokenDataEntity.totalCash = cTokenContract.getCash().toBigDecimal()
-  cTokenDataEntity.exchangeRate = cTokenContract.exchangeRateStored().toBigDecimal()
-  cTokenDataEntity.borrowRatePerBlock = cTokenContract.borrowRatePerBlock()
-  cTokenDataEntity.totalReserves = cTokenContract.totalReserves().toBigDecimal()
-  cTokenDataEntity.totalSupply = cTokenContract.totalSupply().toBigDecimal()
-  cTokenDataEntity.supplyRatePerBlock = cTokenContract.supplyRatePerBlock()
-  log.info("Logging Ctoken data into IPFS", [])
-  cTokenDataEntity.save()
+  // let cTokenContract = CToken.bind(event.address)
+  // cTokenDataEntity.cTokenAddress = event.address.toHexString()
+  // cTokenDataEntity.cTokenSymbol = cTokenContract.symbol()
+  // cTokenDataEntity.totalBorrows = cTokenContract.totalBorrows().toBigDecimal()
+  // cTokenDataEntity.borrowIndex = cTokenContract.borrowIndex().toBigDecimal()
+  // cTokenDataEntity.totalCash = cTokenContract.getCash().toBigDecimal()
+  // cTokenDataEntity.exchangeRate = cTokenContract.exchangeRateStored().toBigDecimal()
+  // cTokenDataEntity.borrowRatePerBlock = cTokenContract.borrowRatePerBlock()
+  // cTokenDataEntity.totalReserves = cTokenContract.totalReserves().toBigDecimal()
+  // cTokenDataEntity.totalSupply = cTokenContract.totalSupply().toBigDecimal()
+  // cTokenDataEntity.supplyRatePerBlock = cTokenContract.supplyRatePerBlock()
+  // log.info("Logging Ctoken data into IPFS", [])
+  // cTokenDataEntity.save()
 }
 
 //  totalSupply is getting changed
@@ -211,28 +274,34 @@ export function handleRedeem(event: RedeemEvent): void {
   // entity.redeemTokens = event.params.redeemTokens
   // entity.save()
 
-  let cTokenDataEntity = CTokenData.load(event.transaction.hash.toHex() + "-" + event.block.number.toString())
-  if (cTokenDataEntity == null) {
-    cTokenDataEntity =  new CTokenData(
-      event.transaction.hash.toHex() + "-" + event.block.number.toString()
-    )
-  }
-  cTokenDataEntity.blockNumber = event.block.number
-  cTokenDataEntity.blockTimestamp = BigInt.fromI32(event.block.timestamp.toI32())
+  handleEntity(event.address, 
+    event.transaction.hash, 
+    null, 
+    null, 
+    event.block.number, 
+    event.block.timestamp);
+  // let cTokenDataEntity = CTokenData.load(event.transaction.hash.toHex() + "-" + event.block.number.toString())
+  // if (cTokenDataEntity == null) {
+  //   cTokenDataEntity =  new CTokenData(
+  //     event.transaction.hash.toHex() + "-" + event.block.number.toString()
+  //   )
+  // }
+  // cTokenDataEntity.blockNumber = event.block.number
+  // cTokenDataEntity.blockTimestamp = BigInt.fromI32(event.block.timestamp.toI32())
   
-  let cTokenContract = CToken.bind(event.address)
-  cTokenDataEntity.cTokenAddress = event.address.toHexString()
-  cTokenDataEntity.cTokenSymbol = cTokenContract.symbol()
-  cTokenDataEntity.totalBorrows = cTokenContract.totalBorrows().toBigDecimal()
-  cTokenDataEntity.borrowIndex = cTokenContract.borrowIndex().toBigDecimal()
-  cTokenDataEntity.totalCash = cTokenContract.getCash().toBigDecimal()
-  cTokenDataEntity.exchangeRate = cTokenContract.exchangeRateStored().toBigDecimal()
-  cTokenDataEntity.borrowRatePerBlock = cTokenContract.borrowRatePerBlock()
-  cTokenDataEntity.totalReserves = cTokenContract.totalReserves().toBigDecimal()
-  cTokenDataEntity.totalSupply = cTokenContract.totalSupply().toBigDecimal()
-  cTokenDataEntity.supplyRatePerBlock = cTokenContract.supplyRatePerBlock()
-  log.info("Logging Ctoken data into IPFS", [])
-  cTokenDataEntity.save()
+  // let cTokenContract = CToken.bind(event.address)
+  // cTokenDataEntity.cTokenAddress = event.address.toHexString()
+  // cTokenDataEntity.cTokenSymbol = cTokenContract.symbol()
+  // cTokenDataEntity.totalBorrows = cTokenContract.totalBorrows().toBigDecimal()
+  // cTokenDataEntity.borrowIndex = cTokenContract.borrowIndex().toBigDecimal()
+  // cTokenDataEntity.totalCash = cTokenContract.getCash().toBigDecimal()
+  // cTokenDataEntity.exchangeRate = cTokenContract.exchangeRateStored().toBigDecimal()
+  // cTokenDataEntity.borrowRatePerBlock = cTokenContract.borrowRatePerBlock()
+  // cTokenDataEntity.totalReserves = cTokenContract.totalReserves().toBigDecimal()
+  // cTokenDataEntity.totalSupply = cTokenContract.totalSupply().toBigDecimal()
+  // cTokenDataEntity.supplyRatePerBlock = cTokenContract.supplyRatePerBlock()
+  // log.info("Logging Ctoken data into IPFS", [])
+  // cTokenDataEntity.save()
 }
 
 //  totalBorrows getting changed, therefore capturing
@@ -247,28 +316,34 @@ export function handleRepayBorrow(event: RepayBorrowEvent): void {
   // entity.totalBorrows = event.params.totalBorrows
   // entity.save()
 
-  let cTokenDataEntity = CTokenData.load(event.transaction.hash.toHex() + "-" + event.block.number.toString())
-  if (cTokenDataEntity == null) {
-    cTokenDataEntity =  new CTokenData(
-      event.transaction.hash.toHex() + "-" + event.block.number.toString()
-    )
-  }
-  cTokenDataEntity.blockNumber = event.block.number
-  cTokenDataEntity.blockTimestamp = BigInt.fromI32(event.block.timestamp.toI32())
+  handleEntity(event.address, 
+    event.transaction.hash, 
+    null, 
+    event.params.totalBorrows, 
+    event.block.number, 
+    event.block.timestamp);
+  // let cTokenDataEntity = CTokenData.load(event.transaction.hash.toHex() + "-" + event.block.number.toString())
+  // if (cTokenDataEntity == null) {
+  //   cTokenDataEntity =  new CTokenData(
+  //     event.transaction.hash.toHex() + "-" + event.block.number.toString()
+  //   )
+  // }
+  // cTokenDataEntity.blockNumber = event.block.number
+  // cTokenDataEntity.blockTimestamp = BigInt.fromI32(event.block.timestamp.toI32())
   
-  let cTokenContract = CToken.bind(event.address)
-  cTokenDataEntity.cTokenAddress = event.address.toHexString()
-  cTokenDataEntity.cTokenSymbol = cTokenContract.symbol()
-  cTokenDataEntity.totalBorrows = cTokenContract.totalBorrows().toBigDecimal()
-  cTokenDataEntity.borrowIndex = cTokenContract.borrowIndex().toBigDecimal()
-  cTokenDataEntity.totalCash = cTokenContract.getCash().toBigDecimal()
-  cTokenDataEntity.exchangeRate = cTokenContract.exchangeRateStored().toBigDecimal()
-  cTokenDataEntity.borrowRatePerBlock = cTokenContract.borrowRatePerBlock()
-  cTokenDataEntity.totalReserves = cTokenContract.totalReserves().toBigDecimal()
-  cTokenDataEntity.totalSupply = cTokenContract.totalSupply().toBigDecimal()
-  cTokenDataEntity.supplyRatePerBlock = cTokenContract.supplyRatePerBlock()
-  log.info("Logging Ctoken data into IPFS", [])
-  cTokenDataEntity.save()
+  // let cTokenContract = CToken.bind(event.address)
+  // cTokenDataEntity.cTokenAddress = event.address.toHexString()
+  // cTokenDataEntity.cTokenSymbol = cTokenContract.symbol()
+  // cTokenDataEntity.totalBorrows = cTokenContract.totalBorrows().toBigDecimal()
+  // cTokenDataEntity.borrowIndex = cTokenContract.borrowIndex().toBigDecimal()
+  // cTokenDataEntity.totalCash = cTokenContract.getCash().toBigDecimal()
+  // cTokenDataEntity.exchangeRate = cTokenContract.exchangeRateStored().toBigDecimal()
+  // cTokenDataEntity.borrowRatePerBlock = cTokenContract.borrowRatePerBlock()
+  // cTokenDataEntity.totalReserves = cTokenContract.totalReserves().toBigDecimal()
+  // cTokenDataEntity.totalSupply = cTokenContract.totalSupply().toBigDecimal()
+  // cTokenDataEntity.supplyRatePerBlock = cTokenContract.supplyRatePerBlock()
+  // log.info("Logging Ctoken data into IPFS", [])
+  // cTokenDataEntity.save()
 }
 
 //  totalReserves getting changed, therefore capturing
@@ -281,28 +356,34 @@ export function handleReservesAdded(event: ReservesAddedEvent): void {
   // entity.newTotalReserves = event.params.newTotalReserves
   // entity.save()
 
-  let cTokenDataEntity = CTokenData.load(event.transaction.hash.toHex() + "-" + event.block.number.toString())
-  if (cTokenDataEntity == null) {
-    cTokenDataEntity =  new CTokenData(
-      event.transaction.hash.toHex() + "-" + event.block.number.toString()
-    )
-  }
-  cTokenDataEntity.blockNumber = event.block.number
-  cTokenDataEntity.blockTimestamp = BigInt.fromI32(event.block.timestamp.toI32())
+  handleEntity(event.address, 
+    event.transaction.hash, 
+    null, 
+    null, 
+    event.block.number, 
+    event.block.timestamp);
+  // let cTokenDataEntity = CTokenData.load(event.transaction.hash.toHex() + "-" + event.block.number.toString())
+  // if (cTokenDataEntity == null) {
+  //   cTokenDataEntity =  new CTokenData(
+  //     event.transaction.hash.toHex() + "-" + event.block.number.toString()
+  //   )
+  // }
+  // cTokenDataEntity.blockNumber = event.block.number
+  // cTokenDataEntity.blockTimestamp = BigInt.fromI32(event.block.timestamp.toI32())
   
-  let cTokenContract = CToken.bind(event.address)
-  cTokenDataEntity.cTokenAddress = event.address.toHexString()
-  cTokenDataEntity.cTokenSymbol = cTokenContract.symbol()
-  cTokenDataEntity.totalBorrows = cTokenContract.totalBorrows().toBigDecimal()
-  cTokenDataEntity.borrowIndex = cTokenContract.borrowIndex().toBigDecimal()
-  cTokenDataEntity.totalCash = cTokenContract.getCash().toBigDecimal()
-  cTokenDataEntity.exchangeRate = cTokenContract.exchangeRateStored().toBigDecimal()
-  cTokenDataEntity.borrowRatePerBlock = cTokenContract.borrowRatePerBlock()
-  cTokenDataEntity.totalReserves = cTokenContract.totalReserves().toBigDecimal()
-  cTokenDataEntity.totalSupply = cTokenContract.totalSupply().toBigDecimal()
-  cTokenDataEntity.supplyRatePerBlock = cTokenContract.supplyRatePerBlock()
-  log.info("Logging Ctoken data into IPFS", [])
-  cTokenDataEntity.save()
+  // let cTokenContract = CToken.bind(event.address)
+  // cTokenDataEntity.cTokenAddress = event.address.toHexString()
+  // cTokenDataEntity.cTokenSymbol = cTokenContract.symbol()
+  // cTokenDataEntity.totalBorrows = cTokenContract.totalBorrows().toBigDecimal()
+  // cTokenDataEntity.borrowIndex = cTokenContract.borrowIndex().toBigDecimal()
+  // cTokenDataEntity.totalCash = cTokenContract.getCash().toBigDecimal()
+  // cTokenDataEntity.exchangeRate = cTokenContract.exchangeRateStored().toBigDecimal()
+  // cTokenDataEntity.borrowRatePerBlock = cTokenContract.borrowRatePerBlock()
+  // cTokenDataEntity.totalReserves = cTokenContract.totalReserves().toBigDecimal()
+  // cTokenDataEntity.totalSupply = cTokenContract.totalSupply().toBigDecimal()
+  // cTokenDataEntity.supplyRatePerBlock = cTokenContract.supplyRatePerBlock()
+  // log.info("Logging Ctoken data into IPFS", [])
+  // cTokenDataEntity.save()
 }
 
 //  totalReserves getting changed
@@ -315,28 +396,34 @@ export function handleReservesReduced(event: ReservesReducedEvent): void {
   // entity.newTotalReserves = event.params.newTotalReserves
   // entity.save()
 
-  let cTokenDataEntity = CTokenData.load(event.transaction.hash.toHex() + "-" + event.block.number.toString())
-  if (cTokenDataEntity == null) {
-    cTokenDataEntity =  new CTokenData(
-      event.transaction.hash.toHex() + "-" + event.block.number.toString()
-    )
-  }
-  cTokenDataEntity.blockNumber = event.block.number
-  cTokenDataEntity.blockTimestamp = BigInt.fromI32(event.block.timestamp.toI32())
+  handleEntity(event.address, 
+    event.transaction.hash, 
+    null, 
+    null, 
+    event.block.number, 
+    event.block.timestamp);
+  // let cTokenDataEntity = CTokenData.load(event.transaction.hash.toHex() + "-" + event.block.number.toString())
+  // if (cTokenDataEntity == null) {
+  //   cTokenDataEntity =  new CTokenData(
+  //     event.transaction.hash.toHex() + "-" + event.block.number.toString()
+  //   )
+  // }
+  // cTokenDataEntity.blockNumber = event.block.number
+  // cTokenDataEntity.blockTimestamp = BigInt.fromI32(event.block.timestamp.toI32())
   
-  let cTokenContract = CToken.bind(event.address)
-  cTokenDataEntity.cTokenAddress = event.address.toHexString()
-  cTokenDataEntity.cTokenSymbol = cTokenContract.symbol()
-  cTokenDataEntity.totalBorrows = cTokenContract.totalBorrows().toBigDecimal()
-  cTokenDataEntity.borrowIndex = cTokenContract.borrowIndex().toBigDecimal()
-  cTokenDataEntity.totalCash = cTokenContract.getCash().toBigDecimal()
-  cTokenDataEntity.exchangeRate = cTokenContract.exchangeRateStored().toBigDecimal()
-  cTokenDataEntity.borrowRatePerBlock = cTokenContract.borrowRatePerBlock()
-  cTokenDataEntity.totalReserves = cTokenContract.totalReserves().toBigDecimal()
-  cTokenDataEntity.totalSupply = cTokenContract.totalSupply().toBigDecimal()
-  cTokenDataEntity.supplyRatePerBlock = cTokenContract.supplyRatePerBlock()
-  log.info("Logging Ctoken data into IPFS", [])
-  cTokenDataEntity.save()
+  // let cTokenContract = CToken.bind(event.address)
+  // cTokenDataEntity.cTokenAddress = event.address.toHexString()
+  // cTokenDataEntity.cTokenSymbol = cTokenContract.symbol()
+  // cTokenDataEntity.totalBorrows = cTokenContract.totalBorrows().toBigDecimal()
+  // cTokenDataEntity.borrowIndex = cTokenContract.borrowIndex().toBigDecimal()
+  // cTokenDataEntity.totalCash = cTokenContract.getCash().toBigDecimal()
+  // cTokenDataEntity.exchangeRate = cTokenContract.exchangeRateStored().toBigDecimal()
+  // cTokenDataEntity.borrowRatePerBlock = cTokenContract.borrowRatePerBlock()
+  // cTokenDataEntity.totalReserves = cTokenContract.totalReserves().toBigDecimal()
+  // cTokenDataEntity.totalSupply = cTokenContract.totalSupply().toBigDecimal()
+  // cTokenDataEntity.supplyRatePerBlock = cTokenContract.supplyRatePerBlock()
+  // log.info("Logging Ctoken data into IPFS", [])
+  // cTokenDataEntity.save()
 }
 
 //  totalSupply getting changed
@@ -349,26 +436,32 @@ export function handleTransfer(event: TransferEvent): void {
   // entity.amount = event.params.amount
   // entity.save()
 
-  let cTokenDataEntity = CTokenData.load(event.transaction.hash.toHex() + "-" + event.block.number.toString())
-  if (cTokenDataEntity == null) {
-    cTokenDataEntity =  new CTokenData(
-      event.transaction.hash.toHex() + "-" + event.block.number.toString()
-    )
-  }
-  cTokenDataEntity.blockNumber = event.block.number
-  cTokenDataEntity.blockTimestamp = BigInt.fromI32(event.block.timestamp.toI32())
+  handleEntity(event.address, 
+    event.transaction.hash, 
+    null, 
+    null, 
+    event.block.number, 
+    event.block.timestamp);
+  // let cTokenDataEntity = CTokenData.load(event.transaction.hash.toHex() + "-" + event.block.number.toString())
+  // if (cTokenDataEntity == null) {
+  //   cTokenDataEntity =  new CTokenData(
+  //     event.transaction.hash.toHex() + "-" + event.block.number.toString()
+  //   )
+  // }
+  // cTokenDataEntity.blockNumber = event.block.number
+  // cTokenDataEntity.blockTimestamp = BigInt.fromI32(event.block.timestamp.toI32())
   
-  let cTokenContract = CToken.bind(event.address)
-  cTokenDataEntity.cTokenAddress = event.address.toHexString()
-  cTokenDataEntity.cTokenSymbol = cTokenContract.symbol()
-  cTokenDataEntity.totalBorrows = cTokenContract.totalBorrows().toBigDecimal()
-  cTokenDataEntity.borrowIndex = cTokenContract.borrowIndex().toBigDecimal()
-  cTokenDataEntity.totalCash = cTokenContract.getCash().toBigDecimal()
-  cTokenDataEntity.exchangeRate = cTokenContract.exchangeRateStored().toBigDecimal()
-  cTokenDataEntity.borrowRatePerBlock = cTokenContract.borrowRatePerBlock()
-  cTokenDataEntity.totalReserves = cTokenContract.totalReserves().toBigDecimal()
-  cTokenDataEntity.totalSupply = cTokenContract.totalSupply().toBigDecimal()
-  cTokenDataEntity.supplyRatePerBlock = cTokenContract.supplyRatePerBlock()
-  log.info("Logging Ctoken data into IPFS", [])
-  cTokenDataEntity.save()
+  // let cTokenContract = CToken.bind(event.address)
+  // cTokenDataEntity.cTokenAddress = event.address.toHexString()
+  // cTokenDataEntity.cTokenSymbol = cTokenContract.symbol()
+  // cTokenDataEntity.totalBorrows = cTokenContract.totalBorrows().toBigDecimal()
+  // cTokenDataEntity.borrowIndex = cTokenContract.borrowIndex().toBigDecimal()
+  // cTokenDataEntity.totalCash = cTokenContract.getCash().toBigDecimal()
+  // cTokenDataEntity.exchangeRate = cTokenContract.exchangeRateStored().toBigDecimal()
+  // cTokenDataEntity.borrowRatePerBlock = cTokenContract.borrowRatePerBlock()
+  // cTokenDataEntity.totalReserves = cTokenContract.totalReserves().toBigDecimal()
+  // cTokenDataEntity.totalSupply = cTokenContract.totalSupply().toBigDecimal()
+  // cTokenDataEntity.supplyRatePerBlock = cTokenContract.supplyRatePerBlock()
+  // log.info("Logging Ctoken data into IPFS", [])
+  // cTokenDataEntity.save()
 }
