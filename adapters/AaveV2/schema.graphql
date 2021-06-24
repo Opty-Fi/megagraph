@@ -1,6 +1,101 @@
-type InitializableImmutableAdminUpgradeabilityProxyUpgraded @entity {
+type LendingPoolBorrow @entity {
   id: ID!
-  implementation: Bytes! # address
+  reserve: Bytes! # address
+  user: Bytes! # address
+  onBehalfOf: Bytes! # address
+  amount: BigInt! # uint256
+  borrowRateMode: BigInt! # uint256
+  borrowRate: BigInt! # uint256
+  referral: Int! # uint16
+}
+
+type LendingPoolDeposit @entity {
+  id: ID!
+  reserve: Bytes! # address
+  user: Bytes! # address
+  onBehalfOf: Bytes! # address
+  amount: BigInt! # uint256
+  referral: Int! # uint16
+}
+
+type LendingPoolFlashLoan @entity {
+  id: ID!
+  target: Bytes! # address
+  initiator: Bytes! # address
+  asset: Bytes! # address
+  amount: BigInt! # uint256
+  premium: BigInt! # uint256
+  referralCode: Int! # uint16
+}
+
+type LendingPoolLiquidationCall @entity {
+  id: ID!
+  collateralAsset: Bytes! # address
+  debtAsset: Bytes! # address
+  user: Bytes! # address
+  debtToCover: BigInt! # uint256
+  liquidatedCollateralAmount: BigInt! # uint256
+  liquidator: Bytes! # address
+  receiveAToken: Boolean! # bool
+}
+
+type LendingPoolPaused @entity {
+  id: ID!
+}
+
+type LendingPoolRebalanceStableBorrowRate @entity {
+  id: ID!
+  reserve: Bytes! # address
+  user: Bytes! # address
+}
+
+type LendingPoolRepay @entity {
+  id: ID!
+  reserve: Bytes! # address
+  user: Bytes! # address
+  repayer: Bytes! # address
+  amount: BigInt! # uint256
+}
+
+type LendingPoolReserveDataUpdated @entity {
+  id: ID!
+  reserve: Bytes! # address
+  liquidityRate: BigInt! # uint256
+  stableBorrowRate: BigInt! # uint256
+  variableBorrowRate: BigInt! # uint256
+  liquidityIndex: BigInt! # uint256
+  variableBorrowIndex: BigInt! # uint256
+}
+
+type LendingPoolReserveUsedAsCollateralDisabled @entity {
+  id: ID!
+  reserve: Bytes! # address
+  user: Bytes! # address
+}
+
+type LendingPoolReserveUsedAsCollateralEnabled @entity {
+  id: ID!
+  reserve: Bytes! # address
+  user: Bytes! # address
+}
+
+type LendingPoolSwap @entity {
+  id: ID!
+  reserve: Bytes! # address
+  user: Bytes! # address
+  rateMode: BigInt! # uint256
+}
+
+type LendingPoolUnpaused @entity {
+  id: ID!
+}
+
+type LendingPoolWithdraw @entity {
+  id: ID!
+  reserve: Bytes! # address
+  user: Bytes! # address
+  to: Bytes! # address
+  amount: BigInt! # uint256
 }
 
 type LendingRateOracleMarketBorrowRateSet @entity {

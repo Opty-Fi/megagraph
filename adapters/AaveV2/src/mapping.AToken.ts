@@ -5,7 +5,7 @@ import {
   Initialized as InitializedEvent,
   Mint as MintEvent,
   Transfer as TransferEvent
-} from "../generated/AToken/AToken"
+} from "./AToken"
 import {
   Approval,
   BalanceTransfer,

@@ -3,25 +3,61 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: InitializableImmutableAdminUpgradeabilityProxy
+    name: LendingPool
     network: mainnet
     source:
       address: "0x7d2768de32b0b80b7a3454c06bdac94a69ddc7a9"
       startBlock: 11362579
-      abi: InitializableImmutableAdminUpgradeabilityProxy
+      abi: LendingPool
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - InitializableImmutableAdminUpgradeabilityProxyUpgraded
+        - LendingPoolBorrow
+        - LendingPoolDeposit
+        - LendingPoolFlashLoan
+        - LendingPoolLiquidationCall
+        - LendingPoolPaused
+        - LendingPoolRebalanceStableBorrowRate
+        - LendingPoolRepay
+        - LendingPoolReserveDataUpdated
+        - LendingPoolReserveUsedAsCollateralDisabled
+        - LendingPoolReserveUsedAsCollateralEnabled
+        - LendingPoolSwap
+        - LendingPoolUnpaused
+        - LendingPoolWithdraw
       abis:
-        - name: InitializableImmutableAdminUpgradeabilityProxy
-          file: ./abis/InitializableImmutableAdminUpgradeabilityProxy.json
+        - name: LendingPool
+          file: ./abis/LendingPool.json
       eventHandlers:
-        - event: Upgraded(indexed address)
-          handler: handleUpgraded
-      file: ./src/mapping.InitializableImmutableAdminUpgradeabilityProxy.ts
+        - event: Borrow(indexed address,address,indexed address,uint256,uint256,uint256,indexed uint16)
+          handler: handleBorrow
+        - event: Deposit(indexed address,address,indexed address,uint256,indexed uint16)
+          handler: handleDeposit
+        - event: FlashLoan(indexed address,indexed address,indexed address,uint256,uint256,uint16)
+          handler: handleFlashLoan
+        - event: LiquidationCall(indexed address,indexed address,indexed address,uint256,uint256,address,bool)
+          handler: handleLiquidationCall
+        - event: Paused()
+          handler: handlePaused
+        - event: RebalanceStableBorrowRate(indexed address,indexed address)
+          handler: handleRebalanceStableBorrowRate
+        - event: Repay(indexed address,indexed address,indexed address,uint256)
+          handler: handleRepay
+        - event: ReserveDataUpdated(indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleReserveDataUpdated
+        - event: ReserveUsedAsCollateralDisabled(indexed address,indexed address)
+          handler: handleReserveUsedAsCollateralDisabled
+        - event: ReserveUsedAsCollateralEnabled(indexed address,indexed address)
+          handler: handleReserveUsedAsCollateralEnabled
+        - event: Swap(indexed address,indexed address,uint256)
+          handler: handleSwap
+        - event: Unpaused()
+          handler: handleUnpaused
+        - event: Withdraw(indexed address,indexed address,indexed address,uint256)
+          handler: handleWithdraw
+      file: ./src/mapping.LendingPool.ts
   - kind: ethereum/contract
     name: LendingRateOracle
     network: mainnet
