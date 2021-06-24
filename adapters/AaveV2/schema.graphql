@@ -1,0 +1,87 @@
+type InitializableImmutableAdminUpgradeabilityProxyUpgraded @entity {
+  id: ID!
+  implementation: Bytes! # address
+}
+
+type LendingRateOracleMarketBorrowRateSet @entity {
+  id: ID!
+  asset: Bytes! # address
+  rate: BigInt! # uint256
+}
+
+type LendingRateOracleOwnershipTransferred @entity {
+  id: ID!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+}
+
+type AaveOracleAssetSourceUpdated @entity {
+  id: ID!
+  asset: Bytes! # address
+  source: Bytes! # address
+}
+
+type AaveOracleFallbackOracleUpdated @entity {
+  id: ID!
+  fallbackOracle: Bytes! # address
+}
+
+type AaveOracleOwnershipTransferred @entity {
+  id: ID!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+}
+
+type AaveOracleWethSet @entity {
+  id: ID!
+  weth: Bytes! # address
+}
+
+type Approval @entity {
+  id: ID!
+  owner: Bytes! # address
+  spender: Bytes! # address
+  value: BigInt! # uint256
+}
+
+type BalanceTransfer @entity {
+  id: ID!
+  from: Bytes! # address
+  to: Bytes! # address
+  value: BigInt! # uint256
+  index: BigInt! # uint256
+}
+
+type Burn @entity {
+  id: ID!
+  from: Bytes! # address
+  target: Bytes! # address
+  value: BigInt! # uint256
+  index: BigInt! # uint256
+}
+
+type Initialized @entity {
+  id: ID!
+  underlyingAsset: Bytes! # address
+  pool: Bytes! # address
+  treasury: Bytes! # address
+  incentivesController: Bytes! # address
+  aTokenDecimals: Int! # uint8
+  aTokenName: String! # string
+  aTokenSymbol: String! # string
+  params: Bytes! # bytes
+}
+
+type Mint @entity {
+  id: ID!
+  from: Bytes! # address
+  value: BigInt! # uint256
+  index: BigInt! # uint256
+}
+
+type Transfer @entity {
+  id: ID!
+  from: Bytes! # address
+  to: Bytes! # address
+  value: BigInt! # uint256
+}

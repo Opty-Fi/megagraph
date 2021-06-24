@@ -1,0 +1,881 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: InitializableImmutableAdminUpgradeabilityProxy
+    network: mainnet
+    source:
+      address: "0x7d2768de32b0b80b7a3454c06bdac94a69ddc7a9"
+      startBlock: 11362579
+      abi: InitializableImmutableAdminUpgradeabilityProxy
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - InitializableImmutableAdminUpgradeabilityProxyUpgraded
+      abis:
+        - name: InitializableImmutableAdminUpgradeabilityProxy
+          file: ./abis/InitializableImmutableAdminUpgradeabilityProxy.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./src/mapping.InitializableImmutableAdminUpgradeabilityProxy.ts
+  - kind: ethereum/contract
+    name: LendingRateOracle
+    network: mainnet
+    source:
+      address: "0x8a32f49ffba88aba6eff96f45d8bd1d4b3f35c7d"
+      startBlock: 11360094
+      abi: LendingRateOracle
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - LendingRateOracleMarketBorrowRateSet
+        - LendingRateOracleOwnershipTransferred
+      abis:
+        - name: LendingRateOracle
+          file: ./abis/LendingRateOracle.json
+      eventHandlers:
+        - event: MarketBorrowRateSet(indexed address,uint256)
+          handler: handleMarketBorrowRateSet
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+      file: ./src/mapping.LendingRateOracle.ts
+  - kind: ethereum/contract
+    name: AaveOracle
+    network: mainnet
+    source:
+      address: "0xa50ba011c48153de246e5192c8f9258a2ba79ca9"
+      startBlock: 11275902
+      abi: AaveOracle
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AaveOracleAssetSourceUpdated
+        - AaveOracleFallbackOracleUpdated
+        - AaveOracleOwnershipTransferred
+        - AaveOracleWethSet
+      abis:
+        - name: AaveOracle
+          file: ./abis/AaveOracle.json
+      eventHandlers:
+        - event: AssetSourceUpdated(indexed address,indexed address)
+          handler: handleAssetSourceUpdated
+        - event: FallbackOracleUpdated(indexed address)
+          handler: handleFallbackOracleUpdated
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: WethSet(indexed address)
+          handler: handleWethSet
+      file: ./src/mapping.AaveOracle.ts
+  - kind: ethereum/contract
+    name: Aaavev2
+    network: mainnet
+    source:
+      address: "0xFFC97d72E13E01096502Cb8Eb52dEe56f74DAD7B"
+      startBlock: 11367184
+      abi: AToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - BalanceTransfer
+        - Burn
+        - Initialized
+        - Mint
+        - Transfer
+      abis:
+        - name: AToken
+          file: ./abis/AToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: Burn(indexed address,indexed address,uint256,uint256)
+          handler: handleBurn
+        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
+          handler: handleInitialized
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.AToken.ts
+  - kind: ethereum/contract
+    name: Abal
+    network: mainnet
+    source:
+      address: "0x272F97b7a56a387aE942350bBC7Df5700f8a4576"
+      startBlock: 11779563
+      abi: AToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - BalanceTransfer
+        - Burn
+        - Initialized
+        - Mint
+        - Transfer
+      abis:
+        - name: AToken
+          file: ./abis/AToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: Burn(indexed address,indexed address,uint256,uint256)
+          handler: handleBurn
+        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
+          handler: handleInitialized
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.AToken.ts
+  - kind: ethereum/contract
+    name: Abatv2
+    network: mainnet
+    source:
+      address: "0x05Ec93c0365baAeAbF7AefFb0972ea7ECdD39CF1"
+      startBlock: 11367184
+      abi: AToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - BalanceTransfer
+        - Burn
+        - Initialized
+        - Mint
+        - Transfer
+      abis:
+        - name: AToken
+          file: ./abis/AToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: Burn(indexed address,indexed address,uint256,uint256)
+          handler: handleBurn
+        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
+          handler: handleInitialized
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.AToken.ts
+  - kind: ethereum/contract
+    name: Abusdv2
+    network: mainnet
+    source:
+      address: "0xA361718326c15715591c299427c62086F69923D9"
+      startBlock: 11367184
+      abi: AToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - BalanceTransfer
+        - Burn
+        - Initialized
+        - Mint
+        - Transfer
+      abis:
+        - name: AToken
+          file: ./abis/AToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: Burn(indexed address,indexed address,uint256,uint256)
+          handler: handleBurn
+        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
+          handler: handleInitialized
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.AToken.ts
+  - kind: ethereum/contract
+    name: Acrvv2
+    network: mainnet
+    source:
+      address: "0x8dAE6Cb04688C62d939ed9B68d32Bc62e49970b1"
+      startBlock: 11538358
+      abi: AToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - BalanceTransfer
+        - Burn
+        - Initialized
+        - Mint
+        - Transfer
+      abis:
+        - name: AToken
+          file: ./abis/AToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: Burn(indexed address,indexed address,uint256,uint256)
+          handler: handleBurn
+        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
+          handler: handleInitialized
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.AToken.ts
+  - kind: ethereum/contract
+    name: Adaiv2
+    network: mainnet
+    source:
+      address: "0x028171bCA77440897B824Ca71D1c56caC55b68A3"
+      startBlock: 11367184
+      abi: AToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - BalanceTransfer
+        - Burn
+        - Initialized
+        - Mint
+        - Transfer
+      abis:
+        - name: AToken
+          file: ./abis/AToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: Burn(indexed address,indexed address,uint256,uint256)
+          handler: handleBurn
+        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
+          handler: handleInitialized
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.AToken.ts
+  - kind: ethereum/contract
+    name: Aenjv2
+    network: mainnet
+    source:
+      address: "0xaC6Df26a590F08dcC95D5a4705ae8abbc88509Ef"
+      startBlock: 11367188
+      abi: AToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - BalanceTransfer
+        - Burn
+        - Initialized
+        - Mint
+        - Transfer
+      abis:
+        - name: AToken
+          file: ./abis/AToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: Burn(indexed address,indexed address,uint256,uint256)
+          handler: handleBurn
+        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
+          handler: handleInitialized
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.AToken.ts
+  - kind: ethereum/contract
+    name: Agusdv2
+    network: mainnet
+    source:
+      address: "0xD37EE7e4f452C6638c96536e68090De8cBcdb583"
+      startBlock: 11576861
+      abi: AToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - BalanceTransfer
+        - Burn
+        - Initialized
+        - Mint
+        - Transfer
+      abis:
+        - name: AToken
+          file: ./abis/AToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: Burn(indexed address,indexed address,uint256,uint256)
+          handler: handleBurn
+        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
+          handler: handleInitialized
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.AToken.ts
+  - kind: ethereum/contract
+    name: Akncv2
+    network: mainnet
+    source:
+      address: "0x39C6b3e42d6A679d7D776778Fe880BC9487C2EDA"
+      startBlock: 11367188
+      abi: AToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - BalanceTransfer
+        - Burn
+        - Initialized
+        - Mint
+        - Transfer
+      abis:
+        - name: AToken
+          file: ./abis/AToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: Burn(indexed address,indexed address,uint256,uint256)
+          handler: handleBurn
+        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
+          handler: handleInitialized
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.AToken.ts
+  - kind: ethereum/contract
+    name: Alinkv2
+    network: mainnet
+    source:
+      address: "0xa06bC25B5805d5F8d82847D191Cb4Af5A3e873E0"
+      startBlock: 11367188
+      abi: AToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - BalanceTransfer
+        - Burn
+        - Initialized
+        - Mint
+        - Transfer
+      abis:
+        - name: AToken
+          file: ./abis/AToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: Burn(indexed address,indexed address,uint256,uint256)
+          handler: handleBurn
+        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
+          handler: handleInitialized
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.AToken.ts
+  - kind: ethereum/contract
+    name: Amanav2
+    network: mainnet
+    source:
+      address: "0xa685a61171bb30d4072B338c80Cb7b2c865c873E"
+      startBlock: 11367188
+      abi: AToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - BalanceTransfer
+        - Burn
+        - Initialized
+        - Mint
+        - Transfer
+      abis:
+        - name: AToken
+          file: ./abis/AToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: Burn(indexed address,indexed address,uint256,uint256)
+          handler: handleBurn
+        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
+          handler: handleInitialized
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.AToken.ts
+  - kind: ethereum/contract
+    name: Amkrv2
+    network: mainnet
+    source:
+      address: "0xc713e5E149D5D0715DcD1c156a020976e7E56B88"
+      startBlock: 11367197
+      abi: AToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - BalanceTransfer
+        - Burn
+        - Initialized
+        - Mint
+        - Transfer
+      abis:
+        - name: AToken
+          file: ./abis/AToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: Burn(indexed address,indexed address,uint256,uint256)
+          handler: handleBurn
+        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
+          handler: handleInitialized
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.AToken.ts
+  - kind: ethereum/contract
+    name: Aren
+    network: mainnet
+    source:
+      address: "0xCC12AbE4ff81c9378D670De1b57F8e0Dd228D77a"
+      startBlock: 11367197
+      abi: AToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - BalanceTransfer
+        - Burn
+        - Initialized
+        - Mint
+        - Transfer
+      abis:
+        - name: AToken
+          file: ./abis/AToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: Burn(indexed address,indexed address,uint256,uint256)
+          handler: handleBurn
+        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
+          handler: handleInitialized
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.AToken.ts
+  - kind: ethereum/contract
+    name: Asnxv2
+    network: mainnet
+    source:
+      address: "0x35f6B052C598d933D69A4EEC4D04c73A191fE6c2"
+      startBlock: 11367197
+      abi: AToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - BalanceTransfer
+        - Burn
+        - Initialized
+        - Mint
+        - Transfer
+      abis:
+        - name: AToken
+          file: ./abis/AToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: Burn(indexed address,indexed address,uint256,uint256)
+          handler: handleBurn
+        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
+          handler: handleInitialized
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.AToken.ts
+  - kind: ethereum/contract
+    name: Asusdv2
+    network: mainnet
+    source:
+      address: "0x6C5024Cd4F8A59110119C56f8933403A539555EB"
+      startBlock: 11367197
+      abi: AToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - BalanceTransfer
+        - Burn
+        - Initialized
+        - Mint
+        - Transfer
+      abis:
+        - name: AToken
+          file: ./abis/AToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: Burn(indexed address,indexed address,uint256,uint256)
+          handler: handleBurn
+        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
+          handler: handleInitialized
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.AToken.ts
+  - kind: ethereum/contract
+    name: Auniv2
+    network: mainnet
+    source:
+      address: "0xB9D7CB55f463405CDfBe4E90a6D2Df01C2B92BF1"
+      startBlock: 11362823
+      abi: AToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - BalanceTransfer
+        - Burn
+        - Initialized
+        - Mint
+        - Transfer
+      abis:
+        - name: AToken
+          file: ./abis/AToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: Burn(indexed address,indexed address,uint256,uint256)
+          handler: handleBurn
+        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
+          handler: handleInitialized
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.AToken.ts
+  - kind: ethereum/contract
+    name: Ausdcv2
+    network: mainnet
+    source:
+      address: "0xBcca60bB61934080951369a648Fb03DF4F96263C"
+      startBlock: 11367200
+      abi: AToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - BalanceTransfer
+        - Burn
+        - Initialized
+        - Mint
+        - Transfer
+      abis:
+        - name: AToken
+          file: ./abis/AToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: Burn(indexed address,indexed address,uint256,uint256)
+          handler: handleBurn
+        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
+          handler: handleInitialized
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.AToken.ts
+  - kind: ethereum/contract
+    name: Ausdtv2
+    network: mainnet
+    source:
+      address: "0x3Ed3B47Dd13EC9a98b44e6204A523E766B225811"
+      startBlock: 11362821
+      abi: AToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - BalanceTransfer
+        - Burn
+        - Initialized
+        - Mint
+        - Transfer
+      abis:
+        - name: AToken
+          file: ./abis/AToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: Burn(indexed address,indexed address,uint256,uint256)
+          handler: handleBurn
+        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
+          handler: handleInitialized
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.AToken.ts
+  - kind: ethereum/contract
+    name: Awbtcv2
+    network: mainnet
+    source:
+      address: "0x9ff58f4fFB29fA2266Ab25e75e2A8b3503311656"
+      startBlock: 11362821
+      abi: AToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - BalanceTransfer
+        - Burn
+        - Initialized
+        - Mint
+        - Transfer
+      abis:
+        - name: AToken
+          file: ./abis/AToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: Burn(indexed address,indexed address,uint256,uint256)
+          handler: handleBurn
+        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
+          handler: handleInitialized
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.AToken.ts
+  - kind: ethereum/contract
+    name: Awethv2
+    network: mainnet
+    source:
+      address: "0x030bA81f1c18d280636F32af80b9AAd02Cf0854e"
+      startBlock: 11362821
+      abi: AToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - BalanceTransfer
+        - Burn
+        - Initialized
+        - Mint
+        - Transfer
+      abis:
+        - name: AToken
+          file: ./abis/AToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: Burn(indexed address,indexed address,uint256,uint256)
+          handler: handleBurn
+        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
+          handler: handleInitialized
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.AToken.ts
+  - kind: ethereum/contract
+    name: Axsushi
+    network: mainnet
+    source:
+      address: "0xF256CC7847E919FAc9B808cC216cAc87CCF2f47a"
+      startBlock: 11857246
+      abi: AToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - BalanceTransfer
+        - Burn
+        - Initialized
+        - Mint
+        - Transfer
+      abis:
+        - name: AToken
+          file: ./abis/AToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: Burn(indexed address,indexed address,uint256,uint256)
+          handler: handleBurn
+        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
+          handler: handleInitialized
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.AToken.ts
+  - kind: ethereum/contract
+    name: Ayfiv2
+    network: mainnet
+    source:
+      address: "0x5165d24277cD063F5ac44Efd447B27025e888f37"
+      startBlock: 11362821
+      abi: AToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - BalanceTransfer
+        - Burn
+        - Initialized
+        - Mint
+        - Transfer
+      abis:
+        - name: AToken
+          file: ./abis/AToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: Burn(indexed address,indexed address,uint256,uint256)
+          handler: handleBurn
+        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
+          handler: handleInitialized
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.AToken.ts
+  - kind: ethereum/contract
+    name: Azrxv2
+    network: mainnet
+    source:
+      address: "0xDf7FF54aAcAcbFf42dfe29DD6144A69b629f8C9e"
+      startBlock: 11362823
+      abi: AToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - BalanceTransfer
+        - Burn
+        - Initialized
+        - Mint
+        - Transfer
+      abis:
+        - name: AToken
+          file: ./abis/AToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
+          handler: handleBalanceTransfer
+        - event: Burn(indexed address,indexed address,uint256,uint256)
+          handler: handleBurn
+        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
+          handler: handleInitialized
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.AToken.ts
