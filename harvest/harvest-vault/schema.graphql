@@ -1,0 +1,23 @@
+type PricePerFullShare @entity {
+  id: ID!
+  block: BigInt!
+  timestamp: BigInt!
+  pricePerFullShare: BigInt!
+  token: String!
+}
+
+type UnderlyingBalanceWithInvestment @entity {
+  id: ID!
+  block: BigInt!
+  timestamp: BigInt!
+  underlyingBalanceWithInvestment: BigInt!
+  token: String!
+}
+
+type UnderlyingBalanceInVault @entity {
+  id: ID!
+  block: BigInt!
+  timestamp: BigInt!
+  underlyingBalanceInVault: BigInt!
+  token: String!
+}
