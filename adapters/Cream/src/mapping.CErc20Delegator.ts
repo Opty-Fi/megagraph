@@ -35,7 +35,7 @@ import {
   ReservesAdded,
   ReservesReduced,
   Transfer
-} from "./schema"
+} from "../generated/schema"
 
 export function handleAccrueInterest(event: AccrueInterestEvent): void {
   let entity = new AccrueInterest(

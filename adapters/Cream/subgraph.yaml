@@ -30,7 +30,7 @@ dataSources:
           handler: handleDelegateVotesChanged
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./src/mapping.ts
+      file: ./src/mapping.Comp.ts
   - kind: ethereum/contract
     name: CreamAave
     network: mainnet
@@ -62,7 +62,7 @@ dataSources:
         - Transfer
       abis:
         - name: CErc20Delegator
-          file: ./tokens/CErc20Delegator.json
+          file: ./abis/CErc20Delegator.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
@@ -98,7 +98,7 @@ dataSources:
           handler: handleReservesReduced
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.CErc20Delegator.ts
   - kind: ethereum/contract
     name: CreamBbtc
     network: mainnet
@@ -130,7 +130,7 @@ dataSources:
         - Transfer
       abis:
         - name: CErc20Delegator
-          file: ./tokens/CErc20Delegator.json
+          file: ./abis/CErc20Delegator.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
@@ -166,7 +166,7 @@ dataSources:
           handler: handleReservesReduced
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.CErc20Delegator.ts
   - kind: ethereum/contract
     name: CreamBond
     network: mainnet
@@ -198,7 +198,7 @@ dataSources:
         - Transfer
       abis:
         - name: CErc20Delegator
-          file: ./tokens/CErc20Delegator.json
+          file: ./abis/CErc20Delegator.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
@@ -234,7 +234,7 @@ dataSources:
           handler: handleReservesReduced
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.CErc20Delegator.ts
   - kind: ethereum/contract
     name: CreamCelsius
     network: mainnet
@@ -266,7 +266,7 @@ dataSources:
         - Transfer
       abis:
         - name: CErc20Delegator
-          file: ./tokens/CErc20Delegator.json
+          file: ./abis/CErc20Delegator.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
@@ -302,7 +302,7 @@ dataSources:
           handler: handleReservesReduced
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.CErc20Delegator.ts
   - kind: ethereum/contract
     name: CreamCover
     network: mainnet
@@ -334,7 +334,7 @@ dataSources:
         - Transfer
       abis:
         - name: CErc20Delegator
-          file: ./tokens/CErc20Delegator.json
+          file: ./abis/CErc20Delegator.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
@@ -370,7 +370,7 @@ dataSources:
           handler: handleReservesReduced
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.CErc20Delegator.ts
   - kind: ethereum/contract
     name: CreamCreth2
     network: mainnet
@@ -402,7 +402,7 @@ dataSources:
         - Transfer
       abis:
         - name: CErc20Delegator
-          file: ./tokens/CErc20Delegator.json
+          file: ./abis/CErc20Delegator.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
@@ -438,7 +438,7 @@ dataSources:
           handler: handleReservesReduced
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.CErc20Delegator.ts
   - kind: ethereum/contract
     name: CreamDai
     network: mainnet
@@ -470,7 +470,7 @@ dataSources:
         - Transfer
       abis:
         - name: CErc20Delegator
-          file: ./tokens/CErc20Delegator.json
+          file: ./abis/CErc20Delegator.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
@@ -506,7 +506,7 @@ dataSources:
           handler: handleReservesReduced
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.CErc20Delegator.ts
   - kind: ethereum/contract
     name: CreamEsd
     network: mainnet
@@ -538,7 +538,7 @@ dataSources:
         - Transfer
       abis:
         - name: CErc20Delegator
-          file: ./tokens/CErc20Delegator.json
+          file: ./abis/CErc20Delegator.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
@@ -574,7 +574,7 @@ dataSources:
           handler: handleReservesReduced
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.CErc20Delegator.ts
   - kind: ethereum/contract
     name: CreamHbtc
     network: mainnet
@@ -606,7 +606,7 @@ dataSources:
         - Transfer
       abis:
         - name: CErc20Delegator
-          file: ./tokens/CErc20Delegator.json
+          file: ./abis/CErc20Delegator.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
@@ -642,7 +642,7 @@ dataSources:
           handler: handleReservesReduced
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.CErc20Delegator.ts
   - kind: ethereum/contract
     name: CreamHfil
     network: mainnet
@@ -674,7 +674,7 @@ dataSources:
         - Transfer
       abis:
         - name: CErc20Delegator
-          file: ./tokens/CErc20Delegator.json
+          file: ./abis/CErc20Delegator.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
@@ -710,7 +710,7 @@ dataSources:
           handler: handleReservesReduced
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.CErc20Delegator.ts
   - kind: ethereum/contract
     name: CreamKp3r
     network: mainnet
@@ -742,7 +742,7 @@ dataSources:
         - Transfer
       abis:
         - name: CErc20Delegator
-          file: ./tokens/CErc20Delegator.json
+          file: ./abis/CErc20Delegator.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
@@ -778,7 +778,7 @@ dataSources:
           handler: handleReservesReduced
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.CErc20Delegator.ts
   - kind: ethereum/contract
     name: CreamUni
     network: mainnet
@@ -810,7 +810,7 @@ dataSources:
         - Transfer
       abis:
         - name: CErc20Delegator
-          file: ./tokens/CErc20Delegator.json
+          file: ./abis/CErc20Delegator.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
@@ -846,7 +846,7 @@ dataSources:
           handler: handleReservesReduced
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.CErc20Delegator.ts
   - kind: ethereum/contract
     name: CreamYcrv
     network: mainnet
@@ -878,7 +878,7 @@ dataSources:
         - Transfer
       abis:
         - name: CErc20Delegator
-          file: ./tokens/CErc20Delegator.json
+          file: ./abis/CErc20Delegator.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
@@ -914,4 +914,4 @@ dataSources:
           handler: handleReservesReduced
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./tokens/mapping.ts
+      file: ./src/mapping.CErc20Delegator.ts

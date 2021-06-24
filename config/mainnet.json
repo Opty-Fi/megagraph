@@ -4,8 +4,8 @@
 
   "CreamAddress": "0x2ba592f78db6436527729929aaf6c908497cb200",
   "CreamStartBlock": 10594024,
-  "CreamAbi": "./adapters/cream/Comp.json",
-  "CreamMapping": "./adapters/cream/mapping.ts",
+  "CreamAbi": "./adapters/Cream/abis/Comp.json",
+  "CreamMapping": "./adapters/Cream/src/mapping.Comp.ts",
   "CreamAaveAddress": "0x3225E3C669B39C7c8B3e204a8614bB218c5e31BC",
   "CreamAaveStartBlock": 11222225,
   "CreamBbtcAddress": "0x7ea9C63E216D5565c3940A2B3d150e59C2907Db3",
