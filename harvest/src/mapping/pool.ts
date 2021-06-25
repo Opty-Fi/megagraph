@@ -5,12 +5,12 @@ import {
   RewardPaid,
   Staked,
   Withdrawn
-} from "../generated/HarvestPoolData/HarvestPoolData"
+} from "../../generated/HarvestPoolData/HarvestPoolData"
 import {
   LastUpdateTime,
   RewardRate,
   RewardPerTokenStored
-} from "../generated/schema"
+} from "../../generated/schema"
 
 export function handleRewardAdded(event: RewardAdded): void {
   let contract = HarvestPoolData.bind(event.address)

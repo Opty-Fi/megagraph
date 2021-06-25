@@ -6,12 +6,12 @@ import {
   StrategyChanged,
   Transfer,
   Withdraw
-} from "../generated/Vault/Vault"
+} from "../../generated/Vault/Vault"
 import {
   PricePerFullShare,
   UnderlyingBalanceWithInvestment,
   UnderlyingBalanceInVault
-} from "../generated/schema"
+} from "../../generated/schema"
 
 function HandleEntity(
   address: Address,

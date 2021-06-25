@@ -3,10 +3,43 @@ schema:
   file: ./schema.graphql
 dataSources:
   # --------------------------------------
+  #      PoolContract - fDAI
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: HarvestPoolData
+    network: mainnet
+    source:
+      address: "0x15d3A64B2d5ab9E152F16593Cdebc4bB165B5B4A"
+      abi: HarvestPoolData
+      startBlock: 11087156
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - LastUpdateTime
+        - RewardRate
+        - RewardPerTokenStored
+      abis:
+        - name: HarvestPoolData
+          file: ./abis/HarvestPoolData.json
+      eventHandlers:
+        - event: RewardAdded(uint256)
+          handler: handleRewardAdded
+        - event: RewardDenied(indexed address,uint256)
+          handler: handleRewardDenied
+        - event: RewardPaid(indexed address,uint256)
+          handler: handleRewardPaid
+        - event: Staked(indexed address,uint256)
+          handler: handleStaked
+        - event: Withdrawn(indexed address,uint256)
+          handler: handleWithdrawn
+      file: ./src/mapping/pool.ts
+  # --------------------------------------
   #      f3CRV
   # --------------------------------------
   - kind: ethereum/contract
-    name: Vault_F3CRV
+    name: Vault
     network: mainnet
     source:
       address: "0x71B9eC42bB3CB40F017D8AD8011BE8e384a95fa5"
@@ -34,7 +67,7 @@ dataSources:
           handler: handleTransfer
         - event: Withdraw(indexed address,uint256)
           handler: handleWithdraw
-      file: ./src/mapping.ts
+      file: ./src/mapping/vault.ts
   # --------------------------------------
   #      fyDAI+yUSDC+yUSDT+yTUSD
   # --------------------------------------
@@ -67,7 +100,7 @@ dataSources:
           handler: handleTransfer
         - event: Withdraw(indexed address,uint256)
           handler: handleWithdraw
-      file: ./src/mapping.ts
+      file: ./src/mapping/vault.ts
   # --------------------------------------
   #      fDAI
   # --------------------------------------
@@ -77,7 +110,7 @@ dataSources:
     source:
       address: "0xab7fa2b2985bccfc13c6d86b1d5a17486ab1e04c"
       abi: Vault
-      startBlock: 11152258
+      startBlock: 11086832
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -100,7 +133,7 @@ dataSources:
           handler: handleTransfer
         - event: Withdraw(indexed address,uint256)
           handler: handleWithdraw
-      file: ./src/mapping.ts
+      file: ./src/mapping/vault.ts
   # --------------------------------------
   #      fUSDC
   # --------------------------------------
@@ -110,7 +143,7 @@ dataSources:
     source:
       address: "0xf0358e8c3CD5Fa238a29301d0bEa3D63A17bEdBE"
       abi: Vault
-      startBlock: 11152258
+      startBlock: 11086842
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -133,7 +166,7 @@ dataSources:
           handler: handleTransfer
         - event: Withdraw(indexed address,uint256)
           handler: handleWithdraw
-      file: ./src/mapping.ts
+      file: ./src/mapping/vault.ts
   # --------------------------------------
   #      fUSDT
   # --------------------------------------
@@ -143,7 +176,7 @@ dataSources:
     source:
       address: "0x053c80eA73Dc6941F518a68E2FC52Ac45BDE7c9C"
       abi: Vault
-      startBlock: 11152258
+      startBlock: 11086849
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -166,7 +199,7 @@ dataSources:
           handler: handleTransfer
         - event: Withdraw(indexed address,uint256)
           handler: handleWithdraw
-      file: ./src/mapping.ts
+      file: ./src/mapping/vault.ts
   # --------------------------------------
   #      fTUSD
   # --------------------------------------
@@ -176,7 +209,7 @@ dataSources:
     source:
       address: "0x7674622c63Bee7F46E86a4A5A18976693D54441b"
       abi: Vault
-      startBlock: 11152258
+      startBlock: 10997721
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -199,7 +232,7 @@ dataSources:
           handler: handleTransfer
         - event: Withdraw(indexed address,uint256)
           handler: handleWithdraw
-      file: ./src/mapping.ts
+      file: ./src/mapping/vault.ts
   # --------------------------------------
   #      fcrvRenWBTC
   # --------------------------------------
@@ -209,7 +242,7 @@ dataSources:
     source:
       address: "0x9aA8F427A17d6B0d91B6262989EdC7D45d6aEdf8"
       abi: Vault
-      startBlock: 11152258
+      startBlock: 11086865
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -232,7 +265,7 @@ dataSources:
           handler: handleTransfer
         - event: Withdraw(indexed address,uint256)
           handler: handleWithdraw
-      file: ./src/mapping.ts
+      file: ./src/mapping/vault.ts
   # --------------------------------------
   #      fWBTC
   # --------------------------------------
@@ -242,7 +275,7 @@ dataSources:
     source:
       address: "0x5d9d25c7C457dD82fc8668FFC6B9746b674d4EcB"
       abi: Vault
-      startBlock: 11152258
+      startBlock: 11068089
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -265,7 +298,7 @@ dataSources:
           handler: handleTransfer
         - event: Withdraw(indexed address,uint256)
           handler: handleWithdraw
-      file: ./src/mapping.ts
+      file: ./src/mapping/vault.ts
   # --------------------------------------
   #      frenBTC
   # --------------------------------------
@@ -275,7 +308,7 @@ dataSources:
     source:
       address: "0xC391d1b08c1403313B0c28D47202DFDA015633C4"
       abi: Vault
-      startBlock: 11152258
+      startBlock: 11086855
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -298,7 +331,7 @@ dataSources:
           handler: handleTransfer
         - event: Withdraw(indexed address,uint256)
           handler: handleWithdraw
-      file: ./src/mapping.ts
+      file: ./src/mapping/vault.ts
   # --------------------------------------
   #      fWETH
   # --------------------------------------
@@ -308,7 +341,7 @@ dataSources:
     source:
       address: "0xFE09e53A81Fe2808bc493ea64319109B5bAa573e"
       abi: Vault
-      startBlock: 11152258
+      startBlock: 11086824
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -331,7 +364,7 @@ dataSources:
           handler: handleTransfer
         - event: Withdraw(indexed address,uint256)
           handler: handleWithdraw
-      file: ./src/mapping.ts
+      file: ./src/mapping/vault.ts
   # --------------------------------------
   #      fcDAI+cUSDC
   # --------------------------------------
@@ -341,7 +374,7 @@ dataSources:
     source:
       address: "0x998cEb152A42a3EaC1f555B1E911642BeBf00faD"
       abi: Vault
-      startBlock: 11152258
+      startBlock: 11257781
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -364,7 +397,7 @@ dataSources:
           handler: handleTransfer
         - event: Withdraw(indexed address,uint256)
           handler: handleWithdraw
-      file: ./src/mapping.ts
+      file: ./src/mapping/vault.ts
   # --------------------------------------
   #      fusdn3CRV
   # --------------------------------------
@@ -374,7 +407,7 @@ dataSources:
     source:
       address: "0x683E683fBE6Cf9b635539712c999f3B3EdCB8664"
       abi: Vault
-      startBlock: 11152258
+      startBlock: 11257784
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -397,7 +430,7 @@ dataSources:
           handler: handleTransfer
         - event: Withdraw(indexed address,uint256)
           handler: handleWithdraw
-      file: ./src/mapping.ts
+      file: ./src/mapping/vault.ts
   # --------------------------------------
   #      fhCRV
   # --------------------------------------
@@ -407,7 +440,7 @@ dataSources:
     source:
       address: "0xCC775989e76ab386E9253df5B0c0b473E22102E2"
       abi: Vault
-      startBlock: 11152258
+      startBlock: 11380817
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -430,7 +463,7 @@ dataSources:
           handler: handleTransfer
         - event: Withdraw(indexed address,uint256)
           handler: handleWithdraw
-      file: ./src/mapping.ts
+      file: ./src/mapping/vault.ts
   # --------------------------------------
   #      fUNI-V2
   # --------------------------------------
@@ -440,7 +473,7 @@ dataSources:
     source:
       address: "0x2a32dcBB121D48C106F6d94cf2B4714c0b4Dfe48"
       abi: Vault
-      startBlock: 11152258
+      startBlock: 11374134
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -463,7 +496,7 @@ dataSources:
           handler: handleTransfer
         - event: Withdraw(indexed address,uint256)
           handler: handleWithdraw
-      file: ./src/mapping.ts
+      file: ./src/mapping/vault.ts
   # --------------------------------------
   #      ftbtc/sbtcCrv
   # --------------------------------------
@@ -473,7 +506,7 @@ dataSources:
     source:
       address: "0x640704D106E79e105FDA424f05467F005418F1B5"
       abi: Vault
-      startBlock: 11152258
+      startBlock: 11230944
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -496,7 +529,7 @@ dataSources:
           handler: handleTransfer
         - event: Withdraw(indexed address,uint256)
           handler: handleWithdraw
-      file: ./src/mapping.ts
+      file: ./src/mapping/vault.ts
   # --------------------------------------
   #      fyDAI+yUSDC+yUSDT+yBUSD
   # --------------------------------------
@@ -506,7 +539,7 @@ dataSources:
     source:
       address: "0x4b1cBD6F6D8676AcE5E412C78B7a59b4A1bbb68a"
       abi: Vault
-      startBlock: 11152258
+      startBlock: 11257802
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -529,4 +562,4 @@ dataSources:
           handler: handleTransfer
         - event: Withdraw(indexed address,uint256)
           handler: handleWithdraw
-      file: ./src/mapping.ts
+      file: ./src/mapping/vault.ts

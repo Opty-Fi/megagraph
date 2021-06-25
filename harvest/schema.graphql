@@ -21,3 +21,24 @@ type UnderlyingBalanceInVault @entity {
   underlyingBalanceInVault: BigInt!
   token: String!
 }
+
+type LastUpdateTime @entity {
+  id: ID!
+  block: BigInt!
+  timestamp: BigInt!
+  lastUpdateTime: BigInt!
+}
+
+type RewardRate @entity {
+  id: ID!
+  block: BigInt!
+  timestamp: BigInt!
+  rewardRate: BigInt!
+}
+
+type RewardPerTokenStored @entity {
+  id: ID!
+  block: BigInt!
+  timestamp: BigInt!
+  rewardPerTokenStored: BigInt!
+}
