@@ -1,3 +1,5 @@
+import { BigInt, Address } from "@graphprotocol/graph-ts"
+
 import {
   HarvestPoolData,
   RewardAdded,
@@ -12,94 +14,79 @@ import {
   RewardPerTokenStored
 } from "../../generated/schema"
 
-export function handleRewardAdded(event: RewardAdded): void {
-  let contract = HarvestPoolData.bind(event.address)
-  let lastUpdateTime = new LastUpdateTime(event.block.hash.toHex())
+function HandleEntity(
+  address: Address,
+  txnHash: string,
+  blockNumber: BigInt,
+  timestamp: BigInt
+): void {
+  let contract = HarvestPoolData.bind(address)
+  let lastUpdateTime = new LastUpdateTime(txnHash)
 
   lastUpdateTime.lastUpdateTime = contract.lastUpdateTime()
-  lastUpdateTime.block = event.block.number
-  lastUpdateTime.timestamp = event.block.timestamp
+  lastUpdateTime.blockNumber = blockNumber
+  lastUpdateTime.timestamp = timestamp
+  lastUpdateTime.vault = contract.lpToken().toString()
   lastUpdateTime.save()
 
-  let rewardRate = new RewardRate(event.block.hash.toHex())
+  let rewardRate = new RewardRate(txnHash)
 
   rewardRate.rewardRate = contract.rewardRate()
-  rewardRate.block = event.block.number
-  rewardRate.timestamp = event.block.timestamp
+  rewardRate.blockNumber = blockNumber
+  rewardRate.timestamp = timestamp
+  rewardRate.vault = contract.lpToken().toString()
   rewardRate.save()
 
-  let rewardPerTokenStored = new RewardPerTokenStored(event.block.hash.toHex())
+  let rewardPerTokenStored = new RewardPerTokenStored(txnHash)
 
   rewardPerTokenStored.rewardPerTokenStored = contract.rewardPerTokenStored()
-  rewardPerTokenStored.timestamp = event.block.timestamp
-  rewardPerTokenStored.block = event.block.number
+  rewardPerTokenStored.timestamp = blockNumber
+  rewardPerTokenStored.blockNumber = timestamp
+  rewardPerTokenStored.vault = contract.lpToken().toString()
   rewardPerTokenStored.save()
+}
+
+export function handleRewardAdded(event: RewardAdded): void {
+  HandleEntity(
+    event.address,
+    event.transaction.hash.toHex(),
+    event.block.number,
+    event.block.timestamp
+  )
 }
 
 export function handleRewardDenied(event: RewardDenied): void {
-  let contract = HarvestPoolData.bind(event.address)
-  let lastUpdateTime = new LastUpdateTime(event.block.hash.toHex())
-
-  lastUpdateTime.lastUpdateTime = contract.lastUpdateTime()
-  lastUpdateTime.block = event.block.number
-  lastUpdateTime.timestamp = event.block.timestamp
-  lastUpdateTime.save()
-
-  let rewardPerTokenStored = new RewardPerTokenStored(event.block.hash.toHex())
-
-  rewardPerTokenStored.rewardPerTokenStored = contract.rewardPerTokenStored()
-  rewardPerTokenStored.timestamp = event.block.timestamp
-  rewardPerTokenStored.block = event.block.number
-  rewardPerTokenStored.save()
+  HandleEntity(
+    event.address,
+    event.transaction.hash.toHex(),
+    event.block.number,
+    event.block.timestamp
+  )
 }
 
 export function handleRewardPaid(event: RewardPaid): void {
-  let contract = HarvestPoolData.bind(event.address)
-  let lastUpdateTime = new LastUpdateTime(event.block.hash.toHex())
-
-  lastUpdateTime.lastUpdateTime = contract.lastUpdateTime()
-  lastUpdateTime.block = event.block.number
-  lastUpdateTime.timestamp = event.block.timestamp
-  lastUpdateTime.save()
-
-  let rewardPerTokenStored = new RewardPerTokenStored(event.block.hash.toHex())
-
-  rewardPerTokenStored.rewardPerTokenStored = contract.rewardPerTokenStored()
-  rewardPerTokenStored.timestamp = event.block.timestamp
-  rewardPerTokenStored.block = event.block.number
-  rewardPerTokenStored.save()
+  HandleEntity(
+    event.address,
+    event.transaction.hash.toHex(),
+    event.block.number,
+    event.block.timestamp
+  )
 }
 
 export function handleStaked(event: Staked): void {
-  let contract = HarvestPoolData.bind(event.address)
-  let lastUpdateTime = new LastUpdateTime(event.block.hash.toHex())
-
-  lastUpdateTime.lastUpdateTime = contract.lastUpdateTime()
-  lastUpdateTime.block = event.block.number
-  lastUpdateTime.timestamp = event.block.timestamp
-  lastUpdateTime.save()
-
-  let rewardPerTokenStored = new RewardPerTokenStored(event.block.hash.toHex())
-
-  rewardPerTokenStored.rewardPerTokenStored = contract.rewardPerTokenStored()
-  rewardPerTokenStored.timestamp = event.block.timestamp
-  rewardPerTokenStored.block = event.block.number
-  rewardPerTokenStored.save()
+  HandleEntity(
+    event.address,
+    event.transaction.hash.toHex(),
+    event.block.number,
+    event.block.timestamp
+  )
 }
 
 export function handleWithdrawn(event: Withdrawn): void {
-  let contract = HarvestPoolData.bind(event.address)
-  let lastUpdateTime = new LastUpdateTime(event.block.hash.toHex())
-
-  lastUpdateTime.lastUpdateTime = contract.lastUpdateTime()
-  lastUpdateTime.block = event.block.number
-  lastUpdateTime.timestamp = event.block.timestamp
-  lastUpdateTime.save()
-
-  let rewardPerTokenStored = new RewardPerTokenStored(event.block.hash.toHex())
-
-  rewardPerTokenStored.rewardPerTokenStored = contract.rewardPerTokenStored()
-  rewardPerTokenStored.timestamp = event.block.timestamp
-  rewardPerTokenStored.block = event.block.number
-  rewardPerTokenStored.save()
+  HandleEntity(
+    event.address,
+    event.transaction.hash.toHex(),
+    event.block.number,
+    event.block.timestamp
+  )
 }

@@ -15,39 +15,40 @@ import {
 
 function HandleEntity(
   address: Address,
-  blockHash: string,
+  txnHash: string,
   blockNumber: BigInt,
   timestamp: BigInt
 ): void {
   let contract = Vault.bind(address)
 
-  let pricePerFullShareEntity = new PricePerFullShare(blockHash)
-  pricePerFullShareEntity.block = blockNumber
+  let pricePerFullShareEntity = new PricePerFullShare(txnHash)
+  pricePerFullShareEntity.blockNumber = blockNumber
   pricePerFullShareEntity.timestamp = timestamp
   pricePerFullShareEntity.pricePerFullShare = contract.getPricePerFullShare()
   pricePerFullShareEntity.token = contract.name()
   pricePerFullShareEntity.save()
 
   let underlyingBalanceWithInvestmentEntity = new UnderlyingBalanceWithInvestment(
-    blockHash
+    txnHash
   )
-  underlyingBalanceWithInvestmentEntity.block = blockNumber
+  underlyingBalanceWithInvestmentEntity.blockNumber = blockNumber
   underlyingBalanceWithInvestmentEntity.timestamp = timestamp
   underlyingBalanceWithInvestmentEntity.underlyingBalanceWithInvestment = contract.underlyingBalanceWithInvestment()
   underlyingBalanceWithInvestmentEntity.token = contract.name()
   underlyingBalanceWithInvestmentEntity.save()
 
-  let underlyingBalanceInVaultEntity = new UnderlyingBalanceInVault(blockHash)
-  underlyingBalanceInVaultEntity.block = blockNumber
+  let underlyingBalanceInVaultEntity = new UnderlyingBalanceInVault(txnHash)
+  underlyingBalanceInVaultEntity.blockNumber = blockNumber
   underlyingBalanceInVaultEntity.timestamp = timestamp
   underlyingBalanceInVaultEntity.underlyingBalanceInVault = contract.underlyingBalanceInVault()
   underlyingBalanceInVaultEntity.token = contract.name()
   underlyingBalanceInVaultEntity.save()
 }
+
 export function handleDeposit(event: Deposit): void {
   HandleEntity(
     event.address,
-    event.block.hash.toHex(),
+    event.transaction.hash.toHex(),
     event.block.number,
     event.block.timestamp
   )
@@ -56,7 +57,7 @@ export function handleDeposit(event: Deposit): void {
 export function handleInvest(event: Invest): void {
   HandleEntity(
     event.address,
-    event.block.hash.toHex(),
+    event.transaction.hash.toHex(),
     event.block.number,
     event.block.timestamp
   )
@@ -65,7 +66,7 @@ export function handleInvest(event: Invest): void {
 export function handleStrategyChanged(event: StrategyChanged): void {
   HandleEntity(
     event.address,
-    event.block.hash.toHex(),
+    event.transaction.hash.toHex(),
     event.block.number,
     event.block.timestamp
   )
@@ -74,7 +75,7 @@ export function handleStrategyChanged(event: StrategyChanged): void {
 export function handleTransfer(event: Transfer): void {
   HandleEntity(
     event.address,
-    event.block.hash.toHex(),
+    event.transaction.hash.toHex(),
     event.block.number,
     event.block.timestamp
   )
@@ -83,7 +84,7 @@ export function handleTransfer(event: Transfer): void {
 export function handleWithdraw(event: Withdraw): void {
   HandleEntity(
     event.address,
-    event.block.hash.toHex(),
+    event.transaction.hash.toHex(),
     event.block.number,
     event.block.timestamp
   )

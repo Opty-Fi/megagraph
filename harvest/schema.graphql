@@ -1,6 +1,6 @@
 type PricePerFullShare @entity {
   id: ID!
-  block: BigInt!
+  blockNumber: BigInt!
   timestamp: BigInt!
   pricePerFullShare: BigInt!
   token: String!
@@ -8,7 +8,7 @@ type PricePerFullShare @entity {
 
 type UnderlyingBalanceWithInvestment @entity {
   id: ID!
-  block: BigInt!
+  blockNumber: BigInt!
   timestamp: BigInt!
   underlyingBalanceWithInvestment: BigInt!
   token: String!
@@ -16,7 +16,7 @@ type UnderlyingBalanceWithInvestment @entity {
 
 type UnderlyingBalanceInVault @entity {
   id: ID!
-  block: BigInt!
+  blockNumber: BigInt!
   timestamp: BigInt!
   underlyingBalanceInVault: BigInt!
   token: String!
@@ -24,21 +24,24 @@ type UnderlyingBalanceInVault @entity {
 
 type LastUpdateTime @entity {
   id: ID!
-  block: BigInt!
+  blockNumber: BigInt!
   timestamp: BigInt!
   lastUpdateTime: BigInt!
+  vault: String!
 }
 
 type RewardRate @entity {
   id: ID!
-  block: BigInt!
+  blockNumber: BigInt!
   timestamp: BigInt!
   rewardRate: BigInt!
+  vault: String!
 }
 
 type RewardPerTokenStored @entity {
   id: ID!
-  block: BigInt!
+  blockNumber: BigInt!
   timestamp: BigInt!
   rewardPerTokenStored: BigInt!
+  vault: String!
 }
