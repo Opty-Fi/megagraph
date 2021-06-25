@@ -14,49 +14,17 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        # - Approval
-        # - FeeRecipientSet
-        # - Interest
-        # - LogSetAuthority
-        # - LogSetOwner
-        # - Mint
-        # - NewDispatcher
-        # - NewOriginationFee
-        # - NewSwapModel
-        # - OwnerUpdate
-        # - Paused
-        # - Rebalance
-        # - Redeem
         - DToken
-        - Transfer
-        # - TransferFee
-        # - Unpaused
       abis:
         - name: dToken
           file: ./abis/dToken.json
       eventHandlers:
-        # - event: Approval(indexed address,indexed address,uint256)
-        #   handler: handleApproval
-        # - event: FeeRecipientSet(address,address)
-        #   handler: handleFeeRecipientSet
         - event: Interest(indexed address,uint256,uint256,uint256)
           handler: handleInterest
-        # - event: LogSetAuthority(indexed address)
-        #   handler: handleLogSetAuthority
-        # - event: LogSetOwner(indexed address)
-        #   handler: handleLogSetOwner
         - event: Mint(indexed address,indexed uint256,uint256,uint256,uint256)
           handler: handleMint
         - event: NewDispatcher(address,address)
           handler: handleNewDispatcher
-        # - event: NewOriginationFee(bytes4,uint256,uint256)
-        #   handler: handleNewOriginationFee
-        # - event: NewSwapModel(address,address)
-        #   handler: handleNewSwapModel
-        # - event: OwnerUpdate(indexed address,indexed address)
-        #   handler: handleOwnerUpdate
-        # - event: Paused(address)
-        #   handler: handlePaused
         - event: Rebalance(address[],uint256[],address[],uint256[])
           handler: handleRebalance
         - event: Redeem(indexed address,indexed uint256,uint256,uint256,uint256)
@@ -65,6 +33,4 @@ dataSources:
           handler: handleTransfer
         - event: TransferFee(address,address,uint256)
           handler: handleTransferFee
-        # - event: Unpaused(address)
-        #   handler: handleUnpaused
       file: ./src/mapping.ts
