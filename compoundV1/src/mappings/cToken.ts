@@ -11,8 +11,9 @@ import {
   ReservesAdded as ReservesAddedEvent,
   ReservesReduced as ReservesReducedEvent,
   Transfer as TransferEvent,
-} from '../generated/CToken/CToken'
-import { CTokenData } from '../generated/schema'
+} from '../../generated/CToken/CToken'
+// import { CompSpeedUpdated as CompSpeedUpdatedEvent, ComptrollerImplementation } from "../generated/ComptrollerImplementation/ComptrollerImplementation"
+import { CTokenData } from '../../generated/schema'
 
 //  Function to add/update the cToken Entity
 function handleEntity(
@@ -20,9 +21,11 @@ function handleEntity(
   transactionHash: Bytes,
   borrowIndex: BigInt,
   totalBorrows: BigInt,
+  compSpeed: BigInt,
   blockNumber: BigInt,
   blockTimestamp: BigInt,
 ): void {
+  log.info("coming in handle entity..", [])
   let cTokenDataEntity = CTokenData.load(
     transactionHash.toHex() + '-' + blockNumber.toString(),
   )
@@ -53,10 +56,35 @@ function handleEntity(
   cTokenDataEntity.totalReserves = cTokenContract.totalReserves().toBigDecimal()
   cTokenDataEntity.totalSupply = cTokenContract.totalSupply().toBigDecimal()
   cTokenDataEntity.supplyRatePerBlock = cTokenContract.supplyRatePerBlock()
+  let comptrollerAddress = cTokenContract.comptroller()
+  log.info("Comptroller Address: {}", [comptrollerAddress.toHex()])
+  log.info("Comp Speed before assigning: {} ", [compSpeed.toHexString()])
+  // let comptrollerImplementationContract = ComptrollerImplementation.bind(Address.fromString("0xbe7616B06f71e363A310Aa8CE8aD99654401ead7"))
+  // cTokenDataEntity.compSpeed = compSpeed == null ? comptrollerImplementationContract.compSpeeds(cTokenAddress).toBigDecimal() : compSpeed.toBigDecimal()
 
+  // log.info("Comp Speed after assigning: {} ", [cTokenDataEntity.compSpeed.toString()])
   log.info('Logging Ctoken data into IPFS', [])
   cTokenDataEntity.save()
+
+  // let entity = new CompSpeedUpdated(
+  //   transactionHash.toHex() + "-" + blockNumber.toString()
+  // )
+  // entity.cToken = cTokenAddress
+  // entity.compSpeed = compSpeed.toBigDecimal()
+  // entity.save()
 }
+
+// export function handleCompSpeedUpdated(event: CompSpeedUpdatedEvent): void {
+//   handleEntity(
+//     event.params.cToken,
+//     event.transaction.hash,
+//     null,
+//     null,
+//     event.params.newSpeed,
+//     event.block.number,
+//     event.block.timestamp
+//   )
+// }
 
 //  changing totalBorrows, borrowIndex, therefore capturing
 export function handleAccrueInterest(event: AccrueInterestEvent): void {
@@ -65,6 +93,7 @@ export function handleAccrueInterest(event: AccrueInterestEvent): void {
     event.transaction.hash,
     event.params.borrowIndex,
     event.params.totalBorrows,
+    null,
     event.block.number,
     event.block.timestamp,
   )
@@ -77,6 +106,7 @@ export function handleBorrow(event: BorrowEvent): void {
     event.transaction.hash,
     null,
     event.params.totalBorrows,
+    null,
     event.block.number,
     event.block.timestamp,
   )
@@ -89,6 +119,7 @@ export function handleLiquidateBorrow(event: LiquidateBorrowEvent): void {
     event.transaction.hash,
     null,
     null,
+    null,
     event.block.number,
     event.block.timestamp,
   )
@@ -99,6 +130,7 @@ export function handleMint(event: MintEvent): void {
   handleEntity(
     event.address,
     event.transaction.hash,
+    null,
     null,
     null,
     event.block.number,
@@ -114,6 +146,7 @@ export function handleNewReserveFactor(event: NewReserveFactorEvent): void {
     event.transaction.hash,
     null,
     null,
+    null,
     event.block.number,
     event.block.timestamp,
   )
@@ -124,6 +157,7 @@ export function handleRedeem(event: RedeemEvent): void {
   handleEntity(
     event.address,
     event.transaction.hash,
+    null,
     null,
     null,
     event.block.number,
@@ -138,6 +172,7 @@ export function handleRepayBorrow(event: RepayBorrowEvent): void {
     event.transaction.hash,
     null,
     event.params.totalBorrows,
+    null,
     event.block.number,
     event.block.timestamp,
   )
@@ -148,6 +183,7 @@ export function handleReservesAdded(event: ReservesAddedEvent): void {
   handleEntity(
     event.address,
     event.transaction.hash,
+    null,
     null,
     null,
     event.block.number,
@@ -162,6 +198,7 @@ export function handleReservesReduced(event: ReservesReducedEvent): void {
     event.transaction.hash,
     null,
     null,
+    null,
     event.block.number,
     event.block.timestamp,
   )
@@ -172,6 +209,7 @@ export function handleTransfer(event: TransferEvent): void {
   handleEntity(
     event.address,
     event.transaction.hash,
+    null,
     null,
     null,
     event.block.number,

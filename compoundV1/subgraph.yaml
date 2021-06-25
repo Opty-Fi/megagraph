@@ -18,23 +18,6 @@ dataSources:
       language: wasm/assemblyscript
       entities:
         - CTokenData
-        # - AccrueInterest
-        # - Approval
-        # - Borrow
-        # - Failure
-        # - LiquidateBorrow
-        # - Mint
-        # - NewAdmin
-        # - NewComptroller
-        # - NewImplementation
-        # - NewMarketInterestRateModel
-        # - NewPendingAdmin
-        # - NewReserveFactor
-        # - Redeem
-        # - RepayBorrow
-        # - ReservesAdded
-        # - ReservesReduced
-        # - Transfer
       abis:
         - name: CToken
           file: ./abis/CToken.json
@@ -59,7 +42,7 @@ dataSources:
           handler: handleReservesReduced
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./src/mapping.ts
+      file: ./src/mappings/cToken.ts
   # --------------------------------------
   #      cUSDC
   # --------------------------------------
@@ -100,7 +83,7 @@ dataSources:
           handler: handleReservesReduced
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./src/mapping.ts
+      file: ./src/mappings/cToken.ts
   # --------------------------------------
   #      cUSDT
   # --------------------------------------
@@ -141,7 +124,7 @@ dataSources:
           handler: handleReservesReduced
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./src/mapping.ts
+      file: ./src/mappings/cToken.ts
   # --------------------------------------
   #      cBAT
   # --------------------------------------
@@ -182,7 +165,7 @@ dataSources:
           handler: handleReservesReduced
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./src/mapping.ts
+      file: ./src/mappings/cToken.ts
   # --------------------------------------
   #      cWBTC
   # --------------------------------------
@@ -223,7 +206,7 @@ dataSources:
           handler: handleReservesReduced
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./src/mapping.ts
+      file: ./src/mappings/cToken.ts
   # --------------------------------------
   #      cCOMP
   # --------------------------------------
@@ -264,7 +247,7 @@ dataSources:
           handler: handleReservesReduced
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./src/mapping.ts
+      file: ./src/mappings/cToken.ts
   # --------------------------------------
   #      cUNI
   # --------------------------------------
@@ -305,7 +288,7 @@ dataSources:
           handler: handleReservesReduced
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./src/mapping.ts
+      file: ./src/mappings/cToken.ts
   # --------------------------------------
   #      cREP
   # --------------------------------------
@@ -346,7 +329,7 @@ dataSources:
           handler: handleReservesReduced
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./src/mapping.ts
+      file: ./src/mappings/cToken.ts
   # --------------------------------------
   #      cZRX
   # --------------------------------------
@@ -387,7 +370,7 @@ dataSources:
           handler: handleReservesReduced
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./src/mapping.ts
+      file: ./src/mappings/cToken.ts
   # --------------------------------------
   #      cETH
   # --------------------------------------
@@ -428,5 +411,30 @@ dataSources:
           handler: handleReservesReduced
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./src/mapping.ts
+      file: ./src/mappings/cToken.ts
+
+  # --------------------------------------
+  #      comptroller
+  # --------------------------------------
+  # - kind: ethereum/contract
+  #   name: ComptrollerImplementation
+  #   network: mainnet
+  #   source:
+  #     address: "0xbe7616B06f71e363A310Aa8CE8aD99654401ead7"
+  #     abi: ComptrollerImplementation
+  #     startBlock: 12680211
+  #   mapping:
+  #     kind: ethereum/events
+  #     apiVersion: 0.0.4
+  #     language: wasm/assemblyscript
+  #     entities:
+  #       - CTokenData
+  #       # - CompSpeedUpdated
+  #     abis:
+  #       - name: ComptrollerImplementation
+  #         file: ./abis/ComptrollerImplementation.json
+  #     eventHandlers:
+  #       - event: CompSpeedUpdated(indexed address,uint256)
+  #         handler: handleCompSpeedUpdated
+  #     file: ./src/mappings/cToken.ts
 
