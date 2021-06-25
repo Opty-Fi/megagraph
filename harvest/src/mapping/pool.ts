@@ -21,29 +21,35 @@ function HandleEntity(
   timestamp: BigInt
 ): void {
   let contract = HarvestPoolData.bind(address)
-  let lastUpdateTime = new LastUpdateTime(txnHash)
+  let lastUpdateTimeEntity = new LastUpdateTime(txnHash)
+  let lastUpdateTime = contract.try_lastUpdateTime()
+  if (lastUpdateTime.value) {
+    lastUpdateTimeEntity.lastUpdateTime = lastUpdateTime.value
+    lastUpdateTimeEntity.blockNumber = blockNumber
+    lastUpdateTimeEntity.timestamp = timestamp
+    lastUpdateTimeEntity.vault = contract.lpToken().toHexString()
+    lastUpdateTimeEntity.save()
+  }
 
-  lastUpdateTime.lastUpdateTime = contract.lastUpdateTime()
-  lastUpdateTime.blockNumber = blockNumber
-  lastUpdateTime.timestamp = timestamp
-  lastUpdateTime.vault = contract.lpToken().toHexString()
-  lastUpdateTime.save()
+  let rewardRateEntity = new RewardRate(txnHash)
+  let rewardRate = contract.try_rewardRate()
+  if (rewardRate.value) {
+    rewardRateEntity.rewardRate = rewardRate.value
+    rewardRateEntity.blockNumber = blockNumber
+    rewardRateEntity.timestamp = timestamp
+    rewardRateEntity.vault = contract.lpToken().toHexString()
+    rewardRateEntity.save()
+  }
 
-  let rewardRate = new RewardRate(txnHash)
-
-  rewardRate.rewardRate = contract.rewardRate()
-  rewardRate.blockNumber = blockNumber
-  rewardRate.timestamp = timestamp
-  rewardRate.vault = contract.lpToken().toHexString()
-  rewardRate.save()
-
-  let rewardPerTokenStored = new RewardPerTokenStored(txnHash)
-
-  rewardPerTokenStored.rewardPerTokenStored = contract.rewardPerTokenStored()
-  rewardPerTokenStored.timestamp = blockNumber
-  rewardPerTokenStored.blockNumber = timestamp
-  rewardPerTokenStored.vault = contract.lpToken().toHexString()
-  rewardPerTokenStored.save()
+  let rewardPerTokenStoredEntity = new RewardPerTokenStored(txnHash)
+  let rewardPerTokenStored = contract.try_rewardPerTokenStored()
+  if (rewardPerTokenStored.value) {
+    rewardPerTokenStoredEntity.rewardPerTokenStored = rewardPerTokenStored.value
+    rewardPerTokenStoredEntity.timestamp = blockNumber
+    rewardPerTokenStoredEntity.blockNumber = timestamp
+    rewardPerTokenStoredEntity.vault = contract.lpToken().toHexString()
+    rewardPerTokenStoredEntity.save()
+  }
 }
 
 export function handleRewardAdded(event: RewardAdded): void {

@@ -22,27 +22,38 @@ function HandleEntity(
   let contract = Vault.bind(address)
 
   let pricePerFullShareEntity = new PricePerFullShare(txnHash)
-  pricePerFullShareEntity.blockNumber = blockNumber
-  pricePerFullShareEntity.timestamp = timestamp
-  pricePerFullShareEntity.pricePerFullShare = contract.getPricePerFullShare()
-  pricePerFullShareEntity.token = contract.name()
-  pricePerFullShareEntity.save()
+  let pricePerFullShare = contract.try_getPricePerFullShare()
+  if (pricePerFullShare.value) {
+    pricePerFullShareEntity.blockNumber = blockNumber
+    pricePerFullShareEntity.timestamp = timestamp
+    pricePerFullShareEntity.pricePerFullShare = pricePerFullShare.value
+    pricePerFullShareEntity.token = contract.name()
+    pricePerFullShareEntity.save()
+  }
 
   let underlyingBalanceWithInvestmentEntity = new UnderlyingBalanceWithInvestment(
     txnHash
   )
-  underlyingBalanceWithInvestmentEntity.blockNumber = blockNumber
-  underlyingBalanceWithInvestmentEntity.timestamp = timestamp
-  underlyingBalanceWithInvestmentEntity.underlyingBalanceWithInvestment = contract.underlyingBalanceWithInvestment()
-  underlyingBalanceWithInvestmentEntity.token = contract.name()
-  underlyingBalanceWithInvestmentEntity.save()
+  let underlyingBalanceWithInvestment = contract.try_underlyingBalanceWithInvestment()
+  if (underlyingBalanceWithInvestment.value) {
+    underlyingBalanceWithInvestmentEntity.blockNumber = blockNumber
+    underlyingBalanceWithInvestmentEntity.timestamp = timestamp
+    underlyingBalanceWithInvestmentEntity.underlyingBalanceWithInvestment =
+      underlyingBalanceWithInvestment.value
+    underlyingBalanceWithInvestmentEntity.token = contract.name()
+    underlyingBalanceWithInvestmentEntity.save()
+  }
 
   let underlyingBalanceInVaultEntity = new UnderlyingBalanceInVault(txnHash)
-  underlyingBalanceInVaultEntity.blockNumber = blockNumber
-  underlyingBalanceInVaultEntity.timestamp = timestamp
-  underlyingBalanceInVaultEntity.underlyingBalanceInVault = contract.underlyingBalanceInVault()
-  underlyingBalanceInVaultEntity.token = contract.name()
-  underlyingBalanceInVaultEntity.save()
+  let underlyingBalanceInVault = contract.try_underlyingBalanceInVault()
+  if (underlyingBalanceInVault.value) {
+    underlyingBalanceInVaultEntity.blockNumber = blockNumber
+    underlyingBalanceInVaultEntity.timestamp = timestamp
+    underlyingBalanceInVaultEntity.underlyingBalanceInVault =
+      underlyingBalanceInVault.value
+    underlyingBalanceInVaultEntity.token = contract.name()
+    underlyingBalanceInVaultEntity.save()
+  }
 }
 
 export function handleDeposit(event: Deposit): void {
