@@ -1,0 +1,122 @@
+# type Approval @entity {
+#   id: ID!
+#   src: Bytes! # address
+#   guy: Bytes! # address
+#   wad: BigInt! # uint256
+# }
+
+# type FeeRecipientSet @entity {
+#   id: ID!
+#   oldFeeRecipient: Bytes! # address
+#   newFeeRecipient: Bytes! # address
+# }
+
+# type Interest @entity {
+#   id: ID!
+#   src: Bytes! # address
+#   interest: BigInt! # uint256
+#   increase: BigInt! # uint256
+#   totalInterest: BigInt! # uint256
+# }
+
+# type LogSetAuthority @entity {
+#   id: ID!
+#   authority: Bytes! # address
+# }
+
+# type LogSetOwner @entity {
+#   id: ID!
+#   owner: Bytes! # address
+# }
+
+# type Mint @entity {
+#   id: ID!
+#   account: Bytes! # address
+#   pie: BigInt! # uint256
+#   wad: BigInt! # uint256
+#   totalSupply: BigInt! # uint256
+#   exchangeRate: BigInt! # uint256
+# }
+
+# type NewDispatcher @entity {
+#   id: ID!
+#   oldDispatcher: Bytes! # address
+#   Dispatcher: Bytes! # address
+# }
+
+# type NewOriginationFee @entity {
+#   id: ID!
+#   sig: Bytes! # bytes4
+#   oldOriginationFeeMantissa: BigInt! # uint256
+#   newOriginationFeeMantissa: BigInt! # uint256
+# }
+
+# type NewSwapModel @entity {
+#   id: ID!
+#   _oldSwapModel: Bytes! # address
+#   _newSwapModel: Bytes! # address
+# }
+
+# type OwnerUpdate @entity {
+#   id: ID!
+#   owner: Bytes! # address
+#   newOwner: Bytes! # address
+# }
+
+# type Paused @entity {
+#   id: ID!
+#   account: Bytes! # address
+# }
+
+# type Rebalance @entity {
+#   id: ID!
+#   withdraw: [Bytes]! # address[]
+#   withdrawAmount: [BigInt]! # uint256[]
+#   supply: [Bytes]! # address[]
+#   supplyAmount: [BigInt]! # uint256[]
+# }
+
+# type Redeem @entity {
+#   id: ID!
+#   account: Bytes! # address
+#   pie: BigInt! # uint256
+#   wad: BigInt! # uint256
+#   totalSupply: BigInt! # uint256
+#   exchangeRate: BigInt! # uint256
+# }
+
+# type Transfer @entity {
+#   id: ID!
+#   src: Bytes! # address
+#   dst: Bytes! # address
+#   wad: BigInt! # uint256
+# }
+
+# type TransferFee @entity {
+#   id: ID!
+#   token: Bytes! # address
+#   feeRecipient: Bytes! # address
+#   amount: BigInt! # uint256
+# }
+
+# type Unpaused @entity {
+#   id: ID!
+#   account: Bytes! # address
+# }
+
+# type Transfer @entity {
+#   id: ID!
+#   src: Bytes
+#   dst: Bytes
+#   wad: BigInt
+# }
+
+type DToken @entity {
+  id: ID!
+  pricePerFullShare: BigDecimal
+  balance: BigDecimal
+  blockNumber: BigInt
+  blockTimestamp: BigInt
+  dTokenSymbol: String
+  dTokenAddress: Bytes
+}

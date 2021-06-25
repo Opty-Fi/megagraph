@@ -1,0 +1,16 @@
+{
+  "name": "dforce",
+  "license": "UNLICENSED",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "yarn codegen && yarn build && graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ deepcrazy/dforce",
+    "create-local": "graph create --node http://localhost:8020/ deepcrazy/dforce",
+    "remove-local": "graph remove --node http://localhost:8020/ deepcrazy/dforce",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 deepcrazy/dforce"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.20.1",
+    "@graphprotocol/graph-ts": "0.20.0"
+  }
+}
