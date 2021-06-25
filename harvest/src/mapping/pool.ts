@@ -26,7 +26,7 @@ function HandleEntity(
   lastUpdateTime.lastUpdateTime = contract.lastUpdateTime()
   lastUpdateTime.blockNumber = blockNumber
   lastUpdateTime.timestamp = timestamp
-  lastUpdateTime.vault = contract.lpToken().toString()
+  lastUpdateTime.vault = contract.lpToken().toHexString()
   lastUpdateTime.save()
 
   let rewardRate = new RewardRate(txnHash)
@@ -34,7 +34,7 @@ function HandleEntity(
   rewardRate.rewardRate = contract.rewardRate()
   rewardRate.blockNumber = blockNumber
   rewardRate.timestamp = timestamp
-  rewardRate.vault = contract.lpToken().toString()
+  rewardRate.vault = contract.lpToken().toHexString()
   rewardRate.save()
 
   let rewardPerTokenStored = new RewardPerTokenStored(txnHash)
@@ -42,7 +42,7 @@ function HandleEntity(
   rewardPerTokenStored.rewardPerTokenStored = contract.rewardPerTokenStored()
   rewardPerTokenStored.timestamp = blockNumber
   rewardPerTokenStored.blockNumber = timestamp
-  rewardPerTokenStored.vault = contract.lpToken().toString()
+  rewardPerTokenStored.vault = contract.lpToken().toHexString()
   rewardPerTokenStored.save()
 }
 
