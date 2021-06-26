@@ -1,0 +1,16 @@
+type Balance @entity {
+  id: ID!
+  balance: BigInt!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+  token: String!
+  vault: String!
+}
+
+type VirtualPrice @entity {
+  id: ID!
+  virtualPrice: BigInt!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+  vault: String!
+}
