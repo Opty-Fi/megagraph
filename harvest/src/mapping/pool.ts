@@ -23,7 +23,7 @@ function HandleEntity(
   let contract = HarvestPoolData.bind(address)
   let lastUpdateTimeEntity = new LastUpdateTime(txnHash)
   let lastUpdateTime = contract.try_lastUpdateTime()
-  if (lastUpdateTime.value) {
+  if (!lastUpdateTime.reverted) {
     lastUpdateTimeEntity.lastUpdateTime = lastUpdateTime.value
     lastUpdateTimeEntity.blockNumber = blockNumber
     lastUpdateTimeEntity.timestamp = timestamp
@@ -33,7 +33,7 @@ function HandleEntity(
 
   let rewardRateEntity = new RewardRate(txnHash)
   let rewardRate = contract.try_rewardRate()
-  if (rewardRate.value) {
+  if (!rewardRate.reverted) {
     rewardRateEntity.rewardRate = rewardRate.value
     rewardRateEntity.blockNumber = blockNumber
     rewardRateEntity.timestamp = timestamp
@@ -43,7 +43,7 @@ function HandleEntity(
 
   let rewardPerTokenStoredEntity = new RewardPerTokenStored(txnHash)
   let rewardPerTokenStored = contract.try_rewardPerTokenStored()
-  if (rewardPerTokenStored.value) {
+  if (!rewardPerTokenStored.reverted) {
     rewardPerTokenStoredEntity.rewardPerTokenStored = rewardPerTokenStored.value
     rewardPerTokenStoredEntity.timestamp = blockNumber
     rewardPerTokenStoredEntity.blockNumber = timestamp

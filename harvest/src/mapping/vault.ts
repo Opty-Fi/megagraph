@@ -23,7 +23,7 @@ function HandleEntity(
 
   let pricePerFullShareEntity = new PricePerFullShare(txnHash)
   let pricePerFullShare = contract.try_getPricePerFullShare()
-  if (pricePerFullShare.value) {
+  if (!pricePerFullShare.reverted) {
     pricePerFullShareEntity.blockNumber = blockNumber
     pricePerFullShareEntity.timestamp = timestamp
     pricePerFullShareEntity.pricePerFullShare = pricePerFullShare.value
@@ -35,7 +35,7 @@ function HandleEntity(
     txnHash
   )
   let underlyingBalanceWithInvestment = contract.try_underlyingBalanceWithInvestment()
-  if (underlyingBalanceWithInvestment.value) {
+  if (!underlyingBalanceWithInvestment.reverted) {
     underlyingBalanceWithInvestmentEntity.blockNumber = blockNumber
     underlyingBalanceWithInvestmentEntity.timestamp = timestamp
     underlyingBalanceWithInvestmentEntity.underlyingBalanceWithInvestment =
@@ -46,7 +46,7 @@ function HandleEntity(
 
   let underlyingBalanceInVaultEntity = new UnderlyingBalanceInVault(txnHash)
   let underlyingBalanceInVault = contract.try_underlyingBalanceInVault()
-  if (underlyingBalanceInVault.value) {
+  if (!underlyingBalanceInVault.reverted) {
     underlyingBalanceInVaultEntity.blockNumber = blockNumber
     underlyingBalanceInVaultEntity.timestamp = timestamp
     underlyingBalanceInVaultEntity.underlyingBalanceInVault =
