@@ -3,22 +3,22 @@ type CTokenData @entity {
   blockNumber: BigInt
   blockTimestamp: BigInt
   borrowIndex: BigDecimal
-  borrowRatePerBlock: BigInt
+  borrowRatePerBlock: BigDecimal
   cTokenSymbol: String
   cTokenAddress: String
   compSpeed: CompSpeedUpdated @derivedFrom(field:"cTokenData")
   exchangeRate: BigDecimal
-  supplyRatePerBlock: BigInt
+  supplyRatePerBlock: BigDecimal
   totalCash: BigDecimal
   totalBorrows: BigDecimal
-  totalSupply: BigDecimal
+  totalSupply: BigInt
   totalReserves: BigDecimal
 }
 
 type CompSpeedUpdated @entity {
   id: ID!
   cToken: Bytes # address
-  compSpeed: BigInt # uint256
+  compSpeed: BigDecimal # uint256
   blockNumber: BigInt
   blockTimestamp: BigInt
   cTokenData: CTokenData

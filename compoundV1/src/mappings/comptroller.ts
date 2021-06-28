@@ -4,6 +4,7 @@ import {
   ComptrollerImplementation,
 } from '../../generated/Comptroller/ComptrollerImplementation'
 import { CompSpeedUpdated } from '../../generated/schema'
+import { convertBINumToDesiredDecimals } from '../../../src/utils/converters'
 
 //  Function to add/update the CompSpeedUpdated Entity
 function handleEntity(
@@ -19,8 +20,9 @@ function handleEntity(
     transactionHash.toHex().concat('-').concat(blockNumber.toString()),
   )
   compSpeedUpdatedEntity.cToken = cTokenAddress
-  compSpeedUpdatedEntity.compSpeed = comptrollerContract.compSpeeds(
-    cTokenAddress,
+  compSpeedUpdatedEntity.compSpeed = convertBINumToDesiredDecimals(
+    comptrollerContract.compSpeeds(cTokenAddress),
+    18,
   )
   compSpeedUpdatedEntity.blockNumber = blockNumber
   compSpeedUpdatedEntity.blockTimestamp = blockTimestamp

@@ -12,8 +12,12 @@ import {
   ReservesReduced as ReservesReducedEvent,
   Transfer as TransferEvent,
 } from '../../generated/CToken/CToken'
-import { ComptrollerImplementation } from "../../generated/Comptroller/ComptrollerImplementation"
+import { ComptrollerImplementation } from '../../generated/Comptroller/ComptrollerImplementation'
 import { CompSpeedUpdated, CTokenData } from '../../generated/schema'
+import {
+  convertBINumToDesiredDecimals,
+  convertToLowerCase,
+} from '../../../src/utils/converters'
 
 //  Function to add/update the cToken Entity
 function handleEntity(
@@ -35,50 +39,95 @@ function handleEntity(
     )
   }
   let cTokenContract = CToken.bind(cTokenAddress)
-  cTokenDataEntity.totalBorrows =
-    totalBorrows == null
-      ? cTokenContract.totalBorrows().toBigDecimal()
-      : totalBorrows.toBigDecimal()
+  let cTokenDecimals = cTokenContract.decimals()
+  let underlyingTokenAddress = cTokenContract.try_underlying()
+  let underlyingTokenDecimals = null
+  if (!underlyingTokenAddress.reverted) {
+    log.info('Able to get the underlyingToken addr: {}', [
+      underlyingTokenAddress.value.toHex(),
+    ])
+    let underlyingTokenContract = CToken.bind(underlyingTokenAddress.value)
+    underlyingTokenDecimals = underlyingTokenContract.decimals()
+    log.info('Underlying token Addr: {} has decimals: {}', [
+      underlyingTokenAddress.value.toHex(),
+      underlyingTokenDecimals.toString(),
+    ])
+  }
+  log.info('Ctoken Addr: {} has decimals: {}', [
+    cTokenAddress.toHex(),
+    cTokenDecimals.toString(),
+  ])
   cTokenDataEntity.blockNumber = blockNumber
   cTokenDataEntity.blockTimestamp = BigInt.fromI32(blockTimestamp.toI32())
-
   cTokenDataEntity.cTokenAddress = cTokenAddress.toHexString()
   cTokenDataEntity.cTokenSymbol = cTokenContract.symbol()
+
+  cTokenDataEntity.totalBorrows =
+    totalBorrows == null
+      ? convertBINumToDesiredDecimals(
+          cTokenContract.totalBorrows(),
+          underlyingTokenDecimals == null
+            ? convertToLowerCase(cTokenContract.symbol()) == 'ceth'
+              ? 18
+              : convertToLowerCase(cTokenContract.symbol()) == 'crep'
+              ? 18
+              : 0
+            : underlyingTokenDecimals,
+        )
+      : convertBINumToDesiredDecimals(
+          totalBorrows,
+          underlyingTokenDecimals == null
+            ? convertToLowerCase(cTokenContract.symbol()) == 'ceth'
+              ? 18
+              : convertToLowerCase(cTokenContract.symbol()) == 'crep'
+              ? 18
+              : 0
+            : underlyingTokenDecimals,
+        )
+
   cTokenDataEntity.borrowIndex =
     borrowIndex == null
-      ? cTokenContract.borrowIndex().toBigDecimal()
-      : borrowIndex.toBigDecimal()
-  cTokenDataEntity.totalCash = cTokenContract.getCash().toBigDecimal()
-  cTokenDataEntity.exchangeRate = cTokenContract
-    .exchangeRateStored()
-    .toBigDecimal()
-  cTokenDataEntity.borrowRatePerBlock = cTokenContract.borrowRatePerBlock()
-  cTokenDataEntity.totalReserves = cTokenContract.totalReserves().toBigDecimal()
-  cTokenDataEntity.totalSupply = cTokenContract.totalSupply().toBigDecimal()
-  cTokenDataEntity.supplyRatePerBlock = cTokenContract.supplyRatePerBlock()
-  let comptrollerAddress = cTokenContract.comptroller()
-  log.info("Comptroller Address in cToken file: {}", [comptrollerAddress.toHex()])
-  log.info("Comp Speed before assigning in cToken file: {} ", [compSpeed.toHexString()])
-  // let comptrollerAddress = cTokenContract.comptroller()
-  // log.info("Comptroller Address: {}", [comptrollerAddress.toHex()])
-  // log.info("Comp Speed before assigning: {} ", [compSpeed.toHexString()])
-  //  --------------------------------------------------------------------------  //
-  // let comptrollerContract = ComptrollerImplementation.bind(Address.fromString("0x3d9819210a31b4961b30ef54be2aed79b9c9cd3b"))
-  // log.info("Comptroller Contract in cTokens address post assigning: {}", [comptrollerContract._address.toHex()])
-  // log.info("CompSpeed in cToken: {}", [comptrollerContract.compSpeeds(cTokenAddress).toBigDecimal().toString()])
-  // cTokenDataEntity.compSpeed = comptrollerContract.compSpeeds(cTokenAddress).toBigDecimal()
-  //  --------------------------------------------------------------------------  //
+      ? convertBINumToDesiredDecimals(cTokenContract.borrowIndex(), 18)
+      : convertBINumToDesiredDecimals(borrowIndex, 18)
+  
+  cTokenDataEntity.totalCash = convertBINumToDesiredDecimals(
+    cTokenContract.getCash(),
+    underlyingTokenDecimals == null
+      ? convertToLowerCase(cTokenContract.symbol()) == 'ceth'
+        ? 18
+        : convertToLowerCase(cTokenContract.symbol()) == 'crep'
+        ? 18
+        : 0
+      : underlyingTokenDecimals,
+  )
 
-  // log.info("Comp Speed after assigning: {} ", [cTokenDataEntity.compSpeed.toString()])
+  cTokenDataEntity.exchangeRate = convertBINumToDesiredDecimals(
+    cTokenContract.exchangeRateStored(),
+    underlyingTokenDecimals == null
+      ? convertToLowerCase(cTokenContract.symbol()) == 'ceth'
+        ? 18 + 10
+        : convertToLowerCase(cTokenContract.symbol()) == 'crep'
+        ? 18 + 10
+        : 0
+      : underlyingTokenDecimals + 10,
+  )
+
+  cTokenDataEntity.borrowRatePerBlock = convertBINumToDesiredDecimals(
+    cTokenContract.borrowRatePerBlock(),
+    18,
+  )
+  cTokenDataEntity.totalReserves = convertBINumToDesiredDecimals(
+    cTokenContract.totalReserves(),
+    18,
+  )
+  cTokenDataEntity.totalSupply = cTokenContract.totalSupply()
+  cTokenDataEntity.supplyRatePerBlock = convertBINumToDesiredDecimals(
+    cTokenContract.supplyRatePerBlock(),
+    18,
+  )
+  
   log.info('Logging Ctoken data into IPFS in Ctoken file', [])
   cTokenDataEntity.save()
-
-  // let compSpeedUpdatedEntity = new CompSpeedUpdated(
-  //   transactionHash.toHex() + "-" + blockNumber.toString()
-  // )
-  // compSpeedUpdatedEntity.cToken = cTokenAddress
-  // compSpeedUpdatedEntity.compSpeed = comptrollerContract.compSpeeds(cTokenAddress).toBigDecimal()
-  // compSpeedUpdatedEntity.save()
 
   //  ----- comptroller stuff ------- //
   // log.info("2nd stage for comptroller in ctoken file",[])
