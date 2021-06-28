@@ -1,4 +1,4 @@
-import { BigInt, log, Address, Bytes } from '@graphprotocol/graph-ts'
+import { BigInt, Address, Bytes } from '@graphprotocol/graph-ts'
 import {
   CompSpeedUpdated as CompSpeedUpdatedEvent,
   ComptrollerImplementation,
@@ -14,7 +14,6 @@ function handleEntity(
   blockNumber: BigInt,
   blockTimestamp: BigInt,
 ): void {
-  log.info('Started saving data in CompSpeedUpdated Entity', [])
   let comptrollerContract = ComptrollerImplementation.bind(comptrollerAddress)
   let compSpeedUpdatedEntity = new CompSpeedUpdated(
     transactionHash.toHex().concat('-').concat(blockNumber.toString()),
@@ -39,7 +38,6 @@ function handleEntity(
 }
 
 export function handleCompSpeedUpdated(event: CompSpeedUpdatedEvent): void {
-  log.info('Comptroller address in event call: {}', [event.address.toHex()])
   handleEntity(
     event.address,
     event.params.cToken,
@@ -64,9 +62,6 @@ export function handleDistributedBorrowerComp(
 export function handleDistributedSupplierComp(
   event: CompSpeedUpdatedEvent,
 ): void {
-  log.info('listening DistSupp event - comptroller addr: ', [
-    event.address.toHex(),
-  ])
   handleEntity(
     event.address,
     event.params.cToken,
@@ -77,7 +72,6 @@ export function handleDistributedSupplierComp(
 }
 
 export function handleMarketEntered(event: CompSpeedUpdatedEvent): void {
-  log.info('listening handle market entered event', [])
   handleEntity(
     event.address,
     event.params.cToken,
@@ -88,7 +82,6 @@ export function handleMarketEntered(event: CompSpeedUpdatedEvent): void {
 }
 
 export function handleMarketExited(event: CompSpeedUpdatedEvent): void {
-  log.info('listening handle market existed event', [])
   handleEntity(
     event.address,
     event.params.cToken,
@@ -99,7 +92,6 @@ export function handleMarketExited(event: CompSpeedUpdatedEvent): void {
 }
 
 export function handleMarketListed(event: CompSpeedUpdatedEvent): void {
-  log.info('listening handle market listed event', [])
   handleEntity(
     event.address,
     event.params.cToken,
@@ -110,7 +102,6 @@ export function handleMarketListed(event: CompSpeedUpdatedEvent): void {
 }
 
 export function handleNewBorrowCap(event: CompSpeedUpdatedEvent): void {
-  log.info('listening handle new borrow cap event', [])
   handleEntity(
     event.address,
     event.params.cToken,
@@ -121,7 +112,6 @@ export function handleNewBorrowCap(event: CompSpeedUpdatedEvent): void {
 }
 
 export function handleNewCollateralFactor(event: CompSpeedUpdatedEvent): void {
-  log.info('listeing handle new collateral factor event', [])
   handleEntity(
     event.address,
     event.params.cToken,
