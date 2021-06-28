@@ -12,8 +12,8 @@ import {
   ReservesReduced as ReservesReducedEvent,
   Transfer as TransferEvent,
 } from '../../generated/CToken/CToken'
-// import { CompSpeedUpdated as CompSpeedUpdatedEvent, ComptrollerImplementation } from "../generated/ComptrollerImplementation/ComptrollerImplementation"
-import { CTokenData } from '../../generated/schema'
+import { ComptrollerImplementation } from "../../generated/Comptroller/ComptrollerImplementation"
+import { CompSpeedUpdated, CTokenData } from '../../generated/schema'
 
 //  Function to add/update the cToken Entity
 function handleEntity(
@@ -25,7 +25,7 @@ function handleEntity(
   blockNumber: BigInt,
   blockTimestamp: BigInt,
 ): void {
-  log.info("coming in handle entity..", [])
+  log.info("coming in ctoken's handle entity..", [])
   let cTokenDataEntity = CTokenData.load(
     transactionHash.toHex() + '-' + blockNumber.toString(),
   )
@@ -57,34 +57,50 @@ function handleEntity(
   cTokenDataEntity.totalSupply = cTokenContract.totalSupply().toBigDecimal()
   cTokenDataEntity.supplyRatePerBlock = cTokenContract.supplyRatePerBlock()
   let comptrollerAddress = cTokenContract.comptroller()
-  log.info("Comptroller Address: {}", [comptrollerAddress.toHex()])
-  log.info("Comp Speed before assigning: {} ", [compSpeed.toHexString()])
-  // let comptrollerImplementationContract = ComptrollerImplementation.bind(Address.fromString("0xbe7616B06f71e363A310Aa8CE8aD99654401ead7"))
-  // cTokenDataEntity.compSpeed = compSpeed == null ? comptrollerImplementationContract.compSpeeds(cTokenAddress).toBigDecimal() : compSpeed.toBigDecimal()
+  log.info("Comptroller Address in cToken file: {}", [comptrollerAddress.toHex()])
+  log.info("Comp Speed before assigning in cToken file: {} ", [compSpeed.toHexString()])
+  // let comptrollerAddress = cTokenContract.comptroller()
+  // log.info("Comptroller Address: {}", [comptrollerAddress.toHex()])
+  // log.info("Comp Speed before assigning: {} ", [compSpeed.toHexString()])
+  //  --------------------------------------------------------------------------  //
+  // let comptrollerContract = ComptrollerImplementation.bind(Address.fromString("0x3d9819210a31b4961b30ef54be2aed79b9c9cd3b"))
+  // log.info("Comptroller Contract in cTokens address post assigning: {}", [comptrollerContract._address.toHex()])
+  // log.info("CompSpeed in cToken: {}", [comptrollerContract.compSpeeds(cTokenAddress).toBigDecimal().toString()])
+  // cTokenDataEntity.compSpeed = comptrollerContract.compSpeeds(cTokenAddress).toBigDecimal()
+  //  --------------------------------------------------------------------------  //
 
   // log.info("Comp Speed after assigning: {} ", [cTokenDataEntity.compSpeed.toString()])
-  log.info('Logging Ctoken data into IPFS', [])
+  log.info('Logging Ctoken data into IPFS in Ctoken file', [])
   cTokenDataEntity.save()
 
-  // let entity = new CompSpeedUpdated(
+  // let compSpeedUpdatedEntity = new CompSpeedUpdated(
   //   transactionHash.toHex() + "-" + blockNumber.toString()
   // )
-  // entity.cToken = cTokenAddress
-  // entity.compSpeed = compSpeed.toBigDecimal()
-  // entity.save()
-}
+  // compSpeedUpdatedEntity.cToken = cTokenAddress
+  // compSpeedUpdatedEntity.compSpeed = comptrollerContract.compSpeeds(cTokenAddress).toBigDecimal()
+  // compSpeedUpdatedEntity.save()
 
-// export function handleCompSpeedUpdated(event: CompSpeedUpdatedEvent): void {
-//   handleEntity(
-//     event.params.cToken,
-//     event.transaction.hash,
-//     null,
-//     null,
-//     event.params.newSpeed,
-//     event.block.number,
-//     event.block.timestamp
-//   )
-// }
+  //  ----- comptroller stuff ------- //
+  // log.info("2nd stage for comptroller in ctoken file",[])
+  // let comptrollerContract = ComptrollerImplementation.bind(comptrollerAddress)
+  // log.info("_comptroller address: {}", [comptrollerContract._address.toHex()])
+  // let compSpeedUpdatedEntity = new CompSpeedUpdated(
+  //   transactionHash.toHex() + "-" + blockNumber.toString()
+  // )
+  // compSpeedUpdatedEntity.cToken = cTokenAddress
+  // if (comptrollerContract.try_compSpeeds(cTokenAddress).reverted) {
+  //   log.info("Reverted: true", [])
+  // } else {
+  //   log.info("Reverted: false", [])
+  // }
+  // comptrollerContract.try_compSpeeds(cTokenAddress).reverted
+  // compSpeedUpdatedEntity.compSpeed = comptrollerContract.try_compSpeeds(cTokenAddress).value
+  // log.info("CompSpeed in ctoken: {}", [comptrollerContract.compSpeeds(cTokenAddress).toString()])
+  // compSpeedUpdatedEntity.blockNumber = blockNumber
+  // compSpeedUpdatedEntity.blockTimestamp = blockTimestamp
+  // compSpeedUpdatedEntity.comptrollerAddress = comptrollerAddress
+  // compSpeedUpdatedEntity.save()
+}
 
 //  changing totalBorrows, borrowIndex, therefore capturing
 export function handleAccrueInterest(event: AccrueInterestEvent): void {
