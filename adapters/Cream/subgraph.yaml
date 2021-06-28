@@ -43,49 +43,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - AccrueInterest
-        - Approval
-        - Borrow
-        - Failure
-        - LiquidateBorrow
-        - Mint
-        - NewAdmin
-        - NewComptroller
-        - NewImplementation
-        - NewMarketInterestRateModel
-        - NewPendingAdmin
-        - NewReserveFactor
-        - Redeem
-        - RepayBorrow
-        - ReservesAdded
-        - ReservesReduced
-        - Transfer
+        - CreamToken
       abis:
         - name: CErc20Delegator
           file: ./abis/CErc20Delegator.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Borrow(address,uint256,uint256,uint256)
           handler: handleBorrow
-        - event: Failure(uint256,uint256,uint256)
-          handler: handleFailure
         - event: LiquidateBorrow(address,address,uint256,address,uint256)
           handler: handleLiquidateBorrow
         - event: Mint(address,uint256,uint256)
           handler: handleMint
-        - event: NewAdmin(address,address)
-          handler: handleNewAdmin
-        - event: NewComptroller(address,address)
-          handler: handleNewComptroller
-        - event: NewImplementation(address,address)
-          handler: handleNewImplementation
-        - event: NewMarketInterestRateModel(address,address)
-          handler: handleNewMarketInterestRateModel
-        - event: NewPendingAdmin(address,address)
-          handler: handleNewPendingAdmin
         - event: NewReserveFactor(uint256,uint256)
           handler: handleNewReserveFactor
         - event: Redeem(address,uint256,uint256)
@@ -111,49 +81,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - AccrueInterest
-        - Approval
-        - Borrow
-        - Failure
-        - LiquidateBorrow
-        - Mint
-        - NewAdmin
-        - NewComptroller
-        - NewImplementation
-        - NewMarketInterestRateModel
-        - NewPendingAdmin
-        - NewReserveFactor
-        - Redeem
-        - RepayBorrow
-        - ReservesAdded
-        - ReservesReduced
-        - Transfer
+        - CreamToken
       abis:
         - name: CErc20Delegator
           file: ./abis/CErc20Delegator.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Borrow(address,uint256,uint256,uint256)
           handler: handleBorrow
-        - event: Failure(uint256,uint256,uint256)
-          handler: handleFailure
         - event: LiquidateBorrow(address,address,uint256,address,uint256)
           handler: handleLiquidateBorrow
         - event: Mint(address,uint256,uint256)
           handler: handleMint
-        - event: NewAdmin(address,address)
-          handler: handleNewAdmin
-        - event: NewComptroller(address,address)
-          handler: handleNewComptroller
-        - event: NewImplementation(address,address)
-          handler: handleNewImplementation
-        - event: NewMarketInterestRateModel(address,address)
-          handler: handleNewMarketInterestRateModel
-        - event: NewPendingAdmin(address,address)
-          handler: handleNewPendingAdmin
         - event: NewReserveFactor(uint256,uint256)
           handler: handleNewReserveFactor
         - event: Redeem(address,uint256,uint256)
@@ -179,49 +119,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - AccrueInterest
-        - Approval
-        - Borrow
-        - Failure
-        - LiquidateBorrow
-        - Mint
-        - NewAdmin
-        - NewComptroller
-        - NewImplementation
-        - NewMarketInterestRateModel
-        - NewPendingAdmin
-        - NewReserveFactor
-        - Redeem
-        - RepayBorrow
-        - ReservesAdded
-        - ReservesReduced
-        - Transfer
+        - CreamToken
       abis:
         - name: CErc20Delegator
           file: ./abis/CErc20Delegator.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Borrow(address,uint256,uint256,uint256)
           handler: handleBorrow
-        - event: Failure(uint256,uint256,uint256)
-          handler: handleFailure
         - event: LiquidateBorrow(address,address,uint256,address,uint256)
           handler: handleLiquidateBorrow
         - event: Mint(address,uint256,uint256)
           handler: handleMint
-        - event: NewAdmin(address,address)
-          handler: handleNewAdmin
-        - event: NewComptroller(address,address)
-          handler: handleNewComptroller
-        - event: NewImplementation(address,address)
-          handler: handleNewImplementation
-        - event: NewMarketInterestRateModel(address,address)
-          handler: handleNewMarketInterestRateModel
-        - event: NewPendingAdmin(address,address)
-          handler: handleNewPendingAdmin
         - event: NewReserveFactor(uint256,uint256)
           handler: handleNewReserveFactor
         - event: Redeem(address,uint256,uint256)
@@ -247,49 +157,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - AccrueInterest
-        - Approval
-        - Borrow
-        - Failure
-        - LiquidateBorrow
-        - Mint
-        - NewAdmin
-        - NewComptroller
-        - NewImplementation
-        - NewMarketInterestRateModel
-        - NewPendingAdmin
-        - NewReserveFactor
-        - Redeem
-        - RepayBorrow
-        - ReservesAdded
-        - ReservesReduced
-        - Transfer
+        - CreamToken
       abis:
         - name: CErc20Delegator
           file: ./abis/CErc20Delegator.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Borrow(address,uint256,uint256,uint256)
           handler: handleBorrow
-        - event: Failure(uint256,uint256,uint256)
-          handler: handleFailure
         - event: LiquidateBorrow(address,address,uint256,address,uint256)
           handler: handleLiquidateBorrow
         - event: Mint(address,uint256,uint256)
           handler: handleMint
-        - event: NewAdmin(address,address)
-          handler: handleNewAdmin
-        - event: NewComptroller(address,address)
-          handler: handleNewComptroller
-        - event: NewImplementation(address,address)
-          handler: handleNewImplementation
-        - event: NewMarketInterestRateModel(address,address)
-          handler: handleNewMarketInterestRateModel
-        - event: NewPendingAdmin(address,address)
-          handler: handleNewPendingAdmin
         - event: NewReserveFactor(uint256,uint256)
           handler: handleNewReserveFactor
         - event: Redeem(address,uint256,uint256)
@@ -315,49 +195,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - AccrueInterest
-        - Approval
-        - Borrow
-        - Failure
-        - LiquidateBorrow
-        - Mint
-        - NewAdmin
-        - NewComptroller
-        - NewImplementation
-        - NewMarketInterestRateModel
-        - NewPendingAdmin
-        - NewReserveFactor
-        - Redeem
-        - RepayBorrow
-        - ReservesAdded
-        - ReservesReduced
-        - Transfer
+        - CreamToken
       abis:
         - name: CErc20Delegator
           file: ./abis/CErc20Delegator.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Borrow(address,uint256,uint256,uint256)
           handler: handleBorrow
-        - event: Failure(uint256,uint256,uint256)
-          handler: handleFailure
         - event: LiquidateBorrow(address,address,uint256,address,uint256)
           handler: handleLiquidateBorrow
         - event: Mint(address,uint256,uint256)
           handler: handleMint
-        - event: NewAdmin(address,address)
-          handler: handleNewAdmin
-        - event: NewComptroller(address,address)
-          handler: handleNewComptroller
-        - event: NewImplementation(address,address)
-          handler: handleNewImplementation
-        - event: NewMarketInterestRateModel(address,address)
-          handler: handleNewMarketInterestRateModel
-        - event: NewPendingAdmin(address,address)
-          handler: handleNewPendingAdmin
         - event: NewReserveFactor(uint256,uint256)
           handler: handleNewReserveFactor
         - event: Redeem(address,uint256,uint256)
@@ -383,49 +233,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - AccrueInterest
-        - Approval
-        - Borrow
-        - Failure
-        - LiquidateBorrow
-        - Mint
-        - NewAdmin
-        - NewComptroller
-        - NewImplementation
-        - NewMarketInterestRateModel
-        - NewPendingAdmin
-        - NewReserveFactor
-        - Redeem
-        - RepayBorrow
-        - ReservesAdded
-        - ReservesReduced
-        - Transfer
+        - CreamToken
       abis:
         - name: CErc20Delegator
           file: ./abis/CErc20Delegator.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Borrow(address,uint256,uint256,uint256)
           handler: handleBorrow
-        - event: Failure(uint256,uint256,uint256)
-          handler: handleFailure
         - event: LiquidateBorrow(address,address,uint256,address,uint256)
           handler: handleLiquidateBorrow
         - event: Mint(address,uint256,uint256)
           handler: handleMint
-        - event: NewAdmin(address,address)
-          handler: handleNewAdmin
-        - event: NewComptroller(address,address)
-          handler: handleNewComptroller
-        - event: NewImplementation(address,address)
-          handler: handleNewImplementation
-        - event: NewMarketInterestRateModel(address,address)
-          handler: handleNewMarketInterestRateModel
-        - event: NewPendingAdmin(address,address)
-          handler: handleNewPendingAdmin
         - event: NewReserveFactor(uint256,uint256)
           handler: handleNewReserveFactor
         - event: Redeem(address,uint256,uint256)
@@ -451,49 +271,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - AccrueInterest
-        - Approval
-        - Borrow
-        - Failure
-        - LiquidateBorrow
-        - Mint
-        - NewAdmin
-        - NewComptroller
-        - NewImplementation
-        - NewMarketInterestRateModel
-        - NewPendingAdmin
-        - NewReserveFactor
-        - Redeem
-        - RepayBorrow
-        - ReservesAdded
-        - ReservesReduced
-        - Transfer
+        - CreamToken
       abis:
         - name: CErc20Delegator
           file: ./abis/CErc20Delegator.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Borrow(address,uint256,uint256,uint256)
           handler: handleBorrow
-        - event: Failure(uint256,uint256,uint256)
-          handler: handleFailure
         - event: LiquidateBorrow(address,address,uint256,address,uint256)
           handler: handleLiquidateBorrow
         - event: Mint(address,uint256,uint256)
           handler: handleMint
-        - event: NewAdmin(address,address)
-          handler: handleNewAdmin
-        - event: NewComptroller(address,address)
-          handler: handleNewComptroller
-        - event: NewImplementation(address,address)
-          handler: handleNewImplementation
-        - event: NewMarketInterestRateModel(address,address)
-          handler: handleNewMarketInterestRateModel
-        - event: NewPendingAdmin(address,address)
-          handler: handleNewPendingAdmin
         - event: NewReserveFactor(uint256,uint256)
           handler: handleNewReserveFactor
         - event: Redeem(address,uint256,uint256)
@@ -519,49 +309,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - AccrueInterest
-        - Approval
-        - Borrow
-        - Failure
-        - LiquidateBorrow
-        - Mint
-        - NewAdmin
-        - NewComptroller
-        - NewImplementation
-        - NewMarketInterestRateModel
-        - NewPendingAdmin
-        - NewReserveFactor
-        - Redeem
-        - RepayBorrow
-        - ReservesAdded
-        - ReservesReduced
-        - Transfer
+        - CreamToken
       abis:
         - name: CErc20Delegator
           file: ./abis/CErc20Delegator.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Borrow(address,uint256,uint256,uint256)
           handler: handleBorrow
-        - event: Failure(uint256,uint256,uint256)
-          handler: handleFailure
         - event: LiquidateBorrow(address,address,uint256,address,uint256)
           handler: handleLiquidateBorrow
         - event: Mint(address,uint256,uint256)
           handler: handleMint
-        - event: NewAdmin(address,address)
-          handler: handleNewAdmin
-        - event: NewComptroller(address,address)
-          handler: handleNewComptroller
-        - event: NewImplementation(address,address)
-          handler: handleNewImplementation
-        - event: NewMarketInterestRateModel(address,address)
-          handler: handleNewMarketInterestRateModel
-        - event: NewPendingAdmin(address,address)
-          handler: handleNewPendingAdmin
         - event: NewReserveFactor(uint256,uint256)
           handler: handleNewReserveFactor
         - event: Redeem(address,uint256,uint256)
@@ -587,49 +347,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - AccrueInterest
-        - Approval
-        - Borrow
-        - Failure
-        - LiquidateBorrow
-        - Mint
-        - NewAdmin
-        - NewComptroller
-        - NewImplementation
-        - NewMarketInterestRateModel
-        - NewPendingAdmin
-        - NewReserveFactor
-        - Redeem
-        - RepayBorrow
-        - ReservesAdded
-        - ReservesReduced
-        - Transfer
+        - CreamToken
       abis:
         - name: CErc20Delegator
           file: ./abis/CErc20Delegator.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Borrow(address,uint256,uint256,uint256)
           handler: handleBorrow
-        - event: Failure(uint256,uint256,uint256)
-          handler: handleFailure
         - event: LiquidateBorrow(address,address,uint256,address,uint256)
           handler: handleLiquidateBorrow
         - event: Mint(address,uint256,uint256)
           handler: handleMint
-        - event: NewAdmin(address,address)
-          handler: handleNewAdmin
-        - event: NewComptroller(address,address)
-          handler: handleNewComptroller
-        - event: NewImplementation(address,address)
-          handler: handleNewImplementation
-        - event: NewMarketInterestRateModel(address,address)
-          handler: handleNewMarketInterestRateModel
-        - event: NewPendingAdmin(address,address)
-          handler: handleNewPendingAdmin
         - event: NewReserveFactor(uint256,uint256)
           handler: handleNewReserveFactor
         - event: Redeem(address,uint256,uint256)
@@ -655,49 +385,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - AccrueInterest
-        - Approval
-        - Borrow
-        - Failure
-        - LiquidateBorrow
-        - Mint
-        - NewAdmin
-        - NewComptroller
-        - NewImplementation
-        - NewMarketInterestRateModel
-        - NewPendingAdmin
-        - NewReserveFactor
-        - Redeem
-        - RepayBorrow
-        - ReservesAdded
-        - ReservesReduced
-        - Transfer
+        - CreamToken
       abis:
         - name: CErc20Delegator
           file: ./abis/CErc20Delegator.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Borrow(address,uint256,uint256,uint256)
           handler: handleBorrow
-        - event: Failure(uint256,uint256,uint256)
-          handler: handleFailure
         - event: LiquidateBorrow(address,address,uint256,address,uint256)
           handler: handleLiquidateBorrow
         - event: Mint(address,uint256,uint256)
           handler: handleMint
-        - event: NewAdmin(address,address)
-          handler: handleNewAdmin
-        - event: NewComptroller(address,address)
-          handler: handleNewComptroller
-        - event: NewImplementation(address,address)
-          handler: handleNewImplementation
-        - event: NewMarketInterestRateModel(address,address)
-          handler: handleNewMarketInterestRateModel
-        - event: NewPendingAdmin(address,address)
-          handler: handleNewPendingAdmin
         - event: NewReserveFactor(uint256,uint256)
           handler: handleNewReserveFactor
         - event: Redeem(address,uint256,uint256)
@@ -723,49 +423,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - AccrueInterest
-        - Approval
-        - Borrow
-        - Failure
-        - LiquidateBorrow
-        - Mint
-        - NewAdmin
-        - NewComptroller
-        - NewImplementation
-        - NewMarketInterestRateModel
-        - NewPendingAdmin
-        - NewReserveFactor
-        - Redeem
-        - RepayBorrow
-        - ReservesAdded
-        - ReservesReduced
-        - Transfer
+        - CreamToken
       abis:
         - name: CErc20Delegator
           file: ./abis/CErc20Delegator.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Borrow(address,uint256,uint256,uint256)
           handler: handleBorrow
-        - event: Failure(uint256,uint256,uint256)
-          handler: handleFailure
         - event: LiquidateBorrow(address,address,uint256,address,uint256)
           handler: handleLiquidateBorrow
         - event: Mint(address,uint256,uint256)
           handler: handleMint
-        - event: NewAdmin(address,address)
-          handler: handleNewAdmin
-        - event: NewComptroller(address,address)
-          handler: handleNewComptroller
-        - event: NewImplementation(address,address)
-          handler: handleNewImplementation
-        - event: NewMarketInterestRateModel(address,address)
-          handler: handleNewMarketInterestRateModel
-        - event: NewPendingAdmin(address,address)
-          handler: handleNewPendingAdmin
         - event: NewReserveFactor(uint256,uint256)
           handler: handleNewReserveFactor
         - event: Redeem(address,uint256,uint256)
@@ -791,49 +461,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - AccrueInterest
-        - Approval
-        - Borrow
-        - Failure
-        - LiquidateBorrow
-        - Mint
-        - NewAdmin
-        - NewComptroller
-        - NewImplementation
-        - NewMarketInterestRateModel
-        - NewPendingAdmin
-        - NewReserveFactor
-        - Redeem
-        - RepayBorrow
-        - ReservesAdded
-        - ReservesReduced
-        - Transfer
+        - CreamToken
       abis:
         - name: CErc20Delegator
           file: ./abis/CErc20Delegator.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Borrow(address,uint256,uint256,uint256)
           handler: handleBorrow
-        - event: Failure(uint256,uint256,uint256)
-          handler: handleFailure
         - event: LiquidateBorrow(address,address,uint256,address,uint256)
           handler: handleLiquidateBorrow
         - event: Mint(address,uint256,uint256)
           handler: handleMint
-        - event: NewAdmin(address,address)
-          handler: handleNewAdmin
-        - event: NewComptroller(address,address)
-          handler: handleNewComptroller
-        - event: NewImplementation(address,address)
-          handler: handleNewImplementation
-        - event: NewMarketInterestRateModel(address,address)
-          handler: handleNewMarketInterestRateModel
-        - event: NewPendingAdmin(address,address)
-          handler: handleNewPendingAdmin
         - event: NewReserveFactor(uint256,uint256)
           handler: handleNewReserveFactor
         - event: Redeem(address,uint256,uint256)
@@ -859,49 +499,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - AccrueInterest
-        - Approval
-        - Borrow
-        - Failure
-        - LiquidateBorrow
-        - Mint
-        - NewAdmin
-        - NewComptroller
-        - NewImplementation
-        - NewMarketInterestRateModel
-        - NewPendingAdmin
-        - NewReserveFactor
-        - Redeem
-        - RepayBorrow
-        - ReservesAdded
-        - ReservesReduced
-        - Transfer
+        - CreamToken
       abis:
         - name: CErc20Delegator
           file: ./abis/CErc20Delegator.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Borrow(address,uint256,uint256,uint256)
           handler: handleBorrow
-        - event: Failure(uint256,uint256,uint256)
-          handler: handleFailure
         - event: LiquidateBorrow(address,address,uint256,address,uint256)
           handler: handleLiquidateBorrow
         - event: Mint(address,uint256,uint256)
           handler: handleMint
-        - event: NewAdmin(address,address)
-          handler: handleNewAdmin
-        - event: NewComptroller(address,address)
-          handler: handleNewComptroller
-        - event: NewImplementation(address,address)
-          handler: handleNewImplementation
-        - event: NewMarketInterestRateModel(address,address)
-          handler: handleNewMarketInterestRateModel
-        - event: NewPendingAdmin(address,address)
-          handler: handleNewPendingAdmin
         - event: NewReserveFactor(uint256,uint256)
           handler: handleNewReserveFactor
         - event: Redeem(address,uint256,uint256)

@@ -1,210 +1,229 @@
+import { BigInt, log, Address, Bytes } from "@graphprotocol/graph-ts";
 import {
+  CErc20Delegator,
   AccrueInterest as AccrueInterestEvent,
-  Approval as ApprovalEvent,
   Borrow as BorrowEvent,
-  Failure as FailureEvent,
   LiquidateBorrow as LiquidateBorrowEvent,
   Mint as MintEvent,
-  NewAdmin as NewAdminEvent,
-  NewComptroller as NewComptrollerEvent,
-  NewImplementation as NewImplementationEvent,
-  NewMarketInterestRateModel as NewMarketInterestRateModelEvent,
-  NewPendingAdmin as NewPendingAdminEvent,
   NewReserveFactor as NewReserveFactorEvent,
   Redeem as RedeemEvent,
   RepayBorrow as RepayBorrowEvent,
   ReservesAdded as ReservesAddedEvent,
   ReservesReduced as ReservesReducedEvent,
   Transfer as TransferEvent
-} from "./CErc20Delegator"
-import {
-  AccrueInterest,
-  Approval,
-  Borrow,
-  Failure,
-  LiquidateBorrow,
-  Mint,
-  NewAdmin,
-  NewComptroller,
-  NewImplementation,
-  NewMarketInterestRateModel,
-  NewPendingAdmin,
-  NewReserveFactor,
-  Redeem,
-  RepayBorrow,
-  ReservesAdded,
-  ReservesReduced,
-  Transfer
-} from "../generated/schema"
+} from "./CErc20Delegator";
+import { CreamToken } from "../generated/schema";
+import { exponentToBigDecimal, convertBINumToDesiredDecimals } from "./converters";
 
-export function handleAccrueInterest(event: AccrueInterestEvent): void {
-  let entity = new AccrueInterest(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.cashPrior = event.params.cashPrior
-  entity.interestAccumulated = event.params.interestAccumulated
-  entity.borrowIndex = event.params.borrowIndex
-  entity.totalBorrows = event.params.totalBorrows
-  entity.save()
+function handleCreamToken(
+  logIndex: BigInt,
+  transactionHash: Bytes,
+  blockNumber: BigInt,
+  blockTimestamp: BigInt,
+  address: Address,
+  totalBorrows: BigInt,
+  totalReserves: BigInt,
+): void {
+  let tokenContract = CErc20Delegator.bind(address);
+
+  let entity = CreamToken.load(`${transactionHash.toHex()}-${logIndex.toString()}`);
+  if (entity == null) {
+    entity = new CreamToken(`${transactionHash.toHex()}-${blockNumber.toString()}`);
+  }
+
+  entity.transactionHash = transactionHash;
+  entity.blockNumber = blockNumber;
+  entity.blockTimestamp = blockTimestamp;
+  entity.address = address.toHex();
+
+  let symb = tokenContract.try_symbol();
+  if (symb.reverted) log.error("symbol() reverted", []);
+  else entity.symbol = symb.value;
+
+  log.debug("Saving Cream Token {} of logIndex {} at address {} in block {} with txHash {}", [
+    symb.value,
+    logIndex.toString(),
+    address.toHex(),
+    blockNumber.toString(),
+    transactionHash.toHex(),
+  ]);
+
+  let tried_borrowRatePerBlock = tokenContract.try_borrowRatePerBlock();
+  if (tried_borrowRatePerBlock.reverted) log.error("borrowRatePerBlock() reverted", []);
+  else entity.borrowRatePerBlock = (
+    convertBINumToDesiredDecimals(tried_borrowRatePerBlock.value, 18)
+    .div(exponentToBigDecimal(18))
+  );
+
+  let tried_supplyRatePerBlock = tokenContract.try_supplyRatePerBlock();
+  if (tried_supplyRatePerBlock.reverted) log.error("supplyRatePerBlock() reverted", []);
+  else entity.supplyRatePerBlock = (
+    convertBINumToDesiredDecimals(tried_supplyRatePerBlock.value, 18)
+    .div(exponentToBigDecimal(18))
+  );
+  
+  let tried_exchangeRateStored = tokenContract.try_exchangeRateStored();
+  if (tried_exchangeRateStored.reverted) log.error("exchangeRateStored() reverted", []);
+  else entity.exchangeRateStored = (
+    convertBINumToDesiredDecimals(tried_exchangeRateStored.value, 10 + tokenContract.decimals())
+    .div(exponentToBigDecimal(10 + tokenContract.decimals()))
+  );
+
+  let tried_getCash = tokenContract.try_getCash();
+  if (tried_getCash.reverted) log.error("getCash() reverted", []);
+  else entity.totalCash = (
+    convertBINumToDesiredDecimals(tried_getCash.value, tokenContract.decimals())
+    .div(exponentToBigDecimal(18))
+  );
+
+  let tried_totalSupply = tokenContract.try_totalSupply();
+  if (tried_totalSupply.reverted) log.error("totalSupply() reverted", []);
+  else entity.totalSupply = (
+    convertBINumToDesiredDecimals(tried_totalSupply.value, tokenContract.decimals())
+    .div(exponentToBigDecimal(18))
+  );
+
+  if (totalBorrows) {
+    entity.totalBorrows = totalBorrows.toBigDecimal();
+  } else {
+    let tried_totalBorrows = tokenContract.try_totalBorrows();
+    if (tried_totalBorrows.reverted) log.error("totalBorrows() reverted", []);
+    else entity.totalBorrows = (
+      convertBINumToDesiredDecimals(tried_totalBorrows.value, tokenContract.decimals())
+      .div(exponentToBigDecimal(18))
+    );
+  }
+
+  if (totalReserves) {
+    entity.totalReserves = totalReserves.toBigDecimal();
+  } else {
+    let tried_totalReserves = tokenContract.try_totalReserves();
+    if (tried_totalReserves.reverted) log.error("totalReserves() reverted", []);
+    else entity.totalReserves = (
+      convertBINumToDesiredDecimals(tried_totalReserves.value, tokenContract.decimals())
+      .div(exponentToBigDecimal(18))
+    );
+  }
+  
+  entity.save();
 }
 
-export function handleApproval(event: ApprovalEvent): void {
-  let entity = new Approval(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.owner = event.params.owner
-  entity.spender = event.params.spender
-  entity.amount = event.params.amount
-  entity.save()
+export function handleAccrueInterest(event: AccrueInterestEvent): void {
+  handleCreamToken(
+    event.logIndex,
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+    event.address,
+    event.params.totalBorrows,
+    null, // totalReserves
+  );
 }
 
 export function handleBorrow(event: BorrowEvent): void {
-  let entity = new Borrow(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.borrower = event.params.borrower
-  entity.borrowAmount = event.params.borrowAmount
-  entity.accountBorrows = event.params.accountBorrows
-  entity.totalBorrows = event.params.totalBorrows
-  entity.save()
-}
-
-export function handleFailure(event: FailureEvent): void {
-  let entity = new Failure(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.error = event.params.error
-  entity.info = event.params.info
-  entity.detail = event.params.detail
-  entity.save()
+  handleCreamToken(
+    event.logIndex,
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+    event.address,
+    event.params.totalBorrows,
+    null, // totalReserves
+  );
 }
 
 export function handleLiquidateBorrow(event: LiquidateBorrowEvent): void {
-  let entity = new LiquidateBorrow(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.liquidator = event.params.liquidator
-  entity.borrower = event.params.borrower
-  entity.repayAmount = event.params.repayAmount
-  entity.cTokenCollateral = event.params.cTokenCollateral
-  entity.seizeTokens = event.params.seizeTokens
-  entity.save()
+  handleCreamToken(
+    event.logIndex,
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+    event.address,
+    null, // totalBorrows
+    null, // totalReserves
+  );
 }
 
 export function handleMint(event: MintEvent): void {
-  let entity = new Mint(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.minter = event.params.minter
-  entity.mintAmount = event.params.mintAmount
-  entity.mintTokens = event.params.mintTokens
-  entity.save()
-}
-
-export function handleNewAdmin(event: NewAdminEvent): void {
-  let entity = new NewAdmin(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.oldAdmin = event.params.oldAdmin
-  entity.newAdmin = event.params.newAdmin
-  entity.save()
-}
-
-export function handleNewComptroller(event: NewComptrollerEvent): void {
-  let entity = new NewComptroller(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.oldComptroller = event.params.oldComptroller
-  entity.newComptroller = event.params.newComptroller
-  entity.save()
-}
-
-export function handleNewImplementation(event: NewImplementationEvent): void {
-  let entity = new NewImplementation(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.oldImplementation = event.params.oldImplementation
-  entity.newImplementation = event.params.newImplementation
-  entity.save()
-}
-
-export function handleNewMarketInterestRateModel(
-  event: NewMarketInterestRateModelEvent
-): void {
-  let entity = new NewMarketInterestRateModel(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.oldInterestRateModel = event.params.oldInterestRateModel
-  entity.newInterestRateModel = event.params.newInterestRateModel
-  entity.save()
-}
-
-export function handleNewPendingAdmin(event: NewPendingAdminEvent): void {
-  let entity = new NewPendingAdmin(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.oldPendingAdmin = event.params.oldPendingAdmin
-  entity.newPendingAdmin = event.params.newPendingAdmin
-  entity.save()
+  handleCreamToken(
+    event.logIndex,
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+    event.address,
+    null, // totalBorrows
+    null, // totalReserves
+  );
 }
 
 export function handleNewReserveFactor(event: NewReserveFactorEvent): void {
-  let entity = new NewReserveFactor(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.oldReserveFactorMantissa = event.params.oldReserveFactorMantissa
-  entity.newReserveFactorMantissa = event.params.newReserveFactorMantissa
-  entity.save()
+  handleCreamToken(
+    event.logIndex,
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+    event.address,
+    null, // totalBorrows
+    null, // totalReserves
+  );
 }
 
 export function handleRedeem(event: RedeemEvent): void {
-  let entity = new Redeem(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.redeemer = event.params.redeemer
-  entity.redeemAmount = event.params.redeemAmount
-  entity.redeemTokens = event.params.redeemTokens
-  entity.save()
+  handleCreamToken(
+    event.logIndex,
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+    event.address,
+    null, // totalBorrows
+    null, // totalReserves
+  );
 }
 
 export function handleRepayBorrow(event: RepayBorrowEvent): void {
-  let entity = new RepayBorrow(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.payer = event.params.payer
-  entity.borrower = event.params.borrower
-  entity.repayAmount = event.params.repayAmount
-  entity.accountBorrows = event.params.accountBorrows
-  entity.totalBorrows = event.params.totalBorrows
-  entity.save()
+  handleCreamToken(
+    event.logIndex,
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+    event.address,
+    event.params.totalBorrows,
+    null, // totalReserves
+  );
 }
 
 export function handleReservesAdded(event: ReservesAddedEvent): void {
-  let entity = new ReservesAdded(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.benefactor = event.params.benefactor
-  entity.addAmount = event.params.addAmount
-  entity.newTotalReserves = event.params.newTotalReserves
-  entity.save()
+  handleCreamToken(
+    event.logIndex,
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+    event.address,
+    null, // totalBorrows
+    event.params.newTotalReserves,
+  );
 }
 
 export function handleReservesReduced(event: ReservesReducedEvent): void {
-  let entity = new ReservesReduced(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.admin = event.params.admin
-  entity.reduceAmount = event.params.reduceAmount
-  entity.newTotalReserves = event.params.newTotalReserves
-  entity.save()
+  handleCreamToken(
+    event.logIndex,
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+    event.address,
+    null, // totalBorrows
+    event.params.newTotalReserves,
+  );
 }
 
 export function handleTransfer(event: TransferEvent): void {
-  let entity = new Transfer(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.from = event.params.from
-  entity.to = event.params.to
-  entity.amount = event.params.amount
-  entity.save()
+  handleCreamToken(
+    event.logIndex,
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+    event.address,
+    null, // totalBorrows
+    null, // totalReserves
+  );
 }
