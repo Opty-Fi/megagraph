@@ -39,7 +39,9 @@ function handleEntity(
     )
   }
   let cTokenContract = CToken.bind(cTokenAddress)
-  let cTokenDecimals = cTokenContract.decimals()
+  let cTokenDecimals = cTokenContract.try_decimals().reverted
+    ? null
+    : cTokenContract.decimals()
   let underlyingTokenAddress = cTokenContract.try_underlying()
   let underlyingTokenDecimals = null
   if (!underlyingTokenAddress.reverted) {
@@ -58,28 +60,32 @@ function handleEntity(
     cTokenDecimals.toString(),
   ])
   cTokenDataEntity.blockNumber = blockNumber
-  cTokenDataEntity.blockTimestamp = BigInt.fromI32(blockTimestamp.toI32())
-  cTokenDataEntity.cTokenAddress = cTokenAddress.toHexString()
-  cTokenDataEntity.cTokenSymbol = cTokenContract.symbol()
-
+  cTokenDataEntity.blockTimestamp = blockTimestamp
+  cTokenDataEntity.cTokenAddress = cTokenAddress
+  cTokenDataEntity.cTokenSymbol = cTokenContract.try_symbol().reverted
+    ? null
+    : cTokenContract.symbol()
+  log.info('Logging symbol before saving: {}', [cTokenDataEntity.cTokenSymbol])
   cTokenDataEntity.totalBorrows =
     totalBorrows == null
-      ? convertBINumToDesiredDecimals(
-          cTokenContract.totalBorrows(),
-          underlyingTokenDecimals == null
-            ? convertToLowerCase(cTokenContract.symbol()) == 'ceth'
-              ? 18
-              : convertToLowerCase(cTokenContract.symbol()) == 'crep'
-              ? 18
-              : 0
-            : underlyingTokenDecimals,
-        )
+      ? cTokenContract.try_totalBorrows().reverted
+        ? null
+        : convertBINumToDesiredDecimals(
+            cTokenContract.totalBorrows(),
+            underlyingTokenDecimals == null
+              ? convertToLowerCase(cTokenDataEntity.cTokenSymbol) == 'ceth'
+                ? 18
+                : convertToLowerCase(cTokenDataEntity.cTokenSymbol) == 'crep'
+                ? 18
+                : 0
+              : underlyingTokenDecimals,
+          )
       : convertBINumToDesiredDecimals(
           totalBorrows,
           underlyingTokenDecimals == null
-            ? convertToLowerCase(cTokenContract.symbol()) == 'ceth'
+            ? convertToLowerCase(cTokenDataEntity.cTokenSymbol) == 'ceth'
               ? 18
-              : convertToLowerCase(cTokenContract.symbol()) == 'crep'
+              : convertToLowerCase(cTokenDataEntity.cTokenSymbol) == 'crep'
               ? 18
               : 0
             : underlyingTokenDecimals,
@@ -87,45 +93,53 @@ function handleEntity(
 
   cTokenDataEntity.borrowIndex =
     borrowIndex == null
-      ? convertBINumToDesiredDecimals(cTokenContract.borrowIndex(), 18)
+      ? cTokenContract.try_borrowIndex().reverted
+        ? null
+        : convertBINumToDesiredDecimals(cTokenContract.borrowIndex(), 18)
       : convertBINumToDesiredDecimals(borrowIndex, 18)
-  
-  cTokenDataEntity.totalCash = convertBINumToDesiredDecimals(
-    cTokenContract.getCash(),
-    underlyingTokenDecimals == null
-      ? convertToLowerCase(cTokenContract.symbol()) == 'ceth'
-        ? 18
-        : convertToLowerCase(cTokenContract.symbol()) == 'crep'
-        ? 18
-        : 0
-      : underlyingTokenDecimals,
-  )
 
-  cTokenDataEntity.exchangeRate = convertBINumToDesiredDecimals(
-    cTokenContract.exchangeRateStored(),
-    underlyingTokenDecimals == null
-      ? convertToLowerCase(cTokenContract.symbol()) == 'ceth'
-        ? 18 + 10
-        : convertToLowerCase(cTokenContract.symbol()) == 'crep'
-        ? 18 + 10
-        : 0
-      : underlyingTokenDecimals + 10,
-  )
+  cTokenDataEntity.totalCash = cTokenContract.try_getCash().reverted
+    ? null
+    : convertBINumToDesiredDecimals(
+        cTokenContract.getCash(),
+        underlyingTokenDecimals == null
+          ? convertToLowerCase(cTokenDataEntity.cTokenSymbol) == 'ceth'
+            ? 18
+            : convertToLowerCase(cTokenDataEntity.cTokenSymbol) == 'crep'
+            ? 18
+            : 0
+          : underlyingTokenDecimals,
+      )
 
-  cTokenDataEntity.borrowRatePerBlock = convertBINumToDesiredDecimals(
-    cTokenContract.borrowRatePerBlock(),
-    18,
-  )
-  cTokenDataEntity.totalReserves = convertBINumToDesiredDecimals(
-    cTokenContract.totalReserves(),
-    18,
-  )
-  cTokenDataEntity.totalSupply = cTokenContract.totalSupply()
-  cTokenDataEntity.supplyRatePerBlock = convertBINumToDesiredDecimals(
-    cTokenContract.supplyRatePerBlock(),
-    18,
-  )
-  
+  cTokenDataEntity.exchangeRate = cTokenContract.try_exchangeRateStored()
+    .reverted
+    ? null
+    : convertBINumToDesiredDecimals(
+        cTokenContract.exchangeRateStored(),
+        underlyingTokenDecimals == null
+          ? convertToLowerCase(cTokenDataEntity.cTokenSymbol) == 'ceth'
+            ? 18 + 10
+            : convertToLowerCase(cTokenDataEntity.cTokenSymbol) == 'crep'
+            ? 18 + 10
+            : 0
+          : underlyingTokenDecimals + 10,
+      )
+
+  cTokenDataEntity.borrowRatePerBlock = cTokenContract.try_borrowRatePerBlock()
+    .reverted
+    ? null
+    : convertBINumToDesiredDecimals(cTokenContract.borrowRatePerBlock(), 18)
+  cTokenDataEntity.totalReserves = cTokenContract.try_totalReserves().reverted
+    ? null
+    : convertBINumToDesiredDecimals(cTokenContract.totalReserves(), 18)
+  cTokenDataEntity.totalSupply = cTokenContract.try_totalSupply().reverted
+    ? null
+    : cTokenContract.totalSupply()
+  cTokenDataEntity.supplyRatePerBlock = cTokenContract.try_supplyRatePerBlock()
+    .reverted
+    ? null
+    : convertBINumToDesiredDecimals(cTokenContract.supplyRatePerBlock(), 18)
+
   log.info('Logging Ctoken data into IPFS in Ctoken file', [])
   cTokenDataEntity.save()
 

@@ -20,10 +20,14 @@ function handleEntity(
     transactionHash.toHex().concat('-').concat(blockNumber.toString()),
   )
   compSpeedUpdatedEntity.cToken = cTokenAddress
-  compSpeedUpdatedEntity.compSpeed = convertBINumToDesiredDecimals(
-    comptrollerContract.compSpeeds(cTokenAddress),
-    18,
-  )
+  compSpeedUpdatedEntity.compSpeed = comptrollerContract.try_compSpeeds(
+    cTokenAddress,
+  ).reverted
+    ? null
+    : convertBINumToDesiredDecimals(
+        comptrollerContract.compSpeeds(cTokenAddress),
+        18,
+      )
   compSpeedUpdatedEntity.blockNumber = blockNumber
   compSpeedUpdatedEntity.blockTimestamp = blockTimestamp
   // linking cTokenData with the compSpeed entity to get the compSpeed
