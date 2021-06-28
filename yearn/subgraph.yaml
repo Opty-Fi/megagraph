@@ -1,0 +1,211 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: yearn_SUSD
+    network: mainnet
+    source:
+      address: "0xf61718057901f84c4eec4339ef8f0d86d2b45600"
+      abi: yearn_SUSD
+      startBlock: 9465292
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - PricePerFullShare
+        - Balance
+      abis:
+        - name: yearn_SUSD
+          file: ./abis/yearn_SUSD.json
+      callHandlers:
+        - function: deposit(uint256)
+          handler: handleDeposit
+        - function: withdraw(uint256)
+          handler: handleWithdraw
+      file: ./src/mapping/susd.ts
+  - kind: ethereum/contract
+    name: yearn_yaLINK
+    network: mainnet
+    source:
+      address: "0x29E240CFD7946BA20895a7a02eDb25C210f9f324"
+      abi: yearn_yaLINK
+      startBlock: 10599617
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - PricePerFullShare
+        - Balance
+      abis:
+        - name: yearn_yaLINK
+          file: ./abis/yearn_yaLINK.json
+      callHandlers:
+        - function: deposit(uint256)
+          handler: handleDeposit
+        - function: withdraw(uint256)
+          handler: handleWithdraw
+      file: ./src/mapping/ya_link.ts
+  - kind: ethereum/contract
+    name: yearn_y3Crv
+    network: mainnet
+    source:
+      address: "0x9cA85572E6A3EbF24dEDd195623F188735A5179f"
+      abi: yearn_y3Crv
+      startBlock: 11026971	
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - PricePerFullShare
+        - Balance
+      abis:
+        - name: yearn_y3Crv
+          file: ./abis/yearn_y3Crv.json
+      callHandlers:
+        - function: deposit(uint256)
+          handler: handleDeposit
+        - function: withdraw(uint256)
+          handler: handleWithdraw
+      file: ./src/mapping/yearn_y3Crv.ts
+  - kind: ethereum/contract
+    name: yearn_yBUSD
+    network: mainnet
+    source:
+      address: "0x04bc0ab673d88ae9dbc9da2380cb6b79c4bca9ae"
+      abi: yearn_yBUSD
+      startBlock: 9564411	
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - PricePerFullShare
+        - Balance
+      abis:
+        - name: yearn_yBUSD
+          file: ./abis/yearn_yBUSD.json
+      callHandlers:
+        - function: deposit(uint256)
+          handler: handleDeposit
+        - function: withdraw(uint256)
+          handler: handleWithdraw
+      file: ./src/mapping/ybusd.ts
+  - kind: ethereum/contract
+    name: yearn_ycrvRenWSBTC
+    network: mainnet
+    source:
+      address: "0x7Ff566E1d69DEfF32a7b244aE7276b9f90e9D0f6"
+      abi: yearn_ycrvRenWSBTC
+      startBlock: 10734341
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - PricePerFullShare
+        - Balance
+      abis:
+        - name: yearn_ycrvRenWSBTC
+          file: ./abis/yearn_ycrvRenWSBTC.json
+      callHandlers:
+        - function: deposit(uint256)
+          handler: handleDeposit
+        - function: withdraw(uint256)
+          handler: handleWithdraw
+      file: ./src/mapping/ycrvRenWSBTC.ts
+  - kind: ethereum/contract
+    name: yearn_yDAI
+    network: mainnet
+    source:
+      address: "0xACd43E627e64355f1861cEC6d3a6688B31a6F952"
+      abi: yearn_yDAI
+      startBlock: 10650116	
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - PricePerFullShare
+        - Balance
+      abis:
+        - name: yearn_yDAI
+          file: ./abis/yearn_yDAI.json
+      callHandlers:
+        - function: deposit(uint256)
+          handler: handleDeposit
+        - function: withdraw(uint256)
+          handler: handleWithdraw
+      file: ./src/mapping/ydai.ts
+  - kind: ethereum/contract
+    name: yearn_yGUSD
+    network: mainnet
+    source:
+      address: "0xec0d8D3ED5477106c6D4ea27D90a60e594693C90"
+      abi: yearn_yGUSD
+      startBlock: 11065127
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - PricePerFullShare
+        - Balance
+      abis:
+        - name: yearn_yGUSD
+          file: ./abis/yearn_yGUSD.json
+      callHandlers:
+        - function: deposit(uint256)
+          handler: handleDeposit
+        - function: withdraw(uint256)
+          handler: handleWithdraw
+      file: ./src/mapping/ygusd.ts
+  - kind: ethereum/contract
+    name: yearn_yLINK
+    network: mainnet
+    source:
+      address: "0x881b06da56BB5675c54E4Ed311c21E54C5025298"
+      abi: yearn_yLINK
+      startBlock: 10604016
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - PricePerFullShare
+        - Balance
+      abis:
+        - name: yearn_yLINK
+          file: ./abis/yearn_yLINK.json
+      callHandlers:
+        - function: deposit(uint256)
+          handler: handleDeposit
+        - function: withdraw(uint256)
+          handler: handleWithdraw
+      file: ./src/mapping/ylink.ts
+  - kind: ethereum/contract
+    name: yearn_yTUSD
+    network: mainnet
+    source:
+      address: "0x37d19d1c4E1fa9DC47bD1eA12f742a0887eDa74a"
+      abi: yearn_yTUSD
+      startBlock: 10603368
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - PricePerFullShare
+        - Balance
+      abis:
+        - name: yearn_yTUSD
+          file: ./abis/yearn_yTUSD.json
+      callHandlers:
+        - function: deposit(uint256)
+          handler: handleDeposit
+        - function: withdraw(uint256)
+          handler: handleWithdraw
+      file: ./src/mapping/ytusd.ts
