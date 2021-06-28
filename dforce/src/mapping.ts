@@ -7,11 +7,10 @@ import {
   Rebalance as RebalanceEvent,
   Redeem as RedeemEvent,
   Transfer as TransferEvent,
-  TransferFee as TransferFeeEvent
+  TransferFee as TransferFeeEvent,
 } from '../generated/dToken/dToken'
-import {
-  DToken
-} from '../generated/schema'
+import { DToken } from '../generated/schema'
+import { convertBINumToDesiredDecimals } from '../../src/utils/converters'
 
 function handleEntity(
   dTokenAddress: Address,
@@ -33,10 +32,14 @@ function handleEntity(
   log.info('dToken contract address: {}', [dTokenContract._address.toHex()])
   dTokenEntity.blockNumber = blockNumber
   dTokenEntity.blockTimestamp = BigInt.fromI32(blockTimestamp.toI32())
-  dTokenEntity.pricePerFullShare = dTokenContract
-    .getExchangeRate()
-    .toBigDecimal()
-  dTokenEntity.balance = dTokenContract.getTotalBalance().toBigDecimal()
+  dTokenEntity.pricePerFullShare = convertBINumToDesiredDecimals(
+    dTokenContract.getExchangeRate(),
+    18,
+  )
+  dTokenEntity.balance = convertBINumToDesiredDecimals(
+    dTokenContract.getTotalBalance(),
+    18,
+  )
   dTokenEntity.dTokenSymbol = dTokenContract.symbol()
   dTokenEntity.dTokenAddress = dTokenAddress
 
@@ -105,4 +108,3 @@ export function handleTransferFee(event: TransferFeeEvent): void {
     event.block.timestamp,
   )
 }
-
