@@ -3,34 +3,25 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: Comp
+    name: Unitroller
     network: mainnet
     source:
-      address: "0x2ba592f78db6436527729929aaf6c908497cb200"
-      startBlock: 10594024
-      abi: Comp
+      address: "0x3d5BC3c8d13dcB8bF317092d84783c2697AE9258"
+      startBlock: 10579797
+      abi: Unitroller
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - CompApproval
-        - CompDelegateChanged
-        - CompDelegateVotesChanged
-        - CompTransfer
+        - Comptroller
       abis:
-        - name: Comp
-          file: ./abis/Comp.json
+        - name: Unitroller
+          file: ./abis/Unitroller.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: DelegateChanged(indexed address,indexed address,indexed address)
-          handler: handleDelegateChanged
-        - event: DelegateVotesChanged(indexed address,uint256,uint256)
-          handler: handleDelegateVotesChanged
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
-      file: ./src/mapping.Comp.ts
+        - event: CompSpeedUpdated(indexed address,uint256)
+          handler: handleCompSpeedUpdated
+      file: ./src/mapping.Unitroller.ts
   - kind: ethereum/contract
     name: CreamAave
     network: mainnet
@@ -149,8 +140,8 @@ dataSources:
     name: CreamCelsius
     network: mainnet
     source:
-      address: "0x2ba592F78dB6436527729929AAf6c908497cB200"
-      startBlock: 10594024
+      address: "0x8b3ff1ed4f36c2c2be675afb13cc3aa5d73685a5"
+      startBlock: 11132874
       abi: CErc20Delegator
     mapping:
       kind: ethereum/events

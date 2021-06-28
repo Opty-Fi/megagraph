@@ -1,29 +1,10 @@
-type CompApproval @entity {
+type Comptroller @entity {
   id: ID!
-  owner: Bytes! # address
-  spender: Bytes! # address
-  amount: BigInt! # uint256
-}
-
-type CompDelegateChanged @entity {
-  id: ID!
-  delegator: Bytes! # address
-  fromDelegate: Bytes! # address
-  toDelegate: Bytes! # address
-}
-
-type CompDelegateVotesChanged @entity {
-  id: ID!
-  delegate: Bytes! # address
-  previousBalance: BigInt! # uint256
-  newBalance: BigInt! # uint256
-}
-
-type CompTransfer @entity {
-  id: ID!
-  from: Bytes! # address
-  to: Bytes! # address
-  amount: BigInt! # uint256
+  transactionHash: Bytes
+  blockNumber: BigInt
+  blockTimestamp: BigInt
+  token: CreamToken
+  compSpeeds: BigDecimal
 }
 
 type CreamToken @entity {
@@ -33,6 +14,7 @@ type CreamToken @entity {
   blockTimestamp: BigInt
   address: String
   symbol: String
+  compSpeeds: Comptroller @derivedFrom(field: "token")
   borrowRatePerBlock: BigDecimal,
   supplyRatePerBlock: BigDecimal,
   exchangeRateStored: BigDecimal,
