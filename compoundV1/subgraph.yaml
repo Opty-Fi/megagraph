@@ -11,8 +11,7 @@ dataSources:
     source:
       address: "0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643"
       abi: CToken
-      startBlock: 12680211
-      # startBlock: 8983575
+      startBlock: 8983575
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -53,7 +52,7 @@ dataSources:
     source:
       address: "0x39AA39c021dfbaE8faC545936693aC917d5E7563"
       abi: CToken
-      startBlock: 12680211
+      startBlock: 7710760
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -94,7 +93,7 @@ dataSources:
     source:
       address: "0xf650C3d88D12dB855b8bf7D11Be6C55A4e07dCC9"
       abi: CToken
-      startBlock: 12680211
+      startBlock: 9879363
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -135,7 +134,7 @@ dataSources:
     source:
       address: "0x6C8c6b02E7b2BE14d4fA6022Dfd6d75921D90E4E"
       abi: CToken
-      startBlock: 12680211
+      startBlock: 7710735
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -176,7 +175,7 @@ dataSources:
     source:
       address: "0xC11b1268C1A384e55C48c2391d8d480264A3A7F4"
       abi: CToken
-      startBlock: 12680211
+      startBlock: 8163813
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -217,7 +216,7 @@ dataSources:
     source:
       address: "0x70e36f6bf80a52b3b46b3af8e106cc0ed743e8e4"
       abi: CToken
-      startBlock: 12680211
+      startBlock: 10960099
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -258,7 +257,7 @@ dataSources:
     source:
       address: "0x35a18000230da775cac24873d00ff85bccded550"
       abi: CToken
-      startBlock: 12680211
+      startBlock: 10921410
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -299,7 +298,7 @@ dataSources:
     source:
       address: "0x158079Ee67Fce2f58472A96584A73C7Ab9AC95c1"
       abi: CToken
-      startBlock: 12680211
+      startBlock: 7710755
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -340,7 +339,7 @@ dataSources:
     source:
       address: "0xb3319f5d18bc0d84dd1b4825dcde5d5f7266d407"
       abi: CToken
-      startBlock: 12680211
+      startBlock: 7710733
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -381,7 +380,7 @@ dataSources:
     source:
       address: "0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5"
       abi: CToken
-      startBlock: 12680211
+      startBlock: 7710758
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -421,11 +420,8 @@ dataSources:
     network: mainnet
     source:
       address: "0x3d9819210A31b4961b30EF54bE2aeD79B9c9Cd3B"
-      # address: "0xbe7616b06f71e363a310aa8ce8ad99654401ead7"
       abi: ComptrollerImplementation
-      startBlock: 12680211
-      # startBlock: 11499181
-      # startBlock: 7710671
+      startBlock: 7710671
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4

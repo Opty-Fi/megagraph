@@ -17,8 +17,8 @@ type CTokenData @entity {
 
 type CompSpeedUpdated @entity {
   id: ID!
-  cToken: Bytes # address
-  compSpeed: BigDecimal # uint256
+  cToken: Bytes
+  compSpeed: BigDecimal
   blockNumber: BigInt
   blockTimestamp: BigInt
   cTokenData: CTokenData
