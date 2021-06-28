@@ -321,7 +321,360 @@ dataSources:
           handler: handleRemoveLiquidityImbalance
       file: ./src/curve2Pool.ts
   # --------------------------------------
+  #      hCRV
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: Curve2Pool_hCRV
+    network: mainnet
+    source:
+      address: "0x4CA9b3063Ec5866A4B82E437059D2C43d1be596F"
+      abi: Curve
+      startBlock: 10732328
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Balances
+        - VirtualPrice
+      abis:
+        - name: Curve
+          file: ./abis/Curve2Pool.json
+      callHandlers:
+        - function: remove_liquidity_one_coin(uint256,int128,uint256)
+          handler: handleRemoveLiquidityOne
+      eventHandlers:
+        - event: TokenExchange(indexed address,int128,uint256,int128,uint256)
+          handler: handleTokenExchange
+        - event: TokenExchangeUnderlying(indexed address,int128,uint256,int128,uint256)
+          handler: handleTokenExchangeUnderlying
+        - event: AddLiquidity(indexed address,uint256[2],uint256[2],uint256,uint256)
+          handler: handleAddLiquidity
+        - event: RemoveLiquidity(indexed address,uint256[2],uint256[2],uint256)
+          handler: handleRemoveLiquidity
+        - event: RemoveLiquidityImbalance(indexed address,uint256[2],uint256[2],uint256,uint256)
+          handler: handleRemoveLiquidityImbalance
+      file: ./src/curve2Pool.ts
+  # --------------------------------------
+  #      cDAI+cUSDC
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: Curve2Pool_cDAI_cUSDC
+    network: mainnet
+    source:
+      address: "0xA2B47E3D5c44877cca798226B7B8118F9BFb7A56"
+      abi: Curve
+      startBlock: 9554040
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Balances
+        - VirtualPrice
+      abis:
+        - name: Curve
+          file: ./abis/Curve2Pool.json
+      callHandlers:
+        - function: remove_liquidity_one_coin(uint256,int128,uint256)
+          handler: handleRemoveLiquidityOne
+      eventHandlers:
+        - event: TokenExchange(indexed address,int128,uint256,int128,uint256)
+          handler: handleTokenExchange
+        - event: TokenExchangeUnderlying(indexed address,int128,uint256,int128,uint256)
+          handler: handleTokenExchangeUnderlying
+        - event: AddLiquidity(indexed address,uint256[2],uint256[2],uint256,uint256)
+          handler: handleAddLiquidity
+        - event: RemoveLiquidity(indexed address,uint256[2],uint256[2],uint256)
+          handler: handleRemoveLiquidity
+        - event: RemoveLiquidityImbalance(indexed address,uint256[2],uint256[2],uint256,uint256)
+          handler: handleRemoveLiquidityImbalance
+      file: ./src/curve2Pool.ts
+  # --------------------------------------
+  #      crvRenWBTC
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: Curve2Pool_crvRenWBTC
+    network: mainnet
+    source:
+      address: "0x93054188d876f558f4a66B2EF1d97d16eDf0895B"
+      abi: Curve
+      startBlock: 10151385
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Balances
+        - VirtualPrice
+      abis:
+        - name: Curve
+          file: ./abis/Curve2Pool.json
+      callHandlers:
+        - function: remove_liquidity_one_coin(uint256,int128,uint256)
+          handler: handleRemoveLiquidityOne
+      eventHandlers:
+        - event: TokenExchange(indexed address,int128,uint256,int128,uint256)
+          handler: handleTokenExchange
+        - event: TokenExchangeUnderlying(indexed address,int128,uint256,int128,uint256)
+          handler: handleTokenExchangeUnderlying
+        - event: AddLiquidity(indexed address,uint256[2],uint256[2],uint256,uint256)
+          handler: handleAddLiquidity
+        - event: RemoveLiquidity(indexed address,uint256[2],uint256[2],uint256)
+          handler: handleRemoveLiquidity
+        - event: RemoveLiquidityImbalance(indexed address,uint256[2],uint256[2],uint256,uint256)
+          handler: handleRemoveLiquidityImbalance
+      file: ./src/curve2Pool.ts
+  # --------------------------------------
+  #      bbtc
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: Curve2Pool_bbtc
+    network: mainnet
+    source:
+      address: "0x071c661B4DeefB59E2a3DdB20Db036821eeE8F4b"
+      abi: Curve
+      startBlock: 11455022
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Balances
+        - VirtualPrice
+      abis:
+        - name: Curve
+          file: ./abis/Curve2Pool.json
+      callHandlers:
+        - function: remove_liquidity_one_coin(uint256,int128,uint256)
+          handler: handleRemoveLiquidityOne
+      eventHandlers:
+        - event: TokenExchange(indexed address,int128,uint256,int128,uint256)
+          handler: handleTokenExchange
+        - event: TokenExchangeUnderlying(indexed address,int128,uint256,int128,uint256)
+          handler: handleTokenExchangeUnderlying
+        - event: AddLiquidity(indexed address,uint256[2],uint256[2],uint256,uint256)
+          handler: handleAddLiquidity
+        - event: RemoveLiquidity(indexed address,uint256[2],uint256[2],uint256)
+          handler: handleRemoveLiquidity
+        - event: RemoveLiquidityImbalance(indexed address,uint256[2],uint256[2],uint256,uint256)
+          handler: handleRemoveLiquidityImbalance
+      file: ./src/curve2Pool.ts
+  # --------------------------------------
+  #      EURS
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: Curve2Pool_EURS
+    network: mainnet
+    source:
+      address: "0x0Ce6a5fF5217e38315f87032CF90686C96627CAA"
+      abi: Curve
+      startBlock: 11466871
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Balances
+        - VirtualPrice
+      abis:
+        - name: Curve
+          file: ./abis/Curve2Pool.json
+      callHandlers:
+        - function: remove_liquidity_one_coin(uint256,int128,uint256)
+          handler: handleRemoveLiquidityOne
+      eventHandlers:
+        - event: TokenExchange(indexed address,int128,uint256,int128,uint256)
+          handler: handleTokenExchange
+        - event: TokenExchangeUnderlying(indexed address,int128,uint256,int128,uint256)
+          handler: handleTokenExchangeUnderlying
+        - event: AddLiquidity(indexed address,uint256[2],uint256[2],uint256,uint256)
+          handler: handleAddLiquidity
+        - event: RemoveLiquidity(indexed address,uint256[2],uint256[2],uint256)
+          handler: handleRemoveLiquidity
+        - event: RemoveLiquidityImbalance(indexed address,uint256[2],uint256[2],uint256,uint256)
+          handler: handleRemoveLiquidityImbalance
+      file: ./src/curve2Pool.ts
+  # --------------------------------------
+  #      pBTC
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: Curve2Pool_pBTC
+    network: mainnet
+    source:
+      address: "0x7F55DDe206dbAD629C080068923b36fe9D6bDBeF"
+      abi: Curve
+      startBlock: 11421596
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Balances
+        - VirtualPrice
+      abis:
+        - name: Curve
+          file: ./abis/Curve2Pool.json
+      callHandlers:
+        - function: remove_liquidity_one_coin(uint256,int128,uint256)
+          handler: handleRemoveLiquidityOne
+      eventHandlers:
+        - event: TokenExchange(indexed address,int128,uint256,int128,uint256)
+          handler: handleTokenExchange
+        - event: TokenExchangeUnderlying(indexed address,int128,uint256,int128,uint256)
+          handler: handleTokenExchangeUnderlying
+        - event: AddLiquidity(indexed address,uint256[2],uint256[2],uint256,uint256)
+          handler: handleAddLiquidity
+        - event: RemoveLiquidity(indexed address,uint256[2],uint256[2],uint256)
+          handler: handleRemoveLiquidity
+        - event: RemoveLiquidityImbalance(indexed address,uint256[2],uint256[2],uint256,uint256)
+          handler: handleRemoveLiquidityImbalance
+      file: ./src/curve2Pool.ts
+  # --------------------------------------
+  #      eCRV
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: Curve2Pool_eCRV
+    network: mainnet
+    source:
+      address: "0xc5424B857f758E906013F3555Dad202e4bdB4567"
+      abi: Curve
+      startBlock: 11491884
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Balances
+        - VirtualPrice
+      abis:
+        - name: Curve
+          file: ./abis/Curve2Pool.json
+      callHandlers:
+        - function: remove_liquidity_one_coin(uint256,int128,uint256)
+          handler: handleRemoveLiquidityOne
+      eventHandlers:
+        - event: TokenExchange(indexed address,int128,uint256,int128,uint256)
+          handler: handleTokenExchange
+        - event: TokenExchangeUnderlying(indexed address,int128,uint256,int128,uint256)
+          handler: handleTokenExchangeUnderlying
+        - event: AddLiquidity(indexed address,uint256[2],uint256[2],uint256,uint256)
+          handler: handleAddLiquidity
+        - event: RemoveLiquidity(indexed address,uint256[2],uint256[2],uint256)
+          handler: handleRemoveLiquidity
+        - event: RemoveLiquidityImbalance(indexed address,uint256[2],uint256[2],uint256,uint256)
+          handler: handleRemoveLiquidityImbalance
+      file: ./src/curve2Pool.ts
+  # --------------------------------------
+  #      steCRV
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: Curve2Pool_steCRV
+    network: mainnet
+    source:
+      address: "0xDC24316b9AE028F1497c275EB9192a3Ea0f67022"
+      abi: Curve
+      startBlock: 11592551
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Balances
+        - VirtualPrice
+      abis:
+        - name: Curve
+          file: ./abis/Curve2Pool.json
+      callHandlers:
+        - function: remove_liquidity_one_coin(uint256,int128,uint256)
+          handler: handleRemoveLiquidityOne
+      eventHandlers:
+        - event: TokenExchange(indexed address,int128,uint256,int128,uint256)
+          handler: handleTokenExchange
+        - event: TokenExchangeUnderlying(indexed address,int128,uint256,int128,uint256)
+          handler: handleTokenExchangeUnderlying
+        - event: AddLiquidity(indexed address,uint256[2],uint256[2],uint256,uint256)
+          handler: handleAddLiquidity
+        - event: RemoveLiquidity(indexed address,uint256[2],uint256[2],uint256)
+          handler: handleRemoveLiquidity
+        - event: RemoveLiquidityImbalance(indexed address,uint256[2],uint256[2],uint256,uint256)
+          handler: handleRemoveLiquidityImbalance
+      file: ./src/curve2Pool.ts
+  # --------------------------------------
+  #      ust3CRV
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: Curve2Pool_ust3CRV
+    network: mainnet
+    source:
+      address: "0x890f4e345B1dAED0367A877a1612f86A1f86985f"
+      abi: Curve
+      startBlock: 11466568
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Balances
+        - VirtualPrice
+      abis:
+        - name: Curve
+          file: ./abis/Curve2Pool.json
+      callHandlers:
+        - function: remove_liquidity_one_coin(uint256,int128,uint256)
+          handler: handleRemoveLiquidityOne
+      eventHandlers:
+        - event: TokenExchange(indexed address,int128,uint256,int128,uint256)
+          handler: handleTokenExchange
+        - event: TokenExchangeUnderlying(indexed address,int128,uint256,int128,uint256)
+          handler: handleTokenExchangeUnderlying
+        - event: AddLiquidity(indexed address,uint256[2],uint256[2],uint256,uint256)
+          handler: handleAddLiquidity
+        - event: RemoveLiquidity(indexed address,uint256[2],uint256[2],uint256)
+          handler: handleRemoveLiquidity
+        - event: RemoveLiquidityImbalance(indexed address,uint256[2],uint256[2],uint256,uint256)
+          handler: handleRemoveLiquidityImbalance
+      file: ./src/curve2Pool.ts
+  # --------------------------------------
+  #      ankrCRV
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: Curve2Pool_ankrCRV
+    network: mainnet
+    source:
+      address: "0xA96A65c051bF88B4095Ee1f2451C2A9d43F53Ae2"
+      abi: Curve
+      startBlock: 11774139
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Balances
+        - VirtualPrice
+      abis:
+        - name: Curve
+          file: ./abis/Curve2Pool.json
+      callHandlers:
+        - function: remove_liquidity_one_coin(uint256,int128,uint256)
+          handler: handleRemoveLiquidityOne
+      eventHandlers:
+        - event: TokenExchange(indexed address,int128,uint256,int128,uint256)
+          handler: handleTokenExchange
+        - event: TokenExchangeUnderlying(indexed address,int128,uint256,int128,uint256)
+          handler: handleTokenExchangeUnderlying
+        - event: AddLiquidity(indexed address,uint256[2],uint256[2],uint256,uint256)
+          handler: handleAddLiquidity
+        - event: RemoveLiquidity(indexed address,uint256[2],uint256[2],uint256)
+          handler: handleRemoveLiquidity
+        - event: RemoveLiquidityImbalance(indexed address,uint256[2],uint256[2],uint256,uint256)
+          handler: handleRemoveLiquidityImbalance
+      file: ./src/curve2Pool.ts
+  # --------------------------------------
   #      Curve3Pool
+  # --------------------------------------
+  # --------------------------------------
+  #      cDAI+cUSDC+USDT
   # --------------------------------------
   - kind: ethereum/contract
     name: Curve3Pool
@@ -353,6 +706,73 @@ dataSources:
         - event: RemoveLiquidityImbalance(indexed address,uint256[3],uint256[3],uint256,uint256)
           handler: handleRemoveLiquidityImbalance
       file: ./src/curve3Pool.ts
+  # --------------------------------------
+  #      crvRenWSBTC
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: Curve3Pool_crvRenWSBTC
+    network: mainnet
+    source:
+      address: "0x7fC77b5c7614E1533320Ea6DDc2Eb61fa00A9714"
+      abi: Curve
+      startBlock: 10276641
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Balances
+        - VirtualPrice
+      abis:
+        - name: Curve
+          file: ./abis/Curve3Pool.json
+      callHandlers:
+        - function: remove_liquidity_one_coin(uint256,int128,uint256)
+          handler: handleRemoveLiquidityOne
+      eventHandlers:
+        - event: TokenExchange(indexed address,int128,uint256,int128,uint256)
+          handler: handleTokenExchange
+        - event: AddLiquidity(indexed address,uint256[3],uint256[3],uint256,uint256)
+          handler: handleAddLiquidity
+        - event: RemoveLiquidity(indexed address,uint256[3],uint256[3],uint256)
+          handler: handleRemoveLiquidity
+        - event: RemoveLiquidityImbalance(indexed address,uint256[3],uint256[3],uint256,uint256)
+          handler: handleRemoveLiquidityImbalance
+      file: ./src/curve3Pool.ts
+  # --------------------------------------
+  #      aave
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: Curve3Pool_aave
+    network: mainnet
+    source:
+      address: "0xDeBF20617708857ebe4F679508E7b7863a8A8EeE"
+      abi: Curve
+      startBlock: 11497106
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Balances
+        - VirtualPrice
+      abis:
+        - name: Curve
+          file: ./abis/Curve3Pool.json
+      callHandlers:
+        - function: remove_liquidity_one_coin(uint256,int128,uint256)
+          handler: handleRemoveLiquidityOne
+      eventHandlers:
+        - event: TokenExchange(indexed address,int128,uint256,int128,uint256)
+          handler: handleTokenExchange
+        - event: AddLiquidity(indexed address,uint256[3],uint256[3],uint256,uint256)
+          handler: handleAddLiquidity
+        - event: RemoveLiquidity(indexed address,uint256[3],uint256[3],uint256)
+          handler: handleRemoveLiquidity
+        - event: RemoveLiquidityImbalance(indexed address,uint256[3],uint256[3],uint256,uint256)
+          handler: handleRemoveLiquidityImbalance
+      file: ./src/curve3Pool.ts
+  
   # --------------------------------------
   #      Curve4Pool
   # --------------------------------------
@@ -426,6 +846,66 @@ dataSources:
       address: "0x79a8C46DeA5aDa233ABaFFD40F3A0A2B1e5A4F27"
       abi: Curve
       startBlock: 9476468
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Balances
+        - VirtualPrice
+      abis:
+        - name: Curve
+          file: ./abis/Curve4Pool.json
+      eventHandlers:
+        - event: TokenExchangeUnderlying(indexed address,int128,uint256,int128,uint256)
+          handler: handleTokenExchangeUnderlying
+        - event: AddLiquidity(indexed address,uint256[4],uint256[4],uint256,uint256)
+          handler: handleAddLiquidity
+        - event: RemoveLiquidity(indexed address,uint256[4],uint256[4],uint256)
+          handler: handleRemoveLiquidity
+        - event: RemoveLiquidityImbalance(indexed address,uint256[4],uint256[4],uint256,uint256)
+          handler: handleRemoveLiquidityImbalance
+      file: ./src/curve4Pool.ts
+  # --------------------------------------
+  #      ypaxCrv
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: Curve4Pool_ypaxCrv
+    network: mainnet
+    source:
+      address: "0x06364f10B501e868329afBc005b3492902d6C763"
+      abi: Curve
+      startBlock: 10041041
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Balances
+        - VirtualPrice
+      abis:
+        - name: Curve
+          file: ./abis/Curve4Pool.json
+      eventHandlers:
+        - event: TokenExchangeUnderlying(indexed address,int128,uint256,int128,uint256)
+          handler: handleTokenExchangeUnderlying
+        - event: AddLiquidity(indexed address,uint256[4],uint256[4],uint256,uint256)
+          handler: handleAddLiquidity
+        - event: RemoveLiquidity(indexed address,uint256[4],uint256[4],uint256)
+          handler: handleRemoveLiquidity
+        - event: RemoveLiquidityImbalance(indexed address,uint256[4],uint256[4],uint256,uint256)
+          handler: handleRemoveLiquidityImbalance
+      file: ./src/curve4Pool.ts
+  # --------------------------------------
+  #      crvRenWBTC
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: Curve4Pool_crvRenWBTC
+    network: mainnet
+    source:
+      address: "0x06364f10B501e868329afBc005b3492902d6C763"
+      abi: Curve
+      startBlock: 10041041
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
