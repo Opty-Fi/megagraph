@@ -32,11 +32,11 @@ function handleEntity(
   log.info('dToken contract address: {}', [dTokenContract._address.toHex()])
   dTokenEntity.blockNumber = blockNumber
   dTokenEntity.blockTimestamp = BigInt.fromI32(blockTimestamp.toI32())
-  dTokenEntity.pricePerFullShare = convertBINumToDesiredDecimals(
+  dTokenEntity.pricePerFullShare = dTokenContract.try_getExchangeRate().reverted ? null : convertBINumToDesiredDecimals(
     dTokenContract.getExchangeRate(),
     18,
   )
-  dTokenEntity.balance = convertBINumToDesiredDecimals(
+  dTokenEntity.balance = dTokenContract.try_getTotalBalance().reverted ? null : convertBINumToDesiredDecimals(
     dTokenContract.getTotalBalance(),
     18,
   )
