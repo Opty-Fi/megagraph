@@ -1,67 +1,96 @@
+import { BigInt, log, Address, Bytes } from "@graphprotocol/graph-ts";
 import {
-  Approval as ApprovalEvent,
+  LoanToken,
   Burn as BurnEvent,
+  FlashBorrow as FlashBorrowEvent,
   Mint as MintEvent,
-  OwnershipTransferred as OwnershipTransferredEvent,
-  Transfer as TransferEvent
-} from "./LoanToken"
-import {
-  Approval,
-  Burn,
-  Mint,
-  OwnershipTransferred,
-  Transfer
-} from "../generated/schema"
+} from "./LoanToken";
+import { FulcrumToken } from "../generated/schema";
+import { convertBINumToDesiredDecimals } from "./converters";;
 
-export function handleApproval(event: ApprovalEvent): void {
-  let entity = new Approval(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.owner = event.params.owner
-  entity.spender = event.params.spender
-  entity.value = event.params.value
-  entity.save()
+function handleFulcrumToken(
+  transactionHash: Bytes,
+  blockNumber: BigInt,
+  blockTimestamp: BigInt,
+  address: Address,
+  tokenPrice: BigInt,
+): void {
+  let tokenContract = LoanToken.bind(address);
+
+  let entity = FulcrumToken.load(transactionHash.toHex());
+  if (entity == null) {
+    entity = new FulcrumToken(transactionHash.toHex());
+  }
+
+  entity.transactionHash = transactionHash;
+  entity.blockNumber = blockNumber;
+  entity.blockTimestamp = blockTimestamp;
+  entity.address = address.toHex();
+
+  let tried_symbol = tokenContract.try_symbol();
+  if (tried_symbol.reverted) log.error("symbol() reverted", []);
+  else entity.symbol = tried_symbol.value;
+
+  log.debug("Saving Fulcrum Token {} at address {} in block {} with txHash {}", [
+    tried_symbol.value,
+    address.toHex(),
+    blockNumber.toString(),
+    transactionHash.toHex(),
+  ]);
+
+  let tried_supplyInterestRate = tokenContract.try_supplyInterestRate();
+  if (tried_supplyInterestRate.reverted) log.error("supplyInterestRate() reverted", []);
+  else entity.supplyInterestRate = convertBINumToDesiredDecimals(tried_supplyInterestRate.value, 20);
+
+  let tried_borrowInterestRate = tokenContract.try_borrowInterestRate();
+  if (tried_borrowInterestRate.reverted) log.error("borrowInterestRate() reverted", []);
+  else entity.borrowInterestRate = convertBINumToDesiredDecimals(tried_borrowInterestRate.value, 20);
+
+  if (tokenPrice) {
+    entity.tokenPrice = convertBINumToDesiredDecimals(tokenPrice, 18);
+  } else {
+    let tried_tokenPrice = tokenContract.try_tokenPrice();
+    if (tried_tokenPrice.reverted) log.error("tokenPrice() reverted", []);
+    else entity.tokenPrice = convertBINumToDesiredDecimals(tried_tokenPrice.value, 18);
+  }
+
+  let tried_marketLiquidity = tokenContract.try_marketLiquidity();
+  if (tried_marketLiquidity.reverted) log.error("marketLiquidity() reverted", []);
+  else entity.marketLiquidity = convertBINumToDesiredDecimals(tried_marketLiquidity.value, 18);
+
+  let tried_totalSupply = tokenContract.try_totalSupply();
+  if (tried_totalSupply.reverted) log.error("totalSupply() reverted", []);
+  else entity.totalSupply = convertBINumToDesiredDecimals(tried_totalSupply.value, 18);
+
+  entity.save();
 }
 
 export function handleBurn(event: BurnEvent): void {
-  let entity = new Burn(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.burner = event.params.burner
-  entity.tokenAmount = event.params.tokenAmount
-  entity.assetAmount = event.params.assetAmount
-  entity.price = event.params.price
-  entity.save()
+  handleFulcrumToken(
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+    event.address,
+    event.params.price,
+  );
+}
+
+export function handleFlashBorrow(event: FlashBorrowEvent): void {
+  handleFulcrumToken(
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+    event.address,
+    null, // tokenPrice
+  );
 }
 
 export function handleMint(event: MintEvent): void {
-  let entity = new Mint(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.minter = event.params.minter
-  entity.tokenAmount = event.params.tokenAmount
-  entity.assetAmount = event.params.assetAmount
-  entity.price = event.params.price
-  entity.save()
-}
-
-export function handleOwnershipTransferred(
-  event: OwnershipTransferredEvent
-): void {
-  let entity = new OwnershipTransferred(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.previousOwner = event.params.previousOwner
-  entity.newOwner = event.params.newOwner
-  entity.save()
-}
-
-export function handleTransfer(event: TransferEvent): void {
-  let entity = new Transfer(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.from = event.params.from
-  entity.to = event.params.to
-  entity.value = event.params.value
-  entity.save()
+  handleFulcrumToken(
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+    event.address,
+    event.params.price,
+  );
 }

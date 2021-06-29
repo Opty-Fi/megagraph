@@ -2,12 +2,18 @@
   "name": "fulcrum",
   "license": "UNLICENSED",
   "scripts": {
-    "setup": "yarn codegen && graph build && yarn auth && yarn deploy",
+    "setup": "yarn codegen && yarn graph-auth && yarn deploy",
+    "setup:local": "yarn codegen && yarn deploy:local",
+    "deploy": "./node_modules/.bin/dotenv -- yarn graph-deploy-replace",
+    "deploy:local": "yarn graph-create-local && yarn graph-deploy-local",
     "codegen": "graph codegen --output-dir ./generated",
-    "auth": "./node_modules/.bin/dotenv -- yarn auth-replace",
-    "auth-replace": "graph auth https://api.thegraph.com/deploy/ $ACCESS_TOKEN",
-    "deploy": "./node_modules/.bin/dotenv -- yarn deploy-replace",
-    "deploy-replace": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ $SLUG"
+    "graph-auth": "./node_modules/.bin/dotenv -- yarn graph-auth-replace",
+    "graph-auth-replace": "graph auth https://api.thegraph.com/deploy/ $ACCESS_TOKEN",
+    "graph-deploy-replace": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ $SLUG",
+    "graph-create-local": "./node_modules/.bin/dotenv -- yarn graph-create-local-replace",
+    "graph-create-local-replace": "graph create --node http://localhost:8020/ $SLUG",
+    "graph-deploy-local": "./node_modules/.bin/dotenv -- yarn graph-deploy-local-replace",
+    "graph-deploy-local-replace": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 $SLUG"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "^0.20.0",

@@ -3,132 +3,6 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: LoanMaintenance
-    network: mainnet
-    source:
-      address: "0xD8Ee69652E4e4838f2531732a46d1f7F584F0b7f"
-      startBlock: 10777787
-      abi: LoanMaintenance
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.4
-      language: wasm/assemblyscript
-      entities:
-        - LoanMaintenanceClaimReward
-        - LoanMaintenanceDepositCollateral
-        - LoanMaintenanceEarnReward
-        - LoanMaintenanceExtendLoanDuration
-        - LoanMaintenanceExternalSwap
-        - LoanMaintenanceLoanDeposit
-        - LoanMaintenanceLoanSwap
-        - LoanMaintenanceOwnershipTransferred
-        - LoanMaintenancePayBorrowingFee
-        - LoanMaintenancePayLendingFee
-        - LoanMaintenancePayTradingFee
-        - LoanMaintenanceReduceLoanDuration
-        - LoanMaintenanceSettleFeeRewardForInterestExpense
-        - LoanMaintenanceVaultDeposit
-        - LoanMaintenanceVaultWithdraw
-        - LoanMaintenanceWithdrawCollateral
-      abis:
-        - name: LoanMaintenance
-          file: ./abis/LoanMaintenance.json
-      eventHandlers:
-        - event: ClaimReward(indexed address,indexed address,indexed address,uint256)
-          handler: handleClaimReward
-        - event: DepositCollateral(indexed address,indexed address,indexed bytes32,uint256)
-          handler: handleDepositCollateral
-        - event: EarnReward(indexed address,indexed bytes32,indexed uint8,address,uint256)
-          handler: handleEarnReward
-        - event: ExtendLoanDuration(indexed address,indexed address,indexed bytes32,uint256,uint256,uint256)
-          handler: handleExtendLoanDuration
-        - event: ExternalSwap(indexed address,indexed address,indexed address,uint256,uint256)
-          handler: handleExternalSwap
-        - event: LoanDeposit(indexed bytes32,uint256,uint256)
-          handler: handleLoanDeposit
-        - event: LoanSwap(indexed bytes32,indexed address,indexed address,address,uint256,uint256)
-          handler: handleLoanSwap
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-        - event: PayBorrowingFee(indexed address,indexed address,indexed bytes32,uint256)
-          handler: handlePayBorrowingFee
-        - event: PayLendingFee(indexed address,indexed address,uint256)
-          handler: handlePayLendingFee
-        - event: PayTradingFee(indexed address,indexed address,indexed bytes32,uint256)
-          handler: handlePayTradingFee
-        - event: ReduceLoanDuration(indexed address,indexed address,indexed bytes32,uint256,uint256)
-          handler: handleReduceLoanDuration
-        - event: SettleFeeRewardForInterestExpense(indexed address,indexed address,indexed bytes32,uint256)
-          handler: handleSettleFeeRewardForInterestExpense
-        - event: VaultDeposit(indexed address,indexed address,uint256)
-          handler: handleVaultDeposit
-        - event: VaultWithdraw(indexed address,indexed address,uint256)
-          handler: handleVaultWithdraw
-        - event: WithdrawCollateral(indexed address,indexed address,indexed bytes32,uint256)
-          handler: handleWithdrawCollateral
-      file: ./src/mapping.LoanMaintenance.ts
-  - kind: ethereum/contract
-    name: StakingProxy
-    network: mainnet
-    source:
-      address: "0x576773CD0B51294997Ec4E4ff96c93d5E3AE9038"
-      startBlock: 10773120
-      abi: StakingProxy
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.4
-      language: wasm/assemblyscript
-      entities:
-        - StakingProxyDelegateChanged
-        - StakingProxyOwnershipTransferred
-        - StakingProxyRewardAdded
-        - StakingProxyStaked
-      abis:
-        - name: StakingProxy
-          file: ./abis/StakingProxy.json
-      eventHandlers:
-        - event: DelegateChanged(indexed address,indexed address,indexed address)
-          handler: handleDelegateChanged
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-        - event: RewardAdded(indexed uint256,uint256)
-          handler: handleRewardAdded
-        - event: Staked(indexed address,indexed address,indexed address,uint256)
-          handler: handleStaked
-      file: ./src/mapping.StakingProxy.ts
-  - kind: ethereum/contract
-    name: FulcrumBzrx
-    network: mainnet
-    source:
-      address: "0x18240BD9C07fA6156Ce3F3f61921cC82b2619157"
-      startBlock: 10785095
-      abi: LoanToken
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.4
-      language: wasm/assemblyscript
-      entities:
-        - Approval
-        - Burn
-        - Mint
-        - OwnershipTransferred
-        - Transfer
-      abis:
-        - name: LoanToken
-          file: ./abis/LoanToken.json
-      eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: Burn(indexed address,uint256,uint256,uint256)
-          handler: handleBurn
-        - event: Mint(indexed address,uint256,uint256,uint256)
-          handler: handleMint
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
-      file: ./src/mapping.LoanToken.ts
-  - kind: ethereum/contract
     name: FulcrumIaave
     network: mainnet
     source:
@@ -140,25 +14,17 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - Burn
-        - Mint
-        - OwnershipTransferred
-        - Transfer
+        - FulcrumToken
       abis:
         - name: LoanToken
           file: ./abis/LoanToken.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Burn(indexed address,uint256,uint256,uint256)
           handler: handleBurn
+        - event: FlashBorrow(address,address,address,uint256)
+          handler: handleFlashBorrow
         - event: Mint(indexed address,uint256,uint256,uint256)
           handler: handleMint
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumIcomp
@@ -172,25 +38,17 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - Burn
-        - Mint
-        - OwnershipTransferred
-        - Transfer
+        - FulcrumToken
       abis:
         - name: LoanToken
           file: ./abis/LoanToken.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Burn(indexed address,uint256,uint256,uint256)
           handler: handleBurn
+        - event: FlashBorrow(address,address,address,uint256)
+          handler: handleFlashBorrow
         - event: Mint(indexed address,uint256,uint256,uint256)
           handler: handleMint
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumIdai
@@ -204,25 +62,17 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - Burn
-        - Mint
-        - OwnershipTransferred
-        - Transfer
+        - FulcrumToken
       abis:
         - name: LoanToken
           file: ./abis/LoanToken.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Burn(indexed address,uint256,uint256,uint256)
           handler: handleBurn
+        - event: FlashBorrow(address,address,address,uint256)
+          handler: handleFlashBorrow
         - event: Mint(indexed address,uint256,uint256,uint256)
           handler: handleMint
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumIeth
@@ -236,25 +86,17 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - Burn
-        - Mint
-        - OwnershipTransferred
-        - Transfer
+        - FulcrumToken
       abis:
         - name: LoanToken
           file: ./abis/LoanToken.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Burn(indexed address,uint256,uint256,uint256)
           handler: handleBurn
+        - event: FlashBorrow(address,address,address,uint256)
+          handler: handleFlashBorrow
         - event: Mint(indexed address,uint256,uint256,uint256)
           handler: handleMint
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumIknc
@@ -268,25 +110,17 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - Burn
-        - Mint
-        - OwnershipTransferred
-        - Transfer
+        - FulcrumToken
       abis:
         - name: LoanToken
           file: ./abis/LoanToken.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Burn(indexed address,uint256,uint256,uint256)
           handler: handleBurn
+        - event: FlashBorrow(address,address,address,uint256)
+          handler: handleFlashBorrow
         - event: Mint(indexed address,uint256,uint256,uint256)
           handler: handleMint
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumIlink
@@ -300,25 +134,17 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - Burn
-        - Mint
-        - OwnershipTransferred
-        - Transfer
+        - FulcrumToken
       abis:
         - name: LoanToken
           file: ./abis/LoanToken.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Burn(indexed address,uint256,uint256,uint256)
           handler: handleBurn
+        - event: FlashBorrow(address,address,address,uint256)
+          handler: handleFlashBorrow
         - event: Mint(indexed address,uint256,uint256,uint256)
           handler: handleMint
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumIlrc
@@ -332,25 +158,17 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - Burn
-        - Mint
-        - OwnershipTransferred
-        - Transfer
+        - FulcrumToken
       abis:
         - name: LoanToken
           file: ./abis/LoanToken.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Burn(indexed address,uint256,uint256,uint256)
           handler: handleBurn
+        - event: FlashBorrow(address,address,address,uint256)
+          handler: handleFlashBorrow
         - event: Mint(indexed address,uint256,uint256,uint256)
           handler: handleMint
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumImkr
@@ -364,25 +182,17 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - Burn
-        - Mint
-        - OwnershipTransferred
-        - Transfer
+        - FulcrumToken
       abis:
         - name: LoanToken
           file: ./abis/LoanToken.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Burn(indexed address,uint256,uint256,uint256)
           handler: handleBurn
+        - event: FlashBorrow(address,address,address,uint256)
+          handler: handleFlashBorrow
         - event: Mint(indexed address,uint256,uint256,uint256)
           handler: handleMint
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumIuni
@@ -396,25 +206,17 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - Burn
-        - Mint
-        - OwnershipTransferred
-        - Transfer
+        - FulcrumToken
       abis:
         - name: LoanToken
           file: ./abis/LoanToken.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Burn(indexed address,uint256,uint256,uint256)
           handler: handleBurn
+        - event: FlashBorrow(address,address,address,uint256)
+          handler: handleFlashBorrow
         - event: Mint(indexed address,uint256,uint256,uint256)
           handler: handleMint
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumIusdc
@@ -428,25 +230,17 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - Burn
-        - Mint
-        - OwnershipTransferred
-        - Transfer
+        - FulcrumToken
       abis:
         - name: LoanToken
           file: ./abis/LoanToken.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Burn(indexed address,uint256,uint256,uint256)
           handler: handleBurn
+        - event: FlashBorrow(address,address,address,uint256)
+          handler: handleFlashBorrow
         - event: Mint(indexed address,uint256,uint256,uint256)
           handler: handleMint
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumIusdt
@@ -460,25 +254,17 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - Burn
-        - Mint
-        - OwnershipTransferred
-        - Transfer
+        - FulcrumToken
       abis:
         - name: LoanToken
           file: ./abis/LoanToken.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Burn(indexed address,uint256,uint256,uint256)
           handler: handleBurn
+        - event: FlashBorrow(address,address,address,uint256)
+          handler: handleFlashBorrow
         - event: Mint(indexed address,uint256,uint256,uint256)
           handler: handleMint
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumIwbtc
@@ -492,25 +278,17 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - Burn
-        - Mint
-        - OwnershipTransferred
-        - Transfer
+        - FulcrumToken
       abis:
         - name: LoanToken
           file: ./abis/LoanToken.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Burn(indexed address,uint256,uint256,uint256)
           handler: handleBurn
+        - event: FlashBorrow(address,address,address,uint256)
+          handler: handleFlashBorrow
         - event: Mint(indexed address,uint256,uint256,uint256)
           handler: handleMint
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumIyfi
@@ -524,25 +302,17 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - Burn
-        - Mint
-        - OwnershipTransferred
-        - Transfer
+        - FulcrumToken
       abis:
         - name: LoanToken
           file: ./abis/LoanToken.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Burn(indexed address,uint256,uint256,uint256)
           handler: handleBurn
+        - event: FlashBorrow(address,address,address,uint256)
+          handler: handleFlashBorrow
         - event: Mint(indexed address,uint256,uint256,uint256)
           handler: handleMint
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.LoanToken.ts
   - kind: ethereum/contract
     name: FulcrumVbzrx
@@ -556,23 +326,15 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - Burn
-        - Mint
-        - OwnershipTransferred
-        - Transfer
+        - FulcrumToken
       abis:
         - name: LoanToken
           file: ./abis/LoanToken.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Burn(indexed address,uint256,uint256,uint256)
           handler: handleBurn
+        - event: FlashBorrow(address,address,address,uint256)
+          handler: handleFlashBorrow
         - event: Mint(indexed address,uint256,uint256,uint256)
           handler: handleMint
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.LoanToken.ts
