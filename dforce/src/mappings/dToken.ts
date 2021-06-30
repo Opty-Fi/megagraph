@@ -8,9 +8,9 @@ import {
   Redeem as RedeemEvent,
   Transfer as TransferEvent,
   TransferFee as TransferFeeEvent,
-} from '../generated/dToken/dToken'
-import { DToken } from '../generated/schema'
-import { convertBINumToDesiredDecimals } from '../../src/utils/converters'
+} from '../../generated/dToken/dToken'
+import { DToken } from '../../generated/schema'
+import { convertBINumToDesiredDecimals } from '../../../src/utils/converters'
 
 function handleEntity(
   dTokenAddress: Address,
@@ -18,6 +18,10 @@ function handleEntity(
   blockNumber: BigInt,
   blockTimestamp: BigInt,
 ): void {
+  log.info('Contract Address from event: {}', [dTokenAddress.toHex()])
+  let dTokenContract = DTokenContract.bind(dTokenAddress)
+  log.info('dToken contract address: {}', [dTokenContract._address.toHex()])
+
   let dTokenEntity = DToken.load(
     transactionHash.toHex().concat('-').concat(blockNumber.toString()),
   )
@@ -27,21 +31,19 @@ function handleEntity(
     )
   }
 
-  log.info('Contract Address from event: {}', [dTokenAddress.toHex()])
-  let dTokenContract = DTokenContract.bind(dTokenAddress)
-  log.info('dToken contract address: {}', [dTokenContract._address.toHex()])
   dTokenEntity.blockNumber = blockNumber
-  dTokenEntity.blockTimestamp = BigInt.fromI32(blockTimestamp.toI32())
-  dTokenEntity.pricePerFullShare = dTokenContract.try_getExchangeRate().reverted ? null : convertBINumToDesiredDecimals(
-    dTokenContract.getExchangeRate(),
-    18,
-  )
-  dTokenEntity.balance = dTokenContract.try_getTotalBalance().reverted ? null : convertBINumToDesiredDecimals(
-    dTokenContract.getTotalBalance(),
-    18,
-  )
-  dTokenEntity.dTokenSymbol = dTokenContract.symbol()
+  dTokenEntity.blockTimestamp = blockTimestamp
   dTokenEntity.dTokenAddress = dTokenAddress
+  dTokenEntity.dTokenSymbol = dTokenContract.try_symbol().reverted
+    ? null
+    : dTokenContract.symbol()
+
+  dTokenEntity.pricePerFullShare = dTokenContract.try_getExchangeRate().reverted
+    ? null
+    : convertBINumToDesiredDecimals(dTokenContract.getExchangeRate(), 18)
+  dTokenEntity.balance = dTokenContract.try_getTotalBalance().reverted
+    ? null
+    : convertBINumToDesiredDecimals(dTokenContract.getTotalBalance(), 18)
 
   dTokenEntity.save()
 }

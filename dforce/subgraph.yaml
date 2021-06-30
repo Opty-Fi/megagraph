@@ -37,7 +37,7 @@ dataSources:
           handler: handleTransfer
         - event: TransferFee(address,address,uint256)
           handler: handleTransferFee
-      file: ./src/mapping.ts
+      file: ./src/mappings/dToken.ts
   # --------------------------------------
   #      dUSDC
   # --------------------------------------
@@ -73,7 +73,7 @@ dataSources:
           handler: handleTransfer
         - event: TransferFee(address,address,uint256)
           handler: handleTransferFee
-      file: ./src/mapping.ts
+      file: ./src/mappings/dToken.ts
   # --------------------------------------
   #      dUSDT
   # --------------------------------------
@@ -109,7 +109,7 @@ dataSources:
           handler: handleTransfer
         - event: TransferFee(address,address,uint256)
           handler: handleTransferFee
-      file: ./src/mapping.ts
+      file: ./src/mappings/dToken.ts
   # --------------------------------------
   #      dTUSD
   # --------------------------------------
@@ -145,7 +145,7 @@ dataSources:
           handler: handleTransfer
         - event: TransferFee(address,address,uint256)
           handler: handleTransferFee
-      file: ./src/mapping.ts
+      file: ./src/mappings/dToken.ts
   # --------------------------------------
   #      dPAX
   # --------------------------------------
@@ -181,5 +181,5 @@ dataSources:
           handler: handleTransfer
         - event: TransferFee(address,address,uint256)
           handler: handleTransferFee
-      file: ./src/mapping.ts
+      file: ./src/mappings/dToken.ts
 
