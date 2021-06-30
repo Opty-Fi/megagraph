@@ -11,6 +11,11 @@ import { Curve as Curve2Pool_PBTC } from "../generated/Curve2Pool_PBTC/Curve"
 import { Curve as Curve2Pool_ankrCRV } from "../generated/Curve2Pool_ankrCRV/Curve"
 import { Curve as Curve2Pool_steCRV } from "../generated/Curve2Pool_steCRV/Curve"
 import { Curve as Curve2Pool_ust3CRV } from "../generated/Curve2Pool_ust3CRV/Curve"
+import { Curve as Curve2Pool_cDAI_cUSDC } from "../generated/Curve2Pool_cDAI_cUSDC/Curve"
+import { Curve as Curve3Pool_aave } from "../generated/Curve3Pool_aave/Curve"
+import { Curve as Curve3Pool_crvRenWSBTC } from "../generated/Curve3Pool_crvRenWSBTC/Curve"
+import { Curve as Curve4Pool_ypaxCrv } from "../generated/Curve4Pool_ypaxCrv/Curve"
+import { Curve as Curve4Pool_crvRenWBTC } from "../generated/Curve4Pool_crvRenWBTC/Curve"
 import { Balance, VirtualPrice } from "../generated/schema"
 
 export const N_COINS_CURVE2POOL = 2
@@ -56,8 +61,20 @@ export function handleUpdateVirtualPrice(
   if (poolType === "Curve4Pool") {
     let contract = Curve4Pool.bind(address)
     virtualPrice = contract.try_get_virtual_price()
+  } else if (poolType === "Curve4Pool_ypaxCrv") {
+    let contract = Curve4Pool_ypaxCrv.bind(address)
+    virtualPrice = contract.try_get_virtual_price()
+  } else if (poolType === "Curve4Pool_crvRenWBTC") {
+    let contract = Curve4Pool_crvRenWBTC.bind(address)
+    virtualPrice = contract.try_get_virtual_price()
   } else if (poolType === "Curve3Pool") {
     let contract = Curve3Pool.bind(address)
+    virtualPrice = contract.try_get_virtual_price()
+  } else if (poolType === "Curve3Pool_aave") {
+    let contract = Curve3Pool_aave.bind(address)
+    virtualPrice = contract.try_get_virtual_price()
+  } else if (poolType === "Curve3Pool_crvRenWSBTC") {
+    let contract = Curve3Pool_crvRenWSBTC.bind(address)
     virtualPrice = contract.try_get_virtual_price()
   } else if (poolType === "Curve2Pool_RSV3CRV") {
     let contract = Curve2Pool_RSV3CRV.bind(address)
@@ -85,6 +102,9 @@ export function handleUpdateVirtualPrice(
     virtualPrice = contract.try_get_virtual_price()
   } else if (poolType === "Curve2Pool_ust3CRV") {
     let contract = Curve2Pool_ust3CRV.bind(address)
+    virtualPrice = contract.try_get_virtual_price()
+  } else if (poolType === "Curve2Pool_cDAI_cUSDC") {
+    let contract = Curve2Pool_cDAI_cUSDC.bind(address)
     virtualPrice = contract.try_get_virtual_price()
   } else {
     let contract = Curve2Pool.bind(address)
@@ -136,8 +156,24 @@ export function handleUpdateOneBalance(
     let contract = Curve4Pool.bind(address)
     balance = contract.try_balances(coinIndex)
     token = contract.try_coins(coinIndex)
+  } else if (poolType === "Curve4Pool_ypaxCrv") {
+    let contract = Curve4Pool_ypaxCrv.bind(address)
+    balance = contract.try_balances(coinIndex)
+    token = contract.try_coins(coinIndex)
+  } else if (poolType === "Curve4Pool_crvRenWBTC") {
+    let contract = Curve4Pool_ypaxCrv.bind(address)
+    balance = contract.try_balances(coinIndex)
+    token = contract.try_coins(coinIndex)
   } else if (poolType === "Curve3Pool") {
     let contract = Curve3Pool.bind(address)
+    balance = contract.try_balances(coinIndex)
+    token = contract.try_coins(coinIndex)
+  } else if (poolType === "Curve3Pool_aave") {
+    let contract = Curve3Pool_aave.bind(address)
+    balance = contract.try_balances(coinIndex)
+    token = contract.try_coins(coinIndex)
+  } else if (poolType === "Curve3Pool_crvRenWSBTC") {
+    let contract = Curve3Pool_crvRenWSBTC.bind(address)
     balance = contract.try_balances(coinIndex)
     token = contract.try_coins(coinIndex)
   } else if (poolType === "Curve2Pool_RSV3CRV") {
@@ -174,6 +210,10 @@ export function handleUpdateOneBalance(
     token = contract.try_coins(coinIndex)
   } else if (poolType === "Curve2Pool_ust3CRV") {
     let contract = Curve2Pool_EURS.bind(address)
+    balance = contract.try_balances(coinIndex)
+    token = contract.try_coins(coinIndex)
+  } else if (poolType === "Curve2Pool_cDAI_cUSDC") {
+    let contract = Curve2Pool_cDAI_cUSDC.bind(address)
     balance = contract.try_balances(coinIndex)
     token = contract.try_coins(coinIndex)
   } else {
