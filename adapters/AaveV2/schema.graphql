@@ -1,182 +1,37 @@
-type LendingPoolBorrow @entity {
+type FromTokenToPool @entity {
   id: ID!
-  reserve: Bytes! # address
-  user: Bytes! # address
-  onBehalfOf: Bytes! # address
-  amount: BigInt! # uint256
-  borrowRateMode: BigInt! # uint256
-  borrowRate: BigInt! # uint256
-  referral: Int! # uint16
+  transactionHash: Bytes!
+  pool: Bytes!
+  underlyingAsset: Bytes!
 }
 
-type LendingPoolDeposit @entity {
+type AaveV2Token @entity {
   id: ID!
-  reserve: Bytes! # address
-  user: Bytes! # address
-  onBehalfOf: Bytes! # address
-  amount: BigInt! # uint256
-  referral: Int! # uint16
-}
+  transactionHash: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  address: String!
+  symbol: String!
 
-type LendingPoolFlashLoan @entity {
-  id: ID!
-  target: Bytes! # address
-  initiator: Bytes! # address
-  asset: Bytes! # address
-  amount: BigInt! # uint256
-  premium: BigInt! # uint256
-  referralCode: Int! # uint16
-}
+  decimals: Int
+  ltv: BigDecimal
+  liquidationThreshold: BigDecimal
+  liquidationBonus: BigDecimal
+  reserveFactor: BigDecimal
+  usageAsCollateralEnabled: Boolean
+  borrowingEnabled: Boolean
+  stableBorrowRateEnabled: Boolean
+  isActive: Boolean
+  isFrozen: Boolean
 
-type LendingPoolLiquidationCall @entity {
-  id: ID!
-  collateralAsset: Bytes! # address
-  debtAsset: Bytes! # address
-  user: Bytes! # address
-  debtToCover: BigInt! # uint256
-  liquidatedCollateralAmount: BigInt! # uint256
-  liquidator: Bytes! # address
-  receiveAToken: Boolean! # bool
-}
-
-type LendingPoolPaused @entity {
-  id: ID!
-}
-
-type LendingPoolRebalanceStableBorrowRate @entity {
-  id: ID!
-  reserve: Bytes! # address
-  user: Bytes! # address
-}
-
-type LendingPoolRepay @entity {
-  id: ID!
-  reserve: Bytes! # address
-  user: Bytes! # address
-  repayer: Bytes! # address
-  amount: BigInt! # uint256
-}
-
-type LendingPoolReserveDataUpdated @entity {
-  id: ID!
-  reserve: Bytes! # address
-  liquidityRate: BigInt! # uint256
-  stableBorrowRate: BigInt! # uint256
-  variableBorrowRate: BigInt! # uint256
-  liquidityIndex: BigInt! # uint256
-  variableBorrowIndex: BigInt! # uint256
-}
-
-type LendingPoolReserveUsedAsCollateralDisabled @entity {
-  id: ID!
-  reserve: Bytes! # address
-  user: Bytes! # address
-}
-
-type LendingPoolReserveUsedAsCollateralEnabled @entity {
-  id: ID!
-  reserve: Bytes! # address
-  user: Bytes! # address
-}
-
-type LendingPoolSwap @entity {
-  id: ID!
-  reserve: Bytes! # address
-  user: Bytes! # address
-  rateMode: BigInt! # uint256
-}
-
-type LendingPoolUnpaused @entity {
-  id: ID!
-}
-
-type LendingPoolWithdraw @entity {
-  id: ID!
-  reserve: Bytes! # address
-  user: Bytes! # address
-  to: Bytes! # address
-  amount: BigInt! # uint256
-}
-
-type LendingRateOracleMarketBorrowRateSet @entity {
-  id: ID!
-  asset: Bytes! # address
-  rate: BigInt! # uint256
-}
-
-type LendingRateOracleOwnershipTransferred @entity {
-  id: ID!
-  previousOwner: Bytes! # address
-  newOwner: Bytes! # address
-}
-
-type AaveOracleAssetSourceUpdated @entity {
-  id: ID!
-  asset: Bytes! # address
-  source: Bytes! # address
-}
-
-type AaveOracleFallbackOracleUpdated @entity {
-  id: ID!
-  fallbackOracle: Bytes! # address
-}
-
-type AaveOracleOwnershipTransferred @entity {
-  id: ID!
-  previousOwner: Bytes! # address
-  newOwner: Bytes! # address
-}
-
-type AaveOracleWethSet @entity {
-  id: ID!
-  weth: Bytes! # address
-}
-
-type Approval @entity {
-  id: ID!
-  owner: Bytes! # address
-  spender: Bytes! # address
-  value: BigInt! # uint256
-}
-
-type BalanceTransfer @entity {
-  id: ID!
-  from: Bytes! # address
-  to: Bytes! # address
-  value: BigInt! # uint256
-  index: BigInt! # uint256
-}
-
-type Burn @entity {
-  id: ID!
-  from: Bytes! # address
-  target: Bytes! # address
-  value: BigInt! # uint256
-  index: BigInt! # uint256
-}
-
-type Initialized @entity {
-  id: ID!
-  underlyingAsset: Bytes! # address
-  pool: Bytes! # address
-  treasury: Bytes! # address
-  incentivesController: Bytes! # address
-  aTokenDecimals: Int! # uint8
-  aTokenName: String! # string
-  aTokenSymbol: String! # string
-  params: Bytes! # bytes
-}
-
-type Mint @entity {
-  id: ID!
-  from: Bytes! # address
-  value: BigInt! # uint256
-  index: BigInt! # uint256
-}
-
-type Transfer @entity {
-  id: ID!
-  from: Bytes! # address
-  to: Bytes! # address
-  value: BigInt! # uint256
+  availableLiquidity: BigDecimal
+  totalStableDebt: BigDecimal
+  totalVariableDebt: BigDecimal
+  liquidityRate: BigDecimal
+  variableBorrowRate: BigDecimal
+  stableBorrowRate: BigDecimal
+  averageStableBorrowRate: BigDecimal
+  liquidityIndex: BigDecimal
+  variableBorrowIndex: BigDecimal
+  lastUpdateTimestamp: BigInt
 }

@@ -1,83 +1,98 @@
+import { log, Address, Bytes, BigInt } from "@graphprotocol/graph-ts";
 import {
-  Approval as ApprovalEvent,
-  BalanceTransfer as BalanceTransferEvent,
+  AToken,
   Burn as BurnEvent,
-  Initialized as InitializedEvent,
   Mint as MintEvent,
-  Transfer as TransferEvent
-} from "./AToken"
+} from "./AToken";
 import {
-  Approval,
-  BalanceTransfer,
-  Burn,
-  Initialized,
-  Mint,
-  Transfer
-} from "../generated/schema"
+  FromTokenToPool,
+  AaveV2Token,
+} from "../generated/schema";
+import { AaveProtocolDataProvider } from "./AaveProtocolDataProvider";
+import { AaveTokenV2 as UnderlyingAsset } from "./AaveTokenV2";
+import { convertBINumToDesiredDecimals } from "./converters";
 
-export function handleApproval(event: ApprovalEvent): void {
-  let entity = new Approval(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.owner = event.params.owner
-  entity.spender = event.params.spender
-  entity.value = event.params.value
-  entity.save()
-}
+function handleAaveV2Token(
+  transactionHash: Bytes,
+  blockNumber: BigInt,
+  blockTimestamp: BigInt,
+  address: Address,
+): void {
+  let tokenContract = AToken.bind(address);
 
-export function handleBalanceTransfer(event: BalanceTransferEvent): void {
-  let entity = new BalanceTransfer(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.from = event.params.from
-  entity.to = event.params.to
-  entity.value = event.params.value
-  entity.index = event.params.index
-  entity.save()
+  let entity = AaveV2Token.load(transactionHash.toHex());
+  if (!entity) entity = new AaveV2Token(transactionHash.toHex());
+
+  entity.transactionHash = transactionHash;
+  entity.blockNumber = blockNumber;
+  entity.blockTimestamp = blockTimestamp;
+  entity.address = address.toHex();
+  entity.symbol = tokenContract.symbol();
+
+  log.debug("Saving AaveV2 Token {} at address {} in block {} with txHash {}", [
+    entity.symbol,
+    address.toHex(),
+    blockNumber.toString(),
+    transactionHash.toHex(),
+  ]);
+
+  let providerContract: AaveProtocolDataProvider = null;
+  let entityFromTokenToPool = FromTokenToPool.load(address.toHex());
+  if (!entityFromTokenToPool) entityFromTokenToPool = new FromTokenToPool(address.toHex());
+  providerContract = AaveProtocolDataProvider.bind(<Address>entityFromTokenToPool.pool);
+
+  let underlyingAssetContract = UnderlyingAsset.bind(<Address>entityFromTokenToPool.underlyingAsset);
+  let underlyingAssetDecimals = underlyingAssetContract.decimals();
+
+  let tried_getReserveConfigurationData = providerContract.try_getReserveConfigurationData(address);
+  if (tried_getReserveConfigurationData.reverted) log.error("getReserveConfigurationData({}) reverted", [ address.toHex() ]);
+  else {
+    let reserveConfData = tried_getReserveConfigurationData.value.toMap();
+    entity.decimals = reserveConfData.get("decimals").toI32();
+    entity.ltv = convertBINumToDesiredDecimals(reserveConfData.get("ltv").toBigInt(), 4);
+    entity.liquidationThreshold = convertBINumToDesiredDecimals(reserveConfData.get("liquidationThreshold").toBigInt(), 4);
+    entity.liquidationBonus = convertBINumToDesiredDecimals(reserveConfData.get("liquidationBonus").toBigInt(), 4);
+    entity.reserveFactor = convertBINumToDesiredDecimals(reserveConfData.get("reserveFactor").toBigInt(), 4);
+    entity.usageAsCollateralEnabled = reserveConfData.get("usageAsCollateralEnabled").toBoolean();
+    entity.borrowingEnabled = reserveConfData.get("borrowingEnabled").toBoolean();
+    entity.stableBorrowRateEnabled = reserveConfData.get("stableBorrowRateEnabled").toBoolean();
+    entity.isActive = reserveConfData.get("isActive").toBoolean();
+    entity.isFrozen = reserveConfData.get("isFrozen").toBoolean();
+  }
+  
+  let tried_getReserveData = providerContract.try_getReserveData(address);
+  if (tried_getReserveData.reverted) log.error("getReserveData({}) reverted", [ address.toHex() ]);
+  else {
+    let reserveData = tried_getReserveData.value.toMap();
+    entity.availableLiquidity = convertBINumToDesiredDecimals(reserveData.get("availableLiquidity").toBigInt(), underlyingAssetDecimals);
+    entity.totalStableDebt = convertBINumToDesiredDecimals(reserveData.get("totalStableDebt").toBigInt(), underlyingAssetDecimals);
+    entity.totalVariableDebt = convertBINumToDesiredDecimals(reserveData.get("totalVariableDebt").toBigInt(), underlyingAssetDecimals);
+    entity.liquidityRate = convertBINumToDesiredDecimals(reserveData.get("liquidityRate").toBigInt(), 27);
+    entity.variableBorrowRate = convertBINumToDesiredDecimals(reserveData.get("variableBorrowRate").toBigInt(), 27);
+    entity.stableBorrowRate = convertBINumToDesiredDecimals(reserveData.get("stableBorrowRate").toBigInt(), 27);
+    entity.averageStableBorrowRate = convertBINumToDesiredDecimals(reserveData.get("averageStableBorrowRate").toBigInt(), 27);
+    entity.liquidityIndex = convertBINumToDesiredDecimals(reserveData.get("liquidityIndex").toBigInt(), 27);
+    entity.variableBorrowIndex = convertBINumToDesiredDecimals(reserveData.get("variableBorrowIndex").toBigInt(), 27);
+    entity.lastUpdateTimestamp = reserveData.get("lastUpdateTimestamp").toBigInt();
+  }
+
+  entity.save();
 }
 
 export function handleBurn(event: BurnEvent): void {
-  let entity = new Burn(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.from = event.params.from
-  entity.target = event.params.target
-  entity.value = event.params.value
-  entity.index = event.params.index
-  entity.save()
-}
-
-export function handleInitialized(event: InitializedEvent): void {
-  let entity = new Initialized(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.underlyingAsset = event.params.underlyingAsset
-  entity.pool = event.params.pool
-  entity.treasury = event.params.treasury
-  entity.incentivesController = event.params.incentivesController
-  entity.aTokenDecimals = event.params.aTokenDecimals
-  entity.aTokenName = event.params.aTokenName
-  entity.aTokenSymbol = event.params.aTokenSymbol
-  entity.params = event.params.params
-  entity.save()
+  handleAaveV2Token(
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+    event.address,
+  );
 }
 
 export function handleMint(event: MintEvent): void {
-  let entity = new Mint(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.from = event.params.from
-  entity.value = event.params.value
-  entity.index = event.params.index
-  entity.save()
-}
-
-export function handleTransfer(event: TransferEvent): void {
-  let entity = new Transfer(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.from = event.params.from
-  entity.to = event.params.to
-  entity.value = event.params.value
-  entity.save()
+  handleAaveV2Token(
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+    event.address,
+  );
 }

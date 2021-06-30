@@ -3,113 +3,25 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: LendingPool
+    name: LendingPoolConfigurator
     network: mainnet
     source:
-      address: "0x7d2768de32b0b80b7a3454c06bdac94a69ddc7a9"
-      startBlock: 11362579
-      abi: LendingPool
+      address: "0x311bb771e4f8952e6da169b425e7e92d6ac45756"
+      startBlock: 11362582
+      abi: LendingPoolConfigurator
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - LendingPoolBorrow
-        - LendingPoolDeposit
-        - LendingPoolFlashLoan
-        - LendingPoolLiquidationCall
-        - LendingPoolPaused
-        - LendingPoolRebalanceStableBorrowRate
-        - LendingPoolRepay
-        - LendingPoolReserveDataUpdated
-        - LendingPoolReserveUsedAsCollateralDisabled
-        - LendingPoolReserveUsedAsCollateralEnabled
-        - LendingPoolSwap
-        - LendingPoolUnpaused
-        - LendingPoolWithdraw
+        - FromTokenToPool
       abis:
-        - name: LendingPool
-          file: ./abis/LendingPool.json
+        - name: LendingPoolConfigurator
+          file: ./abis/LendingPoolConfigurator.json
       eventHandlers:
-        - event: Borrow(indexed address,address,indexed address,uint256,uint256,uint256,indexed uint16)
-          handler: handleBorrow
-        - event: Deposit(indexed address,address,indexed address,uint256,indexed uint16)
-          handler: handleDeposit
-        - event: FlashLoan(indexed address,indexed address,indexed address,uint256,uint256,uint16)
-          handler: handleFlashLoan
-        - event: LiquidationCall(indexed address,indexed address,indexed address,uint256,uint256,address,bool)
-          handler: handleLiquidationCall
-        - event: Paused()
-          handler: handlePaused
-        - event: RebalanceStableBorrowRate(indexed address,indexed address)
-          handler: handleRebalanceStableBorrowRate
-        - event: Repay(indexed address,indexed address,indexed address,uint256)
-          handler: handleRepay
-        - event: ReserveDataUpdated(indexed address,uint256,uint256,uint256,uint256,uint256)
-          handler: handleReserveDataUpdated
-        - event: ReserveUsedAsCollateralDisabled(indexed address,indexed address)
-          handler: handleReserveUsedAsCollateralDisabled
-        - event: ReserveUsedAsCollateralEnabled(indexed address,indexed address)
-          handler: handleReserveUsedAsCollateralEnabled
-        - event: Swap(indexed address,indexed address,uint256)
-          handler: handleSwap
-        - event: Unpaused()
-          handler: handleUnpaused
-        - event: Withdraw(indexed address,indexed address,indexed address,uint256)
-          handler: handleWithdraw
-      file: ./src/mapping.LendingPool.ts
-  - kind: ethereum/contract
-    name: LendingRateOracle
-    network: mainnet
-    source:
-      address: "0x8a32f49ffba88aba6eff96f45d8bd1d4b3f35c7d"
-      startBlock: 11360094
-      abi: LendingRateOracle
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.4
-      language: wasm/assemblyscript
-      entities:
-        - LendingRateOracleMarketBorrowRateSet
-        - LendingRateOracleOwnershipTransferred
-      abis:
-        - name: LendingRateOracle
-          file: ./abis/LendingRateOracle.json
-      eventHandlers:
-        - event: MarketBorrowRateSet(indexed address,uint256)
-          handler: handleMarketBorrowRateSet
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-      file: ./src/mapping.LendingRateOracle.ts
-  - kind: ethereum/contract
-    name: AaveOracle
-    network: mainnet
-    source:
-      address: "0xa50ba011c48153de246e5192c8f9258a2ba79ca9"
-      startBlock: 11275902
-      abi: AaveOracle
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.4
-      language: wasm/assemblyscript
-      entities:
-        - AaveOracleAssetSourceUpdated
-        - AaveOracleFallbackOracleUpdated
-        - AaveOracleOwnershipTransferred
-        - AaveOracleWethSet
-      abis:
-        - name: AaveOracle
-          file: ./abis/AaveOracle.json
-      eventHandlers:
-        - event: AssetSourceUpdated(indexed address,indexed address)
-          handler: handleAssetSourceUpdated
-        - event: FallbackOracleUpdated(indexed address)
-          handler: handleFallbackOracleUpdated
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-        - event: WethSet(indexed address)
-          handler: handleWethSet
-      file: ./src/mapping.AaveOracle.ts
+        - event: ReserveInitialized(indexed address,indexed address,address,address,address)
+          handler: handleReserveInitialized
+      file: ./src/mapping.LendingPoolConfigurator.ts
   - kind: ethereum/contract
     name: Aaavev2
     network: mainnet
@@ -122,28 +34,20 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - BalanceTransfer
-        - Burn
-        - Initialized
-        - Mint
-        - Transfer
+        - FromTokenToPool
+        - AaveV2Token
       abis:
+        - name: AaveProtocolDataProvider
+          file: ./abis/AaveProtocolDataProvider.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: AaveTokenV2
+          file: ./abis/AaveTokenV2.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: Burn(indexed address,indexed address,uint256,uint256)
           handler: handleBurn
-        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
-          handler: handleInitialized
         - event: Mint(indexed address,uint256,uint256)
           handler: handleMint
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Abal
@@ -157,28 +61,20 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - BalanceTransfer
-        - Burn
-        - Initialized
-        - Mint
-        - Transfer
+        - FromTokenToPool
+        - AaveV2Token
       abis:
+        - name: AaveProtocolDataProvider
+          file: ./abis/AaveProtocolDataProvider.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: AaveTokenV2
+          file: ./abis/AaveTokenV2.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: Burn(indexed address,indexed address,uint256,uint256)
           handler: handleBurn
-        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
-          handler: handleInitialized
         - event: Mint(indexed address,uint256,uint256)
           handler: handleMint
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Abatv2
@@ -192,28 +88,20 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - BalanceTransfer
-        - Burn
-        - Initialized
-        - Mint
-        - Transfer
+        - FromTokenToPool
+        - AaveV2Token
       abis:
+        - name: AaveProtocolDataProvider
+          file: ./abis/AaveProtocolDataProvider.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: AaveTokenV2
+          file: ./abis/AaveTokenV2.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: Burn(indexed address,indexed address,uint256,uint256)
           handler: handleBurn
-        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
-          handler: handleInitialized
         - event: Mint(indexed address,uint256,uint256)
           handler: handleMint
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Abusdv2
@@ -227,28 +115,20 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - BalanceTransfer
-        - Burn
-        - Initialized
-        - Mint
-        - Transfer
+        - FromTokenToPool
+        - AaveV2Token
       abis:
+        - name: AaveProtocolDataProvider
+          file: ./abis/AaveProtocolDataProvider.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: AaveTokenV2
+          file: ./abis/AaveTokenV2.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: Burn(indexed address,indexed address,uint256,uint256)
           handler: handleBurn
-        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
-          handler: handleInitialized
         - event: Mint(indexed address,uint256,uint256)
           handler: handleMint
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Acrvv2
@@ -262,28 +142,20 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - BalanceTransfer
-        - Burn
-        - Initialized
-        - Mint
-        - Transfer
+        - FromTokenToPool
+        - AaveV2Token
       abis:
+        - name: AaveProtocolDataProvider
+          file: ./abis/AaveProtocolDataProvider.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: AaveTokenV2
+          file: ./abis/AaveTokenV2.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: Burn(indexed address,indexed address,uint256,uint256)
           handler: handleBurn
-        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
-          handler: handleInitialized
         - event: Mint(indexed address,uint256,uint256)
           handler: handleMint
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Adaiv2
@@ -297,28 +169,20 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - BalanceTransfer
-        - Burn
-        - Initialized
-        - Mint
-        - Transfer
+        - FromTokenToPool
+        - AaveV2Token
       abis:
+        - name: AaveProtocolDataProvider
+          file: ./abis/AaveProtocolDataProvider.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: AaveTokenV2
+          file: ./abis/AaveTokenV2.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: Burn(indexed address,indexed address,uint256,uint256)
           handler: handleBurn
-        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
-          handler: handleInitialized
         - event: Mint(indexed address,uint256,uint256)
           handler: handleMint
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Aenjv2
@@ -332,28 +196,20 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - BalanceTransfer
-        - Burn
-        - Initialized
-        - Mint
-        - Transfer
+        - FromTokenToPool
+        - AaveV2Token
       abis:
+        - name: AaveProtocolDataProvider
+          file: ./abis/AaveProtocolDataProvider.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: AaveTokenV2
+          file: ./abis/AaveTokenV2.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: Burn(indexed address,indexed address,uint256,uint256)
           handler: handleBurn
-        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
-          handler: handleInitialized
         - event: Mint(indexed address,uint256,uint256)
           handler: handleMint
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Agusdv2
@@ -367,28 +223,20 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - BalanceTransfer
-        - Burn
-        - Initialized
-        - Mint
-        - Transfer
+        - FromTokenToPool
+        - AaveV2Token
       abis:
+        - name: AaveProtocolDataProvider
+          file: ./abis/AaveProtocolDataProvider.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: AaveTokenV2
+          file: ./abis/AaveTokenV2.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: Burn(indexed address,indexed address,uint256,uint256)
           handler: handleBurn
-        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
-          handler: handleInitialized
         - event: Mint(indexed address,uint256,uint256)
           handler: handleMint
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Akncv2
@@ -402,28 +250,20 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - BalanceTransfer
-        - Burn
-        - Initialized
-        - Mint
-        - Transfer
+        - FromTokenToPool
+        - AaveV2Token
       abis:
+        - name: AaveProtocolDataProvider
+          file: ./abis/AaveProtocolDataProvider.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: AaveTokenV2
+          file: ./abis/AaveTokenV2.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: Burn(indexed address,indexed address,uint256,uint256)
           handler: handleBurn
-        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
-          handler: handleInitialized
         - event: Mint(indexed address,uint256,uint256)
           handler: handleMint
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Alinkv2
@@ -437,28 +277,20 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - BalanceTransfer
-        - Burn
-        - Initialized
-        - Mint
-        - Transfer
+        - FromTokenToPool
+        - AaveV2Token
       abis:
+        - name: AaveProtocolDataProvider
+          file: ./abis/AaveProtocolDataProvider.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: AaveTokenV2
+          file: ./abis/AaveTokenV2.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: Burn(indexed address,indexed address,uint256,uint256)
           handler: handleBurn
-        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
-          handler: handleInitialized
         - event: Mint(indexed address,uint256,uint256)
           handler: handleMint
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Amanav2
@@ -472,28 +304,20 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - BalanceTransfer
-        - Burn
-        - Initialized
-        - Mint
-        - Transfer
+        - FromTokenToPool
+        - AaveV2Token
       abis:
+        - name: AaveProtocolDataProvider
+          file: ./abis/AaveProtocolDataProvider.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: AaveTokenV2
+          file: ./abis/AaveTokenV2.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: Burn(indexed address,indexed address,uint256,uint256)
           handler: handleBurn
-        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
-          handler: handleInitialized
         - event: Mint(indexed address,uint256,uint256)
           handler: handleMint
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Amkrv2
@@ -507,28 +331,20 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - BalanceTransfer
-        - Burn
-        - Initialized
-        - Mint
-        - Transfer
+        - FromTokenToPool
+        - AaveV2Token
       abis:
+        - name: AaveProtocolDataProvider
+          file: ./abis/AaveProtocolDataProvider.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: AaveTokenV2
+          file: ./abis/AaveTokenV2.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: Burn(indexed address,indexed address,uint256,uint256)
           handler: handleBurn
-        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
-          handler: handleInitialized
         - event: Mint(indexed address,uint256,uint256)
           handler: handleMint
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Aren
@@ -542,28 +358,20 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - BalanceTransfer
-        - Burn
-        - Initialized
-        - Mint
-        - Transfer
+        - FromTokenToPool
+        - AaveV2Token
       abis:
+        - name: AaveProtocolDataProvider
+          file: ./abis/AaveProtocolDataProvider.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: AaveTokenV2
+          file: ./abis/AaveTokenV2.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: Burn(indexed address,indexed address,uint256,uint256)
           handler: handleBurn
-        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
-          handler: handleInitialized
         - event: Mint(indexed address,uint256,uint256)
           handler: handleMint
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Asnxv2
@@ -577,28 +385,20 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - BalanceTransfer
-        - Burn
-        - Initialized
-        - Mint
-        - Transfer
+        - FromTokenToPool
+        - AaveV2Token
       abis:
+        - name: AaveProtocolDataProvider
+          file: ./abis/AaveProtocolDataProvider.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: AaveTokenV2
+          file: ./abis/AaveTokenV2.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: Burn(indexed address,indexed address,uint256,uint256)
           handler: handleBurn
-        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
-          handler: handleInitialized
         - event: Mint(indexed address,uint256,uint256)
           handler: handleMint
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Asusdv2
@@ -612,28 +412,20 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - BalanceTransfer
-        - Burn
-        - Initialized
-        - Mint
-        - Transfer
+        - FromTokenToPool
+        - AaveV2Token
       abis:
+        - name: AaveProtocolDataProvider
+          file: ./abis/AaveProtocolDataProvider.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: AaveTokenV2
+          file: ./abis/AaveTokenV2.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: Burn(indexed address,indexed address,uint256,uint256)
           handler: handleBurn
-        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
-          handler: handleInitialized
         - event: Mint(indexed address,uint256,uint256)
           handler: handleMint
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Auniv2
@@ -647,28 +439,20 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - BalanceTransfer
-        - Burn
-        - Initialized
-        - Mint
-        - Transfer
+        - FromTokenToPool
+        - AaveV2Token
       abis:
+        - name: AaveProtocolDataProvider
+          file: ./abis/AaveProtocolDataProvider.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: AaveTokenV2
+          file: ./abis/AaveTokenV2.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: Burn(indexed address,indexed address,uint256,uint256)
           handler: handleBurn
-        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
-          handler: handleInitialized
         - event: Mint(indexed address,uint256,uint256)
           handler: handleMint
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Ausdcv2
@@ -682,28 +466,20 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - BalanceTransfer
-        - Burn
-        - Initialized
-        - Mint
-        - Transfer
+        - FromTokenToPool
+        - AaveV2Token
       abis:
+        - name: AaveProtocolDataProvider
+          file: ./abis/AaveProtocolDataProvider.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: AaveTokenV2
+          file: ./abis/AaveTokenV2.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: Burn(indexed address,indexed address,uint256,uint256)
           handler: handleBurn
-        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
-          handler: handleInitialized
         - event: Mint(indexed address,uint256,uint256)
           handler: handleMint
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Ausdtv2
@@ -717,28 +493,20 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - BalanceTransfer
-        - Burn
-        - Initialized
-        - Mint
-        - Transfer
+        - FromTokenToPool
+        - AaveV2Token
       abis:
+        - name: AaveProtocolDataProvider
+          file: ./abis/AaveProtocolDataProvider.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: AaveTokenV2
+          file: ./abis/AaveTokenV2.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: Burn(indexed address,indexed address,uint256,uint256)
           handler: handleBurn
-        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
-          handler: handleInitialized
         - event: Mint(indexed address,uint256,uint256)
           handler: handleMint
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Awbtcv2
@@ -752,28 +520,20 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - BalanceTransfer
-        - Burn
-        - Initialized
-        - Mint
-        - Transfer
+        - FromTokenToPool
+        - AaveV2Token
       abis:
+        - name: AaveProtocolDataProvider
+          file: ./abis/AaveProtocolDataProvider.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: AaveTokenV2
+          file: ./abis/AaveTokenV2.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: Burn(indexed address,indexed address,uint256,uint256)
           handler: handleBurn
-        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
-          handler: handleInitialized
         - event: Mint(indexed address,uint256,uint256)
           handler: handleMint
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Awethv2
@@ -787,28 +547,20 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - BalanceTransfer
-        - Burn
-        - Initialized
-        - Mint
-        - Transfer
+        - FromTokenToPool
+        - AaveV2Token
       abis:
+        - name: AaveProtocolDataProvider
+          file: ./abis/AaveProtocolDataProvider.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: AaveTokenV2
+          file: ./abis/AaveTokenV2.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: Burn(indexed address,indexed address,uint256,uint256)
           handler: handleBurn
-        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
-          handler: handleInitialized
         - event: Mint(indexed address,uint256,uint256)
           handler: handleMint
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Axsushi
@@ -822,28 +574,20 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - BalanceTransfer
-        - Burn
-        - Initialized
-        - Mint
-        - Transfer
+        - FromTokenToPool
+        - AaveV2Token
       abis:
+        - name: AaveProtocolDataProvider
+          file: ./abis/AaveProtocolDataProvider.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: AaveTokenV2
+          file: ./abis/AaveTokenV2.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: Burn(indexed address,indexed address,uint256,uint256)
           handler: handleBurn
-        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
-          handler: handleInitialized
         - event: Mint(indexed address,uint256,uint256)
           handler: handleMint
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Ayfiv2
@@ -857,28 +601,20 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - BalanceTransfer
-        - Burn
-        - Initialized
-        - Mint
-        - Transfer
+        - FromTokenToPool
+        - AaveV2Token
       abis:
+        - name: AaveProtocolDataProvider
+          file: ./abis/AaveProtocolDataProvider.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: AaveTokenV2
+          file: ./abis/AaveTokenV2.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: Burn(indexed address,indexed address,uint256,uint256)
           handler: handleBurn
-        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
-          handler: handleInitialized
         - event: Mint(indexed address,uint256,uint256)
           handler: handleMint
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Azrxv2
@@ -892,26 +628,18 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - BalanceTransfer
-        - Burn
-        - Initialized
-        - Mint
-        - Transfer
+        - FromTokenToPool
+        - AaveV2Token
       abis:
+        - name: AaveProtocolDataProvider
+          file: ./abis/AaveProtocolDataProvider.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: AaveTokenV2
+          file: ./abis/AaveTokenV2.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: Burn(indexed address,indexed address,uint256,uint256)
           handler: handleBurn
-        - event: Initialized(indexed address,indexed address,address,address,uint8,string,string,bytes)
-          handler: handleInitialized
         - event: Mint(indexed address,uint256,uint256)
           handler: handleMint
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
