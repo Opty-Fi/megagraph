@@ -19,6 +19,7 @@ export function createCTokenEntity(
 ): void {
   let cTokenContract = CToken.bind(cTokenAddress)
 
+  //  Get the underlying token decimals
   let underlyingTokenAddress = cTokenContract.try_underlying()
   let underlyingTokenDecimals = null
   if (!underlyingTokenAddress.reverted) {
@@ -26,6 +27,7 @@ export function createCTokenEntity(
     underlyingTokenDecimals = underlyingTokenContract.decimals()
   }
 
+  //  Load CTokenData Entity for not having duplicates
   let cTokenDataEntity = CTokenData.load(transactionHash.toHex())
   if (cTokenDataEntity == null) {
     cTokenDataEntity = new CTokenData(transactionHash.toHex())
@@ -118,7 +120,6 @@ export function createCTokenEntity(
         ? null
         : cTokenContract.comptroller()
       : comptrollerAddress
-
   if (comptrollerAddress) {
     let comptrollerContract = ComptrollerImplementation.bind(comptrollerAddress)
     cTokenDataEntity.compSpeed = comptrollerContract.try_compSpeeds(
@@ -130,5 +131,14 @@ export function createCTokenEntity(
           18,
         )
   }
+  log.info(
+    'Saving data for cToken: {} - {} for block: {} with transaction hash: {}',
+    [
+      cTokenDataEntity.cTokenAddress.toHex(),
+      cTokenDataEntity.cTokenSymbol,
+      cTokenDataEntity.blockNumber.toString(),
+      cTokenDataEntity.id,
+    ],
+  )
   cTokenDataEntity.save()
 }
