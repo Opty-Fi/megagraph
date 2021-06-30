@@ -1,18 +1,18 @@
-import { BigInt, log, Address, Bytes } from "@graphprotocol/graph-ts";
+import { log, Address, Bytes, BigInt } from "@graphprotocol/graph-ts";
 import {
-  CErc20Delegator,
+  CCapableErc20Delegate,
   AccrueInterest as AccrueInterestEvent,
   Borrow as BorrowEvent,
+  Flashloan as FlashloanEvent,
   LiquidateBorrow as LiquidateBorrowEvent,
   Mint as MintEvent,
-  NewReserveFactor as NewReserveFactorEvent,
   Redeem as RedeemEvent,
   RepayBorrow as RepayBorrowEvent,
   ReservesAdded as ReservesAddedEvent,
   ReservesReduced as ReservesReducedEvent,
-  Transfer as TransferEvent
-} from "./CErc20Delegator";
+} from "./CCapableErc20Delegate";
 import { CreamToken } from "../generated/schema";
+import { Comptroller } from "../generated/Comptroller/Comptroller";
 import { convertBINumToDesiredDecimals } from "./converters";
 
 function handleCreamToken(
@@ -20,31 +20,44 @@ function handleCreamToken(
   blockNumber: BigInt,
   blockTimestamp: BigInt,
   address: Address,
+  borrowIndex: BigInt,
   totalBorrows: BigInt,
   totalReserves: BigInt,
 ): void {
-  let tokenContract = CErc20Delegator.bind(address);
+  let tokenContract = CCapableErc20Delegate.bind(address);
 
   let entity = CreamToken.load(transactionHash.toHex());
-  if (entity == null) {
-    entity = new CreamToken(transactionHash.toHex());
-  }
+  if (!entity) entity = new CreamToken(transactionHash.toHex());
 
   entity.transactionHash = transactionHash;
   entity.blockNumber = blockNumber;
   entity.blockTimestamp = blockTimestamp;
   entity.address = address.toHex();
-
-  let symb = tokenContract.try_symbol();
-  if (symb.reverted) log.error("symbol() reverted", []);
-  else entity.symbol = symb.value;
+  entity.symbol = tokenContract.symbol();
 
   log.debug("Saving Cream Token {} at address {} in block {} with txHash {}", [
-    symb.value,
+    entity.symbol,
     address.toHex(),
     blockNumber.toString(),
     transactionHash.toHex(),
   ]);
+  
+  let comptrollerContract: Comptroller = null;
+  let tried_comptroller = tokenContract.try_comptroller();
+  if (!tried_comptroller.reverted) comptrollerContract = Comptroller.bind(tried_comptroller.value);
+  if (comptrollerContract) {
+    let tried_compSpeeds = comptrollerContract.try_compSpeeds(address);
+    if (tried_compSpeeds.reverted) log.error("compSpeeds() reverted", []);
+    else entity.compSpeeds = convertBINumToDesiredDecimals(tried_compSpeeds.value, 18);
+  }
+
+  if (borrowIndex) {
+    entity.borrowIndex = borrowIndex;
+  } else {
+    let tried_borrowIndex = tokenContract.try_borrowIndex();
+    if (tried_borrowIndex.reverted) log.error("borrowIndex() reverted", []);
+    else entity.borrowIndex = tried_borrowIndex.value;
+  }
 
   let tried_borrowRatePerBlock = tokenContract.try_borrowRatePerBlock();
   if (tried_borrowRatePerBlock.reverted) log.error("borrowRatePerBlock() reverted", []);
@@ -62,10 +75,6 @@ function handleCreamToken(
   if (tried_getCash.reverted) log.error("getCash() reverted", []);
   else entity.totalCash = convertBINumToDesiredDecimals(tried_getCash.value, tokenContract.decimals());
 
-  let tried_totalSupply = tokenContract.try_totalSupply();
-  if (tried_totalSupply.reverted) log.error("totalSupply() reverted", []);
-  else entity.totalSupply = convertBINumToDesiredDecimals(tried_totalSupply.value, tokenContract.decimals());
-
   if (totalBorrows) {
     entity.totalBorrows = totalBorrows.toBigDecimal();
   } else {
@@ -74,12 +83,16 @@ function handleCreamToken(
     else entity.totalBorrows = convertBINumToDesiredDecimals(tried_totalBorrows.value, tokenContract.decimals());
   }
 
+  let tried_totalSupply = tokenContract.try_totalSupply();
+  if (tried_totalSupply.reverted) log.error("totalSupply() reverted", []);
+  else entity.totalSupply = tried_totalSupply.value;
+
   if (totalReserves) {
-    entity.totalReserves = totalReserves.toBigDecimal();
+    entity.totalReserves = totalReserves;
   } else {
     let tried_totalReserves = tokenContract.try_totalReserves();
     if (tried_totalReserves.reverted) log.error("totalReserves() reverted", []);
-    else entity.totalReserves = convertBINumToDesiredDecimals(tried_totalReserves.value, tokenContract.decimals());
+    else entity.totalReserves = tried_totalReserves.value;
   }
   
   entity.save();
@@ -91,6 +104,7 @@ export function handleAccrueInterest(event: AccrueInterestEvent): void {
     event.block.number,
     event.block.timestamp,
     event.address,
+    event.params.borrowIndex,
     event.params.totalBorrows,
     null, // totalReserves
   );
@@ -102,7 +116,20 @@ export function handleBorrow(event: BorrowEvent): void {
     event.block.number,
     event.block.timestamp,
     event.address,
+    null, // borrowIndex
     event.params.totalBorrows,
+    null, // totalReserves
+  );
+}
+
+export function handleFlashloan(event: FlashloanEvent): void {
+  handleCreamToken(
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+    event.address,
+    null, // borrowIndex
+    null, // totalBorrows
     null, // totalReserves
   );
 }
@@ -113,6 +140,7 @@ export function handleLiquidateBorrow(event: LiquidateBorrowEvent): void {
     event.block.number,
     event.block.timestamp,
     event.address,
+    null, // borrowIndex
     null, // totalBorrows
     null, // totalReserves
   );
@@ -124,17 +152,7 @@ export function handleMint(event: MintEvent): void {
     event.block.number,
     event.block.timestamp,
     event.address,
-    null, // totalBorrows
-    null, // totalReserves
-  );
-}
-
-export function handleNewReserveFactor(event: NewReserveFactorEvent): void {
-  handleCreamToken(
-    event.transaction.hash,
-    event.block.number,
-    event.block.timestamp,
-    event.address,
+    null, // borrowIndex
     null, // totalBorrows
     null, // totalReserves
   );
@@ -146,6 +164,7 @@ export function handleRedeem(event: RedeemEvent): void {
     event.block.number,
     event.block.timestamp,
     event.address,
+    null, // borrowIndex
     null, // totalBorrows
     null, // totalReserves
   );
@@ -157,6 +176,7 @@ export function handleRepayBorrow(event: RepayBorrowEvent): void {
     event.block.number,
     event.block.timestamp,
     event.address,
+    null, // borrowIndex
     event.params.totalBorrows,
     null, // totalReserves
   );
@@ -168,6 +188,7 @@ export function handleReservesAdded(event: ReservesAddedEvent): void {
     event.block.number,
     event.block.timestamp,
     event.address,
+    null, // borrowIndex
     null, // totalBorrows
     event.params.newTotalReserves,
   );
@@ -179,18 +200,8 @@ export function handleReservesReduced(event: ReservesReducedEvent): void {
     event.block.number,
     event.block.timestamp,
     event.address,
+    null, // borrowIndex
     null, // totalBorrows
     event.params.newTotalReserves,
-  );
-}
-
-export function handleTransfer(event: TransferEvent): void {
-  handleCreamToken(
-    event.transaction.hash,
-    event.block.number,
-    event.block.timestamp,
-    event.address,
-    null, // totalBorrows
-    null, // totalReserves
   );
 }

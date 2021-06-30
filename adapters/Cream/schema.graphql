@@ -1,25 +1,17 @@
-type Comptroller @entity {
-  id: ID!
-  transactionHash: Bytes
-  blockNumber: BigInt
-  blockTimestamp: BigInt
-  token: CreamToken
-  compSpeeds: BigDecimal
-}
-
 type CreamToken @entity {
   id: ID!
-  transactionHash: Bytes
-  blockNumber: BigInt
-  blockTimestamp: BigInt
-  address: String
-  symbol: String
-  compSpeeds: Comptroller @derivedFrom(field: "token")
-  borrowRatePerBlock: BigDecimal,
-  supplyRatePerBlock: BigDecimal,
-  exchangeRateStored: BigDecimal,
-  totalCash: BigDecimal,
-  totalBorrows: BigDecimal,
-  totalSupply: BigDecimal,
-  totalReserves: BigDecimal,
+  transactionHash: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  address: String!
+  symbol: String!
+  compSpeeds: BigDecimal
+  borrowIndex: BigInt
+  borrowRatePerBlock: BigDecimal
+  supplyRatePerBlock: BigDecimal
+  exchangeRateStored: BigDecimal
+  totalCash: BigDecimal
+  totalBorrows: BigDecimal
+  totalSupply: BigInt
+  totalReserves: BigInt
 }
