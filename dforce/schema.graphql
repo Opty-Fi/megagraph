@@ -1,4 +1,4 @@
-type DToken @entity {
+type DTokenData @entity {
   id: ID!
   pricePerFullShare: BigDecimal
   balance: BigDecimal

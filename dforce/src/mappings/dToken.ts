@@ -9,7 +9,7 @@ import {
   Transfer as TransferEvent,
   TransferFee as TransferFeeEvent,
 } from '../../generated/dToken/dToken'
-import { DToken } from '../../generated/schema'
+import { DTokenData } from '../../generated/schema'
 import { convertBINumToDesiredDecimals } from '../../../src/utils/converters'
 
 function handleEntity(
@@ -18,34 +18,39 @@ function handleEntity(
   blockNumber: BigInt,
   blockTimestamp: BigInt,
 ): void {
-  log.info('Contract Address from event: {}', [dTokenAddress.toHex()])
   let dTokenContract = DTokenContract.bind(dTokenAddress)
-  log.info('dToken contract address: {}', [dTokenContract._address.toHex()])
 
-  let dTokenEntity = DToken.load(
-    transactionHash.toHex().concat('-').concat(blockNumber.toString()),
-  )
-  if (dTokenEntity == null) {
-    dTokenEntity = new DToken(
-      transactionHash.toHex().concat('-').concat(blockNumber.toString()),
-    )
+  // Load DTokenData Entity for not having duplicates
+  let dTokenDataEntity = DTokenData.load(transactionHash.toHex())
+  if (dTokenDataEntity == null) {
+    dTokenDataEntity = new DTokenData(transactionHash.toHex())
   }
 
-  dTokenEntity.blockNumber = blockNumber
-  dTokenEntity.blockTimestamp = blockTimestamp
-  dTokenEntity.dTokenAddress = dTokenAddress
-  dTokenEntity.dTokenSymbol = dTokenContract.try_symbol().reverted
+  dTokenDataEntity.blockNumber = blockNumber
+  dTokenDataEntity.blockTimestamp = blockTimestamp
+  dTokenDataEntity.dTokenAddress = dTokenAddress
+  dTokenDataEntity.dTokenSymbol = dTokenContract.try_symbol().reverted
     ? null
     : dTokenContract.symbol()
 
-  dTokenEntity.pricePerFullShare = dTokenContract.try_getExchangeRate().reverted
+  dTokenDataEntity.pricePerFullShare = dTokenContract.try_getExchangeRate()
+    .reverted
     ? null
     : convertBINumToDesiredDecimals(dTokenContract.getExchangeRate(), 18)
-  dTokenEntity.balance = dTokenContract.try_getTotalBalance().reverted
+  dTokenDataEntity.balance = dTokenContract.try_getTotalBalance().reverted
     ? null
     : convertBINumToDesiredDecimals(dTokenContract.getTotalBalance(), 18)
 
-  dTokenEntity.save()
+  log.info(
+    'Saving data for cToken: {} - {} for block: {} with transaction hash: {}',
+    [
+      dTokenDataEntity.dTokenAddress.toHex(),
+      dTokenDataEntity.dTokenSymbol,
+      dTokenDataEntity.blockNumber.toString(),
+      dTokenDataEntity.id,
+    ],
+  )
+  dTokenDataEntity.save()
 }
 
 export function handleTransfer(event: TransferEvent): void {
