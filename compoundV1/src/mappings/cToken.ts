@@ -1,4 +1,4 @@
-import { BigInt, Address, Bytes } from '@graphprotocol/graph-ts'
+import { BigInt, Address, log, Bytes } from '@graphprotocol/graph-ts'
 import {
   CToken,
   AccrueInterest as AccrueInterestEvent,
@@ -12,6 +12,7 @@ import {
   ReservesReduced as ReservesReducedEvent,
   Transfer as TransferEvent,
 } from '../../generated/CToken/CToken'
+import { ComptrollerImplementation } from '../../generated/Comptroller/ComptrollerImplementation'
 import { CTokenData } from '../../generated/schema'
 import {
   convertBINumToDesiredDecimals,
@@ -122,6 +123,27 @@ function handleEntity(
     .reverted
     ? null
     : convertBINumToDesiredDecimals(cTokenContract.supplyRatePerBlock(), 18)
+  
+  log.info('Comptroller in ctoken file', [])
+  let comptrollerAddress = cTokenContract.try_comptroller()
+
+  if (!comptrollerAddress.reverted) {
+    let comptrollerContract = ComptrollerImplementation.bind(
+      comptrollerAddress.value,
+    )
+    log.info('_comptroller address: {}', [comptrollerContract._address.toHex()])
+    cTokenDataEntity.compSpeed = comptrollerContract.try_compSpeeds(
+      cTokenAddress,
+    ).reverted
+      ? null
+      : convertBINumToDesiredDecimals(
+          comptrollerContract.compSpeeds(cTokenAddress),
+          18,
+        )
+    log.info('Comp speed in cToken file: {}', [
+      cTokenDataEntity.compSpeed.toString(),
+    ])
+  }
   cTokenDataEntity.save()
 }
 
