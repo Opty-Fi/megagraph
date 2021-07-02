@@ -28,19 +28,6 @@ function handleCreamToken(
 
   let entity = CreamToken.load(transactionHash.toHex());
   if (!entity) entity = new CreamToken(transactionHash.toHex());
-
-  entity.transactionHash = transactionHash;
-  entity.blockNumber = blockNumber;
-  entity.blockTimestamp = blockTimestamp;
-  entity.address = address.toHex();
-  entity.symbol = tokenContract.symbol();
-
-  log.debug("Saving Cream Token {} at address {} in block {} with txHash {}", [
-    entity.symbol,
-    address.toHex(),
-    blockNumber.toString(),
-    transactionHash.toHex(),
-  ]);
   
   let comptrollerContract: Comptroller = null;
   let tried_comptroller = tokenContract.try_comptroller();
@@ -50,6 +37,32 @@ function handleCreamToken(
     if (tried_compSpeeds.reverted) log.error("compSpeeds() reverted", []);
     else entity.compSpeeds = convertBINumToDesiredDecimals(tried_compSpeeds.value, 18);
   }
+
+  let underlyingAssetDecimals: i32;
+  let underlyingAsset = tokenContract.try_underlying();
+  if (underlyingAsset.reverted) log.error("underlying() reverted", []);
+  else {
+    let underlyingAssetContract = CCapableErc20Delegate.bind(underlyingAsset.value);
+    if (!underlyingAssetContract) log.error("No underlyingAsset at {}", [ underlyingAsset.value.toHex() ]);
+    else {
+      let tried_underlyingAssetDecimals = underlyingAssetContract.try_decimals();
+      if (tried_underlyingAssetDecimals.reverted) log.error("decimals() reverted", []);
+      else underlyingAssetDecimals = tried_underlyingAssetDecimals.value;
+    }
+  }
+
+  entity.transactionHash = transactionHash;
+  entity.blockNumber = blockNumber;
+  entity.blockTimestamp = blockTimestamp;
+  entity.address = address;
+  entity.symbol = tokenContract.symbol();
+
+  log.debug("Saving Cream Token {} at address {} in block {} with txHash {}", [
+    entity.symbol,
+    address.toHex(),
+    blockNumber.toString(),
+    transactionHash.toHex(),
+  ]);
 
   if (borrowIndex) {
     entity.borrowIndex = borrowIndex;
@@ -69,18 +82,18 @@ function handleCreamToken(
   
   let tried_exchangeRateStored = tokenContract.try_exchangeRateStored();
   if (tried_exchangeRateStored.reverted) log.error("exchangeRateStored() reverted", []);
-  else entity.exchangeRateStored = convertBINumToDesiredDecimals(tried_exchangeRateStored.value, 10 + tokenContract.decimals());
+  else entity.exchangeRateStored = convertBINumToDesiredDecimals(tried_exchangeRateStored.value, 10 + underlyingAssetDecimals);
 
   let tried_getCash = tokenContract.try_getCash();
   if (tried_getCash.reverted) log.error("getCash() reverted", []);
-  else entity.totalCash = convertBINumToDesiredDecimals(tried_getCash.value, tokenContract.decimals());
+  else entity.totalCash = convertBINumToDesiredDecimals(tried_getCash.value, underlyingAssetDecimals);
 
   if (totalBorrows) {
     entity.totalBorrows = totalBorrows.toBigDecimal();
   } else {
     let tried_totalBorrows = tokenContract.try_totalBorrows();
     if (tried_totalBorrows.reverted) log.error("totalBorrows() reverted", []);
-    else entity.totalBorrows = convertBINumToDesiredDecimals(tried_totalBorrows.value, tokenContract.decimals());
+    else entity.totalBorrows = convertBINumToDesiredDecimals(tried_totalBorrows.value, underlyingAssetDecimals);
   }
 
   let tried_totalSupply = tokenContract.try_totalSupply();

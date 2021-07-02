@@ -3,7 +3,7 @@ type CreamToken @entity {
   transactionHash: Bytes!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
-  address: String!
+  address: Bytes!
   symbol: String!
   compSpeeds: BigDecimal
   borrowIndex: BigInt

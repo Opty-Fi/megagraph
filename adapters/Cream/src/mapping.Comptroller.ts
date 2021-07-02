@@ -1,4 +1,4 @@
-import { log, Address, Bytes, BigInt } from "@graphprotocol/graph-ts";
+import { ethereum, log, Address, Bytes, BigInt } from "@graphprotocol/graph-ts";
 import {
   Comptroller,
   CompSpeedUpdated as CompSpeedUpdatedEvent,
@@ -14,10 +14,23 @@ export function handleCompSpeedUpdated(event: CompSpeedUpdatedEvent): void {
   let entity = CreamToken.load(event.transaction.hash.toHex());
   if (!entity) entity = new CreamToken(event.transaction.hash.toHex());
 
+  let underlyingAssetDecimals: i32;
+  let underlyingAsset = tokenContract.try_underlying();
+  if (underlyingAsset.reverted) log.error("underlying() reverted", []);
+  else {
+    let underlyingAssetContract = CCapableErc20Delegate.bind(underlyingAsset.value);
+    if (!underlyingAssetContract) log.error("No underlyingAsset at {}", [ underlyingAsset.value.toHex() ]);
+    else {
+      let tried_underlyingAssetDecimals = underlyingAssetContract.try_decimals();
+      if (tried_underlyingAssetDecimals.reverted) log.error("decimals() reverted", []);
+      else underlyingAssetDecimals = tried_underlyingAssetDecimals.value;
+    }
+  }
+
   entity.transactionHash = event.transaction.hash;
   entity.blockNumber = event.block.number;
   entity.blockTimestamp = event.block.timestamp;
-  entity.address = event.params.cToken.toHex();
+  entity.address = event.params.cToken;
   entity.symbol = tokenContract.symbol();
 
   if (event.params.newSpeed) {
@@ -42,15 +55,15 @@ export function handleCompSpeedUpdated(event: CompSpeedUpdatedEvent): void {
   
   let tried_exchangeRateStored = tokenContract.try_exchangeRateStored();
   if (tried_exchangeRateStored.reverted) log.error("exchangeRateStored() reverted", []);
-  else entity.exchangeRateStored = convertBINumToDesiredDecimals(tried_exchangeRateStored.value, 10 + tokenContract.decimals());
+  else entity.exchangeRateStored = convertBINumToDesiredDecimals(tried_exchangeRateStored.value, 10 + underlyingAssetDecimals);
 
   let tried_getCash = tokenContract.try_getCash();
   if (tried_getCash.reverted) log.error("getCash() reverted", []);
-  else entity.totalCash = convertBINumToDesiredDecimals(tried_getCash.value, tokenContract.decimals());
+  else entity.totalCash = convertBINumToDesiredDecimals(tried_getCash.value, underlyingAssetDecimals);
 
   let tried_totalBorrows = tokenContract.try_totalBorrows();
   if (tried_totalBorrows.reverted) log.error("totalBorrows() reverted", []);
-  else entity.totalBorrows = convertBINumToDesiredDecimals(tried_totalBorrows.value, tokenContract.decimals());
+  else entity.totalBorrows = convertBINumToDesiredDecimals(tried_totalBorrows.value, underlyingAssetDecimals);
 
   let tried_totalSupply = tokenContract.try_totalSupply();
   if (tried_totalSupply.reverted) log.error("totalSupply() reverted", []);
