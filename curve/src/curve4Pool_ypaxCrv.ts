@@ -3,7 +3,7 @@ import {
   AddLiquidity,
   RemoveLiquidity,
   RemoveLiquidityImbalance
-} from "../generated/Curve4Pool/Curve"
+} from "../generated/Curve4Pool_ypaxCrv/Curve"
 import {
   N_COINS_CURVE4POOL,
   handleExchangeEvent,
@@ -21,14 +21,14 @@ export function handleTokenExchangeUnderlying(
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
-    "Curve4Pool"
+    "Curve4Pool_ypaxCrv"
   )
   handleUpdateVirtualPrice(
     event.address,
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
-    "Curve4Pool"
+    "Curve4Pool_ypaxCrv"
   )
 }
 
@@ -38,7 +38,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
-    "Curve4Pool"
+    "Curve4Pool_ypaxCrv"
   )
   handleUpdateAllBalances(
     event.address,
@@ -46,7 +46,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     event.block.number,
     event.block.timestamp,
     N_COINS_CURVE4POOL,
-    "Curve4Pool"
+    "Curve4Pool_ypaxCrv"
   )
 }
 
@@ -56,7 +56,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
-    "Curve4Pool"
+    "Curve4Pool_ypaxCrv"
   )
   handleUpdateAllBalances(
     event.address,
@@ -64,7 +64,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
     event.block.number,
     event.block.timestamp,
     N_COINS_CURVE4POOL,
-    "Curve4Pool"
+    "Curve4Pool_ypaxCrv"
   )
 }
 
@@ -76,7 +76,7 @@ export function handleRemoveLiquidityImbalance(
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
-    "Curve4Pool"
+    "Curve4Pool_ypaxCrv"
   )
   handleUpdateAllBalances(
     event.address,
@@ -84,6 +84,6 @@ export function handleRemoveLiquidityImbalance(
     event.block.number,
     event.block.timestamp,
     N_COINS_CURVE4POOL,
-    "Curve4Pool"
+    "Curve4Pool_ypaxCrv"
   )
 }

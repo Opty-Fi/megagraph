@@ -12,6 +12,7 @@ import { Curve as Curve2Pool_ankrCRV } from "../generated/Curve2Pool_ankrCRV/Cur
 import { Curve as Curve2Pool_steCRV } from "../generated/Curve2Pool_steCRV/Curve"
 import { Curve as Curve2Pool_ust3CRV } from "../generated/Curve2Pool_ust3CRV/Curve"
 import { Curve as Curve2Pool_cDAI_cUSDC } from "../generated/Curve2Pool_cDAI_cUSDC/Curve"
+import { Curve as Curve2Pool_crvRenWBTC } from "../generated/Curve2Pool_crvRenWBTC/Curve"
 import { Curve as Curve3Pool_aave } from "../generated/Curve3Pool_aave/Curve"
 import { Curve as Curve3Pool_crvRenWSBTC } from "../generated/Curve3Pool_crvRenWSBTC/Curve"
 import { Curve as Curve4Pool_ypaxCrv } from "../generated/Curve4Pool_ypaxCrv/Curve"
@@ -214,6 +215,10 @@ export function handleUpdateOneBalance(
     token = contract.try_coins(coinIndex)
   } else if (poolType === "Curve2Pool_cDAI_cUSDC") {
     let contract = Curve2Pool_cDAI_cUSDC.bind(address)
+    balance = contract.try_balances(coinIndex)
+    token = contract.try_coins(coinIndex)
+  } else if (poolType === "Curve2Pool_crvRenWBTC") {
+    let contract = Curve2Pool_crvRenWBTC.bind(address)
     balance = contract.try_balances(coinIndex)
     token = contract.try_coins(coinIndex)
   } else {
