@@ -4,6 +4,7 @@ import { DForce_Staking_Vault as DForceStakingVaultContract } from '../../genera
 import { DTokenData } from '../../generated/schema'
 import {
   convertBINumToDesiredDecimals,
+  convertStringToAddress,
   convertToLowerCase,
 } from '../../../src/utils/converters'
 import {
@@ -22,17 +23,12 @@ export function handleDTokenEntity(
   blockNumber: BigInt,
   blockTimestamp: BigInt,
 ): void {
-  log.info('Dforce SV address at start: {}', [
-    dforceStakingVaultAddress.toHex(),
-  ])
-
   if (dTokenAddress == null) {
-    log.info('Coming in block when dTokenAddress is null', [])
     if (
       convertToLowerCase(dforceStakingVaultAddress.toHex()) ==
       convertToLowerCase(dDAI_Staking)
     ) {
-      dTokenAddress = Address.fromString(dDAI) //  dDAI
+      dTokenAddress = convertStringToAddress(dDAI) //  dDAI
       createDTokenData(
         dTokenAddress,
         dforceStakingVaultAddress,
@@ -44,7 +40,7 @@ export function handleDTokenEntity(
       convertToLowerCase(dforceStakingVaultAddress.toHex()) ==
       convertToLowerCase(dUSDC_Staking)
     ) {
-      dTokenAddress = Address.fromString(dUSDC) //  dUSDC
+      dTokenAddress = convertStringToAddress(dUSDC) //  dUSDC
       createDTokenData(
         dTokenAddress,
         dforceStakingVaultAddress,
@@ -56,7 +52,7 @@ export function handleDTokenEntity(
       convertToLowerCase(dforceStakingVaultAddress.toHex()) ==
       convertToLowerCase(dUSDT_Staking)
     ) {
-      dTokenAddress = Address.fromString(dUSDT) //  dUSDT
+      dTokenAddress = convertStringToAddress(dUSDT) //  dUSDT
       createDTokenData(
         dTokenAddress,
         dforceStakingVaultAddress,
@@ -66,24 +62,24 @@ export function handleDTokenEntity(
       )
     }
   } else {
-    log.info('Coming in block when dTokenAddress is NOT null', [])
     if (dforceStakingVaultAddress == null) {
-      log.info('Coming in block when dforceStakingVaultAddress is null', [])
       if (
         convertToLowerCase(dTokenAddress.toHex()) == convertToLowerCase(dDAI)
       ) {
-        dforceStakingVaultAddress = Address.fromString(dDAI_Staking) // DAI_Staking_Vault
+        dforceStakingVaultAddress = convertStringToAddress(dDAI_Staking) // DAI_Staking_Vault
+        log.info('dDAI Staking Vault contract address: {}', [dforceStakingVaultAddress.toHex()])
       } else if (
         convertToLowerCase(dTokenAddress.toHex()) == convertToLowerCase(dUSDC)
       ) {
-        dforceStakingVaultAddress = Address.fromString(dUSDC_Staking) //  USDC_Staking_Vault
+        dforceStakingVaultAddress = convertStringToAddress(dUSDC_Staking) //  USDC_Staking_Vault
+        log.info('dUSDC Staking Vault contract address: {}', [dforceStakingVaultAddress.toHex()])
       } else if (
         convertToLowerCase(dTokenAddress.toHex()) == convertToLowerCase(dUSDT)
       ) {
-        dforceStakingVaultAddress = Address.fromString(dUSDT_Staking) //  USDT_Staking_Vault
+        dforceStakingVaultAddress = convertStringToAddress(dUSDT_Staking) //  USDT_Staking_Vault
+        log.info('dUSDT Staking Vault contract address: {}', [dforceStakingVaultAddress.toHex()])
       }
     }
-    log.info('Coming in block when dforceStakingVaultAddress is null', [])
     createDTokenData(
       dTokenAddress,
       dforceStakingVaultAddress,
@@ -101,8 +97,6 @@ function createDTokenData(
   blockNumber: BigInt,
   blockTimestamp: BigInt,
 ): void {
-  // dTokenAddress = dTokenAddress == null ? convertToLowerCase(dforceStakingVaultAddress.toHex()) == "0x324eebdaa45829c6a8ee903afbc7b61af48538df" ? Address.fromString("0x02285AcaafEB533e03A7306C55EC031297df9224") : convertToLowerCase(dforceStakingVaultAddress.toHex()) == convertToLowerCase("0xB71dEFDd6240c45746EC58314a01dd6D833fD3b5") ? Address.fromString("0x16c9cF62d8daC4a38FB50Ae5fa5d51E9170F3179") : null : dTokenAddress
-  log.info('DToken address before everything: {}', [dTokenAddress.toHex()])
   let dTokenContract = DTokenContract.bind(dTokenAddress)
 
   // Load DTokenData Entity for not having duplicates
@@ -117,6 +111,7 @@ function createDTokenData(
   dTokenDataEntity.dTokenSymbol = dTokenContract.try_symbol().reverted
     ? null
     : dTokenContract.symbol()
+  log.info('dToken address: {} and symbol: {}', [dTokenDataEntity.dTokenAddress.toHex(), dTokenDataEntity.dTokenSymbol.toString()])
 
   dTokenDataEntity.pricePerFullShare = dTokenContract.try_getExchangeRate()
     .reverted
@@ -126,38 +121,19 @@ function createDTokenData(
     ? null
     : convertBINumToDesiredDecimals(dTokenContract.getTotalBalance(), 18)
 
-  log.info("dToken's Address from event: {}", [dTokenAddress.toHex()])
-  log.info("dToken's Address from event using convertor: {}", [
-    convertToLowerCase(dTokenAddress.toHex()),
-  ])
-
-  // dforceStakingVaultAddress = dforceStakingVaultAddress == null ? Address.fromString("0x324EebDAa45829c6A8eE903aFBc7B61AF48538df") : dforceStakingVaultAddress
-
   if (dforceStakingVaultAddress) {
-    log.info('Dforce staking vault address before bind: {}', [
-      dforceStakingVaultAddress.toHex(),
-    ])
     let dforceStakingVaultContract = DForceStakingVaultContract.bind(
       dforceStakingVaultAddress,
     )
-    log.info('Dforce Staking Vault address after bind: {}', [
-      dforceStakingVaultContract._address.toHex(),
-    ])
 
     dTokenDataEntity.rewardRate = dforceStakingVaultContract.try_rewardRate()
       .reverted
       ? null
       : dforceStakingVaultContract.rewardRate()
-    // log.info('Reward rate from contract: {}', [
-    //   dforceStakingVaultContract.rewardRate().toString(),
-    // ])
-    log.info('reward rate from entity: {}', [
-      dTokenDataEntity.rewardRate.toString(),
-    ])
   }
 
   log.info(
-    'Saving data for cToken: {} - {} for block: {} with transaction hash: {}',
+    'Saving data for dToken: {} - {} for block: {} with transaction hash: {}',
     [
       dTokenDataEntity.dTokenAddress.toHex(),
       dTokenDataEntity.dTokenSymbol,
