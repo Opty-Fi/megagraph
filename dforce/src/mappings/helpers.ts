@@ -1,4 +1,4 @@
-import { BigInt, log, Bytes, Address, JSONValue } from '@graphprotocol/graph-ts'
+import { BigInt, log, Bytes, Address } from '@graphprotocol/graph-ts'
 import { dToken as DTokenContract } from '../../generated/dToken/dToken'
 import { DForce_Staking_Vault as DForceStakingVaultContract } from '../../generated/DAI_Staking_Vault/DForce_Staking_Vault'
 import { DTokenData } from '../../generated/schema'
