@@ -6,4 +6,5 @@ type DTokenData @entity {
   blockTimestamp: BigInt
   dTokenSymbol: String
   dTokenAddress: Bytes
+  rewardRate: BigInt
 }
