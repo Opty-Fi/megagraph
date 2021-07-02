@@ -13,6 +13,7 @@ dataSources:
       abi: dToken
       # startBlock: 12680211
       startBlock: 10515737
+      # startBlock: 10586236
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -22,6 +23,8 @@ dataSources:
       abis:
         - name: dToken
           file: ./abis/dToken.json
+        - name: DForce_Staking_Vault
+          file: ./abis/DForceStakingVault.json
       eventHandlers:
         - event: Interest(indexed address,uint256,uint256,uint256)
           handler: handleInterest
@@ -58,6 +61,8 @@ dataSources:
       abis:
         - name: dToken
           file: ./abis/dToken.json
+        - name: DForce_Staking_Vault
+          file: ./abis/DForceStakingVault.json
       eventHandlers:
         - event: Interest(indexed address,uint256,uint256,uint256)
           handler: handleInterest
@@ -94,6 +99,8 @@ dataSources:
       abis:
         - name: dToken
           file: ./abis/dToken.json
+        - name: DForce_Staking_Vault
+          file: ./abis/DForceStakingVault.json
       eventHandlers:
         - event: Interest(indexed address,uint256,uint256,uint256)
           handler: handleInterest
@@ -130,6 +137,8 @@ dataSources:
       abis:
         - name: dToken
           file: ./abis/dToken.json
+        - name: DForce_Staking_Vault
+          file: ./abis/DForceStakingVault.json
       eventHandlers:
         - event: Interest(indexed address,uint256,uint256,uint256)
           handler: handleInterest
@@ -166,6 +175,8 @@ dataSources:
       abis:
         - name: dToken
           file: ./abis/dToken.json
+        - name: DForce_Staking_Vault
+          file: ./abis/DForceStakingVault.json
       eventHandlers:
         - event: Interest(indexed address,uint256,uint256,uint256)
           handler: handleInterest
@@ -182,4 +193,85 @@ dataSources:
         - event: TransferFee(address,address,uint256)
           handler: handleTransferFee
       file: ./src/mappings/dToken.ts
-
+  # --------------------------------------
+  #      dDAI_Staking
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: DAI_Staking_Vault
+    network: mainnet
+    source:
+      address: "0xD2fA07cD6Cd4A5A96aa86BacfA6E50bB3aaDBA8B"
+      abi: DForce_Staking_Vault
+      # startBlock: 12680211
+      # startBlock: 10586236
+      startBlock: 10586248
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - DToken
+      abis:
+        - name: dToken
+          file: ./abis/dToken.json
+        - name: DForce_Staking_Vault
+          file: ./abis/DForceStakingVault.json
+      eventHandlers:
+        - event: RewardAdded(uint256)
+          handler: handleRewardRate
+      # file: ./src/mappings/dToken.ts
+      file: ./src/mappings/dForceStakingVault.ts
+  # --------------------------------------
+  #      dUSDC_Staking
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: USDC_Staking_Vault
+    network: mainnet
+    source:
+      address: "0xB71dEFDd6240c45746EC58314a01dd6D833fD3b5"
+      abi: DForce_Staking_Vault
+      # startBlock: 12680211
+      # startBlock: 10586236
+      startBlock: 10586241
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - DToken
+      abis:
+        - name: dToken
+          file: ./abis/dToken.json
+        - name: DForce_Staking_Vault
+          file: ./abis/DForceStakingVault.json
+      eventHandlers:
+        - event: RewardAdded(uint256)
+          handler: handleRewardRate
+      file: ./src/mappings/dForceStakingVault.ts
+  # --------------------------------------
+  #      dUSDT_Staking
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: USDT_Staking_Vault
+    network: mainnet
+    source:
+      address: "0x324EebDAa45829c6A8eE903aFBc7B61AF48538df"
+      abi: DForce_Staking_Vault
+      # startBlock: 12680211
+      startBlock: 10586236
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - DToken
+      abis:
+        - name: dToken
+          file: ./abis/dToken.json
+        - name: DForce_Staking_Vault
+          file: ./abis/DForceStakingVault.json
+      eventHandlers:
+        - event: RewardAdded(uint256)
+          handler: handleRewardRate
+      # file: ./src/mappings/dToken.ts
+      file: ./src/mappings/dForceStakingVault.ts

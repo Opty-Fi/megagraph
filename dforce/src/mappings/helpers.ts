@@ -1,4 +1,4 @@
-import { BigInt, log, Bytes, Address } from '@graphprotocol/graph-ts'
+import { BigInt, log, Bytes, Address, JSONValue } from '@graphprotocol/graph-ts'
 import { dToken as DTokenContract } from '../../generated/dToken/dToken'
 import { DForce_Staking_Vault as DForceStakingVaultContract } from '../../generated/DAI_Staking_Vault/DForce_Staking_Vault'
 import { DTokenData } from '../../generated/schema'
@@ -6,6 +6,14 @@ import {
   convertBINumToDesiredDecimals,
   convertToLowerCase,
 } from '../../../src/utils/converters'
+import {
+  dDAI,
+  dDAI_Staking,
+  dUSDC,
+  dUSDC_Staking,
+  dUSDT,
+  dUSDT_Staking,
+} from './constants'
 
 export function handleDTokenEntity(
   dTokenAddress: Address,
@@ -22,11 +30,9 @@ export function handleDTokenEntity(
     log.info('Coming in block when dTokenAddress is null', [])
     if (
       convertToLowerCase(dforceStakingVaultAddress.toHex()) ==
-      convertToLowerCase('0xD2fA07cD6Cd4A5A96aa86BacfA6E50bB3aaDBA8B')
+      convertToLowerCase(dDAI_Staking)
     ) {
-      dTokenAddress = Address.fromString(
-        '0x02285AcaafEB533e03A7306C55EC031297df9224',
-      ) //  dDAI
+      dTokenAddress = Address.fromString(dDAI) //  dDAI
       createDTokenData(
         dTokenAddress,
         dforceStakingVaultAddress,
@@ -36,11 +42,9 @@ export function handleDTokenEntity(
       )
     } else if (
       convertToLowerCase(dforceStakingVaultAddress.toHex()) ==
-      convertToLowerCase('0xB71dEFDd6240c45746EC58314a01dd6D833fD3b5')
+      convertToLowerCase(dUSDC_Staking)
     ) {
-      dTokenAddress = Address.fromString(
-        '0x16c9cF62d8daC4a38FB50Ae5fa5d51E9170F3179',
-      ) //  dUSDC
+      dTokenAddress = Address.fromString(dUSDC) //  dUSDC
       createDTokenData(
         dTokenAddress,
         dforceStakingVaultAddress,
@@ -50,11 +54,9 @@ export function handleDTokenEntity(
       )
     } else if (
       convertToLowerCase(dforceStakingVaultAddress.toHex()) ==
-      convertToLowerCase('0x324EebDAa45829c6A8eE903aFBc7B61AF48538df')
+      convertToLowerCase(dUSDT_Staking)
     ) {
-      dTokenAddress = Address.fromString(
-        '0x868277d475E0e475E38EC5CdA2d9C83B5E1D9fc8',
-      ) //  dUSDT
+      dTokenAddress = Address.fromString(dUSDT) //  dUSDT
       createDTokenData(
         dTokenAddress,
         dforceStakingVaultAddress,
@@ -68,26 +70,17 @@ export function handleDTokenEntity(
     if (dforceStakingVaultAddress == null) {
       log.info('Coming in block when dforceStakingVaultAddress is null', [])
       if (
-        convertToLowerCase(dTokenAddress.toHex()) ==
-        convertToLowerCase('0x02285AcaafEB533e03A7306C55EC031297df9224')
+        convertToLowerCase(dTokenAddress.toHex()) == convertToLowerCase(dDAI)
       ) {
-        dforceStakingVaultAddress = Address.fromString(
-          '0xD2fA07cD6Cd4A5A96aa86BacfA6E50bB3aaDBA8B',
-        ) // DAI_Staking_Vault
+        dforceStakingVaultAddress = Address.fromString(dDAI_Staking) // DAI_Staking_Vault
       } else if (
-        convertToLowerCase(dTokenAddress.toHex()) ==
-        convertToLowerCase('0x16c9cF62d8daC4a38FB50Ae5fa5d51E9170F3179')
+        convertToLowerCase(dTokenAddress.toHex()) == convertToLowerCase(dUSDC)
       ) {
-        dforceStakingVaultAddress = Address.fromString(
-          '0xB71dEFDd6240c45746EC58314a01dd6D833fD3b5',
-        ) //  USDC_Staking_Vault
+        dforceStakingVaultAddress = Address.fromString(dUSDC_Staking) //  USDC_Staking_Vault
       } else if (
-        convertToLowerCase(dTokenAddress.toHex()) ==
-        convertToLowerCase('0x868277d475E0e475E38EC5CdA2d9C83B5E1D9fc8')
+        convertToLowerCase(dTokenAddress.toHex()) == convertToLowerCase(dUSDT)
       ) {
-        dforceStakingVaultAddress = Address.fromString(
-          '0x324EebDAa45829c6A8eE903aFBc7B61AF48538df',
-        ) //  USDT_Staking_Vault
+        dforceStakingVaultAddress = Address.fromString(dUSDT_Staking) //  USDT_Staking_Vault
       }
     }
     log.info('Coming in block when dforceStakingVaultAddress is null', [])
