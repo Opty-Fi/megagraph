@@ -1,18 +1,14 @@
 import { BigInt, Address } from "@graphprotocol/graph-ts"
 
 import {
-  HarvestPoolData,
+  HarvestPoolData as HarvestPoolDataEntity,
   RewardAdded,
   RewardDenied,
   RewardPaid,
   Staked,
   Withdrawn
 } from "../../generated/HarvestPoolData/HarvestPoolData"
-import {
-  LastUpdateTime,
-  RewardRate,
-  RewardPerTokenStored
-} from "../../generated/schema"
+import { HarvestPoolData } from "../../generated/schema"
 
 function HandleEntity(
   address: Address,
@@ -20,36 +16,30 @@ function HandleEntity(
   blockNumber: BigInt,
   timestamp: BigInt
 ): void {
-  let contract = HarvestPoolData.bind(address)
-  let lastUpdateTimeEntity = new LastUpdateTime(txnHash)
+  let contract = HarvestPoolDataEntity.bind(address)
+  let harvestPoolData = HarvestPoolData.load(txnHash)
+  if (harvestPoolData == null) {
+    harvestPoolData = new HarvestPoolData(txnHash)
+  }
+  harvestPoolData.blockNumber = blockNumber
+  harvestPoolData.timestamp = timestamp
+  harvestPoolData.vault = contract.lpToken().toHexString()
+
   let lastUpdateTime = contract.try_lastUpdateTime()
-  if (!lastUpdateTime.reverted) {
-    lastUpdateTimeEntity.lastUpdateTime = lastUpdateTime.value
-    lastUpdateTimeEntity.blockNumber = blockNumber
-    lastUpdateTimeEntity.timestamp = timestamp
-    lastUpdateTimeEntity.vault = contract.lpToken().toHexString()
-    lastUpdateTimeEntity.save()
-  }
-
-  let rewardRateEntity = new RewardRate(txnHash)
   let rewardRate = contract.try_rewardRate()
-  if (!rewardRate.reverted) {
-    rewardRateEntity.rewardRate = rewardRate.value
-    rewardRateEntity.blockNumber = blockNumber
-    rewardRateEntity.timestamp = timestamp
-    rewardRateEntity.vault = contract.lpToken().toHexString()
-    rewardRateEntity.save()
-  }
-
-  let rewardPerTokenStoredEntity = new RewardPerTokenStored(txnHash)
   let rewardPerTokenStored = contract.try_rewardPerTokenStored()
-  if (!rewardPerTokenStored.reverted) {
-    rewardPerTokenStoredEntity.rewardPerTokenStored = rewardPerTokenStored.value
-    rewardPerTokenStoredEntity.timestamp = blockNumber
-    rewardPerTokenStoredEntity.blockNumber = timestamp
-    rewardPerTokenStoredEntity.vault = contract.lpToken().toHexString()
-    rewardPerTokenStoredEntity.save()
-  }
+
+  harvestPoolData.lastUpdateTime = !lastUpdateTime.reverted
+    ? lastUpdateTime.value
+    : BigInt.fromI32(0)
+  harvestPoolData.rewardRate = !rewardRate.reverted
+    ? rewardRate.value
+    : BigInt.fromI32(0)
+  harvestPoolData.rewardPerTokenStored = !rewardPerTokenStored.reverted
+    ? rewardPerTokenStored.value
+    : BigInt.fromI32(0)
+
+  harvestPoolData.save()
 }
 
 export function handleRewardAdded(event: RewardAdded): void {

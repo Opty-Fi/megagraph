@@ -1,47 +1,19 @@
-type PricePerFullShare @entity {
+type HarvestVaultData @entity {
   id: ID!
   blockNumber: BigInt!
   timestamp: BigInt!
-  pricePerFullShare: BigInt!
+  pricePerFullShare: BigDecimal!
+  underlyingBalanceWithInvestment: BigDecimal!
+  underlyingBalanceInVault: BigDecimal!
   token: String!
 }
 
-type UnderlyingBalanceWithInvestment @entity {
-  id: ID!
-  blockNumber: BigInt!
-  timestamp: BigInt!
-  underlyingBalanceWithInvestment: BigInt!
-  token: String!
-}
-
-type UnderlyingBalanceInVault @entity {
-  id: ID!
-  blockNumber: BigInt!
-  timestamp: BigInt!
-  underlyingBalanceInVault: BigInt!
-  token: String!
-}
-
-type LastUpdateTime @entity {
+type HarvestPoolData @entity {
   id: ID!
   blockNumber: BigInt!
   timestamp: BigInt!
   lastUpdateTime: BigInt!
-  vault: String!
-}
-
-type RewardRate @entity {
-  id: ID!
-  blockNumber: BigInt!
-  timestamp: BigInt!
   rewardRate: BigInt!
-  vault: String!
-}
-
-type RewardPerTokenStored @entity {
-  id: ID!
-  blockNumber: BigInt!
-  timestamp: BigInt!
   rewardPerTokenStored: BigInt!
   vault: String!
 }

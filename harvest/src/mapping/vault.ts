@@ -1,4 +1,4 @@
-import { BigInt, Address } from "@graphprotocol/graph-ts"
+import { BigInt, Address, BigDecimal } from "@graphprotocol/graph-ts"
 import {
   Vault,
   Deposit,
@@ -7,12 +7,8 @@ import {
   Transfer,
   Withdraw
 } from "../../generated/Vault/Vault"
-import {
-  PricePerFullShare,
-  UnderlyingBalanceWithInvestment,
-  UnderlyingBalanceInVault
-} from "../../generated/schema"
-
+import { HarvestVaultData } from "../../generated/schema"
+import { convertBINumToDesiredDecimals } from "../utils/helpers"
 function HandleEntity(
   address: Address,
   txnHash: string,
@@ -20,40 +16,38 @@ function HandleEntity(
   timestamp: BigInt
 ): void {
   let contract = Vault.bind(address)
-
-  let pricePerFullShareEntity = new PricePerFullShare(txnHash)
+  let harvestVaultData = HarvestVaultData.load(txnHash)
+  if (harvestVaultData == null) {
+    harvestVaultData = new HarvestVaultData(txnHash)
+  }
   let pricePerFullShare = contract.try_getPricePerFullShare()
-  if (!pricePerFullShare.reverted) {
-    pricePerFullShareEntity.blockNumber = blockNumber
-    pricePerFullShareEntity.timestamp = timestamp
-    pricePerFullShareEntity.pricePerFullShare = pricePerFullShare.value
-    pricePerFullShareEntity.token = contract.name()
-    pricePerFullShareEntity.save()
-  }
-
-  let underlyingBalanceWithInvestmentEntity = new UnderlyingBalanceWithInvestment(
-    txnHash
-  )
-  let underlyingBalanceWithInvestment = contract.try_underlyingBalanceWithInvestment()
-  if (!underlyingBalanceWithInvestment.reverted) {
-    underlyingBalanceWithInvestmentEntity.blockNumber = blockNumber
-    underlyingBalanceWithInvestmentEntity.timestamp = timestamp
-    underlyingBalanceWithInvestmentEntity.underlyingBalanceWithInvestment =
-      underlyingBalanceWithInvestment.value
-    underlyingBalanceWithInvestmentEntity.token = contract.name()
-    underlyingBalanceWithInvestmentEntity.save()
-  }
-
-  let underlyingBalanceInVaultEntity = new UnderlyingBalanceInVault(txnHash)
+  let underlyingBalanceWithInvestment =
+    contract.try_underlyingBalanceWithInvestment()
   let underlyingBalanceInVault = contract.try_underlyingBalanceInVault()
-  if (!underlyingBalanceInVault.reverted) {
-    underlyingBalanceInVaultEntity.blockNumber = blockNumber
-    underlyingBalanceInVaultEntity.timestamp = timestamp
-    underlyingBalanceInVaultEntity.underlyingBalanceInVault =
-      underlyingBalanceInVault.value
-    underlyingBalanceInVaultEntity.token = contract.name()
-    underlyingBalanceInVaultEntity.save()
-  }
+
+  harvestVaultData.blockNumber = blockNumber
+  harvestVaultData.timestamp = timestamp
+  harvestVaultData.token = contract.name()
+  harvestVaultData.pricePerFullShare = !pricePerFullShare.reverted
+    ? convertBINumToDesiredDecimals(
+        pricePerFullShare.value,
+        contract.decimals()
+      )
+    : BigInt.fromI32(0).toBigDecimal()
+  harvestVaultData.underlyingBalanceWithInvestment =
+    !underlyingBalanceWithInvestment.reverted
+      ? convertBINumToDesiredDecimals(
+          underlyingBalanceWithInvestment.value,
+          contract.decimals()
+        )
+      : BigInt.fromI32(0).toBigDecimal()
+  harvestVaultData.underlyingBalanceInVault = !underlyingBalanceInVault.reverted
+    ? convertBINumToDesiredDecimals(
+        underlyingBalanceInVault.value,
+        contract.decimals()
+      )
+    : BigInt.fromI32(0).toBigDecimal()
+  harvestVaultData.save()
 }
 
 export function handleDeposit(event: Deposit): void {
