@@ -1,15 +1,7 @@
-type PricePerFullShare @entity {
+type YearnPoolData @entity {
   id: ID!
-  blockNumber: BigInt!
-  timestamp: BigInt!
-  pricePerFullShare: BigInt!
-  token: String!
-  vault: String!
-}
-
-type Balance @entity {
-  id: ID!
-  balance: BigInt!
+  balance: BigDecimal!
+  pricePerFullShare: BigDecimal!
   blockNumber: BigInt!
   timestamp: BigInt!
   vault: String!

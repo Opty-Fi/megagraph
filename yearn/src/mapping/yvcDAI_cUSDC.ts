@@ -3,54 +3,59 @@ import {
   DepositCall,
   WithdrawCall
 } from "../../generated/yearn_yvcDAI_cUSDC/yearn_yvcDAI_cUSDC"
-import { Balance, PricePerFullShare } from "../../generated/schema"
+import { YearnPoolData } from "../../generated/schema"
+import { convertBINumToDesiredDecimals } from "../utils/helpers"
+import { BigInt, Address } from "@graphprotocol/graph-ts"
+
+export function updateEntity(
+  address: Address,
+  blockNumber: BigInt,
+  timestamp: BigInt,
+  txnHash: string
+): void {
+  let contract = yearn_yvcDAI_cUSDC.bind(address)
+  let yearnData = YearnPoolData.load(txnHash)
+
+  let pricePerFullShare = contract.try_getPricePerFullShare()
+  let balance = contract.try_balance()
+
+  if (!yearnData) {
+    yearnData = new YearnPoolData(txnHash)
+  }
+
+  yearnData.blockNumber = blockNumber
+  yearnData.timestamp = timestamp
+  yearnData.token = contract.symbol()
+  yearnData.vault = address.toHexString()
+
+  yearnData.balance = !balance.reverted
+    ? convertBINumToDesiredDecimals(balance.value, contract.decimals())
+    : BigInt.fromI32(0).toBigDecimal()
+
+  yearnData.pricePerFullShare = !pricePerFullShare.reverted
+    ? convertBINumToDesiredDecimals(
+        pricePerFullShare.value,
+        contract.decimals()
+      )
+    : BigInt.fromI32(0).toBigDecimal()
+
+  yearnData.save()
+}
 
 export function handleDeposit(call: DepositCall): void {
-  let contract = yearn_yvcDAI_cUSDC.bind(call.to)
-  let pricePerFullShare = contract.try_getPricePerFullShare()
-  if (!pricePerFullShare.reverted) {
-    let entity = new PricePerFullShare(call.transaction.hash.toHexString())
-    entity.pricePerFullShare = pricePerFullShare.value
-    entity.blockNumber = call.block.number
-    entity.timestamp = call.block.timestamp
-    entity.token = contract.symbol()
-    entity.vault = call.to.toHexString()
-    entity.save()
-  }
-
-  let balance = contract.try_balance()
-  if (!balance.reverted) {
-    let entity = new Balance(call.transaction.hash.toHexString())
-    entity.balance = balance.value
-    entity.blockNumber = call.block.number
-    entity.timestamp = call.block.timestamp
-    entity.token = contract.symbol()
-    entity.vault = call.to.toHexString()
-    entity.save()
-  }
+  updateEntity(
+    call.to,
+    call.block.number,
+    call.block.timestamp,
+    call.transaction.hash.toHexString()
+  )
 }
 
 export function handleWithdraw(call: WithdrawCall): void {
-  let contract = yearn_yvcDAI_cUSDC.bind(call.to)
-  let pricePerFullShare = contract.try_getPricePerFullShare()
-  if (!pricePerFullShare.reverted) {
-    let entity = new PricePerFullShare(call.transaction.hash.toHexString())
-    entity.pricePerFullShare = pricePerFullShare.value
-    entity.blockNumber = call.block.number
-    entity.timestamp = call.block.timestamp
-    entity.token = contract.symbol()
-    entity.vault = call.to.toHexString()
-    entity.save()
-  }
-
-  let balance = contract.try_balance()
-  if (!balance.reverted) {
-    let entity = new Balance(call.transaction.hash.toHexString())
-    entity.balance = balance.value
-    entity.blockNumber = call.block.number
-    entity.timestamp = call.block.timestamp
-    entity.token = contract.symbol()
-    entity.vault = call.to.toHexString()
-    entity.save()
-  }
+  updateEntity(
+    call.to,
+    call.block.number,
+    call.block.timestamp,
+    call.transaction.hash.toHexString()
+  )
 }
