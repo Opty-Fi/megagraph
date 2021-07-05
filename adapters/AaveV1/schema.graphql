@@ -1,187 +1,39 @@
-type LendingPoolBorrow @entity {
+type FromTokenToPool @entity {
   id: ID!
-  _reserve: Bytes! # address
-  _user: Bytes! # address
-  _amount: BigInt! # uint256
-  _borrowRateMode: BigInt! # uint256
-  _borrowRate: BigInt! # uint256
-  _originationFee: BigInt! # uint256
-  _borrowBalanceIncrease: BigInt! # uint256
-  _referral: Int! # uint16
-  _timestamp: BigInt! # uint256
+  transactionHash: Bytes!
+  pool: Bytes!
+  underlyingAsset: Bytes!
 }
 
-type LendingPoolDeposit @entity {
+type AaveV1Token @entity {
   id: ID!
-  _reserve: Bytes! # address
-  _user: Bytes! # address
-  _amount: BigInt! # uint256
-  _referral: Int! # uint16
-  _timestamp: BigInt! # uint256
-}
+  transactionHash: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  address: String!
+  symbol: String!
 
-type LendingPoolFlashLoan @entity {
-  id: ID!
-  _target: Bytes! # address
-  _reserve: Bytes! # address
-  _amount: BigInt! # uint256
-  _totalFee: BigInt! # uint256
-  _protocolFee: BigInt! # uint256
-  _timestamp: BigInt! # uint256
-}
+  decimals: Int
+  ltv: BigInt
+  liquidationThreshold: BigInt
+  liquidationBonus: BigInt
+  interestRateStrategyAddress: Bytes
+  usageAsCollateralEnabled: Boolean
+  borrowingEnabled: Boolean
+  stableBorrowRateEnabled: Boolean
+  isActive: Boolean
 
-type LendingPoolLiquidationCall @entity {
-  id: ID!
-  _collateral: Bytes! # address
-  _reserve: Bytes! # address
-  _user: Bytes! # address
-  _purchaseAmount: BigInt! # uint256
-  _liquidatedCollateralAmount: BigInt! # uint256
-  _accruedBorrowInterest: BigInt! # uint256
-  _liquidator: Bytes! # address
-  _receiveAToken: Boolean! # bool
-  _timestamp: BigInt! # uint256
-}
-
-type LendingPoolOriginationFeeLiquidated @entity {
-  id: ID!
-  _collateral: Bytes! # address
-  _reserve: Bytes! # address
-  _user: Bytes! # address
-  _feeLiquidated: BigInt! # uint256
-  _liquidatedCollateralForFee: BigInt! # uint256
-  _timestamp: BigInt! # uint256
-}
-
-type LendingPoolRebalanceStableBorrowRate @entity {
-  id: ID!
-  _reserve: Bytes! # address
-  _user: Bytes! # address
-  _newStableRate: BigInt! # uint256
-  _borrowBalanceIncrease: BigInt! # uint256
-  _timestamp: BigInt! # uint256
-}
-
-type LendingPoolRedeemUnderlying @entity {
-  id: ID!
-  _reserve: Bytes! # address
-  _user: Bytes! # address
-  _amount: BigInt! # uint256
-  _timestamp: BigInt! # uint256
-}
-
-type LendingPoolRepay @entity {
-  id: ID!
-  _reserve: Bytes! # address
-  _user: Bytes! # address
-  _repayer: Bytes! # address
-  _amountMinusFees: BigInt! # uint256
-  _fees: BigInt! # uint256
-  _borrowBalanceIncrease: BigInt! # uint256
-  _timestamp: BigInt! # uint256
-}
-
-type LendingPoolReserveUsedAsCollateralDisabled @entity {
-  id: ID!
-  _reserve: Bytes! # address
-  _user: Bytes! # address
-}
-
-type LendingPoolReserveUsedAsCollateralEnabled @entity {
-  id: ID!
-  _reserve: Bytes! # address
-  _user: Bytes! # address
-}
-
-type LendingPoolSwap @entity {
-  id: ID!
-  _reserve: Bytes! # address
-  _user: Bytes! # address
-  _newRateMode: BigInt! # uint256
-  _newRate: BigInt! # uint256
-  _borrowBalanceIncrease: BigInt! # uint256
-  _timestamp: BigInt! # uint256
-}
-
-type LendingPoolCoreReserveUpdated @entity {
-  id: ID!
-  reserve: Bytes! # address
-  liquidityRate: BigInt! # uint256
-  stableBorrowRate: BigInt! # uint256
-  variableBorrowRate: BigInt! # uint256
-  liquidityIndex: BigInt! # uint256
-  variableBorrowIndex: BigInt! # uint256
-}
-
-type Approval @entity {
-  id: ID!
-  owner: Bytes! # address
-  spender: Bytes! # address
-  value: BigInt! # uint256
-}
-
-type BalanceTransfer @entity {
-  id: ID!
-  _from: Bytes! # address
-  _to: Bytes! # address
-  _value: BigInt! # uint256
-  _fromBalanceIncrease: BigInt! # uint256
-  _toBalanceIncrease: BigInt! # uint256
-  _fromIndex: BigInt! # uint256
-  _toIndex: BigInt! # uint256
-}
-
-type BurnOnLiquidation @entity {
-  id: ID!
-  _from: Bytes! # address
-  _value: BigInt! # uint256
-  _fromBalanceIncrease: BigInt! # uint256
-  _fromIndex: BigInt! # uint256
-}
-
-type InterestRedirectionAllowanceChanged @entity {
-  id: ID!
-  _from: Bytes! # address
-  _to: Bytes! # address
-}
-
-type InterestStreamRedirected @entity {
-  id: ID!
-  _from: Bytes! # address
-  _to: Bytes! # address
-  _redirectedBalance: BigInt! # uint256
-  _fromBalanceIncrease: BigInt! # uint256
-  _fromIndex: BigInt! # uint256
-}
-
-type MintOnDeposit @entity {
-  id: ID!
-  _from: Bytes! # address
-  _value: BigInt! # uint256
-  _fromBalanceIncrease: BigInt! # uint256
-  _fromIndex: BigInt! # uint256
-}
-
-type Redeem @entity {
-  id: ID!
-  _from: Bytes! # address
-  _value: BigInt! # uint256
-  _fromBalanceIncrease: BigInt! # uint256
-  _fromIndex: BigInt! # uint256
-}
-
-type RedirectedBalanceUpdated @entity {
-  id: ID!
-  _targetAddress: Bytes! # address
-  _targetBalanceIncrease: BigInt! # uint256
-  _targetIndex: BigInt! # uint256
-  _redirectedBalanceAdded: BigInt! # uint256
-  _redirectedBalanceRemoved: BigInt! # uint256
-}
-
-type Transfer @entity {
-  id: ID!
-  from: Bytes! # address
-  to: Bytes! # address
-  value: BigInt! # uint256
+  totalLiquidity: BigInt
+  availableLiquidity: BigInt
+  totalBorrowsStable: BigInt
+  totalBorrowsVariable: BigInt
+  liquidityRate: BigInt
+  variableBorrowRate: BigInt
+  stableBorrowRate: BigInt
+  averageStableBorrowRate: BigInt
+  utilizationRate: BigInt
+  liquidityIndex: BigInt
+  variableBorrowIndex: BigInt
+  aTokenAddress: Bytes
+  lastUpdateTimestamp: BigInt
 }

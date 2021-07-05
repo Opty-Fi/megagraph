@@ -2,14 +2,12 @@
   "blockchain": "ethereum",
   "network": "builderevm",
 
-  "AaveV1Address": "0x398eC7346DcD622eDc5ae82352F02bE94C62d119",
-  "AaveV1StartBlock": 9241022,
   "AaveV1Abi": "./adapters/AaveV1/abis/LendingPool.json",
   "AaveV1Mapping": "./adapters/AaveV1/src/mapping.LendingPool.ts",
-  "AaveV1CoreAddress": "0x3dfd23A6c5E8BbcFc9581d2E864a68feb6a076d3",
-  "AaveV1CoreStartBlock": 9241008,
-  "AaveV1CoreAbi": "./adapters/AaveV1/abis/LendingPoolCore.json",
-  "AaveV1CoreMapping": "./adapters/AaveV1/src/mapping.LendingPoolCore.ts",
+  "AaveV1Address": "0x398eC7346DcD622eDc5ae82352F02bE94C62d119",
+  "AaveV1StartBlock": 9241022,
+  "AaveV1TokenAbi": "./adapters/AaveV1/abis/AToken.json",
+  "AaveV1TokenMapping": "./adapters/AaveV1/src/,apping.AToken.ts",
   "AaveV1AaaveAddress": "0xba3D9687Cf50fE253cd2e1cFeEdE1d6787344Ed5",
   "AaveV1AaaveStartBlock": 11093579,
   "AaveV1AbatAddress": "0xE1BA0FB44CCb0D11b80F92f4f8Ed94CA3fF51D00",
@@ -55,50 +53,5 @@
   "AaveV1AzrxAddress": "0x6Fb0855c404E09c47C3fBCA25f08d4E41f9F062f",
   "AaveV1AzrxStartBlock": 9241114,
   "AaveV1LinkusdAddress": "0x0E2EC54fC0B509F445631Bf4b91AB8168230C752",
-  "AaveV1LinkusdStartBlock": 10812702,
-
-  "AaveV2Address": "0x0000000000000000000000000000000000000000",
-  "AaveV2StartBlock": 0,
-  "AaveV2Abi": "./adapters/aavev2/contract.json",
-  "AaveV2Mapping": "./adapters/aavev2/mapping.ts",
-
-  "CompoundAddress": "0x0000000000000000000000000000000000000000",
-  "CompoundStartBlock": 0,
-  "CompoundAbi": "./adapters/compound/contract.json",
-  "CompoundMapping": "./adapters/compound/mapping.ts",
-
-  "CreamAddress": "0x0000000000000000000000000000000000000000",
-  "CreamStartBlock": 0,
-  "CreamAbi": "./adapters/cream/contract.json",
-  "CreamMapping": "./adapters/cream/mapping.ts",
-
-  "CurveV1Address": "0x0000000000000000000000000000000000000000",
-  "CurveV1StartBlock": 0,
-  "CurveV1Abi": "./adapters/curvev1/contract.json",
-  "CurveV1Mapping": "./adapters/curvev1/mapping.ts",
-
-  "CurveV2Address": "0x0000000000000000000000000000000000000000",
-  "CurveV2StartBlock": 0,
-  "CurveV2Abi": "./adapters/curvev2/contract.json",
-  "CurveV2Mapping": "./adapters/curvev2/mapping.ts",
-
-  "DydxAddress": "0x0000000000000000000000000000000000000000",
-  "DydxStartBlock": 0,
-  "DydxAbi": "./adapters/dydx/contract.json",
-  "DydxMapping": "./adapters/dydx/mapping.ts",
-
-  "FulcrumAddress": "0x0000000000000000000000000000000000000000",
-  "FulcrumStartBlock": 0,
-  "FulcrumAbi": "./adapters/fulcrum/contract.json",
-  "FulcrumMapping": "./adapters/fulcrum/mapping.ts",
-
-  "HarvestFiAddress": "0x0000000000000000000000000000000000000000",
-  "HarvestFiStartBlock": 0,
-  "HarvestFiAbi": "./adapters/harvestfi/contract.json",
-  "HarvestFiMapping": "./adapters/harvestfi/mapping.ts",
-
-  "YearnAddress": "0x0000000000000000000000000000000000000000",
-  "YearnStartBlock": 0,
-  "YearnAbi": "./adapters/yearn/contract.json",
-  "YearnMapping": "./adapters/yearn/mapping.ts"
+  "AaveV1LinkusdStartBlock": 10812702
 }
