@@ -4,9 +4,9 @@
   "scripts": {
     "setup": "yarn codegen && yarn graph-auth && yarn deploy",
     "setup:local": "yarn codegen && yarn deploy:local",
+    "codegen": "graph codegen --output-dir ./generated",
     "deploy": "./node_modules/.bin/dotenv -- yarn graph-deploy-replace",
     "deploy:local": "yarn graph-create-local && yarn graph-deploy-local",
-    "codegen": "graph codegen --output-dir ./generated",
     "graph-auth": "./node_modules/.bin/dotenv -- yarn graph-auth-replace",
     "graph-auth-replace": "graph auth https://api.thegraph.com/deploy/ $ACCESS_TOKEN",
     "graph-deploy-replace": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ $SLUG",

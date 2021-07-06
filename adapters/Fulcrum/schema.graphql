@@ -1,10 +1,10 @@
-type FulcrumToken @entity {
+type FulcrumTokenData @entity {
   id: ID!
-  transactionHash: Bytes
-  blockNumber: BigInt
-  blockTimestamp: BigInt
-  address: String
-  symbol: String
+  transactionHash: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  address: Bytes!
+  symbol: String!
   supplyInterestRate: BigDecimal
   borrowInterestRate: BigDecimal
   tokenPrice: BigDecimal

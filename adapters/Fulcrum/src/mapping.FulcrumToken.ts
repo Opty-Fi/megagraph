@@ -1,11 +1,11 @@
 import { BigInt, log, Address, Bytes } from "@graphprotocol/graph-ts";
 import {
-  LoanToken,
+  FulcrumToken,
   Burn as BurnEvent,
   FlashBorrow as FlashBorrowEvent,
   Mint as MintEvent,
-} from "./LoanToken";
-import { FulcrumToken } from "../generated/schema";
+} from "../generated/FulcrumToken/FulcrumToken";
+import { FulcrumTokenData } from "../generated/schema";
 import { convertBINumToDesiredDecimals } from "./converters";;
 
 function handleFulcrumToken(
@@ -15,17 +15,17 @@ function handleFulcrumToken(
   address: Address,
   tokenPrice: BigInt,
 ): void {
-  let tokenContract = LoanToken.bind(address);
+  let tokenContract = FulcrumToken.bind(address);
 
-  let entity = FulcrumToken.load(transactionHash.toHex());
+  let entity = FulcrumTokenData.load(transactionHash.toHex());
   if (entity == null) {
-    entity = new FulcrumToken(transactionHash.toHex());
+    entity = new FulcrumTokenData(transactionHash.toHex());
   }
 
   entity.transactionHash = transactionHash;
   entity.blockNumber = blockNumber;
   entity.blockTimestamp = blockTimestamp;
-  entity.address = address.toHex();
+  entity.address = address;
 
   let tried_symbol = tokenContract.try_symbol();
   if (tried_symbol.reverted) log.error("symbol() reverted", []);

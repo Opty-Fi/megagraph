@@ -2,8 +2,8 @@
   "blockchain": "ethereum",
   "network": "mainnet",
 
-  "FulcrumTokenAbi": "./adapters/Fulcrum/abis/LoanToken.json",
-  "FulcrumTokenMapping": "./adapters/Fulcrum/src/mapping.LoanToken.ts",
+  "FulcrumTokenAbi": "./adapters/Fulcrum/abis/FulcrumToken.json",
+  "FulcrumTokenMapping": "./adapters/Fulcrum/src/mapping.FulcrumToken.ts",
   "FulcrumIaaveAddress": "0x0cae8d91E0b1b7Bd00D906E990C3625b2c220db1",
   "FulcrumIaaveStartBlock": 11158037,
   "FulcrumIcompAddress": "0x6d29903BC2c4318b59B35d97Ab98ab9eC08Ed70D",
