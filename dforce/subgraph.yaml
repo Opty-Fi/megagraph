@@ -1,0 +1,264 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  # --------------------------------------
+  #      dDAI
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: dToken
+    network: mainnet
+    source:
+      address: "0x02285AcaafEB533e03A7306C55EC031297df9224"
+      abi: dToken
+      startBlock: 10515737
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - DToken
+      abis:
+        - name: dToken
+          file: ./abis/dToken.json
+        - name: DForce_Staking_Vault
+          file: ./abis/DForceStakingVault.json
+      eventHandlers:
+        - event: Interest(indexed address,uint256,uint256,uint256)
+          handler: handleInterest
+        - event: Mint(indexed address,indexed uint256,uint256,uint256,uint256)
+          handler: handleMint
+        - event: NewDispatcher(address,address)
+          handler: handleNewDispatcher
+        - event: Rebalance(address[],uint256[],address[],uint256[])
+          handler: handleRebalance
+        - event: Redeem(indexed address,indexed uint256,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: TransferFee(address,address,uint256)
+          handler: handleTransferFee
+      file: ./src/mappings/dToken.ts
+  # --------------------------------------
+  #      dUSDC
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: dToken_dUSDC
+    network: mainnet
+    source:
+      address: "0x16c9cF62d8daC4a38FB50Ae5fa5d51E9170F3179"
+      abi: dToken
+      startBlock: 10515689
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - DToken
+      abis:
+        - name: dToken
+          file: ./abis/dToken.json
+        - name: DForce_Staking_Vault
+          file: ./abis/DForceStakingVault.json
+      eventHandlers:
+        - event: Interest(indexed address,uint256,uint256,uint256)
+          handler: handleInterest
+        - event: Mint(indexed address,indexed uint256,uint256,uint256,uint256)
+          handler: handleMint
+        - event: NewDispatcher(address,address)
+          handler: handleNewDispatcher
+        - event: Rebalance(address[],uint256[],address[],uint256[])
+          handler: handleRebalance
+        - event: Redeem(indexed address,indexed uint256,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: TransferFee(address,address,uint256)
+          handler: handleTransferFee
+      file: ./src/mappings/dToken.ts
+  # --------------------------------------
+  #      dUSDT
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: dToken_dUSDT
+    network: mainnet
+    source:
+      address: "0x868277d475E0e475E38EC5CdA2d9C83B5E1D9fc8"
+      abi: dToken
+      startBlock: 10509668
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - DToken
+      abis:
+        - name: dToken
+          file: ./abis/dToken.json
+        - name: DForce_Staking_Vault
+          file: ./abis/DForceStakingVault.json
+      eventHandlers:
+        - event: Interest(indexed address,uint256,uint256,uint256)
+          handler: handleInterest
+        - event: Mint(indexed address,indexed uint256,uint256,uint256,uint256)
+          handler: handleMint
+        - event: NewDispatcher(address,address)
+          handler: handleNewDispatcher
+        - event: Rebalance(address[],uint256[],address[],uint256[])
+          handler: handleRebalance
+        - event: Redeem(indexed address,indexed uint256,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: TransferFee(address,address,uint256)
+          handler: handleTransferFee
+      file: ./src/mappings/dToken.ts
+  # --------------------------------------
+  #      dTUSD
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: dToken_dTUSD
+    network: mainnet
+    source:
+      address: "0x55bcf7173c8840d5517424ed19b7bbf11cfb9f2b"
+      abi: dToken
+      startBlock: 10619430
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - DToken
+      abis:
+        - name: dToken
+          file: ./abis/dToken.json
+        - name: DForce_Staking_Vault
+          file: ./abis/DForceStakingVault.json
+      eventHandlers:
+        - event: Interest(indexed address,uint256,uint256,uint256)
+          handler: handleInterest
+        - event: Mint(indexed address,indexed uint256,uint256,uint256,uint256)
+          handler: handleMint
+        - event: NewDispatcher(address,address)
+          handler: handleNewDispatcher
+        - event: Rebalance(address[],uint256[],address[],uint256[])
+          handler: handleRebalance
+        - event: Redeem(indexed address,indexed uint256,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: TransferFee(address,address,uint256)
+          handler: handleTransferFee
+      file: ./src/mappings/dToken.ts
+  # --------------------------------------
+  #      dPAX
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: dToken_dPAX
+    network: mainnet
+    source:
+      address: "0xf4dfc3df8c83be5a2ec2025491fd157c474f438a"
+      abi: dToken
+      startBlock: 10619537
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - DToken
+      abis:
+        - name: dToken
+          file: ./abis/dToken.json
+        - name: DForce_Staking_Vault
+          file: ./abis/DForceStakingVault.json
+      eventHandlers:
+        - event: Interest(indexed address,uint256,uint256,uint256)
+          handler: handleInterest
+        - event: Mint(indexed address,indexed uint256,uint256,uint256,uint256)
+          handler: handleMint
+        - event: NewDispatcher(address,address)
+          handler: handleNewDispatcher
+        - event: Rebalance(address[],uint256[],address[],uint256[])
+          handler: handleRebalance
+        - event: Redeem(indexed address,indexed uint256,uint256,uint256,uint256)
+          handler: handleRedeem
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: TransferFee(address,address,uint256)
+          handler: handleTransferFee
+      file: ./src/mappings/dToken.ts
+  # --------------------------------------
+  #      dDAI_Staking
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: DAI_Staking_Vault
+    network: mainnet
+    source:
+      address: "0xD2fA07cD6Cd4A5A96aa86BacfA6E50bB3aaDBA8B"
+      abi: DForce_Staking_Vault
+      startBlock: 10586248
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - DToken
+      abis:
+        - name: dToken
+          file: ./abis/dToken.json
+        - name: DForce_Staking_Vault
+          file: ./abis/DForceStakingVault.json
+      eventHandlers:
+        - event: RewardAdded(uint256)
+          handler: handleRewardRate
+      file: ./src/mappings/dForceStakingVault.ts
+  # --------------------------------------
+  #      dUSDC_Staking
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: USDC_Staking_Vault
+    network: mainnet
+    source:
+      address: "0xB71dEFDd6240c45746EC58314a01dd6D833fD3b5"
+      abi: DForce_Staking_Vault
+      startBlock: 10586241
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - DToken
+      abis:
+        - name: dToken
+          file: ./abis/dToken.json
+        - name: DForce_Staking_Vault
+          file: ./abis/DForceStakingVault.json
+      eventHandlers:
+        - event: RewardAdded(uint256)
+          handler: handleRewardRate
+      file: ./src/mappings/dForceStakingVault.ts
+  # --------------------------------------
+  #      dUSDT_Staking
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: USDT_Staking_Vault
+    network: mainnet
+    source:
+      address: "0x324EebDAa45829c6A8eE903aFBc7B61AF48538df"
+      abi: DForce_Staking_Vault
+      startBlock: 10586236
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - DToken
+      abis:
+        - name: dToken
+          file: ./abis/dToken.json
+        - name: DForce_Staking_Vault
+          file: ./abis/DForceStakingVault.json
+      eventHandlers:
+        - event: RewardAdded(uint256)
+          handler: handleRewardRate
+      file: ./src/mappings/dForceStakingVault.ts
