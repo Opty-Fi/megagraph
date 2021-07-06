@@ -1,0 +1,17 @@
+type CreamTokenData @entity {
+  id: ID!
+  transactionHash: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  address: Bytes!
+  symbol: String!
+  compSpeeds: BigDecimal
+  borrowIndex: BigInt
+  borrowRatePerBlock: BigDecimal
+  supplyRatePerBlock: BigDecimal
+  exchangeRateStored: BigDecimal
+  totalCash: BigDecimal
+  totalBorrows: BigDecimal
+  totalSupply: BigDecimal
+  totalReserves: BigDecimal
+}
