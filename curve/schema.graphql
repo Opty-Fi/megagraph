@@ -1,6 +1,6 @@
 type Balance @entity {
   id: ID!
-  balance: BigInt!
+  balance: BigDecimal!
   blockNumber: BigInt!
   timestamp: BigInt!
   token: String!
@@ -9,8 +9,18 @@ type Balance @entity {
 
 type VirtualPrice @entity {
   id: ID!
-  virtualPrice: BigInt!
+  virtualPrice: BigDecimal!
   blockNumber: BigInt!
   timestamp: BigInt!
   vault: String!
+}
+
+type GaugeControllerData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+  gauge: String!
+  gaugeWeight: BigDecimal!
+  totalGaugeWeight: BigDecimal!
+  controller: String!
 }

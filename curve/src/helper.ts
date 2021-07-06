@@ -2,6 +2,7 @@ import { Address, BigInt, Bytes, ethereum } from "@graphprotocol/graph-ts"
 import { Curve as Curve4Pool } from "../generated/Curve4Pool/Curve"
 import { Curve as Curve3Pool } from "../generated/Curve3Pool/Curve"
 import { Curve as Curve2Pool } from "../generated/Curve2Pool/Curve"
+import { ERC20 } from "../generated/Curve2Pool/ERC20"
 import { Curve as Curve2Pool_RSV3CRV } from "../generated/Curve2Pool_RSV3CRV/Curve"
 import { Curve as Curve2Pool_TBTC_SBTCCRV } from "../generated/Curve2Pool_TBTC_SBTCCRV/Curve"
 import { Curve as Curve2Pool_hCRV } from "../generated/Curve2Pool_HCRV/Curve"
@@ -18,6 +19,7 @@ import { Curve as Curve3Pool_crvRenWSBTC } from "../generated/Curve3Pool_crvRenW
 import { Curve as Curve4Pool_ypaxCrv } from "../generated/Curve4Pool_ypaxCrv/Curve"
 import { Curve as Curve4Pool_crvRenWBTC } from "../generated/Curve4Pool_crvRenWBTC/Curve"
 import { Balance, VirtualPrice } from "../generated/schema"
+import { convertBINumToDesiredDecimals } from "./utils/converters"
 
 export const N_COINS_CURVE2POOL = 2
 export const N_COINS_CURVE3POOL = 3
@@ -113,8 +115,16 @@ export function handleUpdateVirtualPrice(
   }
 
   if (!virtualPrice.reverted) {
-    let virtualPriceEntity = new VirtualPrice(txnHash.toHexString())
-    virtualPriceEntity.virtualPrice = virtualPrice.value
+    let virtualPriceEntity = VirtualPrice.load(txnHash.toHexString())
+    if (!virtualPriceEntity) {
+      virtualPriceEntity = new VirtualPrice(txnHash.toHexString())
+    }
+
+    virtualPriceEntity.virtualPrice = convertBINumToDesiredDecimals(
+      virtualPrice.value,
+      18
+    )
+
     virtualPriceEntity.vault = address.toHexString()
     virtualPriceEntity.blockNumber = blockNumber
     virtualPriceEntity.timestamp = timestamp
@@ -228,10 +238,19 @@ export function handleUpdateOneBalance(
   }
 
   if (!balance.reverted) {
-    let balanceEntity = new Balance(
+    let tokenContract = ERC20.bind(token.value)
+    let balanceEntity = Balance.load(
       txnHash.toHexString() + coinIndex.toHexString()
     )
-    balanceEntity.balance = balance.value
+    if (!balanceEntity) {
+      balanceEntity = new Balance(
+        txnHash.toHexString() + coinIndex.toHexString()
+      )
+    }
+    let decimal = tokenContract.try_decimals()
+    balanceEntity.balance = !decimal.reverted
+      ? convertBINumToDesiredDecimals(balance.value, decimal.value)
+      : balance.value.toBigDecimal()
     balanceEntity.blockNumber = blockNumber
     balanceEntity.timestamp = timestamp
     balanceEntity.vault = address.toHexString()

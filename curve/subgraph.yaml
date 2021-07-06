@@ -23,6 +23,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve2Pool.json
       callHandlers:
@@ -58,6 +60,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve2Pool.json
       callHandlers:
@@ -93,6 +97,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve2Pool.json
       callHandlers:
@@ -128,6 +134,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve2Pool.json
       callHandlers:
@@ -163,6 +171,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve2Pool.json
       callHandlers:
@@ -198,6 +208,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve2Pool.json
       callHandlers:
@@ -233,6 +245,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve2Pool_RSV3CRV.json
       callHandlers:
@@ -268,6 +282,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve2Pool_tbtc_sbtcCrv.json
       callHandlers:
@@ -303,6 +319,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve2Pool.json
       callHandlers:
@@ -338,6 +356,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve2Pool_HCRV.json
       callHandlers:
@@ -371,6 +391,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve2Pool_BBTC.json
       callHandlers:
@@ -406,6 +428,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve2Pool_EURS.json
       callHandlers:
@@ -439,6 +463,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve2Pool_PBTC.json
       callHandlers:
@@ -475,6 +501,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve2Pool_steCRV.json
       callHandlers:
@@ -510,6 +538,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve2Pool_ust3CRV.json
       callHandlers:
@@ -545,6 +575,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve2Pool_ankrCRV.json
       callHandlers:
@@ -578,6 +610,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve2Pool_cDAI_cUSDC.json
       eventHandlers:
@@ -608,6 +642,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve2Pool_crvRenWBTC.json
       callHandlers:
@@ -641,6 +677,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve2Pool_eCRV.json
       callHandlers:
@@ -677,6 +715,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve3Pool.json
       callHandlers:
@@ -710,6 +750,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve3Pool_crvRenWSBTC.json
       callHandlers:
@@ -743,6 +785,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve3Pool_aave.json
       callHandlers:
@@ -777,6 +821,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve4Pool.json
       eventHandlers:
@@ -807,6 +853,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve4Pool.json
       eventHandlers:
@@ -837,6 +885,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve4Pool.json
       eventHandlers:
@@ -867,6 +917,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve4Pool_ypaxCrv.json
       eventHandlers:
@@ -897,6 +949,8 @@ dataSources:
         - Balances
         - VirtualPrice
       abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
         - name: Curve
           file: ./abis/Curve4Pool_crvRenWBTC.json
       eventHandlers:
@@ -909,3 +963,32 @@ dataSources:
         - event: RemoveLiquidityImbalance(indexed address,uint256[4],uint256[4],uint256,uint256)
           handler: handleRemoveLiquidityImbalance
       file: ./src/curve4Pool_crvRenWBTC.ts
+  # --------------------------------------
+  #      Gauge
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: Gauge
+    network: mainnet
+    source:
+      address: "0x2F50D538606Fa9EDD2B11E2446BEb18C9D5846bB"
+      abi: Gauge
+      startBlock: 10647875
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - GaugeControllerData
+      abis:
+        - name: Gauge
+          file: ./abis/Gauge.json
+      eventHandlers:
+        - event: NewTypeWeight(int128,uint256,uint256,uint256)
+          handler: handleNewTypeWeight
+        - event: NewGaugeWeight(address,uint256,uint256,uint256)
+          handler: handleNewGaugeWeight
+        - event: VoteForGauge(uint256,address,address,uint256)
+          handler: handleVoteForGauge
+        - event: NewGauge(address,int128,uint256)
+          handler: handleNewGauge
+      file: ./src/Gauge.ts
