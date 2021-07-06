@@ -1,6 +1,6 @@
 import { log, Address, Bytes, BigInt } from "@graphprotocol/graph-ts";
 import {
-  CCapableErc20Delegate,
+  CreamToken,
   AccrueInterest as AccrueInterestEvent,
   Borrow as BorrowEvent,
   Flashloan as FlashloanEvent,
@@ -10,9 +10,9 @@ import {
   RepayBorrow as RepayBorrowEvent,
   ReservesAdded as ReservesAddedEvent,
   ReservesReduced as ReservesReducedEvent,
-} from "./CCapableErc20Delegate";
-import { CreamToken } from "../generated/schema";
-import { Comptroller } from "../generated/Comptroller/Comptroller";
+} from "../generated/CreamToken/CreamToken";
+import { CreamTokenData } from "../generated/schema";
+import { ComptrollerImplementation } from "../generated/ComptrollerImplementation/ComptrollerImplementation";
 import { convertBINumToDesiredDecimals } from "./converters";
 
 function handleCreamToken(
@@ -24,14 +24,14 @@ function handleCreamToken(
   totalBorrows: BigInt,
   totalReserves: BigInt,
 ): void {
-  let tokenContract = CCapableErc20Delegate.bind(address);
+  let tokenContract = CreamToken.bind(address);
 
-  let entity = CreamToken.load(transactionHash.toHex());
-  if (!entity) entity = new CreamToken(transactionHash.toHex());
+  let entity = CreamTokenData.load(transactionHash.toHex());
+  if (!entity) entity = new CreamTokenData(transactionHash.toHex());
   
-  let comptrollerContract: Comptroller = null;
+  let comptrollerContract: ComptrollerImplementation = null;
   let tried_comptroller = tokenContract.try_comptroller();
-  if (!tried_comptroller.reverted) comptrollerContract = Comptroller.bind(tried_comptroller.value);
+  if (!tried_comptroller.reverted) comptrollerContract = ComptrollerImplementation.bind(tried_comptroller.value);
   if (comptrollerContract) {
     let tried_compSpeeds = comptrollerContract.try_compSpeeds(address);
     if (tried_compSpeeds.reverted) log.error("compSpeeds() reverted", []);
@@ -42,7 +42,7 @@ function handleCreamToken(
   let underlyingAsset = tokenContract.try_underlying();
   if (underlyingAsset.reverted) log.error("underlying() reverted", []);
   else {
-    let underlyingAssetContract = CCapableErc20Delegate.bind(underlyingAsset.value);
+    let underlyingAssetContract = CreamToken.bind(underlyingAsset.value);
     if (!underlyingAssetContract) log.error("No underlyingAsset at {}", [ underlyingAsset.value.toHex() ]);
     else {
       let tried_underlyingAssetDecimals = underlyingAssetContract.try_decimals();
@@ -98,14 +98,14 @@ function handleCreamToken(
 
   let tried_totalSupply = tokenContract.try_totalSupply();
   if (tried_totalSupply.reverted) log.error("totalSupply() reverted", []);
-  else entity.totalSupply = tried_totalSupply.value;
+  else entity.totalSupply = convertBINumToDesiredDecimals(tried_totalSupply.value, underlyingAssetDecimals);
 
   if (totalReserves) {
-    entity.totalReserves = totalReserves;
+    entity.totalReserves = totalReserves.toBigDecimal();
   } else {
     let tried_totalReserves = tokenContract.try_totalReserves();
     if (tried_totalReserves.reverted) log.error("totalReserves() reverted", []);
-    else entity.totalReserves = tried_totalReserves.value;
+    else entity.totalReserves = convertBINumToDesiredDecimals(tried_totalReserves.value, underlyingAssetDecimals);
   }
   
   entity.save();

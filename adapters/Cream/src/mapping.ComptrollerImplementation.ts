@@ -1,24 +1,24 @@
 import { ethereum, log, Address, Bytes, BigInt } from "@graphprotocol/graph-ts";
 import {
-  Comptroller,
+  ComptrollerImplementation,
   CompSpeedUpdated as CompSpeedUpdatedEvent,
-} from "../generated/Comptroller/Comptroller";
-import { CCapableErc20Delegate } from "./CCapableErc20Delegate";
-import { CreamToken } from "../generated/schema";
+} from "../generated/ComptrollerImplementation/ComptrollerImplementation";
+import { CreamToken } from "../generated/CreamToken/CreamToken";
+import { CreamTokenData } from "../generated/schema";
 import { convertBINumToDesiredDecimals } from "./converters";
 
 export function handleCompSpeedUpdated(event: CompSpeedUpdatedEvent): void {
-  let comptrollerContract = Comptroller.bind(event.address);
-  let tokenContract = CCapableErc20Delegate.bind(event.params.cToken);
+  let comptrollerContract = ComptrollerImplementation.bind(event.address);
+  let tokenContract = CreamToken.bind(event.params.cToken);
 
-  let entity = CreamToken.load(event.transaction.hash.toHex());
-  if (!entity) entity = new CreamToken(event.transaction.hash.toHex());
+  let entity = CreamTokenData.load(event.transaction.hash.toHex());
+  if (!entity) entity = new CreamTokenData(event.transaction.hash.toHex());
 
   let underlyingAssetDecimals: i32;
   let underlyingAsset = tokenContract.try_underlying();
   if (underlyingAsset.reverted) log.error("underlying() reverted", []);
   else {
-    let underlyingAssetContract = CCapableErc20Delegate.bind(underlyingAsset.value);
+    let underlyingAssetContract = CreamToken.bind(underlyingAsset.value);
     if (!underlyingAssetContract) log.error("No underlyingAsset at {}", [ underlyingAsset.value.toHex() ]);
     else {
       let tried_underlyingAssetDecimals = underlyingAssetContract.try_decimals();
@@ -67,11 +67,11 @@ export function handleCompSpeedUpdated(event: CompSpeedUpdatedEvent): void {
 
   let tried_totalSupply = tokenContract.try_totalSupply();
   if (tried_totalSupply.reverted) log.error("totalSupply() reverted", []);
-  else entity.totalSupply = tried_totalSupply.value;
+  else entity.totalSupply = convertBINumToDesiredDecimals(tried_totalSupply.value, underlyingAssetDecimals);
 
   let tried_totalReserves = tokenContract.try_totalReserves();
   if (tried_totalReserves.reverted) log.error("totalReserves() reverted", []);
-  else entity.totalReserves = tried_totalReserves.value;
+  else entity.totalReserves = convertBINumToDesiredDecimals(tried_totalReserves.value, underlyingAssetDecimals);
   
   entity.save();
 }

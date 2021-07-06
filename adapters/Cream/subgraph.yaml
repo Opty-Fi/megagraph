@@ -3,45 +3,45 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: Comptroller
+    name: ComptrollerImplementation
     network: mainnet
     source:
       address: "0x3d5BC3c8d13dcB8bF317092d84783c2697AE9258"
       startBlock: 10579797
-      abi: Comptroller
+      abi: ComptrollerImplementation
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - CreamToken
+        - CreamTokenData
       abis:
-        - name: Comptroller
-          file: ./abis/Comptroller.json
-        - name: CCapableErc20Delegate
-          file: ./abis/CCapableErc20Delegate.json
+        - name: ComptrollerImplementation
+          file: ./abis/ComptrollerImplementation.json
+        - name: CreamToken
+          file: ./abis/CreamToken.json
       eventHandlers:
         - event: CompSpeedUpdated(indexed address,uint256)
           handler: handleCompSpeedUpdated
-      file: ./src/mapping.Comptroller.ts
+      file: ./src/mapping.ComptrollerImplementation.ts
   - kind: ethereum/contract
     name: CreamAave
     network: mainnet
     source:
       address: "0x3225E3C669B39C7c8B3e204a8614bB218c5e31BC"
       startBlock: 11222225
-      abi: CCapableErc20Delegate
+      abi: CreamToken
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - CreamToken
+        - CreamTokenData
       abis:
-        - name: Comptroller
-          file: ./abis/Comptroller.json
-        - name: CCapableErc20Delegate
-          file: ./abis/CCapableErc20Delegate.json
+        - name: ComptrollerImplementation
+          file: ./abis/ComptrollerImplementation.json
+        - name: CreamToken
+          file: ./abis/CreamToken.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
@@ -61,25 +61,25 @@ dataSources:
           handler: handleReservesAdded
         - event: ReservesReduced(address,uint256,uint256)
           handler: handleReservesReduced
-      file: ./src/mapping.CCapableErc20Delegate.ts
+      file: ./src/mapping.CreamToken.ts
   - kind: ethereum/contract
     name: CreamBbtc
     network: mainnet
     source:
       address: "0x7ea9C63E216D5565c3940A2B3d150e59C2907Db3"
       startBlock: 11202982
-      abi: CCapableErc20Delegate
+      abi: CreamToken
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - CreamToken
+        - CreamTokenData
       abis:
-        - name: Comptroller
-          file: ./abis/Comptroller.json
-        - name: CCapableErc20Delegate
-          file: ./abis/CCapableErc20Delegate.json
+        - name: ComptrollerImplementation
+          file: ./abis/ComptrollerImplementation.json
+        - name: CreamToken
+          file: ./abis/CreamToken.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
@@ -99,25 +99,25 @@ dataSources:
           handler: handleReservesAdded
         - event: ReservesReduced(address,uint256,uint256)
           handler: handleReservesReduced
-      file: ./src/mapping.CCapableErc20Delegate.ts
+      file: ./src/mapping.CreamToken.ts
   - kind: ethereum/contract
     name: CreamBond
     network: mainnet
     source:
       address: "0xf55BbE0255f7f4E70f63837Ff72A577fbDDbE924"
       startBlock: 11248400
-      abi: CCapableErc20Delegate
+      abi: CreamToken
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - CreamToken
+        - CreamTokenData
       abis:
-        - name: Comptroller
-          file: ./abis/Comptroller.json
-        - name: CCapableErc20Delegate
-          file: ./abis/CCapableErc20Delegate.json
+        - name: ComptrollerImplementation
+          file: ./abis/ComptrollerImplementation.json
+        - name: CreamToken
+          file: ./abis/CreamToken.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
@@ -137,25 +137,25 @@ dataSources:
           handler: handleReservesAdded
         - event: ReservesReduced(address,uint256,uint256)
           handler: handleReservesReduced
-      file: ./src/mapping.CCapableErc20Delegate.ts
+      file: ./src/mapping.CreamToken.ts
   - kind: ethereum/contract
     name: CreamCelsius
     network: mainnet
     source:
       address: "0x8b3ff1ed4f36c2c2be675afb13cc3aa5d73685a5"
       startBlock: 11132874
-      abi: CCapableErc20Delegate
+      abi: CreamToken
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - CreamToken
+        - CreamTokenData
       abis:
-        - name: Comptroller
-          file: ./abis/Comptroller.json
-        - name: CCapableErc20Delegate
-          file: ./abis/CCapableErc20Delegate.json
+        - name: ComptrollerImplementation
+          file: ./abis/ComptrollerImplementation.json
+        - name: CreamToken
+          file: ./abis/CreamToken.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
@@ -175,25 +175,25 @@ dataSources:
           handler: handleReservesAdded
         - event: ReservesReduced(address,uint256,uint256)
           handler: handleReservesReduced
-      file: ./src/mapping.CCapableErc20Delegate.ts
+      file: ./src/mapping.CreamToken.ts
   - kind: ethereum/contract
     name: CreamCover
     network: mainnet
     source:
       address: "0x21011BC93d9E515B9511A817A1eD1D6d468f49Fc"
       startBlock: 11658727
-      abi: CCapableErc20Delegate
+      abi: CreamToken
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - CreamToken
+        - CreamTokenData
       abis:
-        - name: Comptroller
-          file: ./abis/Comptroller.json
-        - name: CCapableErc20Delegate
-          file: ./abis/CCapableErc20Delegate.json
+        - name: ComptrollerImplementation
+          file: ./abis/ComptrollerImplementation.json
+        - name: CreamToken
+          file: ./abis/CreamToken.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
@@ -213,25 +213,25 @@ dataSources:
           handler: handleReservesAdded
         - event: ReservesReduced(address,uint256,uint256)
           handler: handleReservesReduced
-      file: ./src/mapping.CCapableErc20Delegate.ts
+      file: ./src/mapping.CreamToken.ts
   - kind: ethereum/contract
     name: CreamCreth2
     network: mainnet
     source:
       address: "0xfd609a03B393F1A1cFcAcEdaBf068CAD09a924E2"
       startBlock: 11326940
-      abi: CCapableErc20Delegate
+      abi: CreamToken
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - CreamToken
+        - CreamTokenData
       abis:
-        - name: Comptroller
-          file: ./abis/Comptroller.json
-        - name: CCapableErc20Delegate
-          file: ./abis/CCapableErc20Delegate.json
+        - name: ComptrollerImplementation
+          file: ./abis/ComptrollerImplementation.json
+        - name: CreamToken
+          file: ./abis/CreamToken.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
@@ -251,25 +251,25 @@ dataSources:
           handler: handleReservesAdded
         - event: ReservesReduced(address,uint256,uint256)
           handler: handleReservesReduced
-      file: ./src/mapping.CCapableErc20Delegate.ts
+      file: ./src/mapping.CreamToken.ts
   - kind: ethereum/contract
-    name: CreamDai
+    name: CreamToken # CreamDai as CreamToken: using DAI as foundation
     network: mainnet
     source:
       address: "0x92B767185fB3B04F881e3aC8e5B0662a027A1D9f"
       startBlock: 11371388
-      abi: CCapableErc20Delegate
+      abi: CreamToken
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - CreamToken
+        - CreamTokenData
       abis:
-        - name: Comptroller
-          file: ./abis/Comptroller.json
-        - name: CCapableErc20Delegate
-          file: ./abis/CCapableErc20Delegate.json
+        - name: ComptrollerImplementation
+          file: ./abis/ComptrollerImplementation.json
+        - name: CreamToken
+          file: ./abis/CreamToken.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
@@ -289,25 +289,25 @@ dataSources:
           handler: handleReservesAdded
         - event: ReservesReduced(address,uint256,uint256)
           handler: handleReservesReduced
-      file: ./src/mapping.CCapableErc20Delegate.ts
+      file: ./src/mapping.CreamToken.ts
   - kind: ethereum/contract
     name: CreamEsd
     network: mainnet
     source:
       address: "0x3C6C553A95910F9FC81c98784736bd628636D296"
       startBlock: 11554497
-      abi: CCapableErc20Delegate
+      abi: CreamToken
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - CreamToken
+        - CreamTokenData
       abis:
-        - name: Comptroller
-          file: ./abis/Comptroller.json
-        - name: CCapableErc20Delegate
-          file: ./abis/CCapableErc20Delegate.json
+        - name: ComptrollerImplementation
+          file: ./abis/ComptrollerImplementation.json
+        - name: CreamToken
+          file: ./abis/CreamToken.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
@@ -327,25 +327,25 @@ dataSources:
           handler: handleReservesAdded
         - event: ReservesReduced(address,uint256,uint256)
           handler: handleReservesReduced
-      file: ./src/mapping.CCapableErc20Delegate.ts
+      file: ./src/mapping.CreamToken.ts
   - kind: ethereum/contract
     name: CreamHbtc
     network: mainnet
     source:
       address: "0x054B7ed3F45714d3091e82aAd64A1588dC4096Ed"
       startBlock: 11287429
-      abi: CCapableErc20Delegate
+      abi: CreamToken
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - CreamToken
+        - CreamTokenData
       abis:
-        - name: Comptroller
-          file: ./abis/Comptroller.json
-        - name: CCapableErc20Delegate
-          file: ./abis/CCapableErc20Delegate.json
+        - name: ComptrollerImplementation
+          file: ./abis/ComptrollerImplementation.json
+        - name: CreamToken
+          file: ./abis/CreamToken.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
@@ -365,25 +365,25 @@ dataSources:
           handler: handleReservesAdded
         - event: ReservesReduced(address,uint256,uint256)
           handler: handleReservesReduced
-      file: ./src/mapping.CCapableErc20Delegate.ts
+      file: ./src/mapping.CreamToken.ts
   - kind: ethereum/contract
     name: CreamHfil
     network: mainnet
     source:
       address: "0xd5103AfcD0B3fA865997Ef2984C66742c51b2a8b"
       startBlock: 11287588
-      abi: CCapableErc20Delegate
+      abi: CreamToken
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - CreamToken
+        - CreamTokenData
       abis:
-        - name: Comptroller
-          file: ./abis/Comptroller.json
-        - name: CCapableErc20Delegate
-          file: ./abis/CCapableErc20Delegate.json
+        - name: ComptrollerImplementation
+          file: ./abis/ComptrollerImplementation.json
+        - name: CreamToken
+          file: ./abis/CreamToken.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
@@ -403,25 +403,25 @@ dataSources:
           handler: handleReservesAdded
         - event: ReservesReduced(address,uint256,uint256)
           handler: handleReservesReduced
-      file: ./src/mapping.CCapableErc20Delegate.ts
+      file: ./src/mapping.CreamToken.ts
   - kind: ethereum/contract
     name: CreamKp3r
     network: mainnet
     source:
       address: "0x903560b1CcE601794C584F58898dA8a8b789Fc5d"
       startBlock: 11248495
-      abi: CCapableErc20Delegate
+      abi: CreamToken
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - CreamToken
+        - CreamTokenData
       abis:
-        - name: Comptroller
-          file: ./abis/Comptroller.json
-        - name: CCapableErc20Delegate
-          file: ./abis/CCapableErc20Delegate.json
+        - name: ComptrollerImplementation
+          file: ./abis/ComptrollerImplementation.json
+        - name: CreamToken
+          file: ./abis/CreamToken.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
@@ -441,25 +441,25 @@ dataSources:
           handler: handleReservesAdded
         - event: ReservesReduced(address,uint256,uint256)
           handler: handleReservesReduced
-      file: ./src/mapping.CCapableErc20Delegate.ts
+      file: ./src/mapping.CreamToken.ts
   - kind: ethereum/contract
     name: CreamUni
     network: mainnet
     source:
       address: "0xe89a6D0509faF730BD707bf868d9A2A744a363C7"
       startBlock: 10877282
-      abi: CCapableErc20Delegate
+      abi: CreamToken
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - CreamToken
+        - CreamTokenData
       abis:
-        - name: Comptroller
-          file: ./abis/Comptroller.json
-        - name: CCapableErc20Delegate
-          file: ./abis/CCapableErc20Delegate.json
+        - name: ComptrollerImplementation
+          file: ./abis/ComptrollerImplementation.json
+        - name: CreamToken
+          file: ./abis/CreamToken.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
@@ -479,25 +479,25 @@ dataSources:
           handler: handleReservesAdded
         - event: ReservesReduced(address,uint256,uint256)
           handler: handleReservesReduced
-      file: ./src/mapping.CCapableErc20Delegate.ts
+      file: ./src/mapping.CreamToken.ts
   - kind: ethereum/contract
     name: CreamYcrv
     network: mainnet
     source:
       address: "0x9baF8a5236d44AC410c0186Fe39178d5AAD0Bb87"
       startBlock: 10580322
-      abi: CCapableErc20Delegate
+      abi: CreamToken
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - CreamToken
+        - CreamTokenData
       abis:
-        - name: Comptroller
-          file: ./abis/Comptroller.json
-        - name: CCapableErc20Delegate
-          file: ./abis/CCapableErc20Delegate.json
+        - name: ComptrollerImplementation
+          file: ./abis/ComptrollerImplementation.json
+        - name: CreamToken
+          file: ./abis/CreamToken.json
       eventHandlers:
         - event: AccrueInterest(uint256,uint256,uint256,uint256)
           handler: handleAccrueInterest
@@ -517,4 +517,4 @@ dataSources:
           handler: handleReservesAdded
         - event: ReservesReduced(address,uint256,uint256)
           handler: handleReservesReduced
-      file: ./src/mapping.CCapableErc20Delegate.ts
+      file: ./src/mapping.CreamToken.ts

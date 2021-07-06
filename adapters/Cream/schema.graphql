@@ -1,4 +1,4 @@
-type CreamToken @entity {
+type CreamTokenData @entity {
   id: ID!
   transactionHash: Bytes!
   blockNumber: BigInt!
@@ -12,6 +12,6 @@ type CreamToken @entity {
   exchangeRateStored: BigDecimal
   totalCash: BigDecimal
   totalBorrows: BigDecimal
-  totalSupply: BigInt
-  totalReserves: BigInt
+  totalSupply: BigDecimal
+  totalReserves: BigDecimal
 }
