@@ -1,4 +1,4 @@
-import { BigInt, BigDecimal } from '@graphprotocol/graph-ts';
+import { BigInt, BigDecimal, Address } from '@graphprotocol/graph-ts';
 
 //  function to get the 0 number in BigDecimal format
 export function zeroBD(): BigDecimal {
@@ -26,11 +26,11 @@ export function convertBINumToDesiredDecimals(value: BigInt, decimals: i32): Big
 export function convertToLowerCase(str: string): string {
     // create a result variable
     let result = '';
-  
+
     for (let i = 0; i < str.length; i++) {
       // get the code of the current character
       let code = str.charCodeAt(i);
-  
+
       // check if it's within the range of capital letters
       if (code > 64 && code < 91) {
         // if so, add a new character to the result string
@@ -41,7 +41,12 @@ export function convertToLowerCase(str: string): string {
         result += str.charAt(i);
       }
     }
-  
+
     // return the result
     return result;
   }
+
+//  Function to convert the string address to `Address` DataType
+export function convertStringToAddress(addr: string): Address {
+  return Address.fromString(addr.toString())
+}
