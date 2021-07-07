@@ -1,8 +1,4 @@
-import {
-  yearn_yGUSD,
-  DepositCall,
-  WithdrawCall
-} from "../../generated/yearn_yGUSD/yearn_yGUSD"
+import { yearn_1, Transfer } from "../../generated/yearn_SUSD/yearn_1"
 import { YearnPoolData } from "../../generated/schema"
 import { convertBINumToDesiredDecimals } from "../utils/helpers"
 import { BigInt, Address } from "@graphprotocol/graph-ts"
@@ -13,7 +9,7 @@ export function updateEntity(
   timestamp: BigInt,
   txnHash: string
 ): void {
-  let contract = yearn_yGUSD.bind(address)
+  let contract = yearn_1.bind(address)
   let yearnData = YearnPoolData.load(txnHash)
 
   let pricePerFullShare = contract.try_getPricePerFullShare()
@@ -42,20 +38,11 @@ export function updateEntity(
   yearnData.save()
 }
 
-export function handleDeposit(call: DepositCall): void {
+export function handleTransfer(event: Transfer): void {
   updateEntity(
-    call.to,
-    call.block.number,
-    call.block.timestamp,
-    call.transaction.hash.toHexString()
-  )
-}
-
-export function handleWithdraw(call: WithdrawCall): void {
-  updateEntity(
-    call.to,
-    call.block.number,
-    call.block.timestamp,
-    call.transaction.hash.toHexString()
+    event.address,
+    event.block.number,
+    event.block.timestamp,
+    event.transaction.hash.toHexString()
   )
 }

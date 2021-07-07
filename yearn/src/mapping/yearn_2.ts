@@ -1,8 +1,4 @@
-import {
-  yearn_ycrvRenWSBTC,
-  DepositCall,
-  WithdrawCall
-} from "../../generated/yearn_ycrvRenWSBTC/yearn_ycrvRenWSBTC"
+import { yearn_2, Transfer } from "../../generated/yearn_yv1inch/yearn_2"
 import { YearnPoolData } from "../../generated/schema"
 import { convertBINumToDesiredDecimals } from "../utils/helpers"
 import { BigInt, Address } from "@graphprotocol/graph-ts"
@@ -13,11 +9,11 @@ export function updateEntity(
   timestamp: BigInt,
   txnHash: string
 ): void {
-  let contract = yearn_ycrvRenWSBTC.bind(address)
+  let contract = yearn_2.bind(address)
   let yearnData = YearnPoolData.load(txnHash)
 
-  let pricePerFullShare = contract.try_getPricePerFullShare()
-  let balance = contract.try_balance()
+  let pricePerFullShare = contract.try_pricePerShare()
+  let balance = contract.try_totalAssets()
 
   if (!yearnData) {
     yearnData = new YearnPoolData(txnHash)
@@ -29,33 +25,24 @@ export function updateEntity(
   yearnData.vault = address.toHexString()
 
   yearnData.balance = !balance.reverted
-    ? convertBINumToDesiredDecimals(balance.value, contract.decimals())
+    ? convertBINumToDesiredDecimals(balance.value, contract.decimals().toI32())
     : BigInt.fromI32(0).toBigDecimal()
 
   yearnData.pricePerFullShare = !pricePerFullShare.reverted
     ? convertBINumToDesiredDecimals(
         pricePerFullShare.value,
-        contract.decimals()
+        contract.decimals().toI32()
       )
     : BigInt.fromI32(0).toBigDecimal()
 
   yearnData.save()
 }
 
-export function handleDeposit(call: DepositCall): void {
+export function handleTransfer(event: Transfer): void {
   updateEntity(
-    call.to,
-    call.block.number,
-    call.block.timestamp,
-    call.transaction.hash.toHexString()
-  )
-}
-
-export function handleWithdraw(call: WithdrawCall): void {
-  updateEntity(
-    call.to,
-    call.block.number,
-    call.block.timestamp,
-    call.transaction.hash.toHexString()
+    event.address,
+    event.block.number,
+    event.block.timestamp,
+    event.transaction.hash.toHexString()
   )
 }
