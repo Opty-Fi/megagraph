@@ -14,7 +14,7 @@ export function handleNewTypeWeight(event: NewTypeWeight): void {
   if (!data) {
     data = new GaugeControllerData(event.transaction.hash.toHexString())
   }
-  data.blockNumber = event.block.number
+  data.blockNumber = event.block.number.toString()
   data.timestamp = event.block.timestamp
   data.controller = event.address.toHexString()
   data.gauge = null
@@ -31,7 +31,7 @@ export function handleNewGaugeWeight(event: NewGaugeWeight): void {
   if (!data) {
     data = new GaugeControllerData(event.transaction.hash.toHexString())
   }
-  data.blockNumber = event.block.number
+  data.blockNumber = event.block.number.toString()
   data.timestamp = event.block.timestamp
   data.controller = event.address.toHexString()
   data.gauge = event.params.gauge_address.toHexString()
@@ -50,7 +50,7 @@ export function handleVoteForGauge(event: VoteForGauge): void {
     data = new GaugeControllerData(event.transaction.hash.toHexString())
   }
 
-  data.blockNumber = event.block.number
+  data.blockNumber = event.block.number.toString()
   data.timestamp = event.block.timestamp
   data.controller = event.address.toHexString()
   data.gauge = event.params.gauge_addr.toHexString()
@@ -68,7 +68,7 @@ export function handleNewGauge(event: NewGauge): void {
   if (!data) {
     data = new GaugeControllerData(event.transaction.hash.toHexString())
   }
-  data.blockNumber = event.block.number
+  data.blockNumber = event.block.number.toString()
   data.timestamp = event.block.timestamp
   data.controller = event.address.toHexString()
   data.gauge = event.params.addr.toHexString()
