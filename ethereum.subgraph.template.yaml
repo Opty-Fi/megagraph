@@ -2,167 +2,77 @@ specVersion: 0.0.2
 description: Opty-Fi's DeFi Adapters subgraph
 repository: https://github.com/Opty-Fi/defi-protocol-subgraph
 schema:
-  file: ./schema.graphql
+  file: {{{path-schema}}}
 dataSources:
+  {{#adapters}}
   # --------------------------------------
-  #      AaveV1
+  #      {{adapter}}
   # --------------------------------------
+  {{#contract-main}}
   - kind: ethereum/contract
-    name: InitializableAdminUpgradeabilityProxy
+    name: {{contract-main}}
     network: {{network}}
     source:
-      address: "{{AaveV1Address}}"
-      startBlock: {{AaveV1StartBlock}}
-      abi: InitializableAdminUpgradeabilityProxy
+      address: "{{address}}"
+      {{#startBlock}}
+      startBlock: {{startBlock}}
+      {{/startBlock}}
+      abi: {{contract-main}}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - AaveV1AdminChanged
-        - AaveV1Upgraded
+        {{#contract-main}}
+        - {{adapter}}{{contract-main}}Data
+        {{/contract-main}}
+        - {{adapter}}TokenData
       abis:
-        - name: InitializableAdminUpgradeabilityProxy
-          file: {{{AaveV1Abi}}}
+        {{#contract-main}}
+        - name: {{contract-main}}
+          file: ./src/{{adapter}}/abis/{{contract-main}}.json
+        {{/contract-main}}
+        - name: {{adapter}}Token
+          file: ./src/{{adapter}}/abis/{{adapter}}Token.json
       eventHandlers:
-        - event: AdminChanged(address,address)
-          handler: handleAdminChanged
-        - event: Upgraded(indexed address)
-          handler: handleUpgraded
-      file: {{{AaveV1Mapping}}}
-
-  # --------------------------------------
-  #      AaveV2
-  # --------------------------------------
+        {{#events-main}}
+        - event: {{event}}{{params}}
+          handler: handle{{event}}
+        {{/events-main}}
+      file: ./src/{{adapter}}/mappings/{{contract-main}}.ts
+  {{/contract-main}}
+  {{#tokens}}
   - kind: ethereum/contract
-    name: InitializableImmutableAdminUpgradeabilityProxy
+    name: {{adapter}}Token{{symbol}}
     network: {{network}}
     source:
-      address: "{{AaveV2Address}}"
-      startBlock: {{AaveV2StartBlock}}
-      abi: InitializableImmutableAdminUpgradeabilityProxy
+      address: "{{address}}"
+      {{#startBlock}}
+      startBlock: {{startBlock}}
+      {{/startBlock}}
+      abi: {{adapter}}Token
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - AaveV2Upgraded
+        {{#contract-main}}
+        - {{adapter}}{{contract-main}}Data
+        {{/contract-main}}
+        - {{adapter}}TokenData
       abis:
-        - name: InitializableImmutableAdminUpgradeabilityProxy
-          file: {{{AaveV2Abi}}}
+        {{#contract-main}}
+        - name: {{contract-main}}
+          file: ./src/{{adapter}}/abis/{{contract-main}}.json
+        {{/contract-main}}
+        - name: {{adapter}}Token
+          file: ./src/{{adapter}}/abis/{{adapter}}Token.json
       eventHandlers:
-        - event: Upgraded(indexed address)
-          handler: handleUpgraded
-      file: {{{AaveV2Mapping}}}
-
-  # --------------------------------------
-  #      Cream
-  # --------------------------------------
-  - kind: ethereum/contract
-    name: Comp
-    network: {{network}}
-    source:
-      address: "{{CreamAddress}}"
-      startBlock: {{CreamStartBlock}}
-      abi: Comp
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.4
-      language: wasm/assemblyscript
-      entities:
-        - CreamApproval
-        - CreamDelegateChanged
-        - CreamDelegateVotesChanged
-        - CreamTransfer
-      abis:
-        - name: Comp
-          file: {{{CreamAbi}}}
-      eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: DelegateChanged(indexed address,indexed address,indexed address)
-          handler: handleDelegateChanged
-        - event: DelegateVotesChanged(indexed address,uint256,uint256)
-          handler: handleDelegateVotesChanged
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
-      callHandlers:
-        # - function: allowance(address,address)
-        #   handler: handle_allowance
-        - function: approve(address,uint256)
-          handler: handle_approve
-        # - function: balanceOf(address)
-        #   handler: handle_balanceOf
-        # - function: checkpoints(address,uint32)
-        #   handler: handle_checkpoints
-        # - function: decimals()
-        #   handler: handle_decimals
-        - function: delegate(address)
-          handler: handle_delegate
-        - function: delegateBySig(address,uint256,uint256,uint8,bytes32,bytes32)
-          handler: handle_delegateBySig
-        # - function: delegates(address)
-        #   handler: handle_delegates
-        # - function: getCurrentVotes(address)
-        #   handler: handle_getCurrentVotes
-        # - function: getPriorVotes(address,uint256)
-        #   handler: handle_getPriorVotes
-        # - function: name()
-        #   handler: handle_name
-        # - function: nonces(address)
-        #   handler: handle_nonces
-        # - function: numCheckpoints(address)
-        #   handler: handle_numCheckpoints
-        # - function: symbol()
-        #   handler: handle_symbol
-        # - function: totalSupply()
-        #   handler: handle_totalSupply
-        - function: transfer(address,uint256)
-          handler: handle_transfer
-        - function: transferFrom(address,address,uint256)
-          handler: handle_transferFrom
-      file: {{{CreamMapping}}}
-
-  # --------------------------------------
-  #      CurveV1
-  # --------------------------------------
-
-  # --------------------------------------
-  #      CurveV2
-  # --------------------------------------
-
-  # --------------------------------------
-  #      dYdX
-  # --------------------------------------
-
-  # --------------------------------------
-  #      Fulcrum
-  # --------------------------------------
-  - kind: ethereum/contract
-    name: bZxProtocol
-    network: {{network}}
-    source:
-      address: "{{FulcrumAddress}}"
-      startBlock: {{FulcrumStartBlock}}
-      abi: bZxProtocol
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.4
-      language: wasm/assemblyscript
-      entities:
-        - FulcrumOwnershipTransferred
-      abis:
-        - name: bZxProtocol
-          file: {{{FulcrumAbi}}}
-      eventHandlers:
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-      file: {{{FulcrumMapping}}}
-
-  # --------------------------------------
-  #      Harvest
-  # --------------------------------------
-
-  # --------------------------------------
-  #      Yearn
-  # --------------------------------------
+        {{#events-token}}
+        - event: {{event}}{{params}}
+          handler: handle{{event}}
+        {{/events-token}}
+      file: ./src/{{adapter}}/mappings/{{adapter}}Token.ts
+  {{/tokens}}
+  {{/adapters}}
+  

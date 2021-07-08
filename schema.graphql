@@ -1,75 +1,40 @@
-# aavev1 start
-type AaveV1AdminChanged @entity {
+# Naming convention main: <Adapter><Contract>Data
+# Naming convention token: <Adapter>TokenData
+
+# ----------------------------------------
+#      C.R.E.A.M.
+# ----------------------------------------
+type CreamTokenData @entity {
   id: ID!
-  previousAdmin: Bytes! # address
-  newAdmin: Bytes! # address
+  transactionHash: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  address: Bytes!
+  symbol: String!
+  compSpeeds: BigDecimal
+  borrowIndex: BigInt
+  borrowRatePerBlock: BigDecimal
+  supplyRatePerBlock: BigDecimal
+  exchangeRateStored: BigDecimal
+  totalCash: BigDecimal
+  totalBorrows: BigDecimal
+  totalSupply: BigDecimal
+  totalReserves: BigDecimal
 }
 
-type AaveV1Upgraded @entity {
+# ----------------------------------------
+#      bZx Fulcrum
+# ----------------------------------------
+type FulcrumTokenData @entity {
   id: ID!
-  implementation: Bytes! # address
+  transactionHash: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  address: Bytes!
+  symbol: String!
+  supplyInterestRate: BigDecimal
+  borrowInterestRate: BigDecimal
+  tokenPrice: BigDecimal
+  marketLiquidity: BigDecimal
+  totalSupply: BigDecimal
 }
-# aavev1 end
-
-# aavev2 start
-type AaveV2Upgraded @entity {
-  id: ID!
-  implementation: Bytes! # address
-}
-# aavev2 end
-
-# compound start
-# compound end
-
-# cream start
-type CreamApproval @entity {
-  id: ID!
-  owner: Bytes! # address
-  spender: Bytes! # address
-  amount: BigInt! # uint256
-}
-
-type CreamDelegateChanged @entity {
-  id: ID!
-  delegator: Bytes! # address
-  fromDelegate: Bytes! # address
-  toDelegate: Bytes! # address
-}
-
-type CreamDelegateVotesChanged @entity {
-  id: ID!
-  delegate: Bytes! # address
-  previousBalance: BigInt! # uint256
-  newBalance: BigInt! # uint256
-}
-
-type CreamTransfer @entity {
-  id: ID!
-  from: Bytes! # address
-  to: Bytes! # address
-  amount: BigInt! # uint256
-}
-# cream end
-
-# curvev1 start
-# curvev1 end
-
-# curvev2 start
-# curvev2 end
-
-# dydx start
-# dydx end
-
-# fulcrum start
-type FulcrumOwnershipTransferred @entity {
-  id: ID!
-  previousOwner: Bytes! # address
-  newOwner: Bytes! # address
-}
-# fulcrum end
-
-# harvest start
-# harvest end
-
-# yearn start
-# yearn end

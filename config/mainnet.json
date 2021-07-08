@@ -1,58 +1,214 @@
 {
   "blockchain": "ethereum",
   "network": "mainnet",
-
-  "AaveV1Address": "0x398eC7346DcD622eDc5ae82352F02bE94C62d119",
-  "AaveV1StartBlock": 9241022,
-  "AaveV1Abi": "./adapters/aavev1/InitializableAdminUpgradeabilityProxy.json",
-  "AaveV1Mapping": "./adapters/aavev1/mapping.ts",
-  "AaveV1CoreAddress": "0x3dfd23A6c5E8BbcFc9581d2E864a68feb6a076d3",
-  "AaveV1CoreStartBlock": 9241022,
-
-  "AaveV2Address": "0x7d2768de32b0b80b7a3454c06bdac94a69ddc7a9",
-  "AaveV2StartBlock": 11362579,
-  "AaveV2Abi": "./adapters/aavev2/InitializableImmutableAdminUpgradeabilityProxy.json",
-  "AaveV2Mapping": "./adapters/aavev2/mapping.ts",
-
-  "CompoundAddress": "0x0000000000000000000000000000000000000000",
-  "CompoundStartBlock": 0,
-  "CompoundAbi": "./adapters/compound/contract.json",
-  "CompoundMapping": "./adapters/compound/mapping.ts",
-
-  "CreamAddress": "0x2ba592f78db6436527729929aaf6c908497cb200",
-  "CreamStartBlock": 10594024,
-  "CreamAbi": "./adapters/cream/Comp.json",
-  "CreamMapping": "./adapters/cream/mapping.ts",
-
-  "CurveV1Address": "0x0000000000000000000000000000000000000000",
-  "CurveV1StartBlock": 0,
-  "CurveV1Abi": "./adapters/curvev1/contract.json",
-  "CurveV1Mapping": "./adapters/curvev1/mapping.ts",
-
-  "CurveV2Address": "0x0000000000000000000000000000000000000000",
-  "CurveV2StartBlock": 0,
-  "CurveV2Abi": "./adapters/curvev2/contract.json",
-  "CurveV2Mapping": "./adapters/curvev2/mapping.ts",
-
-  "DydxAddress": "0x0000000000000000000000000000000000000000",
-  "DydxStartBlock": 0,
-  "DydxAbi": "./adapters/dydx/contract.json",
-  "DydxMapping": "./adapters/dydx/mapping.ts",
-
-  "FulcrumAddress": "0xD8Ee69652E4e4838f2531732a46d1f7F584F0b7f",
-  "FulcrumStartBlock": 10777787,
-  "FulcrumAbi": "./adapters/fulcrum/bZxProtocol.json",
-  "FulcrumMapping": "./adapters/fulcrum/mapping.ts",
-  "FulcrumStakingAddress": "0x576773CD0B51294997Ec4E4ff96c93d5E3AE9038",
-  "FulcrumStakingStartBlock": 10773120,
-
-  "HarvestFiAddress": "0x0000000000000000000000000000000000000000",
-  "HarvestFiStartBlock": 0,
-  "HarvestFiAbi": "./adapters/harvestfi/contract.json",
-  "HarvestFiMapping": "./adapters/harvestfi/mapping.ts",
-
-  "YearnAddress": "0x0000000000000000000000000000000000000000",
-  "YearnStartBlock": 0,
-  "YearnAbi": "./adapters/yearn/contract.json",
-  "YearnMapping": "./adapters/yearn/mapping.ts"
+  "path-schema": "./schema.graphql",
+  "adapters": [
+    {
+      "adapter": "Cream",
+      "address": "0x3d5BC3c8d13dcB8bF317092d84783c2697AE9258",
+      "startBlock": 10579797,
+      "contract-main": "ComptrollerImplementation",
+      "contract-token": "CreamToken",
+      "events-main": [
+        {
+          "event": "CompSpeedUpdated",
+          "params": "(indexed address,uint256)"
+        }
+      ],
+      "events-token": [
+        {
+          "event": "AccrueInterest",
+          "params": "(uint256,uint256,uint256,uint256)"
+        },
+        {
+          "event": "Borrow",
+          "params": "(address,uint256,uint256,uint256)"
+        },
+        {
+          "event": "Flashloan",
+          "params": "(indexed address,uint256,uint256,uint256)"
+        },
+        {
+          "event": "LiquidateBorrow",
+          "params": "(address,address,uint256,address,uint256)"
+        },
+        {
+          "event": "Mint",
+          "params": "(address,uint256,uint256)"
+        },
+        {
+          "event": "Redeem",
+          "params": "(address,uint256,uint256)"
+        },
+        {
+          "event": "RepayBorrow",
+          "params": "(address,address,uint256,uint256,uint256)"
+        },
+        {
+          "event": "ReservesAdded",
+          "params": "(address,uint256,uint256)"
+        },
+        {
+          "event": "ReservesReduced",
+          "params": "(address,uint256,uint256)"
+        }
+      ],
+      "tokens": [
+        {
+          "symbol": "",
+          "address": "0x92B767185fB3B04F881e3aC8e5B0662a027A1D9f",
+          "startBlock": 11371388
+        },
+        {
+          "symbol": "Aave",
+          "address": "0x3225E3C669B39C7c8B3e204a8614bB218c5e31BC",
+          "startBlock": 11222225
+        },
+        {
+          "symbol": "Bbtc",
+          "address": "0x7ea9C63E216D5565c3940A2B3d150e59C2907Db3",
+          "startBlock": 11202982
+        },
+        {
+          "symbol": "Bond",
+          "address": "0xf55BbE0255f7f4E70f63837Ff72A577fbDDbE924",
+          "startBlock": 11248400
+        },
+        {
+          "symbol": "Celsius",
+          "address": "0x8b3ff1ed4f36c2c2be675afb13cc3aa5d73685a5",
+          "startBlock": 11132874
+        },
+        {
+          "symbol": "Cover",
+          "address": "0x21011BC93d9E515B9511A817A1eD1D6d468f49Fc",
+          "startBlock": 11658727
+        },
+        {
+          "symbol": "Creth2",
+          "address": "0xfd609a03B393F1A1cFcAcEdaBf068CAD09a924E2",
+          "startBlock": 11326940
+        },
+        {
+          "symbol": "Esd",
+          "address": "0x3C6C553A95910F9FC81c98784736bd628636D296",
+          "startBlock": 11554497
+        },
+        {
+          "symbol": "Hbtc",
+          "address": "0x054B7ed3F45714d3091e82aAd64A1588dC4096Ed",
+          "startBlock": 11287429
+        },
+        {
+          "symbol": "Hfil",
+          "address": "0xd5103AfcD0B3fA865997Ef2984C66742c51b2a8b",
+          "startBlock": 11287588
+        },
+        {
+          "symbol": "Kp3r",
+          "address": "0x903560b1CcE601794C584F58898dA8a8b789Fc5d",
+          "startBlock": 11248495
+        },
+        {
+          "symbol": "Uni",
+          "address": "0xe89a6D0509faF730BD707bf868d9A2A744a363C7",
+          "startBlock": 10877282
+        },
+        {
+          "symbol": "Ycrv",
+          "address": "0x9baF8a5236d44AC410c0186Fe39178d5AAD0Bb87",
+          "startBlock": 10580322
+        }
+      ]
+    },
+    {
+      "adapter": "Fulcrum",
+      "address": "0x3d5BC3c8d13dcB8bF317092d84783c2697AE9258",
+      "startBlock": 10579797,
+      "contract-main": "",
+      "contract-token": "FulcrumToken",
+      "events-main": [],
+      "events-token": [
+        {
+          "event": "Burn",
+          "params": "(indexed address,uint256,uint256,uint256)"
+        },
+        {
+          "event": "FlashBorrow",
+          "params": "(address,address,address,uint256)"
+        },
+        {
+          "event": "Mint",
+          "params": "(indexed address,uint256,uint256,uint256)"
+        }
+      ],
+      "tokens": [
+        {
+          "symbol": "",
+          "address": "0x6b093998D36f2C7F0cc359441FBB24CC629D5FF0",
+          "startBlock": 10785055
+        },
+        {
+          "symbol": "Iaave",
+          "address": "0x0cae8d91E0b1b7Bd00D906E990C3625b2c220db1",
+          "startBlock": 11158037
+        },
+        {
+          "symbol": "Icomp",
+          "address": "0x6d29903BC2c4318b59B35d97Ab98ab9eC08Ed70D",
+          "startBlock": 11341990
+        },
+        {
+          "symbol": "Ieth",
+          "address": "0xB983E01458529665007fF7E0CDdeCDB74B967Eb6",
+          "startBlock": 10785086
+        },
+        {
+          "symbol": "Iknc",
+          "address": "0x687642347a9282Be8FD809d8309910A3f984Ac5a",
+          "startBlock": 10785091
+        },
+        {
+          "symbol": "Ilink",
+          "address": "0x463538705E7d22aA7f03Ebf8ab09B067e1001B54",
+          "startBlock": 10785096
+        },
+        {
+          "symbol": "Ilrc",
+          "address": "0x3dA0e01472Dee3746b4D324a65D7EdFaECa9Aa4f",
+          "startBlock": 11341994
+        },
+        {
+          "symbol": "Imkr",
+          "address": "0x9189c499727f88F8eCC7dC4EEA22c828E6AaC015",
+          "startBlock": 10785092
+        },
+        {
+          "symbol": "Iuni",
+          "address": "0x0a625FceC657053Fe2D9FFFdeb1DBb4e412Cf8A8",
+          "startBlock": 11158036
+        },
+        {
+          "symbol": "Iusdc",
+          "address": "0x32E4c68B3A4a813b710595AebA7f6B7604Ab9c15",
+          "startBlock": 10785088
+        },
+        {
+          "symbol": "Iusdt",
+          "address": "0x7e9997a38A439b2be7ed9c9C4628391d3e055D48",
+          "startBlock": 10785098
+        },
+        {
+          "symbol": "Iwbtc",
+          "address": "0x2ffa85f655752fB2aCB210287c60b9ef335f5b6E",
+          "startBlock": 10785089
+        },
+        {
+          "symbol": "Iyfi",
+          "address": "0x7F3Fe9D492A9a60aEBb06d82cBa23c6F32CAd10b",
+          "startBlock": 10785097
+        }
+      ]
+    }
+  ]
 }
