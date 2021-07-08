@@ -25,10 +25,10 @@ export function handleUpdateVirtualPrice(
 ): void {
   let virtualPrice: ethereum.CallResult<BigInt>
   if (poolType === "Curve4Pool") {
-    let contract = Curve2Pool.bind(address)
+    let contract = Curve4Pool.bind(address)
     virtualPrice = contract.try_get_virtual_price()
   } else if (poolType === "Curve3Pool") {
-    let contract = Curve2Pool.bind(address)
+    let contract = Curve3Pool.bind(address)
     virtualPrice = contract.try_get_virtual_price()
   } else {
     let contract = Curve2Pool.bind(address)
