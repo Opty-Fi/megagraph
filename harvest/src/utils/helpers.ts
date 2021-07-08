@@ -1,50 +1,96 @@
-import { BigInt, BigDecimal } from "@graphprotocol/graph-ts"
+import { Address, BigInt, log } from "@graphprotocol/graph-ts"
+import { HarvestPoolData } from "../../generated/HarvestPoolData/HarvestPoolData"
+import { Vault } from "../../generated/Vault_fDAI/Vault"
+import { HarvestData } from "../../generated/schema"
+import { convertToLowerCase, convertBINumToDesiredDecimals } from "./convertors"
 
-//  function to get the 0 number in BigDecimal format
-export function zeroBD(): BigDecimal {
-  return BigDecimal.fromString("0")
-}
-
-// @ts-ignore
-//  function to convert the defined decimals into Graph's BigDecimal format
-export function exponentToBigDecimal(decimals: i32): BigDecimal {
-  let bd = BigDecimal.fromString("1")
-  let bd10 = BigDecimal.fromString("10")
-  for (let i = 0; i < +decimals; i++) {
-    bd = bd.times(bd10)
+export function handleEntity(
+  poolAddr: Address,
+  vaultAddr: Address,
+  txnHash: string,
+  blockNumber: BigInt,
+  timestamp: BigInt
+): void {
+  let harvestData = HarvestData.load(txnHash)
+  if (!harvestData) {
+    harvestData = new HarvestData(txnHash)
   }
-  return bd
-}
-
-// @ts-ignore
-//  function to convert the BigInt number into real time values post dividing with the defined decimals
-export function convertBINumToDesiredDecimals(
-  value: BigInt,
-  decimals: i32
-): BigDecimal {
-  return value.toBigDecimal().div(exponentToBigDecimal(decimals))
-}
-
-//  function to convert the string to lower case
-export function convertToLowerCase(str: string): string {
-  // create a result variable
-  let result = ""
-
-  for (let i = 0; i < str.length; i++) {
-    // get the code of the current character
-    let code = str.charCodeAt(i)
-
-    // check if it's within the range of capital letters
-    if (code > 64 && code < 91) {
-      // if so, add a new character to the result string
-      // of the character from our code, plus 32
-      result += String.fromCharCode(code + 32)
-    } else {
-      // otherwise, just add the current character
-      result += str.charAt(i)
+  harvestData.blockNumber = blockNumber
+  harvestData.timestamp = timestamp
+  if (poolAddr == null) {
+    if (
+      convertToLowerCase(vaultAddr.toHex()) ==
+      convertToLowerCase("0xab7fa2b2985bccfc13c6d86b1d5a17486ab1e04c")
+    ) {
+      poolAddr = convertStringToAddress(
+        "0x15d3A64B2d5ab9E152F16593Cdebc4bB165B5B4A"
+      )
     }
   }
+  if (poolAddr != null) {
+    let poolContract = HarvestPoolData.bind(poolAddr)
+    let lastUpdateTime = poolContract.try_lastUpdateTime()
+    let rewardRate = poolContract.try_rewardRate()
+    let rewardPerTokenStored = poolContract.try_rewardPerTokenStored()
+    harvestData.lastUpdateTime = !lastUpdateTime.reverted
+      ? lastUpdateTime.value
+      : BigInt.fromI32(0)
+    harvestData.rewardRate = !rewardRate.reverted
+      ? rewardRate.value
+      : BigInt.fromI32(0)
+    harvestData.rewardPerTokenStored = !rewardPerTokenStored.reverted
+      ? rewardPerTokenStored.value
+      : BigInt.fromI32(0)
+    harvestData.pool = poolAddr.toHexString()
+  } else {
+    harvestData.lastUpdateTime = BigInt.fromI32(0)
+    harvestData.rewardRate = BigInt.fromI32(0)
+    harvestData.rewardPerTokenStored = BigInt.fromI32(0)
+    harvestData.pool = ""
+  }
 
-  // return the result
-  return result
+  if (vaultAddr == null) {
+    let poolContract = HarvestPoolData.bind(poolAddr)
+    let vault = poolContract.try_lpToken()
+    vaultAddr = !vault.reverted ? vault.value : null
+  }
+
+  if (vaultAddr != null) {
+    let contract = Vault.bind(vaultAddr)
+    let pricePerFullShare = contract.try_getPricePerFullShare()
+    let underlyingBalanceWithInvestment = contract.try_underlyingBalanceWithInvestment()
+    let underlyingBalanceInVault = contract.try_underlyingBalanceInVault()
+    harvestData.pricePerFullShare = !pricePerFullShare.reverted
+      ? convertBINumToDesiredDecimals(
+          pricePerFullShare.value,
+          contract.decimals()
+        )
+      : BigInt.fromI32(0).toBigDecimal()
+    harvestData.underlyingBalanceWithInvestment = !underlyingBalanceWithInvestment.reverted
+      ? convertBINumToDesiredDecimals(
+          underlyingBalanceWithInvestment.value,
+          contract.decimals()
+        )
+      : BigInt.fromI32(0).toBigDecimal()
+    harvestData.underlyingBalanceInVault = !underlyingBalanceInVault.reverted
+      ? convertBINumToDesiredDecimals(
+          underlyingBalanceInVault.value,
+          contract.decimals()
+        )
+      : BigInt.fromI32(0).toBigDecimal()
+    harvestData.vault = vaultAddr.toHexString()
+  } else {
+    harvestData.pricePerFullShare = BigInt.fromI32(0).toBigDecimal()
+    harvestData.underlyingBalanceWithInvestment = BigInt.fromI32(
+      0
+    ).toBigDecimal()
+    harvestData.underlyingBalanceInVault = BigInt.fromI32(0).toBigDecimal()
+    harvestData.vault = ""
+  }
+
+  harvestData.save()
+}
+
+export function convertStringToAddress(addr: string): Address {
+  return Address.fromString(addr.toString())
 }

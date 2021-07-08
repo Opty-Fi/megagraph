@@ -1,57 +1,15 @@
-import { BigInt, Address, BigDecimal } from "@graphprotocol/graph-ts"
 import {
-  Vault,
   Deposit,
   Invest,
   StrategyChanged,
   Transfer,
   Withdraw
 } from "../../generated/Vault/Vault"
-import { HarvestVaultData } from "../../generated/schema"
-import { convertBINumToDesiredDecimals } from "../utils/helpers"
-function HandleEntity(
-  address: Address,
-  txnHash: string,
-  blockNumber: BigInt,
-  timestamp: BigInt
-): void {
-  let contract = Vault.bind(address)
-  let harvestVaultData = HarvestVaultData.load(txnHash)
-  if (harvestVaultData == null) {
-    harvestVaultData = new HarvestVaultData(txnHash)
-  }
-  let pricePerFullShare = contract.try_getPricePerFullShare()
-  let underlyingBalanceWithInvestment =
-    contract.try_underlyingBalanceWithInvestment()
-  let underlyingBalanceInVault = contract.try_underlyingBalanceInVault()
-
-  harvestVaultData.blockNumber = blockNumber
-  harvestVaultData.timestamp = timestamp
-  harvestVaultData.token = contract.name()
-  harvestVaultData.pricePerFullShare = !pricePerFullShare.reverted
-    ? convertBINumToDesiredDecimals(
-        pricePerFullShare.value,
-        contract.decimals()
-      )
-    : BigInt.fromI32(0).toBigDecimal()
-  harvestVaultData.underlyingBalanceWithInvestment =
-    !underlyingBalanceWithInvestment.reverted
-      ? convertBINumToDesiredDecimals(
-          underlyingBalanceWithInvestment.value,
-          contract.decimals()
-        )
-      : BigInt.fromI32(0).toBigDecimal()
-  harvestVaultData.underlyingBalanceInVault = !underlyingBalanceInVault.reverted
-    ? convertBINumToDesiredDecimals(
-        underlyingBalanceInVault.value,
-        contract.decimals()
-      )
-    : BigInt.fromI32(0).toBigDecimal()
-  harvestVaultData.save()
-}
+import { handleEntity } from "../utils/helpers"
 
 export function handleDeposit(event: Deposit): void {
-  HandleEntity(
+  handleEntity(
+    null,
     event.address,
     event.transaction.hash.toHex(),
     event.block.number,
@@ -60,7 +18,8 @@ export function handleDeposit(event: Deposit): void {
 }
 
 export function handleInvest(event: Invest): void {
-  HandleEntity(
+  handleEntity(
+    null,
     event.address,
     event.transaction.hash.toHex(),
     event.block.number,
@@ -69,7 +28,8 @@ export function handleInvest(event: Invest): void {
 }
 
 export function handleStrategyChanged(event: StrategyChanged): void {
-  HandleEntity(
+  handleEntity(
+    null,
     event.address,
     event.transaction.hash.toHex(),
     event.block.number,
@@ -78,7 +38,8 @@ export function handleStrategyChanged(event: StrategyChanged): void {
 }
 
 export function handleTransfer(event: Transfer): void {
-  HandleEntity(
+  handleEntity(
+    null,
     event.address,
     event.transaction.hash.toHex(),
     event.block.number,
@@ -87,7 +48,8 @@ export function handleTransfer(event: Transfer): void {
 }
 
 export function handleWithdraw(event: Withdraw): void {
-  HandleEntity(
+  handleEntity(
+    null,
     event.address,
     event.transaction.hash.toHex(),
     event.block.number,

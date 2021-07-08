@@ -21,6 +21,8 @@ dataSources:
         - RewardRate
         - RewardPerTokenStored
       abis:
+        - name: Vault
+          file: ./abis/Vault.json
         - name: HarvestPoolData
           file: ./abis/HarvestPoolData.json
       eventHandlers:
@@ -122,6 +124,8 @@ dataSources:
       abis:
         - name: Vault
           file: ./abis/Vault.json
+        - name: HarvestPoolData
+          file: ./abis/HarvestPoolData.json
       eventHandlers:
         - event: Deposit(indexed address,uint256)
           handler: handleDeposit
