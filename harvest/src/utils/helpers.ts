@@ -2,7 +2,12 @@ import { Address, BigInt, log } from "@graphprotocol/graph-ts"
 import { HarvestPoolData } from "../../generated/HarvestPoolData/HarvestPoolData"
 import { Vault } from "../../generated/Vault_fDAI/Vault"
 import { HarvestData } from "../../generated/schema"
-import { convertToLowerCase, convertBINumToDesiredDecimals } from "./convertors"
+import {
+  convertToLowerCase,
+  convertBINumToDesiredDecimals,
+  convertStringToAddress,
+  zeroBD
+} from "./convertors"
 
 export function handleEntity(
   poolAddr: Address,
@@ -41,12 +46,12 @@ export function handleEntity(
     harvestData.rewardPerTokenStored = !rewardPerTokenStored.reverted
       ? rewardPerTokenStored.value
       : BigInt.fromI32(0)
-    harvestData.pool = poolAddr.toHexString()
+    harvestData.pool = poolAddr
   } else {
     harvestData.lastUpdateTime = BigInt.fromI32(0)
     harvestData.rewardRate = BigInt.fromI32(0)
     harvestData.rewardPerTokenStored = BigInt.fromI32(0)
-    harvestData.pool = ""
+    harvestData.pool = null
   }
 
   if (vaultAddr == null) {
@@ -65,32 +70,28 @@ export function handleEntity(
           pricePerFullShare.value,
           contract.decimals()
         )
-      : BigInt.fromI32(0).toBigDecimal()
+      : zeroBD()
     harvestData.underlyingBalanceWithInvestment = !underlyingBalanceWithInvestment.reverted
       ? convertBINumToDesiredDecimals(
           underlyingBalanceWithInvestment.value,
           contract.decimals()
         )
-      : BigInt.fromI32(0).toBigDecimal()
+      : zeroBD()
     harvestData.underlyingBalanceInVault = !underlyingBalanceInVault.reverted
       ? convertBINumToDesiredDecimals(
           underlyingBalanceInVault.value,
           contract.decimals()
         )
-      : BigInt.fromI32(0).toBigDecimal()
-    harvestData.vault = vaultAddr.toHexString()
+      : zeroBD()
+    harvestData.vault = vaultAddr
   } else {
-    harvestData.pricePerFullShare = BigInt.fromI32(0).toBigDecimal()
+    harvestData.pricePerFullShare = zeroBD()
     harvestData.underlyingBalanceWithInvestment = BigInt.fromI32(
       0
     ).toBigDecimal()
-    harvestData.underlyingBalanceInVault = BigInt.fromI32(0).toBigDecimal()
-    harvestData.vault = ""
+    harvestData.underlyingBalanceInVault = zeroBD()
+    harvestData.vault = null
   }
 
   harvestData.save()
-}
-
-export function convertStringToAddress(addr: string): Address {
-  return Address.fromString(addr.toString())
 }

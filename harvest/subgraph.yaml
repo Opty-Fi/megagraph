@@ -17,9 +17,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - LastUpdateTime
-        - RewardRate
-        - RewardPerTokenStored
+        - HarvestData
       abis:
         - name: Vault
           file: ./abis/Vault.json
@@ -52,9 +50,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - PricePerFullShare
-        - UnderlyingBalanceWithInvestment
-        - UnderlyingBalanceInVault
+        - HarvestData
       abis:
         - name: Vault
           file: ./abis/Vault.json
@@ -85,9 +81,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - PricePerFullShare
-        - UnderlyingBalanceWithInvestment
-        - UnderlyingBalanceInVault
+        - HarvestData
       abis:
         - name: Vault
           file: ./abis/Vault.json
@@ -118,9 +112,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - PricePerFullShare
-        - UnderlyingBalanceWithInvestment
-        - UnderlyingBalanceInVault
+        - HarvestData
       abis:
         - name: Vault
           file: ./abis/Vault.json
@@ -153,9 +145,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - PricePerFullShare
-        - UnderlyingBalanceWithInvestment
-        - UnderlyingBalanceInVault
+        - HarvestData
       abis:
         - name: Vault
           file: ./abis/Vault.json
@@ -186,9 +176,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - PricePerFullShare
-        - UnderlyingBalanceWithInvestment
-        - UnderlyingBalanceInVault
+        - HarvestData
       abis:
         - name: Vault
           file: ./abis/Vault.json
@@ -219,9 +207,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - PricePerFullShare
-        - UnderlyingBalanceWithInvestment
-        - UnderlyingBalanceInVault
+        - HarvestData
       abis:
         - name: Vault
           file: ./abis/Vault.json
@@ -252,9 +238,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - PricePerFullShare
-        - UnderlyingBalanceWithInvestment
-        - UnderlyingBalanceInVault
+        - HarvestData
       abis:
         - name: Vault
           file: ./abis/Vault.json
@@ -285,9 +269,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - PricePerFullShare
-        - UnderlyingBalanceWithInvestment
-        - UnderlyingBalanceInVault
+        - HarvestData
       abis:
         - name: Vault
           file: ./abis/Vault.json
@@ -318,9 +300,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - PricePerFullShare
-        - UnderlyingBalanceWithInvestment
-        - UnderlyingBalanceInVault
+        - HarvestData
       abis:
         - name: Vault
           file: ./abis/Vault.json
@@ -351,9 +331,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - PricePerFullShare
-        - UnderlyingBalanceWithInvestment
-        - UnderlyingBalanceInVault
+        - HarvestData
       abis:
         - name: Vault
           file: ./abis/Vault.json
@@ -384,9 +362,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - PricePerFullShare
-        - UnderlyingBalanceWithInvestment
-        - UnderlyingBalanceInVault
+        - HarvestData
       abis:
         - name: Vault
           file: ./abis/Vault.json
@@ -417,9 +393,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - PricePerFullShare
-        - UnderlyingBalanceWithInvestment
-        - UnderlyingBalanceInVault
+        - HarvestData
       abis:
         - name: Vault
           file: ./abis/Vault.json
@@ -450,9 +424,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - PricePerFullShare
-        - UnderlyingBalanceWithInvestment
-        - UnderlyingBalanceInVault
+        - HarvestData
       abis:
         - name: Vault
           file: ./abis/Vault.json
@@ -483,9 +455,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - PricePerFullShare
-        - UnderlyingBalanceWithInvestment
-        - UnderlyingBalanceInVault
+        - HarvestData
       abis:
         - name: Vault
           file: ./abis/Vault.json
@@ -516,9 +486,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - PricePerFullShare
-        - UnderlyingBalanceWithInvestment
-        - UnderlyingBalanceInVault
+        - HarvestData
       abis:
         - name: Vault
           file: ./abis/Vault.json
@@ -549,9 +517,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - PricePerFullShare
-        - UnderlyingBalanceWithInvestment
-        - UnderlyingBalanceInVault
+        - HarvestData
       abis:
         - name: Vault
           file: ./abis/Vault.json
