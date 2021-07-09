@@ -7,18 +7,19 @@ import {
   NewGauge
 } from "../generated/Gauge/Gauge"
 import { GaugeControllerData } from "../generated/schema"
-import { convertBINumToDesiredDecimals } from "./utils/converters"
+import { convertBINumToDesiredDecimals, zeroBD } from "./utils/converters"
 
 export function handleNewTypeWeight(event: NewTypeWeight): void {
   let data = GaugeControllerData.load(event.transaction.hash.toHexString())
   if (!data) {
     data = new GaugeControllerData(event.transaction.hash.toHexString())
   }
+
   data.blockNumber = event.block.number.toString()
   data.timestamp = event.block.timestamp
   data.controller = event.address.toHexString()
-  data.gauge = null
-  data.gaugeWeight = null
+  data.gauge = ""
+  data.gaugeWeight = zeroBD()
   data.totalGaugeWeight = convertBINumToDesiredDecimals(
     event.params.total_weight,
     18
