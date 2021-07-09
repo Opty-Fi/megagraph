@@ -311,7 +311,11 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "asset", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "asset",
+        "type": "address"
+      }
     ],
     "name": "activateReserve",
     "outputs": [],
@@ -320,8 +324,16 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "asset", "type": "address" },
-      { "internalType": "uint256", "name": "ltv", "type": "uint256" },
+      {
+        "internalType": "address",
+        "name": "asset",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "ltv",
+        "type": "uint256"
+      },
       {
         "internalType": "uint256",
         "name": "liquidationThreshold",
@@ -340,7 +352,11 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "asset", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "asset",
+        "type": "address"
+      }
     ],
     "name": "deactivateReserve",
     "outputs": [],
@@ -349,7 +365,11 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "asset", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "asset",
+        "type": "address"
+      }
     ],
     "name": "disableBorrowingOnReserve",
     "outputs": [],
@@ -358,7 +378,11 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "asset", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "asset",
+        "type": "address"
+      }
     ],
     "name": "disableReserveStableRate",
     "outputs": [],
@@ -367,7 +391,11 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "asset", "type": "address" },
+      {
+        "internalType": "address",
+        "name": "asset",
+        "type": "address"
+      },
       {
         "internalType": "bool",
         "name": "stableBorrowRateEnabled",
@@ -381,7 +409,11 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "asset", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "asset",
+        "type": "address"
+      }
     ],
     "name": "enableReserveStableRate",
     "outputs": [],
@@ -390,7 +422,11 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "asset", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "asset",
+        "type": "address"
+      }
     ],
     "name": "freezeReserve",
     "outputs": [],
@@ -399,7 +435,11 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "aTokenImpl", "type": "address" },
+      {
+        "internalType": "address",
+        "name": "aTokenImpl",
+        "type": "address"
+      },
       {
         "internalType": "address",
         "name": "stableDebtTokenImpl",
@@ -440,7 +480,13 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "bool", "name": "val", "type": "bool" }],
+    "inputs": [
+      {
+        "internalType": "bool",
+        "name": "val",
+        "type": "bool"
+      }
+    ],
     "name": "setPoolPause",
     "outputs": [],
     "stateMutability": "nonpayable",
@@ -448,8 +494,16 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "asset", "type": "address" },
-      { "internalType": "uint256", "name": "reserveFactor", "type": "uint256" }
+      {
+        "internalType": "address",
+        "name": "asset",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "reserveFactor",
+        "type": "uint256"
+      }
     ],
     "name": "setReserveFactor",
     "outputs": [],
@@ -458,7 +512,11 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "asset", "type": "address" },
+      {
+        "internalType": "address",
+        "name": "asset",
+        "type": "address"
+      },
       {
         "internalType": "address",
         "name": "rateStrategyAddress",
@@ -472,7 +530,11 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "asset", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "asset",
+        "type": "address"
+      }
     ],
     "name": "unfreezeReserve",
     "outputs": [],
@@ -481,8 +543,16 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "asset", "type": "address" },
-      { "internalType": "address", "name": "implementation", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "asset",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "implementation",
+        "type": "address"
+      }
     ],
     "name": "updateAToken",
     "outputs": [],
@@ -491,8 +561,16 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "asset", "type": "address" },
-      { "internalType": "address", "name": "implementation", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "asset",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "implementation",
+        "type": "address"
+      }
     ],
     "name": "updateStableDebtToken",
     "outputs": [],
@@ -501,8 +579,16 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "asset", "type": "address" },
-      { "internalType": "address", "name": "implementation", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "asset",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "implementation",
+        "type": "address"
+      }
     ],
     "name": "updateVariableDebtToken",
     "outputs": [],

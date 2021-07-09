@@ -10,7 +10,7 @@ type AaveV2Token @entity {
   transactionHash: Bytes!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
-  address: String!
+  address: Bytes!
   symbol: String!
 
   decimals: Int

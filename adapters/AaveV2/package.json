@@ -2,9 +2,9 @@
   "name": "aavev2",
   "license": "UNLICENSED",
   "scripts": {
-    "setup": "rm -rf build generated && yarn codegen && yarn graph-auth && yarn deploy",
-    "setup:local": "rm -rf build generated && yarn codegen && yarn deploy:local",
-    "codegen": "graph codegen --output-dir ./generated",
+    "setup": "yarn codegen && yarn graph-auth && yarn deploy",
+    "setup:local": "yarn codegen && yarn deploy:local",
+    "codegen": "rm -rf build generated && graph codegen --output-dir ./generated",
     "deploy": "./node_modules/.bin/dotenv -- yarn graph-deploy-replace",
     "deploy:local": "yarn graph-create-local && yarn graph-deploy-local",
     "graph-auth": "./node_modules/.bin/dotenv -- yarn graph-auth-replace",
