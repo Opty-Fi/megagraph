@@ -58,7 +58,7 @@ export function handleVoteForGauge(event: VoteForGauge): void {
   let weight = contract.try_get_gauge_weight(event.params.gauge_addr)
   data.gaugeWeight = !weight.reverted
     ? convertBINumToDesiredDecimals(weight.value, 18)
-    : BigInt.fromI32(0).toBigDecimal()
+    : zeroBD()
   data.totalGaugeWeight = null
   data.save()
 }
@@ -78,6 +78,6 @@ export function handleNewGauge(event: NewGauge): void {
 
   data.totalGaugeWeight = !totalWeight.reverted
     ? convertBINumToDesiredDecimals(totalWeight.value, 18)
-    : BigInt.fromI32(0).toBigDecimal()
+    : zeroBD()
   data.save()
 }
