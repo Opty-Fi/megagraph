@@ -1,24 +1,11 @@
-type Balance @entity {
-  id: ID!
-  blockNumber: CurvePoolData!
-  balance: [BigDecimal!]!
-  timestamp: BigInt!
-  token: [String!]!
-  vault: String!
-}
-
-type VirtualPrice @entity {
-  id: ID!
-  blockNumber: CurvePoolData!
-  virtualPrice: BigDecimal!
-  timestamp: BigInt!
-  vault: String!
-}
-
 type CurvePoolData @entity {
   id: ID!
-  tokenBalances: [Balance]! @derivedFrom(field: "blockNumber")
-  virtualPrice: [VirtualPrice]! @derivedFrom(field: "blockNumber")
+  balance: [BigDecimal!]!
+  virtualPrice: BigDecimal!
+  timestamp: BigInt!
+  tokens: [String!]!
+  vault: Bytes!
+  blockNumber: CurvePoolData!
 }
 
 type GaugeControllerData @entity {

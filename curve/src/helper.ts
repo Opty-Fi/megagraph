@@ -9,20 +9,29 @@ import { Curve as Curve2Pool } from "../generated/Curve2Pool/Curve"
 import { Curve as Curve3Pool } from "../generated/Curve3Pool/Curve"
 import { Curve as Curve4Pool } from "../generated/Curve4Pool/Curve"
 import { ERC20 } from "../generated/Curve2Pool/ERC20"
-import { Balance, VirtualPrice } from "../generated/schema"
-import { convertBINumToDesiredDecimals } from "./utils/converters"
+import { CurvePoolData } from "../generated/schema"
+import { convertBINumToDesiredDecimals, zeroBD } from "./utils/converters"
 
 export const N_COINS_CURVE2POOL = 2
 export const N_COINS_CURVE3POOL = 3
 export const N_COINS_CURVE4POOL = 4
 
-export function handleUpdateVirtualPrice(
+export function updatePoolData(
   address: Address,
   txnHash: Bytes,
   blockNumber: BigInt,
   timestamp: BigInt,
+  nCoins: number,
   poolType: string
 ): void {
+  let data = CurvePoolData.load(txnHash.toHexString())
+  if (!data) {
+    data = new CurvePoolData(txnHash.toHexString())
+  }
+  data.vault = address
+  data.blockNumber = blockNumber.toString()
+  data.timestamp = timestamp
+
   let virtualPrice: ethereum.CallResult<BigInt>
   if (poolType === "Curve4Pool") {
     let contract = Curve4Pool.bind(address)
@@ -35,49 +44,21 @@ export function handleUpdateVirtualPrice(
     virtualPrice = contract.try_get_virtual_price()
   }
 
-  if (!virtualPrice.reverted) {
-    let virtualPriceEntity = VirtualPrice.load(txnHash.toHexString())
-    if (!virtualPriceEntity) {
-      virtualPriceEntity = new VirtualPrice(txnHash.toHexString())
-    }
+  data.virtualPrice = !virtualPrice.reverted
+    ? convertBINumToDesiredDecimals(virtualPrice.value, 18)
+    : zeroBD()
 
-    virtualPriceEntity.virtualPrice = convertBINumToDesiredDecimals(
-      virtualPrice.value,
-      18
-    )
-
-    virtualPriceEntity.vault = address.toHexString()
-    virtualPriceEntity.blockNumber = blockNumber.toString()
-    virtualPriceEntity.timestamp = timestamp
-    virtualPriceEntity.save()
-  }
-}
-
-export function handleUpdateAllBalances(
-  address: Address,
-  txnHash: Bytes,
-  blockNumber: BigInt,
-  timestamp: BigInt,
-  nCoin: number,
-  poolType: string
-): void {
   let balances: Array<BigDecimal> = []
   let tokens: Array<string> = []
-  for (let i = 0; i < nCoin; i++) {
+  for (let i = 0; i < nCoins; i++) {
     balances.push(getBalance(address, BigInt.fromI32(i), poolType))
     tokens.push(getToken(address, BigInt.fromI32(i), poolType))
   }
-  let balanceEntity = Balance.load(txnHash.toHexString())
-  if (!balanceEntity) {
-    balanceEntity = new Balance(txnHash.toHexString())
-  }
 
-  balanceEntity.balance = balances
-  balanceEntity.blockNumber = blockNumber.toString()
-  balanceEntity.timestamp = timestamp
-  balanceEntity.vault = address.toHexString()
-  balanceEntity.token = tokens
-  balanceEntity.save()
+  data.balance = balances
+  data.tokens = tokens
+
+  data.save()
 }
 
 export function getBalance(
