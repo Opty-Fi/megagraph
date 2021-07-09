@@ -21,8 +21,9 @@ export function updateEntity(
 
   yearnData.blockNumber = blockNumber
   yearnData.timestamp = timestamp
-  yearnData.token = contract.symbol()
-  yearnData.vault = address.toHexString()
+  yearnData.underlyingToken = contract.token()
+  yearnData.symbol = contract.symbol()
+  yearnData.vault = address
 
   yearnData.balance = !balance.reverted
     ? convertBINumToDesiredDecimals(balance.value, contract.decimals().toI32())

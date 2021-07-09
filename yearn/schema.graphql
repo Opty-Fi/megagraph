@@ -4,6 +4,7 @@ type YearnPoolData @entity {
   pricePerFullShare: BigDecimal!
   blockNumber: BigInt!
   timestamp: BigInt!
-  vault: String!
-  token: String!
+  symbol: String!
+  vault: Bytes!
+  underlyingToken: Bytes!
 }

@@ -1,6 +1,6 @@
 import { yearn_1, Transfer } from "../../generated/yearn_SUSD/yearn_1"
 import { YearnPoolData } from "../../generated/schema"
-import { convertBINumToDesiredDecimals } from "../utils/helpers"
+import { convertBINumToDesiredDecimals, zeroBD } from "../utils/helpers"
 import { BigInt, Address } from "@graphprotocol/graph-ts"
 
 export function updateEntity(
@@ -21,19 +21,20 @@ export function updateEntity(
 
   yearnData.blockNumber = blockNumber
   yearnData.timestamp = timestamp
-  yearnData.token = contract.symbol()
-  yearnData.vault = address.toHexString()
+  yearnData.underlyingToken = contract.token()
+  yearnData.symbol = contract.symbol()
+  yearnData.vault = address
 
   yearnData.balance = !balance.reverted
     ? convertBINumToDesiredDecimals(balance.value, contract.decimals())
-    : BigInt.fromI32(0).toBigDecimal()
+    : zeroBD()
 
   yearnData.pricePerFullShare = !pricePerFullShare.reverted
     ? convertBINumToDesiredDecimals(
         pricePerFullShare.value,
         contract.decimals()
       )
-    : BigInt.fromI32(0).toBigDecimal()
+    : zeroBD()
 
   yearnData.save()
 }
