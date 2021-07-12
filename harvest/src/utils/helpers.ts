@@ -7,7 +7,8 @@ import {
   convertBINumToDesiredDecimals,
   convertStringToAddress,
   zeroBD,
-  zeroBI
+  zeroBI,
+  zeroAddress
 } from "./convertors"
 
 export function handleEntity(
@@ -50,7 +51,7 @@ export function handleEntity(
     harvestData.lastUpdateTime = zeroBI()
     harvestData.rewardRate = zeroBI()
     harvestData.rewardPerTokenStored = zeroBI()
-    harvestData.pool = null
+    harvestData.pool = zeroAddress()
   }
 
   if (vaultAddr == null) {
@@ -87,7 +88,7 @@ export function handleEntity(
     harvestData.pricePerFullShare = zeroBD()
     harvestData.underlyingBalanceWithInvestment = zeroBD()
     harvestData.underlyingBalanceInVault = zeroBD()
-    harvestData.vault = null
+    harvestData.vault = zeroAddress()
   }
 
   harvestData.save()
