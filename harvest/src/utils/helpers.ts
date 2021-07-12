@@ -85,9 +85,7 @@ export function handleEntity(
     harvestData.vault = vaultAddr
   } else {
     harvestData.pricePerFullShare = zeroBD()
-    harvestData.underlyingBalanceWithInvestment = BigInt.fromI32(
-      0
-    ).toBigDecimal()
+    harvestData.underlyingBalanceWithInvestment = zeroBD()
     harvestData.underlyingBalanceInVault = zeroBD()
     harvestData.vault = null
   }
