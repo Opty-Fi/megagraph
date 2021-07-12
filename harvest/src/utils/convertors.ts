@@ -5,6 +5,11 @@ export function zeroBD(): BigDecimal {
   return BigDecimal.fromString("0")
 }
 
+//  function to get the 0 number in BigDecimal format
+export function zeroBI(): BigInt {
+  return BigInt.fromI32(0)
+}
+
 // @ts-ignore
 //  function to convert the defined decimals into Graph's BigDecimal format
 export function exponentToBigDecimal(decimals: i32): BigDecimal {

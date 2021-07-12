@@ -6,7 +6,8 @@ import {
   convertToLowerCase,
   convertBINumToDesiredDecimals,
   convertStringToAddress,
-  zeroBD
+  zeroBD,
+  zeroBI
 } from "./convertors"
 
 export function handleEntity(
@@ -39,18 +40,16 @@ export function handleEntity(
     let rewardPerTokenStored = poolContract.try_rewardPerTokenStored()
     harvestData.lastUpdateTime = !lastUpdateTime.reverted
       ? lastUpdateTime.value
-      : BigInt.fromI32(0)
-    harvestData.rewardRate = !rewardRate.reverted
-      ? rewardRate.value
-      : BigInt.fromI32(0)
+      : zeroBI()
+    harvestData.rewardRate = !rewardRate.reverted ? rewardRate.value : zeroBI()
     harvestData.rewardPerTokenStored = !rewardPerTokenStored.reverted
       ? rewardPerTokenStored.value
-      : BigInt.fromI32(0)
+      : zeroBI()
     harvestData.pool = poolAddr
   } else {
-    harvestData.lastUpdateTime = BigInt.fromI32(0)
-    harvestData.rewardRate = BigInt.fromI32(0)
-    harvestData.rewardPerTokenStored = BigInt.fromI32(0)
+    harvestData.lastUpdateTime = zeroBI()
+    harvestData.rewardRate = zeroBI()
+    harvestData.rewardPerTokenStored = zeroBI()
     harvestData.pool = null
   }
 
