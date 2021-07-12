@@ -1,4 +1,4 @@
-import { BigInt, BigDecimal } from "@graphprotocol/graph-ts"
+import { BigInt, BigDecimal, Bytes } from "@graphprotocol/graph-ts"
 
 //  function to get the 0 number in BigDecimal format
 export function zeroBD(): BigDecimal {
@@ -47,4 +47,14 @@ export function convertToLowerCase(str: string): string {
 
   // return the result
   return result
+}
+
+export function convertI32ToBI(number: i32): BigInt {
+  return BigInt.fromI32(number)
+}
+
+export function zeroBytes(): Bytes {
+  return <Bytes>(
+    Bytes.fromHexString("0x0000000000000000000000000000000000000000")
+  )
 }

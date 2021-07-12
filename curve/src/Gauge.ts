@@ -7,7 +7,11 @@ import {
   NewGauge
 } from "../generated/Gauge/Gauge"
 import { GaugeControllerData } from "../generated/schema"
-import { convertBINumToDesiredDecimals, zeroBD } from "./utils/converters"
+import {
+  convertBINumToDesiredDecimals,
+  zeroBD,
+  zeroBytes
+} from "./utils/converters"
 
 export function handleNewTypeWeight(event: NewTypeWeight): void {
   let data = GaugeControllerData.load(event.transaction.hash.toHexString())
@@ -17,8 +21,8 @@ export function handleNewTypeWeight(event: NewTypeWeight): void {
 
   data.blockNumber = event.block.number.toString()
   data.timestamp = event.block.timestamp
-  data.controller = event.address.toHexString()
-  data.gauge = ""
+  data.controller = event.address
+  data.gauge = zeroBytes()
   data.gaugeWeight = zeroBD()
   data.totalGaugeWeight = convertBINumToDesiredDecimals(
     event.params.total_weight,
@@ -34,8 +38,8 @@ export function handleNewGaugeWeight(event: NewGaugeWeight): void {
   }
   data.blockNumber = event.block.number.toString()
   data.timestamp = event.block.timestamp
-  data.controller = event.address.toHexString()
-  data.gauge = event.params.gauge_address.toHexString()
+  data.controller = event.address
+  data.gauge = event.params.gauge_address
   data.gaugeWeight = convertBINumToDesiredDecimals(event.params.weight, 18)
   data.totalGaugeWeight = convertBINumToDesiredDecimals(
     event.params.total_weight,
@@ -53,8 +57,8 @@ export function handleVoteForGauge(event: VoteForGauge): void {
 
   data.blockNumber = event.block.number.toString()
   data.timestamp = event.block.timestamp
-  data.controller = event.address.toHexString()
-  data.gauge = event.params.gauge_addr.toHexString()
+  data.controller = event.address
+  data.gauge = event.params.gauge_addr
   let weight = contract.try_get_gauge_weight(event.params.gauge_addr)
   data.gaugeWeight = !weight.reverted
     ? convertBINumToDesiredDecimals(weight.value, 18)
@@ -71,8 +75,8 @@ export function handleNewGauge(event: NewGauge): void {
   }
   data.blockNumber = event.block.number.toString()
   data.timestamp = event.block.timestamp
-  data.controller = event.address.toHexString()
-  data.gauge = event.params.addr.toHexString()
+  data.controller = event.address
+  data.gauge = event.params.addr
   data.gaugeWeight = convertBINumToDesiredDecimals(event.params.weight, 18)
   let totalWeight = contract.try_get_total_weight()
 

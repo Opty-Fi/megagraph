@@ -10,7 +10,12 @@ import { Curve as Curve3Pool } from "../generated/Curve3Pool/Curve"
 import { Curve as Curve4Pool } from "../generated/Curve4Pool/Curve"
 import { ERC20 } from "../generated/Curve2Pool/ERC20"
 import { CurvePoolData } from "../generated/schema"
-import { convertBINumToDesiredDecimals, zeroBD } from "./utils/converters"
+import {
+  convertBINumToDesiredDecimals,
+  convertI32ToBI,
+  zeroBD,
+  zeroBytes
+} from "./utils/converters"
 
 export const N_COINS_CURVE2POOL = 2
 export const N_COINS_CURVE3POOL = 3
@@ -49,10 +54,10 @@ export function updatePoolData(
     : zeroBD()
 
   let balances: Array<BigDecimal> = []
-  let tokens: Array<string> = []
+  let tokens: Array<Bytes> = []
   for (let i = 0; i < nCoins; i++) {
-    balances.push(getBalance(address, BigInt.fromI32(i), poolType))
-    tokens.push(getToken(address, BigInt.fromI32(i), poolType))
+    balances.push(getBalance(address, convertI32ToBI(i), poolType))
+    tokens.push(getToken(address, convertI32ToBI(i), poolType))
   }
 
   data.balance = balances
@@ -90,14 +95,14 @@ export function getBalance(
       ? convertBINumToDesiredDecimals(balance.value, decimal.value)
       : balance.value.toBigDecimal()
   }
-  return BigDecimal.fromString("0")
+  return zeroBD()
 }
 
 export function getToken(
   address: Address,
   coinIndex: BigInt,
   poolType: string
-): string {
+): Bytes {
   let token: ethereum.CallResult<Address>
 
   if (poolType === "Curve4Pool") {
@@ -110,5 +115,5 @@ export function getToken(
     let contract = Curve2Pool.bind(address)
     token = contract.try_coins(coinIndex)
   }
-  return !token.reverted ? token.value.toHexString() : ""
+  return !token.reverted ? token.value : zeroBytes()
 }
