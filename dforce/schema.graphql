@@ -1,0 +1,10 @@
+type DTokenData @entity {
+  id: ID!
+  pricePerFullShare: BigDecimal
+  balance: BigDecimal
+  blockNumber: BigInt
+  blockTimestamp: BigInt
+  dTokenSymbol: String
+  dTokenAddress: Bytes
+  rewardRate: BigInt
+}
