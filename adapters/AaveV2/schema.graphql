@@ -1,11 +1,4 @@
-type FromTokenToPool @entity {
-  id: ID!
-  transactionHash: Bytes!
-  pool: Bytes!
-  underlyingAsset: Bytes!
-}
-
-type AaveV2Token @entity {
+type AaveV2TokenData @entity {
   id: ID!
   transactionHash: Bytes!
   blockNumber: BigInt!

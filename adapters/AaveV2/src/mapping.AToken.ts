@@ -4,13 +4,9 @@ import {
   Burn as BurnEvent,
   Mint as MintEvent,
 } from "../generated/Adaiv2/AToken";
-import {
-  FromTokenToPool,
-  AaveV2Token,
-} from "../generated/schema";
-// import { LendingPoolConfigurator } from "../generated/LendingPoolConfigurator/LendingPoolConfigurator";
+import { AaveV2TokenData } from "../generated/schema";
+import { LendingPoolAddressesProvider } from "../generated/Adaiv2/LendingPoolAddressesProvider";
 import { AaveProtocolDataProvider } from "../generated/Adaiv2/AaveProtocolDataProvider";
-import { AaveTokenV2 as UnderlyingAsset } from "../generated/Adaiv2/AaveTokenV2";
 import { convertBINumToDesiredDecimals } from "./converters";
 
 function handleAaveV2Token(
@@ -19,10 +15,15 @@ function handleAaveV2Token(
   blockTimestamp: BigInt,
   address: Address,
 ): void {
+  log.warning("entering", []);
+  
+  let POOL_PROVIDER_ADDRESS: Address = Address.fromString("0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5");
+  let DATA_PROVIDER_INDEX: Bytes = <Bytes>Bytes.fromHexString("0x0100000000000000000000000000000000000000000000000000000000000000");
+
   let tokenContract = AToken.bind(address);
 
-  let entity = AaveV2Token.load(transactionHash.toHex());
-  if (!entity) entity = new AaveV2Token(transactionHash.toHex());
+  let entity = AaveV2TokenData.load(transactionHash.toHex());
+  if (!entity) entity = new AaveV2TokenData(transactionHash.toHex());
 
   entity.transactionHash = transactionHash;
   entity.blockNumber = blockNumber;
@@ -38,24 +39,17 @@ function handleAaveV2Token(
   ]);
 
   let dataProviderContract: AaveProtocolDataProvider = null;
-  let entityFromTokenToPool = FromTokenToPool.load(address.toHex());
-  if (!entityFromTokenToPool) entityFromTokenToPool = new FromTokenToPool(address.toHex());
-  dataProviderContract = AaveProtocolDataProvider.bind(<Address>entityFromTokenToPool.pool);
+  let poolProviderContract = LendingPoolAddressesProvider.bind(POOL_PROVIDER_ADDRESS);
+  let tried_dataProviderAddr = poolProviderContract.try_getAddress(DATA_PROVIDER_INDEX);
+  if (tried_dataProviderAddr.reverted) log.error("poolProvider at {} call poolProvider({}) reverted", [ poolProviderContract._address.toHex(), DATA_PROVIDER_INDEX.toHex() ]);
+  else dataProviderContract = AaveProtocolDataProvider.bind(tried_dataProviderAddr.value);
 
-  let underlyingAsset: Address = <Address>entityFromTokenToPool.underlyingAsset;
-  let underlyingAssetContract = UnderlyingAsset.bind(underlyingAsset);
-  let underlyingAssetDecimals = underlyingAssetContract.decimals();
+  let underlyingAssetAddr = tokenContract.UNDERLYING_ASSET_ADDRESS();
 
-  log.warning("dataprovider {} should be '0x057835ad21a177dbdd3090bb1cae03eacf78fc6d': {}", [
-    dataProviderContract._name,
-    dataProviderContract._address.toHex(),
-  ]);
-  log.warning("underlyingasset: {}", [
-    underlyingAsset.toHex(),
-  ]);
-
-  let tried_getReserveConfigurationData = dataProviderContract.try_getReserveConfigurationData(underlyingAsset);
-  if (tried_getReserveConfigurationData.reverted) log.error("getReserveConfigurationData({}) reverted", [ underlyingAsset.toHex() ]);
+  log.warning("0x057835ad21a177dbdd3090bb1cae03eacf78fc6d, dataProv {}", [ dataProviderContract._address.toHex() ]);
+  log.warning("underlying {}", [ underlyingAssetAddr.toHex() ]);
+  let tried_getReserveConfigurationData = dataProviderContract.try_getReserveConfigurationData(underlyingAssetAddr);
+  if (tried_getReserveConfigurationData.reverted) log.error("getReserveConfigurationData({}) reverted", [ underlyingAssetAddr.toHex() ]);
   else {
     let reserveConfData = tried_getReserveConfigurationData.value.toMap();
     entity.decimals = reserveConfData.get("decimals").toI32();
@@ -70,13 +64,13 @@ function handleAaveV2Token(
     entity.isFrozen = reserveConfData.get("isFrozen").toBoolean();
   }
   
-  let tried_getReserveData = dataProviderContract.try_getReserveData(underlyingAsset);
-  if (tried_getReserveData.reverted) log.error("getReserveData({}) reverted", [ underlyingAsset.toHex() ]);
+  let tried_getReserveData = dataProviderContract.try_getReserveData(underlyingAssetAddr);
+  if (tried_getReserveData.reverted) log.error("getReserveData({}) reverted", [ underlyingAssetAddr.toHex() ]);
   else {
     let reserveData = tried_getReserveData.value.toMap();
-    entity.availableLiquidity = convertBINumToDesiredDecimals(reserveData.get("availableLiquidity").toBigInt(), underlyingAssetDecimals);
-    entity.totalStableDebt = convertBINumToDesiredDecimals(reserveData.get("totalStableDebt").toBigInt(), underlyingAssetDecimals);
-    entity.totalVariableDebt = convertBINumToDesiredDecimals(reserveData.get("totalVariableDebt").toBigInt(), underlyingAssetDecimals);
+    entity.availableLiquidity = convertBINumToDesiredDecimals(reserveData.get("availableLiquidity").toBigInt(), entity.decimals);
+    entity.totalStableDebt = convertBINumToDesiredDecimals(reserveData.get("totalStableDebt").toBigInt(), entity.decimals);
+    entity.totalVariableDebt = convertBINumToDesiredDecimals(reserveData.get("totalVariableDebt").toBigInt(), entity.decimals);
     entity.liquidityRate = convertBINumToDesiredDecimals(reserveData.get("liquidityRate").toBigInt(), 27);
     entity.variableBorrowRate = convertBINumToDesiredDecimals(reserveData.get("variableBorrowRate").toBigInt(), 27);
     entity.stableBorrowRate = convertBINumToDesiredDecimals(reserveData.get("stableBorrowRate").toBigInt(), 27);
@@ -90,6 +84,7 @@ function handleAaveV2Token(
 }
 
 export function handleBurn(event: BurnEvent): void {
+  log.warning("handleBurn", []);
   handleAaveV2Token(
     event.transaction.hash,
     event.block.number,
@@ -99,6 +94,7 @@ export function handleBurn(event: BurnEvent): void {
 }
 
 export function handleMint(event: MintEvent): void {
+  log.warning("handleMint", []);
   handleAaveV2Token(
     event.transaction.hash,
     event.block.number,
