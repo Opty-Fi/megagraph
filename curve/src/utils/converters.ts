@@ -49,11 +49,13 @@ export function convertToLowerCase(str: string): string {
   return result
 }
 
+// convert number to BigInt
 export function convertI32ToBI(number: i32): BigInt {
   return BigInt.fromI32(number)
 }
 
-export function zeroBytes(): Bytes {
+//  function to get the 0 address
+export function zeroAddress(): Bytes {
   return <Bytes>(
     Bytes.fromHexString("0x0000000000000000000000000000000000000000")
   )

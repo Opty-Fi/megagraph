@@ -14,7 +14,7 @@ import {
   convertBINumToDesiredDecimals,
   convertI32ToBI,
   zeroBD,
-  zeroBytes
+  zeroAddress
 } from "./utils/converters"
 
 export const N_COINS_CURVE2POOL = 2
@@ -34,7 +34,7 @@ export function updatePoolData(
     data = new CurvePoolData(txnHash.toHexString())
   }
   data.vault = address
-  data.blockNumber = blockNumber.toString()
+  data.blockNumber = blockNumber
   data.timestamp = timestamp
 
   let virtualPrice: ethereum.CallResult<BigInt>
@@ -115,5 +115,5 @@ export function getToken(
     let contract = Curve2Pool.bind(address)
     token = contract.try_coins(coinIndex)
   }
-  return !token.reverted ? token.value : zeroBytes()
+  return !token.reverted ? token.value : zeroAddress()
 }

@@ -5,12 +5,12 @@ type CurvePoolData @entity {
   timestamp: BigInt!
   tokens: [Bytes!]!
   vault: Bytes!
-  blockNumber: CurvePoolData!
+  blockNumber: BigInt!
 }
 
 type GaugeControllerData @entity {
   id: ID!
-  blockNumber: String!
+  blockNumber: BigInt!
   timestamp: BigInt!
   gauge: Bytes!
   gaugeWeight: BigDecimal!

@@ -1,4 +1,3 @@
-import { BigInt } from "@graphprotocol/graph-ts"
 import {
   Gauge,
   NewTypeWeight,
@@ -10,7 +9,7 @@ import { GaugeControllerData } from "../generated/schema"
 import {
   convertBINumToDesiredDecimals,
   zeroBD,
-  zeroBytes
+  zeroAddress
 } from "./utils/converters"
 
 export function handleNewTypeWeight(event: NewTypeWeight): void {
@@ -19,10 +18,10 @@ export function handleNewTypeWeight(event: NewTypeWeight): void {
     data = new GaugeControllerData(event.transaction.hash.toHexString())
   }
 
-  data.blockNumber = event.block.number.toString()
+  data.blockNumber = event.block.number
   data.timestamp = event.block.timestamp
   data.controller = event.address
-  data.gauge = zeroBytes()
+  data.gauge = zeroAddress()
   data.gaugeWeight = zeroBD()
   data.totalGaugeWeight = convertBINumToDesiredDecimals(
     event.params.total_weight,
@@ -36,7 +35,7 @@ export function handleNewGaugeWeight(event: NewGaugeWeight): void {
   if (!data) {
     data = new GaugeControllerData(event.transaction.hash.toHexString())
   }
-  data.blockNumber = event.block.number.toString()
+  data.blockNumber = event.block.number
   data.timestamp = event.block.timestamp
   data.controller = event.address
   data.gauge = event.params.gauge_address
@@ -55,7 +54,7 @@ export function handleVoteForGauge(event: VoteForGauge): void {
     data = new GaugeControllerData(event.transaction.hash.toHexString())
   }
 
-  data.blockNumber = event.block.number.toString()
+  data.blockNumber = event.block.number
   data.timestamp = event.block.timestamp
   data.controller = event.address
   data.gauge = event.params.gauge_addr
@@ -73,7 +72,7 @@ export function handleNewGauge(event: NewGauge): void {
   if (!data) {
     data = new GaugeControllerData(event.transaction.hash.toHexString())
   }
-  data.blockNumber = event.block.number.toString()
+  data.blockNumber = event.block.number
   data.timestamp = event.block.timestamp
   data.controller = event.address
   data.gauge = event.params.addr
