@@ -5,7 +5,7 @@ export function zeroBD(): BigDecimal {
   return BigDecimal.fromString("0")
 }
 
-//  function to get the 0 number in BigDecimal format
+//  function to get the 0 number in BigInt format
 export function zeroBI(): BigInt {
   return BigInt.fromI32(0)
 }
