@@ -62,7 +62,7 @@ export function handleVoteForGauge(event: VoteForGauge): void {
   data.gaugeWeight = !weight.reverted
     ? convertBINumToDesiredDecimals(weight.value, 18)
     : zeroBD()
-  data.totalGaugeWeight = null
+  data.totalGaugeWeight = zeroBD()
   data.save()
 }
 
