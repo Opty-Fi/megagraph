@@ -38,39 +38,43 @@ function handleAaveV1Token(
   entity.decimals = tokenContract.decimals();
 
   let poolProviderContract = AaveV1LendingPoolAddressesProvider.bind(AaveV1_POOL_PROVIDER_ADDRESS);
-  let dataProviderContract = AaveV1LendingPoolDataProvider.bind(poolProviderContract.getLendingPoolDataProvider());
-  
-  let tried_getReserveConfigurationData = dataProviderContract.try_getReserveConfigurationData(underlyingAssetAddr);
-  if (tried_getReserveConfigurationData.reverted) log.error("dataProvider at {} call getReserveConfigurationData({}) reverted", [ dataProviderContract._address.toHex(), underlyingAssetAddr.toHex() ]);
+  let tried_getDataProvider = poolProviderContract.try_getLendingPoolDataProvider();
+  if (tried_getDataProvider.reverted) log.error("poolProvider at {} call getDataProvider() reverted", [ poolProviderContract._address.toHex() ]);
   else {
-    let reserveConfData = tried_getReserveConfigurationData.value;
-    entity.ltv = convertBINumToDesiredDecimals(reserveConfData.value0, 4);
-    entity.liquidationThreshold = convertBINumToDesiredDecimals(reserveConfData.value1, 4);
-    entity.liquidationBonus = convertBINumToDesiredDecimals(reserveConfData.value2, 4);
-    entity.interestRateStrategyAddress = reserveConfData.value3;
-    entity.usageAsCollateralEnabled = reserveConfData.value4;
-    entity.borrowingEnabled = reserveConfData.value5;
-    entity.stableBorrowRateEnabled = reserveConfData.value6;
-    entity.isActive = reserveConfData.value7;
-  }
+    let dataProviderContract = AaveV1LendingPoolDataProvider.bind(tried_getDataProvider.value);
+    
+    let tried_getReserveConfigurationData = dataProviderContract.try_getReserveConfigurationData(underlyingAssetAddr);
+    if (tried_getReserveConfigurationData.reverted) log.error("dataProvider at {} call getReserveConfigurationData({}) reverted", [ dataProviderContract._address.toHex(), underlyingAssetAddr.toHex() ]);
+    else {
+      let reserveConfData = tried_getReserveConfigurationData.value;
+      entity.ltv = convertBINumToDesiredDecimals(reserveConfData.value0, 4);
+      entity.liquidationThreshold = convertBINumToDesiredDecimals(reserveConfData.value1, 4);
+      entity.liquidationBonus = convertBINumToDesiredDecimals(reserveConfData.value2, 4);
+      entity.interestRateStrategyAddress = reserveConfData.value3;
+      entity.usageAsCollateralEnabled = reserveConfData.value4;
+      entity.borrowingEnabled = reserveConfData.value5;
+      entity.stableBorrowRateEnabled = reserveConfData.value6;
+      entity.isActive = reserveConfData.value7;
+    }
 
-  let tried_getReserveData = dataProviderContract.try_getReserveData(underlyingAssetAddr);
-  if (tried_getReserveData.reverted) log.error("dataProvider at {} call getReserveConfigurationData({}) reverted", [ dataProviderContract._address.toHex(), underlyingAssetAddr.toHex() ]);
-  else {
-    let reserveData = tried_getReserveData.value;
-    entity.totalLiquidity = convertBINumToDesiredDecimals(reserveData.value0, entity.decimals);
-    entity.availableLiquidity = convertBINumToDesiredDecimals(reserveData.value1, entity.decimals);
-    entity.totalBorrowsStable = convertBINumToDesiredDecimals(reserveData.value2, 27);
-    entity.totalBorrowsVariable = convertBINumToDesiredDecimals(reserveData.value3, 27);
-    entity.liquidityRate = convertBINumToDesiredDecimals(reserveData.value4, 27);
-    entity.variableBorrowRate = convertBINumToDesiredDecimals(reserveData.value5, 27);
-    entity.stableBorrowRate = convertBINumToDesiredDecimals(reserveData.value6, 27);
-    entity.averageStableBorrowRate = convertBINumToDesiredDecimals(reserveData.value7, 27);
-    entity.utilizationRate = convertBINumToDesiredDecimals(reserveData.value8, 27);
-    entity.liquidityIndex = reserveData.value9;
-    entity.variableBorrowIndex = reserveData.value10;
-    entity.aTokenAddress = reserveData.value11;
-    entity.lastUpdateTimestamp = reserveData.value12;
+    let tried_getReserveData = dataProviderContract.try_getReserveData(underlyingAssetAddr);
+    if (tried_getReserveData.reverted) log.error("dataProvider at {} call getReserveConfigurationData({}) reverted", [ dataProviderContract._address.toHex(), underlyingAssetAddr.toHex() ]);
+    else {
+      let reserveData = tried_getReserveData.value;
+      entity.totalLiquidity = convertBINumToDesiredDecimals(reserveData.value0, entity.decimals);
+      entity.availableLiquidity = convertBINumToDesiredDecimals(reserveData.value1, entity.decimals);
+      entity.totalBorrowsStable = convertBINumToDesiredDecimals(reserveData.value2, 27);
+      entity.totalBorrowsVariable = convertBINumToDesiredDecimals(reserveData.value3, 27);
+      entity.liquidityRate = convertBINumToDesiredDecimals(reserveData.value4, 27);
+      entity.variableBorrowRate = convertBINumToDesiredDecimals(reserveData.value5, 27);
+      entity.stableBorrowRate = convertBINumToDesiredDecimals(reserveData.value6, 27);
+      entity.averageStableBorrowRate = convertBINumToDesiredDecimals(reserveData.value7, 27);
+      entity.utilizationRate = convertBINumToDesiredDecimals(reserveData.value8, 27);
+      entity.liquidityIndex = reserveData.value9;
+      entity.variableBorrowIndex = reserveData.value10;
+      entity.aTokenAddress = reserveData.value11;
+      entity.lastUpdateTimestamp = reserveData.value12;
+    }
   }
 
   entity.save();
