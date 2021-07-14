@@ -3,48 +3,31 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: LendingPool
+    name: AToken # Adai
     network: mainnet
     source:
-      address: "0x398eC7346DcD622eDc5ae82352F02bE94C62d119"
-      startBlock: 9241022
-      abi: LendingPool
+      address: "0xfC1E690f61EFd961294b3e1Ce3313fBD8aa4f85d"
+      startBlock: 9241063
+      abi: AToken
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - FromTokenToPool
-        - AaveV1Token
+        - AaveV1TokenData
       abis:
-        - name: LendingPool
-          file: ./abis/LendingPool.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: LendingPoolAddressesProvider
+          file: ./abis/LendingPoolAddressesProvider.json
+        - name: LendingPoolDataProvider
+          file: ./abis/LendingPoolDataProvider.json
       eventHandlers:
-        - event: Borrow(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256,indexed uint16,uint256)
-          handler: handleBorrow
-        - event: Deposit(indexed address,indexed address,uint256,indexed uint16,uint256)
-          handler: handleDeposit
-        - event: FlashLoan(indexed address,indexed address,uint256,uint256,uint256,uint256)
-          handler: handleFlashLoan
-        - event: LiquidationCall(indexed address,indexed address,indexed address,uint256,uint256,uint256,address,bool,uint256)
-          handler: handleLiquidationCall
-        - event: OriginationFeeLiquidated(indexed address,indexed address,indexed address,uint256,uint256,uint256)
-          handler: handleOriginationFeeLiquidated
-        - event: RebalanceStableBorrowRate(indexed address,indexed address,uint256,uint256,uint256)
-          handler: handleRebalanceStableBorrowRate
-        - event: RedeemUnderlying(indexed address,indexed address,uint256,uint256)
-          handler: handleRedeemUnderlying
-        - event: Repay(indexed address,indexed address,indexed address,uint256,uint256,uint256,uint256)
-          handler: handleRepay
-        - event: ReserveUsedAsCollateralDisabled(indexed address,indexed address)
-          handler: handleReserveUsedAsCollateralDisabled
-        - event: ReserveUsedAsCollateralEnabled(indexed address,indexed address)
-          handler: handleReserveUsedAsCollateralEnabled
-        - event: Swap(indexed address,indexed address,uint256,uint256,uint256,uint256)
-          handler: handleSwap
-      file: ./src/mapping.LendingPool.ts
+        - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
+          handler: handleBurnOnLiquidation
+        - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
+          handler: handleMintOnDeposit
+      file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Aaave
     network: mainnet
@@ -57,32 +40,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - FromTokenToPool
-        - AaveV1Token
+        - AaveV1TokenData
       abis:
-        - name: LendingPool
-          file: ./abis/LendingPool.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: LendingPoolAddressesProvider
+          file: ./abis/LendingPoolAddressesProvider.json
+        - name: LendingPoolDataProvider
+          file: ./abis/LendingPoolDataProvider.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
           handler: handleBurnOnLiquidation
-        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
-          handler: handleInterestRedirectionAllowanceChanged
-        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
-          handler: handleInterestStreamRedirected
         - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
           handler: handleMintOnDeposit
-        - event: Redeem(indexed address,uint256,uint256,uint256)
-          handler: handleRedeem
-        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
-          handler: handleRedirectedBalanceUpdated
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Abat
@@ -96,32 +66,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - FromTokenToPool
-        - AaveV1Token
+        - AaveV1TokenData
       abis:
-        - name: LendingPool
-          file: ./abis/LendingPool.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: LendingPoolAddressesProvider
+          file: ./abis/LendingPoolAddressesProvider.json
+        - name: LendingPoolDataProvider
+          file: ./abis/LendingPoolDataProvider.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
           handler: handleBurnOnLiquidation
-        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
-          handler: handleInterestRedirectionAllowanceChanged
-        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
-          handler: handleInterestStreamRedirected
         - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
           handler: handleMintOnDeposit
-        - event: Redeem(indexed address,uint256,uint256,uint256)
-          handler: handleRedeem
-        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
-          handler: handleRedirectedBalanceUpdated
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Abusd
@@ -135,71 +92,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - FromTokenToPool
-        - AaveV1Token
+        - AaveV1TokenData
       abis:
-        - name: LendingPool
-          file: ./abis/LendingPool.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: LendingPoolAddressesProvider
+          file: ./abis/LendingPoolAddressesProvider.json
+        - name: LendingPoolDataProvider
+          file: ./abis/LendingPoolDataProvider.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
           handler: handleBurnOnLiquidation
-        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
-          handler: handleInterestRedirectionAllowanceChanged
-        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
-          handler: handleInterestStreamRedirected
         - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
           handler: handleMintOnDeposit
-        - event: Redeem(indexed address,uint256,uint256,uint256)
-          handler: handleRedeem
-        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
-          handler: handleRedirectedBalanceUpdated
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
-      file: ./src/mapping.AToken.ts
-  - kind: ethereum/contract
-    name: Adai
-    network: mainnet
-    source:
-      address: "0xfC1E690f61EFd961294b3e1Ce3313fBD8aa4f85d"
-      startBlock: 9241063
-      abi: AToken
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.4
-      language: wasm/assemblyscript
-      entities:
-        - FromTokenToPool
-        - AaveV1Token
-      abis:
-        - name: LendingPool
-          file: ./abis/LendingPool.json
-        - name: AToken
-          file: ./abis/AToken.json
-      eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
-          handler: handleBalanceTransfer
-        - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
-          handler: handleBurnOnLiquidation
-        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
-          handler: handleInterestRedirectionAllowanceChanged
-        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
-          handler: handleInterestStreamRedirected
-        - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
-          handler: handleMintOnDeposit
-        - event: Redeem(indexed address,uint256,uint256,uint256)
-          handler: handleRedeem
-        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
-          handler: handleRedirectedBalanceUpdated
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Aenj
@@ -213,32 +118,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - FromTokenToPool
-        - AaveV1Token
+        - AaveV1TokenData
       abis:
-        - name: LendingPool
-          file: ./abis/LendingPool.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: LendingPoolAddressesProvider
+          file: ./abis/LendingPoolAddressesProvider.json
+        - name: LendingPoolDataProvider
+          file: ./abis/LendingPoolDataProvider.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
           handler: handleBurnOnLiquidation
-        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
-          handler: handleInterestRedirectionAllowanceChanged
-        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
-          handler: handleInterestStreamRedirected
         - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
           handler: handleMintOnDeposit
-        - event: Redeem(indexed address,uint256,uint256,uint256)
-          handler: handleRedeem
-        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
-          handler: handleRedirectedBalanceUpdated
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Aeth
@@ -252,32 +144,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - FromTokenToPool
-        - AaveV1Token
+        - AaveV1TokenData
       abis:
-        - name: LendingPool
-          file: ./abis/LendingPool.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: LendingPoolAddressesProvider
+          file: ./abis/LendingPoolAddressesProvider.json
+        - name: LendingPoolDataProvider
+          file: ./abis/LendingPoolDataProvider.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
           handler: handleBurnOnLiquidation
-        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
-          handler: handleInterestRedirectionAllowanceChanged
-        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
-          handler: handleInterestStreamRedirected
         - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
           handler: handleMintOnDeposit
-        - event: Redeem(indexed address,uint256,uint256,uint256)
-          handler: handleRedeem
-        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
-          handler: handleRedirectedBalanceUpdated
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Aknc
@@ -291,32 +170,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - FromTokenToPool
-        - AaveV1Token
+        - AaveV1TokenData
       abis:
-        - name: LendingPool
-          file: ./abis/LendingPool.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: LendingPoolAddressesProvider
+          file: ./abis/LendingPoolAddressesProvider.json
+        - name: LendingPoolDataProvider
+          file: ./abis/LendingPoolDataProvider.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
           handler: handleBurnOnLiquidation
-        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
-          handler: handleInterestRedirectionAllowanceChanged
-        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
-          handler: handleInterestStreamRedirected
         - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
           handler: handleMintOnDeposit
-        - event: Redeem(indexed address,uint256,uint256,uint256)
-          handler: handleRedeem
-        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
-          handler: handleRedirectedBalanceUpdated
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Alend
@@ -330,32 +196,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - FromTokenToPool
-        - AaveV1Token
+        - AaveV1TokenData
       abis:
-        - name: LendingPool
-          file: ./abis/LendingPool.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: LendingPoolAddressesProvider
+          file: ./abis/LendingPoolAddressesProvider.json
+        - name: LendingPoolDataProvider
+          file: ./abis/LendingPoolDataProvider.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
           handler: handleBurnOnLiquidation
-        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
-          handler: handleInterestRedirectionAllowanceChanged
-        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
-          handler: handleInterestStreamRedirected
         - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
           handler: handleMintOnDeposit
-        - event: Redeem(indexed address,uint256,uint256,uint256)
-          handler: handleRedeem
-        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
-          handler: handleRedirectedBalanceUpdated
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Alink
@@ -369,32 +222,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - FromTokenToPool
-        - AaveV1Token
+        - AaveV1TokenData
       abis:
-        - name: LendingPool
-          file: ./abis/LendingPool.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: LendingPoolAddressesProvider
+          file: ./abis/LendingPoolAddressesProvider.json
+        - name: LendingPoolDataProvider
+          file: ./abis/LendingPoolDataProvider.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
           handler: handleBurnOnLiquidation
-        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
-          handler: handleInterestRedirectionAllowanceChanged
-        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
-          handler: handleInterestStreamRedirected
         - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
           handler: handleMintOnDeposit
-        - event: Redeem(indexed address,uint256,uint256,uint256)
-          handler: handleRedeem
-        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
-          handler: handleRedirectedBalanceUpdated
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Amana
@@ -408,32 +248,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - FromTokenToPool
-        - AaveV1Token
+        - AaveV1TokenData
       abis:
-        - name: LendingPool
-          file: ./abis/LendingPool.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: LendingPoolAddressesProvider
+          file: ./abis/LendingPoolAddressesProvider.json
+        - name: LendingPoolDataProvider
+          file: ./abis/LendingPoolDataProvider.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
           handler: handleBurnOnLiquidation
-        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
-          handler: handleInterestRedirectionAllowanceChanged
-        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
-          handler: handleInterestStreamRedirected
         - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
           handler: handleMintOnDeposit
-        - event: Redeem(indexed address,uint256,uint256,uint256)
-          handler: handleRedeem
-        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
-          handler: handleRedirectedBalanceUpdated
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Amkr
@@ -447,32 +274,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - FromTokenToPool
-        - AaveV1Token
+        - AaveV1TokenData
       abis:
-        - name: LendingPool
-          file: ./abis/LendingPool.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: LendingPoolAddressesProvider
+          file: ./abis/LendingPoolAddressesProvider.json
+        - name: LendingPoolDataProvider
+          file: ./abis/LendingPoolDataProvider.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
           handler: handleBurnOnLiquidation
-        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
-          handler: handleInterestRedirectionAllowanceChanged
-        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
-          handler: handleInterestStreamRedirected
         - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
           handler: handleMintOnDeposit
-        - event: Redeem(indexed address,uint256,uint256,uint256)
-          handler: handleRedeem
-        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
-          handler: handleRedirectedBalanceUpdated
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Aren
@@ -486,32 +300,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - FromTokenToPool
-        - AaveV1Token
+        - AaveV1TokenData
       abis:
-        - name: LendingPool
-          file: ./abis/LendingPool.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: LendingPoolAddressesProvider
+          file: ./abis/LendingPoolAddressesProvider.json
+        - name: LendingPoolDataProvider
+          file: ./abis/LendingPoolDataProvider.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
           handler: handleBurnOnLiquidation
-        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
-          handler: handleInterestRedirectionAllowanceChanged
-        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
-          handler: handleInterestStreamRedirected
         - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
           handler: handleMintOnDeposit
-        - event: Redeem(indexed address,uint256,uint256,uint256)
-          handler: handleRedeem
-        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
-          handler: handleRedirectedBalanceUpdated
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Arep
@@ -525,32 +326,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - FromTokenToPool
-        - AaveV1Token
+        - AaveV1TokenData
       abis:
-        - name: LendingPool
-          file: ./abis/LendingPool.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: LendingPoolAddressesProvider
+          file: ./abis/LendingPoolAddressesProvider.json
+        - name: LendingPoolDataProvider
+          file: ./abis/LendingPoolDataProvider.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
           handler: handleBurnOnLiquidation
-        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
-          handler: handleInterestRedirectionAllowanceChanged
-        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
-          handler: handleInterestStreamRedirected
         - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
           handler: handleMintOnDeposit
-        - event: Redeem(indexed address,uint256,uint256,uint256)
-          handler: handleRedeem
-        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
-          handler: handleRedirectedBalanceUpdated
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Asnx
@@ -564,32 +352,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - FromTokenToPool
-        - AaveV1Token
+        - AaveV1TokenData
       abis:
-        - name: LendingPool
-          file: ./abis/LendingPool.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: LendingPoolAddressesProvider
+          file: ./abis/LendingPoolAddressesProvider.json
+        - name: LendingPoolDataProvider
+          file: ./abis/LendingPoolDataProvider.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
           handler: handleBurnOnLiquidation
-        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
-          handler: handleInterestRedirectionAllowanceChanged
-        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
-          handler: handleInterestStreamRedirected
         - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
           handler: handleMintOnDeposit
-        - event: Redeem(indexed address,uint256,uint256,uint256)
-          handler: handleRedeem
-        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
-          handler: handleRedirectedBalanceUpdated
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Asusd
@@ -603,32 +378,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - FromTokenToPool
-        - AaveV1Token
+        - AaveV1TokenData
       abis:
-        - name: LendingPool
-          file: ./abis/LendingPool.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: LendingPoolAddressesProvider
+          file: ./abis/LendingPoolAddressesProvider.json
+        - name: LendingPoolDataProvider
+          file: ./abis/LendingPoolDataProvider.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
           handler: handleBurnOnLiquidation
-        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
-          handler: handleInterestRedirectionAllowanceChanged
-        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
-          handler: handleInterestStreamRedirected
         - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
           handler: handleMintOnDeposit
-        - event: Redeem(indexed address,uint256,uint256,uint256)
-          handler: handleRedeem
-        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
-          handler: handleRedirectedBalanceUpdated
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Atusd
@@ -642,32 +404,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - FromTokenToPool
-        - AaveV1Token
+        - AaveV1TokenData
       abis:
-        - name: LendingPool
-          file: ./abis/LendingPool.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: LendingPoolAddressesProvider
+          file: ./abis/LendingPoolAddressesProvider.json
+        - name: LendingPoolDataProvider
+          file: ./abis/LendingPoolDataProvider.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
           handler: handleBurnOnLiquidation
-        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
-          handler: handleInterestRedirectionAllowanceChanged
-        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
-          handler: handleInterestStreamRedirected
         - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
           handler: handleMintOnDeposit
-        - event: Redeem(indexed address,uint256,uint256,uint256)
-          handler: handleRedeem
-        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
-          handler: handleRedirectedBalanceUpdated
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Auni
@@ -681,32 +430,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - FromTokenToPool
-        - AaveV1Token
+        - AaveV1TokenData
       abis:
-        - name: LendingPool
-          file: ./abis/LendingPool.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: LendingPoolAddressesProvider
+          file: ./abis/LendingPoolAddressesProvider.json
+        - name: LendingPoolDataProvider
+          file: ./abis/LendingPoolDataProvider.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
           handler: handleBurnOnLiquidation
-        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
-          handler: handleInterestRedirectionAllowanceChanged
-        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
-          handler: handleInterestStreamRedirected
         - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
           handler: handleMintOnDeposit
-        - event: Redeem(indexed address,uint256,uint256,uint256)
-          handler: handleRedeem
-        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
-          handler: handleRedirectedBalanceUpdated
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Ausdc
@@ -720,32 +456,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - FromTokenToPool
-        - AaveV1Token
+        - AaveV1TokenData
       abis:
-        - name: LendingPool
-          file: ./abis/LendingPool.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: LendingPoolAddressesProvider
+          file: ./abis/LendingPoolAddressesProvider.json
+        - name: LendingPoolDataProvider
+          file: ./abis/LendingPoolDataProvider.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
           handler: handleBurnOnLiquidation
-        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
-          handler: handleInterestRedirectionAllowanceChanged
-        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
-          handler: handleInterestStreamRedirected
         - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
           handler: handleMintOnDeposit
-        - event: Redeem(indexed address,uint256,uint256,uint256)
-          handler: handleRedeem
-        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
-          handler: handleRedirectedBalanceUpdated
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Ausdt
@@ -759,32 +482,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - FromTokenToPool
-        - AaveV1Token
+        - AaveV1TokenData
       abis:
-        - name: LendingPool
-          file: ./abis/LendingPool.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: LendingPoolAddressesProvider
+          file: ./abis/LendingPoolAddressesProvider.json
+        - name: LendingPoolDataProvider
+          file: ./abis/LendingPoolDataProvider.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
           handler: handleBurnOnLiquidation
-        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
-          handler: handleInterestRedirectionAllowanceChanged
-        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
-          handler: handleInterestStreamRedirected
         - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
           handler: handleMintOnDeposit
-        - event: Redeem(indexed address,uint256,uint256,uint256)
-          handler: handleRedeem
-        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
-          handler: handleRedirectedBalanceUpdated
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Awbtc
@@ -798,32 +508,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - FromTokenToPool
-        - AaveV1Token
+        - AaveV1TokenData
       abis:
-        - name: LendingPool
-          file: ./abis/LendingPool.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: LendingPoolAddressesProvider
+          file: ./abis/LendingPoolAddressesProvider.json
+        - name: LendingPoolDataProvider
+          file: ./abis/LendingPoolDataProvider.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
           handler: handleBurnOnLiquidation
-        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
-          handler: handleInterestRedirectionAllowanceChanged
-        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
-          handler: handleInterestStreamRedirected
         - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
           handler: handleMintOnDeposit
-        - event: Redeem(indexed address,uint256,uint256,uint256)
-          handler: handleRedeem
-        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
-          handler: handleRedirectedBalanceUpdated
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Ayfi
@@ -837,32 +534,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - FromTokenToPool
-        - AaveV1Token
+        - AaveV1TokenData
       abis:
-        - name: LendingPool
-          file: ./abis/LendingPool.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: LendingPoolAddressesProvider
+          file: ./abis/LendingPoolAddressesProvider.json
+        - name: LendingPoolDataProvider
+          file: ./abis/LendingPoolDataProvider.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
           handler: handleBurnOnLiquidation
-        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
-          handler: handleInterestRedirectionAllowanceChanged
-        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
-          handler: handleInterestStreamRedirected
         - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
           handler: handleMintOnDeposit
-        - event: Redeem(indexed address,uint256,uint256,uint256)
-          handler: handleRedeem
-        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
-          handler: handleRedirectedBalanceUpdated
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Azrx
@@ -876,32 +560,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - FromTokenToPool
-        - AaveV1Token
+        - AaveV1TokenData
       abis:
-        - name: LendingPool
-          file: ./abis/LendingPool.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: LendingPoolAddressesProvider
+          file: ./abis/LendingPoolAddressesProvider.json
+        - name: LendingPoolDataProvider
+          file: ./abis/LendingPoolDataProvider.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
           handler: handleBurnOnLiquidation
-        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
-          handler: handleInterestRedirectionAllowanceChanged
-        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
-          handler: handleInterestStreamRedirected
         - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
           handler: handleMintOnDeposit
-        - event: Redeem(indexed address,uint256,uint256,uint256)
-          handler: handleRedeem
-        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
-          handler: handleRedirectedBalanceUpdated
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts
   - kind: ethereum/contract
     name: Linkusd
@@ -915,30 +586,17 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - FromTokenToPool
-        - AaveV1Token
+        - AaveV1TokenData
       abis:
-        - name: LendingPool
-          file: ./abis/LendingPool.json
         - name: AToken
           file: ./abis/AToken.json
+        - name: LendingPoolAddressesProvider
+          file: ./abis/LendingPoolAddressesProvider.json
+        - name: LendingPoolDataProvider
+          file: ./abis/LendingPoolDataProvider.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: BalanceTransfer(indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
-          handler: handleBalanceTransfer
         - event: BurnOnLiquidation(indexed address,uint256,uint256,uint256)
           handler: handleBurnOnLiquidation
-        - event: InterestRedirectionAllowanceChanged(indexed address,indexed address)
-          handler: handleInterestRedirectionAllowanceChanged
-        - event: InterestStreamRedirected(indexed address,indexed address,uint256,uint256,uint256)
-          handler: handleInterestStreamRedirected
         - event: MintOnDeposit(indexed address,uint256,uint256,uint256)
           handler: handleMintOnDeposit
-        - event: Redeem(indexed address,uint256,uint256,uint256)
-          handler: handleRedeem
-        - event: RedirectedBalanceUpdated(indexed address,uint256,uint256,uint256,uint256)
-          handler: handleRedirectedBalanceUpdated
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
       file: ./src/mapping.AToken.ts

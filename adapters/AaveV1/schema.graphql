@@ -1,37 +1,30 @@
-type FromTokenToPool @entity {
-  id: ID!
-  transactionHash: Bytes!
-  pool: Bytes!
-  underlyingAsset: Bytes!
-}
-
-type AaveV1Token @entity {
+type AaveV1TokenData @entity {
   id: ID!
   transactionHash: Bytes!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
-  address: String!
+  address: Bytes!
   symbol: String!
 
   decimals: Int
-  ltv: BigInt
-  liquidationThreshold: BigInt
-  liquidationBonus: BigInt
+  ltv: BigDecimal
+  liquidationThreshold: BigDecimal
+  liquidationBonus: BigDecimal
   interestRateStrategyAddress: Bytes
   usageAsCollateralEnabled: Boolean
   borrowingEnabled: Boolean
   stableBorrowRateEnabled: Boolean
   isActive: Boolean
 
-  totalLiquidity: BigInt
-  availableLiquidity: BigInt
-  totalBorrowsStable: BigInt
-  totalBorrowsVariable: BigInt
-  liquidityRate: BigInt
-  variableBorrowRate: BigInt
-  stableBorrowRate: BigInt
-  averageStableBorrowRate: BigInt
-  utilizationRate: BigInt
+  totalLiquidity: BigDecimal
+  availableLiquidity: BigDecimal
+  totalBorrowsStable: BigDecimal
+  totalBorrowsVariable: BigDecimal
+  liquidityRate: BigDecimal
+  variableBorrowRate: BigDecimal
+  stableBorrowRate: BigDecimal
+  averageStableBorrowRate: BigDecimal
+  utilizationRate: BigDecimal
   liquidityIndex: BigInt
   variableBorrowIndex: BigInt
   aTokenAddress: Bytes
