@@ -7,7 +7,8 @@ import {
 import { AaveV2TokenData } from "../generated/schema";
 import { LendingPoolAddressesProvider } from "../generated/AToken/LendingPoolAddressesProvider";
 import { AaveProtocolDataProvider } from "../generated/AToken/AaveProtocolDataProvider";
-import { convertBINumToDesiredDecimals } from "./converters";
+import { toAddress, convertBINumToDesiredDecimals } from "./converters";
+import { POOL_PROVIDER_ADDRESS, DATA_PROVIDER_INDEX } from "./constants";
 
 function handleAaveV2Token(
   transactionHash: Bytes,
@@ -15,9 +16,6 @@ function handleAaveV2Token(
   blockTimestamp: BigInt,
   address: Address,
 ): void {
-  let POOL_PROVIDER_ADDRESS: Address = Address.fromString("0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5");
-  let DATA_PROVIDER_INDEX: Bytes = <Bytes>Bytes.fromHexString("0x0100000000000000000000000000000000000000000000000000000000000000");
-
   let tokenContract = AToken.bind(address);
 
   let entity = AaveV2TokenData.load(transactionHash.toHex());
@@ -42,7 +40,7 @@ function handleAaveV2Token(
   let tried_getDataProvider = poolProviderContract.try_getAddress(DATA_PROVIDER_INDEX);
   let dataProviderContract: AaveProtocolDataProvider = null;
   if (tried_getDataProvider.reverted) log.error("poolProvider at {} call getDataProvider({}) reverted", [ poolProviderContract._address.toHex(), DATA_PROVIDER_INDEX.toHex() ]);
-  else dataProviderContract = AaveProtocolDataProvider.bind(Address.fromString(tried_getDataProvider.value.toHexString()));
+  else dataProviderContract = AaveProtocolDataProvider.bind(toAddress(tried_getDataProvider.value.toHexString()));
 
   let tried_getReserveConfigurationData = dataProviderContract.try_getReserveConfigurationData(underlyingAssetAddr);
   if (tried_getReserveConfigurationData.reverted) log.error("dataProvider at {} call getReserveConfigurationData({}) reverted", [ dataProviderContract._address.toHex(), underlyingAssetAddr.toHex() ]);
