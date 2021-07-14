@@ -25,17 +25,17 @@
     "graph-deploy-local-replace": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 $SLUG"
   },
   "dependencies": {
-    "@graphprotocol/graph-cli": "^0.20.1",
+    "@graphprotocol/graph-cli": "^0.21.0",
     "@graphprotocol/graph-ts": "^0.20.1",
-    "@types/node": "^16.0.1",
+    "@types/node": "^16.3.2",
     "dotenv": "^10.0.0",
     "dotenv-cli": "^4.0.0",
+    "mustache": "^4.2.0",
     "typescript": "^4.3.5"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.28.2",
-    "@typescript-eslint/parser": "^4.28.2",
-    "eslint": "^7.30.0",
-    "mustache": "^4.2.0"
+    "@typescript-eslint/eslint-plugin": "^4.28.3",
+    "@typescript-eslint/parser": "^4.28.3",
+    "eslint": "^7.30.0"
   }
 }
