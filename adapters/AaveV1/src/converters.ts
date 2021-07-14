@@ -1,4 +1,4 @@
-import { BigInt, BigDecimal } from '@graphprotocol/graph-ts';
+import { Address, BigInt, BigDecimal } from '@graphprotocol/graph-ts';
 
 export function zeroBD(): BigDecimal {
   return BigDecimal.fromString('0');
@@ -17,4 +17,8 @@ export function exponentToBigDecimal(decimals: i32): BigDecimal {
 // @ts-ignore
 export function convertBINumToDesiredDecimals(value: BigInt, decimals: i32): BigDecimal {
   return value.toBigDecimal().div(exponentToBigDecimal(decimals));
+}
+
+export function toAddress(str: string): Address {
+  return Address.fromString(str);
 }
