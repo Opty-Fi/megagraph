@@ -3,10 +3,10 @@ import {
   AToken,
   Burn as BurnEvent,
   Mint as MintEvent,
-} from "../generated/Adaiv2/AToken";
+} from "../generated/AToken/AToken";
 import { AaveV2TokenData } from "../generated/schema";
-import { LendingPoolAddressesProvider } from "../generated/Adaiv2/LendingPoolAddressesProvider";
-import { AaveProtocolDataProvider } from "../generated/Adaiv2/AaveProtocolDataProvider";
+import { LendingPoolAddressesProvider } from "../generated/AToken/LendingPoolAddressesProvider";
+import { AaveProtocolDataProvider } from "../generated/AToken/AaveProtocolDataProvider";
 import { convertBINumToDesiredDecimals } from "./converters";
 
 function handleAaveV2Token(
@@ -15,8 +15,6 @@ function handleAaveV2Token(
   blockTimestamp: BigInt,
   address: Address,
 ): void {
-  log.warning("entering", []);
-  
   let POOL_PROVIDER_ADDRESS: Address = Address.fromString("0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5");
   let DATA_PROVIDER_INDEX: Bytes = <Bytes>Bytes.fromHexString("0x0100000000000000000000000000000000000000000000000000000000000000");
 
@@ -38,53 +36,50 @@ function handleAaveV2Token(
     transactionHash.toHex(),
   ]);
 
-  let dataProviderContract: AaveProtocolDataProvider = null;
-  let poolProviderContract = LendingPoolAddressesProvider.bind(POOL_PROVIDER_ADDRESS);
-  let tried_dataProviderAddr = poolProviderContract.try_getAddress(DATA_PROVIDER_INDEX);
-  if (tried_dataProviderAddr.reverted) log.error("poolProvider at {} call poolProvider({}) reverted", [ poolProviderContract._address.toHex(), DATA_PROVIDER_INDEX.toHex() ]);
-  else dataProviderContract = AaveProtocolDataProvider.bind(tried_dataProviderAddr.value);
-
   let underlyingAssetAddr = tokenContract.UNDERLYING_ASSET_ADDRESS();
 
-  log.warning("0x057835ad21a177dbdd3090bb1cae03eacf78fc6d, dataProv {}", [ dataProviderContract._address.toHex() ]);
-  log.warning("underlying {}", [ underlyingAssetAddr.toHex() ]);
+  let poolProviderContract = LendingPoolAddressesProvider.bind(POOL_PROVIDER_ADDRESS);
+  let tried_getDataProvider = poolProviderContract.try_getAddress(DATA_PROVIDER_INDEX);
+  let dataProviderContract: AaveProtocolDataProvider = null;
+  if (tried_getDataProvider.reverted) log.error("poolProvider at {} call getDataProvider({}) reverted", [ poolProviderContract._address.toHex(), DATA_PROVIDER_INDEX.toHex() ]);
+  else dataProviderContract = AaveProtocolDataProvider.bind(Address.fromString(tried_getDataProvider.value.toHexString()));
+
   let tried_getReserveConfigurationData = dataProviderContract.try_getReserveConfigurationData(underlyingAssetAddr);
-  if (tried_getReserveConfigurationData.reverted) log.error("getReserveConfigurationData({}) reverted", [ underlyingAssetAddr.toHex() ]);
+  if (tried_getReserveConfigurationData.reverted) log.error("dataProvider at {} call getReserveConfigurationData({}) reverted", [ dataProviderContract._address.toHex(), underlyingAssetAddr.toHex() ]);
   else {
-    let reserveConfData = tried_getReserveConfigurationData.value.toMap();
-    entity.decimals = reserveConfData.get("decimals").toI32();
-    entity.ltv = convertBINumToDesiredDecimals(reserveConfData.get("ltv").toBigInt(), 4);
-    entity.liquidationThreshold = convertBINumToDesiredDecimals(reserveConfData.get("liquidationThreshold").toBigInt(), 4);
-    entity.liquidationBonus = convertBINumToDesiredDecimals(reserveConfData.get("liquidationBonus").toBigInt(), 4);
-    entity.reserveFactor = convertBINumToDesiredDecimals(reserveConfData.get("reserveFactor").toBigInt(), 4);
-    entity.usageAsCollateralEnabled = reserveConfData.get("usageAsCollateralEnabled").toBoolean();
-    entity.borrowingEnabled = reserveConfData.get("borrowingEnabled").toBoolean();
-    entity.stableBorrowRateEnabled = reserveConfData.get("stableBorrowRateEnabled").toBoolean();
-    entity.isActive = reserveConfData.get("isActive").toBoolean();
-    entity.isFrozen = reserveConfData.get("isFrozen").toBoolean();
+    let reserveConfData = tried_getReserveConfigurationData.value;
+    entity.decimals = reserveConfData.value0.toI32();
+    entity.ltv = convertBINumToDesiredDecimals(reserveConfData.value1, 4);
+    entity.liquidationThreshold = convertBINumToDesiredDecimals(reserveConfData.value2, 4);
+    entity.liquidationBonus = convertBINumToDesiredDecimals(reserveConfData.value3, 4);
+    entity.reserveFactor = convertBINumToDesiredDecimals(reserveConfData.value4, 4);
+    entity.usageAsCollateralEnabled = reserveConfData.value5;
+    entity.borrowingEnabled = reserveConfData.value6;
+    entity.stableBorrowRateEnabled = reserveConfData.value7;
+    entity.isActive = reserveConfData.value8;
+    entity.isFrozen = reserveConfData.value9;
   }
-  
+
   let tried_getReserveData = dataProviderContract.try_getReserveData(underlyingAssetAddr);
-  if (tried_getReserveData.reverted) log.error("getReserveData({}) reverted", [ underlyingAssetAddr.toHex() ]);
+  if (tried_getReserveData.reverted) log.error("dataProvider at {} call getReserveConfigurationData({}) reverted", [ dataProviderContract._address.toHex(), underlyingAssetAddr.toHex() ]);
   else {
-    let reserveData = tried_getReserveData.value.toMap();
-    entity.availableLiquidity = convertBINumToDesiredDecimals(reserveData.get("availableLiquidity").toBigInt(), entity.decimals);
-    entity.totalStableDebt = convertBINumToDesiredDecimals(reserveData.get("totalStableDebt").toBigInt(), entity.decimals);
-    entity.totalVariableDebt = convertBINumToDesiredDecimals(reserveData.get("totalVariableDebt").toBigInt(), entity.decimals);
-    entity.liquidityRate = convertBINumToDesiredDecimals(reserveData.get("liquidityRate").toBigInt(), 27);
-    entity.variableBorrowRate = convertBINumToDesiredDecimals(reserveData.get("variableBorrowRate").toBigInt(), 27);
-    entity.stableBorrowRate = convertBINumToDesiredDecimals(reserveData.get("stableBorrowRate").toBigInt(), 27);
-    entity.averageStableBorrowRate = convertBINumToDesiredDecimals(reserveData.get("averageStableBorrowRate").toBigInt(), 27);
-    entity.liquidityIndex = convertBINumToDesiredDecimals(reserveData.get("liquidityIndex").toBigInt(), 27);
-    entity.variableBorrowIndex = convertBINumToDesiredDecimals(reserveData.get("variableBorrowIndex").toBigInt(), 27);
-    entity.lastUpdateTimestamp = reserveData.get("lastUpdateTimestamp").toBigInt();
+    let reserveData = tried_getReserveData.value;
+    entity.availableLiquidity = convertBINumToDesiredDecimals(reserveData.value0, entity.decimals);
+    entity.totalStableDebt = convertBINumToDesiredDecimals(reserveData.value1, entity.decimals);
+    entity.totalVariableDebt = convertBINumToDesiredDecimals(reserveData.value2, entity.decimals);
+    entity.liquidityRate = convertBINumToDesiredDecimals(reserveData.value3, 27);
+    entity.variableBorrowRate = convertBINumToDesiredDecimals(reserveData.value4, 27);
+    entity.stableBorrowRate = convertBINumToDesiredDecimals(reserveData.value5, 27);
+    entity.averageStableBorrowRate = convertBINumToDesiredDecimals(reserveData.value6, 27);
+    entity.liquidityIndex = convertBINumToDesiredDecimals(reserveData.value7, 27);
+    entity.variableBorrowIndex = convertBINumToDesiredDecimals(reserveData.value8, 27);
+    entity.lastUpdateTimestamp = reserveData.value9;
   }
 
   entity.save();
 }
 
 export function handleBurn(event: BurnEvent): void {
-  log.warning("handleBurn", []);
   handleAaveV2Token(
     event.transaction.hash,
     event.block.number,
@@ -94,7 +89,6 @@ export function handleBurn(event: BurnEvent): void {
 }
 
 export function handleMint(event: MintEvent): void {
-  log.warning("handleMint", []);
   handleAaveV2Token(
     event.transaction.hash,
     event.block.number,
