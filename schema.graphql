@@ -1,5 +1,72 @@
-# Naming convention main: <Adapter><Contract>Data
-# Naming convention token: <Adapter>TokenData
+# ----------------------------------------
+#      AaveV1
+# ----------------------------------------
+type AaveV1TokenData @entity {
+  id: ID!
+  transactionHash: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  address: Bytes!
+  symbol: String!
+
+  decimals: Int
+  ltv: BigDecimal
+  liquidationThreshold: BigDecimal
+  liquidationBonus: BigDecimal
+  interestRateStrategyAddress: Bytes
+  usageAsCollateralEnabled: Boolean
+  borrowingEnabled: Boolean
+  stableBorrowRateEnabled: Boolean
+  isActive: Boolean
+
+  totalLiquidity: BigDecimal
+  availableLiquidity: BigDecimal
+  totalBorrowsStable: BigDecimal
+  totalBorrowsVariable: BigDecimal
+  liquidityRate: BigDecimal
+  variableBorrowRate: BigDecimal
+  stableBorrowRate: BigDecimal
+  averageStableBorrowRate: BigDecimal
+  utilizationRate: BigDecimal
+  liquidityIndex: BigInt
+  variableBorrowIndex: BigInt
+  aTokenAddress: Bytes
+  lastUpdateTimestamp: BigInt
+}
+
+# ----------------------------------------
+#      AaveV2
+# ----------------------------------------
+type AaveV2TokenData @entity {
+  id: ID!
+  transactionHash: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  address: Bytes!
+  symbol: String!
+
+  decimals: Int
+  ltv: BigDecimal
+  liquidationThreshold: BigDecimal
+  liquidationBonus: BigDecimal
+  reserveFactor: BigDecimal
+  usageAsCollateralEnabled: Boolean
+  borrowingEnabled: Boolean
+  stableBorrowRateEnabled: Boolean
+  isActive: Boolean
+  isFrozen: Boolean
+
+  availableLiquidity: BigDecimal
+  totalStableDebt: BigDecimal
+  totalVariableDebt: BigDecimal
+  liquidityRate: BigDecimal
+  variableBorrowRate: BigDecimal
+  stableBorrowRate: BigDecimal
+  averageStableBorrowRate: BigDecimal
+  liquidityIndex: BigDecimal
+  variableBorrowIndex: BigDecimal
+  lastUpdateTimestamp: BigInt
+}
 
 # ----------------------------------------
 #      C.R.E.A.M.

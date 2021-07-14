@@ -1,21 +1,163 @@
 {
   "blockchain": "ethereum",
   "network": "mainnet",
-  "path-schema": "./schema.graphql",
   "adapters": [
+    {
+      "adapter": "AaveV2",
+      "address": "0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5",
+      "startBlock": 11362562,
+      "pool-contract": "",
+      "pool-events": [],
+      "token-supporting-abis": [
+        "LendingPoolAddressesProvider",
+        "AaveProtocolDataProvider"
+      ],
+      "token-events": [
+        {
+          "event": "Burn",
+          "params": "(indexed address,indexed address,uint256,uint256)"
+        },
+        {
+          "event": "Mint",
+          "params": "(indexed address,uint256,uint256)"
+        }
+      ],
+      "tokens": [
+        {
+          "symbol": "aAAVE",
+          "address": "0xFFC97d72E13E01096502Cb8Eb52dEe56f74DAD7B",
+          "startBlock": 11367184
+        },
+        {
+          "symbol": "aBAL",
+          "address": "0x272F97b7a56a387aE942350bBC7Df5700f8a4576",
+          "startblock": 11779563
+        },
+        {
+          "symbol": "aBAT",
+          "address": "0x05Ec93c0365baAeAbF7AefFb0972ea7ECdD39CF1",
+          "startBlock": 11367184
+        },
+        {
+          "symbol": "aBUSD",
+          "address": "0xA361718326c15715591c299427c62086F69923D9",
+          "startBlock": 11367184
+        },
+        {
+          "symbol": "aCRV",
+          "address": "0x8dAE6Cb04688C62d939ed9B68d32Bc62e49970b1",
+          "startBlock": 11538358
+        },
+        {
+          "symbol": "aDAI",
+          "address": "0x028171bCA77440897B824Ca71D1c56caC55b68A3",
+          "startBlock": 11367184
+        },
+        {
+          "symbol": "aENJ",
+          "address": "0xaC6Df26a590F08dcC95D5a4705ae8abbc88509Ef",
+          "startBlock": 11367188
+        },
+        {
+          "symbol": "aGUSD",
+          "address": "0xD37EE7e4f452C6638c96536e68090De8cBcdb583",
+          "startBlock": 11576861
+        },
+        {
+          "symbol": "aKNC",
+          "address": "0x39C6b3e42d6A679d7D776778Fe880BC9487C2EDA",
+          "startBlock": 11367188
+        },
+        {
+          "symbol": "aLINK",
+          "address": "0xa06bC25B5805d5F8d82847D191Cb4Af5A3e873E0",
+          "startBlock": 11367188
+        },
+        {
+          "symbol": "aMANA",
+          "address": "0xa685a61171bb30d4072B338c80Cb7b2c865c873E",
+          "startBlock": 11367188
+        },
+        {
+          "symbol": "aMKR",
+          "address": "0xc713e5E149D5D0715DcD1c156a020976e7E56B88",
+          "startBlock": 11367197
+        },
+        {
+          "symbol": "aREN",
+          "address": "0xCC12AbE4ff81c9378D670De1b57F8e0Dd228D77a",
+          "startblock": 11367197
+        },
+        {
+          "symbol": "aSNX",
+          "address": "0x35f6B052C598d933D69A4EEC4D04c73A191fE6c2",
+          "startBlock": 11367197
+        },
+        {
+          "symbol": "aSUSD",
+          "address": "0x6C5024Cd4F8A59110119C56f8933403A539555EB",
+          "startBlock": 11367197
+        },
+        {
+          "symbol": "aTUSD",
+          "address": "0x101cc05f4A51C0319f570d5E146a8C625198e636",
+          "startBlock": 11367200
+        },
+        {
+          "symbol": "aUNI",
+          "address": "0xB9D7CB55f463405CDfBe4E90a6D2Df01C2B92BF1",
+          "startBlock": 11362823
+        },
+        {
+          "symbol": "aUSDC",
+          "address": "0xBcca60bB61934080951369a648Fb03DF4F96263C",
+          "startBlock": 11367200
+        },
+        {
+          "symbol": "aUSDT",
+          "address": "0x3Ed3B47Dd13EC9a98b44e6204A523E766B225811",
+          "startBlock": 11362821
+        },
+        {
+          "symbol": "aWBTC",
+          "address": "0x9ff58f4fFB29fA2266Ab25e75e2A8b3503311656",
+          "startBlock": 11362821
+        },
+        {
+          "symbol": "aWETH",
+          "address": "0x030bA81f1c18d280636F32af80b9AAd02Cf0854e",
+          "startBlock": 11362821
+        },
+        {
+          "symbol": "aXSUSHI",
+          "address": "0xF256CC7847E919FAc9B808cC216cAc87CCF2f47a",
+          "startblock": 11857246
+        },
+        {
+          "symbol": "aYFI",
+          "address": "0x5165d24277cD063F5ac44Efd447B27025e888f37",
+          "startBlock": 11362821
+        },
+        {
+          "symbol": "aZRX",
+          "address": "0xDf7FF54aAcAcbFf42dfe29DD6144A69b629f8C9e",
+          "startBlock": 11362823
+        }
+      ]
+    },
     {
       "adapter": "Cream",
       "address": "0x3d5BC3c8d13dcB8bF317092d84783c2697AE9258",
       "startBlock": 10579797,
-      "contract-main": "ComptrollerImplementation",
-      "contract-token": "CreamToken",
-      "events-main": [
+      "pool-contract": "ComptrollerImplementation",
+      "pool-events": [
         {
           "event": "CompSpeedUpdated",
           "params": "(indexed address,uint256)"
         }
       ],
-      "events-token": [
+      "token-supporting-abis": [],
+      "token-events": [
         {
           "event": "AccrueInterest",
           "params": "(uint256,uint256,uint256,uint256)"
@@ -55,67 +197,67 @@
       ],
       "tokens": [
         {
-          "symbol": "",
-          "address": "0x92B767185fB3B04F881e3aC8e5B0662a027A1D9f",
-          "startBlock": 11371388
-        },
-        {
-          "symbol": "Aave",
+          "symbol": "crAAVE",
           "address": "0x3225E3C669B39C7c8B3e204a8614bB218c5e31BC",
           "startBlock": 11222225
         },
         {
-          "symbol": "Bbtc",
+          "symbol": "crBBTC",
           "address": "0x7ea9C63E216D5565c3940A2B3d150e59C2907Db3",
           "startBlock": 11202982
         },
         {
-          "symbol": "Bond",
+          "symbol": "crBOND",
           "address": "0xf55BbE0255f7f4E70f63837Ff72A577fbDDbE924",
           "startBlock": 11248400
         },
         {
-          "symbol": "Celsius",
+          "symbol": "crCEL",
           "address": "0x8b3ff1ed4f36c2c2be675afb13cc3aa5d73685a5",
           "startBlock": 11132874
         },
         {
-          "symbol": "Cover",
+          "symbol": "crCOVER",
           "address": "0x21011BC93d9E515B9511A817A1eD1D6d468f49Fc",
           "startBlock": 11658727
         },
         {
-          "symbol": "Creth2",
+          "symbol": "crCRETH2",
           "address": "0xfd609a03B393F1A1cFcAcEdaBf068CAD09a924E2",
           "startBlock": 11326940
         },
         {
-          "symbol": "Esd",
+          "symbol": "crDAI",
+          "address": "0x92B767185fB3B04F881e3aC8e5B0662a027A1D9f",
+          "startBlock": 11371388
+        },
+        {
+          "symbol": "crESD",
           "address": "0x3C6C553A95910F9FC81c98784736bd628636D296",
           "startBlock": 11554497
         },
         {
-          "symbol": "Hbtc",
+          "symbol": "crHBTC",
           "address": "0x054B7ed3F45714d3091e82aAd64A1588dC4096Ed",
           "startBlock": 11287429
         },
         {
-          "symbol": "Hfil",
+          "symbol": "crHFIL",
           "address": "0xd5103AfcD0B3fA865997Ef2984C66742c51b2a8b",
           "startBlock": 11287588
         },
         {
-          "symbol": "Kp3r",
+          "symbol": "crKP3R",
           "address": "0x903560b1CcE601794C584F58898dA8a8b789Fc5d",
           "startBlock": 11248495
         },
         {
-          "symbol": "Uni",
+          "symbol": "crUNI",
           "address": "0xe89a6D0509faF730BD707bf868d9A2A744a363C7",
           "startBlock": 10877282
         },
         {
-          "symbol": "Ycrv",
+          "symbol": "crYCRV",
           "address": "0x9baF8a5236d44AC410c0186Fe39178d5AAD0Bb87",
           "startBlock": 10580322
         }
@@ -123,12 +265,12 @@
     },
     {
       "adapter": "Fulcrum",
-      "address": "0x3d5BC3c8d13dcB8bF317092d84783c2697AE9258",
-      "startBlock": 10579797,
-      "contract-main": "",
-      "contract-token": "FulcrumToken",
-      "events-main": [],
-      "events-token": [
+      "pool-address": "0x3d5BC3c8d13dcB8bF317092d84783c2697AE9258",
+      "pool-startBlock": 10579797,
+      "pool-contract": "",
+      "pool-events": [],
+      "token-supporting-abis": [],
+      "token-events": [
         {
           "event": "Burn",
           "params": "(indexed address,uint256,uint256,uint256)"
@@ -144,67 +286,67 @@
       ],
       "tokens": [
         {
-          "symbol": "",
-          "address": "0x6b093998D36f2C7F0cc359441FBB24CC629D5FF0",
-          "startBlock": 10785055
-        },
-        {
-          "symbol": "Iaave",
+          "symbol": "iAAVE",
           "address": "0x0cae8d91E0b1b7Bd00D906E990C3625b2c220db1",
           "startBlock": 11158037
         },
         {
-          "symbol": "Icomp",
+          "symbol": "iCOMP",
           "address": "0x6d29903BC2c4318b59B35d97Ab98ab9eC08Ed70D",
           "startBlock": 11341990
         },
         {
-          "symbol": "Ieth",
+          "symbol": "iDAI",
+          "address": "0x6b093998D36f2C7F0cc359441FBB24CC629D5FF0",
+          "startBlock": 10785055
+        },
+        {
+          "symbol": "iETH",
           "address": "0xB983E01458529665007fF7E0CDdeCDB74B967Eb6",
           "startBlock": 10785086
         },
         {
-          "symbol": "Iknc",
+          "symbol": "iKNC",
           "address": "0x687642347a9282Be8FD809d8309910A3f984Ac5a",
           "startBlock": 10785091
         },
         {
-          "symbol": "Ilink",
+          "symbol": "iLINK",
           "address": "0x463538705E7d22aA7f03Ebf8ab09B067e1001B54",
           "startBlock": 10785096
         },
         {
-          "symbol": "Ilrc",
+          "symbol": "iLRC",
           "address": "0x3dA0e01472Dee3746b4D324a65D7EdFaECa9Aa4f",
           "startBlock": 11341994
         },
         {
-          "symbol": "Imkr",
+          "symbol": "iMKR",
           "address": "0x9189c499727f88F8eCC7dC4EEA22c828E6AaC015",
           "startBlock": 10785092
         },
         {
-          "symbol": "Iuni",
+          "symbol": "iUNI",
           "address": "0x0a625FceC657053Fe2D9FFFdeb1DBb4e412Cf8A8",
           "startBlock": 11158036
         },
         {
-          "symbol": "Iusdc",
+          "symbol": "iUSDC",
           "address": "0x32E4c68B3A4a813b710595AebA7f6B7604Ab9c15",
           "startBlock": 10785088
         },
         {
-          "symbol": "Iusdt",
+          "symbol": "iUSDT",
           "address": "0x7e9997a38A439b2be7ed9c9C4628391d3e055D48",
           "startBlock": 10785098
         },
         {
-          "symbol": "Iwbtc",
+          "symbol": "iWBTC",
           "address": "0x2ffa85f655752fB2aCB210287c60b9ef335f5b6E",
           "startBlock": 10785089
         },
         {
-          "symbol": "Iyfi",
+          "symbol": "iYFI",
           "address": "0x7F3Fe9D492A9a60aEBb06d82cBa23c6F32CAd10b",
           "startBlock": 10785097
         }

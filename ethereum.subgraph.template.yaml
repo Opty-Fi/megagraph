@@ -2,46 +2,52 @@ specVersion: 0.0.2
 description: Opty-Fi's DeFi Adapters subgraph
 repository: https://github.com/Opty-Fi/defi-protocol-subgraph
 schema:
-  file: {{{path-schema}}}
+  file: ./schema.graphql
 dataSources:
-  {{#adapters}}
-  # --------------------------------------
-  #      {{adapter}}
-  # --------------------------------------
-  {{#contract-main}}
+{{#adapters}}
+# ----------------------------------------
+#      {{adapter}}
+# ----------------------------------------
+  {{#pool-contract}}
+  # ----------------------------------------
+  #      {{adapter}} pool
+  # ----------------------------------------
   - kind: ethereum/contract
-    name: {{contract-main}}
+    name: {{adapter}}{{pool-contract}}
     network: {{network}}
     source:
       address: "{{address}}"
       {{#startBlock}}
       startBlock: {{startBlock}}
       {{/startBlock}}
-      abi: {{contract-main}}
+      abi: {{adapter}}{{pool-contract}}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        {{#contract-main}}
-        - {{adapter}}{{contract-main}}Data
-        {{/contract-main}}
+        {{#pool-contract}}
+        - {{adapter}}{{pool-contract}}Data
+        {{/pool-contract}}
         - {{adapter}}TokenData
       abis:
-        {{#contract-main}}
-        - name: {{contract-main}}
-          file: ./src/{{adapter}}/abis/{{contract-main}}.json
-        {{/contract-main}}
+        {{#pool-contract}}
+        - name: {{adapter}}{{pool-contract}}
+          file: ./src/{{adapter}}/abis/{{pool-contract}}.json
+        {{/pool-contract}}
         - name: {{adapter}}Token
-          file: ./src/{{adapter}}/abis/{{adapter}}Token.json
+          file: ./src/{{adapter}}/abis/Token.json
       eventHandlers:
-        {{#events-main}}
+        {{#pool-events}}
         - event: {{event}}{{params}}
           handler: handle{{event}}
-        {{/events-main}}
-      file: ./src/{{adapter}}/mappings/{{contract-main}}.ts
-  {{/contract-main}}
+        {{/pool-events}}
+      file: ./src/{{adapter}}/mappings/{{pool-contract}}.ts
+  {{/pool-contract}}
   {{#tokens}}
+  # ----------------------------------------
+  #      {{adapter}} {{symbol}}
+  # ----------------------------------------
   - kind: ethereum/contract
     name: {{adapter}}Token{{symbol}}
     network: {{network}}
@@ -56,23 +62,27 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        {{#contract-main}}
-        - {{adapter}}{{contract-main}}Data
-        {{/contract-main}}
+        {{#pool-contract}}
+        - {{adapter}}{{pool-contract}}Data
+        {{/pool-contract}}
         - {{adapter}}TokenData
       abis:
-        {{#contract-main}}
-        - name: {{contract-main}}
-          file: ./src/{{adapter}}/abis/{{contract-main}}.json
-        {{/contract-main}}
+        {{#pool-contract}}
+        - name: {{adapter}}{{pool-contract}}
+          file: ./src/{{adapter}}/abis/{{pool-contract}}.json
+        {{/pool-contract}}
         - name: {{adapter}}Token
-          file: ./src/{{adapter}}/abis/{{adapter}}Token.json
+          file: ./src/{{adapter}}/abis/Token.json
+        {{#token-supporting-abis}}
+        - name: {{adapter}}{{.}}
+          file: ./src/{{adapter}}/abis/{{.}}.json
+        {{/token-supporting-abis}}
       eventHandlers:
-        {{#events-token}}
+        {{#token-events}}
         - event: {{event}}{{params}}
           handler: handle{{event}}
-        {{/events-token}}
-      file: ./src/{{adapter}}/mappings/{{adapter}}Token.ts
+        {{/token-events}}
+      file: ./src/{{adapter}}/mappings/Token.ts
   {{/tokens}}
-  {{/adapters}}
+{{/adapters}}
   
