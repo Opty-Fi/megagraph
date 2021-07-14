@@ -38,7 +38,8 @@ function handleCreamToken(
     else entity.compSpeeds = convertBINumToDesiredDecimals(tried_compSpeeds.value, 18);
   }
 
-  let underlyingAssetDecimals: i32; // eslint-disable-line
+  // @ts-ignore
+  let underlyingAssetDecimals: i32;
   let underlyingAsset = tokenContract.try_underlying();
   if (underlyingAsset.reverted) log.error("underlying() reverted", []);
   else {
@@ -55,7 +56,7 @@ function handleCreamToken(
   entity.blockNumber = blockNumber;
   entity.blockTimestamp = blockTimestamp;
   entity.address = address;
-  entity.symbol = tokenContract.symbol();
+  entity.symbol = tokenContract.try_symbol().reverted ? null : tokenContract.symbol();
 
   log.debug("Saving Cream Token {} at address {} in block {} with txHash {}", [
     entity.symbol,

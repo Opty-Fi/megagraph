@@ -26,13 +26,10 @@ function handleFulcrumToken(
   entity.blockNumber = blockNumber;
   entity.blockTimestamp = blockTimestamp;
   entity.address = address;
-
-  let tried_symbol = tokenContract.try_symbol();
-  if (tried_symbol.reverted) log.error("symbol() reverted", []);
-  else entity.symbol = tried_symbol.value;
+  entity.symbol = tokenContract.try_symbol().reverted ? null : tokenContract.symbol();
 
   log.debug("Saving Fulcrum Token {} at address {} in block {} with txHash {}", [
-    tried_symbol.value,
+    entity.symbol,
     address.toHex(),
     blockNumber.toString(),
     transactionHash.toHex(),

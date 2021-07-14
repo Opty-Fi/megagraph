@@ -8,6 +8,7 @@ import { AaveV1TokenData } from "../../../generated/schema";
 import { AaveV1LendingPoolAddressesProvider } from "../../../generated/AaveV1TokenaDAI/AaveV1LendingPoolAddressesProvider";
 import { AaveV1LendingPoolDataProvider } from "../../../generated/AaveV1TokenaDAI/AaveV1LendingPoolDataProvider";
 import { convertBINumToDesiredDecimals } from "../../utils/converters";
+import { AaveV1_POOL_PROVIDER_ADDRESS } from "../../utils/constants";
 
 function handleAaveV1Token(
   transactionHash: Bytes,
@@ -15,8 +16,6 @@ function handleAaveV1Token(
   blockTimestamp: BigInt,
   address: Address,
 ): void {
-  let POOL_PROVIDER_ADDRESS: Address = Address.fromString("0x24a42fD28C976A61Df5D00D0599C34c4f90748c8");
-
   let tokenContract = AaveV1Token.bind(address);
 
   let entity = AaveV1TokenData.load(transactionHash.toHex());
@@ -26,7 +25,7 @@ function handleAaveV1Token(
   entity.blockNumber = blockNumber;
   entity.blockTimestamp = blockTimestamp;
   entity.address = address;
-  entity.symbol = tokenContract.symbol();
+  entity.symbol = tokenContract.try_symbol().reverted ? null : tokenContract.symbol();
 
   log.debug("Saving AaveV1 Token {} at address {} in block {} with txHash {}", [
     entity.symbol,
@@ -38,7 +37,7 @@ function handleAaveV1Token(
   let underlyingAssetAddr = tokenContract.underlyingAssetAddress();
   entity.decimals = tokenContract.decimals();
 
-  let poolProviderContract = AaveV1LendingPoolAddressesProvider.bind(POOL_PROVIDER_ADDRESS);
+  let poolProviderContract = AaveV1LendingPoolAddressesProvider.bind(AaveV1_POOL_PROVIDER_ADDRESS);
   let dataProviderContract = AaveV1LendingPoolDataProvider.bind(poolProviderContract.getLendingPoolDataProvider());
   
   let tried_getReserveConfigurationData = dataProviderContract.try_getReserveConfigurationData(underlyingAssetAddr);

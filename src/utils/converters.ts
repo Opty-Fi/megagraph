@@ -1,4 +1,4 @@
-import { BigInt, BigDecimal } from '@graphprotocol/graph-ts';
+import { Address, Bytes, BigInt, BigDecimal } from '@graphprotocol/graph-ts';
 
 //  function to get the 0 number in BigDecimal format
 export function zeroBD(): BigDecimal {
@@ -43,4 +43,12 @@ export function convertToLowerCase(str: string): string {
   }
 
   return result;
+}
+
+export function toAddress(str: string): Address {
+  return Address.fromString(str);
+}
+
+export function toBytes(str: string): Bytes {
+  return <Bytes>Bytes.fromHexString(str);
 }

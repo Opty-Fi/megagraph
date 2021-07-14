@@ -14,7 +14,8 @@ export function handleCompSpeedUpdated(event: CompSpeedUpdatedEvent): void {
   let entity = CreamTokenData.load(event.transaction.hash.toHex());
   if (!entity) entity = new CreamTokenData(event.transaction.hash.toHex());
 
-  let underlyingAssetDecimals: i32; // eslint-disable-line
+  // @ts-ignore
+  let underlyingAssetDecimals: i32;
   let underlyingAsset = tokenContract.try_underlying();
   if (underlyingAsset.reverted) log.error("underlying() reverted", []);
   else {
