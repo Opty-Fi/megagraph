@@ -26,7 +26,7 @@ function handleToken(
   entity.blockNumber = blockNumber;
   entity.blockTimestamp = blockTimestamp;
   entity.address = address;
-  entity.symbol = tokenContract.symbol();
+  entity.symbol = tokenContract.try_symbol().reverted ? null: tokenContract.symbol();
 
   log.debug("Saving AaveV1 Token {} at address {} in block {} with txHash {}", [
     entity.symbol,
