@@ -38,10 +38,9 @@ function handleAaveV2Token(
 
   let poolProviderContract = LendingPoolAddressesProvider.bind(POOL_PROVIDER_ADDRESS);
   let tried_getDataProvider = poolProviderContract.try_getAddress(DATA_PROVIDER_INDEX);
-  let dataProviderContract: AaveProtocolDataProvider = null;
   if (tried_getDataProvider.reverted) log.error("poolProvider at {} call getDataProvider({}) reverted", [ poolProviderContract._address.toHex(), DATA_PROVIDER_INDEX.toHex() ]);
   else {
-    dataProviderContract = AaveProtocolDataProvider.bind(toAddress(tried_getDataProvider.value.toHexString()));
+    let dataProviderContract = AaveProtocolDataProvider.bind(toAddress(tried_getDataProvider.value.toHexString()));
     
     let tried_getReserveConfigurationData = dataProviderContract.try_getReserveConfigurationData(underlyingAssetAddr);
     if (tried_getReserveConfigurationData.reverted) log.error("dataProvider at {} call getReserveConfigurationData({}) reverted", [ dataProviderContract._address.toHex(), underlyingAssetAddr.toHex() ]);
