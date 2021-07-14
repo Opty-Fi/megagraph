@@ -10,9 +10,9 @@ import {
   RepayBorrow as RepayBorrowEvent,
   ReservesAdded as ReservesAddedEvent,
   ReservesReduced as ReservesReducedEvent,
-} from "../../../generated/CreamToken/CreamToken";
+} from "../../../generated/CreamTokencrDAI/CreamToken";
 import { CreamTokenData } from "../../../generated/schema";
-import { ComptrollerImplementation } from "../../../generated/ComptrollerImplementation/ComptrollerImplementation";
+import { CreamComptrollerImplementation } from "../../../generated/CreamComptrollerImplementation/CreamComptrollerImplementation";
 import { convertBINumToDesiredDecimals } from "../../utils/converters";
 
 function handleCreamToken(
@@ -29,16 +29,16 @@ function handleCreamToken(
   let entity = CreamTokenData.load(transactionHash.toHex());
   if (!entity) entity = new CreamTokenData(transactionHash.toHex());
   
-  let comptrollerContract: ComptrollerImplementation = null;
+  let comptrollerContract: CreamComptrollerImplementation = null;
   let tried_comptroller = tokenContract.try_comptroller();
-  if (!tried_comptroller.reverted) comptrollerContract = ComptrollerImplementation.bind(tried_comptroller.value);
+  if (!tried_comptroller.reverted) comptrollerContract = CreamComptrollerImplementation.bind(tried_comptroller.value);
   if (comptrollerContract) {
     let tried_compSpeeds = comptrollerContract.try_compSpeeds(address);
     if (tried_compSpeeds.reverted) log.error("compSpeeds() reverted", []);
     else entity.compSpeeds = convertBINumToDesiredDecimals(tried_compSpeeds.value, 18);
   }
 
-  let underlyingAssetDecimals: i32;
+  let underlyingAssetDecimals: i32; // eslint-disable-line
   let underlyingAsset = tokenContract.try_underlying();
   if (underlyingAsset.reverted) log.error("underlying() reverted", []);
   else {

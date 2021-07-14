@@ -4,7 +4,7 @@ import {
   Burn as BurnEvent,
   FlashBorrow as FlashBorrowEvent,
   Mint as MintEvent,
-} from "../../../generated/FulcrumToken/FulcrumToken";
+} from "../../../generated/FulcrumTokeniDAI/FulcrumToken";
 import { FulcrumTokenData } from "../../../generated/schema";
 import { convertBINumToDesiredDecimals } from "../../utils/converters";
 

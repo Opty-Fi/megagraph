@@ -26,9 +26,6 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        {{#pool-contract}}
-        - {{adapter}}{{pool-contract}}Data
-        {{/pool-contract}}
         - {{adapter}}TokenData
       abis:
         {{#pool-contract}}

@@ -1,20 +1,20 @@
 import { log } from "@graphprotocol/graph-ts";
 import {
-  ComptrollerImplementation,
+  CreamComptrollerImplementation,
   CompSpeedUpdated as CompSpeedUpdatedEvent,
-} from "../../../generated/ComptrollerImplementation/ComptrollerImplementation";
-import { CreamToken } from "../../../generated/CreamToken/CreamToken";
+} from "../../../generated/CreamComptrollerImplementation/CreamComptrollerImplementation";
+import { CreamToken } from "../../../generated/CreamTokencrDAI/CreamToken";
 import { CreamTokenData } from "../../../generated/schema";
 import { convertBINumToDesiredDecimals } from "../../utils/converters";
 
 export function handleCompSpeedUpdated(event: CompSpeedUpdatedEvent): void {
-  let comptrollerContract = ComptrollerImplementation.bind(event.address);
+  let comptrollerContract = CreamComptrollerImplementation.bind(event.address);
   let tokenContract = CreamToken.bind(event.params.cToken);
 
   let entity = CreamTokenData.load(event.transaction.hash.toHex());
   if (!entity) entity = new CreamTokenData(event.transaction.hash.toHex());
 
-  let underlyingAssetDecimals: i32;
+  let underlyingAssetDecimals: i32; // eslint-disable-line
   let underlyingAsset = tokenContract.try_underlying();
   if (underlyingAsset.reverted) log.error("underlying() reverted", []);
   else {
