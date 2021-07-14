@@ -13,6 +13,65 @@ The subgraph for the DeFi protocols with which [OptyFi](https://opty.fi)'s [`ear
   ```
   and populate accordingly
 
+### Naming conventions
+- `./config/` directory:
+  - `dev.json` file only:
+    - `startBlock` to be omitted, or `"startBlock": 0`, unless you configure your local `graph-node` otherwise
+  - all `$CONFIG.json` files:
+    - format:
+      ```json
+      {
+        "blockchain": "$BLOCKCHAIN",
+        "network": "$CONFIG",
+        "adapters": [
+          {
+            "adapter": "AdapterName",
+            "address": "0xAddressValue",
+            "startBlock": 12345, // if present
+            "pool-contract": "ContractName",
+            "pool-events": [
+              {
+                "event": "EventName",
+                "params": "(list, of, params, from, event, sig)"
+              }
+            ],
+            "token-supporting-abis": [ // if present
+              "DataProvider" // e.g.
+            ],
+            "token-events": [
+              {
+                "event": "EventName",
+                "params": "(list, of, params, from, event, sig)"
+              }
+            ],
+            "tokens": [
+              {
+                "symbol": "SYMBOL",
+                "address": "0xAddressValue",
+                "startBlock": 12345 // if present
+              }
+            ]
+          }
+        ]
+      }
+      ```
+- `./schema.graphql` file:
+  - pool (if present): `type <Adapter><ContractName>Data @entity { ... }`
+  - token: `type <Adapter>TokenData @entity { ... }`
+- `./src/<Adapter>/` directory:
+  - `abis/` directory:
+    - pool (if present): `<Adapter><ContractName>.json`
+    - token: `Token.json`
+    - others (if present): `<Name>.json` as needed
+  - `mappings/` directory:
+    - pool (if present): `<Adapter><ContractName>.ts`
+    - token: `Token.ts`
+    - all `<mapping>.ts` files:
+      - pool: `import { <Adapter><ContractName>, <events...> } from "../../../generated/<Adapter><ContractName>/<Adapter><ContractName>";`
+      - token: `import { <Adapter>Token } from "../../../generated/<Adapter>Token<symbolDAI>/<Adapter>Token";`
+      - supporting-abi (if present): `import { <Adapter><ContractName> } from "../../../generated/<Adapter>Token<symbolDAI>/<Adapter><ContractName>";`
+      - graphql: `import { <Adapter>TokenData } from "../../../generated/schema";`
+
 ### Local development:
 1. Install [ganache-cli](https://github.com/trufflesuite/ganache-cli)
 1. Clone a [graph node](https://github.com/graphprotocol/graph-node) locally
@@ -24,7 +83,7 @@ The subgraph for the DeFi protocols with which [OptyFi](https://opty.fi)'s [`ear
          environment:
            ethereum:
      ```
-     from `'mainnet:[...]'` to `'builderevm:[...]'` and save
+     from `'mainnet:http...'` to `'builderevm:http...'` and save
 1. Spin up a `ganache` instance on the side:
    ```sh
    ganache-cli -d -h 0.0.0.0 --networkId 31337
