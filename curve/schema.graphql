@@ -1,0 +1,19 @@
+type CurvePoolData @entity {
+  id: ID!
+  balance: [BigDecimal!]!
+  virtualPrice: BigDecimal!
+  timestamp: BigInt!
+  tokens: [Bytes!]!
+  vault: Bytes!
+  blockNumber: BigInt!
+}
+
+type GaugeControllerData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+  gauge: Bytes!
+  gaugeWeight: BigDecimal!
+  totalGaugeWeight: BigDecimal!
+  controller: Bytes!
+}

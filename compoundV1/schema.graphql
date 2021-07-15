@@ -1,0 +1,16 @@
+type CTokenData @entity {
+  id: ID!
+  blockNumber: BigInt
+  blockTimestamp: BigInt
+  borrowIndex: BigDecimal
+  borrowRatePerBlock: BigDecimal
+  compSpeed: BigDecimal
+  cTokenSymbol: String
+  cTokenAddress: Bytes
+  exchangeRate: BigDecimal
+  supplyRatePerBlock: BigDecimal
+  totalCash: BigDecimal
+  totalBorrows: BigDecimal
+  totalSupply: BigInt
+  totalReserves: BigDecimal
+}

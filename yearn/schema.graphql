@@ -1,0 +1,10 @@
+type YearnPoolData @entity {
+  id: ID!
+  balance: BigDecimal!
+  pricePerFullShare: BigDecimal!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+  symbol: String!
+  vault: Bytes!
+  underlyingToken: Bytes!
+}
