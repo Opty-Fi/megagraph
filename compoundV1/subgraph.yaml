@@ -1,0 +1,459 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  # --------------------------------------
+  #      cDAI
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: CToken
+    network: mainnet
+    source:
+      address: "0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643"
+      abi: CToken
+      startBlock: 8983575
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - CTokenData
+      abis:
+        - name: CToken
+          file: ./abis/CToken.json
+        - name: ComptrollerImplementation
+          file: ./abis/ComptrollerImplementation.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mappings/cToken.ts
+  # --------------------------------------
+  #      cUSDC
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: CToken_cUSDC
+    network: mainnet
+    source:
+      address: "0x39AA39c021dfbaE8faC545936693aC917d5E7563"
+      abi: CToken
+      startBlock: 7710760
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - CTokenData
+      abis:
+        - name: CToken
+          file: ./abis/CToken.json
+        - name: ComptrollerImplementation
+          file: ./abis/ComptrollerImplementation.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mappings/cToken.ts
+  # --------------------------------------
+  #      cUSDT
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: CToken_cUSDT
+    network: mainnet
+    source:
+      address: "0xf650C3d88D12dB855b8bf7D11Be6C55A4e07dCC9"
+      abi: CToken
+      startBlock: 9879363
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - CTokenData
+      abis:
+        - name: CToken
+          file: ./abis/CToken.json
+        - name: ComptrollerImplementation
+          file: ./abis/ComptrollerImplementation.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mappings/cToken.ts
+  # --------------------------------------
+  #      cBAT
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: CToken_cBAT
+    network: mainnet
+    source:
+      address: "0x6C8c6b02E7b2BE14d4fA6022Dfd6d75921D90E4E"
+      abi: CToken
+      startBlock: 7710735
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - CTokenData
+      abis:
+        - name: CToken
+          file: ./abis/CToken.json
+        - name: ComptrollerImplementation
+          file: ./abis/ComptrollerImplementation.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mappings/cToken.ts
+  # --------------------------------------
+  #      cWBTC
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: CToken_cWBTC
+    network: mainnet
+    source:
+      address: "0xC11b1268C1A384e55C48c2391d8d480264A3A7F4"
+      abi: CToken
+      startBlock: 8163813
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - CTokenData
+      abis:
+        - name: CToken
+          file: ./abis/CToken.json
+        - name: ComptrollerImplementation
+          file: ./abis/ComptrollerImplementation.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mappings/cToken.ts
+  # --------------------------------------
+  #      cCOMP
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: CToken_cCOMP
+    network: mainnet
+    source:
+      address: "0x70e36f6bf80a52b3b46b3af8e106cc0ed743e8e4"
+      abi: CToken
+      startBlock: 10960099
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - CTokenData
+      abis:
+        - name: CToken
+          file: ./abis/CToken.json
+        - name: ComptrollerImplementation
+          file: ./abis/ComptrollerImplementation.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mappings/cToken.ts
+  # --------------------------------------
+  #      cUNI
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: CToken_cUNI
+    network: mainnet
+    source:
+      address: "0x35a18000230da775cac24873d00ff85bccded550"
+      abi: CToken
+      startBlock: 10921410
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - CTokenData
+      abis:
+        - name: CToken
+          file: ./abis/CToken.json
+        - name: ComptrollerImplementation
+          file: ./abis/ComptrollerImplementation.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mappings/cToken.ts
+  # --------------------------------------
+  #      cREP
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: CToken_cREP
+    network: mainnet
+    source:
+      address: "0x158079Ee67Fce2f58472A96584A73C7Ab9AC95c1"
+      abi: CToken
+      startBlock: 7710755
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - CTokenData
+      abis:
+        - name: CToken
+          file: ./abis/CToken.json
+        - name: ComptrollerImplementation
+          file: ./abis/ComptrollerImplementation.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mappings/cToken.ts
+  # --------------------------------------
+  #      cZRX
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: CToken_cZRX
+    network: mainnet
+    source:
+      address: "0xb3319f5d18bc0d84dd1b4825dcde5d5f7266d407"
+      abi: CToken
+      startBlock: 7710733
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - CTokenData
+      abis:
+        - name: CToken
+          file: ./abis/CToken.json
+        - name: ComptrollerImplementation
+          file: ./abis/ComptrollerImplementation.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mappings/cToken.ts
+  # --------------------------------------
+  #      cETH
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: CToken_cETH
+    network: mainnet
+    source:
+      address: "0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5"
+      abi: CToken
+      startBlock: 7710758
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - CTokenData
+      abis:
+        - name: CToken
+          file: ./abis/CToken.json
+        - name: ComptrollerImplementation
+          file: ./abis/ComptrollerImplementation.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mappings/cToken.ts
+  # --------------------------------------
+  #      Comptroller
+  # --------------------------------------
+  - kind: ethereum/contract
+    name: Comptroller
+    network: mainnet
+    source:
+      address: "0x3d9819210A31b4961b30EF54bE2aeD79B9c9Cd3B"
+      abi: ComptrollerImplementation
+      startBlock: 7710671
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - CTokenData
+      abis:
+        - name: CToken
+          file: ./abis/CToken.json
+        - name: ComptrollerImplementation
+          file: ./abis/ComptrollerImplementation.json
+      eventHandlers:
+        - event: CompSpeedUpdated(indexed address,uint256)
+          handler: handleCompSpeedUpdated
+      file: ./src/mappings/comptroller.ts
