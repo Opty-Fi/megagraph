@@ -1,0 +1,24 @@
+{
+  "name": "defi-protocols",
+  "license": "UNLICENSED",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "graph:auth": "graph auth https://api.thegraph.com/deploy/ $ACCESS_TOKEN",
+    "auth": "env-cmd npm run graph:auth",
+    "subgraph:deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ $SLUG --access-token $ACCESS_TOKEN",
+    "deploy": "env-cmd npm run subgraph:deploy",
+    "deploy:dev": "yarn codegen && yarn deploy",
+    "subgraph:create-local": "graph create --node http://localhost:8020/ $SLUG",
+    "subgraph:remove-local": "graph remove --node http://localhost:8020/ $SLUG",
+    "subgraph:deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 $SLUG",
+    "create-local": "env-cmd npm run subgraph:create-local",
+    "remove-local": "env-cmd npm run subgraph:remove-local",
+    "deploy-local": "env-cmd npm run subgraph:deploy-local"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.20.1",
+    "@graphprotocol/graph-ts": "0.20.0",
+    "env-cmd": "^10.1.0"
+  }
+}
