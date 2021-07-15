@@ -22,10 +22,10 @@
     "graph-create-local": "./node_modules/.bin/dotenv -- yarn graph-create-local-replace",
     "graph-create-local-replace": "graph create --node http://localhost:8020/ $SLUG",
     "graph-deploy-local": "./node_modules/.bin/dotenv -- yarn graph-deploy-local-replace",
-    "graph-deploy-local-replace": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 $SLUG"
+    "graph-deploy-local-replace": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001/ $SLUG"
   },
   "dependencies": {
-    "@graphprotocol/graph-cli": "^0.21.0",
+    "@graphprotocol/graph-cli": "^0.20.1",
     "@graphprotocol/graph-ts": "^0.20.1",
     "@types/node": "^16.3.2",
     "dotenv": "^10.0.0",
