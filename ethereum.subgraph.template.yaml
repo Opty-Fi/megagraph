@@ -8,19 +8,19 @@ dataSources:
 # ----------------------------------------
 #      {{adapter}}
 # ----------------------------------------
-  {{#pool-contract}}
+  {{#pool-contracts}}
   # ----------------------------------------
-  #      {{adapter}} pool
+  #      {{adapter}} {{contract}}{{symbol}}
   # ----------------------------------------
   - kind: ethereum/contract
-    name: {{adapter}}{{pool-contract}}
+    name: {{adapter}}{{contract}}{{symbol}}
     network: {{network}}
     source:
       address: "{{address}}"
       {{#startBlock}}
       startBlock: {{startBlock}}
       {{/startBlock}}
-      abi: {{adapter}}{{pool-contract}}
+      abi: {{adapter}}{{contract}}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -28,10 +28,8 @@ dataSources:
       entities:
         - {{adapter}}TokenData
       abis:
-        {{#pool-contract}}
-        - name: {{adapter}}{{pool-contract}}
-          file: ./src/{{adapter}}/abis/{{pool-contract}}.json
-        {{/pool-contract}}
+        - name: {{adapter}}{{contract}}
+          file: ./src/{{adapter}}/abis/{{contract}}.json
         - name: {{adapter}}Token
           file: ./src/{{adapter}}/abis/Token.json
       eventHandlers:
@@ -39,11 +37,11 @@ dataSources:
         - event: {{event}}{{params}}
           handler: handle{{event}}
         {{/pool-events}}
-      file: ./src/{{adapter}}/mappings/{{pool-contract}}.ts
-  {{/pool-contract}}
+      file: ./src/{{adapter}}/mappings/{{contract}}.ts
+  {{/pool-contracts}}
   {{#tokens}}
   # ----------------------------------------
-  #      {{adapter}} {{symbol}}
+  #      {{adapter}} Token {{symbol}}
   # ----------------------------------------
   - kind: ethereum/contract
     name: {{adapter}}Token{{symbol}}
@@ -59,15 +57,12 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        {{#pool-contract}}
-        - {{adapter}}{{pool-contract}}Data
-        {{/pool-contract}}
         - {{adapter}}TokenData
       abis:
-        {{#pool-contract}}
-        - name: {{adapter}}{{pool-contract}}
-          file: ./src/{{adapter}}/abis/{{pool-contract}}.json
-        {{/pool-contract}}
+        {{#pool-contracts}}
+        - name: {{adapter}}{{contract}}{{symbol}}
+          file: ./src/{{adapter}}/abis/{{contract}}.json
+        {{/pool-contracts}}
         - name: {{adapter}}Token
           file: ./src/{{adapter}}/abis/Token.json
         {{#token-supporting-abis}}
@@ -82,4 +77,3 @@ dataSources:
       file: ./src/{{adapter}}/mappings/Token.ts
   {{/tokens}}
 {{/adapters}}
-  

@@ -90,6 +90,20 @@ type CreamTokenData @entity {
 }
 
 # ----------------------------------------
+#      dForce
+# ----------------------------------------
+type DForceTokenData @entity {
+  id: ID!
+  pricePerFullShare: BigDecimal
+  balance: BigDecimal
+  blockNumber: BigInt
+  blockTimestamp: BigInt
+  dTokenSymbol: String
+  dTokenAddress: Bytes
+  rewardRate: BigInt
+}
+
+# ----------------------------------------
 #      bZx Fulcrum
 # ----------------------------------------
 type FulcrumTokenData @entity {
