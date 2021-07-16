@@ -32,7 +32,7 @@ export function handleCompSpeedUpdated(event: CompSpeedUpdatedEvent): void {
   entity.blockNumber = event.block.number;
   entity.blockTimestamp = event.block.timestamp;
   entity.address = event.params.cToken;
-  entity.symbol = tokenContract.symbol();
+  entity.symbol = tokenContract.try_symbol().reverted ? null : tokenContract.symbol();
 
   if (event.params.newSpeed) {
     entity.compSpeeds = convertBINumToDesiredDecimals(event.params.newSpeed, 18);
