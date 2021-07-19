@@ -9,16 +9,6 @@ import {
 } from "../../../generated/DForceTokendDAI/DForceToken";
 import { handleDTokenEntity } from "./handlers";
 
-export function handleTransfer(event: TransferEvent): void {
-  handleDTokenEntity(
-    event.address, // dTokenAddress
-    null, // dforceStakingVaultAddress
-    event.transaction.hash,
-    event.block.number,
-    event.block.timestamp,
-  );
-}
-
 export function handleInterest(event: InterestEvent): void {
   handleDTokenEntity(
     event.address, // dTokenAddress
@@ -60,6 +50,16 @@ export function handleRebalance(event: RebalanceEvent): void {
 }
 
 export function handleRedeem(event: RedeemEvent): void {
+  handleDTokenEntity(
+    event.address, // dTokenAddress
+    null, // dforceStakingVaultAddress
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+  );
+}
+
+export function handleTransfer(event: TransferEvent): void {
   handleDTokenEntity(
     event.address, // dTokenAddress
     null, // dforceStakingVaultAddress

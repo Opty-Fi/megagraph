@@ -59,10 +59,6 @@ dataSources:
       entities:
         - {{adapter}}TokenData
       abis:
-        {{#pool-contracts}}
-        - name: {{adapter}}{{contract}}{{symbol}}
-          file: ./src/{{adapter}}/abis/{{contract}}.json
-        {{/pool-contracts}}
         - name: {{adapter}}Token
           file: ./src/{{adapter}}/abis/Token.json
         {{#token-supporting-abis}}

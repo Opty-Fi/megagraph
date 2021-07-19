@@ -1,12 +1,8 @@
-import { log, Address, Bytes, BigInt } from "@graphprotocol/graph-ts";
+import { BigInt, log, Bytes, Address } from "@graphprotocol/graph-ts";
 import { DForceToken as DTokenContract } from "../../../generated/DForceTokendDAI/DForceToken";
-import { DForceStakingVault as DForceStakingVaultContract } from "../../../generated/DForceStakingVaultDAI/DForceStakingVault";
+import { DForceStakingVault as DForceStakingVaultContract } from "../../../generated/DForceTokendDAI/DForceStakingVault";
 import { DForceTokenData } from "../../../generated/schema";
-import {
-  convertBINumToDesiredDecimals,
-  toAddress,
-  convertToLowerCase,
-} from "../../utils/converters";
+import { convertBINumToDesiredDecimals, convertToLowerCase } from "../../utils/converters";
 import {
   DForce_dDAI,
   DForce_dDAI_Staking,
@@ -26,9 +22,9 @@ export function handleDTokenEntity(
   if (dTokenAddress == null) {
     if (
       convertToLowerCase(dforceStakingVaultAddress.toHex()) ==
-      convertToLowerCase(DForce_dDAI_Staking)
+      convertToLowerCase(DForce_dDAI_Staking.toHex())
     ) {
-      dTokenAddress = toAddress(DForce_dDAI); //  dDAI
+      dTokenAddress = DForce_dDAI;
       createDTokenData(
         dTokenAddress,
         dforceStakingVaultAddress,
@@ -38,9 +34,9 @@ export function handleDTokenEntity(
       );
     } else if (
       convertToLowerCase(dforceStakingVaultAddress.toHex()) ==
-      convertToLowerCase(DForce_dUSDC_Staking)
+      convertToLowerCase(DForce_dUSDC_Staking.toHex())
     ) {
-      dTokenAddress = toAddress(DForce_dUSDC); //  dUSDC
+      dTokenAddress = DForce_dUSDC;
       createDTokenData(
         dTokenAddress,
         dforceStakingVaultAddress,
@@ -50,9 +46,9 @@ export function handleDTokenEntity(
       );
     } else if (
       convertToLowerCase(dforceStakingVaultAddress.toHex()) ==
-      convertToLowerCase(DForce_dUSDT_Staking)
+      convertToLowerCase(DForce_dUSDT_Staking.toHex())
     ) {
-      dTokenAddress = toAddress(DForce_dUSDT); //  dUSDT
+      dTokenAddress = DForce_dUSDT;
       createDTokenData(
         dTokenAddress,
         dforceStakingVaultAddress,
@@ -63,14 +59,20 @@ export function handleDTokenEntity(
     }
   } else {
     if (dforceStakingVaultAddress == null) {
-      if (convertToLowerCase(dTokenAddress.toHex()) == convertToLowerCase(DForce_dDAI)) {
-        dforceStakingVaultAddress = toAddress(DForce_dDAI_Staking); // DAI_Staking_Vault
+      if (
+        convertToLowerCase(dTokenAddress.toHex()) == convertToLowerCase(DForce_dDAI.toHex())
+      ) {
+        dforceStakingVaultAddress = DForce_dDAI_Staking;
         log.info("dDAI Staking Vault contract address: {}", [ dforceStakingVaultAddress.toHex() ]);
-      } else if (convertToLowerCase(dTokenAddress.toHex()) == convertToLowerCase(DForce_dUSDC)) {
-        dforceStakingVaultAddress = toAddress(DForce_dUSDC_Staking); //  USDC_Staking_Vault
+      } else if (
+        convertToLowerCase(dTokenAddress.toHex()) == convertToLowerCase(DForce_dUSDC.toHex())
+      ) {
+        dforceStakingVaultAddress = DForce_dUSDC_Staking;
         log.info("dUSDC Staking Vault contract address: {}", [ dforceStakingVaultAddress.toHex() ]);
-      } else if (convertToLowerCase(dTokenAddress.toHex()) == convertToLowerCase(DForce_dUSDT)) {
-        dforceStakingVaultAddress = toAddress(DForce_dUSDT_Staking); //  USDT_Staking_Vault
+      } else if (
+        convertToLowerCase(dTokenAddress.toHex()) == convertToLowerCase(DForce_dUSDT.toHex())
+      ) {
+        dforceStakingVaultAddress = DForce_dUSDT_Staking;
         log.info("dUSDT Staking Vault contract address: {}", [ dforceStakingVaultAddress.toHex() ]);
       }
     }
@@ -93,7 +95,7 @@ function createDTokenData(
 ): void {
   let dTokenContract = DTokenContract.bind(dTokenAddress);
 
-  // Load DForceTokenData Entity for not having duplicates
+  // Load DTokenData Entity for not having duplicates
   let dTokenDataEntity = DForceTokenData.load(transactionHash.toHex());
   if (dTokenDataEntity == null) {
     dTokenDataEntity = new DForceTokenData(transactionHash.toHex());

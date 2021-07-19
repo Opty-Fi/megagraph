@@ -295,7 +295,9 @@
           "params": "(indexed address,uint256)"
         }
       ],
-      "token-supporting-abis": [],
+      "token-supporting-abis": [
+        "ComptrollerImplementation"
+      ],
       "token-events": [
         {
           "event": "AccrueInterest",
@@ -430,7 +432,9 @@
           "params": "(uint256)"
         }
       ],
-      "token-supporting-abis": [],
+      "token-supporting-abis": [
+        "StakingVault"
+      ],
       "token-events": [
         {
           "event": "Interest",
