@@ -4,9 +4,7 @@
   "adapters": [
     {
       "adapter": "AaveV1",
-      "address": "0x24a42fD28C976A61Df5D00D0599C34c4f90748c8",
-      "startBlock": 9240988,
-      "pool-contract": "",
+      "pool-contracts": [],
       "pool-events": [],
       "token-supporting-abis": [
         "LendingPoolAddressesProvider",
@@ -142,9 +140,7 @@
     },
     {
       "adapter": "AaveV2",
-      "address": "0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5",
-      "startBlock": 11362562,
-      "pool-contract": "",
+      "pool-contracts": [],
       "pool-events": [],
       "token-supporting-abis": [
         "LendingPoolAddressesProvider",
@@ -285,9 +281,14 @@
     },
     {
       "adapter": "Cream",
-      "address": "0x3d5BC3c8d13dcB8bF317092d84783c2697AE9258",
-      "startBlock": 10579797,
-      "pool-contract": "ComptrollerImplementation",
+      "pool-contracts": [
+        {
+          "contract": "ComptrollerImplementation",
+          "symbol": "",
+          "address": "0x3d5BC3c8d13dcB8bF317092d84783c2697AE9258",
+          "startBlock": 10579797
+        }
+      ],
       "pool-events": [
         {
           "event": "CompSpeedUpdated",
@@ -403,9 +404,7 @@
     },
     {
       "adapter": "Fulcrum",
-      "pool-address": "0x3d5BC3c8d13dcB8bF317092d84783c2697AE9258",
-      "pool-startBlock": 10579797,
-      "pool-contract": "",
+      "pool-contracts": [],
       "pool-events": [],
       "token-supporting-abis": [],
       "token-events": [
