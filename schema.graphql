@@ -69,26 +69,6 @@ type AaveV2TokenData @entity {
 }
 
 # ----------------------------------------
-#      CompoundV1
-# ----------------------------------------
-type CompoundV1TokenData @entity {
-  id: ID!
-  blockNumber: BigInt
-  blockTimestamp: BigInt
-  borrowIndex: BigDecimal
-  borrowRatePerBlock: BigDecimal
-  compSpeed: BigDecimal
-  cTokenSymbol: String
-  cTokenAddress: Bytes
-  exchangeRate: BigDecimal
-  supplyRatePerBlock: BigDecimal
-  totalCash: BigDecimal
-  totalBorrows: BigDecimal
-  totalSupply: BigInt
-  totalReserves: BigDecimal
-}
-
-# ----------------------------------------
 #      C.R.E.A.M.
 # ----------------------------------------
 type CreamTokenData @entity {
