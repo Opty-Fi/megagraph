@@ -1,10 +1,5 @@
 import { Address, Bytes, BigInt, BigDecimal } from '@graphprotocol/graph-ts';
 
-//  function to get the 0 number in BigDecimal format
-export function zeroBD(): BigDecimal {
-  return BigDecimal.fromString('0');
-}
-
 // @ts-ignore
 //  function to convert the defined decimals into Graph's BigDecimal format
 export function exponentToBigDecimal(decimals: i32): BigDecimal {
@@ -45,10 +40,12 @@ export function convertToLowerCase(str: string): string {
   return result;
 }
 
+//  Function to convert the string address to `Address` DataType
 export function toAddress(str: string): Address {
   return Address.fromString(str);
 }
 
+//  Function to convert the string address to `Bytes` DataType
 export function toBytes(str: string): Bytes {
   return <Bytes>Bytes.fromHexString(str);
 }
