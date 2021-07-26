@@ -295,7 +295,9 @@
           "params": "(indexed address,uint256)"
         }
       ],
-      "token-supporting-abis": [],
+      "token-supporting-abis": [
+        "ComptrollerImplementation"
+      ],
       "token-events": [
         {
           "event": "AccrueInterest",
