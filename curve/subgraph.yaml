@@ -20,8 +20,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
@@ -54,8 +53,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
@@ -88,8 +86,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
@@ -122,8 +119,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
@@ -156,8 +152,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
@@ -190,8 +185,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
@@ -224,8 +218,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
@@ -258,8 +251,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
@@ -292,8 +284,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
@@ -326,8 +317,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
@@ -358,8 +348,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
@@ -392,8 +381,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
@@ -424,8 +412,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
@@ -459,8 +446,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
@@ -493,8 +479,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
@@ -527,8 +512,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
@@ -559,8 +543,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
@@ -591,8 +574,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
@@ -623,8 +605,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
@@ -658,8 +639,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
@@ -690,8 +670,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
@@ -722,8 +701,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
@@ -755,8 +733,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
@@ -787,8 +764,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
@@ -819,8 +795,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
@@ -851,8 +826,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
@@ -883,8 +857,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Balances
-        - VirtualPrice
+        - CurvePoolData
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
