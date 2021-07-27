@@ -6,7 +6,7 @@
       "adapter": "AaveV1",
       "pool-contracts": [],
       "pool-events": [],
-      "token-supporting-abis": [
+      "supporting-abis": [
         "LendingPoolAddressesProvider",
         "LendingPoolDataProvider"
       ],
@@ -142,7 +142,7 @@
       "adapter": "AaveV2",
       "pool-contracts": [],
       "pool-events": [],
-      "token-supporting-abis": [
+      "supporting-abis": [
         "LendingPoolAddressesProvider",
         "AaveProtocolDataProvider"
       ],
@@ -295,7 +295,10 @@
           "params": "(indexed address,uint256)"
         }
       ],
-      "token-supporting-abis": [],
+      "supporting-abis": [
+        "ComptrollerImplementation",
+        "Underlying"
+      ],
       "token-events": [
         {
           "event": "AccrueInterest",
@@ -406,7 +409,7 @@
       "adapter": "Fulcrum",
       "pool-contracts": [],
       "pool-events": [],
-      "token-supporting-abis": [],
+      "supporting-abis": [],
       "token-events": [
         {
           "event": "Burn",
@@ -485,6 +488,146 @@
         {
           "symbol": "iYFI",
           "address": "0x7F3Fe9D492A9a60aEBb06d82cBa23c6F32CAd10b",
+          "startBlock": 0
+        }
+      ]
+    },
+    {
+      "adapter": "Harvest",
+      "pool-contracts": [
+        {
+          "contract": "NoMintRewardPool",
+          "symbol": "",
+          "address": "0x15d3A64B2d5ab9E152F16593Cdebc4bB165B5B4A",
+          "startBlock": 0
+        }
+      ],
+      "pool-events": [
+        {
+          "event": "RewardAdded",
+          "params": "(uint256)"
+        },
+        {
+          "event": "RewardDenied",
+          "params": "(indexed address,uint256)"
+        },
+        {
+          "event": "RewardPaid",
+          "params": "(indexed address,uint256)"
+        },
+        {
+          "event": "Staked",
+          "params": "(indexed address,uint256)"
+        },
+        {
+          "event": "Withdrawn",
+          "params": "(indexed address,uint256)"
+        }
+      ],
+      "supporting-abis": [
+        "NoMintRewardPool"
+      ],
+      "token-events": [
+        {
+          "event": "Deposit",
+          "params": "(indexed address,uint256)"
+        },
+        {
+          "event": "Invest",
+          "params": "(uint256)"
+        },
+        {
+          "event": "StrategyChanged",
+          "params": "(address,address)"
+        },
+        {
+          "event": "Transfer",
+          "params": "(indexed address,indexed address,uint256)"
+        },
+        {
+          "event": "Withdraw",
+          "params": "(indexed address,uint256)"
+        }
+      ],
+      "tokens": [
+        {
+          "symbol": "f3CRV",
+          "address": "0x71B9eC42bB3CB40F017D8AD8011BE8e384a95fa5",
+          "startBlock": 0
+        },
+        {
+          "symbol": "fcDAI+cUSDC",
+          "address": "0x998cEb152A42a3EaC1f555B1E911642BeBf00faD",
+          "startBlock": 0
+        },
+        {
+          "symbol": "fcrvRenWBTC",
+          "address": "0x9aA8F427A17d6B0d91B6262989EdC7D45d6aEdf8",
+          "startBlock": 0
+        },
+        {
+          "symbol": "fDAI",
+          "address": "0xab7fa2b2985bccfc13c6d86b1d5a17486ab1e04c",
+          "startBlock": 0
+        },
+        {
+          "symbol": "fhCRV",
+          "address": "0xCC775989e76ab386E9253df5B0c0b473E22102E2",
+          "startBlock": 0
+        },
+        {
+          "symbol": "frenBTC",
+          "address": "0xC391d1b08c1403313B0c28D47202DFDA015633C4",
+          "startBlock": 0
+        },
+        {
+          "symbol": "fUSDC",
+          "address": "0xf0358e8c3CD5Fa238a29301d0bEa3D63A17bEdBE",
+          "startBlock": 0
+        },
+        {
+          "symbol": "fUSDT",
+          "address": "0x053c80eA73Dc6941F518a68E2FC52Ac45BDE7c9C",
+          "startBlock": 0
+        },
+        {
+          "symbol": "ftbtc/sbtcCrv",
+          "address": "0x640704D106E79e105FDA424f05467F005418F1B5",
+          "startBlock": 0
+        },
+        {
+          "symbol": "fTUSD",
+          "address": "0x7674622c63Bee7F46E86a4A5A18976693D54441b",
+          "startBlock": 0
+        },
+        {
+          "symbol": "fUNIV2",
+          "address": "0x2a32dcBB121D48C106F6d94cf2B4714c0b4Dfe48",
+          "startBlock": 0
+        },
+        {
+          "symbol": "fusdn3CRV",
+          "address": "0x683E683fBE6Cf9b635539712c999f3B3EdCB8664",
+          "startBlock": 0
+        },
+        {
+          "symbol": "fWBTC",
+          "address": "0x5d9d25c7C457dD82fc8668FFC6B9746b674d4EcB",
+          "startBlock": 0
+        },
+        {
+          "symbol": "fWETH",
+          "address": "0xFE09e53A81Fe2808bc493ea64319109B5bAa573e",
+          "startBlock": 0
+        },
+        {
+          "symbol": "fyDAI+yUSDC+yUSDT+yBUSD",
+          "address": "0x4b1cBD6F6D8676AcE5E412C78B7a59b4A1bbb68a",
+          "startBlock": 0
+        },
+        {
+          "symbol": "fyDAI+yUSDC+yUSDT+yTUSD",
+          "address": "0x0FE4283e0216F94f5f9750a7a11AC54D3c9C38F3",
           "startBlock": 0
         }
       ]

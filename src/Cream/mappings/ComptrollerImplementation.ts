@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { log } from "@graphprotocol/graph-ts";
 import {
   CreamComptrollerImplementation,
@@ -75,4 +76,21 @@ export function handleCompSpeedUpdated(event: CompSpeedUpdatedEvent): void {
   else entity.totalReserves = convertBINumToDesiredDecimals(tried_totalReserves.value, underlyingAssetDecimals);
   
   entity.save();
+=======
+import { CompSpeedUpdated as CompSpeedUpdatedEvent } from "../../../generated/CreamComptrollerImplementation/CreamComptrollerImplementation";
+import { handleEntity } from "./handlers";
+
+export function handleCompSpeedUpdated(event: CompSpeedUpdatedEvent): void {
+  handleEntity(
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+    event.address,
+    event.params.newSpeed,
+    event.params.cToken,
+    null, // borrowIndex
+    null, // totalBorrows
+    null, // totalReserves
+  );
+>>>>>>> 20b71bb8e26a1fb67637ae7f87c4f168b6424f0c
 }

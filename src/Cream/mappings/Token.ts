@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 import { log, Address, Bytes, BigInt } from "@graphprotocol/graph-ts";
 import {
   CreamToken,
+=======
+import {
+>>>>>>> 20b71bb8e26a1fb67637ae7f87c4f168b6424f0c
   AccrueInterest as AccrueInterestEvent,
   Borrow as BorrowEvent,
   Flashloan as FlashloanEvent,
@@ -11,6 +15,7 @@ import {
   ReservesAdded as ReservesAddedEvent,
   ReservesReduced as ReservesReducedEvent,
 } from "../../../generated/CreamTokencrDAI/CreamToken";
+<<<<<<< HEAD
 import { CreamTokenData } from "../../../generated/schema";
 import { CreamComptrollerImplementation } from "../../../generated/CreamComptrollerImplementation/CreamComptrollerImplementation";
 import { convertBINumToDesiredDecimals } from "../../utils/converters";
@@ -117,6 +122,17 @@ export function handleAccrueInterest(event: AccrueInterestEvent): void {
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
+=======
+import { handleEntity } from "./handlers";
+
+export function handleAccrueInterest(event: AccrueInterestEvent): void {
+  handleEntity(
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+    null, // comptrollerAddr
+    null, // newSpeed
+>>>>>>> 20b71bb8e26a1fb67637ae7f87c4f168b6424f0c
     event.address,
     event.params.borrowIndex,
     event.params.totalBorrows,
@@ -125,10 +141,19 @@ export function handleAccrueInterest(event: AccrueInterestEvent): void {
 }
 
 export function handleBorrow(event: BorrowEvent): void {
+<<<<<<< HEAD
   handleCreamToken(
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
+=======
+  handleEntity(
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+    null, // comptrollerAddr
+    null, // newSpeed
+>>>>>>> 20b71bb8e26a1fb67637ae7f87c4f168b6424f0c
     event.address,
     null, // borrowIndex
     event.params.totalBorrows,
@@ -137,10 +162,19 @@ export function handleBorrow(event: BorrowEvent): void {
 }
 
 export function handleFlashloan(event: FlashloanEvent): void {
+<<<<<<< HEAD
   handleCreamToken(
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
+=======
+  handleEntity(
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+    null, // comptrollerAddr
+    null, // newSpeed
+>>>>>>> 20b71bb8e26a1fb67637ae7f87c4f168b6424f0c
     event.address,
     null, // borrowIndex
     null, // totalBorrows
@@ -149,10 +183,19 @@ export function handleFlashloan(event: FlashloanEvent): void {
 }
 
 export function handleLiquidateBorrow(event: LiquidateBorrowEvent): void {
+<<<<<<< HEAD
   handleCreamToken(
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
+=======
+  handleEntity(
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+    null, // comptrollerAddr
+    null, // newSpeed
+>>>>>>> 20b71bb8e26a1fb67637ae7f87c4f168b6424f0c
     event.address,
     null, // borrowIndex
     null, // totalBorrows
@@ -161,10 +204,19 @@ export function handleLiquidateBorrow(event: LiquidateBorrowEvent): void {
 }
 
 export function handleMint(event: MintEvent): void {
+<<<<<<< HEAD
   handleCreamToken(
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
+=======
+  handleEntity(
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+    null, // comptrollerAddr
+    null, // newSpeed
+>>>>>>> 20b71bb8e26a1fb67637ae7f87c4f168b6424f0c
     event.address,
     null, // borrowIndex
     null, // totalBorrows
@@ -173,10 +225,19 @@ export function handleMint(event: MintEvent): void {
 }
 
 export function handleRedeem(event: RedeemEvent): void {
+<<<<<<< HEAD
   handleCreamToken(
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
+=======
+  handleEntity(
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+    null, // comptrollerAddr
+    null, // newSpeed
+>>>>>>> 20b71bb8e26a1fb67637ae7f87c4f168b6424f0c
     event.address,
     null, // borrowIndex
     null, // totalBorrows
@@ -185,10 +246,19 @@ export function handleRedeem(event: RedeemEvent): void {
 }
 
 export function handleRepayBorrow(event: RepayBorrowEvent): void {
+<<<<<<< HEAD
   handleCreamToken(
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
+=======
+  handleEntity(
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+    null, // comptrollerAddr
+    null, // newSpeed
+>>>>>>> 20b71bb8e26a1fb67637ae7f87c4f168b6424f0c
     event.address,
     null, // borrowIndex
     event.params.totalBorrows,
@@ -197,10 +267,19 @@ export function handleRepayBorrow(event: RepayBorrowEvent): void {
 }
 
 export function handleReservesAdded(event: ReservesAddedEvent): void {
+<<<<<<< HEAD
   handleCreamToken(
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
+=======
+  handleEntity(
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+    null, // comptrollerAddr
+    null, // newSpeed
+>>>>>>> 20b71bb8e26a1fb67637ae7f87c4f168b6424f0c
     event.address,
     null, // borrowIndex
     null, // totalBorrows
@@ -209,10 +288,19 @@ export function handleReservesAdded(event: ReservesAddedEvent): void {
 }
 
 export function handleReservesReduced(event: ReservesReducedEvent): void {
+<<<<<<< HEAD
   handleCreamToken(
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
+=======
+  handleEntity(
+    event.transaction.hash,
+    event.block.number,
+    event.block.timestamp,
+    null, // comptrollerAddr
+    null, // newSpeed
+>>>>>>> 20b71bb8e26a1fb67637ae7f87c4f168b6424f0c
     event.address,
     null, // borrowIndex
     null, // totalBorrows
