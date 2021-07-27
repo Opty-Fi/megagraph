@@ -1,16 +1,18 @@
 import { BigInt, Address, log, Bytes } from "@graphprotocol/graph-ts";
 import { CompoundV1Token } from "../../../generated/CompoundV1TokencDAI/CompoundV1Token";
 import { CompoundV1ComptrollerImplementation } from "../../../generated/CompoundV1TokencDAI/CompoundV1ComptrollerImplementation";
+import { CompoundV1Underlying } from "../../../generated/CompoundV1TokencDAI/CompoundV1Underlying";
 import { CompoundV1TokenData } from "../../../generated/schema";
 import { convertBINumToDesiredDecimals, convertToLowerCase } from "../../utils/converters";
 
 //  Function to add/update the cToken Entity
-export function createCTokenEntity(
+export function handleEntity(
   transactionHash: Bytes,
   blockNumber: BigInt,
   blockTimestamp: BigInt,
-  cTokenAddress: Address,
   comptrollerAddress: Address,
+  newSpeed: BigInt,
+  cTokenAddress: Address,
   borrowIndex: BigInt,
   totalBorrows: BigInt,
 ): void {
@@ -20,7 +22,7 @@ export function createCTokenEntity(
   let underlyingTokenAddress = cTokenContract.try_underlying()
   let underlyingTokenDecimals = null
   if (!underlyingTokenAddress.reverted) {
-    let underlyingTokenContract = CompoundV1Token.bind(underlyingTokenAddress.value)
+    let underlyingTokenContract = CompoundV1Underlying.bind(underlyingTokenAddress.value)
     underlyingTokenDecimals = underlyingTokenContract.decimals()
   }
 
@@ -119,14 +121,14 @@ export function createCTokenEntity(
       : comptrollerAddress
   if (comptrollerAddress) {
     let comptrollerContract = CompoundV1ComptrollerImplementation.bind(comptrollerAddress)
-    cTokenDataEntity.compSpeed = comptrollerContract.try_compSpeeds(
-      cTokenAddress,
-    ).reverted
-      ? null
-      : convertBINumToDesiredDecimals(
-          comptrollerContract.compSpeeds(cTokenAddress),
-          18,
-        )
+    cTokenDataEntity.compSpeed = convertBINumToDesiredDecimals(
+      newSpeed
+        ? newSpeed
+        : comptrollerContract.try_compSpeeds(cTokenAddress).reverted
+          ? null
+          : comptrollerContract.compSpeeds(cTokenAddress)
+      , 18
+    );
   }
   log.info(
     'Saving data for cToken: {} - {} for block: {} with transaction hash: {}',

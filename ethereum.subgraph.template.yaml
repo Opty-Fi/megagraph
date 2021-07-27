@@ -28,10 +28,12 @@ dataSources:
       entities:
         - {{adapter}}TokenData
       abis:
-        - name: {{adapter}}{{contract}}
-          file: ./src/{{adapter}}/abis/{{contract}}.json
         - name: {{adapter}}Token
           file: ./src/{{adapter}}/abis/Token.json
+        {{#supporting-abis}}
+        - name: {{adapter}}{{.}}
+          file: ./src/{{adapter}}/abis/{{.}}.json
+        {{/supporting-abis}}
       eventHandlers:
         {{#pool-events}}
         - event: {{event}}{{params}}
@@ -59,16 +61,12 @@ dataSources:
       entities:
         - {{adapter}}TokenData
       abis:
-        {{#pool-contracts}}
-        - name: {{adapter}}{{contract}}{{symbol}}
-          file: ./src/{{adapter}}/abis/{{contract}}.json
-        {{/pool-contracts}}
         - name: {{adapter}}Token
           file: ./src/{{adapter}}/abis/Token.json
-        {{#token-supporting-abis}}
+        {{#supporting-abis}}
         - name: {{adapter}}{{.}}
           file: ./src/{{adapter}}/abis/{{.}}.json
-        {{/token-supporting-abis}}
+        {{/supporting-abis}}
       eventHandlers:
         {{#token-events}}
         - event: {{event}}{{params}}

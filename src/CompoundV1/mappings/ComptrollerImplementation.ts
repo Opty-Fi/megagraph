@@ -1,14 +1,15 @@
 import { CompSpeedUpdated as CompSpeedUpdatedEvent } from "../../../generated/CompoundV1ComptrollerImplementation/CompoundV1ComptrollerImplementation";
-import { createCTokenEntity } from "./handlers";
+import { handleEntity } from "./handlers";
 
 export function handleCompSpeedUpdated(event: CompSpeedUpdatedEvent): void {
-  createCTokenEntity(
+  handleEntity(
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
+    event.address, // comptrollerAddress
+    event.params.newSpeed,
     event.params.cToken,
-    event.address,
     null, // borrowIndex
-    null // totalBorrows
+    null, // totalBorrows
   );
 }
