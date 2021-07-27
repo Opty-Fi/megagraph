@@ -1,40 +1,153 @@
-## defi protocol subgraph
-The subgraph for the defi protocols that [opty.fi](https://opty.fi)'s earn protocol integrates natively.
+# DeFi protocol subgraph
+The subgraph for the DeFi protocols with which [OptyFi](https://opty.fi)'s [`earn-protocol`](https://github.com/Opty-Fi/earn-protocol) integrates natively.
 
-### Prerequisites
-
+### Prerequisites:
 - Node JS 12.x.x and above
+- Install the prerequisite modules:
+  ```sh
+  yarn
+  ```
+- Setup your environment variables:
+  ```sh
+  cp .env.example .env
+  ```
+  and populate accordingly
 
-### Running a build
+### Naming conventions
+- `./config/` directory:
+  - `dev.json` file only:
+    - `startBlock` to be omitted, or `"startBlock": 0`, unless you configure your local `graph-node` otherwise
+  - all `$CONFIG.json` files:
+    - format:
+      ```json
+      {
+        "blockchain": "$BLOCKCHAIN",
+        "network": "$CONFIG",
+        "adapters": [
+          {
+            "adapter": "AdapterName",
+            "address": "0xAddressValue",
+            "startBlock": 12345, // if present
+            "pool-contract": "ContractName",
+            "pool-events": [
+              {
+                "event": "EventName",
+                "params": "(list, of, params, from, event, sig)"
+              }
+            ],
+            "token-supporting-abis": [ // if present
+              "DataProvider" // e.g.
+            ],
+            "token-events": [
+              {
+                "event": "EventName",
+                "params": "(list, of, params, from, event, sig)"
+              }
+            ],
+            "tokens": [
+              {
+                "symbol": "SYMBOL",
+                "address": "0xAddressValue",
+                "startBlock": 12345 // if present
+              }
+            ]
+          }
+        ]
+      }
+      ```
+- `./schema.graphql` file:
+  - pool (if present): `type <Adapter><ContractName>Data @entity { ... }`
+  - token: `type <Adapter>TokenData @entity { ... }`
+- `./src/<Adapter>/` directory:
+  - `abis/` directory:
+    - pool (if present): `<Adapter><ContractName>.json`
+    - token: `Token.json`
+    - others (if present): `<Name>.json` as needed
+  - `mappings/` directory:
+    - pool (if present): `<Adapter><ContractName>.ts`
+    - token: `Token.ts`
+    - all `<mapping>.ts` files:
+      - pool: `import { <Adapter><ContractName>, <events...> } from "../../../generated/<Adapter><ContractName>/<Adapter><ContractName>";`
+      - token: `import { <Adapter>Token } from "../../../generated/<Adapter>Token<symbolDAI>/<Adapter>Token";`
+      - supporting-abi (if present): `import { <Adapter><ContractName> } from "../../../generated/<Adapter>Token<symbolDAI>/<Adapter><ContractName>";`
+      - graphql: `import { <Adapter>TokenData } from "../../../generated/schema";`
 
-Run the `build` command:
+### Local development:
+1. Install [ganache-cli](https://github.com/trufflesuite/ganache-cli)
+1. Clone a [graph node](https://github.com/graphprotocol/graph-node) locally
+1. In your local `graph-node`:
+   - Adjust the `./docker/docker-compose.yaml` file:
+     ```
+     services:
+       graph-node:
+         environment:
+           ethereum:
+     ```
+     from `'mainnet:http...'` to `'builderevm:http...'` and save
+1. Spin up a `ganache` instance on the side:
+   ```sh
+   ganache-cli -d -h 0.0.0.0 --networkId 31337
+   ```
+1. In your local `graph-node`:
+   - In the `docker` directory:
+     ```sh
+     cd ./docker
+     ```
+   - Initialize the docker container:
+     ```sh
+     docker-compose up
+     ```
+1. In the `defi-protocol-subgraph` root directory, run the following command:
+   ```sh
+   yarn setup:local
+   ```
 
-```sh
-$ graph build
-```
+### Deploying to [TheGraph](https://thegraph.com):
+1. Create an account and login, and ensure that your [Access token](https://thegraph.com/explorer/dashboard) is populated in your `.env` file
+1. In your local `defi-protocol-subgraph` directory, run the `yarn setup` command:
+   ```sh
+   yarn setup
+   ```
 
-If the build is successful, you should see a new __build__ folder generated in your root directory.
+## Detailed Instructions
 
-## Deploying the subgraph
+### Mustache template:
+- Run the following command:
+  ```sh
+  yarn mustache-yaml
+  ```
+  If the execution is successful, you should see a new `subgraph.yaml` file created from the `$BLOCKCHAIN.subgraph.template.yaml` file.
 
-To deploy, we can run the `deploy` command using the Graph CLI. To deploy, you will first need to copy the __Access token__ for the subgraph you created in the Graph console.
+### Generating subgraph code:
+- Run the following command:
+  ```sh
+  yarn codegen
+  ```
+  If the generation was successful, you should see a new `generated` folder in your root directory.
 
-Next, run the following command:
+### Running a build:
+- Run the `build` command:
+  ```sh
+  graph build
+  ```
+  If the build is successful, you should see a new `build` folder generated in your root directory.
 
-```sh
-$ graph auth https://api.thegraph.com/deploy/ <ACCESS_TOKEN>
+### Deploying the subgraph:
+- To deploy, we can run the `deploy` command using the Graph CLI. To deploy, you will first need to copy the __Access token__ for the subgraph you created in the Graph console.
 
-$ yarn deploy
-```
+- Next, run the following commands:
+  ```sh
+  graph auth https://api.thegraph.com/deploy/ <ACCESS_TOKEN>
 
-Once the subgraph is deployed, you should see it show up in your dashboard.
+  yarn deploy
+  ```
+  
+  Once the subgraph is deployed, you should see it show up in your dashboard.
+  
+  When you click on the subgraph, it should open the Graph explorer.
 
-When you click on the subgraph, it should open the Graph explorer.
-
-## Querying for data
-
+### Querying for data:
 Now that we are in the dashboard, we should be able to start querying for data. Run the following query to get a list of tokens and their metadata:
-
 ```graphql
 {
   tokens {
@@ -47,7 +160,6 @@ Now that we are in the dashboard, we should be able to start querying for data. 
 ```
 
 We can also configure the order direction:
-
 ```graphql
 {
   tokens(
@@ -63,7 +175,6 @@ We can also configure the order direction:
 ```
 
 Or choose to skip forward a certain number of results to implement some basic pagination:
-
 ```graphql
 {
   tokens(
@@ -80,7 +191,6 @@ Or choose to skip forward a certain number of results to implement some basic pa
 ```
 
 Or query for users and their associated content:
-
 ```graphql
 {
   users {
@@ -93,12 +203,10 @@ Or query for users and their associated content:
 }
 ```
 
-## Updating the subgraph
-
+### Updating the subgraph:
 For example adding the capabilities to sort by the timestamp that the NFT was created.
 
 Add a new `createdAtTimestamp` field to the `Token` entity:
-
 ```graphql
 type Token @entity {
   id: ID!
@@ -113,13 +221,11 @@ type Token @entity {
 ```
 
 Re-run the codegen:
-
 ```sh
 graph codegen
 ```
 
 Update the mapping to save this new field:
-
 ```typescript
 // update the handleTransfer function to add the createdAtTimestamp to the token object
 export function handleTransfer(event: TransferEvent): void {
@@ -147,14 +253,11 @@ export function handleTransfer(event: TransferEvent): void {
 ```
 
 Re-deploy the subgraph:
-
-
 ```sh
-$ yarn deploy
+yarn deploy
 ```
 
 After redeployment of the graph, query can be made by timestamp to view the most recently created NFTs:
-
 ```graphql
 {
   tokens(

@@ -1,19 +1,41 @@
 {
   "name": "defi-protocol-subgraph",
   "version": "1.0.0",
-  "description": "This package contains subgraph defi protocols that opty.fi's earn protocol integrates natively",
+  "description": "This package contains subgraph DeFi protocols that opty.fi's earn protocol integrates natively",
   "author": "Opty-Fi <info@opty.fi>",
   "license": "AGPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Opty-Fi/defi-protocol-subgraph"
+  },
   "scripts": {
-    "codegen": "graph codegen",
-    "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ opty-fi/defi-protocol-subgraph",
-    "create-local": "graph create --node http://localhost:8020/ opty-fi/defi-protocol-subgraph",
-    "remove-local": "graph remove --node http://localhost:8020/ opty-fi/defi-protocol-subgraph",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 opty-fi/defi-protocol-subgraph"
+    "setup": "yarn mustache-yaml && yarn codegen && yarn graph-auth && yarn deploy",
+    "setup:local": "yarn mustache-yaml && yarn codegen && yarn deploy:local",
+    "mustache-yaml": "./node_modules/.bin/dotenv -- yarn mustache-yaml-replace",
+    "mustache-yaml-replace": "mustache ./config/${CONFIG:-dev}.json ${BLOCKCHAIN:-ethereum}.subgraph.template.yaml > subgraph.yaml",
+    "codegen": "rm -rf build generated && graph codegen --output-dir ./generated",
+    "graph-auth": "./node_modules/.bin/dotenv -- yarn graph-auth-replace",
+    "graph-auth-replace": "graph auth https://api.thegraph.com/deploy/ $ACCESS_TOKEN",
+    "deploy": "./node_modules/.bin/dotenv -- yarn graph-deploy-replace",
+    "graph-deploy-replace": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ $SLUG",
+    "deploy:local": "yarn graph-create-local && yarn graph-deploy-local",
+    "graph-create-local": "./node_modules/.bin/dotenv -- yarn graph-create-local-replace",
+    "graph-create-local-replace": "graph create --node http://localhost:8020/ $SLUG",
+    "graph-deploy-local": "./node_modules/.bin/dotenv -- yarn graph-deploy-local-replace",
+    "graph-deploy-local-replace": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 $SLUG"
   },
   "dependencies": {
-    "@graphprotocol/graph-cli": "0.20.0",
-    "@graphprotocol/graph-ts": "0.20.0"
+    "@graphprotocol/graph-cli": "^0.20.1",
+    "@graphprotocol/graph-ts": "^0.20.1",
+    "@types/node": "^16.3.2",
+    "dotenv": "^10.0.0",
+    "dotenv-cli": "^4.0.0",
+    "mustache": "^4.2.0",
+    "typescript": "^4.3.5"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.28.3",
+    "@typescript-eslint/parser": "^4.28.3",
+    "eslint": "^7.30.0"
   }
 }

@@ -1,31 +1,107 @@
-type _Schema_
-  @fulltext(
-    name: "metadataSearch",
-    language: en
-    algorithm: rank,
-    include: [
-      {
-        entity: "Token",
-        fields: [
-          { name: "metadataURI" }
-        ]
-      }
-    ]
-  )
-
-
-type Token @entity {
+# ----------------------------------------
+#      AaveV1
+# ----------------------------------------
+type AaveV1TokenData @entity {
   id: ID!
-  tokenID: BigInt!
-  contentURI: String!
-  metadataURI: String!
-  creator: User!
-  owner: User!
-  createdAtTimestamp: BigInt!
+  transactionHash: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  address: Bytes!
+  symbol: String!
+
+  decimals: Int
+  ltv: BigDecimal
+  liquidationThreshold: BigDecimal
+  liquidationBonus: BigDecimal
+  interestRateStrategyAddress: Bytes
+  usageAsCollateralEnabled: Boolean
+  borrowingEnabled: Boolean
+  stableBorrowRateEnabled: Boolean
+  isActive: Boolean
+
+  totalLiquidity: BigDecimal
+  availableLiquidity: BigDecimal
+  totalBorrowsStable: BigDecimal
+  totalBorrowsVariable: BigDecimal
+  liquidityRate: BigDecimal
+  variableBorrowRate: BigDecimal
+  stableBorrowRate: BigDecimal
+  averageStableBorrowRate: BigDecimal
+  utilizationRate: BigDecimal
+  liquidityIndex: BigInt
+  variableBorrowIndex: BigInt
+  aTokenAddress: Bytes
+  lastUpdateTimestamp: BigInt
 }
 
-type User @entity {
+# ----------------------------------------
+#      AaveV2
+# ----------------------------------------
+type AaveV2TokenData @entity {
   id: ID!
-  tokens: [Token!]! @derivedFrom(field: "owner")
-  created: [Token!]! @derivedFrom(field: "creator")
+  transactionHash: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  address: Bytes!
+  symbol: String!
+
+  decimals: Int
+  ltv: BigDecimal
+  liquidationThreshold: BigDecimal
+  liquidationBonus: BigDecimal
+  reserveFactor: BigDecimal
+  usageAsCollateralEnabled: Boolean
+  borrowingEnabled: Boolean
+  stableBorrowRateEnabled: Boolean
+  isActive: Boolean
+  isFrozen: Boolean
+
+  availableLiquidity: BigDecimal
+  totalStableDebt: BigDecimal
+  totalVariableDebt: BigDecimal
+  liquidityRate: BigDecimal
+  variableBorrowRate: BigDecimal
+  stableBorrowRate: BigDecimal
+  averageStableBorrowRate: BigDecimal
+  liquidityIndex: BigDecimal
+  variableBorrowIndex: BigDecimal
+  lastUpdateTimestamp: BigInt
+}
+
+# ----------------------------------------
+#      C.R.E.A.M.
+# ----------------------------------------
+type CreamTokenData @entity {
+  id: ID!
+  transactionHash: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  address: Bytes!
+  symbol: String!
+  compSpeeds: BigDecimal
+  borrowIndex: BigInt
+  borrowRatePerBlock: BigDecimal
+  supplyRatePerBlock: BigDecimal
+  exchangeRateStored: BigDecimal
+  totalCash: BigDecimal
+  totalBorrows: BigDecimal
+  totalSupply: BigDecimal
+  totalReserves: BigDecimal
+}
+
+# ----------------------------------------
+#      bZx Fulcrum
+# ----------------------------------------
+type FulcrumTokenData @entity {
+  id: ID!
+  transactionHash: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  address: Bytes!
+  symbol: String!
+  supplyInterestRate: BigDecimal
+  borrowInterestRate: BigDecimal
+  tokenPrice: BigDecimal
+  marketLiquidity: BigDecimal
+  totalSupply: BigDecimal
 }
