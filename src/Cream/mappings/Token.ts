@@ -16,6 +16,8 @@ export function handleAccrueInterest(event: AccrueInterestEvent): void {
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
+    null, // comptrollerAddr
+    null, // newSpeed
     event.address,
     event.params.borrowIndex,
     event.params.totalBorrows,
@@ -28,6 +30,8 @@ export function handleBorrow(event: BorrowEvent): void {
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
+    null, // comptrollerAddr
+    null, // newSpeed
     event.address,
     null, // borrowIndex
     event.params.totalBorrows,
@@ -40,6 +44,8 @@ export function handleFlashloan(event: FlashloanEvent): void {
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
+    null, // comptrollerAddr
+    null, // newSpeed
     event.address,
     null, // borrowIndex
     null, // totalBorrows
@@ -52,6 +58,8 @@ export function handleLiquidateBorrow(event: LiquidateBorrowEvent): void {
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
+    null, // comptrollerAddr
+    null, // newSpeed
     event.address,
     null, // borrowIndex
     null, // totalBorrows
@@ -64,6 +72,8 @@ export function handleMint(event: MintEvent): void {
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
+    null, // comptrollerAddr
+    null, // newSpeed
     event.address,
     null, // borrowIndex
     null, // totalBorrows
@@ -76,6 +86,8 @@ export function handleRedeem(event: RedeemEvent): void {
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
+    null, // comptrollerAddr
+    null, // newSpeed
     event.address,
     null, // borrowIndex
     null, // totalBorrows
@@ -88,6 +100,8 @@ export function handleRepayBorrow(event: RepayBorrowEvent): void {
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
+    null, // comptrollerAddr
+    null, // newSpeed
     event.address,
     null, // borrowIndex
     event.params.totalBorrows,
@@ -100,6 +114,8 @@ export function handleReservesAdded(event: ReservesAddedEvent): void {
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
+    null, // comptrollerAddr
+    null, // newSpeed
     event.address,
     null, // borrowIndex
     null, // totalBorrows
@@ -112,6 +128,8 @@ export function handleReservesReduced(event: ReservesReducedEvent): void {
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
+    null, // comptrollerAddr
+    null, // newSpeed
     event.address,
     null, // borrowIndex
     null, // totalBorrows

@@ -1,6 +1,7 @@
 import { log, Address, Bytes, BigInt } from "@graphprotocol/graph-ts";
 import { CreamComptrollerImplementation } from "../../../generated/CreamComptrollerImplementation/CreamComptrollerImplementation";
 import { CreamToken } from "../../../generated/CreamTokencrDAI/CreamToken";
+import { CreamUnderlying } from "../../../generated/CreamTokencrDAI/CreamUnderlying";
 import { CreamTokenData } from "../../../generated/schema";
 import { convertBINumToDesiredDecimals } from "../../utils/converters";
 
@@ -8,6 +9,8 @@ export function handleEntity(
   transactionHash: Bytes,
   blockNumber: BigInt,
   blockTimestamp: BigInt,
+  comptrollerAddr: Address,
+  newSpeed: BigInt,
   address: Address,
   borrowIndex: BigInt,
   totalBorrows: BigInt,
@@ -18,13 +21,18 @@ export function handleEntity(
   let entity = CreamTokenData.load(transactionHash.toHex());
   if (!entity) entity = new CreamTokenData(transactionHash.toHex());
   
-  let comptrollerContract: CreamComptrollerImplementation = null;
-  let tried_comptroller = tokenContract.try_comptroller();
-  if (!tried_comptroller.reverted) comptrollerContract = CreamComptrollerImplementation.bind(tried_comptroller.value);
-  if (comptrollerContract) {
-    let tried_compSpeeds = comptrollerContract.try_compSpeeds(address);
-    if (tried_compSpeeds.reverted) log.error("compSpeeds() reverted", []);
-    else entity.compSpeeds = convertBINumToDesiredDecimals(tried_compSpeeds.value, 18);
+  
+  if (comptrollerAddr) {
+    entity.compSpeeds = convertBINumToDesiredDecimals(newSpeed, 18);
+  } else {
+    let comptrollerContract: CreamComptrollerImplementation = null;
+    let tried_comptroller = tokenContract.try_comptroller();
+    if (!tried_comptroller.reverted) comptrollerContract = CreamComptrollerImplementation.bind(tried_comptroller.value);
+    if (comptrollerContract) {
+      let tried_compSpeeds = comptrollerContract.try_compSpeeds(address);
+      if (tried_compSpeeds.reverted) log.error("compSpeeds() reverted", []);
+      else entity.compSpeeds = convertBINumToDesiredDecimals(tried_compSpeeds.value, 18);
+    }
   }
 
   // @ts-ignore
@@ -32,7 +40,7 @@ export function handleEntity(
   let underlyingAsset = tokenContract.try_underlying();
   if (underlyingAsset.reverted) log.error("underlying() reverted", []);
   else {
-    let underlyingAssetContract = CreamToken.bind(underlyingAsset.value);
+    let underlyingAssetContract = CreamUnderlying.bind(underlyingAsset.value);
     if (!underlyingAssetContract) log.error("No underlyingAsset at {}", [ underlyingAsset.value.toHex() ]);
     else {
       let tried_underlyingAssetDecimals = underlyingAssetContract.try_decimals();

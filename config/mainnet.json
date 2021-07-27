@@ -6,7 +6,7 @@
       "adapter": "AaveV1",
       "pool-contracts": [],
       "pool-events": [],
-      "token-supporting-abis": [
+      "supporting-abis": [
         "LendingPoolAddressesProvider",
         "LendingPoolDataProvider"
       ],
@@ -142,7 +142,7 @@
       "adapter": "AaveV2",
       "pool-contracts": [],
       "pool-events": [],
-      "token-supporting-abis": [
+      "supporting-abis": [
         "LendingPoolAddressesProvider",
         "AaveProtocolDataProvider"
       ],
@@ -295,7 +295,10 @@
           "params": "(indexed address,uint256)"
         }
       ],
-      "token-supporting-abis": [],
+      "supporting-abis": [
+        "ComptrollerImplementation",
+        "Underlying"
+      ],
       "token-events": [
         {
           "event": "AccrueInterest",
@@ -406,7 +409,7 @@
       "adapter": "Fulcrum",
       "pool-contracts": [],
       "pool-events": [],
-      "token-supporting-abis": [],
+      "supporting-abis": [],
       "token-events": [
         {
           "event": "Burn",
