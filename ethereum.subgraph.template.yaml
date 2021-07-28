@@ -74,4 +74,37 @@ dataSources:
         {{/token-events}}
       file: ./src/{{adapter}}/mappings/Token.ts
   {{/tokens}}
+  {{#tokens-2}}
+  # ----------------------------------------
+  #      {{adapter}} Token2 {{symbol}}
+  # ----------------------------------------
+  - kind: ethereum/contract
+    name: {{adapter}}Token2{{symbol}}
+    network: {{network}}
+    source:
+      address: "{{address}}"
+      {{#startBlock}}
+      startBlock: {{startBlock}}
+      {{/startBlock}}
+      abi: {{adapter}}Token2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - {{adapter}}TokenData
+      abis:
+        - name: {{adapter}}Token2
+          file: ./src/{{adapter}}/abis/Token2.json
+        {{#supporting-abis}}
+        - name: {{adapter}}{{.}}
+          file: ./src/{{adapter}}/abis/{{.}}.json
+        {{/supporting-abis}}
+      eventHandlers:
+        {{#token-2-events}}
+        - event: {{event}}{{params}}
+          handler: handle{{event}}
+        {{/token-2-events}}
+      file: ./src/{{adapter}}/mappings/Token2.ts
+  {{/tokens-2}}
 {{/adapters}}
