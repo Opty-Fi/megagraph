@@ -26,34 +26,29 @@ The subgraph for the DeFi protocols with which [OptyFi](https://opty.fi)'s [`ear
         "adapters": [
           {
             "adapter": "AdapterName",
-            "pool-contracts": [
+            "contracts": [
               {
                 "contract": "ContractName",
-                "symbol": "SYMBOL", // if multiple
-                "address": "0xAddressValue",
-                "startBlock": 12345 // if present
-              }
-            ],
-            "pool-events": [
-              {
-                "event": "EventName",
-                "params": "(list, of, params, from, event, sig)"
-              }
-            ],
-            "token-supporting-abis": [ // if present
-              "DataProvider" // e.g.
-            ],
-            "token-events": [
-              {
-                "event": "EventName",
-                "params": "(list, of, params, from, event, sig)"
-              }
-            ],
-            "tokens": [
-              {
-                "symbol": "SYMBOL",
-                "address": "0xAddressValue",
-                "startBlock": 12345 // if present
+                "abis": [
+                  "AbiName",
+                  "SupportingAbiName"
+                ],
+                "entities": [
+                  ""
+                ],
+                "events": [
+                  {
+                    "event-name": "EventName",
+                    "event-params": "(list, of, params, from, event, sig)"
+                  }
+                ],
+                "instances": [
+                  {
+                    "symbol": "SYMBOL", // if multiple
+                    "address": "0xAddressValue",
+                    "startBlock": 12345 // if present
+                  }
+                ]
               }
             ]
           }
