@@ -69,6 +69,26 @@ type AaveV2TokenData @entity {
 }
 
 # ----------------------------------------
+#      CompoundV1
+# ----------------------------------------
+type CompoundV1TokenData @entity {
+  id: ID!
+  blockNumber: BigInt
+  blockTimestamp: BigInt
+  borrowIndex: BigDecimal
+  borrowRatePerBlock: BigDecimal
+  compSpeed: BigDecimal
+  cTokenSymbol: String
+  cTokenAddress: Bytes
+  exchangeRate: BigDecimal
+  supplyRatePerBlock: BigDecimal
+  totalCash: BigDecimal
+  totalBorrows: BigDecimal
+  totalSupply: BigInt
+  totalReserves: BigDecimal
+}
+
+# ----------------------------------------
 #      C.R.E.A.M.
 # ----------------------------------------
 type CreamTokenData @entity {
@@ -113,6 +133,20 @@ type CurveV1PoolData @entity {
 }
 
 # ----------------------------------------
+#      dForce
+# ----------------------------------------
+type DForceTokenData @entity {
+  id: ID!
+  pricePerFullShare: BigDecimal
+  balance: BigDecimal
+  blockNumber: BigInt
+  blockTimestamp: BigInt
+  dTokenSymbol: String
+  dTokenAddress: Bytes
+  rewardRate: BigInt
+}
+
+# ----------------------------------------
 #      bZx Fulcrum
 # ----------------------------------------
 type FulcrumTokenData @entity {
@@ -127,4 +161,35 @@ type FulcrumTokenData @entity {
   tokenPrice: BigDecimal
   marketLiquidity: BigDecimal
   totalSupply: BigDecimal
+}
+
+# ----------------------------------------
+#      Harvest
+# ----------------------------------------
+type HarvestTokenData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  lastUpdateTime: BigInt!
+  rewardRate: BigInt!
+  rewardPerTokenStored: BigInt!
+  pricePerFullShare: BigDecimal!
+  underlyingBalanceWithInvestment: BigDecimal!
+  underlyingBalanceInVault: BigDecimal!
+  pool: Bytes!
+  vault: Bytes!
+}
+
+# ----------------------------------------
+#      Yearn
+# ----------------------------------------
+type YearnTokenData @entity {
+  id: ID!
+  balance: BigDecimal!
+  pricePerFullShare: BigDecimal!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  symbol: String!
+  vault: Bytes!
+  underlyingToken: Bytes!
 }
