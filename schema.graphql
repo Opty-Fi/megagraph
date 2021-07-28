@@ -69,6 +69,26 @@ type AaveV2TokenData @entity {
 }
 
 # ----------------------------------------
+#      CompoundV1
+# ----------------------------------------
+type CompoundV1TokenData @entity {
+  id: ID!
+  blockNumber: BigInt
+  blockTimestamp: BigInt
+  borrowIndex: BigDecimal
+  borrowRatePerBlock: BigDecimal
+  compSpeed: BigDecimal
+  cTokenSymbol: String
+  cTokenAddress: Bytes
+  exchangeRate: BigDecimal
+  supplyRatePerBlock: BigDecimal
+  totalCash: BigDecimal
+  totalBorrows: BigDecimal
+  totalSupply: BigInt
+  totalReserves: BigDecimal
+}
+
+# ----------------------------------------
 #      C.R.E.A.M.
 # ----------------------------------------
 type CreamTokenData @entity {
@@ -90,6 +110,43 @@ type CreamTokenData @entity {
 }
 
 # ----------------------------------------
+#      CurveV1
+# ----------------------------------------
+type CurveV1GaugeData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  gaugeController: Bytes!
+  liquidityGauge: Bytes!
+  gaugeWeight: BigDecimal!
+  totalWeight: BigDecimal!
+}
+
+type CurveV1PoolData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  vault: Bytes!
+  balance: [BigDecimal!]!
+  virtualPrice: BigDecimal!
+  tokens: [Bytes!]!
+}
+
+# ----------------------------------------
+#      dForce
+# ----------------------------------------
+type DForceTokenData @entity {
+  id: ID!
+  pricePerFullShare: BigDecimal
+  balance: BigDecimal
+  blockNumber: BigInt
+  blockTimestamp: BigInt
+  dTokenSymbol: String
+  dTokenAddress: Bytes
+  rewardRate: BigInt
+}
+
+# ----------------------------------------
 #      bZx Fulcrum
 # ----------------------------------------
 type FulcrumTokenData @entity {
@@ -104,6 +161,23 @@ type FulcrumTokenData @entity {
   tokenPrice: BigDecimal
   marketLiquidity: BigDecimal
   totalSupply: BigDecimal
+}
+
+# ----------------------------------------
+#      Harvest
+# ----------------------------------------
+type HarvestTokenData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  lastUpdateTime: BigInt!
+  rewardRate: BigInt!
+  rewardPerTokenStored: BigInt!
+  pricePerFullShare: BigDecimal!
+  underlyingBalanceWithInvestment: BigDecimal!
+  underlyingBalanceInVault: BigDecimal!
+  pool: Bytes!
+  vault: Bytes!
 }
 
 # ----------------------------------------

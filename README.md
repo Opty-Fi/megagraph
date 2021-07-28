@@ -26,9 +26,14 @@ The subgraph for the DeFi protocols with which [OptyFi](https://opty.fi)'s [`ear
         "adapters": [
           {
             "adapter": "AdapterName",
-            "address": "0xAddressValue",
-            "startBlock": 12345, // if present
-            "pool-contract": "ContractName",
+            "pool-contracts": [
+              {
+                "contract": "ContractName",
+                "symbol": "SYMBOL", // if multiple
+                "address": "0xAddressValue",
+                "startBlock": 12345 // if present
+              }
+            ],
             "pool-events": [
               {
                 "event": "EventName",
