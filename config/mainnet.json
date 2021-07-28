@@ -280,6 +280,121 @@
       ]
     },
     {
+      "adapter": "CompoundV1",
+      "pool-contracts": [
+        {
+          "contract": "ComptrollerImplementation",
+          "symbol": "",
+          "address": "0x3d9819210A31b4961b30EF54bE2aeD79B9c9Cd3B",
+          "startBlock": 7710671
+        }
+      ],
+      "pool-events": [
+        {
+          "event": "CompSpeedUpdated",
+          "params": "(indexed address,uint256)"
+        }
+      ],
+      "supporting-abis": [
+        "ComptrollerImplementation",
+        "Underlying"
+      ],
+      "token-events": [
+        {
+          "event": "AccrueInterest",
+          "params": "(uint256,uint256,uint256,uint256)"
+        },
+        {
+          "event": "Borrow",
+          "params": "(address,uint256,uint256,uint256)"
+        },
+        {
+          "event": "LiquidateBorrow",
+          "params": "(address,address,uint256,address,uint256)"
+        },
+        {
+          "event": "Mint",
+          "params": "(address,uint256,uint256)"
+        },
+        {
+          "event": "NewReserveFactor",
+          "params": "(uint256,uint256)"
+        },
+        {
+          "event": "Redeem",
+          "params": "(address,uint256,uint256)"
+        },
+        {
+          "event": "RepayBorrow",
+          "params": "(address,address,uint256,uint256,uint256)"
+        },
+        {
+          "event": "ReservesAdded",
+          "params": "(address,uint256,uint256)"
+        },
+        {
+          "event": "ReservesReduced",
+          "params": "(address,uint256,uint256)"
+        },
+        {
+          "event": "Transfer",
+          "params": "(indexed address,indexed address,uint256)"
+        }
+      ],
+      "tokens": [
+        {
+          "symbol": "cBAT",
+          "address": "0x6C8c6b02E7b2BE14d4fA6022Dfd6d75921D90E4E",
+          "startBlock": 7710735
+        },
+        {
+          "symbol": "cCOMP",
+          "address": "0x70e36f6bf80a52b3b46b3af8e106cc0ed743e8e4",
+          "startBlock": 10960099
+        },
+        {
+          "symbol": "cDAI",
+          "address": "0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643",
+          "startBlock": 8983575
+        },
+        {
+          "symbol": "cETH",
+          "address": "0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5",
+          "startBlock": 7710758
+        },
+        {
+          "symbol": "cREP",
+          "address": "0x158079Ee67Fce2f58472A96584A73C7Ab9AC95c1",
+          "startBlock": 7710755
+        },
+        {
+          "symbol": "cUNI",
+          "address": "0x35a18000230da775cac24873d00ff85bccded550",
+          "startBlock": 10921410
+        },
+        {
+          "symbol": "cUSDC",
+          "address": "0x39AA39c021dfbaE8faC545936693aC917d5E7563",
+          "startBlock": 7710760
+        },
+        {
+          "symbol": "cUSDT",
+          "address": "0xf650C3d88D12dB855b8bf7D11Be6C55A4e07dCC9",
+          "startBlock": 9879363
+        },
+        {
+          "symbol": "cWBTC",
+          "address": "0xC11b1268C1A384e55C48c2391d8d480264A3A7F4",
+          "startBlock": 8163813
+        },
+        {
+          "symbol": "cZRX",
+          "address": "0xb3319f5d18bc0d84dd1b4825dcde5d5f7266d407",
+          "startBlock": 7710733
+        }
+      ]
+    },
+    {
       "adapter": "Cream",
       "pool-contracts": [
         {
