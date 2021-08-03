@@ -1,7 +1,7 @@
 # ----------------------------------------
-#      AaveV1
+#      Aave
 # ----------------------------------------
-type AaveV1TokenData @entity {
+type AaveTokenData @entity {
   id: ID!
   transactionHash: Bytes!
   blockNumber: BigInt!
@@ -69,9 +69,9 @@ type AaveV2TokenData @entity {
 }
 
 # ----------------------------------------
-#      CompoundV1
+#      Compound
 # ----------------------------------------
-type CompoundV1TokenData @entity {
+type CompoundTokenData @entity {
   id: ID!
   blockNumber: BigInt
   blockTimestamp: BigInt
@@ -110,9 +110,9 @@ type CreamTokenData @entity {
 }
 
 # ----------------------------------------
-#      CurveV1
+#      Curve
 # ----------------------------------------
-type CurveV1GaugeData @entity {
+type CurveGaugeData @entity {
   id: ID!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
@@ -122,7 +122,7 @@ type CurveV1GaugeData @entity {
   totalWeight: BigDecimal!
 }
 
-type CurveV1PoolData @entity {
+type CurvePoolData @entity {
   id: ID!
   blockNumber: BigInt!
   blockTimestamp: BigInt!

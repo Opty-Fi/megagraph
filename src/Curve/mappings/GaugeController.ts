@@ -3,7 +3,7 @@ import {
   NewGaugeWeight as NewGaugeWeightEvent,
   NewTypeWeight as NewTypeWeightEvent,
   VoteForGauge as VoteForGaugeEvent,
-} from "../../../generated/CurveV1GaugeController/CurveV1GaugeController";
+} from "../../../generated/CurveGaugeController/CurveGaugeController";
 import { handleGaugeEntity } from "./handlers";
 
 export function handleNewGauge(event: NewGaugeEvent): void {

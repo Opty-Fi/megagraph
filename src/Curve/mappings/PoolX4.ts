@@ -2,9 +2,9 @@ import {
   AddLiquidity as AddLiquidityEvent,
   RemoveLiquidity as RemoveLiquidityEvent,
   RemoveLiquidityImbalance as RemoveLiquidityImbalanceEvent,
-  TokenExchange as TokenExchangeEvent,
-} from "../../../generated/CurveV1PoolX3DAI+USDC+USDT/CurveV1PoolX3";
-import { CurveV1_N_COINS_CURVE3POOL } from "../../utils/constants";
+  TokenExchangeUnderlying as TokenExchangeUnderlyingEvent,
+} from "../../../generated/CurvePoolX4yDAI+yUSDC+yUSDT+yTUSD/CurvePoolX4";
+import { Curve_N_COINS_CURVE4POOL } from "../../utils/constants";
 import { handlePoolEntity } from "./handlers";
 
 export function handleAddLiquidity(event: AddLiquidityEvent): void {
@@ -13,8 +13,8 @@ export function handleAddLiquidity(event: AddLiquidityEvent): void {
     event.block.number,
     event.block.timestamp,
     event.address, // vault
-    CurveV1_N_COINS_CURVE3POOL,
-    "Curve3Pool"
+    Curve_N_COINS_CURVE4POOL,
+    "Curve4Pool"
   );
 }
 
@@ -24,8 +24,8 @@ export function handleRemoveLiquidity(event: RemoveLiquidityEvent): void {
     event.block.number,
     event.block.timestamp,
     event.address, // vault
-    CurveV1_N_COINS_CURVE3POOL,
-    "Curve3Pool"
+    Curve_N_COINS_CURVE4POOL,
+    "Curve4Pool"
   );
 }
 
@@ -35,18 +35,18 @@ export function handleRemoveLiquidityImbalance(event: RemoveLiquidityImbalanceEv
     event.block.number,
     event.block.timestamp,
     event.address, // vault
-    CurveV1_N_COINS_CURVE3POOL,
-    "Curve3Pool"
+    Curve_N_COINS_CURVE4POOL,
+    "Curve4Pool"
   );
 }
 
-export function handleTokenExchange(event: TokenExchangeEvent): void {
+export function handleTokenExchangeUnderlying(event: TokenExchangeUnderlyingEvent): void {
   handlePoolEntity(
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
     event.address, // vault
-    CurveV1_N_COINS_CURVE3POOL,
-    "Curve3Pool"
+    Curve_N_COINS_CURVE4POOL,
+    "Curve4Pool"
   );
 }

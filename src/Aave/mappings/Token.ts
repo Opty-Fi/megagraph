@@ -1,25 +1,25 @@
 import { log, Address, Bytes, BigInt } from "@graphprotocol/graph-ts";
 import {
-  AaveV1Token,
+  AaveToken,
   BurnOnLiquidation as BurnOnLiquidationEvent,
   MintOnDeposit as MintOnDepositEvent,
-} from "../../../generated/AaveV1TokenaDAI/AaveV1Token";
-import { AaveV1TokenData } from "../../../generated/schema";
-import { AaveV1LendingPoolAddressesProvider } from "../../../generated/AaveV1TokenaDAI/AaveV1LendingPoolAddressesProvider";
-import { AaveV1LendingPoolDataProvider } from "../../../generated/AaveV1TokenaDAI/AaveV1LendingPoolDataProvider";
+} from "../../../generated/AaveTokenaDAI/AaveToken";
+import { AaveTokenData } from "../../../generated/schema";
+import { AaveLendingPoolAddressesProvider } from "../../../generated/AaveTokenaDAI/AaveLendingPoolAddressesProvider";
+import { AaveLendingPoolDataProvider } from "../../../generated/AaveTokenaDAI/AaveLendingPoolDataProvider";
 import { convertBINumToDesiredDecimals } from "../../utils/converters";
-import { AaveV1_POOL_PROVIDER_ADDRESS } from "../../utils/constants";
+import { Aave_POOL_PROVIDER_ADDRESS } from "../../utils/constants";
 
-function handleAaveV1Token(
+function handleAaveToken(
   transactionHash: Bytes,
   blockNumber: BigInt,
   blockTimestamp: BigInt,
   address: Address,
 ): void {
-  let tokenContract = AaveV1Token.bind(address);
+  let tokenContract = AaveToken.bind(address);
 
-  let entity = AaveV1TokenData.load(transactionHash.toHex());
-  if (!entity) entity = new AaveV1TokenData(transactionHash.toHex());
+  let entity = AaveTokenData.load(transactionHash.toHex());
+  if (!entity) entity = new AaveTokenData(transactionHash.toHex());
 
   entity.transactionHash = transactionHash;
   entity.blockNumber = blockNumber;
@@ -27,7 +27,7 @@ function handleAaveV1Token(
   entity.address = address;
   entity.symbol = tokenContract.try_symbol().reverted ? null : tokenContract.symbol();
 
-  log.debug("Saving AaveV1 Token {} at address {} in block {} with txHash {}", [
+  log.debug("Saving Aave Token {} at address {} in block {} with txHash {}", [
     entity.symbol,
     address.toHex(),
     blockNumber.toString(),
@@ -37,11 +37,11 @@ function handleAaveV1Token(
   let underlyingAssetAddr = tokenContract.underlyingAssetAddress();
   entity.decimals = tokenContract.decimals();
 
-  let poolProviderContract = AaveV1LendingPoolAddressesProvider.bind(AaveV1_POOL_PROVIDER_ADDRESS);
+  let poolProviderContract = AaveLendingPoolAddressesProvider.bind(Aave_POOL_PROVIDER_ADDRESS);
   let tried_getDataProvider = poolProviderContract.try_getLendingPoolDataProvider();
   if (tried_getDataProvider.reverted) log.error("poolProvider at {} call getDataProvider() reverted", [ poolProviderContract._address.toHex() ]);
   else {
-    let dataProviderContract = AaveV1LendingPoolDataProvider.bind(tried_getDataProvider.value);
+    let dataProviderContract = AaveLendingPoolDataProvider.bind(tried_getDataProvider.value);
     
     let tried_getReserveConfigurationData = dataProviderContract.try_getReserveConfigurationData(underlyingAssetAddr);
     if (tried_getReserveConfigurationData.reverted) log.error("dataProvider at {} call getReserveConfigurationData({}) reverted", [ dataProviderContract._address.toHex(), underlyingAssetAddr.toHex() ]);
@@ -81,7 +81,7 @@ function handleAaveV1Token(
 }
 
 export function handleBurnOnLiquidation(event: BurnOnLiquidationEvent): void {
-  handleAaveV1Token(
+  handleAaveToken(
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
@@ -90,7 +90,7 @@ export function handleBurnOnLiquidation(event: BurnOnLiquidationEvent): void {
 }
 
 export function handleMintOnDeposit(event: MintOnDepositEvent): void {
-  handleAaveV1Token(
+  handleAaveToken(
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,

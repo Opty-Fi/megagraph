@@ -3,7 +3,7 @@
   "network": "mainnet",
   "adapters": [
     {
-      "adapter": "AaveV1",
+      "adapter": "Aave",
       "contracts": [
         {
           "contract": "Token",
@@ -13,7 +13,7 @@
             "Token"
           ],
           "entities": [
-            "AaveV1TokenData"
+            "AaveTokenData"
           ],
           "events": [
             {
@@ -294,7 +294,7 @@
       ]
     },
     {
-      "adapter": "CompoundV1",
+      "adapter": "Compound",
       "contracts": [
         {
           "contract": "ComptrollerImplementation",
@@ -304,7 +304,7 @@
             "Underlying"
           ],
           "entities": [
-            "CompoundV1TokenData"
+            "CompoundTokenData"
           ],
           "events": [
             {
@@ -328,7 +328,7 @@
             "Underlying"
           ],
           "entities": [
-            "CompoundV1TokenData"
+            "CompoundTokenData"
           ],
           "events": [
             {
@@ -428,7 +428,7 @@
       ]
     },
     {
-      "adapter": "CompoundV1",
+      "adapter": "Compound",
       "pool-contracts": [
         {
           "contract": "ComptrollerImplementation",
@@ -688,7 +688,7 @@
       ]
     },
     {
-      "adapter": "CurveV1",
+      "adapter": "Curve",
       "contracts": [
         {
           "contract": "GaugeController",
@@ -696,7 +696,7 @@
             "GaugeController"
           ],
           "entities": [
-            "CurveV1GaugeData"
+            "CurveGaugeData"
           ],
           "events": [
             {
@@ -731,7 +731,7 @@
             "ERC20"
           ],
           "entities": [
-            "CurveV1PoolData"
+            "CurvePoolData"
           ],
           "events": [
             {
@@ -860,7 +860,7 @@
             "ERC20"
           ],
           "entities": [
-            "CurveV1PoolData"
+            "CurvePoolData"
           ],
           "events": [
             {
@@ -905,7 +905,7 @@
             "ERC20"
           ],
           "entities": [
-            "CurveV1PoolData"
+            "CurvePoolData"
           ],
           "events": [
             {

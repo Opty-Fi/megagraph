@@ -1,4 +1,4 @@
-import { CompSpeedUpdated as CompSpeedUpdatedEvent } from "../../../generated/CompoundV1ComptrollerImplementation/CompoundV1ComptrollerImplementation";
+import { CompSpeedUpdated as CompSpeedUpdatedEvent } from "../../../generated/CompoundComptrollerImplementation/CompoundComptrollerImplementation";
 import { handleEntity } from "./handlers";
 
 export function handleCompSpeedUpdated(event: CompSpeedUpdatedEvent): void {
