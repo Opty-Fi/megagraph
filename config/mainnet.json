@@ -300,6 +300,7 @@
           "contract": "ComptrollerImplementation",
           "abis": [
             "ComptrollerImplementation",
+            "Token",
             "Underlying"
           ],
           "entities": [
