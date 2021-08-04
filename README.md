@@ -249,7 +249,7 @@ For example adding the capabilities to sort by the timestamp that an NFT was cre
     let token = Token.load(event.params.tokenId.toString());
     if (!token) {
       token = new Token(event.params.tokenId.toString());
-      token.creator = event.params.to.toHexString();
+      token.creator = event.params.to.toHex();
       token.tokenID = event.params.tokenId;
       
       // Add the createdAtTimestamp to the token object
@@ -259,12 +259,12 @@ For example adding the capabilities to sort by the timestamp that an NFT was cre
       token.contentURI = tokenContract.tokenURI(event.params.tokenId);
       token.metadataURI = tokenContract.tokenMetadataURI(event.params.tokenId);
     }
-    token.owner = event.params.to.toHexString();
+    token.owner = event.params.to.toHex();
     token.save();
     
-    let user = User.load(event.params.to.toHexString());
+    let user = User.load(event.params.to.toHex());
     if (!user) {
-      user = new User(event.params.to.toHexString());
+      user = new User(event.params.to.toHex());
       user.save();
     }
   }
