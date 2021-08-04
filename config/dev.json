@@ -3,7 +3,7 @@
   "network": "builderevm",
   "adapters": [
     {
-      "adapter": "AaveV1",
+      "adapter": "Aave",
       "contracts": [
         {
           "contract": "Token",
@@ -13,7 +13,7 @@
             "Token"
           ],
           "entities": [
-            "AaveV1TokenData"
+            "AaveTokenData"
           ],
           "events": [
             {
@@ -294,7 +294,7 @@
       ]
     },
     {
-      "adapter": "CompoundV1",
+      "adapter": "Compound",
       "contracts": [
         {
           "contract": "ComptrollerImplementation",
@@ -304,7 +304,7 @@
             "Underlying"
           ],
           "entities": [
-            "CompoundV1TokenData"
+            "CompoundTokenData"
           ],
           "events": [
             {
@@ -328,140 +328,7 @@
             "Underlying"
           ],
           "entities": [
-            "CompoundV1TokenData"
-          ],
-          "events": [
-            {
-              "event-name": "AccrueInterest",
-              "event-params": "(uint256,uint256,uint256,uint256)"
-            },
-            {
-              "event-name": "Borrow",
-              "event-params": "(address,uint256,uint256,uint256)"
-            },
-            {
-              "event-name": "LiquidateBorrow",
-              "event-params": "(address,address,uint256,address,uint256)"
-            },
-            {
-              "event-name": "Mint",
-              "event-params": "(address,uint256,uint256)"
-            },
-            {
-              "event-name": "NewReserveFactor",
-              "event-params": "(uint256,uint256)"
-            },
-            {
-              "event-name": "Redeem",
-              "event-params": "(address,uint256,uint256)"
-            },
-            {
-              "event-name": "RepayBorrow",
-              "event-params": "(address,address,uint256,uint256,uint256)"
-            },
-            {
-              "event-name": "ReservesAdded",
-              "event-params": "(address,uint256,uint256)"
-            },
-            {
-              "event-name": "ReservesReduced",
-              "event-params": "(address,uint256,uint256)"
-            },
-            {
-              "event-name": "Transfer",
-              "event-params": "(indexed address,indexed address,uint256)"
-            }
-          ],
-          "instances": [
-            {
-              "symbol": "cBAT",
-              "address": "0x6C8c6b02E7b2BE14d4fA6022Dfd6d75921D90E4E",
-              "startBlock": 0
-            },
-            {
-              "symbol": "cCOMP",
-              "address": "0x70e36f6bf80a52b3b46b3af8e106cc0ed743e8e4",
-              "startBlock": 0
-            },
-            {
-              "symbol": "cDAI",
-              "address": "0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643",
-              "startBlock": 0
-            },
-            {
-              "symbol": "cETH",
-              "address": "0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5",
-              "startBlock": 0
-            },
-            {
-              "symbol": "cREP",
-              "address": "0x158079Ee67Fce2f58472A96584A73C7Ab9AC95c1",
-              "startBlock": 0
-            },
-            {
-              "symbol": "cUNI",
-              "address": "0x35a18000230da775cac24873d00ff85bccded550",
-              "startBlock": 0
-            },
-            {
-              "symbol": "cUSDC",
-              "address": "0x39AA39c021dfbaE8faC545936693aC917d5E7563",
-              "startBlock": 0
-            },
-            {
-              "symbol": "cUSDT",
-              "address": "0xf650C3d88D12dB855b8bf7D11Be6C55A4e07dCC9",
-              "startBlock": 0
-            },
-            {
-              "symbol": "cWBTC",
-              "address": "0xC11b1268C1A384e55C48c2391d8d480264A3A7F4",
-              "startBlock": 0
-            },
-            {
-              "symbol": "cZRX",
-              "address": "0xb3319f5d18bc0d84dd1b4825dcde5d5f7266d407",
-              "startBlock": 0
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "adapter": "CompoundV1",
-      "contracts": [
-        {
-          "contract": "ComptrollerImplementation",
-          "abis": [
-            "ComptrollerImplementation",
-            "Underlying"
-          ],
-          "entities": [
-            "CompoundV1TokenData"
-          ],
-          "events": [
-            {
-              "event-name": "CompSpeedUpdated",
-              "event-params": "(indexed address,uint256)"
-            }
-          ],
-          "instances": [
-            {
-              "symbol": "",
-              "address": "0x3d9819210A31b4961b30EF54bE2aeD79B9c9Cd3B",
-              "startBlock": 0
-            }
-          ]
-        },
-        {
-          "contract": "Token",
-          "abis": [
-            "ComptrollerImplementation",
-            "Token",
-            "Underlying"
-          ],
-          "entities": [
-            "CompoundV1TokenData"
+            "CompoundTokenData"
           ],
           "events": [
             {
@@ -706,7 +573,7 @@
       ]
     },
     {
-      "adapter": "CurveV1",
+      "adapter": "Curve",
       "contracts": [
         {
           "contract": "GaugeController",
@@ -714,7 +581,7 @@
             "GaugeController"
           ],
           "entities": [
-            "CurveV1GaugeData"
+            "CurveGaugeData"
           ],
           "events": [
             {
@@ -749,7 +616,7 @@
             "ERC20"
           ],
           "entities": [
-            "CurveV1PoolData"
+            "CurvePoolData"
           ],
           "events": [
             {
@@ -878,7 +745,7 @@
             "ERC20"
           ],
           "entities": [
-            "CurveV1PoolData"
+            "CurvePoolData"
           ],
           "events": [
             {
@@ -923,7 +790,7 @@
             "ERC20"
           ],
           "entities": [
-            "CurveV1PoolData"
+            "CurvePoolData"
           ],
           "events": [
             {
@@ -962,111 +829,6 @@
             {
               "symbol": "yDAI+yUSDC+yUSDT+yTUSD",
               "address": "0x45F783CCE6B7FF23B2ab2D70e416cdb7D6055f51",
-              "startBlock": 0
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "adapter": "DForce",
-      "contracts": [
-        {
-          "contract": "StakingVault",
-          "abis": [
-            "StakingVault",
-            "Token"
-          ],
-          "entities": [
-            "DForceTokenData"
-          ],
-          "events": [
-            {
-              "event-name": "RewardAdded",
-              "event-params": "(uint256)"
-            }
-          ],
-          "instances": [
-            {
-              "symbol": "DAI",
-              "address": "0xD2fA07cD6Cd4A5A96aa86BacfA6E50bB3aaDBA8B",
-              "startBlock": 0
-            },
-            {
-              "symbol": "USDC",
-              "address": "0xB71dEFDd6240c45746EC58314a01dd6D833fD3b5",
-              "startBlock": 0
-            },
-            {
-              "symbol": "USDT",
-              "address": "0x324EebDAa45829c6A8eE903aFBc7B61AF48538df",
-              "startBlock": 0
-            }
-          ]
-        },
-        {
-          "contract": "Token",
-          "abis": [
-            "StakingVault",
-            "Token"
-          ],
-          "entities": [
-            "DForceTokenData"
-          ],
-          "events": [
-            {
-              "event-name": "Interest",
-              "event-params": "(indexed address,uint256,uint256,uint256)"
-            },
-            {
-              "event-name": "Mint",
-              "event-params": "(indexed address,indexed uint256,uint256,uint256,uint256)"
-            },
-            {
-              "event-name": "NewDispatcher",
-              "event-params": "(address,address)"
-            },
-            {
-              "event-name": "Rebalance",
-              "event-params": "(address[],uint256[],address[],uint256[])"
-            },
-            {
-              "event-name": "Redeem",
-              "event-params": "(indexed address,indexed uint256,uint256,uint256,uint256)"
-            },
-            {
-              "event-name": "Transfer",
-              "event-params": "(indexed address,indexed address,uint256)"
-            },
-            {
-              "event-name": "TransferFee",
-              "event-params": "(address,address,uint256)"
-            }
-          ],
-          "instances": [
-            {
-              "symbol": "dDAI",
-              "address": "0x02285AcaafEB533e03A7306C55EC031297df9224",
-              "startBlock": 0
-            },
-            {
-              "symbol": "dPAX",
-              "address": "0xf4dfc3df8c83be5a2ec2025491fd157c474f438a",
-              "startBlock": 0
-            },
-            {
-              "symbol": "dTUSD",
-              "address": "0x55bcf7173c8840d5517424ed19b7bbf11cfb9f2b",
-              "startBlock": 0
-            },
-            {
-              "symbol": "dUSDC",
-              "address": "0x16c9cF62d8daC4a38FB50Ae5fa5d51E9170F3179",
-              "startBlock": 0
-            },
-            {
-              "symbol": "dUSDT",
-              "address": "0x868277d475E0e475E38EC5CdA2d9C83B5E1D9fc8",
               "startBlock": 0
             }
           ]
@@ -1267,427 +1029,6 @@
             {
               "symbol": "iYFI",
               "address": "0x7F3Fe9D492A9a60aEBb06d82cBa23c6F32CAd10b",
-              "startBlock": 0
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "adapter": "Harvest",
-      "contracts": [
-        {
-          "contract": "NoMintRewardPool",
-          "abis": [
-            "NoMintRewardPool"
-          ],
-          "entities": [
-            "HarvestTokenData"
-          ],
-          "events": [
-            {
-              "event-name": "RewardAdded",
-              "event-params": "(uint256)"
-            },
-            {
-              "event-name": "RewardDenied",
-              "event-params": "(indexed address,uint256)"
-            },
-            {
-              "event-name": "RewardPaid",
-              "event-params": "(indexed address,uint256)"
-            },
-            {
-              "event-name": "Staked",
-              "event-params": "(indexed address,uint256)"
-            },
-            {
-              "event-name": "Withdrawn",
-              "event-params": "(indexed address,uint256)"
-            }
-          ],
-          "instances": [
-            {
-              "symbol": "",
-              "address": "0x15d3A64B2d5ab9E152F16593Cdebc4bB165B5B4A",
-              "startBlock": 0
-            }
-          ]
-        },
-        {
-          "contract": "Token",
-          "abis": [
-            "NoMintRewardPool",
-            "Token"
-          ],
-          "entities": [
-            "HarvestTokenData"
-          ],
-          "events": [
-            {
-              "event-name": "Deposit",
-              "event-params": "(indexed address,uint256)"
-            },
-            {
-              "event-name": "Invest",
-              "event-params": "(uint256)"
-            },
-            {
-              "event-name": "StrategyChanged",
-              "event-params": "(address,address)"
-            },
-            {
-              "event-name": "Transfer",
-              "event-params": "(indexed address,indexed address,uint256)"
-            },
-            {
-              "event-name": "Withdraw",
-              "event-params": "(indexed address,uint256)"
-            }
-          ],
-          "instances": [
-            {
-              "symbol": "f3CRV",
-              "address": "0x71B9eC42bB3CB40F017D8AD8011BE8e384a95fa5",
-              "startBlock": 0
-            },
-            {
-              "symbol": "fcDAI+cUSDC",
-              "address": "0x998cEb152A42a3EaC1f555B1E911642BeBf00faD",
-              "startBlock": 0
-            },
-            {
-              "symbol": "fcrvRenWBTC",
-              "address": "0x9aA8F427A17d6B0d91B6262989EdC7D45d6aEdf8",
-              "startBlock": 0
-            },
-            {
-              "symbol": "fDAI",
-              "address": "0xab7fa2b2985bccfc13c6d86b1d5a17486ab1e04c",
-              "startBlock": 0
-            },
-            {
-              "symbol": "fhCRV",
-              "address": "0xCC775989e76ab386E9253df5B0c0b473E22102E2",
-              "startBlock": 0
-            },
-            {
-              "symbol": "frenBTC",
-              "address": "0xC391d1b08c1403313B0c28D47202DFDA015633C4",
-              "startBlock": 0
-            },
-            {
-              "symbol": "fUSDC",
-              "address": "0xf0358e8c3CD5Fa238a29301d0bEa3D63A17bEdBE",
-              "startBlock": 0
-            },
-            {
-              "symbol": "fUSDT",
-              "address": "0x053c80eA73Dc6941F518a68E2FC52Ac45BDE7c9C",
-              "startBlock": 0
-            },
-            {
-              "symbol": "ftbtc/sbtcCrv",
-              "address": "0x640704D106E79e105FDA424f05467F005418F1B5",
-              "startBlock": 0
-            },
-            {
-              "symbol": "fTUSD",
-              "address": "0x7674622c63Bee7F46E86a4A5A18976693D54441b",
-              "startBlock": 0
-            },
-            {
-              "symbol": "fUNIV2",
-              "address": "0x2a32dcBB121D48C106F6d94cf2B4714c0b4Dfe48",
-              "startBlock": 0
-            },
-            {
-              "symbol": "fusdn3CRV",
-              "address": "0x683E683fBE6Cf9b635539712c999f3B3EdCB8664",
-              "startBlock": 0
-            },
-            {
-              "symbol": "fWBTC",
-              "address": "0x5d9d25c7C457dD82fc8668FFC6B9746b674d4EcB",
-              "startBlock": 0
-            },
-            {
-              "symbol": "fWETH",
-              "address": "0xFE09e53A81Fe2808bc493ea64319109B5bAa573e",
-              "startBlock": 0
-            },
-            {
-              "symbol": "fyDAI+yUSDC+yUSDT+yBUSD",
-              "address": "0x4b1cBD6F6D8676AcE5E412C78B7a59b4A1bbb68a",
-              "startBlock": 0
-            },
-            {
-              "symbol": "fyDAI+yUSDC+yUSDT+yTUSD",
-              "address": "0x0FE4283e0216F94f5f9750a7a11AC54D3c9C38F3",
-              "startBlock": 0
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "adapter": "Yearn",
-      "contracts": [
-        {
-          "contract": "Token",
-          "abis": [
-            "Token"
-          ],
-          "entities": [
-            "YearnTokenData"
-          ],
-          "events": [
-            {
-              "event-name": "Transfer",
-              "event-params": "(indexed address,indexed address,uint256)"
-            }
-          ],
-          "instances": [
-            {
-              "symbol": "y3Crv",
-              "address": "0x9cA85572E6A3EbF24dEDd195623F188735A5179f",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yaLINK",
-              "address": "0x29E240CFD7946BA20895a7a02eDb25C210f9f324",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yBUSD",
-              "address": "0x04bC0Ab673d88aE9dbC9DA2380cB6B79C4BCa9aE",
-              "startBlock": 0
-            },
-            {
-              "symbol": "ycrvRenWSBTC",
-              "address": "0x7Ff566E1d69DEfF32a7b244aE7276b9f90e9D0f6",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yDAI",
-              "address": "0xACd43E627e64355f1861cEC6d3a6688B31a6F952",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yGUSD",
-              "address": "0xec0d8D3ED5477106c6D4ea27D90a60e594693C90",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yLINK",
-              "address": "0x881b06da56BB5675c54E4Ed311c21E54C5025298",
-              "startBlock": 0
-            },
-            {
-              "symbol": "ySUSD",
-              "address": "0xf61718057901f84c4eec4339ef8f0d86d2b45600",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yTUSD",
-              "address": "0x37d19d1c4E1fa9DC47bD1eA12f742a0887eDa74a",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yUSDC",
-              "address": "0x597aD1e0c13Bfe8025993D9e79C69E1c0233522e",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yUSDT",
-              "address": "0x2f08119C6f07c006695E079AAFc638b8789FAf18",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yWETH",
-              "address": "0xe1237aA7f535b0CC33Fd973D66cBf830354D16c7",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvcDAI+cUSDC",
-              "address": "0x629c759D1E83eFbF63d84eb3868B564d9521C129",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yyDAI+yUSDC+yUSDT+yBUSD",
-              "address": "0x2994529C0652D127b7842094103715ec5299bBed",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yyDAI+yUSDC+yUSDT+yTUSD",
-              "address": "0x5dbcF33D8c2E976c6b560249878e6F1491Bca25c",
-              "startBlock": 0
-            }
-          ]
-        },
-        {
-          "contract": "Token2",
-          "abis": [
-            "Token2"
-          ],
-          "entities": [
-            "YearnTokenData"
-          ],
-          "events": [
-            {
-              "event-name": "Transfer",
-              "event-params": "(indexed address,indexed address,uint256)"
-            }
-          ],
-          "instances": [
-            {
-              "symbol": "yUSD",
-              "address": "0x4B5BfD52124784745c1071dcB244C6688d2533d3",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yv1INCH",
-              "address": "0xB8C3B7A2A618C552C23B1E4701109a9E756Bab67",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvCurve+Aave",
-              "address": "0x39CAF13a104FF567f71fd2A4c68C026FDB6E740B",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvCurve+alUSD",
-              "address": "0xA74d4B67b3368E83797a35382AFB776bAAE4F5C8",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvCurve+ankrETH",
-              "address": "0x132d8D2C76Db3812403431fAcB00F3453Fc42125",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvCurve+BBTC",
-              "address": "0x8fA3A9ecd9EFb07A8CE90A6eb014CF3c0E3B32Ef",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvCurve+Compound",
-              "address": "0xD6Ea40597Be05c201845c0bFd2e96A60bACde267",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvCurve+DUSD",
-              "address": "0x30FCf7c6cDfC46eC237783D94Fc78553E79d4E9C",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvCurve+EURS",
-              "address": "0x25212Df29073FfFA7A67399AcEfC2dd75a831A1A",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvCurve+FRAX",
-              "address": "0xB4AdA607B9d6b2c9Ee07A275e9616B84AC560139",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvCurve+HBTC",
-              "address": "0x625b7DF2fa8aBe21B0A976736CDa4775523aeD1E",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvCurve+IronBank",
-              "address": "0x27b7b1ad7288079A66d12350c828D3C00A6F07d7",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvCurve+LINK",
-              "address": "0xf2db9a7c0ACd427A680D640F02d90f6186E71725",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvCurve+LUSD",
-              "address": "0x5fA5B62c8AF877CB37031e0a3B2f34A78e3C56A6",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvCurve+mUSD",
-              "address": "0x8cc94ccd0f3841a468184aCA3Cc478D2148E1757",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvCurve+oBTC",
-              "address": "0xe9Dc63083c464d6EDcCFf23444fF3CFc6886f6FB",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvCurve+rETH",
-              "address": "0xBfedbcbe27171C418CDabC2477042554b1904857",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvCurve+sAave",
-              "address": "0xb4D1Be44BfF40ad6e506edf43156577a3f8672eC",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvCurve+sETH",
-              "address": "0x986b4AFF588a109c09B50A03f42E4110E29D353F",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvCurve+stETH",
-              "address": "0xdCD90C7f6324cfa40d7169ef80b12031770B4325",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvCurve+USDN",
-              "address": "0x3B96d491f067912D18563d56858Ba7d6EC67a6fa",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvCurve+USDP",
-              "address": "0xC4dAf3b5e2A9e93861c3FBDd25f1e943B8D87417",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvDAI",
-              "address": "0x19D3364A399d251E894aC732651be8B0E4e85001",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvLINK",
-              "address": "0x671a912C10bba0CFA74Cfc2d6Fba9BA1ed9530B2",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvsUSD",
-              "address": "0xa5cA62D95D24A4a350983D5B8ac4EB8638887396",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvUSDC",
-              "address": "0x5f18C75AbDAe578b483E5F43f12a39cF75b973a9",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvUSDT",
-              "address": "0x7Da96a3891Add058AdA2E826306D812C638D87a7",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvWBTC",
-              "address": "0xA696a63cc78DfFa1a63E9E50587C197387FF6C7E",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvWETH",
-              "address": "0xa258C4606Ca8206D8aA700cE2143D7db854D168c",
-              "startBlock": 0
-            },
-            {
-              "symbol": "yvYFI",
-              "address": "0xE14d13d8B3b85aF791b2AADD661cDBd5E6097Db1",
               "startBlock": 0
             }
           ]

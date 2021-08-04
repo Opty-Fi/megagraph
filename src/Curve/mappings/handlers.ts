@@ -1,12 +1,12 @@
 import { log, ethereum, Address, Bytes, BigInt, BigDecimal } from "@graphprotocol/graph-ts";
-import { CurveV1GaugeController } from "../../../generated/CurveV1GaugeController/CurveV1GaugeController";
-import { CurveV1PoolX2 } from "../../../generated/CurveV1PoolX2cDAI+cUSDC/CurveV1PoolX2";
-import { CurveV1PoolX3 } from "../../../generated/CurveV1PoolX3DAI+USDC+USDT/CurveV1PoolX3";
-import { CurveV1PoolX4 } from "../../../generated/CurveV1PoolX4yDAI+yUSDC+yUSDT+yTUSD/CurveV1PoolX4";
-import { CurveV1ERC20 } from "../../../generated/CurveV1PoolX2cDAI+cUSDC/CurveV1ERC20";
+import { CurveGaugeController } from "../../../generated/CurveGaugeController/CurveGaugeController";
+import { CurvePoolX2 } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurvePoolX2";
+import { CurvePoolX3 } from "../../../generated/CurvePoolX3DAI+USDC+USDT/CurvePoolX3";
+import { CurvePoolX4 } from "../../../generated/CurvePoolX4yDAI+yUSDC+yUSDT+yTUSD/CurvePoolX4";
+import { CurveERC20 } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveERC20";
 import {
-  CurveV1GaugeData,
-  CurveV1PoolData,
+  CurveGaugeData,
+  CurvePoolData,
 } from "../../../generated/schema";
 import {
   convertBINumToDesiredDecimals,
@@ -27,8 +27,8 @@ export function handleGaugeEntity(
   gaugeWeight: BigInt,
   totalWeight: BigInt
 ): void {
-  let entity = CurveV1GaugeData.load(txnHash.toHex());
-  if (!entity) entity = new CurveV1GaugeData(txnHash.toHex());
+  let entity = CurveGaugeData.load(txnHash.toHex());
+  if (!entity) entity = new CurveGaugeData(txnHash.toHex());
 
   log.debug("Saving Gauge Controller at {}", [ controller.toHex() ]);
 
@@ -41,7 +41,7 @@ export function handleGaugeEntity(
     : ZERO_ADDRESS;
   entity.liquidityGauge = liquidityGauge;
 
-  let gaugeControllerContract = CurveV1GaugeController.bind(controller);
+  let gaugeControllerContract = CurveGaugeController.bind(controller);
   entity.gaugeWeight = gaugeWeight
     ? convertBINumToDesiredDecimals(gaugeWeight, 18)
     : gaugeControllerContract.try_get_gauge_weight(liquidityGauge).reverted
@@ -64,8 +64,8 @@ export function handlePoolEntity(
   nCoins: number,
   poolType: string
 ): void {
-  let entity = CurveV1PoolData.load(txnHash.toHex());
-  if (!entity) entity = new CurveV1PoolData(txnHash.toHex());
+  let entity = CurvePoolData.load(txnHash.toHex());
+  if (!entity) entity = new CurvePoolData(txnHash.toHex());
 
   log.debug("Saving {} at {}", [
     poolType,
@@ -87,13 +87,13 @@ export function handlePoolEntity(
   
   let virtualPrice: ethereum.CallResult<BigInt>;
   if (poolType === "Curve2Pool") {
-    let contract = CurveV1PoolX2.bind(vault);
+    let contract = CurvePoolX2.bind(vault);
     virtualPrice = contract.try_get_virtual_price();
   } else if (poolType === "Curve3Pool") {
-    let contract = CurveV1PoolX3.bind(vault);
+    let contract = CurvePoolX3.bind(vault);
     virtualPrice = contract.try_get_virtual_price();
   } else if (poolType === "Curve4Pool") {
-    let contract = CurveV1PoolX4.bind(vault);
+    let contract = CurvePoolX4.bind(vault);
     virtualPrice = contract.try_get_virtual_price();
   } else {
     log.error("Unknown poolType {}", [ poolType ]);
@@ -114,15 +114,15 @@ function getBalance(
   let token: ethereum.CallResult<Address>;
 
   if (poolType === "Curve2Pool") {
-    let contract = CurveV1PoolX2.bind(address);
+    let contract = CurvePoolX2.bind(address);
     balance = contract.try_balances(coinIndex);
     token = contract.try_coins(coinIndex);
   } else if (poolType === "Curve3Pool") {
-    let contract = CurveV1PoolX3.bind(address);
+    let contract = CurvePoolX3.bind(address);
     balance = contract.try_balances(coinIndex);
     token = contract.try_coins(coinIndex);
   } else if (poolType === "Curve4Pool") {
-    let contract = CurveV1PoolX4.bind(address);
+    let contract = CurvePoolX4.bind(address);
     balance = contract.try_balances(coinIndex);
     token = contract.try_coins(coinIndex);
   } else {
@@ -130,7 +130,7 @@ function getBalance(
   }
 
   if (!balance.reverted && !token.reverted) {
-    let tokenContract = CurveV1ERC20.bind(token.value);
+    let tokenContract = CurveERC20.bind(token.value);
     let decimal = tokenContract.try_decimals();
     return decimal.reverted
       ? balance.value.toBigDecimal()
@@ -147,13 +147,13 @@ function getToken(
   let token: ethereum.CallResult<Address>;
 
   if (poolType === "Curve2Pool") {
-    let contract = CurveV1PoolX2.bind(address);
+    let contract = CurvePoolX2.bind(address);
     token = contract.try_coins(coinIndex);
   } else if (poolType === "Curve3Pool") {
-    let contract = CurveV1PoolX3.bind(address);
+    let contract = CurvePoolX3.bind(address);
     token = contract.try_coins(coinIndex);
   } else if (poolType === "Curve4Pool") {
-    let contract = CurveV1PoolX4.bind(address);
+    let contract = CurvePoolX4.bind(address);
     token = contract.try_coins(coinIndex);
   } else {
     return ZERO_BYTES;

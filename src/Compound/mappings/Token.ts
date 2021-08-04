@@ -9,7 +9,7 @@ import {
   ReservesAdded as ReservesAddedEvent,
   ReservesReduced as ReservesReducedEvent,
   Transfer as TransferEvent,
-} from "../../../generated/CompoundV1TokencDAI/CompoundV1Token";
+} from "../../../generated/CompoundTokencDAI/CompoundToken";
 import { handleEntity } from "./handlers";
 
 export function handleAccrueInterest(event: AccrueInterestEvent): void {

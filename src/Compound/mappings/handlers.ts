@@ -1,8 +1,8 @@
 import { BigInt, Address, log, Bytes } from "@graphprotocol/graph-ts";
-import { CompoundV1Token } from "../../../generated/CompoundV1TokencDAI/CompoundV1Token";
-import { CompoundV1ComptrollerImplementation } from "../../../generated/CompoundV1TokencDAI/CompoundV1ComptrollerImplementation";
-import { CompoundV1Underlying } from "../../../generated/CompoundV1TokencDAI/CompoundV1Underlying";
-import { CompoundV1TokenData } from "../../../generated/schema";
+import { CompoundToken } from "../../../generated/CompoundTokencDAI/CompoundToken";
+import { CompoundComptrollerImplementation } from "../../../generated/CompoundTokencDAI/CompoundComptrollerImplementation";
+import { CompoundUnderlying } from "../../../generated/CompoundTokencDAI/CompoundUnderlying";
+import { CompoundTokenData } from "../../../generated/schema";
 import { convertBINumToDesiredDecimals, convertToLowerCase } from "../../utils/converters";
 
 //  Function to add/update the cToken Entity
@@ -16,20 +16,20 @@ export function handleEntity(
   borrowIndex: BigInt,
   totalBorrows: BigInt,
 ): void {
-  let cTokenContract = CompoundV1Token.bind(cTokenAddress)
+  let cTokenContract = CompoundToken.bind(cTokenAddress)
 
   //  Get the underlying token decimals
   let underlyingTokenAddress = cTokenContract.try_underlying()
   let underlyingTokenDecimals = null
   if (!underlyingTokenAddress.reverted) {
-    let underlyingTokenContract = CompoundV1Underlying.bind(underlyingTokenAddress.value)
+    let underlyingTokenContract = CompoundUnderlying.bind(underlyingTokenAddress.value)
     underlyingTokenDecimals = underlyingTokenContract.decimals()
   }
 
   //  Load CTokenData Entity for not having duplicates
-  let cTokenDataEntity = CompoundV1TokenData.load(transactionHash.toHex())
+  let cTokenDataEntity = CompoundTokenData.load(transactionHash.toHex())
   if (cTokenDataEntity == null) {
-    cTokenDataEntity = new CompoundV1TokenData(transactionHash.toHex())
+    cTokenDataEntity = new CompoundTokenData(transactionHash.toHex())
   }
 
   cTokenDataEntity.blockNumber = blockNumber
@@ -120,7 +120,7 @@ export function handleEntity(
         : cTokenContract.comptroller()
       : comptrollerAddress
   if (comptrollerAddress) {
-    let comptrollerContract = CompoundV1ComptrollerImplementation.bind(comptrollerAddress)
+    let comptrollerContract = CompoundComptrollerImplementation.bind(comptrollerAddress)
     cTokenDataEntity.compSpeed = convertBINumToDesiredDecimals(
       newSpeed
         ? newSpeed
