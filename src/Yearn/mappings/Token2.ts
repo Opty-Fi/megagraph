@@ -48,6 +48,6 @@ export function handleTransfer(event: TransferEvent): void {
     event.address,
     event.block.number,
     event.block.timestamp,
-    event.transaction.hash.toHexString()
+    event.transaction.hash.toHex()
   );
 }
