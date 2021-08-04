@@ -25,7 +25,7 @@ export function handleEntity(
 
   yearnData.blockNumber = blockNumber;
   yearnData.blockTimestamp = timestamp;
-  yearnData.underlyingToken = contract.token();
+  yearnData.underlyingToken = contract.try_token().reverted ? ZERO_ADDRESS : contract.token();
   yearnData.symbol = contract.symbol();
   yearnData.vault = address;
 
