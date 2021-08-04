@@ -5,7 +5,10 @@ import {
 } from "../../../generated/YearnTokenyDAI/YearnToken";
 import { YearnTokenData } from "../../../generated/schema";
 import { convertBINumToDesiredDecimals } from "../../utils/converters";
-import { ZERO_BD } from "../../utils/constants";
+import {
+  ZERO_ADDRESS,
+  ZERO_BD,
+} from "../../utils/constants";
 
 export function handleEntity(
   address: Address,
@@ -25,7 +28,7 @@ export function handleEntity(
 
   yearnData.blockNumber = blockNumber;
   yearnData.blockTimestamp = timestamp;
-  yearnData.underlyingToken = contract.token();
+  yearnData.underlyingToken = contract.try_token().reverted ? ZERO_ADDRESS : contract.token();
   yearnData.symbol = contract.symbol();
   yearnData.vault = address;
 
