@@ -1,18 +1,19 @@
 import { Address, Bytes, BigInt, BigDecimal } from "@graphprotocol/graph-ts";
 import { toAddress, toBytes } from "./converters";
 
+export const ZERO_ADDRESS: Address = toAddress("0x0000000000000000000000000000000000000000");
+export const ZERO_BYTES: Bytes = toBytes("0x00");
 export const ZERO_BI: BigInt = BigInt.fromString("0");
 export const ZERO_BD: BigDecimal = BigDecimal.fromString("0");
-export const ZERO_ADDRESS: Address = toAddress("0x0000000000000000000000000000000000000000");
 
 export const AaveV1_POOL_PROVIDER_ADDRESS: Address = toAddress("0x24a42fD28C976A61Df5D00D0599C34c4f90748c8");
 
 export const AaveV2_POOL_PROVIDER_ADDRESS: Address = toAddress("0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5");
 export const AaveV2_DATA_PROVIDER_INDEX: Bytes = toBytes("0x0100000000000000000000000000000000000000000000000000000000000000");
 
-export const CurveV1_N_COINS_CURVE2POOL = 2;
-export const CurveV1_N_COINS_CURVE3POOL = 3;
-export const CurveV1_N_COINS_CURVE4POOL = 4;
+export const CurveV1_N_COINS_CURVE2POOL: number = 2;
+export const CurveV1_N_COINS_CURVE3POOL: number = 3;
+export const CurveV1_N_COINS_CURVE4POOL: number = 4;
 
 export const DForce_dDAI: Address = toAddress("0x02285AcaafEB533e03A7306C55EC031297df9224");
 export const DForce_dDAI_Staking: Address = toAddress("0xD2fA07cD6Cd4A5A96aa86BacfA6E50bB3aaDBA8B");

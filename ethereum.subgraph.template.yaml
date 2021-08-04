@@ -8,10 +8,11 @@ dataSources:
 # ----------------------------------------
 #      {{adapter}}
 # ----------------------------------------
-  {{#pool-contracts}}
+{{#contracts}}
   # ----------------------------------------
-  #      {{adapter}} {{contract}}{{symbol}}
+  #      {{adapter}} {{contract}} {{symbol}}
   # ----------------------------------------
+  {{#instances}}
   - kind: ethereum/contract
     name: {{adapter}}{{contract}}{{symbol}}
     network: {{network}}
@@ -26,52 +27,20 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - {{adapter}}TokenData
+        {{#entities}}
+        - {{.}}
+        {{/entities}}
       abis:
-        - name: {{adapter}}Token
-          file: ./src/{{adapter}}/abis/Token.json
-        {{#supporting-abis}}
+        {{#abis}}
         - name: {{adapter}}{{.}}
           file: ./src/{{adapter}}/abis/{{.}}.json
-        {{/supporting-abis}}
+        {{/abis}}
       eventHandlers:
-        {{#pool-events}}
-        - event: {{event}}{{params}}
-          handler: handle{{event}}
-        {{/pool-events}}
+        {{#events}}
+        - event: {{event-name}}{{event-params}}
+          handler: handle{{event-name}}
+        {{/events}}
       file: ./src/{{adapter}}/mappings/{{contract}}.ts
-  {{/pool-contracts}}
-  {{#tokens}}
-  # ----------------------------------------
-  #      {{adapter}} Token {{symbol}}
-  # ----------------------------------------
-  - kind: ethereum/contract
-    name: {{adapter}}Token{{symbol}}
-    network: {{network}}
-    source:
-      address: "{{address}}"
-      {{#startBlock}}
-      startBlock: {{startBlock}}
-      {{/startBlock}}
-      abi: {{adapter}}Token
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.4
-      language: wasm/assemblyscript
-      entities:
-        - {{adapter}}TokenData
-      abis:
-        - name: {{adapter}}Token
-          file: ./src/{{adapter}}/abis/Token.json
-        {{#supporting-abis}}
-        - name: {{adapter}}{{.}}
-          file: ./src/{{adapter}}/abis/{{.}}.json
-        {{/supporting-abis}}
-      eventHandlers:
-        {{#token-events}}
-        - event: {{event}}{{params}}
-          handler: handle{{event}}
-        {{/token-events}}
-      file: ./src/{{adapter}}/mappings/Token.ts
-  {{/tokens}}
+  {{/instances}}
+{{/contracts}}
 {{/adapters}}

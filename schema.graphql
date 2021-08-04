@@ -110,6 +110,29 @@ type CreamTokenData @entity {
 }
 
 # ----------------------------------------
+#      CurveV1
+# ----------------------------------------
+type CurveV1GaugeData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  gaugeController: Bytes!
+  liquidityGauge: Bytes!
+  gaugeWeight: BigDecimal!
+  totalWeight: BigDecimal!
+}
+
+type CurveV1PoolData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  vault: Bytes!
+  balance: [BigDecimal!]!
+  virtualPrice: BigDecimal!
+  tokens: [Bytes!]!
+}
+
+# ----------------------------------------
 #      dForce
 # ----------------------------------------
 type DForceTokenData @entity {
@@ -155,4 +178,18 @@ type HarvestTokenData @entity {
   underlyingBalanceInVault: BigDecimal!
   pool: Bytes!
   vault: Bytes!
+}
+
+# ----------------------------------------
+#      Yearn
+# ----------------------------------------
+type YearnTokenData @entity {
+  id: ID!
+  balance: BigDecimal!
+  pricePerFullShare: BigDecimal!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  symbol: String!
+  vault: Bytes!
+  underlyingToken: Bytes!
 }
