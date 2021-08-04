@@ -5,7 +5,10 @@ import {
 } from "../../../generated/YearnToken2yvDAI/YearnToken2";
 import { YearnTokenData } from "../../../generated/schema";
 import { convertBINumToDesiredDecimals } from "../../utils/converters";
-import { ZERO_BD } from "../../utils/constants";
+import {
+  ZERO_ADDRESS,
+  ZERO_BD,
+} from "../../utils/constants";
 
 export function handleEntity(
   address: Address,
