@@ -1,6 +1,14 @@
 # DeFi protocol subgraph
 The subgraph for the DeFi protocols with which [OptyFi](https://opty.fi)'s [`earn-protocol`](https://github.com/Opty-Fi/earn-protocol) integrates natively.
 
+
+## Subgraph
+
+* Link : https://thegraph.com/legacy-explorer/subgraph/opty-fi/defi-protocol-subgraph
+* Query : https://api.thegraph.com/subgraphs/name/opty-fi/defi-protocol-subgraph
+* Subscription : wss://api.thegraph.com/subgraphs/name/opty-fi/defi-protocol-subgraph
+
+## Development
 ### Prerequisites:
 - Node JS 12.x.x and above
 - Install the prerequisite modules:
