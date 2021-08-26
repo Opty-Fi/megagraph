@@ -1041,7 +1041,8 @@
         {
           "contract": "NoMintRewardPool",
           "abis": [
-            "NoMintRewardPool"
+            "NoMintRewardPool",
+            "Token"
           ],
           "entities": [
             "HarvestTokenData"
