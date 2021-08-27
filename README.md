@@ -4,6 +4,10 @@ The subgraph for the DeFi protocols with which [OptyFi](https://opty.fi)'s [`ear
 
 ## Subgraph
 
+* Build : QmYPqD5MUFVBsKhNvYVQzKxaMdVVqhofYux4aJajEMSsSp
+
+* Subgraph endpoints:
+  * Queries (HTTP):     https://api.thegraph.com/subgraphs/name/opty-fi/defi-protocol-subgraph
 * Link : https://thegraph.com/legacy-explorer/subgraph/opty-fi/defi-protocol-subgraph
 * Query : https://api.thegraph.com/subgraphs/name/opty-fi/defi-protocol-subgraph
 * Subscription : wss://api.thegraph.com/subgraphs/name/opty-fi/defi-protocol-subgraph
