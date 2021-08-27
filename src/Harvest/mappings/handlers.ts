@@ -8,7 +8,7 @@ import {
   ZERO_BI,
   ZERO_BD,
   Harvest_POOL,
-  Harvest_VAULT,
+  Harvest_fDAI,
 } from "../../utils/constants";
 
 export function handleEntity(
@@ -28,8 +28,9 @@ export function handleEntity(
   if (poolAddr == null) {
     if (
       convertToLowerCase(vaultAddr.toHex()) ==
-      convertToLowerCase(Harvest_VAULT.toHex())
+      convertToLowerCase(Harvest_fDAI.toHex())
     ) {
+      log.debug("Found fDAI, setting Pool to {}", [ Harvest_POOL.toHex() ]);
       poolAddr = Harvest_POOL;
     }
   }
