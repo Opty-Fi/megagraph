@@ -1,5 +1,5 @@
 # Megagraph
-The subgraph for the DeFi protocols with which [OptyFi](https://opty.fi)'s [`earn-protocol`](https://github.com/Opty-Fi/earn-protocol) integrates natively.
+The subgraph for the DeFi protocols that are integrated with [OptyFi](https://opty.fi)'s [`earn-protocol`](https://github.com/Opty-Fi/earn-protocol).
 
 
 ## Subgraph
