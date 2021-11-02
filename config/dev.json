@@ -428,6 +428,17 @@
       ]
     },
     {
+      "adapter": "Convex",
+      "contracts": [
+        {
+          "contract": "",
+          "abis": [
+
+          ]
+        }
+      ]
+    },
+    {
       "adapter": "Cream",
       "contracts": [
         {
