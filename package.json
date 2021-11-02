@@ -1,12 +1,12 @@
 {
-  "name": "defi-protocol-subgraph",
+  "name": "megagraph",
   "version": "1.0.0",
   "description": "This package contains subgraph DeFi protocols that opty.fi's earn protocol integrates natively",
   "author": "Opty-Fi <info@opty.fi>",
   "license": "AGPL-3.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Opty-Fi/defi-protocol-subgraph"
+    "url": "https://github.com/Opty-Fi/megagraph"
   },
   "scripts": {
     "setup": "yarn mustache-yaml && yarn codegen && yarn graph-auth && yarn deploy",

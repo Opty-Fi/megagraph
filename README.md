@@ -7,10 +7,10 @@ The subgraph for the DeFi protocols that are integrated with [OptyFi](https://op
 * Build : QmYPqD5MUFVBsKhNvYVQzKxaMdVVqhofYux4aJajEMSsSp
 
 * Subgraph endpoints:
-  * Queries (HTTP):     https://api.thegraph.com/subgraphs/name/opty-fi/defi-protocol-subgraph
-* Link : https://thegraph.com/legacy-explorer/subgraph/opty-fi/defi-protocol-subgraph
-* Query : https://api.thegraph.com/subgraphs/name/opty-fi/defi-protocol-subgraph
-* Subscription : wss://api.thegraph.com/subgraphs/name/opty-fi/defi-protocol-subgraph
+  * Queries (HTTP):     https://api.thegraph.com/subgraphs/name/opty-fi/megagraph
+* Link : https://thegraph.com/legacy-explorer/subgraph/opty-fi/megagraph
+* Query : https://api.thegraph.com/subgraphs/name/opty-fi/megagraph
+* Subscription : wss://api.thegraph.com/subgraphs/name/opty-fi/megagraph
 
 ## Development
 ### Prerequisites:
@@ -92,7 +92,7 @@ The subgraph for the DeFi protocols that are integrated with [OptyFi](https://op
           <EventName> as <EventName>Event,
           ...
         } from "../../../generated/<Adapter><ContractName><symbol>/<Adapter><ContractName>";
-        
+
         export function handle<EventName>(event: <EventName>Event): void {
           ...
         }
@@ -132,14 +132,14 @@ The subgraph for the DeFi protocols that are integrated with [OptyFi](https://op
      ```sh
      docker-compose up
      ```
-1. In the `defi-protocol-subgraph` root directory, run:
+1. In the `megagraph` root directory, run:
    ```sh
    yarn setup:local
    ```
 
 ### Deploying to [The Graph](https://thegraph.com):
 1. Create an account and login, and ensure that your [Access token](https://thegraph.com/explorer/dashboard) is populated in your `.env` file
-1. In your local `defi-protocol-subgraph` directory, run:
+1. In your local `megagraph` directory, run:
    ```sh
    yarn setup
    ```
@@ -177,7 +177,7 @@ The subgraph for the DeFi protocols that are integrated with [OptyFi](https://op
   yarn deploy
   ```
   Once the subgraph is deployed, you should see it show up in your dashboard.
-  
+
   When you click on the subgraph, it should open the Graph explorer.
 
 ### Example querying:
@@ -263,17 +263,17 @@ For example adding the capabilities to sort by the timestamp that an NFT was cre
       token = new Token(event.params.tokenId.toString());
       token.creator = event.params.to.toHex();
       token.tokenID = event.params.tokenId;
-      
+
       // Add the createdAtTimestamp to the token object
       token.createdAtTimestamp = event.block.timestamp;
-      
+
       let tokenContract = TokenContract.bind(event.address);
       token.contentURI = tokenContract.tokenURI(event.params.tokenId);
       token.metadataURI = tokenContract.tokenMetadataURI(event.params.tokenId);
     }
     token.owner = event.params.to.toHex();
     token.save();
-    
+
     let user = User.load(event.params.to.toHex());
     if (!user) {
       user = new User(event.params.to.toHex());
