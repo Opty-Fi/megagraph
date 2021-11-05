@@ -6,11 +6,11 @@ The subgraph for the DeFi protocols that are integrated with [OptyFi](https://op
 
 * Build : QmYPqD5MUFVBsKhNvYVQzKxaMdVVqhofYux4aJajEMSsSp
 
-* Subgraph endpoints:
-  * Queries (HTTP):     https://api.thegraph.com/subgraphs/name/opty-fi/megagraph
-* Link : https://thegraph.com/legacy-explorer/subgraph/opty-fi/megagraph
-* Query : https://api.thegraph.com/subgraphs/name/opty-fi/megagraph
-* Subscription : wss://api.thegraph.com/subgraphs/name/opty-fi/megagraph
+* Subgraph endpoints: (still using the old repo name `defi-protocol-subgraph`)
+  * Queries (HTTP):     https://api.thegraph.com/subgraphs/name/opty-fi/defi-protocol-subgraph
+* Link : https://thegraph.com/legacy-explorer/subgraph/opty-fi/defi-protocol-subgraph
+* Query : https://api.thegraph.com/subgraphs/name/opty-fi/defi-protocol-subgraph
+* Subscription : wss://api.thegraph.com/subgraphs/name/opty-fi/defi-protocol-subgraph
 
 ## Development
 ### Prerequisites:
