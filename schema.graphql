@@ -89,6 +89,28 @@ type CompoundTokenData @entity {
 }
 
 # ----------------------------------------
+#      Convex
+# ----------------------------------------
+type ConvexPoolData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  poolId: BigInt!
+
+  lpToken: Bytes!
+  token: Bytes!
+  gauge: Bytes!
+  crvRewards: Bytes!
+  stash: Bytes
+  shutdown: Boolean!
+  swap: Bytes!
+
+  virtualPrice: BigDecimal
+  crvRatePerSecond: BigDecimal
+  cvxRatePerSecond: BigDecimal
+}
+
+# ----------------------------------------
 #      C.R.E.A.M.
 # ----------------------------------------
 type CreamTokenData @entity {

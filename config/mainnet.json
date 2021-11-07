@@ -428,33 +428,6 @@
       ]
     },
     {
-      "adapter": "Convex",
-      "contracts": [
-        {
-          "contract": "DepositToken",
-          "abis": [
-            "DepositToken"
-          ],
-          "entities": [
-            "ConvexTokenData"
-          ],
-          "events": [
-            {
-              "event-name": "Transfer",
-              "event-params": "(indexed address,indexed address,uint256)"
-            }
-          ],
-          "instances": [
-            {
-              "symbol": "cvxmusd3CRV",
-              "address": "0xd34d466233c5195193df712936049729140dbbd7",
-              "startBlock": 12452227
-            }
-          ]
-        }
-      ]
-    },
-    {
       "adapter": "Cream",
       "contracts": [
         {
