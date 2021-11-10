@@ -93,17 +93,24 @@ type CompoundTokenData @entity {
 # ----------------------------------------
 type ConvexPoolData @entity {
   id: ID!
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  poolId: BigInt!
 
+  # poolInfo
   lpToken: Bytes!
   token: Bytes!
   gauge: Bytes!
   crvRewards: Bytes!
-  stash: Bytes
+  stash: Bytes!
   shutdown: Boolean!
-  swap: Bytes!
+
+  stashVersion: String!
+}
+
+type ConvexTokenData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+
+  pool: ConvexPoolData!
 
   totalSupply: BigInt
   virtualPrice: BigDecimal

@@ -13,10 +13,16 @@
             "CurvePool",
             "CurveRegistry",
             "ERC20",
+            "ExtraRewardStashV1",
+            "ExtraRewardStashV2",
+            "ExtraRewardStashV3",
+            "ExtraRewardStashV31",
+            "ExtraRewardStashV32",
             "UniswapV2Pair"
           ],
           "entities": [
-            "ConvexPoolData"
+            "ConvexPoolData",
+            "ConvexTokenData"
           ],
           "events": [
             {

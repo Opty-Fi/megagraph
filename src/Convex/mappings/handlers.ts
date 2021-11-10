@@ -4,10 +4,11 @@ import { ConvexBooster } from "../../../generated/ConvexBooster/ConvexBooster";
 import { ConvexCurvePool } from "../../../generated/ConvexBooster/ConvexCurvePool";
 import { ConvexCurveRegistry } from "../../../generated/ConvexBooster/ConvexCurveRegistry";
 import { ConvexERC20 } from "../../../generated/ConvexBooster/ConvexERC20";
+import { ConvexExtraRewardStashV1 } from "../../../generated/ConvexBooster/ConvexExtraRewardStashV1";
 import { ConvexUniswapV2Pair } from "../../../generated/ConvexBooster/ConvexUniswapV2Pair";
-import { ConvexPoolData } from "../../../generated/schema";
+import { ConvexPoolData, ConvexTokenData } from "../../../generated/schema";
 import { convertBINumToDesiredDecimals } from "../../utils/converters";
-import { ZERO_BD } from "../../utils/constants";
+import { ConvexBoosterAddress, CurveRegistryAddress, ZERO_ADDRESS, ZERO_BD } from "../../utils/constants";
 
 export function handlePoolEntity(
   txnHash: Bytes,
@@ -15,40 +16,19 @@ export function handlePoolEntity(
   timestamp: BigInt,
   poolId: BigInt
 ): void {
-  let entity = ConvexPoolData.load(txnHash.toHex());
-  if (!entity) entity = new ConvexPoolData(txnHash.toHex());
-
-  log.debug("Saving Pool Data at {}", [ poolId.toString() ]);
+  let entity = ConvexTokenData.load(txnHash.toHex());
+  if (!entity) entity = new ConvexTokenData(txnHash.toHex());
 
   entity.blockNumber = blockNumber;
   entity.blockTimestamp = timestamp;
-  entity.poolId = poolId;
 
-  let convexBoosterContract = ConvexBooster.bind(Address.fromString("0xf403c135812408bfbe8713b5a23a04b3d48aae31"));
-  let poolInfo = convexBoosterContract.try_poolInfo(poolId);
-  if (poolInfo.reverted) {
-    log.error("Could not load poolInfo for pool {}", [ poolId.toString() ]);
-    return;
-  }
-
-  entity.lpToken = poolInfo.value.value0
-  entity.token = poolInfo.value.value1
-  entity.gauge = poolInfo.value.value2
-  entity.crvRewards = poolInfo.value.value3
-  entity.stash = poolInfo.value.value4
-  entity.shutdown = poolInfo.value.value5
-
-  let curveRegistryContract = ConvexCurveRegistry.bind(Address.fromString("0x90e00ace148ca3b23ac1bc8c240c2a7dd9c2d7f5"));
-  let lpTokenAddress = Address.fromString(entity.lpToken.toHexString());
-  let swap = curveRegistryContract.try_get_pool_from_lp_token(lpTokenAddress);
-  if (swap.reverted) {
-    log.error("Could not determine swap for pool {}", [ poolId.toString() ]);
-    return;
-  }
-  entity.swap = swap.value;
+  let pool = getPoolData(poolId);
+  entity.pool = pool.id;
 
   // virtualPrice - virtual price of the underlying Curve lpToken
 
+  let curveRegistryContract = ConvexCurveRegistry.bind(CurveRegistryAddress);
+  let lpTokenAddress = Address.fromString(pool.lpToken.toHexString());
   let virtualPrice = curveRegistryContract.try_get_virtual_price_from_lp_token(lpTokenAddress);
   if (!virtualPrice.reverted) {
     entity.virtualPrice = convertBINumToDesiredDecimals(virtualPrice.value, 18);
@@ -63,7 +43,7 @@ export function handlePoolEntity(
 
   // totalSupply (TVL = totalSupply * virtualPrice)
 
-  let rewardsContract = ConvexBaseRewardsPool.bind(Address.fromString(entity.crvRewards.toHexString()));
+  let rewardsContract = ConvexBaseRewardsPool.bind(Address.fromString(pool.crvRewards.toHexString()));
   let supply = rewardsContract.try_totalSupply();
   if (!supply.reverted) {
     entity.totalSupply = supply.value;
@@ -78,6 +58,8 @@ export function handlePoolEntity(
     entity.crvRatePerSecond = crvRatePerSecond;
     entity.cvxRatePerSecond = getCvxMintAmount(crvRatePerSecond);
   }
+
+  // TODO can we remove these prices here (and use the SushiSwap subgraph instead?
 
   // crvPrice - CRV price in USD (via SushiSwap)
   // cvxPrice - CVX price in USD (via SushiSwap)
@@ -152,4 +134,51 @@ function getCvxMintAmount(crvEarned: BigDecimal): BigDecimal {
     return cvxEarned
   }
   return ZERO_BD;
+}
+
+function getPoolData(id: BigInt): ConvexPoolData {
+  let pool = ConvexPoolData.load(id.toString());
+  if (pool) {
+    return pool as ConvexPoolData;
+  }
+
+  pool = new ConvexPoolData(id.toString());
+
+  let convexBoosterContract = ConvexBooster.bind(ConvexBoosterAddress);
+  let poolInfo = convexBoosterContract.try_poolInfo(id);
+  if (poolInfo.reverted) {
+    log.error("Could not load poolInfo for pool {}", [id.toString()]);
+    return pool as ConvexPoolData;
+  }
+
+  pool.lpToken    = poolInfo.value.value0
+  pool.token      = poolInfo.value.value1
+  pool.gauge      = poolInfo.value.value2
+  pool.crvRewards = poolInfo.value.value3
+  pool.stash      = poolInfo.value.value4
+  pool.shutdown   = poolInfo.value.value5
+
+  pool.stashVersion = "";
+
+  let stashAddress = Address.fromString(pool.stash.toHexString());
+  if (stashAddress !== ZERO_ADDRESS) {
+    // all stash versions have getName()
+    let genericStashContract = ConvexExtraRewardStashV1.bind(stashAddress);
+    let name = genericStashContract.try_getName();
+    if (!name.reverted) {
+      // TODO why is there no match() available?
+      let version = name.value.substr(-4);
+      // V1, V2, V3 - remove last two characters from name: ExtraRewardSta[sh]V1
+      // TODO why does === not work?
+      if (version.substr(0, 2) == "sh") {
+        version = version.substr(-2);
+      }
+
+      pool.stashVersion = version;
+    }
+  }
+
+  pool.save();
+
+  return pool as ConvexPoolData;
 }
