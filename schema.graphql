@@ -105,9 +105,12 @@ type ConvexPoolData @entity {
   shutdown: Boolean!
   swap: Bytes!
 
+  totalSupply: BigInt
   virtualPrice: BigDecimal
   crvRatePerSecond: BigDecimal
+  crvPrice: BigDecimal
   cvxRatePerSecond: BigDecimal
+  cvxPrice: BigDecimal
 }
 
 # ----------------------------------------
