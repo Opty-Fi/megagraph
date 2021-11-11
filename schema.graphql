@@ -91,6 +91,14 @@ type CompoundTokenData @entity {
 # ----------------------------------------
 #      Convex
 # ----------------------------------------
+type ConvexExtraReward @entity {
+  id: ID!
+  token: Bytes!
+  rewardPool: Bytes!
+  finishPeriod: BigInt!
+  rewardRatePerSecond: BigDecimal!
+}
+
 type ConvexPoolData @entity {
   id: ID!
   lpToken: Bytes!
@@ -106,15 +114,12 @@ type ConvexTokenData @entity {
   id: ID!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
-
   pool: ConvexPoolData!
-
   totalSupply: BigInt
   virtualPrice: BigDecimal
   crvRatePerSecond: BigDecimal
-  crvPrice: BigDecimal
   cvxRatePerSecond: BigDecimal
-  cvxPrice: BigDecimal
+  extras: [ConvexExtraReward!]
 }
 
 # ----------------------------------------
