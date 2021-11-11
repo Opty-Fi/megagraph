@@ -1,8 +1,8 @@
 import { Deposited as DepositedEvent, Withdrawn as WithdrawnEvent } from '../../../generated/ConvexBooster/ConvexBooster';
-import { handlePoolEntity } from "./handlers"
+import { handleTokenEntity } from "./handlers"
 
 export function handleDeposited(event: DepositedEvent): void {
-  handlePoolEntity(
+  handleTokenEntity(
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,
@@ -11,7 +11,7 @@ export function handleDeposited(event: DepositedEvent): void {
 }
 
 export function handleWithdrawn(event: WithdrawnEvent): void {
-  handlePoolEntity(
+  handleTokenEntity(
     event.transaction.hash,
     event.block.number,
     event.block.timestamp,

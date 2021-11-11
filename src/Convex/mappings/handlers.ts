@@ -10,7 +10,7 @@ import { ConvexBoosterAddress, CurveRegistryAddress, ZERO_ADDRESS } from "../../
 import { getExtras } from "./extras";
 import { getCvxMintAmount } from "./convex";
 
-export function handlePoolEntity(
+export function handleTokenEntity(
   txnHash: Bytes,
   blockNumber: BigInt,
   timestamp: BigInt,
