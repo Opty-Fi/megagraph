@@ -5,9 +5,12 @@ import { ConvexCurvePool } from "../../../generated/ConvexBooster/ConvexCurvePoo
 import { ConvexCurveRegistry } from "../../../generated/ConvexBooster/ConvexCurveRegistry";
 import { ConvexERC20 } from "../../../generated/ConvexBooster/ConvexERC20";
 import { ConvexExtraRewardStashV1 } from "../../../generated/ConvexBooster/ConvexExtraRewardStashV1";
-import { ConvexUniswapV2Pair } from "../../../generated/ConvexBooster/ConvexUniswapV2Pair";
+import { ConvexExtraRewardStashV2 } from "../../../generated/ConvexBooster/ConvexExtraRewardStashV2";
+import { ConvexExtraRewardStashV3 } from "../../../generated/ConvexBooster/ConvexExtraRewardStashV3";
+import { ConvexExtraRewardStashV31 } from "../../../generated/ConvexBooster/ConvexExtraRewardStashV31";
+import { ConvexExtraRewardStashV32 } from "../../../generated/ConvexBooster/ConvexExtraRewardStashV32";
 import { ConvexPoolData, ConvexTokenData } from "../../../generated/schema";
-import { convertBINumToDesiredDecimals } from "../../utils/converters";
+import { convertBINumToDesiredDecimals, convertBytesToAddress } from "../../utils/converters";
 import { ConvexBoosterAddress, CurveRegistryAddress, ZERO_ADDRESS, ZERO_BD } from "../../utils/constants";
 
 export function handlePoolEntity(
@@ -28,7 +31,7 @@ export function handlePoolEntity(
   // virtualPrice - virtual price of the underlying Curve lpToken
 
   let curveRegistryContract = ConvexCurveRegistry.bind(CurveRegistryAddress);
-  let lpTokenAddress = Address.fromString(pool.lpToken.toHexString());
+  let lpTokenAddress = convertBytesToAddress(pool.lpToken);
   let virtualPrice = curveRegistryContract.try_get_virtual_price_from_lp_token(lpTokenAddress);
   if (!virtualPrice.reverted) {
     entity.virtualPrice = convertBINumToDesiredDecimals(virtualPrice.value, 18);
@@ -43,7 +46,7 @@ export function handlePoolEntity(
 
   // totalSupply (TVL = totalSupply * virtualPrice)
 
-  let rewardsContract = ConvexBaseRewardsPool.bind(Address.fromString(pool.crvRewards.toHexString()));
+  let rewardsContract = ConvexBaseRewardsPool.bind(convertBytesToAddress(pool.crvRewards));
   let supply = rewardsContract.try_totalSupply();
   if (!supply.reverted) {
     entity.totalSupply = supply.value;
@@ -59,44 +62,72 @@ export function handlePoolEntity(
     entity.cvxRatePerSecond = getCvxMintAmount(crvRatePerSecond);
   }
 
-  // TODO can we remove these prices here (and use the SushiSwap subgraph instead?
+  // extra rewards
 
-  // crvPrice - CRV price in USD (via SushiSwap)
-  // cvxPrice - CVX price in USD (via SushiSwap)
+  switch (pool.stashVersion) {
+    case "V1":
+      let stashContractV1 = ConvexExtraRewardStashV1.bind(convertBytesToAddress(pool.stash));
+      let tokenInfo = stashContractV1.try_tokenInfo();
+      if (!tokenInfo.reverted) {
+        let rewardToken = tokenInfo.value.value0;
+        let rewardAddress = tokenInfo.value.value1;
+        let lastActive = tokenInfo.value.value2;
 
-  // https://ethereum.stackexchange.com/questions/91441/how-can-you-get-the-price-of-token-on-uniswap-using-solidity/94173
-  // we use SushiSwap (same interface as UniswapV2), because there are no more CRV and CVX pools on UniswapV2 (only V3)
+        // TODO add to array
+      }
+      break;
+    case "V2":
+      let stashContractV2 = ConvexExtraRewardStashV2.bind(convertBytesToAddress(pool.stash));
+      let tokenCountV2 = stashContractV2.try_tokenCount();
+      if (!tokenCountV2.reverted) {
+        for (let i = 0; i < tokenCountV2.value.toI32(); i++) {
+          let tokenInfo = stashContractV2.try_tokenInfo(BigInt.fromI32(i));
+          if (!tokenInfo.reverted) {
+            let rewardToken = tokenInfo.value.value0;
+            let rewardAddress = tokenInfo.value.value1;
+            let lastActive = tokenInfo.value.value2;
+          }
 
-  let usdcWethPairContract = ConvexUniswapV2Pair.bind(Address.fromString('0x397ff1542f962076d0bfe58ea045ffa2d347aca0'));
-  let wethCrvPairContract = ConvexUniswapV2Pair.bind(Address.fromString('0x58dc5a51fe44589beb22e8ce67720b5bc5378009'));
-  let cvxWethPairContract = ConvexUniswapV2Pair.bind(Address.fromString('0x05767d9ef41dc40689678ffca0608878fb3de906'));
+          // TODO add to array
+        }
+      }
+      break;
+    case "V3":
+      let stashContractV3 = ConvexExtraRewardStashV3.bind(convertBytesToAddress(pool.stash));
+      let tokenCountV3 = stashContractV3.try_tokenCount();
+      if (!tokenCountV3.reverted) {
+        for (let i = 0; i < tokenCountV3.value.toI32(); i++) {
+          let tokenInfo = stashContractV3.try_tokenInfo(BigInt.fromI32(i));
+          if (!tokenInfo.reverted) {
+            let rewardToken = tokenInfo.value.value0;
+            let rewardAddress = tokenInfo.value.value1;
+          }
 
-  let res = usdcWethPairContract.try_getReserves();
-  if (res.reverted) {
-    log.warning("Could not get price for WETH", []);
-  } else {
-    let res0 = res.value.value0;
-    let res1 = res.value.value1;
-    let wethPrice = res0.divDecimal(res1.toBigDecimal()).times(BigDecimal.fromString("1_000_000_000_000"));
+          // TODO add to array
+        }
+      }
+      break;
+    case "V3.1":
+    case "V3.2":
+      let stashContractV31 = ConvexExtraRewardStashV31.bind(convertBytesToAddress(pool.stash));
+      let tokenCountV31 = stashContractV31.try_tokenCount();
+      if (!tokenCountV31.reverted) {
+        for (let i = 0; i < tokenCountV31.value.toI32(); i++) {
+          let tokenList = stashContractV31.try_tokenList(BigInt.fromI32(i));
+          if (!tokenList.reverted) {
+            let tokenInfo = stashContractV31.try_tokenInfo(tokenList.value);
+            if (!tokenInfo.reverted) {
+              let rewardToken = tokenInfo.value.value0;
+              let rewardAddress = tokenInfo.value.value1;
 
-    res = wethCrvPairContract.try_getReserves();
-    if (!res.reverted) {
-      res0 = res.value.value0;
-      res1 = res.value.value1;
-      let crvPrice = res0.divDecimal(res1.toBigDecimal()).times(wethPrice);
-      entity.crvPrice = crvPrice;
-    }
-
-    res = cvxWethPairContract.try_getReserves();
-    if (!res.reverted) {
-      res0 = res.value.value0;
-      res1 = res.value.value1;
-      let cvxPrice = res1.divDecimal(res0.toBigDecimal()).times(wethPrice);
-      entity.cvxPrice = cvxPrice;
-    }
+              // TODO add to array
+            }
+          }
+        }
+      }
+    default:
+      log.error("Unexpected stashVersion {}", [pool.stashVersion])
   }
-
-  // TODO extra rewards
 
   entity.save();
 }

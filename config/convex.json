@@ -17,8 +17,7 @@
             "ExtraRewardStashV2",
             "ExtraRewardStashV3",
             "ExtraRewardStashV31",
-            "ExtraRewardStashV32",
-            "UniswapV2Pair"
+            "ExtraRewardStashV32"
           ],
           "entities": [
             "ConvexPoolData",
