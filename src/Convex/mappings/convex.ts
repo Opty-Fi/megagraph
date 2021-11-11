@@ -1,16 +1,16 @@
 import { BigDecimal, Address } from  "@graphprotocol/graph-ts";
 import { ConvexERC20 } from "../../../generated/ConvexBooster/ConvexERC20";
-import { ZERO_BD } from "../../utils/constants";
+import { ConvexTokenAddress, ZERO_BD } from "../../utils/constants";
 import { convertBINumToDesiredDecimals } from "../../utils/converters";
 
 // https://docs.convexfinance.com/convexfinanceintegration/cvx-minting
-let cliffSize = BigDecimal.fromString("100_000"); // new cliff every 100k tokens
+let cliffSize  = BigDecimal.fromString("100_000"); // new cliff every 100k tokens
 let cliffCount = BigDecimal.fromString("1000");
-let maxSupply = BigDecimal.fromString("100_000_000"); // 100m tokens
+let maxSupply  = BigDecimal.fromString("100_000_000"); // 100m tokens
 
 export function getCvxMintAmount(crvEarned: BigDecimal): BigDecimal {
   // first get total supply
-  let cvxToken = ConvexERC20.bind(Address.fromString('0x4e3FBD56CD56c3e72c1403e103b45Db9da5B9D2B'));
+  let cvxToken = ConvexERC20.bind(ConvexTokenAddress);
   let supply = cvxToken.try_totalSupply();
   if (supply.reverted) {
     return ZERO_BD;
