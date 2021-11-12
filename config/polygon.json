@@ -1,0 +1,46 @@
+{
+  "blockchain": "ethereum",
+  "network": "matic",
+  "adapters": [
+    {
+      "adapter": "Curve",
+      "contracts": [
+        {
+          "contract": "PoolX3",
+          "abis": [
+            "PoolX3",
+            "ERC20"
+          ],
+          "entities": [
+            "CurvePoolData"
+          ],
+          "events": [
+            {
+              "event-name": "AddLiquidity",
+              "event-params": "(indexed address,uint256[3],uint256[3],uint256,uint256)"
+            },
+            {
+              "event-name": "RemoveLiquidity",
+              "event-params": "(indexed address,uint256[3],uint256[3],uint256)"
+            },
+            {
+              "event-name": "RemoveLiquidityImbalance",
+              "event-params": "(indexed address,uint256[3],uint256[3],uint256,uint256)"
+            },
+            {
+              "event-name": "TokenExchange",
+              "event-params": "(indexed address,int128,uint256,int128,uint256)"
+            }
+          ],
+          "instances": [
+            {
+              "symbol": "aDAI+aUSDC+aUSDT",
+              "address": "0x445FE580eF8d70FF569aB36e80c647af338db351",
+              "startBlock": 21280148
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
