@@ -9,6 +9,10 @@
     "url": "https://github.com/Opty-Fi/megagraph"
   },
   "scripts": {
+    "lint": "yarn run lint:ts",
+    "lint:ts": "eslint --config ./.eslintrc.yaml --ignore-path ./.eslintignore --ext .js,.ts",
+    "prettier": "prettier --config ./.prettierrc.yaml --write \"**/*.{js,json,md,ts}\"",
+    "prettier:check": "prettier --check --config ./.prettierrc.yaml \"**/*.{js,json,md,ts}\"",
     "setup": "yarn mustache-yaml && yarn codegen && yarn graph-auth && yarn deploy",
     "setup:local": "yarn mustache-yaml && yarn codegen && yarn deploy:local",
     "mustache-yaml": "./node_modules/.bin/dotenv -- yarn mustache-yaml-replace",
@@ -34,8 +38,10 @@
     "typescript": "^4.3.5"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.28.3",
+    "@typescript-eslint/eslint-plugin": "^5.3.1",
     "@typescript-eslint/parser": "^4.28.3",
-    "eslint": "^7.30.0"
+    "eslint": "^8.2.0",
+    "eslint-config-prettier": "^8.3.0",
+    "prettier": "^2.4.1"
   }
 }

@@ -1,0 +1,21 @@
+# directories
+.yarn/
+artifacts/
+build/
+cache/
+coverage/
+dist/
+generated/
+lib/
+node_modules/
+typechain/
+
+# files
+*.env
+*.log
+*.tsbuildinfo
+.pnp.*
+coverage.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
