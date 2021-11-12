@@ -65,7 +65,7 @@ function getBalanceAndToken(
   address: Address,
   coinIndex: BigInt,
   poolType: string
-): { balance: BigDecimal, token: Address} {
+): { balance: BigDecimal, token: Bytes } {
   let balance: ethereum.CallResult<BigInt>;
   let token: ethereum.CallResult<Address>;
 
@@ -82,7 +82,7 @@ function getBalanceAndToken(
     balance = contract.try_balances(coinIndex);
     token = contract.try_coins(coinIndex);
   } else {
-    return { balance: ZERO_BD, token: ZERO_BYTES};
+    return { balance: ZERO_BD, token: ZERO_BYTES };
   }
 
   if (!balance.reverted && !token.reverted) {
