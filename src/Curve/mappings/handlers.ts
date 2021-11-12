@@ -33,8 +33,10 @@ export function handlePoolEntity(
   let balances: Array<BigDecimal> = [];
   let tokens: Array<Bytes> = [];
   for (let i = 0; i < nCoins; i++) {
-    balances.push(getBalance(vault, BigInt.fromI32(i), poolType));
-    tokens.push(getToken(vault, BigInt.fromI32(i), poolType));
+    let { balance, token } = getBalanceAndToken(vault, BigInt.fromI32(i), poolType);
+
+    balances.push(balance);
+    tokens.push(token);
   }
   entity.balance = balances;
   entity.tokens = tokens;
@@ -59,11 +61,11 @@ export function handlePoolEntity(
   entity.save();
 }
 
-function getBalance(
+function getBalanceAndToken(
   address: Address,
   coinIndex: BigInt,
   poolType: string
-): BigDecimal {
+): { balance: BigDecimal, token: Address} {
   let balance: ethereum.CallResult<BigInt>;
   let token: ethereum.CallResult<Address>;
 
@@ -80,39 +82,17 @@ function getBalance(
     balance = contract.try_balances(coinIndex);
     token = contract.try_coins(coinIndex);
   } else {
-    return ZERO_BD;
+    return { balance: ZERO_BD, token: ZERO_BYTES};
   }
 
   if (!balance.reverted && !token.reverted) {
     let tokenContract = CurveERC20.bind(token.value);
     let decimal = tokenContract.try_decimals();
-    return decimal.reverted
+    let balanceValue = decimal.reverted
       ? balance.value.toBigDecimal()
       : convertBINumToDesiredDecimals(balance.value, decimal.value);
+    return { balance: balanceValue, token: toBytes(token.value.toHex()) }
   }
-  return ZERO_BD;
-}
 
-function getToken(
-  address: Address,
-  coinIndex: BigInt,
-  poolType: string
-): Bytes {
-  let token: ethereum.CallResult<Address>;
-
-  if (poolType === "Curve2Pool") {
-    let contract = CurvePoolX2.bind(address);
-    token = contract.try_coins(coinIndex);
-  } else if (poolType === "Curve3Pool") {
-    let contract = CurvePoolX3.bind(address);
-    token = contract.try_coins(coinIndex);
-  } else if (poolType === "Curve4Pool") {
-    let contract = CurvePoolX4.bind(address);
-    token = contract.try_coins(coinIndex);
-  } else {
-    return ZERO_BYTES;
-  }
-  return token.reverted
-    ? ZERO_BYTES
-    : toBytes(token.value.toHex());
+  return { balance: ZERO_BD, token: ZERO_BYTES };
 }
