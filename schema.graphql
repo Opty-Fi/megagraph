@@ -112,6 +112,14 @@ type CreamTokenData @entity {
 # ----------------------------------------
 #      Curve
 # ----------------------------------------
+type CurveExtraReward @entity {
+  id: ID!
+  token: Bytes!
+  rewardPool: Bytes!
+  finishPeriod: BigInt!
+  rewardRatePerSecond: BigDecimal!
+}
+
 type CurveGaugeData @entity {
   id: ID!
   blockNumber: BigInt!
@@ -130,6 +138,7 @@ type CurvePoolData @entity {
   balance: [BigDecimal!]!
   virtualPrice: BigDecimal!
   tokens: [Bytes!]!
+  extras: [CurveExtraReward!]
 }
 
 # ----------------------------------------

@@ -613,6 +613,8 @@
           "contract": "PoolX2",
           "abis": [
             "PoolX2",
+            "Registry",
+            "LiquidityGauge",
             "ERC20"
           ],
           "entities": [
@@ -746,6 +748,8 @@
           "contract": "PoolX3",
           "abis": [
             "PoolX3",
+            "Registry",
+            "LiquidityGauge",
             "ERC20"
           ],
           "entities": [
@@ -795,6 +799,8 @@
           "contract": "PoolX4",
           "abis": [
             "PoolX4",
+            "Registry",
+            "LiquidityGauge",
             "ERC20"
           ],
           "entities": [

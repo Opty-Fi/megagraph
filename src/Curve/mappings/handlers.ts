@@ -3,12 +3,14 @@ import { CurvePoolX2 } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurvePoolX
 import { CurvePoolX3 } from "../../../generated/CurvePoolX3DAI+USDC+USDT/CurvePoolX3";
 import { CurvePoolX4 } from "../../../generated/CurvePoolX4yDAI+yUSDC+yUSDT+yTUSD/CurvePoolX4";
 import { CurveERC20 } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveERC20";
-import { CurvePoolData } from "../../../generated/schema";
+import { CurveLiquidityGauge } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveLiquidityGauge";
+import { CurveRegistry } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveRegistry";
+import { CurveExtraReward, CurvePoolData } from "../../../generated/schema";
 import {
   convertBINumToDesiredDecimals,
   toBytes,
 } from "../../utils/converters";
-import { ZERO_BYTES, ZERO_BD } from "../../utils/constants";
+import { ZERO_BYTES, ZERO_BD, CurveRegistryAddress, ZERO_BI } from "../../utils/constants";
 
 export function handlePoolEntity(
   txnHash: Bytes,
@@ -30,6 +32,8 @@ export function handlePoolEntity(
   entity.blockTimestamp = timestamp;
   entity.vault = vault;
 
+  // balance and tokens arrays
+
   let balances: Array<BigDecimal> = [];
   let tokens: Array<Bytes> = [];
   for (let i = 0; i < nCoins; i++) {
@@ -40,6 +44,8 @@ export function handlePoolEntity(
   }
   entity.balance = balances;
   entity.tokens = tokens;
+
+  // virtual price
 
   let virtualPrice: ethereum.CallResult<BigInt>;
   if (poolType === "Curve2Pool") {
@@ -57,6 +63,37 @@ export function handlePoolEntity(
   entity.virtualPrice = (!virtualPrice || virtualPrice.reverted)
     ? ZERO_BD
     : convertBINumToDesiredDecimals(virtualPrice.value, 18);
+
+  // extra rewards
+
+  let extras: string[] = [];
+
+  let CurveRegistryContract = CurveRegistry.bind(CurveRegistryAddress);
+  let getGaugesResult = CurveRegistryContract.try_get_gauges(entity.vault);
+  if (!getGaugesResult.reverted) {
+    let gaugeAddress = getGaugesResult.value[0];
+    let liquidityGaugeContract = CurveLiquidityGauge.bind(gaugeAddress);
+    let rewardTokensResult = liquidityGaugeContract.try_reward_tokens(ZERO_BI);
+    if (!rewardTokensResult.reverted) {
+      let rewardToken = rewardTokensResult.value;
+      let rewardDataResult = liquidityGaugeContract.try_reward_data(rewardToken);
+      if (!rewardDataResult.reverted) {
+        let periodFinish = rewardDataResult.value.value2;
+        let rewardRate   = rewardDataResult.value.value3;
+
+        let id = txnHash.toHex() + rewardToken.toHexString();
+        let extra = new CurveExtraReward(id);
+        extra.token = rewardToken;
+        extra.finishPeriod = periodFinish;
+        extra.rewardRatePerSecond = convertBINumToDesiredDecimals(rewardRate, 18);
+        extra.save();
+
+        extras.push(extra.id);
+      }
+    }
+  }
+
+  entity.extras(extras);
 
   entity.save();
 }
