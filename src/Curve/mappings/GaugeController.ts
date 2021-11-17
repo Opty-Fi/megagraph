@@ -49,7 +49,7 @@ export function handleVoteForGauge(event: VoteForGaugeEvent): void {
     event.block.timestamp,
     event.address, // controller
     event.params.gauge_addr, // gauge
-    event.params.weight, // gaugeWeight
+    null, // gaugeWeight
     null // totalWeight
   );
 }
