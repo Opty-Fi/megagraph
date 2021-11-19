@@ -1,9 +1,9 @@
 import { log, ethereum, Address, Bytes, BigInt, BigDecimal } from "@graphprotocol/graph-ts";
 import { CurveGaugeController } from "../../../generated/CurveGaugeController/CurveGaugeController";
-import { CurvePoolX2 } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurvePoolX2";
-import { CurvePoolX3 } from "../../../generated/CurvePoolX3DAI+USDC+USDT/CurvePoolX3";
-import { CurvePoolX4 } from "../../../generated/CurvePoolX4yDAI+yUSDC+yUSDT+yTUSD/CurvePoolX4";
-import { CurveERC20 } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveERC20";
+import { CurvePoolX2 } from "../../../generated/CurvePoolX2/CurvePoolX2";
+import { CurvePoolX3 } from "../../../generated/CurvePoolX3/CurvePoolX3";
+import { CurvePoolX4 } from "../../../generated/CurvePoolX4/CurvePoolX4";
+import { CurveERC20 } from "../../../generated/CurvePoolX2/CurveERC20";
 import {
   CurveGaugeData,
   CurvePoolData,
@@ -35,7 +35,7 @@ export function handleGaugeEntity(
   entity.blockNumber = blockNumber;
   entity.blockTimestamp = timestamp;
   entity.gaugeController = controller;
-  
+
   let liquidityGauge = gauge
     ? gauge
     : ZERO_ADDRESS;
@@ -84,7 +84,7 @@ export function handlePoolEntity(
   }
   entity.balance = balances;
   entity.tokens = tokens;
-  
+
   let virtualPrice: ethereum.CallResult<BigInt>;
   if (poolType === "Curve2Pool") {
     let contract = CurvePoolX2.bind(vault);

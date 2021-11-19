@@ -3,7 +3,7 @@ import {
   RemoveLiquidity as RemoveLiquidityEvent,
   RemoveLiquidityImbalance as RemoveLiquidityImbalanceEvent,
   TokenExchangeUnderlying as TokenExchangeUnderlyingEvent,
-} from "../../../generated/CurvePoolX4yDAI+yUSDC+yUSDT+yTUSD/CurvePoolX4";
+} from "../../../generated/CurvePoolX4/CurvePoolX4";
 import { Curve_N_COINS_CURVE4POOL } from "../../utils/constants";
 import { handlePoolEntity } from "./handlers";
 
