@@ -6,7 +6,6 @@ import { CurveERC20 } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveERC20"
 import { CurveLiquidityGauge } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveLiquidityGauge";
 import { CurveRegistry } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveRegistry";
 import { CurveExtraReward, CurvePoolData } from "../../../generated/schema";
-import { CurvePoolData } from "../../../generated/schema";
 import {
   convertBINumToDesiredDecimals,
   toBytes,
@@ -38,7 +37,8 @@ export function handlePoolEntity(
   let balances: Array<BigDecimal> = [];
   let tokens: Array<Bytes> = [];
   for (let i = 0; i < nCoins; i++) {
-    let { balance, token } = getBalanceAndToken(vault, BigInt.fromI32(i), poolType);
+    let balance = getBalance(vault, BigInt.fromI32(i), poolType);
+    let token   = getToken(vault, BigInt.fromI32(i), poolType);
 
     balances.push(balance);
     tokens.push(token);
@@ -94,16 +94,16 @@ export function handlePoolEntity(
     }
   }
 
-  entity.extras(extras);
+  entity.extras = extras;
 
   entity.save();
 }
 
-function getBalanceAndToken(
+function getBalance(
   address: Address,
   coinIndex: BigInt,
   poolType: string
-): { balance: BigDecimal, token: Bytes } {
+): BigDecimal {
   let balance: ethereum.CallResult<BigInt>;
   let token: ethereum.CallResult<Address>;
 
@@ -115,22 +115,37 @@ function getBalanceAndToken(
     let contract = CurvePoolX3.bind(address);
     balance = contract.try_balances(coinIndex);
     token = contract.try_coins(coinIndex);
-  } else if (poolType === "Curve4Pool") {
-    let contract = CurvePoolX4.bind(address);
-    balance = contract.try_balances(coinIndex);
-    token = contract.try_coins(coinIndex);
   } else {
-    return { balance: ZERO_BD, token: ZERO_BYTES };
+    return ZERO_BD;
   }
 
   if (!balance.reverted && !token.reverted) {
     let tokenContract = CurveERC20.bind(token.value);
     let decimal = tokenContract.try_decimals();
-    let balanceValue = decimal.reverted
+    return decimal.reverted
       ? balance.value.toBigDecimal()
       : convertBINumToDesiredDecimals(balance.value, decimal.value);
-    return { balance: balanceValue, token: toBytes(token.value.toHex()) }
   }
+  return ZERO_BD;
+}
 
-  return { balance: ZERO_BD, token: ZERO_BYTES };
+function getToken(
+  address: Address,
+  coinIndex: BigInt,
+  poolType: string
+): Bytes {
+  let token: ethereum.CallResult<Address>;
+
+  if (poolType === "Curve2Pool") {
+    let contract = CurvePoolX2.bind(address);
+    token = contract.try_coins(coinIndex);
+  } else if (poolType === "Curve3Pool") {
+    let contract = CurvePoolX3.bind(address);
+    token = contract.try_coins(coinIndex);
+  } else {
+    return ZERO_BYTES;
+  }
+  return token.reverted
+    ? ZERO_BYTES
+    : toBytes(token.value.toHex());
 }
