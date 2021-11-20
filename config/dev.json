@@ -671,6 +671,10 @@
               "event-params": "(indexed address,uint256[2],uint256[2],uint256)"
             },
             {
+              "event-name": "RemoveLiquidityOne",
+              "event-params": "(indexed address,uint256,uint256,uint256)"
+            },
+            {
               "event-name": "RemoveLiquidityImbalance",
               "event-params": "(indexed address,uint256[2],uint256[2],uint256,uint256)"
             },
@@ -800,6 +804,10 @@
               "event-params": "(indexed address,uint256[3],uint256[3],uint256)"
             },
             {
+              "event-name": "RemoveLiquidityOne",
+              "event-params": "(indexed address,uint256,uint256,uint256)"
+            },
+            {
               "event-name": "RemoveLiquidityImbalance",
               "event-params": "(indexed address,uint256[3],uint256[3],uint256,uint256)"
             },
@@ -847,6 +855,10 @@
             {
               "event-name": "RemoveLiquidityImbalance",
               "event-params": "(indexed address,uint256[4],uint256[4],uint256,uint256)"
+            },
+            {
+              "event-name": "TokenExchange",
+              "event-params": "(indexed address,int128,uint256,int128,uint256)"
             },
             {
               "event-name": "TokenExchangeUnderlying",

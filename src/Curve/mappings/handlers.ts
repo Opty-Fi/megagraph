@@ -1,60 +1,14 @@
 import { log, ethereum, Address, Bytes, BigInt, BigDecimal } from "@graphprotocol/graph-ts";
-import { CurveGaugeController } from "../../../generated/CurveGaugeController/CurveGaugeController";
 import { CurvePoolX2 } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurvePoolX2";
 import { CurvePoolX3 } from "../../../generated/CurvePoolX3DAI+USDC+USDT/CurvePoolX3";
 import { CurvePoolX4 } from "../../../generated/CurvePoolX4yDAI+yUSDC+yUSDT+yTUSD/CurvePoolX4";
 import { CurveERC20 } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveERC20";
-import {
-  CurveGaugeData,
-  CurvePoolData,
-} from "../../../generated/schema";
+import { CurvePoolData } from "../../../generated/schema";
 import {
   convertBINumToDesiredDecimals,
   toBytes,
 } from "../../utils/converters";
-import {
-  ZERO_ADDRESS,
-  ZERO_BYTES,
-  ZERO_BD,
-} from "../../utils/constants";
-
-export function handleGaugeEntity(
-  txnHash: Bytes,
-  blockNumber: BigInt,
-  timestamp: BigInt,
-  controller: Address,
-  gauge: Address,
-  gaugeWeight: BigInt,
-  totalWeight: BigInt
-): void {
-  let entity = CurveGaugeData.load(txnHash.toHex());
-  if (!entity) entity = new CurveGaugeData(txnHash.toHex());
-
-  log.debug("Saving Gauge Controller at {}", [ controller.toHex() ]);
-
-  entity.blockNumber = blockNumber;
-  entity.blockTimestamp = timestamp;
-  entity.gaugeController = controller;
-  
-  let liquidityGauge = gauge
-    ? gauge
-    : ZERO_ADDRESS;
-  entity.liquidityGauge = liquidityGauge;
-
-  let gaugeControllerContract = CurveGaugeController.bind(controller);
-  entity.gaugeWeight = gaugeWeight
-    ? convertBINumToDesiredDecimals(gaugeWeight, 18)
-    : gaugeControllerContract.try_get_gauge_weight(liquidityGauge).reverted
-      ? ZERO_BD
-      : convertBINumToDesiredDecimals(gaugeControllerContract.get_gauge_weight(liquidityGauge), 18);
-  entity.totalWeight = totalWeight
-    ? convertBINumToDesiredDecimals(totalWeight, 18)
-    : gaugeControllerContract.try_get_total_weight().reverted
-      ? ZERO_BD
-      : convertBINumToDesiredDecimals(gaugeControllerContract.get_total_weight(), 18);
-
-  entity.save();
-}
+import { ZERO_BYTES, ZERO_BD } from "../../utils/constants";
 
 export function handlePoolEntity(
   txnHash: Bytes,
@@ -84,7 +38,7 @@ export function handlePoolEntity(
   }
   entity.balance = balances;
   entity.tokens = tokens;
-  
+
   let virtualPrice: ethereum.CallResult<BigInt>;
   if (poolType === "Curve2Pool") {
     let contract = CurvePoolX2.bind(vault);
