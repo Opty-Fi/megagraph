@@ -49,3 +49,8 @@ export function toAddress(str: string): Address {
 export function toBytes(str: string): Bytes {
   return <Bytes>Bytes.fromHexString(str);
 }
+
+//  Function to convert a `Bytes` address to `Address` DataType
+export function convertBytesToAddress(address: Bytes): Address {
+  return Address.fromString(address.toHexString())
+}
