@@ -89,6 +89,40 @@ type CompoundTokenData @entity {
 }
 
 # ----------------------------------------
+#      Convex
+# ----------------------------------------
+type ConvexExtraReward @entity {
+  id: ID!
+  token: Bytes!
+  rewardPool: Bytes!
+  finishPeriod: BigInt!
+  rewardRatePerSecond: BigDecimal!
+}
+
+type ConvexPoolData @entity {
+  id: ID!
+  lpToken: Bytes!
+  token: Bytes!
+  gauge: Bytes!
+  crvRewards: Bytes!
+  stash: Bytes!
+  stashVersion: String!
+  shutdown: Boolean!
+}
+
+type ConvexTokenData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  pool: ConvexPoolData!
+  totalSupply: BigInt
+  virtualPrice: BigDecimal
+  crvRatePerSecond: BigDecimal
+  cvxRatePerSecond: BigDecimal
+  extras: [ConvexExtraReward!]
+}
+
+# ----------------------------------------
 #      C.R.E.A.M.
 # ----------------------------------------
 type CreamTokenData @entity {

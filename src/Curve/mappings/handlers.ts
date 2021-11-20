@@ -6,6 +6,7 @@ import { CurveERC20 } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveERC20"
 import { CurveLiquidityGauge } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveLiquidityGauge";
 import { CurveRegistry } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveRegistry";
 import { CurveExtraReward, CurvePoolData } from "../../../generated/schema";
+import { CurvePoolData } from "../../../generated/schema";
 import {
   convertBINumToDesiredDecimals,
   toBytes,
