@@ -33,11 +33,8 @@ export function handlePoolEntity(
   let balances: Array<BigDecimal> = [];
   let tokens: Array<Bytes> = [];
   for (let i = 0; i < nCoins; i++) {
-    let balance = getBalance(vault, BigInt.fromI32(i), poolType);
-    let token   = getToken(vault, BigInt.fromI32(i), poolType);
-
-    balances.push(balance);
-    tokens.push(token);
+    balances.push(getBalance(vault, BigInt.fromI32(i), poolType));
+    tokens.push(getToken(vault, BigInt.fromI32(i), poolType));
   }
   entity.balance = balances;
   entity.tokens = tokens;
