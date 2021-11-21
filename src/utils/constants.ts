@@ -24,3 +24,7 @@ export let DForce_dUSDT_Staking: Address = toAddress("0x324EebDAa45829c6A8eE903a
 
 export let Harvest_POOL: Address = toAddress("0x15d3A64B2d5ab9E152F16593Cdebc4bB165B5B4A");
 export let Harvest_fDAI: Address = toAddress("0xab7FA2B2985BCcfC13c6D86b1D5A17486ab1e04C");
+
+export let ConvexBoosterAddress = toAddress("0xf403c135812408bfbe8713b5a23a04b3d48aae31");
+export let ConvexTokenAddress   = toAddress("0x4e3FBD56CD56c3e72c1403e103b45Db9da5B9D2B");
+export let CurveRegistryAddress = toAddress("0x90e00ace148ca3b23ac1bc8c240c2a7dd9c2d7f5");
