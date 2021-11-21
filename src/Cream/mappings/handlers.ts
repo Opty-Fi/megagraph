@@ -20,8 +20,7 @@ export function handleEntity(
 
   let entity = CreamTokenData.load(transactionHash.toHex());
   if (!entity) entity = new CreamTokenData(transactionHash.toHex());
-  
-  
+
   if (comptrollerAddr) {
     entity.compSpeeds = convertBINumToDesiredDecimals(newSpeed, 18);
   } else {
@@ -41,7 +40,7 @@ export function handleEntity(
   if (underlyingAsset.reverted) log.error("underlying() reverted", []);
   else {
     let underlyingAssetContract = CreamUnderlying.bind(underlyingAsset.value);
-    if (!underlyingAssetContract) log.error("No underlyingAsset at {}", [ underlyingAsset.value.toHex() ]);
+    if (!underlyingAssetContract) log.error("No underlyingAsset at {}", [underlyingAsset.value.toHex()]);
     else {
       let tried_underlyingAssetDecimals = underlyingAssetContract.try_decimals();
       if (tried_underlyingAssetDecimals.reverted) log.error("decimals() reverted", []);
@@ -77,10 +76,14 @@ export function handleEntity(
   let tried_supplyRatePerBlock = tokenContract.try_supplyRatePerBlock();
   if (tried_supplyRatePerBlock.reverted) log.error("supplyRatePerBlock() reverted", []);
   else entity.supplyRatePerBlock = convertBINumToDesiredDecimals(tried_supplyRatePerBlock.value, 18);
-  
+
   let tried_exchangeRateStored = tokenContract.try_exchangeRateStored();
   if (tried_exchangeRateStored.reverted) log.error("exchangeRateStored() reverted", []);
-  else entity.exchangeRateStored = convertBINumToDesiredDecimals(tried_exchangeRateStored.value, 10 + underlyingAssetDecimals);
+  else
+    entity.exchangeRateStored = convertBINumToDesiredDecimals(
+      tried_exchangeRateStored.value,
+      10 + underlyingAssetDecimals,
+    );
 
   let tried_getCash = tokenContract.try_getCash();
   if (tried_getCash.reverted) log.error("getCash() reverted", []);
@@ -105,6 +108,6 @@ export function handleEntity(
     if (tried_totalReserves.reverted) log.error("totalReserves() reverted", []);
     else entity.totalReserves = convertBINumToDesiredDecimals(tried_totalReserves.value, underlyingAssetDecimals);
   }
-  
+
   entity.save();
 }

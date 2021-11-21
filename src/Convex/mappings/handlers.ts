@@ -1,4 +1,4 @@
-import { log, Bytes, BigInt, Address } from  "@graphprotocol/graph-ts";
+import { log, Bytes, BigInt, Address } from "@graphprotocol/graph-ts";
 import { ConvexBaseRewardsPool } from "../../../generated/ConvexBooster/ConvexBaseRewardsPool";
 import { ConvexBooster } from "../../../generated/ConvexBooster/ConvexBooster";
 import { ConvexCurvePool } from "../../../generated/ConvexBooster/ConvexCurvePool";
@@ -10,16 +10,11 @@ import { ConvexBoosterAddress, CurveRegistryAddress, ZERO_ADDRESS } from "../../
 import { getExtras } from "./extras";
 import { getCvxMintAmount } from "./convex";
 
-export function handleTokenEntity(
-  txnHash: Bytes,
-  blockNumber: BigInt,
-  timestamp: BigInt,
-  poolId: BigInt
-): void {
+export function handleTokenEntity(txnHash: Bytes, blockNumber: BigInt, timestamp: BigInt, poolId: BigInt): void {
   let entity = ConvexTokenData.load(txnHash.toHex());
   if (!entity) entity = new ConvexTokenData(txnHash.toHex());
 
-  entity.blockNumber    = blockNumber;
+  entity.blockNumber = blockNumber;
   entity.blockTimestamp = timestamp;
 
   let pool = getPoolData(poolId);
@@ -54,7 +49,7 @@ export function handleTokenEntity(
 
   let crvRewardRate = rewardsContract.try_rewardRate();
   if (!crvRewardRate.reverted) {
-    let crvRatePerSecond = convertBINumToDesiredDecimals(crvRewardRate.value, 18)
+    let crvRatePerSecond = convertBINumToDesiredDecimals(crvRewardRate.value, 18);
     entity.crvRatePerSecond = crvRatePerSecond;
     entity.cvxRatePerSecond = getCvxMintAmount(crvRatePerSecond);
   }
@@ -81,12 +76,12 @@ function getPoolData(id: BigInt): ConvexPoolData {
     return pool as ConvexPoolData;
   }
 
-  pool.lpToken    = poolInfo.value.value0
-  pool.token      = poolInfo.value.value1
-  pool.gauge      = poolInfo.value.value2
-  pool.crvRewards = poolInfo.value.value3
-  pool.stash      = poolInfo.value.value4
-  pool.shutdown   = poolInfo.value.value5
+  pool.lpToken = poolInfo.value.value0;
+  pool.token = poolInfo.value.value1;
+  pool.gauge = poolInfo.value.value2;
+  pool.crvRewards = poolInfo.value.value3;
+  pool.stash = poolInfo.value.value4;
+  pool.shutdown = poolInfo.value.value5;
 
   pool.stashVersion = "";
 

@@ -15,7 +15,7 @@ export function handleAddLiquidity(event: AddLiquidityEvent): void {
     event.block.timestamp,
     event.address, // vault
     Curve_N_COINS_CURVE3POOL,
-    "Curve3Pool"
+    "Curve3Pool",
   );
 }
 
@@ -26,7 +26,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidityEvent): void {
     event.block.timestamp,
     event.address, // vault
     Curve_N_COINS_CURVE3POOL,
-    "Curve3Pool"
+    "Curve3Pool",
   );
 }
 
@@ -37,7 +37,7 @@ export function handleRemoveLiquidityOne(event: RemoveLiquidityOneEvent): void {
     event.block.timestamp,
     event.address, // vault
     Curve_N_COINS_CURVE3POOL,
-    "Curve3Pool"
+    "Curve3Pool",
   );
 }
 
@@ -48,7 +48,7 @@ export function handleRemoveLiquidityImbalance(event: RemoveLiquidityImbalanceEv
     event.block.timestamp,
     event.address, // vault
     Curve_N_COINS_CURVE3POOL,
-    "Curve3Pool"
+    "Curve3Pool",
   );
 }
 
@@ -59,6 +59,6 @@ export function handleTokenExchange(event: TokenExchangeEvent): void {
     event.block.timestamp,
     event.address, // vault
     Curve_N_COINS_CURVE3POOL,
-    "Curve3Pool"
+    "Curve3Pool",
   );
 }

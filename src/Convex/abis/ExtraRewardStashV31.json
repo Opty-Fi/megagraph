@@ -95,18 +95,14 @@
     "type": "function"
   },
   {
-    "inputs": [
-      { "internalType": "address", "name": "_token", "type": "address" }
-    ],
+    "inputs": [{ "internalType": "address", "name": "_token", "type": "address" }],
     "name": "setExtraReward",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "inputs": [
-      { "internalType": "address", "name": "_hook", "type": "address" }
-    ],
+    "inputs": [{ "internalType": "address", "name": "_hook", "type": "address" }],
     "name": "setRewardHook",
     "outputs": [],
     "stateMutability": "nonpayable",

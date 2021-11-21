@@ -28,7 +28,7 @@ function getExtrasV1(pool: ConvexPoolData, tx: string): string[] {
   }
 
   let rewardToken = tokenInfo.value.value0;
-  let rewardPool  = tokenInfo.value.value1;
+  let rewardPool = tokenInfo.value.value1;
   let extra = createExtraReward(rewardToken, rewardPool, tx);
 
   return [extra];
@@ -44,7 +44,7 @@ function getExtrasV2(pool: ConvexPoolData, tx: string): string[] {
       let tokenInfo = stashContract.try_tokenInfo(BigInt.fromI32(i));
       if (!tokenInfo.reverted) {
         let rewardToken = tokenInfo.value.value0;
-        let rewardPool  = tokenInfo.value.value1;
+        let rewardPool = tokenInfo.value.value1;
         let extra = createExtraReward(rewardToken, rewardPool, tx);
         extras.push(extra);
       }
@@ -64,7 +64,7 @@ function getExtrasV3(pool: ConvexPoolData, tx: string): string[] {
       let tokenInfo = stashContract.try_tokenInfo(BigInt.fromI32(i));
       if (!tokenInfo.reverted) {
         let rewardToken = tokenInfo.value.value0;
-        let rewardPool  = tokenInfo.value.value1;
+        let rewardPool = tokenInfo.value.value1;
         let extra = createExtraReward(rewardToken, rewardPool, tx);
         extras.push(extra);
       }
@@ -86,7 +86,7 @@ function getExtrasV31(pool: ConvexPoolData, tx: string): string[] {
         let tokenInfo = stashContract.try_tokenInfo(tokenList.value);
         if (!tokenInfo.reverted) {
           let rewardToken = tokenInfo.value.value0;
-          let rewardPool  = tokenInfo.value.value1;
+          let rewardPool = tokenInfo.value.value1;
           let extra = createExtraReward(rewardToken, rewardPool, tx);
           extras.push(extra);
         }
@@ -103,8 +103,7 @@ function createExtraReward(rewardToken: Address, rewardPool: Address, tx: string
   let finishPeriod = finishPeriodResult.reverted ? ZERO_BI : finishPeriodResult.value;
 
   let rewardRateResult = rewardPoolContract.try_rewardRate();
-  let rewardRate = rewardRateResult.reverted ? ZERO_BD :
-    convertBINumToDesiredDecimals(rewardRateResult.value, 18);
+  let rewardRate = rewardRateResult.reverted ? ZERO_BD : convertBINumToDesiredDecimals(rewardRateResult.value, 18);
 
   let id = tx + rewardToken.toHexString();
   let extra = new ConvexExtraReward(id);
