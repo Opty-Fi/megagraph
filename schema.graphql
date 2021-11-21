@@ -149,7 +149,6 @@ type CreamTokenData @entity {
 type CurveExtraReward @entity {
   id: ID!
   token: Bytes!
-  rewardPool: Bytes!
   finishPeriod: BigInt!
   rewardRatePerSecond: BigDecimal!
 }

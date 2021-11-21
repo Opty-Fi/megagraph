@@ -3,14 +3,10 @@ import { CurvePoolX2 } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurvePoolX
 import { CurvePoolX3 } from "../../../generated/CurvePoolX3DAI+USDC+USDT/CurvePoolX3";
 import { CurvePoolX4 } from "../../../generated/CurvePoolX4yDAI+yUSDC+yUSDT+yTUSD/CurvePoolX4";
 import { CurveERC20 } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveERC20";
-import { CurveLiquidityGauge } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveLiquidityGauge";
-import { CurveRegistry } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveRegistry";
-import { CurveExtraReward, CurvePoolData } from "../../../generated/schema";
-import {
-  convertBINumToDesiredDecimals,
-  toBytes,
-} from "../../utils/converters";
-import { ZERO_BYTES, ZERO_BD, CurveRegistryAddress, ZERO_BI } from "../../utils/constants";
+import { CurvePoolData } from "../../../generated/schema";
+import { convertBINumToDesiredDecimals, toBytes } from "../../utils/converters";
+import { ZERO_BYTES, ZERO_BD } from "../../utils/constants";
+import { getExtras } from "./extras";
 
 export function handlePoolEntity(
   txnHash: Bytes,
@@ -67,34 +63,7 @@ export function handlePoolEntity(
 
   // extra rewards
 
-  let extras: string[] = [];
-
-  let CurveRegistryContract = CurveRegistry.bind(CurveRegistryAddress);
-  let getGaugesResult = CurveRegistryContract.try_get_gauges(entity.vault);
-  if (!getGaugesResult.reverted) {
-    let gaugeAddress = getGaugesResult.value[0];
-    let liquidityGaugeContract = CurveLiquidityGauge.bind(gaugeAddress);
-    let rewardTokensResult = liquidityGaugeContract.try_reward_tokens(ZERO_BI);
-    if (!rewardTokensResult.reverted) {
-      let rewardToken = rewardTokensResult.value;
-      let rewardDataResult = liquidityGaugeContract.try_reward_data(rewardToken);
-      if (!rewardDataResult.reverted) {
-        let periodFinish = rewardDataResult.value.value2;
-        let rewardRate   = rewardDataResult.value.value3;
-
-        let id = txnHash.toHex() + rewardToken.toHexString();
-        let extra = new CurveExtraReward(id);
-        extra.token = rewardToken;
-        extra.finishPeriod = periodFinish;
-        extra.rewardRatePerSecond = convertBINumToDesiredDecimals(rewardRate, 18);
-        extra.save();
-
-        extras.push(extra.id);
-      }
-    }
-  }
-
-  entity.extras = extras;
+  entity.extras = getExtras(<CurvePoolData>entity, txnHash);
 
   entity.save();
 }
@@ -113,6 +82,10 @@ function getBalance(
     token = contract.try_coins(coinIndex);
   } else if (poolType === "Curve3Pool") {
     let contract = CurvePoolX3.bind(address);
+    balance = contract.try_balances(coinIndex);
+    token = contract.try_coins(coinIndex);
+  } else if (poolType === "Curve4Pool") {
+    let contract = CurvePoolX4.bind(address);
     balance = contract.try_balances(coinIndex);
     token = contract.try_coins(coinIndex);
   } else {
@@ -141,6 +114,9 @@ function getToken(
     token = contract.try_coins(coinIndex);
   } else if (poolType === "Curve3Pool") {
     let contract = CurvePoolX3.bind(address);
+    token = contract.try_coins(coinIndex);
+  } else if (poolType === "Curve4Pool") {
+    let contract = CurvePoolX4.bind(address);
     token = contract.try_coins(coinIndex);
   } else {
     return ZERO_BYTES;
