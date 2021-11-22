@@ -14,6 +14,7 @@
             "LiquidityGaugeV2",
             "StakingLiquidityGauge",
             "StakingRewards",
+            "MultiRewards",
             "Rewards",
             "ERC20"
           ],
@@ -154,6 +155,7 @@
             "LiquidityGaugeV2",
             "StakingLiquidityGauge",
             "StakingRewards",
+            "MultiRewards",
             "Rewards",
             "ERC20"
           ],
@@ -210,6 +212,7 @@
             "LiquidityGaugeV2",
             "StakingLiquidityGauge",
             "StakingRewards",
+            "MultiRewards",
             "Rewards",
             "ERC20"
           ],

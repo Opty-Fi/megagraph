@@ -1,20 +1,21 @@
-import { log, Bytes, Address } from "@graphprotocol/graph-ts";
+import { log, Bytes, Address, BigInt } from "@graphprotocol/graph-ts";
 import { CurveLiquidityGauge } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveLiquidityGauge";
 import { CurveLiquidityGaugeV2 } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveLiquidityGaugeV2";
 import { CurveStakingLiquidityGauge } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveStakingLiquidityGauge";
 import { CurveRegistry } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveRegistry";
 import { CurveRewards } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveRewards";
+import { CurveMultiRewards } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveMultiRewards";
 import { CurveStakingRewards } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveStakingRewards";
 import { CurveExtraReward, CurvePoolData } from "../../../generated/schema";
 import { convertBINumToDesiredDecimals, convertBytesToAddress, toAddress } from "../../utils/converters";
-import { CurveRegistryAddress, ZERO_BI } from "../../utils/constants";
+import { CurveRegistryAddress, ZERO_BI, ZERO_ADDRESS } from "../../utils/constants";
 
-// Liquidity Gauge - reward_tokens(), reward_data()
+// Liquidity Gauge - reward_tokens, reward_data
 let v1Pools: Array<string> = [
   "0x5a6A4D54456819380173272A5E8E9B9904BdF41B", "0x5a6a4d54456819380173272a5e8e9b9904bdf41b", // mim -> SPELL
 ];
 
-// Liquidity Gauge V2 - reward_tokens(), reward_contract()
+// Liquidity Gauge V2 - reward_tokens, reward_contract
 let v2Pools: Array<string> = [
   "0xDC24316b9AE028F1497c275EB9192a3Ea0f67022", "0xdc24316b9ae028f1497c275eb9192a3ea0f67022", // steth -> LDO
   "0xd632f22692FaC7611d2AA1C0D552930D43CAEd3B", "0xd632f22692fac7611d2aa1c0d552930d43caed3b", // frax -> FXS
@@ -23,7 +24,12 @@ let v2Pools: Array<string> = [
   "0xd7d147c6Bb90A718c3De8C0568F9B560C79fa416", "0xd7d147c6bb90a718c3de8c0568f9b560c79fa416", // pbtc -> PNT
 ];
 
-// TODO: Liquidity Gauge V3 -
+// Liquidity Gauge V2 + MultiRewards
+let v2PoolsMulti: Array<string> = [
+  "0xA96A65c051bF88B4095Ee1f2451C2A9d43F53Ae2", "0xa96a65c051bf88b4095ee1f2451c2a9d43f53ae2", // ankreth -> ANKR + ONX
+];
+
+// Liquidity Gauge V3 - reward_tokens, reward_contract (same as V2)
 let v3Pools: Array<string> = [
   "0x43b4FdFD4Ff969587185cDB6f0BD875c5Fc83f8c", "0x43b4fdfd4ff969587185cdb6f0bd875c5fc83f8c", // alusd -> ALCX
   "0xF9440930043eb3997fc70e1339dBb11F341de7A8", "0xf9440930043eb3997fc70e1339dbb11f341de7a8", // reth -> FIS
@@ -74,8 +80,6 @@ let factoryPools: Array<string> = [ // TODO: object gives compile error
   "0x9c2c8910f113181783c249d8f6aa41b51cde0f0c", "0x2fA53e8fa5fAdb81f4332C8EcE39Fe62eA2f919E",
 ];
 
-// TODO: https://curve.fi/ankreth - 0xA96A65c051bF88B4095Ee1f2451C2A9d43F53Ae2 -> ANKR + ONX
-
 export function getExtras(entity: CurvePoolData, txnHash: Bytes): string[] {
   let address = entity.vault.toHexString();
   let index = factoryPools.indexOf(address);
@@ -84,6 +88,11 @@ export function getExtras(entity: CurvePoolData, txnHash: Bytes): string[] {
   } else if (stakingPools.includes(address)) {
     return stakingPool(entity, txnHash);
   } else if (v2Pools.includes(address)) {
+    return v2Pool(entity, txnHash);
+  } else if (v2PoolsMulti.includes(address)) {
+    return v2PoolMulti(entity, txnHash);
+  } else if (v3Pools.includes(address)) {
+    // V3 same ABI as V2 (for our calls)
     return v2Pool(entity, txnHash);
   } else if (index > -1) {
     let gauge = factoryPools[index + 1];
@@ -209,6 +218,57 @@ function v2Pool(entity: CurvePoolData, txnHash: Bytes): string[] {
   extra.save();
 
   return [extra.id];
+}
+
+function v2PoolMulti(entity: CurvePoolData, txnHash: Bytes): string[] {
+  let CurveRegistryContract = CurveRegistry.bind(CurveRegistryAddress);
+  let getGaugesResult = CurveRegistryContract.try_get_gauges(convertBytesToAddress(entity.vault));
+  if (getGaugesResult.reverted) {
+    log.warning("get_gauges reverted", []);
+    return [];
+  }
+
+  let gaugeAddress = convertBytesToAddress(getGaugesResult.value.value0[0]);
+  let liquidityGaugeV2Contract = CurveLiquidityGaugeV2.bind(gaugeAddress);
+  let extras: Array<string> = [];
+  let index = ZERO_BI;
+  while (1) {
+    let rewardTokensResult = liquidityGaugeV2Contract.try_reward_tokens(index);
+    index = index.plus(BigInt.fromString("1"));
+    if (rewardTokensResult.reverted) {
+      log.warning("reward_tokens reverted", []);
+      return extras;
+    }
+
+    let rewardToken = rewardTokensResult.value;
+    let rewardContractResult = liquidityGaugeV2Contract.try_reward_contract();
+    if (rewardContractResult.reverted) {
+      log.warning("reward_contract reverted", []);
+      return extras;
+    }
+
+    let rewardContractAddress = convertBytesToAddress(rewardContractResult.value);
+    let rewardContract = CurveMultiRewards.bind(rewardContractAddress);
+    let rewardDataResult = rewardContract.try_rewardData(rewardToken);
+    if (rewardDataResult.reverted) {
+      log.warning("rewardData reverted", []);
+      return extras;
+    }
+
+    let periodFinish = rewardDataResult.value.value2;
+    let rewardRate   = rewardDataResult.value.value3;
+
+    let id = txnHash.toHex() + rewardToken.toHexString();
+    let extra = new CurveExtraReward(id);
+    extra.token = rewardToken;
+    extra.finishPeriod = periodFinish;
+    extra.rewardRatePerSecond = convertBINumToDesiredDecimals(rewardRate, 18);
+    extra.save();
+
+    extras.push(extra.id);
+  }
+
+  return extras;
 }
 
 function factoryPool(entity: CurvePoolData, gaugeAddress: Address, txnHash: Bytes): string[] {
