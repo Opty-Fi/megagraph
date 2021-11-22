@@ -241,6 +241,9 @@ function v2PoolMulti(entity: CurvePoolData, txnHash: Bytes): string[] {
     }
 
     let rewardToken = rewardTokensResult.value;
+    if (rewardToken == ZERO_ADDRESS) {
+      break;
+    }
     let rewardContractResult = liquidityGaugeV2Contract.try_reward_contract();
     if (rewardContractResult.reverted) {
       log.warning("reward_contract reverted", []);
