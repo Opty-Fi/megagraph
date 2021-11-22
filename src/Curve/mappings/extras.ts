@@ -44,51 +44,55 @@ let aavePools: Array<string> = [
 ];
 
 // Factory Pools - Liquidity Gauge (reward_tokens, reward_data)
-let factoryPools = {
+let factoryPools: Array<string> = [ // TODO: object gives compile error
   // 2: f-ibkrw -> rKP3R
-  "0x8461A004b50d321CB22B7d034969cE6803911899": "0x1750a3a3d80A3F5333BBe9c4695B0fAd41061ab1",
-  "0x8461a004b50d321cb22b7d034969ce6803911899": "0x1750a3a3d80A3F5333BBe9c4695B0fAd41061ab1",
+  "0x8461A004b50d321CB22B7d034969cE6803911899", "0x1750a3a3d80A3F5333BBe9c4695B0fAd41061ab1",
+  "0x8461a004b50d321cb22b7d034969ce6803911899", "0x1750a3a3d80A3F5333BBe9c4695B0fAd41061ab1",
 
   // 3: f-ibeur -> rKP3R
-  "0x19b080FE1ffA0553469D20Ca36219F17Fcf03859": "0x99fb76F75501039089AAC8f20f487bf84E51d76F",
-  "0x19b080fe1ffa0553469d20ca36219f17fcf03859": "0x99fb76F75501039089AAC8f20f487bf84E51d76F",
+  "0x19b080FE1ffA0553469D20Ca36219F17Fcf03859", "0x99fb76F75501039089AAC8f20f487bf84E51d76F",
+  "0x19b080fe1ffa0553469d20ca36219f17fcf03859", "0x99fb76F75501039089AAC8f20f487bf84E51d76F",
 
   // 9: ousd -> OGN
-  "0x87650D7bbfC3A9F10587d7778206671719d9910D": "0x25f0cE4E2F8dbA112D9b115710AC297F816087CD",
-  "0x87650d7bbfc3a9f10587d7778206671719d9910d": "0x25f0cE4E2F8dbA112D9b115710AC297F816087CD",
+  "0x87650D7bbfC3A9F10587d7778206671719d9910D", "0x25f0cE4E2F8dbA112D9b115710AC297F816087CD",
+  "0x87650d7bbfc3a9f10587d7778206671719d9910d", "0x25f0cE4E2F8dbA112D9b115710AC297F816087CD",
 
   // 28: f-ibjpy -> rKP3R
-  "0x8818a9bb44Fbf33502bE7c15c500d0C783B73067": "0xeFF437A56A22D7dD86C1202A308536ED8C7da7c1",
-  "0x8818a9bb44fbf33502be7c15c500d0c783b73067": "0xeFF437A56A22D7dD86C1202A308536ED8C7da7c1",
+  "0x8818a9bb44Fbf33502bE7c15c500d0C783B73067", "0xeFF437A56A22D7dD86C1202A308536ED8C7da7c1",
+  "0x8818a9bb44fbf33502be7c15c500d0c783b73067", "0xeFF437A56A22D7dD86C1202A308536ED8C7da7c1",
 
   // 29: f-ibaud -> rKP3R
-  "0x3F1B0278A9ee595635B61817630cC19DE792f506": "0x05ca5c01629a8E5845f12ea3A03fF7331932233A",
-  "0x3f1b0278a9ee595635b61817630cc19de792f506": "0x05ca5c01629a8E5845f12ea3A03fF7331932233A",
+  "0x3F1B0278A9ee595635B61817630cC19DE792f506", "0x05ca5c01629a8E5845f12ea3A03fF7331932233A",
+  "0x3f1b0278a9ee595635b61817630cc19de792f506", "0x05ca5c01629a8E5845f12ea3A03fF7331932233A",
 
   // 30: f-ibgbp -> rKP3R
-  "0xD6Ac1CB9019137a896343Da59dDE6d097F710538": "0x63d9f3aB7d0c528797A12a0684E50C397E9e79dC",
-  "0xd6ac1cb9019137a896343da59dde6d097f710538": "0x63d9f3aB7d0c528797A12a0684E50C397E9e79dC",
+  "0xD6Ac1CB9019137a896343Da59dDE6d097F710538", "0x63d9f3aB7d0c528797A12a0684E50C397E9e79dC",
+  "0xd6ac1cb9019137a896343da59dde6d097f710538", "0x63d9f3aB7d0c528797A12a0684E50C397E9e79dC",
 
   // 31: f-ibchf -> rKP3R
-  "0x9c2C8910F113181783c249d8F6Aa41b51Cde0f0c": "0x2fA53e8fa5fAdb81f4332C8EcE39Fe62eA2f919E",
-  "0x9c2c8910f113181783c249d8f6aa41b51cde0f0c": "0x2fA53e8fa5fAdb81f4332C8EcE39Fe62eA2f919E",
-};
+  "0x9c2C8910F113181783c249d8F6Aa41b51Cde0f0c", "0x2fA53e8fa5fAdb81f4332C8EcE39Fe62eA2f919E",
+  "0x9c2c8910f113181783c249d8f6aa41b51cde0f0c", "0x2fA53e8fa5fAdb81f4332C8EcE39Fe62eA2f919E",
+];
 
 // TODO: https://curve.fi/ankreth - 0xA96A65c051bF88B4095Ee1f2451C2A9d43F53Ae2 -> ANKR + ONX
 
 export function getExtras(entity: CurvePoolData, txnHash: Bytes): string[] {
   let address = entity.vault.toHexString();
-  const gauge = factoryPools[address]
+  let index = factoryPools.indexOf(address);
   if (v1Pools.includes(address)) {
     return v1Pool(entity, txnHash);
   } else if (stakingPools.includes(address)) {
     return stakingPool(entity, txnHash);
   } else if (v2Pools.includes(address)) {
     return v2Pool(entity, txnHash);
-  } else if (gauge) {
+  } else if (index > -1) {
+    let gauge = factoryPools[index + 1];
     return factoryPool(entity, toAddress(gauge), txnHash);
   } else if (aavePools.includes(address)) {
     log.warning("aavePools not implemented", []);
+    return [];
+  } else if (v3Pools.includes(address)) {
+    log.warning("v3Pool not implemented", []);
     return [];
   }
 
@@ -208,7 +212,6 @@ function v2Pool(entity: CurvePoolData, txnHash: Bytes): string[] {
 }
 
 function factoryPool(entity: CurvePoolData, gaugeAddress: Address, txnHash: Bytes): string[] {
-  let gaugeAddress = convertBytesToAddress(gauge);
   let liquidityGaugeContract = CurveLiquidityGauge.bind(gaugeAddress);
   let rewardTokensResult = liquidityGaugeContract.try_reward_tokens(ZERO_BI);
   if (rewardTokensResult.reverted) {
