@@ -16,7 +16,8 @@
             "StakingRewards",
             "MultiRewards",
             "Rewards",
-            "ERC20"
+            "ERC20",
+            "AaveIncentivesController"
           ],
           "entities": [
             "CurvePoolData",
@@ -157,7 +158,8 @@
             "StakingRewards",
             "MultiRewards",
             "Rewards",
-            "ERC20"
+            "ERC20",
+            "AaveIncentivesController"
           ],
           "entities": [
             "CurvePoolData",
@@ -214,7 +216,8 @@
             "StakingRewards",
             "MultiRewards",
             "Rewards",
-            "ERC20"
+            "ERC20",
+            "AaveIncentivesController"
           ],
           "entities": [
             "CurvePoolData",

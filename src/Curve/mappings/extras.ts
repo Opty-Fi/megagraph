@@ -6,9 +6,10 @@ import { CurveRegistry } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveReg
 import { CurveRewards } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveRewards";
 import { CurveMultiRewards } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveMultiRewards";
 import { CurveStakingRewards } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveStakingRewards";
+import { CurveAaveIncentivesController } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveAaveIncentivesController";
 import { CurveExtraReward, CurvePoolData } from "../../../generated/schema";
 import { convertBINumToDesiredDecimals, convertBytesToAddress, convertToLowerCase, toAddress } from "../../utils/converters";
-import { CurveRegistryAddress, ZERO_BI, ZERO_ADDRESS } from "../../utils/constants";
+import { CurveRegistryAddress, ZERO_BI, ZERO_ADDRESS, AaveV2_INCENTIVES_CONTROLLER_ADDRESS } from "../../utils/constants";
 
 // Liquidity Gauge - reward_tokens, reward_data
 let v1Pools: Array<string> = [
@@ -55,25 +56,32 @@ let aavePools: Array<string> = [
 // Factory Pools - Liquidity Gauge (reward_tokens, reward_data)
 let factoryPools: Array<string> = [ // TODO: object gives compile error
   // 2: f-ibkrw -> rKP3R
-  convertToLowerCase("0x8461A004b50d321CB22B7d034969cE6803911899"), "0x1750a3a3d80A3F5333BBe9c4695B0fAd41061ab1",
+  convertToLowerCase("0x8461A004b50d321CB22B7d034969cE6803911899"),
+  "0x1750a3a3d80A3F5333BBe9c4695B0fAd41061ab1",
 
   // 3: f-ibeur -> rKP3R
-  convertToLowerCase("0x19b080FE1ffA0553469D20Ca36219F17Fcf03859"), "0x99fb76F75501039089AAC8f20f487bf84E51d76F",
+  convertToLowerCase("0x19b080FE1ffA0553469D20Ca36219F17Fcf03859"),
+  "0x99fb76F75501039089AAC8f20f487bf84E51d76F",
 
   // 9: ousd -> OGN
-  convertToLowerCase("0x87650D7bbfC3A9F10587d7778206671719d9910D"), "0x25f0cE4E2F8dbA112D9b115710AC297F816087CD",
+  convertToLowerCase("0x87650D7bbfC3A9F10587d7778206671719d9910D"),
+  "0x25f0cE4E2F8dbA112D9b115710AC297F816087CD",
 
   // 28: f-ibjpy -> rKP3R
-  convertToLowerCase("0x8818a9bb44Fbf33502bE7c15c500d0C783B73067"), "0xeFF437A56A22D7dD86C1202A308536ED8C7da7c1",
+  convertToLowerCase("0x8818a9bb44Fbf33502bE7c15c500d0C783B73067"),
+  "0xeFF437A56A22D7dD86C1202A308536ED8C7da7c1",
 
   // 29: f-ibaud -> rKP3R
-  convertToLowerCase("0x3F1B0278A9ee595635B61817630cC19DE792f506"), "0x05ca5c01629a8E5845f12ea3A03fF7331932233A",
+  convertToLowerCase("0x3F1B0278A9ee595635B61817630cC19DE792f506"),
+  "0x05ca5c01629a8E5845f12ea3A03fF7331932233A",
 
   // 30: f-ibgbp -> rKP3R
-  convertToLowerCase("0xD6Ac1CB9019137a896343Da59dDE6d097F710538"), "0x63d9f3aB7d0c528797A12a0684E50C397E9e79dC",
+  convertToLowerCase("0xD6Ac1CB9019137a896343Da59dDE6d097F710538"),
+  "0x63d9f3aB7d0c528797A12a0684E50C397E9e79dC",
 
   // 31: f-ibchf -> rKP3R
-  convertToLowerCase("0x9c2C8910F113181783c249d8F6Aa41b51Cde0f0c"), "0x2fA53e8fa5fAdb81f4332C8EcE39Fe62eA2f919E",
+  convertToLowerCase("0x9c2C8910F113181783c249d8F6Aa41b51Cde0f0c"),
+  "0x2fA53e8fa5fAdb81f4332C8EcE39Fe62eA2f919E",
 ];
 
 export function getExtras(entity: CurvePoolData, txnHash: Bytes): string[] {
@@ -94,11 +102,7 @@ export function getExtras(entity: CurvePoolData, txnHash: Bytes): string[] {
     let gauge = factoryPools[index + 1];
     return factoryPool(entity, toAddress(gauge), txnHash);
   } else if (aavePools.includes(address)) {
-    log.warning("aavePools not implemented", []);
-    return [];
-  } else if (v3Pools.includes(address)) {
-    log.warning("v3Pool not implemented", []);
-    return [];
+    return aavePool(entity, txnHash);
   }
 
   return [];
@@ -296,4 +300,19 @@ function factoryPool(entity: CurvePoolData, gaugeAddress: Address, txnHash: Byte
   extra.save();
 
   return [extra.id];
+}
+
+function aavePool(entity: CurvePoolData, txnHash: Bytes): string[] {
+  // TODO: Work in Progress
+  let aaveIncentivesControllerContract = CurveAaveIncentivesController.bind(AaveV2_INCENTIVES_CONTROLLER_ADDRESS);
+  let getAssetDataResult = aaveIncentivesControllerContract.try_getAssetData(toAddress("0x101cc05f4a51c0319f570d5e146a8c625198e636"));
+  if (getAssetDataResult.reverted) {
+    log.error("getAssetData reverted", []);
+    return [];
+  }
+
+  let aEmissionPerSecond = getAssetDataResult.value.value1;
+  log.warning("aEmissionPerSecond = {}", [aEmissionPerSecond.toString()]);
+
+  return [];
 }
