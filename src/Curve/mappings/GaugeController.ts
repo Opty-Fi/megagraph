@@ -18,7 +18,7 @@ export function handleNewGauge(event: NewGaugeEvent): void {
     event.address, // controller
     event.params.addr, // gauge
     event.params.weight, // gaugeWeight
-    null // totalWeight
+    null, // totalWeight
   );
 }
 
@@ -30,7 +30,7 @@ export function handleNewGaugeWeight(event: NewGaugeWeightEvent): void {
     event.address, // controller
     event.params.gauge_address, // gauge
     event.params.weight, // gaugeWeight
-    event.params.total_weight // totalWeight
+    event.params.total_weight, // totalWeight
   );
 }
 
@@ -42,7 +42,7 @@ export function handleNewTypeWeight(event: NewTypeWeightEvent): void {
     event.address, // controller
     null, // gauge
     event.params.weight, // gaugeWeight
-    event.params.total_weight // totalWeight
+    event.params.total_weight, // totalWeight
   );
 }
 
@@ -54,7 +54,7 @@ export function handleVoteForGauge(event: VoteForGaugeEvent): void {
     event.address, // controller
     event.params.gauge_addr, // gauge
     null, // gaugeWeight
-    null // totalWeight
+    null, // totalWeight
   );
 }
 
@@ -65,33 +65,31 @@ function handleGaugeEntity(
   controller: Address,
   gauge: Address,
   gaugeWeight: BigInt,
-  totalWeight: BigInt
+  totalWeight: BigInt,
 ): void {
   let entity = CurveGaugeData.load(txnHash.toHex());
   if (!entity) entity = new CurveGaugeData(txnHash.toHex());
 
-  log.debug("Saving Gauge Controller at {}", [ controller.toHex() ]);
+  log.debug("Saving Gauge Controller at {}", [controller.toHex()]);
 
   entity.blockNumber = blockNumber;
   entity.blockTimestamp = timestamp;
   entity.gaugeController = controller;
 
-  let liquidityGauge = gauge
-    ? gauge
-    : ZERO_ADDRESS;
+  let liquidityGauge = gauge ? gauge : ZERO_ADDRESS;
   entity.liquidityGauge = liquidityGauge;
 
   let gaugeControllerContract = CurveGaugeController.bind(controller);
   entity.gaugeWeight = gaugeWeight
     ? convertBINumToDesiredDecimals(gaugeWeight, 18)
     : gaugeControllerContract.try_get_gauge_weight(liquidityGauge).reverted
-      ? ZERO_BD
-      : convertBINumToDesiredDecimals(gaugeControllerContract.get_gauge_weight(liquidityGauge), 18);
+    ? ZERO_BD
+    : convertBINumToDesiredDecimals(gaugeControllerContract.get_gauge_weight(liquidityGauge), 18);
   entity.totalWeight = totalWeight
     ? convertBINumToDesiredDecimals(totalWeight, 18)
     : gaugeControllerContract.try_get_total_weight().reverted
-      ? ZERO_BD
-      : convertBINumToDesiredDecimals(gaugeControllerContract.get_total_weight(), 18);
+    ? ZERO_BD
+    : convertBINumToDesiredDecimals(gaugeControllerContract.get_total_weight(), 18);
 
   entity.save();
 }
