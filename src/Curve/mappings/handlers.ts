@@ -14,15 +14,12 @@ export function handlePoolEntity(
   timestamp: BigInt,
   vault: Address,
   nCoins: number,
-  poolType: string
+  poolType: string,
 ): void {
   let entity = CurvePoolData.load(txnHash.toHex());
   if (!entity) entity = new CurvePoolData(txnHash.toHex());
 
-  log.debug("Saving {} at {}", [
-    poolType,
-    vault.toHex(),
-  ]);
+  log.debug("Saving {} at {}", [poolType, vault.toHex()]);
 
   entity.blockNumber = blockNumber;
   entity.blockTimestamp = timestamp;
@@ -52,11 +49,10 @@ export function handlePoolEntity(
     let contract = CurvePoolX4.bind(vault);
     virtualPrice = contract.try_get_virtual_price();
   } else {
-    log.error("Unknown poolType {}", [ poolType ]);
+    log.error("Unknown poolType {}", [poolType]);
   }
-  entity.virtualPrice = (!virtualPrice || virtualPrice.reverted)
-    ? ZERO_BD
-    : convertBINumToDesiredDecimals(virtualPrice.value, 18);
+  entity.virtualPrice =
+    !virtualPrice || virtualPrice.reverted ? ZERO_BD : convertBINumToDesiredDecimals(virtualPrice.value, 18);
 
   // extra rewards
 
@@ -65,11 +61,7 @@ export function handlePoolEntity(
   entity.save();
 }
 
-function getBalance(
-  address: Address,
-  coinIndex: BigInt,
-  poolType: string
-): BigDecimal {
+function getBalance(address: Address, coinIndex: BigInt, poolType: string): BigDecimal {
   let balance: ethereum.CallResult<BigInt>;
   let token: ethereum.CallResult<Address>;
 
@@ -99,11 +91,7 @@ function getBalance(
   return ZERO_BD;
 }
 
-function getToken(
-  address: Address,
-  coinIndex: BigInt,
-  poolType: string
-): Bytes {
+function getToken(address: Address, coinIndex: BigInt, poolType: string): Bytes {
   let token: ethereum.CallResult<Address>;
 
   if (poolType === "Curve2Pool") {
@@ -118,7 +106,5 @@ function getToken(
   } else {
     return ZERO_BYTES;
   }
-  return token.reverted
-    ? ZERO_BYTES
-    : toBytes(token.value.toHex());
+  return token.reverted ? ZERO_BYTES : toBytes(token.value.toHex());
 }

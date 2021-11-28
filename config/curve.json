@@ -19,10 +19,7 @@
             "ERC20",
             "AaveIncentivesController"
           ],
-          "entities": [
-            "CurvePoolData",
-            "CurveExtraReward"
-          ],
+          "entities": ["CurvePoolData", "CurveExtraReward"],
           "events": [
             {
               "event-name": "AddLiquidity",
@@ -161,10 +158,7 @@
             "ERC20",
             "AaveIncentivesController"
           ],
-          "entities": [
-            "CurvePoolData",
-            "CurveExtraReward"
-          ],
+          "entities": ["CurvePoolData", "CurveExtraReward"],
           "events": [
             {
               "event-name": "AddLiquidity",
@@ -219,10 +213,7 @@
             "ERC20",
             "AaveIncentivesController"
           ],
-          "entities": [
-            "CurvePoolData",
-            "CurveExtraReward"
-          ],
+          "entities": ["CurvePoolData", "CurveExtraReward"],
           "events": [
             {
               "event-name": "AddLiquidity",

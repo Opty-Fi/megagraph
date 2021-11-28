@@ -8,8 +8,18 @@ import { CurveMultiRewards } from "../../../generated/CurvePoolX2cDAI+cUSDC/Curv
 import { CurveStakingRewards } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveStakingRewards";
 import { CurveAaveIncentivesController } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveAaveIncentivesController";
 import { CurveExtraReward, CurvePoolData } from "../../../generated/schema";
-import { convertBINumToDesiredDecimals, convertBytesToAddress, convertToLowerCase, toAddress } from "../../utils/converters";
-import { CurveRegistryAddress, ZERO_BI, ZERO_ADDRESS, AaveV2_INCENTIVES_CONTROLLER_ADDRESS } from "../../utils/constants";
+import {
+  convertBINumToDesiredDecimals,
+  convertBytesToAddress,
+  convertToLowerCase,
+  toAddress,
+} from "../../utils/converters";
+import {
+  CurveRegistryAddress,
+  ZERO_BI,
+  ZERO_ADDRESS,
+  AaveV2_INCENTIVES_CONTROLLER_ADDRESS,
+} from "../../utils/constants";
 
 // Liquidity Gauge - reward_tokens, reward_data
 let v1Pools: Array<string> = [
@@ -47,14 +57,17 @@ let stakingPools: Array<string> = [
 // TODO: Aave Pools
 let aavePools: Array<string> = [
   // saave -> stkAAVE
-  convertToLowerCase("0xEB16Ae0052ed37f479f7fe63849198Df1765a733"), "TODO",
+  convertToLowerCase("0xEB16Ae0052ed37f479f7fe63849198Df1765a733"),
+  "TODO",
 
   // aave -> stkAAVE
-  convertToLowerCase("0xDeBF20617708857ebe4F679508E7b7863a8A8EeE"), "TODO",
+  convertToLowerCase("0xDeBF20617708857ebe4F679508E7b7863a8A8EeE"),
+  "TODO",
 ];
 
 // Factory Pools - Liquidity Gauge (reward_tokens, reward_data)
-let factoryPools: Array<string> = [ // TODO: object gives compile error
+let factoryPools: Array<string> = [
+  // TODO: object gives compile error
   // 2: f-ibkrw -> rKP3R
   convertToLowerCase("0x8461A004b50d321CB22B7d034969cE6803911899"),
   "0x1750a3a3d80A3F5333BBe9c4695B0fAd41061ab1",
@@ -259,7 +272,7 @@ function v2PoolMulti(entity: CurvePoolData, txnHash: Bytes): string[] {
     }
 
     let periodFinish = rewardDataResult.value.value2;
-    let rewardRate   = rewardDataResult.value.value3;
+    let rewardRate = rewardDataResult.value.value3;
 
     let id = txnHash.toHex() + rewardToken.toHexString();
     let extra = new CurveExtraReward(id);
@@ -290,7 +303,7 @@ function factoryPool(entity: CurvePoolData, gaugeAddress: Address, txnHash: Byte
   }
 
   let periodFinish = rewardDataResult.value.value2;
-  let rewardRate   = rewardDataResult.value.value3;
+  let rewardRate = rewardDataResult.value.value3;
 
   let id = txnHash.toHex() + rewardToken.toHexString();
   let extra = new CurveExtraReward(id);
@@ -305,7 +318,9 @@ function factoryPool(entity: CurvePoolData, gaugeAddress: Address, txnHash: Byte
 function aavePool(entity: CurvePoolData, txnHash: Bytes): string[] {
   // TODO: Work in Progress
   let aaveIncentivesControllerContract = CurveAaveIncentivesController.bind(AaveV2_INCENTIVES_CONTROLLER_ADDRESS);
-  let getAssetDataResult = aaveIncentivesControllerContract.try_getAssetData(toAddress("0x101cc05f4a51c0319f570d5e146a8c625198e636"));
+  let getAssetDataResult = aaveIncentivesControllerContract.try_getAssetData(
+    toAddress("0x101cc05f4a51c0319f570d5e146a8c625198e636"),
+  );
   if (getAssetDataResult.reverted) {
     log.error("getAssetData reverted", []);
     return [];
