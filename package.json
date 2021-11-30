@@ -18,6 +18,7 @@
     "mustache-yaml": "./node_modules/.bin/dotenv -- yarn mustache-yaml-replace",
     "mustache-yaml-replace": "mustache ./config/${CONFIG:-dev}.json ${BLOCKCHAIN:-ethereum}.subgraph.template.yaml > subgraph.yaml",
     "codegen": "rm -rf build generated && graph codegen --output-dir ./generated",
+    "postcodegen": "./node_modules/.bin/dotenv -- ./script/add-symlinks.sh",
     "graph-auth": "./node_modules/.bin/dotenv -- yarn graph-auth-replace",
     "graph-auth-replace": "graph auth https://api.thegraph.com/deploy/ $ACCESS_TOKEN",
     "deploy": "./node_modules/.bin/dotenv -- yarn graph-deploy-replace",
