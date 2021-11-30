@@ -71,6 +71,6 @@ export function handleTokenExchangeUnderlying(event: TokenExchangeUnderlyingEven
     event.block.timestamp,
     event.address, // vault
     Curve_N_COINS_CURVE3POOL,
-    "Curve3Pool"
+    "Curve3Pool",
   );
 }
