@@ -1,8 +1,8 @@
 import { log, ethereum, Address, Bytes, BigInt, BigDecimal } from "@graphprotocol/graph-ts";
-import { CurvePoolX2 } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurvePoolX2";
-import { CurvePoolX3 } from "../../../generated/CurvePoolX3DAI+USDC+USDT/CurvePoolX3";
-import { CurvePoolX4 } from "../../../generated/CurvePoolX4yDAI+yUSDC+yUSDT+yTUSD/CurvePoolX4";
-import { CurveERC20 } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveERC20";
+import { CurvePoolX2 } from "../../../generated/CurvePoolX2/CurvePoolX2";
+import { CurvePoolX3 } from "../../../generated/CurvePoolX3/CurvePoolX3";
+import { CurvePoolX4 } from "../../../generated/CurvePoolX4/CurvePoolX4";
+import { CurveERC20 } from "../../../generated/CurvePoolX2/CurveERC20";
 import { CurvePoolData } from "../../../generated/schema";
 import { convertBINumToDesiredDecimals, toBytes } from "../../utils/converters";
 import { ZERO_BYTES, ZERO_BD } from "../../utils/constants";

@@ -5,7 +5,7 @@ import {
   RemoveLiquidityImbalance as RemoveLiquidityImbalanceEvent,
   TokenExchange as TokenExchangeEvent,
   TokenExchangeUnderlying as TokenExchangeUnderlyingEvent,
-} from "../../../generated/CurvePoolX3DAI+USDC+USDT/CurvePoolX3";
+} from "../../../generated/CurvePoolX3/CurvePoolX3";
 import { Curve_N_COINS_CURVE3POOL } from "../../utils/constants";
 import { handlePoolEntity } from "./handlers";
 
@@ -71,6 +71,6 @@ export function handleTokenExchangeUnderlying(event: TokenExchangeUnderlyingEven
     event.block.timestamp,
     event.address, // vault
     Curve_N_COINS_CURVE3POOL,
-    "Curve3Pool"
+    "Curve3Pool",
   );
 }
