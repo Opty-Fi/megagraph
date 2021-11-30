@@ -87,12 +87,12 @@
               "startBlock": 20500706
             },
             {
-              "symbol": "ibbtc3CRV-f",
+              "symbol": "ibbtc3CRV-f-2",
               "address": "0x9da618900fDEa8fc300Db03254394ed8Eb07EF83",
               "startBlock": 20643523
             },
             {
-              "symbol": "ibbtc3CRV-f-2",
+              "symbol": "ibbtc3CRV-f-3",
               "address": "0xf0016fA1b5CB0036425AE47510aC9DEb40d3f273",
               "startBlock": 20643552
             },
@@ -107,7 +107,7 @@
               "startBlock": 20714581
             },
             {
-              "symbol": "jSGD+XSGD-f",
+              "symbol": "jSGD+XSGD-f-2",
               "address": "0xeF75E9C7097842AcC5D0869E1dB4e5fDdf4BFDDA",
               "startBlock": 20717226
             },
