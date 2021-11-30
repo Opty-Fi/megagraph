@@ -13,8 +13,8 @@ export function handleRewardAdded(event: RewardAddedEvent): void {
     null, // vaultAddr
     event.transaction.hash.toHex(),
     event.block.number,
-    event.block.timestamp
-  )
+    event.block.timestamp,
+  );
 }
 
 export function handleRewardDenied(event: RewardDeniedEvent): void {
@@ -23,7 +23,7 @@ export function handleRewardDenied(event: RewardDeniedEvent): void {
     null, // vaultAddr
     event.transaction.hash.toHex(),
     event.block.number,
-    event.block.timestamp
+    event.block.timestamp,
   );
 }
 
@@ -33,7 +33,7 @@ export function handleRewardPaid(event: RewardPaidEvent): void {
     null, // vaultAddr
     event.transaction.hash.toHex(),
     event.block.number,
-    event.block.timestamp
+    event.block.timestamp,
   );
 }
 
@@ -43,7 +43,7 @@ export function handleStaked(event: StakedEvent): void {
     null, // vaultAddr
     event.transaction.hash.toHex(),
     event.block.number,
-    event.block.timestamp
+    event.block.timestamp,
   );
 }
 
@@ -53,6 +53,6 @@ export function handleWithdrawn(event: WithdrawnEvent): void {
     null, // vaultAddr
     event.transaction.hash.toHex(),
     event.block.number,
-    event.block.timestamp
+    event.block.timestamp,
   );
 }

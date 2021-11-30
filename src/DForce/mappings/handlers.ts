@@ -20,69 +20,34 @@ export function handleDTokenEntity(
   blockTimestamp: BigInt,
 ): void {
   if (dTokenAddress == null) {
-    if (
-      convertToLowerCase(dforceStakingVaultAddress.toHex()) ==
-      convertToLowerCase(DForce_dDAI_Staking.toHex())
-    ) {
+    if (convertToLowerCase(dforceStakingVaultAddress.toHex()) == convertToLowerCase(DForce_dDAI_Staking.toHex())) {
       dTokenAddress = DForce_dDAI;
-      createDTokenData(
-        dTokenAddress,
-        dforceStakingVaultAddress,
-        transactionHash,
-        blockNumber,
-        blockTimestamp,
-      );
+      createDTokenData(dTokenAddress, dforceStakingVaultAddress, transactionHash, blockNumber, blockTimestamp);
     } else if (
-      convertToLowerCase(dforceStakingVaultAddress.toHex()) ==
-      convertToLowerCase(DForce_dUSDC_Staking.toHex())
+      convertToLowerCase(dforceStakingVaultAddress.toHex()) == convertToLowerCase(DForce_dUSDC_Staking.toHex())
     ) {
       dTokenAddress = DForce_dUSDC;
-      createDTokenData(
-        dTokenAddress,
-        dforceStakingVaultAddress,
-        transactionHash,
-        blockNumber,
-        blockTimestamp,
-      );
+      createDTokenData(dTokenAddress, dforceStakingVaultAddress, transactionHash, blockNumber, blockTimestamp);
     } else if (
-      convertToLowerCase(dforceStakingVaultAddress.toHex()) ==
-      convertToLowerCase(DForce_dUSDT_Staking.toHex())
+      convertToLowerCase(dforceStakingVaultAddress.toHex()) == convertToLowerCase(DForce_dUSDT_Staking.toHex())
     ) {
       dTokenAddress = DForce_dUSDT;
-      createDTokenData(
-        dTokenAddress,
-        dforceStakingVaultAddress,
-        transactionHash,
-        blockNumber,
-        blockTimestamp,
-      );
+      createDTokenData(dTokenAddress, dforceStakingVaultAddress, transactionHash, blockNumber, blockTimestamp);
     }
   } else {
     if (dforceStakingVaultAddress == null) {
-      if (
-        convertToLowerCase(dTokenAddress.toHex()) == convertToLowerCase(DForce_dDAI.toHex())
-      ) {
+      if (convertToLowerCase(dTokenAddress.toHex()) == convertToLowerCase(DForce_dDAI.toHex())) {
         dforceStakingVaultAddress = DForce_dDAI_Staking;
-        log.info("dDAI Staking Vault contract address: {}", [ dforceStakingVaultAddress.toHex() ]);
-      } else if (
-        convertToLowerCase(dTokenAddress.toHex()) == convertToLowerCase(DForce_dUSDC.toHex())
-      ) {
+        log.info("dDAI Staking Vault contract address: {}", [dforceStakingVaultAddress.toHex()]);
+      } else if (convertToLowerCase(dTokenAddress.toHex()) == convertToLowerCase(DForce_dUSDC.toHex())) {
         dforceStakingVaultAddress = DForce_dUSDC_Staking;
-        log.info("dUSDC Staking Vault contract address: {}", [ dforceStakingVaultAddress.toHex() ]);
-      } else if (
-        convertToLowerCase(dTokenAddress.toHex()) == convertToLowerCase(DForce_dUSDT.toHex())
-      ) {
+        log.info("dUSDC Staking Vault contract address: {}", [dforceStakingVaultAddress.toHex()]);
+      } else if (convertToLowerCase(dTokenAddress.toHex()) == convertToLowerCase(DForce_dUSDT.toHex())) {
         dforceStakingVaultAddress = DForce_dUSDT_Staking;
-        log.info("dUSDT Staking Vault contract address: {}", [ dforceStakingVaultAddress.toHex() ]);
+        log.info("dUSDT Staking Vault contract address: {}", [dforceStakingVaultAddress.toHex()]);
       }
     }
-    createDTokenData(
-      dTokenAddress,
-      dforceStakingVaultAddress,
-      transactionHash,
-      blockNumber,
-      blockTimestamp,
-    );
+    createDTokenData(dTokenAddress, dforceStakingVaultAddress, transactionHash, blockNumber, blockTimestamp);
   }
 }
 
@@ -104,12 +69,10 @@ function createDTokenData(
   dTokenDataEntity.blockNumber = blockNumber;
   dTokenDataEntity.blockTimestamp = blockTimestamp;
   dTokenDataEntity.dTokenAddress = dTokenAddress;
-  dTokenDataEntity.dTokenSymbol = dTokenContract.try_symbol().reverted
-    ? null
-    : dTokenContract.symbol();
+  dTokenDataEntity.dTokenSymbol = dTokenContract.try_symbol().reverted ? null : dTokenContract.symbol();
   log.info("dToken address: {} and symbol: {}", [
     dTokenDataEntity.dTokenAddress.toHex(),
-    dTokenDataEntity.dTokenSymbol.toString()
+    dTokenDataEntity.dTokenSymbol.toString(),
   ]);
 
   dTokenDataEntity.pricePerFullShare = dTokenContract.try_getExchangeRate().reverted
@@ -127,14 +90,11 @@ function createDTokenData(
       : dforceStakingVaultContract.rewardRate();
   }
 
-  log.info(
-    "Saving data for dToken: {} - {} for block: {} with transaction hash: {}",
-    [
-      dTokenDataEntity.dTokenAddress.toHex(),
-      dTokenDataEntity.dTokenSymbol,
-      dTokenDataEntity.blockNumber.toString(),
-      dTokenDataEntity.id,
-    ],
-  );
+  log.info("Saving data for dToken: {} - {} for block: {} with transaction hash: {}", [
+    dTokenDataEntity.dTokenAddress.toHex(),
+    dTokenDataEntity.dTokenSymbol,
+    dTokenDataEntity.blockNumber.toString(),
+    dTokenDataEntity.id,
+  ]);
   dTokenDataEntity.save();
 }

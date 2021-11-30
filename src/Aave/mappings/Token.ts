@@ -10,12 +10,7 @@ import { AaveLendingPoolDataProvider } from "../../../generated/AaveTokenaDAI/Aa
 import { convertBINumToDesiredDecimals } from "../../utils/converters";
 import { Aave_POOL_PROVIDER_ADDRESS } from "../../utils/constants";
 
-function handleAaveToken(
-  transactionHash: Bytes,
-  blockNumber: BigInt,
-  blockTimestamp: BigInt,
-  address: Address,
-): void {
+function handleAaveToken(transactionHash: Bytes, blockNumber: BigInt, blockTimestamp: BigInt, address: Address): void {
   let tokenContract = AaveToken.bind(address);
 
   let entity = AaveTokenData.load(transactionHash.toHex());
@@ -39,12 +34,17 @@ function handleAaveToken(
 
   let poolProviderContract = AaveLendingPoolAddressesProvider.bind(Aave_POOL_PROVIDER_ADDRESS);
   let tried_getDataProvider = poolProviderContract.try_getLendingPoolDataProvider();
-  if (tried_getDataProvider.reverted) log.error("poolProvider at {} call getDataProvider() reverted", [ poolProviderContract._address.toHex() ]);
+  if (tried_getDataProvider.reverted)
+    log.error("poolProvider at {} call getDataProvider() reverted", [poolProviderContract._address.toHex()]);
   else {
     let dataProviderContract = AaveLendingPoolDataProvider.bind(tried_getDataProvider.value);
-    
+
     let tried_getReserveConfigurationData = dataProviderContract.try_getReserveConfigurationData(underlyingAssetAddr);
-    if (tried_getReserveConfigurationData.reverted) log.error("dataProvider at {} call getReserveConfigurationData({}) reverted", [ dataProviderContract._address.toHex(), underlyingAssetAddr.toHex() ]);
+    if (tried_getReserveConfigurationData.reverted)
+      log.error("dataProvider at {} call getReserveConfigurationData({}) reverted", [
+        dataProviderContract._address.toHex(),
+        underlyingAssetAddr.toHex(),
+      ]);
     else {
       let reserveConfData = tried_getReserveConfigurationData.value;
       entity.ltv = convertBINumToDesiredDecimals(reserveConfData.value0, 4);
@@ -58,7 +58,11 @@ function handleAaveToken(
     }
 
     let tried_getReserveData = dataProviderContract.try_getReserveData(underlyingAssetAddr);
-    if (tried_getReserveData.reverted) log.error("dataProvider at {} call getReserveConfigurationData({}) reverted", [ dataProviderContract._address.toHex(), underlyingAssetAddr.toHex() ]);
+    if (tried_getReserveData.reverted)
+      log.error("dataProvider at {} call getReserveConfigurationData({}) reverted", [
+        dataProviderContract._address.toHex(),
+        underlyingAssetAddr.toHex(),
+      ]);
     else {
       let reserveData = tried_getReserveData.value;
       entity.totalLiquidity = convertBINumToDesiredDecimals(reserveData.value0, entity.decimals);
@@ -81,19 +85,9 @@ function handleAaveToken(
 }
 
 export function handleBurnOnLiquidation(event: BurnOnLiquidationEvent): void {
-  handleAaveToken(
-    event.transaction.hash,
-    event.block.number,
-    event.block.timestamp,
-    event.address,
-  );
+  handleAaveToken(event.transaction.hash, event.block.number, event.block.timestamp, event.address);
 }
 
 export function handleMintOnDeposit(event: MintOnDepositEvent): void {
-  handleAaveToken(
-    event.transaction.hash,
-    event.block.number,
-    event.block.timestamp,
-    event.address,
-  );
+  handleAaveToken(event.transaction.hash, event.block.number, event.block.timestamp, event.address);
 }
