@@ -34,8 +34,14 @@ export function handlePoolEntity(
   entity.tokens = tokens;
 
   let virtualPrice: ethereum.CallResult<BigInt>;
-  if (poolType === "Curve3Pool") {
+  if (poolType === "Curve2Pool") {
+    let contract = CurvePoolX2.bind(vault);
+    virtualPrice = contract.try_get_virtual_price();
+  } else if (poolType === "Curve3Pool") {
     let contract = CurvePoolX3.bind(vault);
+    virtualPrice = contract.try_get_virtual_price();
+  } else if (poolType === "Curve4Pool") {
+    let contract = CurvePoolX4.bind(vault);
     virtualPrice = contract.try_get_virtual_price();
   } else {
     log.error("Unknown poolType {}", [poolType]);
@@ -50,8 +56,16 @@ function getBalance(address: Address, coinIndex: BigInt, poolType: string): BigD
   let balance: ethereum.CallResult<BigInt>;
   let token: ethereum.CallResult<Address>;
 
-  if (poolType === "Curve3Pool") {
+  if (poolType === "Curve2Pool") {
+    let contract = CurvePoolX2.bind(address);
+    balance = contract.try_balances(coinIndex);
+    token = contract.try_coins(coinIndex);
+  } else if (poolType === "Curve3Pool") {
     let contract = CurvePoolX3.bind(address);
+    balance = contract.try_balances(coinIndex);
+    token = contract.try_coins(coinIndex);
+  } else if (poolType === "Curve4Pool") {
+    let contract = CurvePoolX4.bind(address);
     balance = contract.try_balances(coinIndex);
     token = contract.try_coins(coinIndex);
   } else {
@@ -71,8 +85,14 @@ function getBalance(address: Address, coinIndex: BigInt, poolType: string): BigD
 function getToken(address: Address, coinIndex: BigInt, poolType: string): Bytes {
   let token: ethereum.CallResult<Address>;
 
-  if (poolType === "Curve3Pool") {
+  if (poolType === "Curve2Pool") {
+    let contract = CurvePoolX2.bind(address);
+    token = contract.try_coins(coinIndex);
+  } else if (poolType === "Curve3Pool") {
     let contract = CurvePoolX3.bind(address);
+    token = contract.try_coins(coinIndex);
+  } else if (poolType === "Curve4Pool") {
+    let contract = CurvePoolX4.bind(address);
     token = contract.try_coins(coinIndex);
   } else {
     return ZERO_BYTES;
