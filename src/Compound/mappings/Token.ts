@@ -21,7 +21,7 @@ export function handleAccrueInterest(event: AccrueInterestEvent): void {
     null, // newSpeed
     event.address, // cTokenAddress
     event.params.borrowIndex,
-    event.params.totalBorrows
+    event.params.totalBorrows,
   );
 }
 
@@ -34,7 +34,7 @@ export function handleBorrow(event: BorrowEvent): void {
     null, // newSpeed
     event.address, // cTokenAddress
     null, // borrowIndex
-    event.params.totalBorrows
+    event.params.totalBorrows,
   );
 }
 
@@ -47,7 +47,7 @@ export function handleLiquidateBorrow(event: LiquidateBorrowEvent): void {
     null, // newSpeed
     event.address, // cTokenAddress
     null, // borrowIndex
-    null // totalBorrows
+    null, // totalBorrows
   );
 }
 
@@ -60,7 +60,7 @@ export function handleMint(event: MintEvent): void {
     null, // newSpeed
     event.address, // cTokenAddress
     null, // borrowIndex
-    null // totalBorrows
+    null, // totalBorrows
   );
 }
 
@@ -73,7 +73,7 @@ export function handleNewReserveFactor(event: NewReserveFactorEvent): void {
     null, // newSpeed
     event.address, // cTokenAddress
     null, // borrowIndex
-    null // totalBorrows
+    null, // totalBorrows
   );
 }
 
@@ -86,7 +86,7 @@ export function handleRedeem(event: RedeemEvent): void {
     null, // newSpeed
     event.address, // cTokenAddress
     null, // borrowIndex
-    null // totalBorrows
+    null, // totalBorrows
   );
 }
 
@@ -99,7 +99,7 @@ export function handleRepayBorrow(event: RepayBorrowEvent): void {
     null, // newSpeed
     event.address, // cTokenAddress
     null, // borrowIndex
-    event.params.totalBorrows
+    event.params.totalBorrows,
   );
 }
 
@@ -112,7 +112,7 @@ export function handleReservesAdded(event: ReservesAddedEvent): void {
     null, // newSpeed
     event.address, // cTokenAddress
     null, // borrowIndex
-    null // totalBorrows
+    null, // totalBorrows
   );
 }
 
@@ -125,7 +125,7 @@ export function handleReservesReduced(event: ReservesReducedEvent): void {
     null, // newSpeed
     event.address, // cTokenAddress
     null, // borrowIndex
-    null // totalBorrows
+    null, // totalBorrows
   );
 }
 
@@ -138,6 +138,6 @@ export function handleTransfer(event: TransferEvent): void {
     null, // newSpeed
     event.address, // cTokenAddress
     null, // borrowIndex
-    null // totalBorrows
+    null, // totalBorrows
   );
 }

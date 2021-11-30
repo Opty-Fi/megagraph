@@ -1,6 +1,6 @@
 specVersion: 0.0.2
 description: Opty-Fi's DeFi Adapters subgraph
-repository: https://github.com/Opty-Fi/defi-protocol-subgraph
+repository: https://github.com/Opty-Fi/megagraph
 schema:
   file: ./schema.graphql
 dataSources:

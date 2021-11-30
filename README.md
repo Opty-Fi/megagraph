@@ -1,19 +1,21 @@
 # Megagraph
-The subgraph for the DeFi protocols that are integrated with [OptyFi](https://opty.fi)'s [`earn-protocol`](https://github.com/Opty-Fi/earn-protocol).
 
+The subgraph for the DeFi protocols that are integrated with [OptyFi](https://opty.fi)'s [`earn-protocol`](https://github.com/Opty-Fi/earn-protocol).
 
 ## Subgraph
 
-* Build : QmYPqD5MUFVBsKhNvYVQzKxaMdVVqhofYux4aJajEMSsSp
+- Build : QmYPqD5MUFVBsKhNvYVQzKxaMdVVqhofYux4aJajEMSsSp
 
-* Subgraph endpoints:
-  * Queries (HTTP):     https://api.thegraph.com/subgraphs/name/opty-fi/defi-protocol-subgraph
-* Link : https://thegraph.com/legacy-explorer/subgraph/opty-fi/defi-protocol-subgraph
-* Query : https://api.thegraph.com/subgraphs/name/opty-fi/defi-protocol-subgraph
-* Subscription : wss://api.thegraph.com/subgraphs/name/opty-fi/defi-protocol-subgraph
+- Subgraph endpoints: (still using the old repo name `defi-protocol-subgraph`)
+  - Queries (HTTP): https://api.thegraph.com/subgraphs/name/opty-fi/defi-protocol-subgraph
+- Link : https://thegraph.com/hosted-service/subgraph/opty-fi/defi-protocol-subgraph
+- Query : https://api.thegraph.com/subgraphs/name/opty-fi/defi-protocol-subgraph
+- Subscription : wss://api.thegraph.com/subgraphs/name/opty-fi/defi-protocol-subgraph
 
 ## Development
+
 ### Prerequisites:
+
 - Node JS 12.x.x and above
 - Install the prerequisite modules:
   ```sh
@@ -26,6 +28,7 @@ The subgraph for the DeFi protocols that are integrated with [OptyFi](https://op
   and populate accordingly.
 
 ### Naming conventions:
+
 - `./config/` directory:
   - `dev.json` file only:
     - `startBlock` to be omitted, or `"startBlock": 0`, unless you configure your local `graph-node` otherwise (see [`Local Development`](#local-development) below)
@@ -41,13 +44,8 @@ The subgraph for the DeFi protocols that are integrated with [OptyFi](https://op
             "contracts": [
               {
                 "contract": "ContractName",
-                "abis": [
-                  "AbiName",
-                  "SupportingAbiName"
-                ],
-                "entities": [
-                  "<Adapter>EntityName"
-                ],
+                "abis": ["AbiName", "SupportingAbiName"],
+                "entities": ["<Adapter>EntityName"],
                 "events": [
                   {
                     "event-name": "EventName",
@@ -75,11 +73,14 @@ The subgraph for the DeFi protocols that are integrated with [OptyFi](https://op
   }
   ```
 - `./src/<Adapter>/` directory:
+
   - `abis/` directory:
     - all `<AbiName>.json` files from `./config/$CONFIG.json` file's `adapters[i].contracts[j].abis`
   - `mappings/` directory:
+
     - all `<ContractName>.ts` files from `./config/$CONFIG.json` file's `adapters[i].contracts[j].contract`
     - for each `<ContractName>.ts` file, at minimum the generated:
+
       - WebAssembly typescript reference:
         ```typescript
         import {
@@ -87,27 +88,32 @@ The subgraph for the DeFi protocols that are integrated with [OptyFi](https://op
         } from "../../../generated/<Adapter><ContractName><SymbolDAI>/<Adapter><ContractName>";
         ```
       - event handlers:
+
         ```typescript
         import {
           <EventName> as <EventName>Event,
           ...
         } from "../../../generated/<Adapter><ContractName><symbol>/<Adapter><ContractName>";
-        
+
         export function handle<EventName>(event: <EventName>Event): void {
           ...
         }
         export function handle...
         ```
+
       - `graphql` entities:
         ```typescript
         import {
           <Adapter><EntityName>
         } from "../../../generated/schema";
         ```
+
     - repeat for the next `<ContractName>.ts` file
+
 - The above will leverage the `./package.json` "`yarn mustache-yaml`" script to populate a `./subgraph.yaml` file for use with the `yarn codegen` script.
 
 ### Local development:
+
 1. Install [ganache-cli](https://github.com/trufflesuite/ganache-cli)
 1. Clone a [graph node](https://github.com/graphprotocol/graph-node) locally
 1. In your local `graph-node`:
@@ -132,14 +138,15 @@ The subgraph for the DeFi protocols that are integrated with [OptyFi](https://op
      ```sh
      docker-compose up
      ```
-1. In the `defi-protocol-subgraph` root directory, run:
+1. In the `megagraph` root directory, run:
    ```sh
    yarn setup:local
    ```
 
 ### Deploying to [The Graph](https://thegraph.com):
+
 1. Create an account and login, and ensure that your [Access token](https://thegraph.com/explorer/dashboard) is populated in your `.env` file
-1. In your local `defi-protocol-subgraph` directory, run:
+1. In your local `megagraph` directory, run:
    ```sh
    yarn setup
    ```
@@ -147,6 +154,7 @@ The subgraph for the DeFi protocols that are integrated with [OptyFi](https://op
 ## Detailed Instructions
 
 ### Generate manifest from mustache template:
+
 - Run the following command:
   ```sh
   yarn mustache-yaml
@@ -154,6 +162,7 @@ The subgraph for the DeFi protocols that are integrated with [OptyFi](https://op
   If the execution is successful, you should see a new `./subgraph.yaml` file created from the `./$BLOCKCHAIN.subgraph.template.yaml` file, based on the `./config/$CONFIG.json` file as per the [`Naming conventions`](#naming-conventions) above.
 
 ### Generating subgraph code:
+
 - Run the following command:
   ```sh
   yarn codegen
@@ -161,6 +170,7 @@ The subgraph for the DeFi protocols that are integrated with [OptyFi](https://op
   If the generation was successful, you should see a new `./generated/` folder.
 
 ### Running a build:
+
 - Run the `build` command:
   ```sh
   graph build
@@ -169,19 +179,24 @@ The subgraph for the DeFi protocols that are integrated with [OptyFi](https://op
 - Note: this step is performed automatically when running the `yarn deploy` script, or when manually executing the `graph deploy` command.
 
 ### Deploying the subgraph:
-- To deploy, we can run the `deploy` command using the Graph CLI. To deploy, you will first need to copy the __Access token__ for the subgraph you created in the Graph console.
+
+- To deploy, we can run the `deploy` command using the Graph CLI. To deploy, you will first need to copy the **Access token** for the subgraph you created in the Graph console.
 - Next, run the following commands:
+
   ```sh
   graph auth https://api.thegraph.com/deploy/ <ACCESS_TOKEN>
 
   yarn deploy
   ```
+
   Once the subgraph is deployed, you should see it show up in your dashboard.
-  
+
   When you click on the subgraph, it should open the Graph explorer.
 
 ### Example querying:
+
 In the dashboard, we should be able to start querying for data. Run the following query to get a list of tokens and their metadata:
+
 ```graphql
 {
   tokens {
@@ -194,12 +209,10 @@ In the dashboard, we should be able to start querying for data. Run the followin
 ```
 
 We can also configure the order direction:
+
 ```graphql
 {
-  tokens(
-    orderBy: id,
-    orderDirection: desc
-  ) {
+  tokens(orderBy: id, orderDirection: desc) {
     id
     tokenID
     contentURI
@@ -209,13 +222,10 @@ We can also configure the order direction:
 ```
 
 Or choose to skip forward a certain number of results to implement some basic pagination:
+
 ```graphql
 {
-  tokens(
-    skip: 100,
-    orderBy: id,
-    orderDirection: desc
-  ) {
+  tokens(skip: 100, orderBy: id, orderDirection: desc) {
     id
     tokenID
     contentURI
@@ -225,6 +235,7 @@ Or choose to skip forward a certain number of results to implement some basic pa
 ```
 
 Or query for users and their associated content:
+
 ```graphql
 {
   users {
@@ -238,6 +249,7 @@ Or query for users and their associated content:
 ```
 
 ### Updating the subgraph:
+
 For example adding the capabilities to sort by the timestamp that an NFT was created.
 
 - Add a new `createdAtTimestamp` field to the `Token` entity:
@@ -255,6 +267,7 @@ For example adding the capabilities to sort by the timestamp that an NFT was cre
 - Re-run the `yarn codegen` script.
 
 - Update the mapping to save this new field:
+
   ```typescript
   // update the handleTransfer function to add the createdAtTimestamp to the token object
   export function handleTransfer(event: TransferEvent): void {
@@ -263,17 +276,17 @@ For example adding the capabilities to sort by the timestamp that an NFT was cre
       token = new Token(event.params.tokenId.toString());
       token.creator = event.params.to.toHex();
       token.tokenID = event.params.tokenId;
-      
+
       // Add the createdAtTimestamp to the token object
       token.createdAtTimestamp = event.block.timestamp;
-      
+
       let tokenContract = TokenContract.bind(event.address);
       token.contentURI = tokenContract.tokenURI(event.params.tokenId);
       token.metadataURI = tokenContract.tokenMetadataURI(event.params.tokenId);
     }
     token.owner = event.params.to.toHex();
     token.save();
-    
+
     let user = User.load(event.params.to.toHex());
     if (!user) {
       user = new User(event.params.to.toHex());
@@ -281,18 +294,17 @@ For example adding the capabilities to sort by the timestamp that an NFT was cre
     }
   }
   ```
+
 - Re-deploy the subgraph:
   ```sh
   yarn deploy
   ```
 
 After redeployment, a query can be made by timestamp to view the most recently created NFTs:
+
 ```graphql
 {
-  tokens(
-    orderBy:createdAtTimestamp,
-    orderDirection: desc
-  ) {
+  tokens(orderBy: createdAtTimestamp, orderDirection: desc) {
     id
     tokenID
     contentURI

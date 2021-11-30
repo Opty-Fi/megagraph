@@ -1,10 +1,10 @@
-import { Address, Bytes, BigInt, BigDecimal } from '@graphprotocol/graph-ts';
+import { Address, Bytes, BigInt, BigDecimal } from "@graphprotocol/graph-ts";
 
 // @ts-ignore
 //  function to convert the defined decimals into Graph's BigDecimal format
 export function exponentToBigDecimal(decimals: i32): BigDecimal {
-  let bd = BigDecimal.fromString('1');
-  let bd10 = BigDecimal.fromString('10');
+  let bd = BigDecimal.fromString("1");
+  let bd10 = BigDecimal.fromString("10");
   for (let i = 0; i < decimals; i++) {
     bd = bd.times(bd10);
   }
@@ -20,7 +20,7 @@ export function convertBINumToDesiredDecimals(value: BigInt, decimals: i32): Big
 //  function to convert the string to lower case
 export function convertToLowerCase(str: string): string {
   // create a result variable
-  let result = '';
+  let result = "";
 
   for (let i = 0; i < str.length; i++) {
     // get the code of the current character
@@ -48,4 +48,9 @@ export function toAddress(str: string): Address {
 //  Function to convert the string address to `Bytes` DataType
 export function toBytes(str: string): Bytes {
   return <Bytes>Bytes.fromHexString(str);
+}
+
+//  Function to convert a `Bytes` address to `Address` DataType
+export function convertBytesToAddress(address: Bytes): Address {
+  return Address.fromString(address.toHexString());
 }

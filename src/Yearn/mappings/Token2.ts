@@ -1,21 +1,10 @@
 import { Address, BigInt } from "@graphprotocol/graph-ts";
-import {
-  YearnToken2,
-  Transfer as TransferEvent,
-} from "../../../generated/YearnToken2yvDAI/YearnToken2";
+import { YearnToken2, Transfer as TransferEvent } from "../../../generated/YearnToken2yvDAI/YearnToken2";
 import { YearnTokenData } from "../../../generated/schema";
 import { convertBINumToDesiredDecimals } from "../../utils/converters";
-import {
-  ZERO_ADDRESS,
-  ZERO_BD,
-} from "../../utils/constants";
+import { ZERO_ADDRESS, ZERO_BD } from "../../utils/constants";
 
-export function handleEntity(
-  address: Address,
-  blockNumber: BigInt,
-  timestamp: BigInt,
-  txnHash: string
-): void {
+export function handleEntity(address: Address, blockNumber: BigInt, timestamp: BigInt, txnHash: string): void {
   let contract = YearnToken2.bind(address);
   let yearnData = YearnTokenData.load(txnHash);
 
@@ -37,20 +26,12 @@ export function handleEntity(
     : ZERO_BD;
 
   yearnData.pricePerFullShare = !pricePerFullShare.reverted
-    ? convertBINumToDesiredDecimals(
-        pricePerFullShare.value,
-        contract.decimals().toI32()
-      )
+    ? convertBINumToDesiredDecimals(pricePerFullShare.value, contract.decimals().toI32())
     : ZERO_BD;
 
   yearnData.save();
 }
 
 export function handleTransfer(event: TransferEvent): void {
-  handleEntity(
-    event.address,
-    event.block.number,
-    event.block.timestamp,
-    event.transaction.hash.toHex()
-  );
+  handleEntity(event.address, event.block.number, event.block.timestamp, event.transaction.hash.toHex());
 }

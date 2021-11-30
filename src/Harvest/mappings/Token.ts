@@ -3,7 +3,7 @@ import {
   Invest as InvestEvent,
   StrategyChanged as StrategyChangedEvent,
   Transfer as TransferEvent,
-  Withdraw as WithdrawEvent
+  Withdraw as WithdrawEvent,
 } from "../../../generated/HarvestTokenfDAI/HarvestToken";
 import { handleEntity } from "./handlers";
 
@@ -13,7 +13,7 @@ export function handleDeposit(event: DepositEvent): void {
     event.address, // vaultAddr
     event.transaction.hash.toHex(),
     event.block.number,
-    event.block.timestamp
+    event.block.timestamp,
   );
 }
 
@@ -23,7 +23,7 @@ export function handleInvest(event: InvestEvent): void {
     event.address, // vaultAddr
     event.transaction.hash.toHex(),
     event.block.number,
-    event.block.timestamp
+    event.block.timestamp,
   );
 }
 
@@ -33,7 +33,7 @@ export function handleStrategyChanged(event: StrategyChangedEvent): void {
     event.address, // vaultAddr
     event.transaction.hash.toHex(),
     event.block.number,
-    event.block.timestamp
+    event.block.timestamp,
   );
 }
 
@@ -43,7 +43,7 @@ export function handleTransfer(event: TransferEvent): void {
     event.address, // vaultAddr
     event.transaction.hash.toHex(),
     event.block.number,
-    event.block.timestamp
+    event.block.timestamp,
   );
 }
 
@@ -53,6 +53,6 @@ export function handleWithdraw(event: WithdrawEvent): void {
     event.address, // vaultAddr
     event.transaction.hash.toHex(),
     event.block.number,
-    event.block.timestamp
+    event.block.timestamp,
   );
 }

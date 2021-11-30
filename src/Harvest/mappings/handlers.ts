@@ -3,13 +3,7 @@ import { HarvestNoMintRewardPool } from "../../../generated/HarvestNoMintRewardP
 import { HarvestToken as Vault } from "../../../generated/HarvestTokenfDAI/HarvestToken";
 import { HarvestTokenData } from "../../../generated/schema";
 import { convertToLowerCase, convertBINumToDesiredDecimals } from "../../utils/converters";
-import {
-  ZERO_ADDRESS,
-  ZERO_BI,
-  ZERO_BD,
-  Harvest_POOL,
-  Harvest_fDAI,
-} from "../../utils/constants";
+import { ZERO_ADDRESS, ZERO_BI, ZERO_BD, Harvest_POOL, Harvest_fDAI } from "../../utils/constants";
 
 export function handleEntity(
   poolAddr: Address,
@@ -26,11 +20,8 @@ export function handleEntity(
   entity.blockTimestamp = timestamp;
 
   if (poolAddr == null) {
-    if (
-      convertToLowerCase(vaultAddr.toHex()) ==
-      convertToLowerCase(Harvest_fDAI.toHex())
-    ) {
-      log.debug("Found fDAI, setting Pool to {}", [ Harvest_POOL.toHex() ]);
+    if (convertToLowerCase(vaultAddr.toHex()) == convertToLowerCase(Harvest_fDAI.toHex())) {
+      log.debug("Found fDAI, setting Pool to {}", [Harvest_POOL.toHex()]);
       poolAddr = Harvest_POOL;
     }
   }
@@ -39,15 +30,9 @@ export function handleEntity(
     let lastUpdateTime = poolContract.try_lastUpdateTime();
     let rewardRate = poolContract.try_rewardRate();
     let rewardPerTokenStored = poolContract.try_rewardPerTokenStored();
-    entity.lastUpdateTime = lastUpdateTime.reverted
-      ? ZERO_BI
-      : lastUpdateTime.value;
-    entity.rewardRate = rewardRate.reverted
-      ? ZERO_BI
-      : rewardRate.value;
-    entity.rewardPerTokenStored = rewardPerTokenStored.reverted
-      ? ZERO_BI
-      : rewardPerTokenStored.value;
+    entity.lastUpdateTime = lastUpdateTime.reverted ? ZERO_BI : lastUpdateTime.value;
+    entity.rewardRate = rewardRate.reverted ? ZERO_BI : rewardRate.value;
+    entity.rewardPerTokenStored = rewardPerTokenStored.reverted ? ZERO_BI : rewardPerTokenStored.value;
     entity.pool = poolAddr;
   } else {
     entity.lastUpdateTime = ZERO_BI;
@@ -59,9 +44,7 @@ export function handleEntity(
   if (vaultAddr == null) {
     let poolContract = HarvestNoMintRewardPool.bind(poolAddr);
     let vault = poolContract.try_lpToken();
-    vaultAddr = vault.reverted
-      ? null
-      : vault.value;
+    vaultAddr = vault.reverted ? null : vault.value;
   }
   if (vaultAddr != null) {
     let contract = Vault.bind(vaultAddr);
