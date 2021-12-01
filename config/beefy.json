@@ -1,0 +1,29 @@
+{
+  "blockchain": "ethereum",
+  "network": "matic",
+  "adapters": [
+    {
+      "adapter": "Beefy",
+      "contracts": [
+        {
+          "contract": "Vault",
+          "abis": ["Vault"],
+          "entities": ["BeefyVaultData"],
+          "events": [
+            {
+              "event-name": "Transfer",
+              "event-params": "(indexed address,indexed address,uint256)"
+            }
+          ],
+          "instances": [
+            {
+              "symbol": "bifi-maxi",
+              "address": "0xfEcf784F48125ccb7d8855cdda7C5ED6b5024Cb3",
+              "startBlock": 14692985
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

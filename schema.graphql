@@ -69,6 +69,19 @@ type AaveV2TokenData @entity {
 }
 
 # ----------------------------------------
+#      Beefy
+# ----------------------------------------
+type BeefyVaultData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  vault: Bytes!
+  balance: BigDecimal
+  virtualPrice: BigDecimal
+  token: Bytes
+}
+
+# ----------------------------------------
 #      Compound
 # ----------------------------------------
 type CompoundTokenData @entity {
