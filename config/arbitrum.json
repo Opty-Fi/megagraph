@@ -1,0 +1,128 @@
+{
+  "blockchain": "ethereum",
+  "network": "arbitrum-one",
+  "adapters": [
+    {
+      "adapter": "Curve",
+      "contracts": [
+        {
+          "contract": "PoolX2",
+          "abis": ["PoolX2", "ERC20"],
+          "entities": ["CurvePoolData"],
+          "events": [
+            {
+              "event-name": "AddLiquidity",
+              "event-params": "(indexed address,uint256[2],uint256[2],uint256,uint256)"
+            },
+            {
+              "event-name": "RemoveLiquidity",
+              "event-params": "(indexed address,uint256[2],uint256[2],uint256)"
+            },
+            {
+              "event-name": "RemoveLiquidityOne",
+              "event-params": "(indexed address,uint256,uint256,uint256)"
+            },
+            {
+              "event-name": "RemoveLiquidityImbalance",
+              "event-params": "(indexed address,uint256[2],uint256[2],uint256,uint256)"
+            },
+            {
+              "event-name": "TokenExchange",
+              "event-params": "(indexed address,int128,uint256,int128,uint256)"
+            },
+            {
+              "event-name": "TokenExchangeUnderlying",
+              "event-params": "(indexed address,int128,uint256,int128,uint256)"
+            }
+          ],
+          "instances": [
+            {
+              "symbol": "2pool",
+              "address": "0x7f90122BF0700F9E7e1F688fe926940E8839F353",
+              "startBlock": 534054
+            },
+            {
+              "symbol": "ren",
+              "address": "0x3E01dD8a5E1fb3481F0F589056b428Fc308AF0Fb",
+              "startBlock": 819995
+            },
+            {
+              "symbol": "eursusd",
+              "address": "0xA827a652Ead76c6B0b3D19dba05452E06e25c27e",
+              "startBlock": 2721012
+            },
+            {
+              "symbol": "MIM3CRV-f",
+              "address": "0x30dF229cefa463e991e29D42DB0bae2e122B2AC7",
+              "startBlock": 1428757
+            },
+            {
+              "symbol": "dai-2pool3CRV-f",
+              "address": "0xF92C2A3C91bf869F77f9cB221C5AB1B1ada8a586",
+              "startBlock": 1886242
+            },
+            {
+              "symbol": "kUSDC3CRV-f",
+              "address": "0xAEA2E71b631fA93683BCF256A8689dFa0e094fcD",
+              "startBlock": 3107152
+            },
+            {
+              "symbol": "fxEUR_CRV-f",
+              "address": "0xb0D2EB3C2cA3c6916FAb8DCbf9d9c165649231AE",
+              "startBlock": 2823253
+            },
+            {
+              "symbol": "FRAX-2pool3CRV-f",
+              "address": "0xF72beaCc6fD334E14a7DDAC25c3ce1Eb8a827E10",
+              "startBlock": 2828842
+            },
+            {
+              "symbol": "FRAX+2CRV3CRV-f",
+              "address": "0xf07d553B195080F84F582e88ecdD54bAa122b279",
+              "startBlock": 3132682
+            },
+            {
+              "symbol": "ELE-f",
+              "address": "0xC120Ef573752aAD82484eBc9A752daD6f3FEC54B",
+              "startBlock": 2924756
+            }
+          ]
+        },
+        {
+          "contract": "PoolX3",
+          "abis": ["PoolX3", "ERC20"],
+          "entities": ["CurvePoolData"],
+          "events": [
+            {
+              "event-name": "AddLiquidity",
+              "event-params": "(indexed address,uint256[3],uint256[3],uint256,uint256)"
+            },
+            {
+              "event-name": "RemoveLiquidity",
+              "event-params": "(indexed address,uint256[3],uint256[3],uint256)"
+            },
+            {
+              "event-name": "RemoveLiquidityOne",
+              "event-params": "(indexed address,uint256,uint256)"
+            },
+            {
+              "event-name": "RemoveLiquidityImbalance",
+              "event-params": "(indexed address,uint256[3],uint256[3],uint256,uint256)"
+            },
+            {
+              "event-name": "TokenExchange",
+              "event-params": "(indexed address,int128,uint256,int128,uint256)"
+            }
+          ],
+          "instances": [
+            {
+              "symbol": "tricrypto",
+              "address": "0x960ea3e3C7FB317332d990873d354E18d7645590",
+              "startBlock": 741883
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
