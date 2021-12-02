@@ -3,12 +3,7 @@ import { BeefyVault } from "../../../generated/BeefyVaultbifi-maxi/BeefyVault";
 import { BeefyVaultData } from "../../../generated/schema";
 import { convertBINumToDesiredDecimals } from "../../utils/converters";
 
-export function handleEntity(
-  txnHash: Bytes,
-  blockNumber: BigInt,
-  timestamp: BigInt,
-  vault: Address,
-): void {
+export function handleEntity(txnHash: Bytes, blockNumber: BigInt, timestamp: BigInt, vault: Address): void {
   let entity = BeefyVaultData.load(txnHash.toHex());
   if (!entity) entity = new BeefyVaultData(txnHash.toHex());
 
