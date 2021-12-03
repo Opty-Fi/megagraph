@@ -4,10 +4,11 @@
 
 if [[ "$CONFIG" == "arbitrum" ]]
 then
-  ln -s CurvePoolX22pool      generated/CurvePoolX2
-  ln -s CurvePoolX3tricrypto  generated/CurvePoolX3
+  ln -s CurvePoolX22pool     generated/CurvePoolX2
+  ln -s CurvePoolX3tricrypto generated/CurvePoolX3
   # PoolX4 is not used
-  ln -s generated/CurvePoolX3tricrypto  generated/CurvePoolX4
+  ln -s CurvePoolX3tricrypto generated/CurvePoolX4
+  ln -s CurvePoolX3.ts       generated/CurvePoolX4/CurvePoolX4.ts
 elif [[ "$CONFIG" == "polygon" ]]
 then
   ln -s CurvePoolX2aAAVE generated/CurvePoolX2
