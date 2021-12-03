@@ -1,6 +1,67 @@
-import { Transfer as TransferEvent } from "../../../generated/BeefyVaultbifi-maxi/BeefyVault";
-import { handleEntity } from "./handlers";
+import { Transfer as TransferEvent, BeefyVault } from "../../../generated/BeefyVaultbifi-maxi/BeefyVault";
+import { Address, BigInt, Bytes, log } from "@graphprotocol/graph-ts";
+import { BeefyVaultData } from "../../../generated/schema";
+import { convertBINumToDesiredDecimals } from "../../utils/converters";
+
 
 export function handleTransfer(event: TransferEvent): void {
-  handleEntity(event.transaction.hash, event.block.number, event.block.timestamp, event.address);
+  let id = event.transaction.hash.toHex();
+  let block = event.block;
+  let vault = event.address;
+
+  let entity = BeefyVaultData.load(id);
+  if (!entity) entity = new BeefyVaultData(id);
+
+  entity.blockNumber = block.number;
+  entity.blockTimestamp = block.timestamp;
+  entity.vault = vault;
+
+  let contract = BeefyVault.bind(vault);
+
+  let nameResult = contract.try_name();
+  if (nameResult.reverted) {
+    log.warning("name() reverted for {}", [vault.toString()]);
+  } else {
+    entity.name = nameResult.value;
+  }
+
+  let symbolResult = contract.try_name();
+  if (symbolResult.reverted) {
+    log.warning("symbol() reverted for {}", [vault.toString()]);
+  } else {
+    entity.symbol = symbolResult.value;
+  }
+
+  let decimals = 18; // fallback
+  let decimalsResult = contract.try_decimals();
+  if (decimalsResult.reverted) {
+    log.warning("decimals() reverted for {}", [vault.toString()]);
+  } else {
+    decimals = decimalsResult.value;
+    entity.decimals;
+  }
+
+  let balanceResult = contract.try_balance();
+  if (balanceResult.reverted) {
+    log.warning("balance() reverted for {}", [vault.toString()]);
+  } else {
+    // TODO: really with decimals?
+    entity.balance = convertBINumToDesiredDecimals(balanceResult.value, decimals);
+  }
+
+  let priceResult = contract.try_getPricePerFullShare();
+  if (priceResult.reverted) {
+    log.warning("getPricePerFullShare() reverted for {}", [vault.toString()]);
+  } else {
+    entity.virtualPrice = convertBINumToDesiredDecimals(balanceResult.value, decimals);
+  }
+
+  let wantResult = contract.try_want();
+  if (wantResult.reverted) {
+    log.warning("want() reverted for {}", [vault.toString()]);
+  } else {
+    entity.token = wantResult.value;
+  }
+
+  entity.save();
 }
