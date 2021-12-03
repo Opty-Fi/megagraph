@@ -6,6 +6,24 @@
       "adapter": "Beefy",
       "contracts": [
         {
+          "contract": "NativeVault",
+          "abis": ["NativeVault"],
+          "entities": ["BeefyVaultData"],
+          "events": [
+            {
+              "event-name": "Transfer",
+              "event-params": "(indexed address,indexed address,uint256)"
+            }
+          ],
+          "instances": [
+            {
+              "address": "0x1d23ecC0645B07791b7D99349e253ECEbe43f614",
+              "startBlock": "14532335",
+              "symbol": "aave-matic"
+            }
+          ]
+        },
+        {
           "contract": "Vault",
           "abis": ["Vault"],
           "entities": ["BeefyVaultData"],

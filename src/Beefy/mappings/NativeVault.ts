@@ -1,8 +1,9 @@
-import { Transfer as TransferEvent, BeefyVault } from "../../../generated/BeefyVaultbifi-maxi/BeefyVault";
+import { Transfer as TransferEvent, BeefyNativeVault } from "../../../generated/BeefyNativeVaultaave-matic/BeefyNativeVault";
 import { log } from "@graphprotocol/graph-ts";
 import { BeefyVaultData } from "../../../generated/schema";
 import { convertBINumToDesiredDecimals } from "../../utils/converters";
 
+// difference to Vault.ts: wmatic() instead of want()
 
 export function handleTransfer(event: TransferEvent): void {
   let id = event.transaction.hash.toHex();
@@ -16,7 +17,7 @@ export function handleTransfer(event: TransferEvent): void {
   entity.blockTimestamp = block.timestamp;
   entity.vault = vault;
 
-  let contract = BeefyVault.bind(vault);
+  let contract = BeefyNativeVault.bind(vault);
 
   let nameResult = contract.try_name();
   if (nameResult.reverted) {
@@ -49,11 +50,11 @@ export function handleTransfer(event: TransferEvent): void {
     entity.virtualPrice = convertBINumToDesiredDecimals(balanceResult.value, decimals);
   }
 
-  let wantResult = contract.try_want();
-  if (wantResult.reverted) {
-    log.warning("want() reverted for {}", [vault.toString()]);
+  let wmaticResult = contract.try_wmatic();
+  if (wmaticResult.reverted) {
+    log.warning("wmatic() reverted for {}", [vault.toString()]);
   } else {
-    entity.token = wantResult.value;
+    entity.token = wmaticResult.value;
   }
 
   entity.save();

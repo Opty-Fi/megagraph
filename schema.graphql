@@ -77,7 +77,6 @@ type BeefyVaultData @entity {
   blockTimestamp: BigInt!
   vault: Bytes!
   name: String
-  symbol: String
   decimals: Int
   balance: BigDecimal
   virtualPrice: BigDecimal
