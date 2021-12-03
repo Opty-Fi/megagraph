@@ -1,4 +1,7 @@
-import { Transfer as TransferEvent, BeefyNativeVault } from "../../../generated/BeefyNativeVaultaave-matic/BeefyNativeVault";
+import {
+  Transfer as TransferEvent,
+  BeefyNativeVault,
+} from "../../../generated/BeefyNativeVaultaave-matic/BeefyNativeVault";
 import { log } from "@graphprotocol/graph-ts";
 import { BeefyVaultData } from "../../../generated/schema";
 import { convertBINumToDesiredDecimals } from "../../utils/converters";

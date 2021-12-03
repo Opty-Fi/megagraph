@@ -3,7 +3,6 @@ import { log } from "@graphprotocol/graph-ts";
 import { BeefyVaultData } from "../../../generated/schema";
 import { convertBINumToDesiredDecimals } from "../../utils/converters";
 
-
 export function handleTransfer(event: TransferEvent): void {
   let id = event.transaction.hash.toHex();
   let block = event.block;
