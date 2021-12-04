@@ -9,6 +9,11 @@ then
   # PoolX4 is not used
   ln -s CurvePoolX3tricrypto generated/CurvePoolX4
   ln -s CurvePoolX3.ts       generated/CurvePoolX4/CurvePoolX4.ts
+elif [[ "$CONFIG" == "avalanche" ]]
+then
+  ln -s CurvePoolX2MIM3CRV-f-0  generated/CurvePoolX2
+  ln -s CurvePoolX3atricrypto   generated/CurvePoolX3
+  ln -s CurvePoolX4U.TOKEN-f-19 generated/CurvePoolX4
 elif [[ "$CONFIG" == "polygon" ]]
 then
   ln -s CurvePoolX2aAAVE generated/CurvePoolX2
