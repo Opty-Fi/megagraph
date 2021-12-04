@@ -286,7 +286,7 @@
       "contracts": [
         {
           "contract": "ComptrollerImplementation",
-          "abis": ["ComptrollerImplementation", "Token", "Underlying"],
+          "abis": ["ComptrollerImplementation"],
           "entities": ["CompoundTokenData"],
           "events": [
             {
@@ -303,8 +303,30 @@
           ]
         },
         {
+          "contract": "ComptrollerImplementationV2",
+          "abis": ["ComptrollerImplementationV2"],
+          "entities": ["CompoundTokenData"],
+          "events": [
+            {
+              "event-name": "CompBorrowSpeedUpdated",
+              "event-params": "(indexed address,uint256)"
+            },
+            {
+              "event-name": "CompSupplySpeedUpdated",
+              "event-params": "(indexed address,uint256)"
+            }
+          ],
+          "instances": [
+            {
+              "symbol": "",
+              "address": "0x3d9819210A31b4961b30EF54bE2aeD79B9c9Cd3B",
+              "startBlock": 13322798
+            }
+          ]
+        },
+        {
           "contract": "Token",
-          "abis": ["ComptrollerImplementation", "Token", "Underlying"],
+          "abis": ["ComptrollerImplementation", "ComptrollerImplementationV2", "Token", "Underlying"],
           "entities": ["CompoundTokenData"],
           "events": [
             {
