@@ -8,6 +8,11 @@ then
   ln -s CurvePoolX3tricrypto  generated/CurvePoolX3
   # PoolX4 is not used
   ln -s generated/CurvePoolX3tricrypto  generated/CurvePoolX4
+elif [[ "$CONFIG" == "fantom" ]]
+then
+  ln -s CurvePoolX2ren       generated/CurvePoolX2
+  ln -s CurvePoolX3tricrypto generated/CurvePoolX3
+  ln -s CurvePoolX44pool-f-7 generated/CurvePoolX4
 elif [[ "$CONFIG" == "polygon" ]]
 then
   ln -s CurvePoolX2aAAVE generated/CurvePoolX2
