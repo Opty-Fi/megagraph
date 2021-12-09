@@ -14,6 +14,9 @@ then
   # PoolX2 and X3 are not used
   ln -s CurvePoolX2aAAVE generated/CurvePoolX3
   ln -s CurvePoolX2aAAVE generated/CurvePoolX4
+elif [[ "$CONFIG" == "sushi" ]]
+then
+  ln -s SushiKashiPairMediumRiskV1kmWBTC\&\#x2F\;WMATIC-LINK generated/SushiKashiPairMediumRiskV1
 else # mainnet or dev
   ln -s CurvePoolX2ankrCRV            generated/CurvePoolX2
   ln -s CurvePoolX3aDAI+aUSDC+aUSDT   generated/CurvePoolX3
