@@ -3,12 +3,7 @@ import { SushiKashiData } from "../../../generated/schema";
 import { SushiKashiPairMediumRiskV1 } from "../../../generated/SushiKashiPairMediumRiskV1/SushiKashiPairMediumRiskV1";
 import { convertBINumToDesiredDecimals } from "../../utils/converters";
 
-export function handleKashiPair(
-  txnHash: Bytes,
-  blockNumber: BigInt,
-  timestamp: BigInt,
-  vault: Address
-): void {
+export function handleKashiPair(txnHash: Bytes, blockNumber: BigInt, timestamp: BigInt, vault: Address): void {
   let entity = SushiKashiData.load(txnHash.toHex());
   if (!entity) entity = new SushiKashiData(txnHash.toHex());
 
@@ -20,7 +15,7 @@ export function handleKashiPair(
 
   let symbolResult = contract.try_symbol();
   if (symbolResult.reverted) {
-    log.warning("symbol() reverted", [])
+    log.warning("symbol() reverted", []);
   } else {
     entity.symbol = symbolResult.value;
   }
