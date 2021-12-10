@@ -30,3 +30,5 @@ export let Harvest_fDAI: Address = toAddress("0xab7FA2B2985BCcfC13c6D86b1D5A1748
 export let ConvexBoosterAddress = toAddress("0xf403c135812408bfbe8713b5a23a04b3d48aae31");
 export let ConvexTokenAddress = toAddress("0x4e3FBD56CD56c3e72c1403e103b45Db9da5B9D2B");
 export let CurveRegistryAddress = toAddress("0x90e00ace148ca3b23ac1bc8c240c2a7dd9c2d7f5");
+
+export let SushiMiniChefAddress = toAddress("0x0769fd68dFb93167989C6f7254cd0D766Fb2841F");

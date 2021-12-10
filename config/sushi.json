@@ -6,8 +6,26 @@
       "adapter": "Sushi",
       "contracts": [
         {
+          "contract": "MiniChefV2",
+          "abis": ["MiniChefV2", "ComplexRewarderTime"],
+          "entities": ["SushiPoolData", "SushiTokenData"],
+          "events": [
+            {
+              "event-name": "LogUpdatePool",
+              "event-params": "(indexed uint256,uint64,uint256,uint256)"
+            }
+          ],
+          "instances": [
+            {
+              "symbol": "",
+              "address": "0x0769fd68dFb93167989C6f7254cd0D766Fb2841F",
+              "startBlock": 13911377
+            }
+          ]
+        },
+        {
           "contract": "KashiPairMediumRiskV1",
-          "abis": ["KashiPairMediumRiskV1"],
+          "abis": ["KashiPairMediumRiskV1", "ERC20Minimal"],
           "entities": ["SushiKashiPair"],
           "events": [
             {

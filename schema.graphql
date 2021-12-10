@@ -230,6 +230,21 @@ type SushiKashiData @entity {
   totalAssetBase: BigDecimal
 }
 
+type SushiPoolData @entity {
+  id: ID!
+  lpToken: Bytes!
+}
+
+type SushiTokenData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  pool: SushiPoolData!
+  sushiPerSecond: BigDecimal
+  rewardPerSecond: BigDecimal
+  lastRewardTime: BigInt
+}
+
 # ----------------------------------------
 #      Yearn
 # ----------------------------------------
