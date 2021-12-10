@@ -67,7 +67,7 @@ export function handleKashiPair(txnHash: Bytes, blockNumber: BigInt, timestamp: 
   if (totalAssetResult.reverted) {
     log.warning("totalAsset() reverted", []);
   } else {
-    entity.totalAssetBase = convertBINumToDesiredDecimals(accrueInfoResult.value.value1, assetDecimals);
+    entity.totalAssetBase = convertBINumToDesiredDecimals(totalAssetResult.value.value1, assetDecimals);
   }
 
   entity.save();
