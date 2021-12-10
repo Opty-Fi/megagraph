@@ -92,10 +92,7 @@ export function handlePool(txnHash: Bytes, blockNumber: BigInt, timestamp: BigIn
   if (sushiPerSecondResult.reverted) {
     log.warning("sushiPerSecond() reverted", []);
   } else {
-    totalSushiPerSecond = convertBINumToDesiredDecimals(
-      sushiPerSecondResult.value,
-      18
-    );
+    totalSushiPerSecond = convertBINumToDesiredDecimals(sushiPerSecondResult.value, 18);
   }
 
   let totalAllocPoint = ZERO_BI;
@@ -130,10 +127,7 @@ export function handlePool(txnHash: Bytes, blockNumber: BigInt, timestamp: BigIn
     if (rewardPerSecondResult.reverted) {
       log.warning("rewardPerSecond() reverted", []);
     } else {
-      let rewardPerSecond = convertBINumToDesiredDecimals(
-        rewardPerSecondResult.value,
-        18
-      );
+      let rewardPerSecond = convertBINumToDesiredDecimals(rewardPerSecondResult.value, 18);
 
       if (totalAllocPoint > ZERO_BI) {
         entity.rewardPerSecond = rewardPerSecond.times(allocPoint.toBigDecimal()).div(totalAllocPoint.toBigDecimal());
