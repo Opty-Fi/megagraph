@@ -242,7 +242,7 @@ type LidoOracleTotals @entity {
   beaconBalance: BigInt!
   beaconValidators: BigInt!  
 }
-type Totals @entity {
+type LidoTotals @entity {
   id: ID!
   totalPooledEther: BigInt!
   totalShares: BigInt!

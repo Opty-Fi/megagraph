@@ -1,6 +1,6 @@
 import { Address } from "@graphprotocol/graph-ts";
 import { Transfer, Submitted, Withdrawal } from "../../../generated/LidoTokenstETH/LidoToken";
-import { LidoTokenData, LidoRewardData, Totals } from "../../../generated/schema";
+import { LidoTokenData, LidoRewardData, LidoTotals } from "../../../generated/schema";
 import { LIDO_DUST_BOUNDARY } from "./lidoConstants";
 import { ZERO_BI, LidoTreasuryAddress } from "../../utils/constants";
 export function handleTransfer(event: Transfer): void {
@@ -16,7 +16,7 @@ export function handleTransfer(event: Transfer): void {
   let fromZeros = event.params.from == Address.fromString("0x0000000000000000000000000000000000000000");
 
   let lidoRewards = LidoRewardData.load(event.transaction.hash.toHex());
-  let totals = Totals.load("") as Totals;
+  let totals = LidoTotals.load("") as LidoTotals;
   let totalPooledEther = totals.totalPooledEther;
   let totalShares = totals.totalShares;
 
@@ -47,12 +47,12 @@ export function handleTransfer(event: Transfer): void {
   entity.save();
 }
 export function handleSubmitted(event: Submitted): void {
-  let totals = Totals.load("");
+  let totals = LidoTotals.load("");
 
   let isFirstSubmission = !totals;
 
   if (!totals) {
-    totals = new Totals("");
+    totals = new LidoTotals("");
     totals.totalPooledEther = ZERO_BI;
     totals.totalShares = ZERO_BI;
   }
@@ -87,7 +87,7 @@ export function handleWithdrawal(event: Withdrawal): void {
   if (entity == null) {
     entity = new LidoTokenData(event.transaction.hash.toHex());
   }
-  let totals = Totals.load("");
+  let totals = LidoTotals.load("");
 
   entity.totalPooledEther = totals.totalPooledEther;
 

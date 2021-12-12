@@ -1,6 +1,6 @@
 import { BigInt } from "@graphprotocol/graph-ts";
 import { Completed, PostTotalShares } from "../../../generated/LidoOracle/LidoOracle";
-import { LidoRewardData, Totals, LidoOracleTotals } from "../../../generated/schema";
+import { LidoRewardData, LidoTotals, LidoOracleTotals } from "../../../generated/schema";
 import { loadLidoContract, loadOracleContract, LIDO_DEPOSIT_AMOUNT, LIDO_CALCULATION_UNIT } from "./lidoConstants";
 import { ZERO_BI } from "../../utils/constants";
 
@@ -36,7 +36,7 @@ export function handleCompleted(event: Completed): void {
 
   // Totals and rewards data logic
   // Totals are already non-null on first oracle report
-  let totals = Totals.load("") as Totals;
+  let totals = LidoTotals.load("") as LidoTotals;
   // Increasing or decreasing totals
   let totalPooledEtherAfter = positiveRewards
     ? totals.totalPooledEther.plus(newTotalRewards)
