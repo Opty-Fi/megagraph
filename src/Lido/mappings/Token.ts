@@ -1,11 +1,10 @@
-import { Address } from "@graphprotocol/graph-ts";
+import { BigInt } from "@graphprotocol/graph-ts";
+
 import { Transfer, Submitted, Withdrawal } from "../../../generated/LidoTokenstETH/LidoToken";
 import { LidoTokenData, LidoRewardData, LidoTotals } from "../../../generated/schema";
-import { LIDO_DUST_BOUNDARY } from "./lidoConstants";
-import { ZERO_BI, LidoTreasuryAddress } from "../../utils/constants";
-export function handleTransfer(event: Transfer): void {
-  // new lido event.
+import { ZERO_BI, LidoTreasuryAddress, ZERO_ADDRESS } from "../../utils/constants";
 
+export function handleTransfer(event: Transfer): void {
   let entity = LidoTokenData.load(event.transaction.hash.toHex());
   if (entity == null) {
     entity = new LidoTokenData(event.transaction.hash.toHex());
@@ -13,7 +12,7 @@ export function handleTransfer(event: Transfer): void {
     entity.blockTimestamp = event.block.timestamp;
   }
 
-  let fromZeros = event.params.from == Address.fromString("0x0000000000000000000000000000000000000000");
+  let fromZeros = event.params.from == ZERO_ADDRESS;
 
   let lidoRewards = LidoRewardData.load(event.transaction.hash.toHex());
   let totals = LidoTotals.load("") as LidoTotals;
@@ -25,6 +24,7 @@ export function handleTransfer(event: Transfer): void {
   let isFeeDistributionToTreasury = fromZeros && event.params.to == LidoTreasuryAddress;
 
   // graph-ts less or equal to
+  const LIDO_DUST_BOUNDARY = BigInt.fromI32(50000);
   let isDust = event.params.value.lt(LIDO_DUST_BOUNDARY);
 
   if (lidoRewards != null && isFeeDistributionToTreasury && !isDust) {
@@ -51,13 +51,13 @@ export function handleSubmitted(event: Submitted): void {
 
   let isFirstSubmission = !totals;
 
-  if (!totals) {
+  if (isFirstSubmission) {
     totals = new LidoTotals("");
     totals.totalPooledEther = ZERO_BI;
     totals.totalShares = ZERO_BI;
   }
 
-  // new lido event.
+  // creating a new LidoTokenData entity
   let entity = LidoTokenData.load(event.transaction.hash.toHex());
   if (entity == null) {
     entity = new LidoTokenData(event.transaction.hash.toHex());
@@ -82,7 +82,7 @@ export function handleSubmitted(event: Submitted): void {
   totals.save();
 }
 export function handleWithdrawal(event: Withdrawal): void {
-  // new lido event.
+  // creating a new LidoTokenData if not existent already
   let entity = LidoTokenData.load(event.transaction.hash.toHex());
   if (entity == null) {
     entity = new LidoTokenData(event.transaction.hash.toHex());

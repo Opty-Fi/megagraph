@@ -1,8 +1,13 @@
 import { BigInt } from "@graphprotocol/graph-ts";
-import { Completed, PostTotalShares } from "../../../generated/LidoOracle/LidoOracle";
+import { Completed, LidoOracle, PostTotalShares } from "../../../generated/LidoOracle/LidoOracle";
+import { LidoToken } from "../../../generated/LidoTokenstETH/LidoToken";
+
 import { LidoRewardData, LidoTotals, LidoOracleTotals } from "../../../generated/schema";
-import { loadLidoContract, loadOracleContract, LIDO_DEPOSIT_AMOUNT, LIDO_CALCULATION_UNIT } from "./lidoConstants";
-import { ZERO_BI } from "../../utils/constants";
+//import { loadLidoContract, loadOracleContract, LIDO_DEPOSIT_AMOUNT, LIDO_CALCULATION_UNIT } from "./lidoConstants";
+import { ZERO_BI, LidoTokenAddress, LidoOracleAddress } from "../../utils/constants";
+
+const LIDO_DEPOSIT_AMOUNT = BigInt.fromI32(32).times(BigInt.fromString("1000000000000000000")); // 32 ETH
+const LIDO_CALCULATION_UNIT = BigInt.fromI32(10000);
 
 export function handleCompleted(event: Completed): void {
   let lastOracle = LidoOracleTotals.load("") as LidoOracleTotals;
@@ -13,9 +18,8 @@ export function handleCompleted(event: Completed): void {
 
   newOracle.save();
 
-  let lidoContract = loadLidoContract();
-  let oracleContract = loadOracleContract();
-  // new reward event.
+  let lidoContract = LidoToken.bind(LidoTokenAddress);
+  let oracleContract = LidoOracle.bind(LidoOracleAddress);
 
   // Trying to set just one oracle
 
@@ -74,12 +78,11 @@ export function handleCompleted(event: Completed): void {
   entity.save();
 }
 export function handlePostTotalShares(event: PostTotalShares): void {
-  let lidoContract = loadLidoContract();
+  let lidoContract = LidoToken.bind(LidoTokenAddress);
   let preTotalPooledEther = event.params.preTotalPooledEther;
 
   let postTotalPooledEther = event.params.postTotalPooledEther;
 
-  // new lido event.
   let entity = LidoRewardData.load(event.transaction.hash.toHex());
   if (!entity) {
     return;
@@ -106,11 +109,8 @@ export function handlePostTotalShares(event: PostTotalShares): void {
   // Time compensation logic
 
   let timeElapsed = event.params.timeElapsed;
-
   let day = BigInt.fromI32(60 * 60 * 24).toBigDecimal();
-
   let dayDifference = timeElapsed.toBigDecimal().div(day);
-
   let aprBeforeFees = aprRaw.div(dayDifference);
 
   entity.aprBeforeFees = aprBeforeFees;
