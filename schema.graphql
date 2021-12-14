@@ -215,6 +215,40 @@ type HarvestTokenData @entity {
 }
 
 # ----------------------------------------
+#      Lido Finance
+# ----------------------------------------
+type LidoTokenData @entity {  
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!   
+  totalPooledEther: BigInt #   
+  totalShares: BigInt        
+}
+
+type LidoRewardData @entity {
+  id: ID!
+  epochId: BigInt!  
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!   
+  totalRewards: BigInt!  
+  totalRewardsWithFees: BigInt!
+  totalFee: BigInt!  
+  aprBeforeFees: BigDecimal
+  apr: BigDecimal  
+  timeElapsed: BigInt  
+}
+type LidoOracleTotals @entity {
+  id: ID!  
+  beaconBalance: BigInt!
+  beaconValidators: BigInt!  
+}
+type LidoTotals @entity {
+  id: ID!
+  totalPooledEther: BigInt!
+  totalShares: BigInt!
+}
+
+# ----------------------------------------
 #      Yearn
 # ----------------------------------------
 type YearnTokenData @entity {
