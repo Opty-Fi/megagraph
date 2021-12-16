@@ -1,7 +1,8 @@
 import { log, Address, Bytes, BigInt } from "@graphprotocol/graph-ts";
 import { AaveV2Token, Burn as BurnEvent, Mint as MintEvent } from "../../../generated/AaveV2TokenaDAI/AaveV2Token";
-import { AaveV2TokenData } from "../../../generated/schema";
+import { AaveV2TokenData, AaveV2Reserve } from "../../../generated/schema";
 import { AaveV2LendingPoolAddressesProvider } from "../../../generated/AaveV2TokenaDAI/AaveV2LendingPoolAddressesProvider";
+import { AaveV2IncentivesController } from "../../../generated/AaveV2TokenaDAI/AaveV2IncentivesController"; // ADD ABI FOR IT!!!
 import { AaveV2AaveProtocolDataProvider } from "../../../generated/AaveV2TokenaDAI/AaveV2AaveProtocolDataProvider";
 import { convertBINumToDesiredDecimals } from "../../utils/converters";
 import { AaveV2_POOL_PROVIDER_ADDRESS, AaveV2_DATA_PROVIDER_INDEX } from "../../utils/constants";
@@ -11,11 +12,16 @@ function handleAaveV2Token(
   blockNumber: BigInt,
   blockTimestamp: BigInt,
   address: Address,
+  value: BigInt
 ): void {
   let tokenContract = AaveV2Token.bind(address);
 
   let entity = AaveV2TokenData.load(transactionHash.toHex());
-  if (!entity) entity = new AaveV2TokenData(transactionHash.toHex());
+
+  if (!entity) {
+    entity = new AaveV2TokenData(transactionHash.toHex());
+    entity.totalLiquidity = BigInt.fromI32(0);
+  }
 
   entity.transactionHash = transactionHash;
   entity.blockNumber = blockNumber;
@@ -83,13 +89,44 @@ function handleAaveV2Token(
     }
   }
 
+  //get aEmissionsPerSecond
+  let tried_getIncentivesController = tokenContract.try_getIncentivesController();
+  if (tried_getIncentivesController.reverted) log.error("tokenContract at {} call getIncentivesController() reverted", [ tokenContract._address.toHex() ]); 
+  else {
+    let incentivesControllerAddress = tried_getIncentivesController.value;
+    let incentivesControllerContract = AaveV2IncentivesController.bind(incentivesControllerAddress);
+    let tried_assets = incentivesControllerContract.try_assets(address);
+
+    if (tried_assets.reverted) log.error("AaveIncentivesController at {} call assets({}) reverted", [ incentivesControllerContract._address.toHex(), underlyingAssetAddr.toHex() ]);
+    else {
+      let assets = tried_assets.value;
+      entity.aEmissionPerSecond = assets.value0;
+    }
+  }
+
+
+  //get totalLiquidity per token
+  let reserveId = address.toHexString();
+  let reserve = AaveV2Reserve.load(reserveId);
+
+  if (!reserve) {
+    reserve = new AaveV2Reserve(reserveId);
+    reserve.address = address;
+    reserve.symbol = entity.symbol;
+    reserve.totalLiquidity = BigInt.fromI32(0);
+  }  
+
+  reserve.totalLiquidity = reserve.totalLiquidity.plus(value);
+  entity.totalLiquidity = reserve.totalLiquidity;
+
+  reserve.save();
   entity.save();
 }
 
 export function handleBurn(event: BurnEvent): void {
-  handleAaveV2Token(event.transaction.hash, event.block.number, event.block.timestamp, event.address);
+  handleAaveV2Token(event.transaction.hash, event.block.number, event.block.timestamp, event.address, event.params.value.neg());
 }
 
 export function handleMint(event: MintEvent): void {
-  handleAaveV2Token(event.transaction.hash, event.block.number, event.block.timestamp, event.address);
+  handleAaveV2Token(event.transaction.hash, event.block.number, event.block.timestamp, event.address, event.params.value);
 }

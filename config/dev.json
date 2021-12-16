@@ -144,8 +144,8 @@
       "contracts": [
         {
           "contract": "Token",
-          "abis": ["LendingPoolAddressesProvider", "AaveProtocolDataProvider", "Token"],
-          "entities": ["AaveV2TokenData"],
+          "abis": ["LendingPoolAddressesProvider", "AaveProtocolDataProvider", "IncentivesController", "Token"],
+          "entities": ["AaveV2TokenData", "AaveV2Reserve"],
           "events": [
             {
               "event-name": "Burn",

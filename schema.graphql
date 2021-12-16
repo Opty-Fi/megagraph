@@ -66,6 +66,16 @@ type AaveV2TokenData @entity {
   liquidityIndex: BigDecimal
   variableBorrowIndex: BigDecimal
   lastUpdateTimestamp: BigInt
+
+  aEmissionPerSecond: BigInt
+  totalLiquidity: BigInt!
+}
+
+type AaveV2Reserve @entity {
+  id: ID!
+  address: Bytes!
+  symbol: String!
+  totalLiquidity: BigInt!
 }
 
 # ----------------------------------------
