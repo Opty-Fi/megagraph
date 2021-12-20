@@ -144,8 +144,8 @@
       "contracts": [
         {
           "contract": "Token",
-          "abis": ["LendingPoolAddressesProvider", "AaveProtocolDataProvider", "Token"],
-          "entities": ["AaveV2TokenData"],
+          "abis": ["LendingPoolAddressesProvider", "AaveProtocolDataProvider", "IncentivesController", "Token"],
+          "entities": ["AaveV2TokenData", "AaveV2Reserve"],
           "events": [
             {
               "event-name": "Burn",
@@ -1162,6 +1162,59 @@
             {
               "symbol": "fyDAI+yUSDC+yUSDT+yTUSD",
               "address": "0x0FE4283e0216F94f5f9750a7a11AC54D3c9C38F3",
+              "startBlock": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "adapter": "Lido",
+      "contracts": [
+        {
+          "contract": "Token",
+          "abis": ["Token", "Oracle", "NodeOperatorsRegistry"],
+          "entities": ["LidoTokenData"],
+          "events": [
+            {
+              "event-name": "Transfer",
+              "event-params": "(indexed address,indexed address,uint256)"
+            },
+            {
+              "event-name": "Submitted",
+              "event-params": "(indexed address,uint256,address)"
+            },
+            {
+              "event-name": "Withdrawal",
+              "event-params": "(indexed address,uint256,uint256,indexed bytes32,uint256)"
+            }
+          ],
+          "instances": [
+            {
+              "symbol": "stETH",
+              "address": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84",
+              "startBlock": 0
+            }
+          ]
+        },
+        {
+          "contract": "Oracle",
+          "abis": ["Token", "Oracle", "NodeOperatorsRegistry"],
+          "entities": ["LidoTokenData", "LidoOracle"],
+          "events": [
+            {
+              "event-name": "Completed",
+              "event-params": "(uint256,uint128,uint128)"
+            },
+            {
+              "event-name": "PostTotalShares",
+              "event-params": "(uint256,uint256,uint256,uint256)"
+            }
+          ],
+          "instances": [
+            {
+              "symbol": "",
+              "address": "0x442af784A788A5bd6F42A01Ebe9F287a871243fb",
               "startBlock": 0
             }
           ]
