@@ -579,39 +579,20 @@
       "adapter": "Curve",
       "contracts": [
         {
-          "contract": "GaugeController",
-          "abis": ["GaugeController"],
-          "entities": ["CurveGaugeData"],
-          "events": [
-            {
-              "event-name": "NewGauge",
-              "event-params": "(address,int128,uint256)"
-            },
-            {
-              "event-name": "NewGaugeWeight",
-              "event-params": "(address,uint256,uint256,uint256)"
-            },
-            {
-              "event-name": "NewTypeWeight",
-              "event-params": "(int128,uint256,uint256,uint256)"
-            },
-            {
-              "event-name": "VoteForGauge",
-              "event-params": "(uint256,address,address,uint256)"
-            }
-          ],
-          "instances": [
-            {
-              "symbol": "",
-              "address": "0x2F50D538606Fa9EDD2B11E2446BEb18C9D5846bB",
-              "startBlock": 10647875
-            }
-          ]
-        },
-        {
           "contract": "PoolX2",
-          "abis": ["PoolX2", "ERC20"],
-          "entities": ["CurvePoolData"],
+          "abis": [
+            "PoolX2",
+            "Registry",
+            "LiquidityGauge",
+            "LiquidityGaugeV2",
+            "StakingLiquidityGauge",
+            "StakingRewards",
+            "MultiRewards",
+            "Rewards",
+            "ERC20",
+            "AaveIncentivesController"
+          ],
+          "entities": ["CurvePoolData", "CurveExtraReward"],
           "events": [
             {
               "event-name": "AddLiquidity",
@@ -738,8 +719,19 @@
         },
         {
           "contract": "PoolX3",
-          "abis": ["PoolX3", "ERC20"],
-          "entities": ["CurvePoolData"],
+          "abis": [
+            "PoolX3",
+            "Registry",
+            "LiquidityGauge",
+            "LiquidityGaugeV2",
+            "StakingLiquidityGauge",
+            "StakingRewards",
+            "MultiRewards",
+            "Rewards",
+            "ERC20",
+            "AaveIncentivesController"
+          ],
+          "entities": ["CurvePoolData", "CurveExtraReward"],
           "events": [
             {
               "event-name": "AddLiquidity",
@@ -782,8 +774,19 @@
         },
         {
           "contract": "PoolX4",
-          "abis": ["PoolX4", "ERC20"],
-          "entities": ["CurvePoolData"],
+          "abis": [
+            "PoolX4",
+            "Registry",
+            "LiquidityGauge",
+            "LiquidityGaugeV2",
+            "StakingLiquidityGauge",
+            "StakingRewards",
+            "MultiRewards",
+            "Rewards",
+            "ERC20",
+            "AaveIncentivesController"
+          ],
+          "entities": ["CurvePoolData", "CurveExtraReward"],
           "events": [
             {
               "event-name": "AddLiquidity",

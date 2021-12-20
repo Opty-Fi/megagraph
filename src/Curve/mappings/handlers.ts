@@ -6,6 +6,7 @@ import { CurveERC20 } from "../../../generated/CurvePoolX2/CurveERC20";
 import { CurvePoolData } from "../../../generated/schema";
 import { convertBINumToDesiredDecimals, toBytes } from "../../utils/converters";
 import { ZERO_BYTES, ZERO_BD } from "../../utils/constants";
+import { getExtras } from "./extras";
 
 export function handlePoolEntity(
   txnHash: Bytes,
@@ -24,6 +25,8 @@ export function handlePoolEntity(
   entity.blockTimestamp = timestamp;
   entity.vault = vault;
 
+  // balance and tokens arrays
+
   let balances: Array<BigDecimal> = [];
   let tokens: Array<Bytes> = [];
   for (let i = 0; i < nCoins; i++) {
@@ -32,6 +35,8 @@ export function handlePoolEntity(
   }
   entity.balance = balances;
   entity.tokens = tokens;
+
+  // virtual price
 
   let virtualPrice: ethereum.CallResult<BigInt>;
   if (poolType === "Curve2Pool") {
@@ -48,6 +53,10 @@ export function handlePoolEntity(
   }
   entity.virtualPrice =
     !virtualPrice || virtualPrice.reverted ? ZERO_BD : convertBINumToDesiredDecimals(virtualPrice.value, 18);
+
+  // extra rewards
+
+  entity.extras = getExtras(<CurvePoolData>entity, txnHash);
 
   entity.save();
 }
