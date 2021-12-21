@@ -79,6 +79,21 @@ type AaveV2Reserve @entity {
 }
 
 # ----------------------------------------
+#      Beefy
+# ----------------------------------------
+type BeefyVaultData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  vault: Bytes!
+  name: String
+  decimals: Int
+  balance: BigDecimal
+  virtualPrice: BigDecimal
+  token: Bytes
+}
+
+# ----------------------------------------
 #      Compound
 # ----------------------------------------
 type CompoundTokenData @entity {
@@ -87,7 +102,8 @@ type CompoundTokenData @entity {
   blockTimestamp: BigInt
   borrowIndex: BigDecimal
   borrowRatePerBlock: BigDecimal
-  compSpeed: BigDecimal
+  compBorrowSpeed: BigDecimal
+  compSupplySpeed: BigDecimal
   cTokenSymbol: String
   cTokenAddress: Bytes
   exchangeRate: BigDecimal

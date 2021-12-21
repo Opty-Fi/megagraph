@@ -1,6 +1,7 @@
 import { BigInt, Address, log, Bytes } from "@graphprotocol/graph-ts";
 import { CompoundToken } from "../../../generated/CompoundTokencDAI/CompoundToken";
 import { CompoundComptrollerImplementation } from "../../../generated/CompoundTokencDAI/CompoundComptrollerImplementation";
+import { CompoundComptrollerImplementationV2 } from "../../../generated/CompoundTokencDAI/CompoundComptrollerImplementationV2";
 import { CompoundUnderlying } from "../../../generated/CompoundTokencDAI/CompoundUnderlying";
 import { CompoundTokenData } from "../../../generated/schema";
 import { convertBINumToDesiredDecimals, convertToLowerCase } from "../../utils/converters";
@@ -11,7 +12,8 @@ export function handleEntity(
   blockNumber: BigInt,
   blockTimestamp: BigInt,
   comptrollerAddress: Address,
-  newSpeed: BigInt,
+  newBorrowSpeed: BigInt,
+  newSupplySpeed: BigInt,
   cTokenAddress: Address,
   borrowIndex: BigInt,
   totalBorrows: BigInt,
@@ -113,15 +115,45 @@ export function handleEntity(
         : cTokenContract.comptroller()
       : comptrollerAddress;
   if (comptrollerAddress) {
-    let comptrollerContract = CompoundComptrollerImplementation.bind(comptrollerAddress);
-    cTokenDataEntity.compSpeed = convertBINumToDesiredDecimals(
-      newSpeed
-        ? newSpeed
-        : comptrollerContract.try_compSpeeds(cTokenAddress).reverted
-        ? null
-        : comptrollerContract.compSpeeds(cTokenAddress),
-      18,
-    );
+    // https://compound.finance/governance/proposals/62
+    // split compSpeeds into compBorrowSpeeds and compSupplySpeeds
+    if (blockNumber.ge(BigInt.fromI32(13322798))) {
+      let comptrollerContract = CompoundComptrollerImplementationV2.bind(comptrollerAddress);
+      cTokenDataEntity.compBorrowSpeed = convertBINumToDesiredDecimals(
+        newBorrowSpeed
+          ? newBorrowSpeed
+          : comptrollerContract.try_compBorrowSpeeds(cTokenAddress).reverted
+          ? null
+          : comptrollerContract.compBorrowSpeeds(cTokenAddress),
+        18,
+      );
+      cTokenDataEntity.compSupplySpeed = convertBINumToDesiredDecimals(
+        newSupplySpeed
+          ? newSupplySpeed
+          : comptrollerContract.try_compSupplySpeeds(cTokenAddress).reverted
+          ? null
+          : comptrollerContract.compSupplySpeeds(cTokenAddress),
+        18,
+      );
+    } else {
+      let comptrollerContract = CompoundComptrollerImplementation.bind(comptrollerAddress);
+      cTokenDataEntity.compBorrowSpeed = convertBINumToDesiredDecimals(
+        newBorrowSpeed
+          ? newBorrowSpeed
+          : comptrollerContract.try_compSpeeds(cTokenAddress).reverted
+          ? null
+          : comptrollerContract.compSpeeds(cTokenAddress),
+        18,
+      );
+      cTokenDataEntity.compSupplySpeed = convertBINumToDesiredDecimals(
+        newSupplySpeed
+          ? newSupplySpeed
+          : comptrollerContract.try_compSpeeds(cTokenAddress).reverted
+          ? null
+          : comptrollerContract.compSpeeds(cTokenAddress),
+        18,
+      );
+    }
   }
   log.info("Saving data for cToken: {} - {} for block: {} with transaction hash: {}", [
     cTokenDataEntity.cTokenAddress.toHex(),
