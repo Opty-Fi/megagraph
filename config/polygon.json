@@ -3,6 +3,617 @@
   "network": "matic",
   "adapters": [
     {
+      "adapter": "Beefy",
+      "contracts": [
+        {
+          "contract": "NativeVault",
+          "abis": ["NativeVault"],
+          "entities": ["BeefyVaultData"],
+          "events": [
+            {
+              "event-name": "Transfer",
+              "event-params": "(indexed address,indexed address,uint256)"
+            }
+          ],
+          "instances": [
+            {
+              "address": "0x1d23ecC0645B07791b7D99349e253ECEbe43f614",
+              "startBlock": "14532335",
+              "symbol": "aave-matic"
+            }
+          ]
+        },
+        {
+          "contract": "Vault",
+          "abis": ["Vault"],
+          "entities": ["BeefyVaultData"],
+          "events": [
+            {
+              "event-name": "Transfer",
+              "event-params": "(indexed address,indexed address,uint256)"
+            }
+          ],
+          "instances": [
+            {
+              "address": "0xfEcf784F48125ccb7d8855cdda7C5ED6b5024Cb3",
+              "startBlock": "14692985",
+              "symbol": "bifi-maxi"
+            },
+            {
+              "address": "0x108c7a293162Adff86DA216AB5F91e56723125dc",
+              "startBlock": "21742881",
+              "symbol": "curve-poly-eurt"
+            },
+            {
+              "address": "0x4A041eD4dda1cf460D557E1bdCBf0b29c02A1b3c",
+              "startBlock": "20098937",
+              "symbol": "kyber-usdc-jeur"
+            },
+            {
+              "address": "0xAA7C2879DaF8034722A0977f13c343aF0883E92e",
+              "startBlock": "14915138",
+              "symbol": "curve-am3crv"
+            },
+            {
+              "address": "0x6EfBc871323148d9Fc34226594e90d9Ce2de3da3",
+              "startBlock": "21897430",
+              "symbol": "quick-matic-wcro"
+            },
+            {
+              "address": "0x5e03C75a8728a8E0FF0326baADC95433009424d6",
+              "startBlock": "21898410",
+              "symbol": "quick-matic-mana"
+            },
+            {
+              "address": "0x72B5Cf05770C9a6A99FB8652825884ee36a4BfdA",
+              "startBlock": "20596159",
+              "symbol": "quick-shib-matic"
+            },
+            {
+              "address": "0x1a83915207c9028a9f71e7D9Acf41eD2beB6f42D",
+              "startBlock": "20596091",
+              "symbol": "quick-dpi-eth"
+            },
+            {
+              "address": "0x48e58c7E8d2063ae7ADe8a0829E00780155232eC",
+              "startBlock": "20595802",
+              "symbol": "quick-ftm-matic"
+            },
+            {
+              "address": "0x659418cc3cf755F5367a51aDb586a7F770Da6d29",
+              "startBlock": "18626600",
+              "symbol": "quick-quick"
+            },
+            {
+              "address": "0x03F69AAF4c8512f533Da46cC9eFd49C4969e3CB8",
+              "startBlock": "15829286",
+              "symbol": "sushi-usdc-bifi"
+            },
+            {
+              "address": "0xfdE69969f4527343D78F9C9AC797ded29098B215",
+              "startBlock": "20371188",
+              "symbol": "sushi-jrt-eth"
+            },
+            {
+              "address": "0x5Da31E310bb83e89BF85A4100A98C7b33530395c",
+              "startBlock": "20143174",
+              "symbol": "ape-wmatic-crystl"
+            },
+            {
+              "address": "0xF10c108670b137Ae78C5705C84A6D00a9DD005a2",
+              "startBlock": "20136446",
+              "symbol": "kyber-usdc-jgbp"
+            },
+            {
+              "address": "0x2e78D4Cc7e1dF9845B60A28980b28B3E9fc82fd1",
+              "startBlock": "20137283",
+              "symbol": "kyber-usdc-jchf"
+            },
+            {
+              "address": "0x8c9d3Bc4425773BD2F00C4a2aC105c5Ad73c8141",
+              "startBlock": "16361940",
+              "symbol": "curve-poly-ren"
+            },
+            {
+              "address": "0x700504eaBA64Cd92080059a3C93b6baa73a4Ec38",
+              "startBlock": "19982977",
+              "symbol": "cafe-pbrew-matic"
+            },
+            {
+              "address": "0xd7C196571068EC51b86F378eF19387E6f3885748",
+              "startBlock": "19983120",
+              "symbol": "cafe-pbrew-usdc"
+            },
+            {
+              "address": "0xadfff816820B0f5C7255373DAca83489367bEB43",
+              "startBlock": "19947129",
+              "symbol": "sing-usdc-sing"
+            },
+            {
+              "address": "0xADA7F98fb2594E76914EB593e74B348A498Ea5Bd",
+              "startBlock": "16005518",
+              "symbol": "ape-banana-matic"
+            },
+            {
+              "address": "0x5A0801BAd20B6c62d86C566ca90688A6b9ea1d3f",
+              "startBlock": "18441979",
+              "symbol": "curve-poly-atricrypto3"
+            },
+            {
+              "address": "0x4f589d7A5d816b436318F9634935Ff4755d7d8f5",
+              "startBlock": "19985632",
+              "symbol": "sushi-fox-eth"
+            },
+            {
+              "address": "0x756866Bd84A2441664e80367977357b1F9b5F3D3",
+              "startBlock": "19645640",
+              "symbol": "sushi-wmatic-ghst"
+            },
+            {
+              "address": "0x4266Cc81D861Fccc37dbe9A24459B6Fc3507039F",
+              "startBlock": "19462938",
+              "symbol": "tetu-tetu-usdc"
+            },
+            {
+              "address": "0xFbc896588413cEAb25fE80bb9D5322E577Af9536",
+              "startBlock": "19605763",
+              "symbol": "tetu-matic-tetu"
+            },
+            {
+              "address": "0x944A5C12cD4399ABC6883fF1ba40A14c23B2Fd37",
+              "startBlock": "19097362",
+              "symbol": "mai-qi-matic"
+            },
+            {
+              "address": "0x8c864B1FD2BbB20F614661ddD992eFaeEeF0b2Ac",
+              "startBlock": "18917128",
+              "symbol": "quick-qi-eth"
+            },
+            {
+              "address": "0xe5844a9Af7748492dAba745506bfB2b91f19be62",
+              "startBlock": "18915871",
+              "symbol": "quick-mai-usdt"
+            },
+            {
+              "address": "0x64fbCDfd1335AfdC8f81383919483c593399c738",
+              "startBlock": "18914994",
+              "symbol": "quick-dai-mai"
+            },
+            {
+              "address": "0xD6eB31D849eE79B5F5fA1b7c470cDDFa515965cD",
+              "startBlock": "18785460",
+              "symbol": "quick-mai-matic"
+            },
+            {
+              "address": "0x7c0E28652523e36f0dF89C5A895cF59D493cb04c",
+              "startBlock": "18784954",
+              "symbol": "quick-usdt-matic"
+            },
+            {
+              "address": "0xb2A56dFdbC890c102Dcd5e30afcfB43cD3343762",
+              "startBlock": "18614620",
+              "symbol": "ape-watch-matic"
+            },
+            {
+              "address": "0x3404361876897A92579DcEBd9eDC94A1662dC4aF",
+              "startBlock": "18492437",
+              "symbol": "sushi-axs-eth"
+            },
+            {
+              "address": "0xBD8B03a3fF5F63093000Df6De33B0A6C9E5bb501",
+              "startBlock": "18453843",
+              "symbol": "ironswap-ice-iron"
+            },
+            {
+              "address": "0x8440DAe4E1002e83D57fbFD6d33E6F3684a35036",
+              "startBlock": "18449514",
+              "symbol": "ape-usdc-dai"
+            },
+            {
+              "address": "0xf5881fF8fF609C1202E0c6481bc16B4273407A04",
+              "startBlock": "18422797",
+              "symbol": "sushi-avax-weth"
+            },
+            {
+              "address": "0x9F94558306D37F23a85ac95fDcCee7551C086b34",
+              "startBlock": "18384130",
+              "symbol": "ironswap-iron"
+            },
+            {
+              "address": "0xC4FABD1E2A99c84b7fd152a41426B77c217c5764",
+              "startBlock": "18268435",
+              "symbol": "quick-eth-rendoge"
+            },
+            {
+              "address": "0x655AF65e1f26ccB1dD18EF1DA93E813911818c5e",
+              "startBlock": "18086055",
+              "symbol": "dinoswap-dfyn-route-eth"
+            },
+            {
+              "address": "0xeD7148949c2dC8AA59A5aD8658eF347Bd7387fA8",
+              "startBlock": "18063555",
+              "symbol": "quick-usdc-quick"
+            },
+            {
+              "address": "0x764B2aAcfDE7e33888566a6d44005Dc982F02031",
+              "startBlock": "18063780",
+              "symbol": "quick-wmatic-avax"
+            },
+            {
+              "address": "0x07628d57b68E3ec227496740820A6fDa1b0DD0d8",
+              "startBlock": "17828732",
+              "symbol": "polygonfarm-spade-matic"
+            },
+            {
+              "address": "0xEEc9a4Ecd1C0caB2Eb20081A10b8b0A07336dA14",
+              "startBlock": "17828783",
+              "symbol": "polygonfarm-spade-usdc"
+            },
+            {
+              "address": "0x55eebAd2b295d5229cf853368c9307e48B9CD955",
+              "startBlock": "17453423",
+              "symbol": "cometh-eth-wbtc"
+            },
+            {
+              "address": "0x47036A1ecC5D02e122Ae6604973ee1529E76e022",
+              "startBlock": "17794994",
+              "symbol": "cometh-eth-usdc"
+            },
+            {
+              "address": "0x8802fbcb669c7BbcC3989455B3FdBF9235176bD4",
+              "startBlock": "17646265",
+              "symbol": "quick-sol-matic"
+            },
+            {
+              "address": "0x80fcA0946fb75724f5d84Dd49edC694062E3111C",
+              "startBlock": "17573123",
+              "symbol": "quick-uni-eth"
+            },
+            {
+              "address": "0xE87151D8dd8695e3e69e8B2f0eB8cf79BD2227d1",
+              "startBlock": "17568543",
+              "symbol": "dinoswap-dino-eth"
+            },
+            {
+              "address": "0xa2e51538fce9d2D8082988921be4C0afC3Fe089a",
+              "startBlock": "17464827",
+              "symbol": "dinoswap-dfyn-ust-usdt"
+            },
+            {
+              "address": "0x05064BF1Bc9f6778c69c3f68E17Ba8d9427594D8",
+              "startBlock": "17464717",
+              "symbol": "dinoswap-dfyn-eth-dfyn"
+            },
+            {
+              "address": "0xD8f5095Fd7E27D4aD12008d5eb09105bFFd1572c",
+              "startBlock": "17348059",
+              "symbol": "farmhero-quick-usdc-honor"
+            },
+            {
+              "address": "0x0cFc878111e72e800ecA9E0B2a6358bcc15EB9FE",
+              "startBlock": "17348164",
+              "symbol": "farmhero-wault-usdc-honor"
+            },
+            {
+              "address": "0xFa08E2EFE3aa5a8a0142f26add94354f9FdFe1DE",
+              "startBlock": "17249473",
+              "symbol": "dinoswap-xmark-usdc"
+            },
+            {
+              "address": "0x6a195660472a51f267230c3324F86055D2A8B1E2",
+              "startBlock": "16997754",
+              "symbol": "dinoswap-dino-usdc"
+            },
+            {
+              "address": "0x93c9f29CF2496e73f3d8b07055e2359267207147",
+              "startBlock": "16676051",
+              "symbol": "jetswap-poly-usdc-usdt"
+            },
+            {
+              "address": "0xebe0c8d842AA5A57D7BEf8e524dEabA676F91cD1",
+              "startBlock": "15886645",
+              "symbol": "mai-usdc-mimatic"
+            },
+            {
+              "address": "0xba1548b3f673950094dc00eDc1eB71683f371696",
+              "startBlock": "16886006",
+              "symbol": "quick-nexo-eth"
+            },
+            {
+              "address": "0x2AaB02eDE64d4A686EA1d1A70B688E46cce50fFd",
+              "startBlock": "16873664",
+              "symbol": "telxchange-quick-wmatic-tel"
+            },
+            {
+              "address": "0xBa58D7131Ca50DdFB458f37ea0De6fdcebFe836B",
+              "startBlock": "16875773",
+              "symbol": "telxchange-quick-aave-tel"
+            },
+            {
+              "address": "0xb74792F6a2cF81E3f704930621cb4832ffFcC840",
+              "startBlock": "16875846",
+              "symbol": "telxchange-quick-wbtc-tel"
+            },
+            {
+              "address": "0x90D0F2050e62a6d4AF088dD09d802D9A18253c40",
+              "startBlock": "16806216",
+              "symbol": "ironswap-ice-eth"
+            },
+            {
+              "address": "0x0564889d4Ff0dA0371Ec8a898AC39ABC99065BfA",
+              "startBlock": "16810108",
+              "symbol": "ironswap-ice-usdc"
+            },
+            {
+              "address": "0x0C4705EBd2BF69660b72f9E9B684714c9e341942",
+              "startBlock": "16782403",
+              "symbol": "ironswap-3usd"
+            },
+            {
+              "address": "0xa55e8326a9AC7B0bFcA5E6Fc9Cf1141E2dc11f67",
+              "startBlock": "16706926",
+              "symbol": "jetswap-poly-pwings"
+            },
+            {
+              "address": "0x97fe99a9bc7db115EC89Bc2627eC7f0518409121",
+              "startBlock": "16675356",
+              "symbol": "jetswap-poly-pwings-matic"
+            },
+            {
+              "address": "0x1BE356364a1e849af2F7a513Fc46dAB6063Db485",
+              "startBlock": "16215201",
+              "symbol": "ape-matic-usdt"
+            },
+            {
+              "address": "0x584611DA226b4d4C0c4D880E6f1E0c0E8522f3AE",
+              "startBlock": "16215079",
+              "symbol": "ape-matic-dai"
+            },
+            {
+              "address": "0x2b17aD11c5e9553c79a18F33Df4dE565eF0ad5b0",
+              "startBlock": "16139002",
+              "symbol": "quick-usdc-rusd"
+            },
+            {
+              "address": "0xD35B3733c2ceaf3635bE246B2c6C42f10e5b6B78",
+              "startBlock": "16007086",
+              "symbol": "sushi-wbtc-ibbtc"
+            },
+            {
+              "address": "0xc24Cf5fA29E619f2D5ccbEC46F2295876c3722ff",
+              "startBlock": "16022520",
+              "symbol": "ape-eth-matic"
+            },
+            {
+              "address": "0x76F0e4a08c1e85d020dfD7C66B991ecd4A7551AF",
+              "startBlock": "16021912",
+              "symbol": "ape-btc-matic"
+            },
+            {
+              "address": "0x6888f67662d1f442C4428129e0Bdb27a275e0a65",
+              "startBlock": "16021290",
+              "symbol": "ape-bnb-matic"
+            },
+            {
+              "address": "0x8F1F1FB23A208041e1f4Bf4A3b4E165bcCA25Bbb",
+              "startBlock": "15812221",
+              "symbol": "quick-dai-usdt"
+            },
+            {
+              "address": "0xA4fB94990f99A8C1290e83d40DB9C648fD868D14",
+              "startBlock": "15639429",
+              "symbol": "sushi-eth-wfil"
+            },
+            {
+              "address": "0x0dFd8c4dd493d8f87Be362878E41537Ca7Ee4d9e",
+              "startBlock": "15633203",
+              "symbol": "quick-usdc-dai"
+            },
+            {
+              "address": "0x5d4B83B3011B1E14e55185c5D432987e76f6DE3C",
+              "startBlock": "15268793",
+              "symbol": "quick-usdc-eth"
+            },
+            {
+              "address": "0x9DA4048550C1a73686E594f726310F0b0585fBA3",
+              "startBlock": "15259996",
+              "symbol": "quick-dai-eth"
+            },
+            {
+              "address": "0xD3395577febc6AdaB25490a69955ebC47040766C",
+              "startBlock": "14437953",
+              "symbol": "aave-wbtc"
+            },
+            {
+              "address": "0x77276a7c9Ff3a6cbD334524d6F1f6219D039ac0E",
+              "startBlock": "14286297",
+              "symbol": "aave-eth"
+            },
+            {
+              "address": "0x8efCf419813F9E018cCaCda36151e5079c274fa4",
+              "startBlock": "15181715",
+              "symbol": "sushi-grt-eth"
+            },
+            {
+              "address": "0xddD5F39d044Dbaeef7b348cf04C3628acd3F1D8f",
+              "startBlock": "15181638",
+              "symbol": "sushi-frax-fxs"
+            },
+            {
+              "address": "0x5B19A2e8E5878cF2b1E9b1AC7CEA50346671B2Fc",
+              "startBlock": "15181562",
+              "symbol": "sushi-frax-usdc"
+            },
+            {
+              "address": "0x544551E4E7D7bDd1CfbD55F07e304F5C9fD514Dd",
+              "startBlock": "15181301",
+              "symbol": "sushi-wmatic-woofy"
+            },
+            {
+              "address": "0x75424BE5378621AeC2eEF25965f40FeB59039B52",
+              "startBlock": "15019329",
+              "symbol": "sushi-usdc-dai"
+            },
+            {
+              "address": "0x3AD9cd8d75f7a711Caea58e725425A9dC0D249c4",
+              "startBlock": "15179066",
+              "symbol": "sushi-snx-eth"
+            },
+            {
+              "address": "0x91a55E4b057119e20334258f7C5EAB8822491CEb",
+              "startBlock": "14957781",
+              "symbol": "quick-btc-usdc"
+            },
+            {
+              "address": "0xC1A2e8274D390b67A7136708203D71BF3877f158",
+              "startBlock": "14929177",
+              "symbol": "quick-matic-usdc"
+            },
+            {
+              "address": "0xBA4FA9A5e1e573fA5267970238af5Edf40727315",
+              "startBlock": "14644693",
+              "symbol": "pzap-pzap-usdc"
+            },
+            {
+              "address": "0xf2984c27B963A14F9f3B7326096c54fb05d5b9AF",
+              "startBlock": "14681396",
+              "symbol": "pzap-pzap-matic"
+            },
+            {
+              "address": "0x9649e6E5c689f21BC27B47CE4177f7c5f7281E20",
+              "startBlock": "14606460",
+              "symbol": "cometh-bifi-eth"
+            },
+            {
+              "address": "0x66b3d910c30f2305EA0078E06DF65e0c1745ceF0",
+              "startBlock": "14606467",
+              "symbol": "cometh-bifi-must"
+            },
+            {
+              "address": "0xe4b3CCbB1E48c579Ea3D764Fb258Bc908e46487E",
+              "startBlock": "14530804",
+              "symbol": "aave-aave"
+            },
+            {
+              "address": "0x9B36ECeaC46B70ACfB7C2D6F3FD51aEa87C31018",
+              "startBlock": "14438273",
+              "symbol": "aave-dai"
+            },
+            {
+              "address": "0xE71f3C11D4535a7F8c5FB03FDA57899B2C9c721F",
+              "startBlock": "14272076",
+              "symbol": "aave-usdc"
+            },
+            {
+              "address": "0xE695fCeD8fD93eeE54204a7fC33323a60d41865A",
+              "startBlock": "14490094",
+              "symbol": "sushi-crv-eth"
+            },
+            {
+              "address": "0xB6B89a05ad8228b98d0D8a77e1a695c54500db3b",
+              "startBlock": "14490668",
+              "symbol": "sushi-usdc-usdt"
+            },
+            {
+              "address": "0xaE65a66B3c7f8cc1ba71cEA740C953aBa0F3Ce8b",
+              "startBlock": "14490701",
+              "symbol": "sushi-link-eth"
+            },
+            {
+              "address": "0x866a910F3375d0dEBDdD904A36B3940aFcD29900",
+              "startBlock": "14214805",
+              "symbol": "sushi-aave-eth"
+            },
+            {
+              "address": "0x6b6ca47520dDC9333B8bD09a1e64204648B63274",
+              "startBlock": "14326195",
+              "symbol": "sushi-eth-dai"
+            },
+            {
+              "address": "0x6530E351074f1f9fdf254dC7d7d8A44324E158a4",
+              "startBlock": "14326950",
+              "symbol": "sushi-btc-eth"
+            },
+            {
+              "address": "0xE8417099971151CD5CfAE264e25634Fac05cA2b3",
+              "startBlock": "14327139",
+              "symbol": "sushi-eth-usdt"
+            },
+            {
+              "address": "0xE4DB97A2AAFbfef40D1a4AE8B709f61d6756F8e1",
+              "startBlock": "14327329",
+              "symbol": "sushi-usdc-eth"
+            },
+            {
+              "address": "0xC8e809a9180d637Cc23dAf60b41B70CA1ad5Fc08",
+              "startBlock": "14327469",
+              "symbol": "sushi-matic-eth"
+            },
+            {
+              "address": "0x4462817b53E76b722c2D174D0148ddb81452f1dE",
+              "startBlock": "13935366",
+              "symbol": "quick-usdc-usdt"
+            },
+            {
+              "address": "0x7CE2332fAF6328986C75e3A8fCc1CB79621aeB1F",
+              "startBlock": "14049778",
+              "symbol": "cometh-must-eth"
+            },
+            {
+              "address": "0xf26607237355D7c6183ea66EC908729E9c6eEB6b",
+              "startBlock": "13922118",
+              "symbol": "quick-eth-btc"
+            },
+            {
+              "address": "0x66df1B2d22759D03A9f37BAaAc826089e56a5936",
+              "startBlock": "14039880",
+              "symbol": "quick-quick-eth"
+            },
+            {
+              "address": "0x752948B4493d2Ee09c95F944A76005aEBF410087",
+              "startBlock": "13922148",
+              "symbol": "quick-aave-eth"
+            },
+            {
+              "address": "0xaB4105375FbE5F502B0da986F46ADf7a21762e52",
+              "startBlock": "13922136",
+              "symbol": "quick-link-eth"
+            },
+            {
+              "address": "0xC422261EdC5dB679CAd9BC403e886351De540e77",
+              "startBlock": "13884767",
+              "symbol": "quick-eth-usdt"
+            },
+            {
+              "address": "0x8b89477dFde285849E1B07947E25012206F4D674",
+              "startBlock": "13884750",
+              "symbol": "quick-eth-matic"
+            },
+            {
+              "address": "0xa008B727ddBa283Ddb178b47BB227Cdbea5C1bfD",
+              "startBlock": "13884735",
+              "symbol": "quick-quick-matic"
+            },
+            {
+              "address": "0xa5aaE3a55cA356C62b5425AA4bFC212542B17777",
+              "startBlock": "13795276",
+              "symbol": "cometh-eth-matic"
+            },
+            {
+              "address": "0x7f6fE34C51d5352A0CF375C0Fbe03bD19eCD8460",
+              "startBlock": "13795266",
+              "symbol": "cometh-matic-must"
+            },
+            {
+              "address": "0x8a198BCbF313A5565c64A7Ed61FaA413eB4E0931",
+              "startBlock": "13795241",
+              "symbol": "cometh-usdc-must"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "adapter": "Curve",
       "contracts": [
         {
