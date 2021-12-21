@@ -144,8 +144,8 @@
       "contracts": [
         {
           "contract": "Token",
-          "abis": ["LendingPoolAddressesProvider", "AaveProtocolDataProvider", "Token"],
-          "entities": ["AaveV2TokenData"],
+          "abis": ["LendingPoolAddressesProvider", "AaveProtocolDataProvider", "IncentivesController", "Token"],
+          "entities": ["AaveV2TokenData", "AaveV2Reserve"],
           "events": [
             {
               "event-name": "Burn",
@@ -286,7 +286,7 @@
       "contracts": [
         {
           "contract": "ComptrollerImplementation",
-          "abis": ["ComptrollerImplementation", "Token", "Underlying"],
+          "abis": ["ComptrollerImplementation"],
           "entities": ["CompoundTokenData"],
           "events": [
             {
@@ -303,8 +303,30 @@
           ]
         },
         {
+          "contract": "ComptrollerImplementationV2",
+          "abis": ["ComptrollerImplementationV2"],
+          "entities": ["CompoundTokenData"],
+          "events": [
+            {
+              "event-name": "CompBorrowSpeedUpdated",
+              "event-params": "(indexed address,uint256)"
+            },
+            {
+              "event-name": "CompSupplySpeedUpdated",
+              "event-params": "(indexed address,uint256)"
+            }
+          ],
+          "instances": [
+            {
+              "symbol": "",
+              "address": "0x3d9819210A31b4961b30EF54bE2aeD79B9c9Cd3B",
+              "startBlock": 13322798
+            }
+          ]
+        },
+        {
           "contract": "Token",
-          "abis": ["ComptrollerImplementation", "Token", "Underlying"],
+          "abis": ["ComptrollerImplementation", "ComptrollerImplementationV2", "Token", "Underlying"],
           "entities": ["CompoundTokenData"],
           "events": [
             {
@@ -398,7 +420,15 @@
               "symbol": "cZRX",
               "address": "0xb3319f5d18bc0d84dd1b4825dcde5d5f7266d407",
               "startBlock": 7710733
-            }
+            },
+            { "address": "0xccf4429db6322d5c611ee964527d42e5d685dd6a", "startBlock": "12038653", "symbol": "cWBTC2" },
+            { "address": "0xf5dce57282a584d2746faf1593d3121fcac444dc", "startBlock": "7710752", "symbol": "cSAI" },
+            { "address": "0x4b0181102a0112a2ef11abee5563bb4a3176c9d7", "startBlock": "12848166", "symbol": "cSUSHI" },
+            { "address": "0x12392f67bdf24fae0af363c24ac620a2f67dad86", "startBlock": "11008385", "symbol": "cTUSD" },
+            { "address": "0xe65cdb6479bac1e22340e4e755fae7e509ecd06c", "startBlock": "12848198", "symbol": "cAAVE" },
+            { "address": "0x80a2ae356fc9ef4305676f7a3e2ed04e12c33946", "startBlock": "12848198", "symbol": "cYFI" },
+            { "address": "0xface851a4921ce59e912d19329929ce6da6eb0c7", "startBlock": "12286030", "symbol": "cLINK" },
+            { "address": "0x95b4ef2869ebd94beb4eee400a99824bf5dc325b", "startBlock": "12836064", "symbol": "cMKR" }
           ]
         }
       ]
@@ -579,39 +609,20 @@
       "adapter": "Curve",
       "contracts": [
         {
-          "contract": "GaugeController",
-          "abis": ["GaugeController"],
-          "entities": ["CurveGaugeData"],
-          "events": [
-            {
-              "event-name": "NewGauge",
-              "event-params": "(address,int128,uint256)"
-            },
-            {
-              "event-name": "NewGaugeWeight",
-              "event-params": "(address,uint256,uint256,uint256)"
-            },
-            {
-              "event-name": "NewTypeWeight",
-              "event-params": "(int128,uint256,uint256,uint256)"
-            },
-            {
-              "event-name": "VoteForGauge",
-              "event-params": "(uint256,address,address,uint256)"
-            }
-          ],
-          "instances": [
-            {
-              "symbol": "",
-              "address": "0x2F50D538606Fa9EDD2B11E2446BEb18C9D5846bB",
-              "startBlock": 10647875
-            }
-          ]
-        },
-        {
           "contract": "PoolX2",
-          "abis": ["PoolX2", "ERC20"],
-          "entities": ["CurvePoolData"],
+          "abis": [
+            "PoolX2",
+            "Registry",
+            "LiquidityGauge",
+            "LiquidityGaugeV2",
+            "StakingLiquidityGauge",
+            "StakingRewards",
+            "MultiRewards",
+            "Rewards",
+            "ERC20",
+            "AaveIncentivesController"
+          ],
+          "entities": ["CurvePoolData", "CurveExtraReward"],
           "events": [
             {
               "event-name": "AddLiquidity",
@@ -738,8 +749,19 @@
         },
         {
           "contract": "PoolX3",
-          "abis": ["PoolX3", "ERC20"],
-          "entities": ["CurvePoolData"],
+          "abis": [
+            "PoolX3",
+            "Registry",
+            "LiquidityGauge",
+            "LiquidityGaugeV2",
+            "StakingLiquidityGauge",
+            "StakingRewards",
+            "MultiRewards",
+            "Rewards",
+            "ERC20",
+            "AaveIncentivesController"
+          ],
+          "entities": ["CurvePoolData", "CurveExtraReward"],
           "events": [
             {
               "event-name": "AddLiquidity",
@@ -782,8 +804,19 @@
         },
         {
           "contract": "PoolX4",
-          "abis": ["PoolX4", "ERC20"],
-          "entities": ["CurvePoolData"],
+          "abis": [
+            "PoolX4",
+            "Registry",
+            "LiquidityGauge",
+            "LiquidityGaugeV2",
+            "StakingLiquidityGauge",
+            "StakingRewards",
+            "MultiRewards",
+            "Rewards",
+            "ERC20",
+            "AaveIncentivesController"
+          ],
+          "entities": ["CurvePoolData", "CurveExtraReward"],
           "events": [
             {
               "event-name": "AddLiquidity",
@@ -1165,6 +1198,60 @@
         }
       ]
     },
+    {
+      "adapter": "Lido",
+      "contracts": [
+        {
+          "contract": "Token",
+          "abis": ["Token", "Oracle", "NodeOperatorsRegistry"],
+          "entities": ["LidoTokenData"],
+          "events": [
+            {
+              "event-name": "Transfer",
+              "event-params": "(indexed address,indexed address,uint256)"
+            },
+            {
+              "event-name": "Submitted",
+              "event-params": "(indexed address,uint256,address)"
+            },
+            {
+              "event-name": "Withdrawal",
+              "event-params": "(indexed address,uint256,uint256,indexed bytes32,uint256)"
+            }
+          ],
+          "instances": [
+            {
+              "symbol": "stETH",
+              "address": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84",
+              "startBlock": 11473216
+            }
+          ]
+        },
+        {
+          "contract": "Oracle",
+          "abis": ["Token", "Oracle", "NodeOperatorsRegistry"],
+          "entities": ["LidoTokenData", "LidoOracle"],
+          "events": [
+            {
+              "event-name": "Completed",
+              "event-params": "(uint256,uint128,uint128)"
+            },
+            {
+              "event-name": "PostTotalShares",
+              "event-params": "(uint256,uint256,uint256,uint256)"
+            }
+          ],
+          "instances": [
+            {
+              "symbol": "",
+              "address": "0x442af784A788A5bd6F42A01Ebe9F287a871243fb",
+              "startBlock": 11473216
+            }
+          ]
+        }
+      ]
+    },
+
     {
       "adapter": "Yearn",
       "contracts": [
