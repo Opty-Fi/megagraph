@@ -18,7 +18,8 @@ export function handleAccrueInterest(event: AccrueInterestEvent): void {
     event.block.number,
     event.block.timestamp,
     null, // comptrollerAddress
-    null, // newSpeed
+    null, // newBorrowSpeed
+    null, // newSupplySpeed
     event.address, // cTokenAddress
     event.params.borrowIndex,
     event.params.totalBorrows,
@@ -31,7 +32,8 @@ export function handleBorrow(event: BorrowEvent): void {
     event.block.number,
     event.block.timestamp,
     null, // comptrollerAddress
-    null, // newSpeed
+    null, // newBorrowSpeed
+    null, // newSupplySpeed
     event.address, // cTokenAddress
     null, // borrowIndex
     event.params.totalBorrows,
@@ -44,7 +46,8 @@ export function handleLiquidateBorrow(event: LiquidateBorrowEvent): void {
     event.block.number,
     event.block.timestamp,
     null, // comptrollerAddress
-    null, // newSpeed
+    null, // newBorrowSpeed
+    null, // newSupplySpeed
     event.address, // cTokenAddress
     null, // borrowIndex
     null, // totalBorrows
@@ -57,7 +60,8 @@ export function handleMint(event: MintEvent): void {
     event.block.number,
     event.block.timestamp,
     null, // comptrollerAddress
-    null, // newSpeed
+    null, // newBorrowSpeed
+    null, // newSupplySpeed
     event.address, // cTokenAddress
     null, // borrowIndex
     null, // totalBorrows
@@ -70,7 +74,8 @@ export function handleNewReserveFactor(event: NewReserveFactorEvent): void {
     event.block.number,
     event.block.timestamp,
     null, // comptrollerAddress
-    null, // newSpeed
+    null, // newBorrowSpeed
+    null, // newSupplySpeed
     event.address, // cTokenAddress
     null, // borrowIndex
     null, // totalBorrows
@@ -83,7 +88,8 @@ export function handleRedeem(event: RedeemEvent): void {
     event.block.number,
     event.block.timestamp,
     null, // comptrollerAddress
-    null, // newSpeed
+    null, // newBorrowSpeed
+    null, // newSupplySpeed
     event.address, // cTokenAddress
     null, // borrowIndex
     null, // totalBorrows
@@ -96,7 +102,8 @@ export function handleRepayBorrow(event: RepayBorrowEvent): void {
     event.block.number,
     event.block.timestamp,
     null, // comptrollerAddress
-    null, // newSpeed
+    null, // newBorrowSpeed
+    null, // newSupplySpeed
     event.address, // cTokenAddress
     null, // borrowIndex
     event.params.totalBorrows,
@@ -109,7 +116,8 @@ export function handleReservesAdded(event: ReservesAddedEvent): void {
     event.block.number,
     event.block.timestamp,
     null, // comptrollerAddress
-    null, // newSpeed
+    null, // newBorrowSpeed
+    null, // newSupplySpeed
     event.address, // cTokenAddress
     null, // borrowIndex
     null, // totalBorrows
@@ -122,7 +130,8 @@ export function handleReservesReduced(event: ReservesReducedEvent): void {
     event.block.number,
     event.block.timestamp,
     null, // comptrollerAddress
-    null, // newSpeed
+    null, // newBorrowSpeed
+    null, // newSupplySpeed
     event.address, // cTokenAddress
     null, // borrowIndex
     null, // totalBorrows
@@ -135,7 +144,8 @@ export function handleTransfer(event: TransferEvent): void {
     event.block.number,
     event.block.timestamp,
     null, // comptrollerAddress
-    null, // newSpeed
+    null, // newBorrowSpeed
+    null, // newSupplySpeed
     event.address, // cTokenAddress
     null, // borrowIndex
     null, // totalBorrows

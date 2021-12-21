@@ -4,18 +4,27 @@
 
 if [[ "$CONFIG" == "arbitrum" ]]
 then
-  ln -s CurvePoolX22pool      generated/CurvePoolX2
-  ln -s CurvePoolX3tricrypto  generated/CurvePoolX3
+  ln -s CurvePoolX22pool     generated/CurvePoolX2
+  ln -s CurvePoolX3tricrypto generated/CurvePoolX3
   # PoolX4 is not used
-  ln -s generated/CurvePoolX3tricrypto  generated/CurvePoolX4
+  ln -s CurvePoolX3tricrypto generated/CurvePoolX4
+  ln -s CurvePoolX3.ts       generated/CurvePoolX4/CurvePoolX4.ts
+elif [[ "$CONFIG" == "avalanche" ]]
+then
+  ln -s CurvePoolX2MIM3CRV-f-0  generated/CurvePoolX2
+  ln -s CurvePoolX3atricrypto   generated/CurvePoolX3
+  ln -s CurvePoolX4U.TOKEN-f-19 generated/CurvePoolX4
+elif [[ "$CONFIG" == "fantom" ]]
+then
+  ln -s CurvePoolX2ren       generated/CurvePoolX2
+  ln -s CurvePoolX3tricrypto generated/CurvePoolX3
+  ln -s CurvePoolX44pool-f-7 generated/CurvePoolX4
 elif [[ "$CONFIG" == "polygon" ]]
 then
-  ln -s CurvePoolX2aAAVE generated/CurvePoolX2
-  # PoolX2 and X3 are not used
-  ln -s CurvePoolX2aAAVE generated/CurvePoolX3
-  ln -s CurvePoolX2aAAVE generated/CurvePoolX4
-elif [[ "$CONFIG" == "sushi" ]]
-then
+  ln -s CurvePoolX2eurtusd      generated/CurvePoolX2
+  ln -s CurvePoolX3aave         generated/CurvePoolX3
+  ln -s CurvePoolX4crvAUR-JRT-f generated/CurvePoolX4
+
   ln -s SushiKashiPairMediumRiskV1kmWBTC\&\#x2F\;WMATIC-LINK generated/SushiKashiPairMediumRiskV1
 else # mainnet or dev
   ln -s CurvePoolX2ankrCRV            generated/CurvePoolX2

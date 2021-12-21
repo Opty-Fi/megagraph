@@ -286,7 +286,7 @@
       "contracts": [
         {
           "contract": "ComptrollerImplementation",
-          "abis": ["ComptrollerImplementation", "Token", "Underlying"],
+          "abis": ["ComptrollerImplementation"],
           "entities": ["CompoundTokenData"],
           "events": [
             {
@@ -303,8 +303,30 @@
           ]
         },
         {
+          "contract": "ComptrollerImplementationV2",
+          "abis": ["ComptrollerImplementationV2"],
+          "entities": ["CompoundTokenData"],
+          "events": [
+            {
+              "event-name": "CompBorrowSpeedUpdated",
+              "event-params": "(indexed address,uint256)"
+            },
+            {
+              "event-name": "CompSupplySpeedUpdated",
+              "event-params": "(indexed address,uint256)"
+            }
+          ],
+          "instances": [
+            {
+              "symbol": "",
+              "address": "0x3d9819210A31b4961b30EF54bE2aeD79B9c9Cd3B",
+              "startBlock": 13322798
+            }
+          ]
+        },
+        {
           "contract": "Token",
-          "abis": ["ComptrollerImplementation", "Token", "Underlying"],
+          "abis": ["ComptrollerImplementation", "ComptrollerImplementationV2", "Token", "Underlying"],
           "entities": ["CompoundTokenData"],
           "events": [
             {
@@ -398,7 +420,15 @@
               "symbol": "cZRX",
               "address": "0xb3319f5d18bc0d84dd1b4825dcde5d5f7266d407",
               "startBlock": 7710733
-            }
+            },
+            { "address": "0xccf4429db6322d5c611ee964527d42e5d685dd6a", "startBlock": "12038653", "symbol": "cWBTC2" },
+            { "address": "0xf5dce57282a584d2746faf1593d3121fcac444dc", "startBlock": "7710752", "symbol": "cSAI" },
+            { "address": "0x4b0181102a0112a2ef11abee5563bb4a3176c9d7", "startBlock": "12848166", "symbol": "cSUSHI" },
+            { "address": "0x12392f67bdf24fae0af363c24ac620a2f67dad86", "startBlock": "11008385", "symbol": "cTUSD" },
+            { "address": "0xe65cdb6479bac1e22340e4e755fae7e509ecd06c", "startBlock": "12848198", "symbol": "cAAVE" },
+            { "address": "0x80a2ae356fc9ef4305676f7a3e2ed04e12c33946", "startBlock": "12848198", "symbol": "cYFI" },
+            { "address": "0xface851a4921ce59e912d19329929ce6da6eb0c7", "startBlock": "12286030", "symbol": "cLINK" },
+            { "address": "0x95b4ef2869ebd94beb4eee400a99824bf5dc325b", "startBlock": "12836064", "symbol": "cMKR" }
           ]
         }
       ]
