@@ -195,9 +195,7 @@
   },
   {
     "constant": true,
-    "inputs": [
-      { "internalType": "bytes32", "name": "_key", "type": "bytes32" }
-    ],
+    "inputs": [{ "internalType": "bytes32", "name": "_key", "type": "bytes32" }],
     "name": "getAddress",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "payable": false,
@@ -235,9 +233,7 @@
     "constant": true,
     "inputs": [],
     "name": "getLendingPoolCore",
-    "outputs": [
-      { "internalType": "address payable", "name": "", "type": "address" }
-    ],
+    "outputs": [{ "internalType": "address payable", "name": "", "type": "address" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -334,9 +330,7 @@
   },
   {
     "constant": false,
-    "inputs": [
-      { "internalType": "address", "name": "_feeProvider", "type": "address" }
-    ],
+    "inputs": [{ "internalType": "address", "name": "_feeProvider", "type": "address" }],
     "name": "setFeeProviderImpl",
     "outputs": [],
     "payable": false,
@@ -345,9 +339,7 @@
   },
   {
     "constant": false,
-    "inputs": [
-      { "internalType": "address", "name": "_configurator", "type": "address" }
-    ],
+    "inputs": [{ "internalType": "address", "name": "_configurator", "type": "address" }],
     "name": "setLendingPoolConfiguratorImpl",
     "outputs": [],
     "payable": false,
@@ -371,9 +363,7 @@
   },
   {
     "constant": false,
-    "inputs": [
-      { "internalType": "address", "name": "_provider", "type": "address" }
-    ],
+    "inputs": [{ "internalType": "address", "name": "_provider", "type": "address" }],
     "name": "setLendingPoolDataProviderImpl",
     "outputs": [],
     "payable": false,
@@ -382,9 +372,7 @@
   },
   {
     "constant": false,
-    "inputs": [
-      { "internalType": "address", "name": "_pool", "type": "address" }
-    ],
+    "inputs": [{ "internalType": "address", "name": "_pool", "type": "address" }],
     "name": "setLendingPoolImpl",
     "outputs": [],
     "payable": false,
@@ -393,9 +381,7 @@
   },
   {
     "constant": false,
-    "inputs": [
-      { "internalType": "address", "name": "_manager", "type": "address" }
-    ],
+    "inputs": [{ "internalType": "address", "name": "_manager", "type": "address" }],
     "name": "setLendingPoolLiquidationManager",
     "outputs": [],
     "payable": false,
@@ -449,9 +435,7 @@
   },
   {
     "constant": false,
-    "inputs": [
-      { "internalType": "address", "name": "_priceOracle", "type": "address" }
-    ],
+    "inputs": [{ "internalType": "address", "name": "_priceOracle", "type": "address" }],
     "name": "setPriceOracle",
     "outputs": [],
     "payable": false,
@@ -475,9 +459,7 @@
   },
   {
     "constant": false,
-    "inputs": [
-      { "internalType": "address", "name": "newOwner", "type": "address" }
-    ],
+    "inputs": [{ "internalType": "address", "name": "newOwner", "type": "address" }],
     "name": "transferOwnership",
     "outputs": [],
     "payable": false,

@@ -66,6 +66,16 @@ type AaveV2TokenData @entity {
   liquidityIndex: BigDecimal
   variableBorrowIndex: BigDecimal
   lastUpdateTimestamp: BigInt
+
+  aEmissionPerSecond: BigInt
+  totalLiquidity: BigInt!
+}
+
+type AaveV2Reserve @entity {
+  id: ID!
+  address: Bytes!
+  symbol: String!
+  totalLiquidity: BigInt!
 }
 
 # ----------------------------------------
@@ -180,6 +190,13 @@ type CreamTokenData @entity {
 # ----------------------------------------
 #      Curve
 # ----------------------------------------
+type CurveExtraReward @entity {
+  id: ID!
+  token: Bytes!
+  finishPeriod: BigInt!
+  rewardRatePerSecond: BigDecimal!
+}
+
 type CurveGaugeData @entity {
   id: ID!
   blockNumber: BigInt!
@@ -198,6 +215,7 @@ type CurvePoolData @entity {
   balance: [BigDecimal!]!
   virtualPrice: BigDecimal!
   tokens: [Bytes!]!
+  extras: [CurveExtraReward!]
 }
 
 # ----------------------------------------
@@ -246,6 +264,40 @@ type HarvestTokenData @entity {
   underlyingBalanceInVault: BigDecimal!
   pool: Bytes!
   vault: Bytes!
+}
+
+# ----------------------------------------
+#      Lido Finance
+# ----------------------------------------
+type LidoTokenData @entity {  
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!   
+  totalPooledEther: BigInt #   
+  totalShares: BigInt        
+}
+
+type LidoRewardData @entity {
+  id: ID!
+  epochId: BigInt!  
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!   
+  totalRewards: BigInt!  
+  totalRewardsWithFees: BigInt!
+  totalFee: BigInt!  
+  aprBeforeFees: BigDecimal
+  apr: BigDecimal  
+  timeElapsed: BigInt  
+}
+type LidoOracleTotals @entity {
+  id: ID!  
+  beaconBalance: BigInt!
+  beaconValidators: BigInt!  
+}
+type LidoTotals @entity {
+  id: ID!
+  totalPooledEther: BigInt!
+  totalShares: BigInt!
 }
 
 # ----------------------------------------

@@ -75,9 +75,7 @@
   },
   {
     "constant": true,
-    "inputs": [
-      { "internalType": "address", "name": "_user", "type": "address" }
-    ],
+    "inputs": [{ "internalType": "address", "name": "_user", "type": "address" }],
     "name": "calculateUserGlobalData",
     "outputs": [
       {
@@ -139,9 +137,7 @@
   },
   {
     "constant": true,
-    "inputs": [
-      { "internalType": "address", "name": "_reserve", "type": "address" }
-    ],
+    "inputs": [{ "internalType": "address", "name": "_reserve", "type": "address" }],
     "name": "getReserveConfigurationData",
     "outputs": [
       { "internalType": "uint256", "name": "ltv", "type": "uint256" },
@@ -179,9 +175,7 @@
   },
   {
     "constant": true,
-    "inputs": [
-      { "internalType": "address", "name": "_reserve", "type": "address" }
-    ],
+    "inputs": [{ "internalType": "address", "name": "_reserve", "type": "address" }],
     "name": "getReserveData",
     "outputs": [
       {
@@ -248,9 +242,7 @@
   },
   {
     "constant": true,
-    "inputs": [
-      { "internalType": "address", "name": "_user", "type": "address" }
-    ],
+    "inputs": [{ "internalType": "address", "name": "_user", "type": "address" }],
     "name": "getUserAccountData",
     "outputs": [
       {

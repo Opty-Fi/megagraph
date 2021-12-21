@@ -7,14 +7,8 @@
       "contracts": [
         {
           "contract": "Token",
-          "abis": [
-            "LendingPoolAddressesProvider",
-            "LendingPoolDataProvider",
-            "Token"
-          ],
-          "entities": [
-            "AaveTokenData"
-          ],
+          "abis": ["LendingPoolAddressesProvider", "LendingPoolDataProvider", "Token"],
+          "entities": ["AaveTokenData"],
           "events": [
             {
               "event-name": "BurnOnLiquidation",
@@ -150,14 +144,8 @@
       "contracts": [
         {
           "contract": "Token",
-          "abis": [
-            "LendingPoolAddressesProvider",
-            "AaveProtocolDataProvider",
-            "Token"
-          ],
-          "entities": [
-            "AaveV2TokenData"
-          ],
+          "abis": ["LendingPoolAddressesProvider", "AaveProtocolDataProvider", "IncentivesController", "Token"],
+          "entities": ["AaveV2TokenData", "AaveV2Reserve"],
           "events": [
             {
               "event-name": "Burn",
@@ -298,14 +286,8 @@
       "contracts": [
         {
           "contract": "ComptrollerImplementation",
-          "abis": [
-            "ComptrollerImplementation",
-            "Token",
-            "Underlying"
-          ],
-          "entities": [
-            "CompoundTokenData"
-          ],
+          "abis": ["ComptrollerImplementation", "Token", "Underlying"],
+          "entities": ["CompoundTokenData"],
           "events": [
             {
               "event-name": "CompSpeedUpdated",
@@ -322,14 +304,8 @@
         },
         {
           "contract": "Token",
-          "abis": [
-            "ComptrollerImplementation",
-            "Token",
-            "Underlying"
-          ],
-          "entities": [
-            "CompoundTokenData"
-          ],
+          "abis": ["ComptrollerImplementation", "Token", "Underlying"],
+          "entities": ["CompoundTokenData"],
           "events": [
             {
               "event-name": "AccrueInterest",
@@ -445,11 +421,7 @@
             "ExtraRewardStashV32",
             "VirtualBalanceRewardsPool"
           ],
-          "entities": [
-            "ConvexExtraReward",
-            "ConvexPoolData",
-            "ConvexTokenData"
-          ],
+          "entities": ["ConvexExtraReward", "ConvexPoolData", "ConvexTokenData"],
           "events": [
             {
               "event-name": "Deposited",
@@ -475,14 +447,8 @@
       "contracts": [
         {
           "contract": "ComptrollerImplementation",
-          "abis": [
-            "ComptrollerImplementation",
-            "Token",
-            "Underlying"
-          ],
-          "entities": [
-            "CreamTokenData"
-          ],
+          "abis": ["ComptrollerImplementation", "Token", "Underlying"],
+          "entities": ["CreamTokenData"],
           "events": [
             {
               "event-name": "CompSpeedUpdated",
@@ -499,14 +465,8 @@
         },
         {
           "contract": "Token",
-          "abis": [
-            "ComptrollerImplementation",
-            "Token",
-            "Underlying"
-          ],
-          "entities": [
-            "CreamTokenData"
-          ],
+          "abis": ["ComptrollerImplementation", "Token", "Underlying"],
+          "entities": ["CreamTokenData"],
           "events": [
             {
               "event-name": "AccrueInterest",
@@ -619,48 +579,20 @@
       "adapter": "Curve",
       "contracts": [
         {
-          "contract": "GaugeController",
-          "abis": [
-            "GaugeController"
-          ],
-          "entities": [
-            "CurveGaugeData"
-          ],
-          "events": [
-            {
-              "event-name": "NewGauge",
-              "event-params": "(address,int128,uint256)"
-            },
-            {
-              "event-name": "NewGaugeWeight",
-              "event-params": "(address,uint256,uint256,uint256)"
-            },
-            {
-              "event-name": "NewTypeWeight",
-              "event-params": "(int128,uint256,uint256,uint256)"
-            },
-            {
-              "event-name": "VoteForGauge",
-              "event-params": "(uint256,address,address,uint256)"
-            }
-          ],
-          "instances": [
-            {
-              "symbol": "",
-              "address": "0x2F50D538606Fa9EDD2B11E2446BEb18C9D5846bB",
-              "startBlock": 0
-            }
-          ]
-        },
-        {
           "contract": "PoolX2",
           "abis": [
             "PoolX2",
-            "ERC20"
+            "Registry",
+            "LiquidityGauge",
+            "LiquidityGaugeV2",
+            "StakingLiquidityGauge",
+            "StakingRewards",
+            "MultiRewards",
+            "Rewards",
+            "ERC20",
+            "AaveIncentivesController"
           ],
-          "entities": [
-            "CurvePoolData"
-          ],
+          "entities": ["CurvePoolData", "CurveExtraReward"],
           "events": [
             {
               "event-name": "AddLiquidity",
@@ -789,11 +721,17 @@
           "contract": "PoolX3",
           "abis": [
             "PoolX3",
-            "ERC20"
+            "Registry",
+            "LiquidityGauge",
+            "LiquidityGaugeV2",
+            "StakingLiquidityGauge",
+            "StakingRewards",
+            "MultiRewards",
+            "Rewards",
+            "ERC20",
+            "AaveIncentivesController"
           ],
-          "entities": [
-            "CurvePoolData"
-          ],
+          "entities": ["CurvePoolData", "CurveExtraReward"],
           "events": [
             {
               "event-name": "AddLiquidity",
@@ -805,7 +743,7 @@
             },
             {
               "event-name": "RemoveLiquidityOne",
-              "event-params": "(indexed address,uint256,uint256,uint256)"
+              "event-params": "(indexed address,uint256,uint256)"
             },
             {
               "event-name": "RemoveLiquidityImbalance",
@@ -838,11 +776,17 @@
           "contract": "PoolX4",
           "abis": [
             "PoolX4",
-            "ERC20"
+            "Registry",
+            "LiquidityGauge",
+            "LiquidityGaugeV2",
+            "StakingLiquidityGauge",
+            "StakingRewards",
+            "MultiRewards",
+            "Rewards",
+            "ERC20",
+            "AaveIncentivesController"
           ],
-          "entities": [
-            "CurvePoolData"
-          ],
+          "entities": ["CurvePoolData", "CurveExtraReward"],
           "events": [
             {
               "event-name": "AddLiquidity",
@@ -895,13 +839,8 @@
       "contracts": [
         {
           "contract": "StakingVault",
-          "abis": [
-            "StakingVault",
-            "Token"
-          ],
-          "entities": [
-            "DForceTokenData"
-          ],
+          "abis": ["StakingVault", "Token"],
+          "entities": ["DForceTokenData"],
           "events": [
             {
               "event-name": "RewardAdded",
@@ -928,13 +867,8 @@
         },
         {
           "contract": "Token",
-          "abis": [
-            "StakingVault",
-            "Token"
-          ],
-          "entities": [
-            "DForceTokenData"
-          ],
+          "abis": ["StakingVault", "Token"],
+          "entities": ["DForceTokenData"],
           "events": [
             {
               "event-name": "Interest",
@@ -1000,12 +934,8 @@
       "contracts": [
         {
           "contract": "Token",
-          "abis": [
-            "Token"
-          ],
-          "entities": [
-            "FulcrumTokenData"
-          ],
+          "abis": ["Token"],
+          "entities": ["FulcrumTokenData"],
           "events": [
             {
               "event-name": "Burn",
@@ -1095,13 +1025,8 @@
       "contracts": [
         {
           "contract": "NoMintRewardPool",
-          "abis": [
-            "NoMintRewardPool",
-            "Token"
-          ],
-          "entities": [
-            "HarvestTokenData"
-          ],
+          "abis": ["NoMintRewardPool", "Token"],
+          "entities": ["HarvestTokenData"],
           "events": [
             {
               "event-name": "RewardAdded",
@@ -1134,13 +1059,8 @@
         },
         {
           "contract": "Token",
-          "abis": [
-            "NoMintRewardPool",
-            "Token"
-          ],
-          "entities": [
-            "HarvestTokenData"
-          ],
+          "abis": ["NoMintRewardPool", "Token"],
+          "entities": ["HarvestTokenData"],
           "events": [
             {
               "event-name": "Deposit",
@@ -1249,16 +1169,65 @@
       ]
     },
     {
+      "adapter": "Lido",
+      "contracts": [
+        {
+          "contract": "Token",
+          "abis": ["Token", "Oracle", "NodeOperatorsRegistry"],
+          "entities": ["LidoTokenData"],
+          "events": [
+            {
+              "event-name": "Transfer",
+              "event-params": "(indexed address,indexed address,uint256)"
+            },
+            {
+              "event-name": "Submitted",
+              "event-params": "(indexed address,uint256,address)"
+            },
+            {
+              "event-name": "Withdrawal",
+              "event-params": "(indexed address,uint256,uint256,indexed bytes32,uint256)"
+            }
+          ],
+          "instances": [
+            {
+              "symbol": "stETH",
+              "address": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84",
+              "startBlock": 0
+            }
+          ]
+        },
+        {
+          "contract": "Oracle",
+          "abis": ["Token", "Oracle", "NodeOperatorsRegistry"],
+          "entities": ["LidoTokenData", "LidoOracle"],
+          "events": [
+            {
+              "event-name": "Completed",
+              "event-params": "(uint256,uint128,uint128)"
+            },
+            {
+              "event-name": "PostTotalShares",
+              "event-params": "(uint256,uint256,uint256,uint256)"
+            }
+          ],
+          "instances": [
+            {
+              "symbol": "",
+              "address": "0x442af784A788A5bd6F42A01Ebe9F287a871243fb",
+              "startBlock": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
       "adapter": "Yearn",
       "contracts": [
         {
           "contract": "Token",
-          "abis": [
-            "Token"
-          ],
-          "entities": [
-            "YearnTokenData"
-          ],
+          "abis": ["Token"],
+          "entities": ["YearnTokenData"],
           "events": [
             {
               "event-name": "Transfer",
@@ -1345,12 +1314,8 @@
         },
         {
           "contract": "Token2",
-          "abis": [
-            "Token2"
-          ],
-          "entities": [
-            "YearnTokenData"
-          ],
+          "abis": ["Token2"],
+          "entities": ["YearnTokenData"],
           "events": [
             {
               "event-name": "Transfer",

@@ -1,0 +1,12 @@
+[
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "get_gauges",
+    "inputs": [{ "name": "_pool", "type": "address" }],
+    "outputs": [
+      { "name": "", "type": "address[10]" },
+      { "name": "", "type": "int128[10]" }
+    ]
+  }
+]

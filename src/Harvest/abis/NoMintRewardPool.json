@@ -175,9 +175,7 @@
   },
   {
     "constant": true,
-    "inputs": [
-      { "internalType": "address", "name": "account", "type": "address" }
-    ],
+    "inputs": [{ "internalType": "address", "name": "account", "type": "address" }],
     "name": "balanceOf",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "payable": false,
@@ -213,9 +211,7 @@
   },
   {
     "constant": true,
-    "inputs": [
-      { "internalType": "address", "name": "account", "type": "address" }
-    ],
+    "inputs": [{ "internalType": "address", "name": "account", "type": "address" }],
     "name": "earned",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "payable": false,
@@ -280,9 +276,7 @@
     "constant": true,
     "inputs": [],
     "name": "lpToken",
-    "outputs": [
-      { "internalType": "contract IERC20", "name": "", "type": "address" }
-    ],
+    "outputs": [{ "internalType": "contract IERC20", "name": "", "type": "address" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -307,9 +301,7 @@
   },
   {
     "constant": false,
-    "inputs": [
-      { "internalType": "uint256", "name": "reward", "type": "uint256" }
-    ],
+    "inputs": [{ "internalType": "uint256", "name": "reward", "type": "uint256" }],
     "name": "notifyRewardAmount",
     "outputs": [],
     "payable": false,
@@ -345,9 +337,7 @@
   },
   {
     "constant": false,
-    "inputs": [
-      { "internalType": "address", "name": "recipient", "type": "address" }
-    ],
+    "inputs": [{ "internalType": "address", "name": "recipient", "type": "address" }],
     "name": "pushReward",
     "outputs": [],
     "payable": false,
@@ -394,9 +384,7 @@
     "constant": true,
     "inputs": [],
     "name": "rewardToken",
-    "outputs": [
-      { "internalType": "contract IERC20", "name": "", "type": "address" }
-    ],
+    "outputs": [{ "internalType": "contract IERC20", "name": "", "type": "address" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -412,9 +400,7 @@
   },
   {
     "constant": false,
-    "inputs": [
-      { "internalType": "bool", "name": "_canMigrate", "type": "bool" }
-    ],
+    "inputs": [{ "internalType": "bool", "name": "_canMigrate", "type": "bool" }],
     "name": "setCanMigrate",
     "outputs": [],
     "payable": false,
@@ -438,9 +424,7 @@
   },
   {
     "constant": false,
-    "inputs": [
-      { "internalType": "address", "name": "_store", "type": "address" }
-    ],
+    "inputs": [{ "internalType": "address", "name": "_store", "type": "address" }],
     "name": "setStorage",
     "outputs": [],
     "payable": false,
@@ -458,9 +442,7 @@
   },
   {
     "constant": false,
-    "inputs": [
-      { "internalType": "uint256", "name": "amount", "type": "uint256" }
-    ],
+    "inputs": [{ "internalType": "uint256", "name": "amount", "type": "uint256" }],
     "name": "stake",
     "outputs": [],
     "payable": false,
@@ -471,9 +453,7 @@
     "constant": true,
     "inputs": [],
     "name": "store",
-    "outputs": [
-      { "internalType": "contract Storage", "name": "", "type": "address" }
-    ],
+    "outputs": [{ "internalType": "contract Storage", "name": "", "type": "address" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -489,9 +469,7 @@
   },
   {
     "constant": false,
-    "inputs": [
-      { "internalType": "address", "name": "newOwner", "type": "address" }
-    ],
+    "inputs": [{ "internalType": "address", "name": "newOwner", "type": "address" }],
     "name": "transferOwnership",
     "outputs": [],
     "payable": false,
@@ -509,9 +487,7 @@
   },
   {
     "constant": false,
-    "inputs": [
-      { "internalType": "uint256", "name": "amount", "type": "uint256" }
-    ],
+    "inputs": [{ "internalType": "uint256", "name": "amount", "type": "uint256" }],
     "name": "withdraw",
     "outputs": [],
     "payable": false,
