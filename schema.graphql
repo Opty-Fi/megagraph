@@ -87,7 +87,8 @@ type CompoundTokenData @entity {
   blockTimestamp: BigInt
   borrowIndex: BigDecimal
   borrowRatePerBlock: BigDecimal
-  compSpeed: BigDecimal
+  compBorrowSpeed: BigDecimal
+  compSupplySpeed: BigDecimal
   cTokenSymbol: String
   cTokenAddress: Bytes
   exchangeRate: BigDecimal
