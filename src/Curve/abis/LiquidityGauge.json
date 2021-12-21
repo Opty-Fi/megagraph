@@ -1,0 +1,30 @@
+[
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "reward_count",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "reward_tokens",
+    "inputs": [{ "name": "arg0", "type": "uint256" }],
+    "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "reward_data",
+    "inputs": [{ "name": "arg0", "type": "address" }],
+    "outputs": [
+      { "name": "token", "type": "address" },
+      { "name": "distributor", "type": "address" },
+      { "name": "period_finish", "type": "uint256" },
+      { "name": "rate", "type": "uint256" },
+      { "name": "last_update", "type": "uint256" },
+      { "name": "integral", "type": "uint256" }
+    ]
+  }
+]
