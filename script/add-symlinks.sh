@@ -14,6 +14,11 @@ then
   ln -s CurvePoolX2MIM3CRV-f-0  generated/CurvePoolX2
   ln -s CurvePoolX3atricrypto   generated/CurvePoolX3
   ln -s CurvePoolX4U.TOKEN-f-19 generated/CurvePoolX4
+elif [[ "$CONFIG" == "fantom" ]]
+then
+  ln -s CurvePoolX2ren       generated/CurvePoolX2
+  ln -s CurvePoolX3tricrypto generated/CurvePoolX3
+  ln -s CurvePoolX44pool-f-7 generated/CurvePoolX4
 elif [[ "$CONFIG" == "polygon" ]]
 then
   ln -s CurvePoolX2eurtusd      generated/CurvePoolX2
