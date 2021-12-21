@@ -16,10 +16,9 @@ then
   ln -s CurvePoolX4U.TOKEN-f-19 generated/CurvePoolX4
 elif [[ "$CONFIG" == "polygon" ]]
 then
-  ln -s CurvePoolX2aAAVE generated/CurvePoolX2
-  # PoolX2 and X3 are not used
-  ln -s CurvePoolX2aAAVE generated/CurvePoolX3
-  ln -s CurvePoolX2aAAVE generated/CurvePoolX4
+  ln -s CurvePoolX2eurtusd      generated/CurvePoolX2
+  ln -s CurvePoolX3aave         generated/CurvePoolX3
+  ln -s CurvePoolX4crvAUR-JRT-f generated/CurvePoolX4
 else # mainnet or dev
   ln -s CurvePoolX2ankrCRV            generated/CurvePoolX2
   ln -s CurvePoolX3aDAI+aUSDC+aUSDT   generated/CurvePoolX3
