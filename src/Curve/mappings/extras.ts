@@ -1,12 +1,12 @@
 import { log, Bytes, Address, BigInt } from "@graphprotocol/graph-ts";
-import { CurveLiquidityGauge } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveLiquidityGauge";
-import { CurveLiquidityGaugeV2 } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveLiquidityGaugeV2";
-import { CurveStakingLiquidityGauge } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveStakingLiquidityGauge";
-import { CurveRegistry } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveRegistry";
-import { CurveRewards } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveRewards";
-import { CurveMultiRewards } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveMultiRewards";
-import { CurveStakingRewards } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveStakingRewards";
-import { CurveAaveIncentivesController } from "../../../generated/CurvePoolX2cDAI+cUSDC/CurveAaveIncentivesController";
+import { CurveLiquidityGauge } from "../../../generated/CurvePoolX2/CurveLiquidityGauge";
+import { CurveLiquidityGaugeV2 } from "../../../generated/CurvePoolX2/CurveLiquidityGaugeV2";
+import { CurveStakingLiquidityGauge } from "../../../generated/CurvePoolX2/CurveStakingLiquidityGauge";
+import { CurveRegistry } from "../../../generated/CurvePoolX2/CurveRegistry";
+import { CurveRewards } from "../../../generated/CurvePoolX2/CurveRewards";
+import { CurveMultiRewards } from "../../../generated/CurvePoolX2/CurveMultiRewards";
+import { CurveStakingRewards } from "../../../generated/CurvePoolX2/CurveStakingRewards";
+import { CurveAaveIncentivesController } from "../../../generated/CurvePoolX2/CurveAaveIncentivesController";
 import { CurveExtraReward, CurvePoolData } from "../../../generated/schema";
 import {
   convertBINumToDesiredDecimals,
