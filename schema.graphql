@@ -249,33 +249,66 @@ type HarvestTokenData @entity {
 }
 
 # ----------------------------------------
-#      Lido Finance
+#      Sushi
 # ----------------------------------------
-type LidoTokenData @entity {  
+type SushiKashiData @entity {
   id: ID!
   blockNumber: BigInt!
-  blockTimestamp: BigInt!   
-  totalPooledEther: BigInt #   
-  totalShares: BigInt        
+  blockTimestamp: BigInt!
+  vault: Bytes!
+  symbol: String
+  decimals: Int!
+  assetToken: Bytes!
+  collateralToken: Bytes!
+  interestPerSecond: BigDecimal
+  totalAssetBase: BigDecimal
+}
+
+type SushiPoolData @entity {
+  id: ID!
+  lpToken: Bytes!
+}
+
+type SushiTokenData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  pool: SushiPoolData!
+  sushiPerSecond: BigDecimal
+  rewardPerSecond: BigDecimal
+  lastRewardTime: BigInt
+}
+
+# ----------------------------------------
+#      Lido Finance
+# ----------------------------------------
+type LidoTokenData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  totalPooledEther: BigInt #
+  totalShares: BigInt
 }
 
 type LidoRewardData @entity {
   id: ID!
-  epochId: BigInt!  
+  epochId: BigInt!
   blockNumber: BigInt!
-  blockTimestamp: BigInt!   
-  totalRewards: BigInt!  
+  blockTimestamp: BigInt!
+  totalRewards: BigInt!
   totalRewardsWithFees: BigInt!
-  totalFee: BigInt!  
+  totalFee: BigInt!
   aprBeforeFees: BigDecimal
-  apr: BigDecimal  
-  timeElapsed: BigInt  
+  apr: BigDecimal
+  timeElapsed: BigInt
 }
+
 type LidoOracleTotals @entity {
-  id: ID!  
+  id: ID!
   beaconBalance: BigInt!
-  beaconValidators: BigInt!  
+  beaconValidators: BigInt!
 }
+
 type LidoTotals @entity {
   id: ID!
   totalPooledEther: BigInt!

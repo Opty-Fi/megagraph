@@ -24,6 +24,8 @@ then
   ln -s CurvePoolX2eurtusd      generated/CurvePoolX2
   ln -s CurvePoolX3aave         generated/CurvePoolX3
   ln -s CurvePoolX4crvAUR-JRT-f generated/CurvePoolX4
+
+  ln -s SushiKashiPairMediumRiskV1kmWBTC\&\#x2F\;WMATIC-LINK generated/SushiKashiPairMediumRiskV1
 else # mainnet or dev
   ln -s CurvePoolX2ankrCRV            generated/CurvePoolX2
   ln -s CurvePoolX3aDAI+aUSDC+aUSDT   generated/CurvePoolX3
