@@ -30,4 +30,6 @@ jobs:
       - name: Formatting
         run: yarn prettier:check
       - name: Build
-        run: yarn graph build
+        run: |
+            yarn mustache-yaml 
+            yarn graph build
