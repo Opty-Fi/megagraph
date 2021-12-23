@@ -32,6 +32,6 @@ jobs:
       - name: Build
         run: |
             yarn mustache-yaml
-            cat subgraph.yaml
             yarn graph codegen
+            ./script/add-symlinks.sh
             yarn graph build
