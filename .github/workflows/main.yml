@@ -32,6 +32,6 @@ jobs:
       - name: Build
         run: |
             yarn mustache-yaml
-            cat subgraph.yml
+            cat subgraph.yaml
             yarn graph codegen
             yarn graph build
