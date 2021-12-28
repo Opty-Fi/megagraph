@@ -1,8 +1,8 @@
 .DS_Store
 node_modules
 *.env
+/schema.graphql
 /subgraph.yaml
 generated
 build
-config/*-dev.json
-
+src/*/config/*-dev.json

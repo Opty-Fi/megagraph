@@ -6,18 +6,18 @@ schema:
 dataSources:
 {{#contracts}}
   # ----------------------------------------
-  #      {{contract}} {{symbol}}
+  #      {{adapter}} {{contract}} {{symbol}}
   # ----------------------------------------
   {{#instances}}
   - kind: ethereum/contract
-    name: {{contract}}{{symbol}}
+    name: {{adapter}}{{contract}}{{symbol}}
     network: {{network}}
     source:
       address: "{{address}}"
       {{#startBlock}}
       startBlock: {{startBlock}}
       {{/startBlock}}
-      abi: {{contract}}
+      abi: {{adapter}}{{contract}}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -28,7 +28,7 @@ dataSources:
         {{/entities}}
       abis:
         {{#abis}}
-        - name: {{.}}
+        - name: {{adapter}}{{.}}
           file: ./src/{{adapter}}/abis/{{.}}.json
         {{/abis}}
       eventHandlers:
