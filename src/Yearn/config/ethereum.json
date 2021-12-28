@@ -1,0 +1,257 @@
+{
+  "network": "mainnet",
+  "adapter": "Yearn",
+  "contracts": [
+    {
+      "contract": "Token",
+      "abis": ["Token"],
+      "entities": ["YearnTokenData"],
+      "events": [
+        {
+          "event-name": "Transfer",
+          "event-params": "(indexed address,indexed address,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "symbol": "y3Crv",
+          "address": "0x9cA85572E6A3EbF24dEDd195623F188735A5179f",
+          "startBlock": 11026971
+        },
+        {
+          "symbol": "yaLINK",
+          "address": "0x29E240CFD7946BA20895a7a02eDb25C210f9f324",
+          "startBlock": 10599617
+        },
+        {
+          "symbol": "yBUSD",
+          "address": "0x04bC0Ab673d88aE9dbC9DA2380cB6B79C4BCa9aE",
+          "startBlock": 9564411
+        },
+        {
+          "symbol": "ycrvRenWSBTC",
+          "address": "0x7Ff566E1d69DEfF32a7b244aE7276b9f90e9D0f6",
+          "startBlock": 10734341
+        },
+        {
+          "symbol": "yDAI",
+          "address": "0xACd43E627e64355f1861cEC6d3a6688B31a6F952",
+          "startBlock": 10650116
+        },
+        {
+          "symbol": "yGUSD",
+          "address": "0xec0d8D3ED5477106c6D4ea27D90a60e594693C90",
+          "startBlock": 11065127
+        },
+        {
+          "symbol": "yLINK",
+          "address": "0x881b06da56BB5675c54E4Ed311c21E54C5025298",
+          "startBlock": 10604016
+        },
+        {
+          "symbol": "ySUSD",
+          "address": "0xf61718057901f84c4eec4339ef8f0d86d2b45600",
+          "startBlock": 9465292
+        },
+        {
+          "symbol": "yTUSD",
+          "address": "0x37d19d1c4E1fa9DC47bD1eA12f742a0887eDa74a",
+          "startBlock": 10603368
+        },
+        {
+          "symbol": "yUSDC",
+          "address": "0x597aD1e0c13Bfe8025993D9e79C69E1c0233522e",
+          "startBlock": 10532708
+        },
+        {
+          "symbol": "yUSDT",
+          "address": "0x2f08119C6f07c006695E079AAFc638b8789FAf18",
+          "startBlock": 10651402
+        },
+        {
+          "symbol": "yWETH",
+          "address": "0xe1237aA7f535b0CC33Fd973D66cBf830354D16c7",
+          "startBlock": 10774489
+        },
+        {
+          "symbol": "yvcDAI+cUSDC",
+          "address": "0x629c759D1E83eFbF63d84eb3868B564d9521C129",
+          "startBlock": 11210772
+        },
+        {
+          "symbol": "yyDAI+yUSDC+yUSDT+yBUSD",
+          "address": "0x2994529C0652D127b7842094103715ec5299bBed",
+          "startBlock": 10709740
+        },
+        {
+          "symbol": "yyDAI+yUSDC+yUSDT+yTUSD",
+          "address": "0x5dbcF33D8c2E976c6b560249878e6F1491Bca25c",
+          "startBlock": 10559448
+        }
+      ]
+    },
+    {
+      "contract": "Token2",
+      "abis": ["Token2"],
+      "entities": ["YearnTokenData"],
+      "events": [
+        {
+          "event-name": "Transfer",
+          "event-params": "(indexed address,indexed address,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "symbol": "yUSD",
+          "address": "0x4B5BfD52124784745c1071dcB244C6688d2533d3",
+          "startBlock": 12286016
+        },
+        {
+          "symbol": "yv1INCH",
+          "address": "0xB8C3B7A2A618C552C23B1E4701109a9E756Bab67",
+          "startBlock": 11889144
+        },
+        {
+          "symbol": "yvCurve+Aave",
+          "address": "0x39CAF13a104FF567f71fd2A4c68C026FDB6E740B",
+          "startBlock": 12298216
+        },
+        {
+          "symbol": "yvCurve+alUSD",
+          "address": "0xA74d4B67b3368E83797a35382AFB776bAAE4F5C8",
+          "startBlock": 12484682
+        },
+        {
+          "symbol": "yvCurve+ankrETH",
+          "address": "0x132d8D2C76Db3812403431fAcB00F3453Fc42125",
+          "startBlock": 12293061
+        },
+        {
+          "symbol": "yvCurve+BBTC",
+          "address": "0x8fA3A9ecd9EFb07A8CE90A6eb014CF3c0E3B32Ef",
+          "startBlock": 12292951
+        },
+        {
+          "symbol": "yvCurve+Compound",
+          "address": "0xD6Ea40597Be05c201845c0bFd2e96A60bACde267",
+          "startBlock": 12245239
+        },
+        {
+          "symbol": "yvCurve+DUSD",
+          "address": "0x30FCf7c6cDfC46eC237783D94Fc78553E79d4E9C",
+          "startBlock": 12293189
+        },
+        {
+          "symbol": "yvCurve+EURS",
+          "address": "0x25212Df29073FfFA7A67399AcEfC2dd75a831A1A",
+          "startBlock": 12298088
+        },
+        {
+          "symbol": "yvCurve+FRAX",
+          "address": "0xB4AdA607B9d6b2c9Ee07A275e9616B84AC560139",
+          "startBlock": 12283723
+        },
+        {
+          "symbol": "yvCurve+HBTC",
+          "address": "0x625b7DF2fa8aBe21B0A976736CDa4775523aeD1E",
+          "startBlock": 12115501
+        },
+        {
+          "symbol": "yvCurve+IronBank",
+          "address": "0x27b7b1ad7288079A66d12350c828D3C00A6F07d7",
+          "startBlock": 12022103
+        },
+        {
+          "symbol": "yvCurve+LINK",
+          "address": "0xf2db9a7c0ACd427A680D640F02d90f6186E71725",
+          "startBlock": 12298192
+        },
+        {
+          "symbol": "yvCurve+LUSD",
+          "address": "0x5fA5B62c8AF877CB37031e0a3B2f34A78e3C56A6",
+          "startBlock": 12283801
+        },
+        {
+          "symbol": "yvCurve+mUSD",
+          "address": "0x8cc94ccd0f3841a468184aCA3Cc478D2148E1757",
+          "startBlock": 12293207
+        },
+        {
+          "symbol": "yvCurve+oBTC",
+          "address": "0xe9Dc63083c464d6EDcCFf23444fF3CFc6886f6FB",
+          "startBlock": 12292619
+        },
+        {
+          "symbol": "yvCurve+rETH",
+          "address": "0xBfedbcbe27171C418CDabC2477042554b1904857",
+          "startBlock": 12484685
+        },
+        {
+          "symbol": "yvCurve+sAave",
+          "address": "0xb4D1Be44BfF40ad6e506edf43156577a3f8672eC",
+          "startBlock": 12245110
+        },
+        {
+          "symbol": "yvCurve+sETH",
+          "address": "0x986b4AFF588a109c09B50A03f42E4110E29D353F",
+          "startBlock": 11870013
+        },
+        {
+          "symbol": "yvCurve+stETH",
+          "address": "0xdCD90C7f6324cfa40d7169ef80b12031770B4325",
+          "startBlock": 11654862
+        },
+        {
+          "symbol": "yvCurve+USDN",
+          "address": "0x3B96d491f067912D18563d56858Ba7d6EC67a6fa",
+          "startBlock": 12298161
+        },
+        {
+          "symbol": "yvCurve+USDP",
+          "address": "0xC4dAf3b5e2A9e93861c3FBDd25f1e943B8D87417",
+          "startBlock": 12298233
+        },
+        {
+          "symbol": "yvDAI",
+          "address": "0x19D3364A399d251E894aC732651be8B0E4e85001",
+          "startBlock": 11673762
+        },
+        {
+          "symbol": "yvLINK",
+          "address": "0x671a912C10bba0CFA74Cfc2d6Fba9BA1ed9530B2",
+          "startBlock": 12542636
+        },
+        {
+          "symbol": "yvsUSD",
+          "address": "0xa5cA62D95D24A4a350983D5B8ac4EB8638887396",
+          "startBlock": 12064975
+        },
+        {
+          "symbol": "yvUSDC",
+          "address": "0x5f18C75AbDAe578b483E5F43f12a39cF75b973a9",
+          "startBlock": 11674456
+        },
+        {
+          "symbol": "yvUSDT",
+          "address": "0x7Da96a3891Add058AdA2E826306D812C638D87a7",
+          "startBlock": 12233959
+        },
+        {
+          "symbol": "yvWBTC",
+          "address": "0xA696a63cc78DfFa1a63E9E50587C197387FF6C7E",
+          "startBlock": 12185982
+        },
+        {
+          "symbol": "yvWETH",
+          "address": "0xa258C4606Ca8206D8aA700cE2143D7db854D168c",
+          "startBlock": 12588794
+        },
+        {
+          "symbol": "yvYFI",
+          "address": "0xE14d13d8B3b85aF791b2AADD661cDBd5E6097Db1",
+          "startBlock": 11992803
+        }
+      ]
+    }
+  ]
+}

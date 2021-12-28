@@ -1,0 +1,13 @@
+type HarvestTokenData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  lastUpdateTime: BigInt!
+  rewardRate: BigInt!
+  rewardPerTokenStored: BigInt!
+  pricePerFullShare: BigDecimal!
+  underlyingBalanceWithInvestment: BigDecimal!
+  underlyingBalanceInVault: BigDecimal!
+  pool: Bytes!
+  vault: Bytes!
+}

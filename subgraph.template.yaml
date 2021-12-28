@@ -1,27 +1,23 @@
 specVersion: 0.0.2
-description: Opty-Fi's DeFi Adapters subgraph
+description: Opty-Fi's {{adapter}} subgraph
 repository: https://github.com/Opty-Fi/megagraph
 schema:
   file: ./schema.graphql
 dataSources:
-{{#adapters}}
-# ----------------------------------------
-#      {{adapter}}
-# ----------------------------------------
 {{#contracts}}
   # ----------------------------------------
-  #      {{adapter}} {{contract}} {{symbol}}
+  #      {{contract}} {{symbol}}
   # ----------------------------------------
   {{#instances}}
   - kind: ethereum/contract
-    name: {{adapter}}{{contract}}{{symbol}}
+    name: {{contract}}{{symbol}}
     network: {{network}}
     source:
       address: "{{address}}"
       {{#startBlock}}
       startBlock: {{startBlock}}
       {{/startBlock}}
-      abi: {{adapter}}{{contract}}
+      abi: {{contract}}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -32,7 +28,7 @@ dataSources:
         {{/entities}}
       abis:
         {{#abis}}
-        - name: {{adapter}}{{.}}
+        - name: {{.}}
           file: ./src/{{adapter}}/abis/{{.}}.json
         {{/abis}}
       eventHandlers:
@@ -43,4 +39,3 @@ dataSources:
       file: ./src/{{adapter}}/mappings/{{contract}}.ts
   {{/instances}}
 {{/contracts}}
-{{/adapters}}

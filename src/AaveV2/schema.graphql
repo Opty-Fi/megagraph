@@ -1,0 +1,40 @@
+type AaveV2TokenData @entity {
+  id: ID!
+  transactionHash: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  address: Bytes!
+  symbol: String!
+
+  decimals: Int
+  ltv: BigDecimal
+  liquidationThreshold: BigDecimal
+  liquidationBonus: BigDecimal
+  reserveFactor: BigDecimal
+  usageAsCollateralEnabled: Boolean
+  borrowingEnabled: Boolean
+  stableBorrowRateEnabled: Boolean
+  isActive: Boolean
+  isFrozen: Boolean
+
+  availableLiquidity: BigDecimal
+  totalStableDebt: BigDecimal
+  totalVariableDebt: BigDecimal
+  liquidityRate: BigDecimal
+  variableBorrowRate: BigDecimal
+  stableBorrowRate: BigDecimal
+  averageStableBorrowRate: BigDecimal
+  liquidityIndex: BigDecimal
+  variableBorrowIndex: BigDecimal
+  lastUpdateTimestamp: BigInt
+
+  aEmissionPerSecond: BigInt
+  totalLiquidity: BigInt!
+}
+
+type AaveV2Reserve @entity {
+  id: ID!
+  address: Bytes!
+  symbol: String!
+  totalLiquidity: BigInt!
+}

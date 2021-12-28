@@ -1,0 +1,27 @@
+type SushiKashiData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  vault: Bytes!
+  symbol: String
+  decimals: Int!
+  assetToken: Bytes!
+  collateralToken: Bytes!
+  interestPerSecond: BigDecimal
+  totalAssetBase: BigDecimal
+}
+
+type SushiPoolData @entity {
+  id: ID!
+  lpToken: Bytes!
+}
+
+type SushiTokenData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  pool: SushiPoolData!
+  sushiPerSecond: BigDecimal
+  rewardPerSecond: BigDecimal
+  lastRewardTime: BigInt
+}

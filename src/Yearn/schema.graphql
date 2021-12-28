@@ -1,0 +1,10 @@
+type YearnTokenData @entity {
+  id: ID!
+  balance: BigDecimal!
+  pricePerFullShare: BigDecimal!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  symbol: String!
+  vault: Bytes!
+  underlyingToken: Bytes!
+}
