@@ -16,7 +16,7 @@
     "setup": "yarn mustache-yaml && yarn codegen && yarn graph-auth && yarn deploy",
     "setup:local": "yarn mustache-yaml && yarn codegen && yarn deploy:local",
     "mustache-yaml": "./node_modules/.bin/dotenv -- yarn mustache-yaml-replace",
-    "mustache-yaml-replace": "mustache ./config/${CONFIG:-dev}.json ${BLOCKCHAIN:-ethereum}.subgraph.template.yaml > subgraph.yaml",
+    "mustache-yaml-replace": "mustache ./config/${CONFIG:-dev}.json subgraph.template.yaml > subgraph.yaml",
     "codegen": "rm -rf build generated && graph codegen --output-dir ./generated",
     "postcodegen": "./node_modules/.bin/dotenv -- ./script/add-symlinks.sh",
     "graph-auth": "./node_modules/.bin/dotenv -- yarn graph-auth-replace",

@@ -48,7 +48,7 @@ The subgraph for the DeFi protocols that are integrated with [OptyFi](https://op
     - format:
       ```json
       {
-        "blockchain": "$BLOCKCHAIN",
+        "blockchain": "ethereum",
         "network": "$CONFIG",
         "adapters": [
           {
@@ -171,7 +171,7 @@ The subgraph for the DeFi protocols that are integrated with [OptyFi](https://op
   ```sh
   yarn mustache-yaml
   ```
-  If the execution is successful, you should see a new `./subgraph.yaml` file created from the `./$BLOCKCHAIN.subgraph.template.yaml` file, based on the `./config/$CONFIG.json` file as per the [`Naming conventions`](#naming-conventions) above.
+  If the execution is successful, you should see a new `./subgraph.yaml` file created from the `./subgraph.template.yaml` file, based on the `./config/$CONFIG.json` file as per the [`Naming conventions`](#naming-conventions) above.
 
 ### Generating subgraph code:
 
