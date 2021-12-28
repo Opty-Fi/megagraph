@@ -24,7 +24,7 @@ export function handleTransfer(event: Transfer): void {
   let isFeeDistributionToTreasury = fromZeros && event.params.to == LidoTreasuryAddress;
 
   // graph-ts less or equal to dust boundary
-  const LIDO_DUST_BOUNDARY = BigInt.fromI32(50000);
+  let LIDO_DUST_BOUNDARY = BigInt.fromI32(50000);
   let isDust = event.params.value.lt(LIDO_DUST_BOUNDARY);
 
   if (lidoRewards != null && isFeeDistributionToTreasury && !isDust) {

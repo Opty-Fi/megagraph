@@ -4,8 +4,8 @@ import { LidoToken } from "../../../generated/LidoTokenstETH/LidoToken";
 import { LidoRewardData, LidoTotals, LidoOracleTotals } from "../../../generated/schema";
 import { ZERO_BI, LidoTokenAddress, LidoOracleAddress } from "../../utils/constants";
 
-const LIDO_DEPOSIT_AMOUNT = BigInt.fromI32(32).times(BigInt.fromString("1000000000000000000")); // 32 ETH
-const LIDO_CALCULATION_UNIT = BigInt.fromI32(10000);
+let LIDO_DEPOSIT_AMOUNT = BigInt.fromI32(32).times(BigInt.fromString("1000000000000000000")); // 32 ETH
+let LIDO_CALCULATION_UNIT = BigInt.fromI32(10000);
 
 export function handleCompleted(event: Completed): void {
   let lastOracle = LidoOracleTotals.load("") as LidoOracleTotals;
@@ -87,13 +87,13 @@ export function handlePostTotalShares(event: PostTotalShares): void {
   }
   entity.timeElapsed = event.params.timeElapsed;
   /**
-  
+
   aprRaw -> aprBeforeFees -> apr
-  
+
   aprRaw - APR straight from validator balances without adjustments
   aprBeforeFees - APR compensated for time difference between oracle reports
   apr - APR with fees subtracted and time-compensated
-  
+
   **/
 
   // APR without subtracting fees and without any compensations
