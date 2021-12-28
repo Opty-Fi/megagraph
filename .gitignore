@@ -4,3 +4,5 @@ node_modules
 /subgraph.yaml
 generated
 build
+config/*-dev.json
+
