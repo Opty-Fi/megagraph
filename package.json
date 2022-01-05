@@ -26,7 +26,7 @@
     "mustache-yaml": "./node_modules/.bin/dotenv -- yarn mustache-yaml-replace",
     "mustache-yaml-replace": "mustache ./src/${ADAPTER}/config/${CONFIG}.json subgraph.template.yaml > subgraph.yaml",
     "mustache-yaml:dev": "./node_modules/.bin/dotenv -- yarn mustache-yaml-replace:dev",
-    "mustache-yaml-replace:dev": "jq 'del(.contracts | .[] | .instances | .[] | .startBlock)' ./src/${ADAPTER}/config/${CONFIG}.json > ./src/${ADAPTER}/config/${CONFIG}-dev.json && mustache ./src/${ADAPTER}/config/${CONFIG}-dev.json subgraph.template.yaml > subgraph.yaml",
+    "mustache-yaml-replace:dev": "./node_modules/node-jq/bin/jq 'del(.contracts | .[] | .instances | .[] | .startBlock)' ./src/${ADAPTER}/config/${CONFIG}.json > ./src/${ADAPTER}/config/${CONFIG}-dev.json && mustache ./src/${ADAPTER}/config/${CONFIG}-dev.json subgraph.template.yaml > subgraph.yaml",
     "postmustache-yaml-replace": "cp src/${ADAPTER}/schema.graphql schema.graphql",
     "postmustache-yaml-replace:dev": "cp src/${ADAPTER}/schema.graphql schema.graphql",
     "codegen": "rm -rf build generated && graph codegen",
@@ -48,6 +48,7 @@
     "dotenv": "^10.0.0",
     "dotenv-cli": "^4.1.1",
     "mustache": "^4.2.0",
+    "node-jq": "^2.1.0",
     "typescript": "^4.5.2"
   },
   "devDependencies": {
