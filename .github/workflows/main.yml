@@ -31,7 +31,7 @@ jobs:
         run: yarn prettier:check
       - name: Build
         run: |
-            yarn mustache-yaml
+            CONFIG=ethereum yarn mustache-yaml:dev
             yarn graph codegen
             ./script/add-symlinks.sh
             yarn graph build

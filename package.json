@@ -14,9 +14,12 @@
     "prettier": "prettier --config ./.prettierrc.yaml --write \"**/*.{js,json,md,ts}\"",
     "prettier:check": "prettier --check --config ./.prettierrc.yaml \"**/*.{js,json,md,ts}\"",
     "setup": "yarn mustache-yaml && yarn codegen && yarn graph-auth && yarn deploy",
+    "setup:dev": "yarn mustache-yaml:dev && yarn codegen && yarn deploy:local",
     "setup:local": "yarn mustache-yaml && yarn codegen && yarn deploy:local",
     "mustache-yaml": "./node_modules/.bin/dotenv -- yarn mustache-yaml-replace",
-    "mustache-yaml-replace": "mustache ./config/${CONFIG:-dev}.json ${BLOCKCHAIN:-ethereum}.subgraph.template.yaml > subgraph.yaml",
+    "mustache-yaml-replace": "mustache ./config/${CONFIG}.json subgraph.template.yaml > subgraph.yaml",
+    "mustache-yaml:dev": "./node_modules/.bin/dotenv -- yarn mustache-yaml-replace:dev",
+    "mustache-yaml-replace:dev": "./node_modules/node-jq/bin/jq 'del(.adapters | .[] | .contracts | .[] | .instances | .[] | .startBlock)' ./config/${CONFIG}.json > ./config/${CONFIG}-dev.json && mustache ./config/${CONFIG}-dev.json subgraph.template.yaml > subgraph.yaml",
     "codegen": "rm -rf build generated && graph codegen --output-dir ./generated",
     "postcodegen": "./node_modules/.bin/dotenv -- ./script/add-symlinks.sh",
     "graph-auth": "./node_modules/.bin/dotenv -- yarn graph-auth-replace",
@@ -36,6 +39,7 @@
     "dotenv": "^10.0.0",
     "dotenv-cli": "^4.1.1",
     "mustache": "^4.2.0",
+    "node-jq": "^2.1.0",
     "typescript": "^4.5.2"
   },
   "devDependencies": {

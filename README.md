@@ -42,13 +42,11 @@ The subgraph for the DeFi protocols that are integrated with [OptyFi](https://op
 ### Naming conventions:
 
 - `./config/` directory:
-  - `dev.json` file only:
-    - `startBlock` to be omitted, or `"startBlock": 0`, unless you configure your local `graph-node` otherwise (see [`Local Development`](#local-development) below)
   - all`$CONFIG.json` files:
     - format:
       ```json
       {
-        "blockchain": "$BLOCKCHAIN",
+        "blockchain": "ethereum",
         "network": "$CONFIG",
         "adapters": [
           {
@@ -68,7 +66,7 @@ The subgraph for the DeFi protocols that are integrated with [OptyFi](https://op
                   {
                     "symbol": "SYMBOL", // if multiple
                     "address": "0xAddressValue",
-                    "startBlock": 12345 // if present
+                    "startBlock": 12345
                   }
                 ]
               }
@@ -152,7 +150,7 @@ The subgraph for the DeFi protocols that are integrated with [OptyFi](https://op
      ```
 1. In the `megagraph` root directory, run:
    ```sh
-   yarn setup:local
+   yarn setup:dev
    ```
 
 ### Deploying to [The Graph](https://thegraph.com):
@@ -171,7 +169,7 @@ The subgraph for the DeFi protocols that are integrated with [OptyFi](https://op
   ```sh
   yarn mustache-yaml
   ```
-  If the execution is successful, you should see a new `./subgraph.yaml` file created from the `./$BLOCKCHAIN.subgraph.template.yaml` file, based on the `./config/$CONFIG.json` file as per the [`Naming conventions`](#naming-conventions) above.
+  If the execution is successful, you should see a new `./subgraph.yaml` file created from the `./subgraph.template.yaml` file, based on the `./config/$CONFIG.json` file as per the [`Naming conventions`](#naming-conventions) above.
 
 ### Generating subgraph code:
 
