@@ -249,6 +249,19 @@ type HarvestTokenData @entity {
 }
 
 # ----------------------------------------
+#      QuickSwap
+# ----------------------------------------
+type QuickSwapPoolData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  stakingToken: Bytes
+  rewardsToken: Bytes
+  rewardRate: BigDecimal
+  totalSupply: BigInt
+}
+
+# ----------------------------------------
 #      Sushi
 # ----------------------------------------
 type SushiKashiData @entity {

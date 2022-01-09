@@ -1,0 +1,438 @@
+{
+  "blockchain": "ethereum",
+  "network": "matic",
+  "adapters": [
+    {
+      "adapter": "QuickSwap",
+      "contracts": [
+        {
+          "contract": "StakingRewards",
+          "abis": ["StakingRewards"],
+          "entities": ["QuickSwapPoolData"],
+          "events": [
+            {
+              "event-name": "RewardAdded",
+              "event-params": "(uint256,uint256)"
+            },
+            {
+              "event-name": "Staked",
+              "event-params": "(indexed address,uint256)"
+            },
+            {
+              "event-name": "Withdrawn",
+              "event-params": "(indexed address,uint256)"
+            }
+          ],
+          "instances": [
+            {
+              "address": "0xbB703E95348424FF9e94fbE4FB524f6d280331B8",
+              "startBlock": "19911733",
+              "symbol": "USDC-WETH"
+            },
+            {
+              "address": "0x4b678cA360c5f53a2B0590e53079140F302A9DcD",
+              "startBlock": "19911737",
+              "symbol": "WMATIC-WETH"
+            },
+            {
+              "address": "0xdD8758eBB792C9aed3517e9E28ce03C090564DA0",
+              "startBlock": "19911741",
+              "symbol": "WMATIC-QUICK"
+            },
+            {
+              "address": "0x45a5CB25F3E3bFEe615F6da0731740093F59b768",
+              "startBlock": "19911745",
+              "symbol": "WETH-USDT"
+            },
+            {
+              "address": "0x2972175e1a35C403B5596354D6459C34Ae6A1070",
+              "startBlock": "19911749",
+              "symbol": "WBTC-WETH"
+            },
+            {
+              "address": "0x9891548FB271C2350bd0FA25eb56A3b558cD4A64",
+              "startBlock": "19911753",
+              "symbol": "WETH-AAVE"
+            },
+            { "address": "0x8d6b2dBa9e85b897Dc97eD262C1aa3e4D76477dF", "startBlock": "19911757", "symbol": "WETH-DAI" },
+            {
+              "address": "0x5BcFcc24Db0A16b1C01BAC1342662eBd104e816c",
+              "startBlock": "19911764",
+              "symbol": "WETH-QUICK"
+            },
+            {
+              "address": "0x06e49078b1900A8489462Cd2355ED8c09f507499",
+              "startBlock": "19911767",
+              "symbol": "miMATIC-USDT"
+            },
+            { "address": "0x17fE4630A855FF6e546C19c315BE7f3ED01f38Ff", "startBlock": "19911771", "symbol": "QI-WETH" },
+            {
+              "address": "0xb827B23e2276ceB912CB42088ab064800447c158",
+              "startBlock": "19911774",
+              "symbol": "DAI-miMATIC"
+            },
+            {
+              "address": "0x7E9E46BBAa92a2d18c17B8e8c537Cc488f0f1559",
+              "startBlock": "19911778",
+              "symbol": "XCASH-QUICK"
+            },
+            {
+              "address": "0x1b077a0586b2ABD4062a39E6368E256dB2F723c4",
+              "startBlock": "19911781",
+              "symbol": "LINK-WETH"
+            },
+            {
+              "address": "0x9854e01432b348194e025DF773e6412892cBc900",
+              "startBlock": "19911785",
+              "symbol": "WMATIC-USDC"
+            },
+            {
+              "address": "0xBF0b0DEF82C1D473e6B8770458Ddc82f5C8C7504",
+              "startBlock": "19911789",
+              "symbol": "WBTC-USDC"
+            },
+            {
+              "address": "0x94d024C05E2eae6ee3C9E0711D3E18C80F8CebA8",
+              "startBlock": "19911826",
+              "symbol": "USDC-rUSD"
+            },
+            {
+              "address": "0xDa734d661BEf168895EFB2aC0634950C7874B5Ec",
+              "startBlock": "19911841",
+              "symbol": "USDC-MASK"
+            },
+            {
+              "address": "0x939290Ed45514E82900BA767bBcfa38eE1067039",
+              "startBlock": "19911845",
+              "symbol": "USDC-QUICK"
+            },
+            {
+              "address": "0x5454862d457d0e87f68Ff2eb6c2Ffb12FE5f254b",
+              "startBlock": "19911849",
+              "symbol": "QUICK-GMEE"
+            },
+            {
+              "address": "0xAFB76771C98351Aa7fCA13B130c9972181612b54",
+              "startBlock": "19911853",
+              "symbol": "USDC-USDT"
+            },
+            { "address": "0x43CdB843Bdc76DDfb9F5aE1B9F20424E9D77cED6", "startBlock": "19911887", "symbol": "TCP-USDC" },
+            {
+              "address": "0x1476331f814c00F1d15dc6187A0EB1e1E403D745",
+              "startBlock": "19911892",
+              "symbol": "NEXO-WETH"
+            },
+            { "address": "0x76cC4059Dd19518c377934CD799615B3543967fd", "startBlock": "19911897", "symbol": "WETH-UNI" },
+            { "address": "0x7Cb08B1dd9A9fA5da22ef99E7Fb00a856DA6A2c7", "startBlock": "19911902", "symbol": "QUICK-OM" },
+            { "address": "0x4a01270909A3a11810B8d73dF11083106f7833Ce", "startBlock": "19911907", "symbol": "USDC-ADS" },
+            {
+              "address": "0xf113B8dec8368b7FeC4802fF7126cA317131F7cF",
+              "startBlock": "19911912",
+              "symbol": "QUICK-EROWAN"
+            },
+            {
+              "address": "0x70C674bCe0aEc05E0d13bFEdd692b2F231323899",
+              "startBlock": "19911917",
+              "symbol": "EROWAN-ATOM"
+            },
+            {
+              "address": "0xd24FdB548704D8C6AA1e15B238E4cBe10d214119",
+              "startBlock": "19911922",
+              "symbol": "WETH-MCASH"
+            },
+            {
+              "address": "0x132A9714939d0194eAC5B97725BFE0d7D6fFb8bb",
+              "startBlock": "19911927",
+              "symbol": "ADS-QUICK"
+            },
+            {
+              "address": "0x7b4125d303eE59e8Ef5aB66ca06314904E45DA7E",
+              "startBlock": "19911931",
+              "symbol": "ELET-QUICK"
+            },
+            {
+              "address": "0x7381EC7FB10d4242447A4056a84EF75b007D1a00",
+              "startBlock": "19911935",
+              "symbol": "ANGEL-QUICK"
+            },
+            {
+              "address": "0x97E4bcF95DfA4C0EDAcFd12287317BfaF5B4866A",
+              "startBlock": "19911937",
+              "symbol": "USDC-REVV"
+            },
+            {
+              "address": "0xEce832aBe253681FC0C4fE116ca3De8d18D811e2",
+              "startBlock": "19911941",
+              "symbol": "USDC-DNXC"
+            },
+            {
+              "address": "0xB84319392d51FEEBfA40EdA326C14Bf56c31D030",
+              "startBlock": "19911945",
+              "symbol": "REVV-QUICK"
+            },
+            {
+              "address": "0xc003fC1a62f7eEa5b07FeFf89BA45A925AC46f1d",
+              "startBlock": "19911950",
+              "symbol": "QUICK-DNXC"
+            },
+            {
+              "address": "0x8eF44aF84D79717577C54DD7eC60a60945404680",
+              "startBlock": "19911954",
+              "symbol": "QUICK-RELAY"
+            },
+            {
+              "address": "0x7475b9eDfc13cdc994AeF39F67F5b4211515C873",
+              "startBlock": "19911973",
+              "symbol": "polyBUNNY-WETH"
+            },
+            {
+              "address": "0x20b07BF5d7c84171c84Daf1ec327306830561AD9",
+              "startBlock": "19911979",
+              "symbol": "QUICK-UGT"
+            },
+            { "address": "0x4Cef5a7B5736e65ad9dd6Ab52eD79eF1BbeBec84", "startBlock": "19911983", "symbol": "WETH-UGT" },
+            {
+              "address": "0xE3Cd2c9971C12F817Aac1350654CBae53BE72433",
+              "startBlock": "19911988",
+              "symbol": "USDC-zUSD"
+            },
+            {
+              "address": "0xB1B2e2b4cBED8e7b6FF7Cca016760ccA9260f0Ec",
+              "startBlock": "19911992",
+              "symbol": "START-QUICK"
+            },
+            {
+              "address": "0xE1F991f93997085472469B2fA72Fd5454469Fa94",
+              "startBlock": "19911997",
+              "symbol": "WMATIC-USDT"
+            },
+            {
+              "address": "0x7fF1ed1960108Ff896be37199796Cc474B2C070D",
+              "startBlock": "19912000",
+              "symbol": "QUICK-OOE"
+            },
+            {
+              "address": "0x5189B2e1A3896c053D094633B77Adc6AeBCF7C03",
+              "startBlock": "19912004",
+              "symbol": "QUICK-REI"
+            },
+            {
+              "address": "0x403A2604226585Cb1e07D644780930D650EA4b73",
+              "startBlock": "19912009",
+              "symbol": "QUICK-PolyDoge"
+            },
+            {
+              "address": "0x3486D306c3Fe9e1cC7809e2C171766CA942c144A",
+              "startBlock": "19912019",
+              "symbol": "SWAP-QUICK"
+            },
+            {
+              "address": "0x5F709F81cdA3E84fC2af3662B8B8C3F4f44e3d4E",
+              "startBlock": "19912023",
+              "symbol": "WMATIC-miMATIC"
+            },
+            {
+              "address": "0x3fC5c25f946894e14AA2e9cE755Be55d98B7d515",
+              "startBlock": "19912028",
+              "symbol": "XED-QUICK"
+            },
+            { "address": "0xACb9EB5B52F495F09bA98aC96D8e61257F3daE14", "startBlock": "19912033", "symbol": "USDC-DAI" },
+            {
+              "address": "0x0cAB010bA055a9F3B3f987BA39eE0ad3E2d1a830",
+              "startBlock": "19912037",
+              "symbol": "WMATIC-AVAX"
+            },
+            {
+              "address": "0x0e72b1b7658FFb0e3f45562A489FD4Bc15873E4B",
+              "startBlock": "19912041",
+              "symbol": "QUICK-PLR"
+            },
+            {
+              "address": "0xE73580E28A4cCb796fEBb276902F2fa2F5a39067",
+              "startBlock": "19912046",
+              "symbol": "USDC-ETHA"
+            },
+            {
+              "address": "0x16043947b496a5B31932bcF9f41dD66880ff2Bb7",
+              "startBlock": "19912051",
+              "symbol": "WETH-renDOGE"
+            },
+            {
+              "address": "0x2a33666D3e06FdBE07F8AeA0d0ae22861F8C7e73",
+              "startBlock": "19912055",
+              "symbol": "MITx-WETH"
+            },
+            {
+              "address": "0x2458D6CE80963915Be56FD9bfBd702728EE899b0",
+              "startBlock": "19912059",
+              "symbol": "WMATIC-ODDZ"
+            },
+            {
+              "address": "0x4Fdc40A3F4926E04BC8B76eB4a83433318D6f0E6",
+              "startBlock": "19912063",
+              "symbol": "ODDZ-QUICK"
+            },
+            {
+              "address": "0x9DD277679F4BB9412Ec68D7E0F41cb2985BEF0c7",
+              "startBlock": "19912065",
+              "symbol": "QUICK-PERA"
+            },
+            {
+              "address": "0xB332b9D67E20bb8Ce4B93308A63C2EE2F846D372",
+              "startBlock": "19912070",
+              "symbol": "WMATIC-SOL"
+            },
+            {
+              "address": "0xb323d6f17A0cDFaE1BfD263839B39eBB5210155a",
+              "startBlock": "19912075",
+              "symbol": "MONA-USDT"
+            },
+            {
+              "address": "0xDBFb709a40F4B6C10DbfC27Cd96F90cf67EbBcF1",
+              "startBlock": "19912080",
+              "symbol": "ETHA-QUICK"
+            },
+            {
+              "address": "0x7aE6190a279a919612B5C563296C93CAe983e457",
+              "startBlock": "19912085",
+              "symbol": "WMATIC-PHX"
+            },
+            {
+              "address": "0x7efCff893e01D36F3856a5b063A50b91Bbad303D",
+              "startBlock": "19912094",
+              "symbol": "USDC-XCAD"
+            },
+            {
+              "address": "0xeD79D524B50e16ccC5d57193a2CAdF1964d484E7",
+              "startBlock": "19912099",
+              "symbol": "MITx-QUICK"
+            },
+            { "address": "0xCd7E62D9E2D209EcB22EC48A942b4db9503aB97B", "startBlock": "19912103", "symbol": "USDC-BNB" },
+            {
+              "address": "0x789c93e6fd3F6327Ff2f2d1F394e694DE442044e",
+              "startBlock": "19912107",
+              "symbol": "TRADE-QUICK"
+            },
+            {
+              "address": "0xfBAafCc888E68153a667CA36020B0dc2c5019bAC",
+              "startBlock": "19912120",
+              "symbol": "USDC-MOONED"
+            },
+            {
+              "address": "0x5db8eB2cbcd7C74CF700173eCf86338247898c1a",
+              "startBlock": "19912125",
+              "symbol": "TRADE-WETH"
+            },
+            {
+              "address": "0x91061e09e9c7819CBbb92a418240954A4D8a9fed",
+              "startBlock": "19912128",
+              "symbol": "QUICK-KOM"
+            },
+            { "address": "0x4c510d82FD85F2B54FD0C41975fbb9305a92751B", "startBlock": "19912193", "symbol": "PBR-USDT" },
+            {
+              "address": "0xC105a406ad18f3736bd8Af158D811E85a018ef00",
+              "startBlock": "19912198",
+              "symbol": "WMATIC-D11"
+            },
+            {
+              "address": "0x4f5f46Db08D28b7c6A96653B7C4BdB8a209c6331",
+              "startBlock": "19912202",
+              "symbol": "WATCH-QUICK"
+            },
+            {
+              "address": "0x7a066B2e504ae958926F5DAa2A31aC5Fa278c52D",
+              "startBlock": "19912207",
+              "symbol": "MEEB-WETH"
+            },
+            {
+              "address": "0xa19220e11C3a3d5C71CBB29C2e581125f087450D",
+              "startBlock": "19912212",
+              "symbol": "QUICK-CNTR"
+            },
+            {
+              "address": "0xB8219752b7E35E82B2a37845D74351580A6AC3cc",
+              "startBlock": "19912217",
+              "symbol": "$ANRX-WETH"
+            },
+            {
+              "address": "0x09DdB5E6B740De10b4b710E72ac4AF100d47428B",
+              "startBlock": "19912222",
+              "symbol": "DHV-QUICK"
+            },
+            {
+              "address": "0xeaF39eba018F086e7723CdECdb700BC2b7862ade",
+              "startBlock": "19912233",
+              "symbol": "USDC-CIOTX"
+            },
+            {
+              "address": "0xc599CdE2c17084E40D25BC4Ca8f33aF04bE5C9B1",
+              "startBlock": "19912239",
+              "symbol": "QUICK-FEAR"
+            },
+            {
+              "address": "0xB2ef545E18946a04aE0a82eC4fb199630025F2Ce",
+              "startBlock": "19912255",
+              "symbol": "CIOTX-QUICK"
+            },
+            {
+              "address": "0xf32E91281f453644F95038526Ee491d2718Db9e2",
+              "startBlock": "19912328",
+              "symbol": "USDC-FEAR"
+            },
+            {
+              "address": "0xd0AA987bb9C5b6c211094fAC5B3AcA8bA3e6B562",
+              "startBlock": "19912385",
+              "symbol": "MOONED-QUICK"
+            },
+            {
+              "address": "0xFef9DF77b67037b184a22cBB449EaBE571Dd7Ff5",
+              "startBlock": "19912389",
+              "symbol": "MONA-QUICK"
+            },
+            { "address": "0xc45aB79526Dd16B00505EB39222E6B1Aed0Ef079", "startBlock": "19912393", "symbol": "DAI-USDT" },
+            {
+              "address": "0x8D79CA210442f67FB21951E6Ec16c974c6B4d278",
+              "startBlock": "19912398",
+              "symbol": "EGG-QUICK"
+            },
+            { "address": "0x51BAbd09082e83FfB8cbe4F10E6dC5B2a5D888b5", "startBlock": "19912403", "symbol": "EGG-USDC" },
+            {
+              "address": "0xf588C993b3A410d937bDC24Cb73392e196E0e634",
+              "startBlock": "19912407",
+              "symbol": "USDC-YAMP"
+            },
+            {
+              "address": "0x474e655CCD715393E31d66077a007491b7e52070",
+              "startBlock": "19912412",
+              "symbol": "QUICK-YAMP"
+            },
+            { "address": "0x32B249cd2717799bEd634940a47c2e8Da56EB670", "startBlock": "19912417", "symbol": "EZ-QUICK" },
+            { "address": "0xBba6c7B2D1B088ecC969E13140b801714f9b1a20", "startBlock": "19912422", "symbol": "IMX-WETH" },
+            { "address": "0x4238474E92734E762784EAA20d3D454b616986a2", "startBlock": "19912427", "symbol": "QI-QUICK" },
+            {
+              "address": "0x5D2680B93D851B137626361Dfa1F97e60c796615",
+              "startBlock": "19912432",
+              "symbol": "WETH-RAMP"
+            },
+            {
+              "address": "0xF5c305F9D817a462Fa0eCE578a552C3F05F58b40",
+              "startBlock": "19912439",
+              "symbol": "USDC-Guard"
+            },
+            {
+              "address": "0x6491F7eb102233453951aC933b6bc5181077560B",
+              "startBlock": "19912472",
+              "symbol": "renDGB-WETH"
+            },
+            {
+              "address": "0x6d06DcC1FA6226C3F2e5ECE0aA6c1e4273368F68",
+              "startBlock": "19912481",
+              "symbol": "polyBUNNY-QUICK"
+            },
+            { "address": "0x00e13b2873465A07043c701FE5eE7e5AA4D8bA96", "startBlock": "19912485", "symbol": "POOL-WETH" }
+          ]
+        }
+      ]
+    }
+  ]
+}
