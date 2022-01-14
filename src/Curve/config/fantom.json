@@ -1,0 +1,291 @@
+{
+  "network": "fantom",
+  "adapter": "Curve",
+  "contracts": [
+    {
+      "contract": "PoolX2",
+      "abis": [
+        "PoolX2",
+        "Registry",
+        "LiquidityGauge",
+        "LiquidityGaugeV2",
+        "StakingLiquidityGauge",
+        "StakingRewards",
+        "MultiRewards",
+        "Rewards",
+        "ERC20",
+        "AaveIncentivesController"
+      ],
+      "entities": ["CurvePoolData", "CurveExtraReward"],
+      "events": [
+        {
+          "event-name": "AddLiquidity",
+          "event-params": "(indexed address,uint256[2],uint256[2],uint256,uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidity",
+          "event-params": "(indexed address,uint256[2],uint256[2],uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidityOne",
+          "event-params": "(indexed address,uint256,uint256,uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidityImbalance",
+          "event-params": "(indexed address,uint256[2],uint256[2],uint256,uint256)"
+        },
+        {
+          "event-name": "TokenExchange",
+          "event-params": "(indexed address,int128,uint256,int128,uint256)"
+        },
+        {
+          "event-name": "TokenExchangeUnderlying",
+          "event-params": "(indexed address,int128,uint256,int128,uint256)"
+        }
+      ],
+      "instances": [
+        { "address": "0x3eF6A01A0f81D6046290f3e2A8c5b843e738E604", "startBlock": "9464131", "symbol": "ren" },
+        { "address": "0x27e611fd27b276acbd5ffd632e5eaebec9761e40", "startBlock": "2320909", "symbol": "2pool" },
+        { "address": "0x92d5ebf3593a92888c25c0abef126583d4b5312e", "startBlock": "3182905", "symbol": "fusdt" },
+        {
+          "address": "0x1cb5C03d0585333A6D0578D47a5F9de66C80fD5A",
+          "startBlock": "17081767",
+          "symbol": "mim3CRV-f-0"
+        },
+        {
+          "address": "0xeCf64ba816C75e595fF212391E80B5CD9071E7D5",
+          "startBlock": "17195360",
+          "symbol": "BUSD3CRV-f-3"
+        },
+        {
+          "address": "0x1c7FA28E7BFa396a4B044cC939daFF51674d852B",
+          "startBlock": "17723236",
+          "symbol": "fUSD3CRV-f-6"
+        },
+        {
+          "address": "0x4cd4786426eD34DBd96ba64e4a7B676FAD25D71C",
+          "startBlock": "18491278",
+          "symbol": "anyUSDC-f-8"
+        },
+        { "address": "0xd3f83ec4BB684712D9CA8519eDAfbb910470F77C", "startBlock": "18737214", "symbol": "333-f-10" },
+        { "address": "0xb17DeFAB9Da9A48F2712B92db8dA7c4EDb2D1c0a", "startBlock": "18737216", "symbol": "333-f-11" },
+        {
+          "address": "0x68dde7344a302394845097E96E83cDdFe6D4d76e",
+          "startBlock": "19066468",
+          "symbol": "MAIpool3CRV-f-13"
+        },
+        {
+          "address": "0x28368D7090421Ca544BC89799a2Ea8489306E3E5",
+          "startBlock": "19321214",
+          "symbol": "DOLA-2POOL3CRV-f-14"
+        },
+        {
+          "address": "0x12cb0687B95158340287D8391D0Ca5314c10532D",
+          "startBlock": "19445729",
+          "symbol": "FRAX3CRV-f3CRV-f-15"
+        },
+        {
+          "address": "0x7a656B342E14F745e2B164890E88017e27AE7320",
+          "startBlock": "19489505",
+          "symbol": "FRAX2pool3CRV-f-16"
+        },
+        {
+          "address": "0x96817E9E47419dd66346AB64811e0f43aB75fEC8",
+          "startBlock": "20362085",
+          "symbol": "Aquarius3CRV-f-17"
+        },
+        {
+          "address": "0xc955b79959aca2895AC8667A418849e4C218A708",
+          "startBlock": "21247843",
+          "symbol": "DAI-USDC-f-19"
+        },
+        {
+          "address": "0xA7d2Ac1D5A1cFba7e3e21B68e76c48dd16348592",
+          "startBlock": "21247878",
+          "symbol": "DAI-USDC-f-20"
+        },
+        {
+          "address": "0xF427A0BE7524B022f89742EAf2F52EA433280aC3",
+          "startBlock": "21250350",
+          "symbol": "USDC-SKULL-f-21"
+        },
+        {
+          "address": "0x9834766a92135DBd03b987Bf423aB89A18656194",
+          "startBlock": "21250447",
+          "symbol": "SKULL-USDC-f-22"
+        },
+        {
+          "address": "0xbd05dF58eD93560457aD2Bc8d1Fe69Aa45Bbd636",
+          "startBlock": "21250590",
+          "symbol": "SKULL-USDC-f-23"
+        },
+        {
+          "address": "0xD5B51BA080F815446646a61039fBbFef5A12A4CF",
+          "startBlock": "22497320",
+          "symbol": "MIM1P3CRV-f-24"
+        },
+        {
+          "address": "0x34033F0227C48bc3577aE5C6923A3DEEF3E36670",
+          "startBlock": "23668453",
+          "symbol": "renDAI-f-26"
+        },
+        {
+          "address": "0x43EC4106b3A09b17f8669E268f36Cc5cdd5F356f",
+          "startBlock": "23677363",
+          "symbol": "renBUSD-f-27"
+        },
+        {
+          "address": "0xD73a2802697263fb84cb06bBCe9501A2d33dc880",
+          "startBlock": "23695239",
+          "symbol": "renMIM-f-28"
+        },
+        {
+          "address": "0xAD6D5548c45b1b198A4A563Cba1C3D384AFc44C6",
+          "startBlock": "23711955",
+          "symbol": "renUSDC-f-29"
+        },
+        {
+          "address": "0x03fa4c23bA3a7BC0BeC18789CE29c7857324bD22",
+          "startBlock": "23712811",
+          "symbol": "renUSDT-f-30"
+        },
+        {
+          "address": "0x115266f936B2ea12eBb5cf5eB2D35f9c46614436",
+          "startBlock": "23773838",
+          "symbol": "UST3CRV-f-31"
+        },
+        {
+          "address": "0xE8117F058A37367d6bf70a8E56B569d7fd5e2A8B",
+          "startBlock": "23794596",
+          "symbol": "renETH-f-32"
+        },
+        {
+          "address": "0x83A503780983bbaBd6ACab577FbA2c5A3DcAa57f",
+          "startBlock": "23870760",
+          "symbol": "usdp+2pool3CRV-f-33"
+        }
+      ]
+    },
+    {
+      "contract": "PoolX3",
+      "abis": [
+        "PoolX3",
+        "Registry",
+        "LiquidityGauge",
+        "LiquidityGaugeV2",
+        "StakingLiquidityGauge",
+        "StakingRewards",
+        "MultiRewards",
+        "Rewards",
+        "ERC20",
+        "AaveIncentivesController"
+      ],
+      "entities": ["CurvePoolData", "CurveExtraReward"],
+      "events": [
+        {
+          "event-name": "AddLiquidity",
+          "event-params": "(indexed address,uint256[3],uint256[3],uint256,uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidity",
+          "event-params": "(indexed address,uint256[3],uint256[3],uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidityOne",
+          "event-params": "(indexed address,uint256,uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidityImbalance",
+          "event-params": "(indexed address,uint256[3],uint256[3],uint256,uint256)"
+        },
+        {
+          "event-name": "TokenExchange",
+          "event-params": "(indexed address,int128,uint256,int128,uint256)"
+        }
+      ],
+      "instances": [
+        { "address": "0x0fa949783947Bf6c1b171DB13AEACBB488845B3f", "startBlock": "19420477", "symbol": "geist" },
+        {
+          "address": "0x3a1659Ddcf2339Be3aeA159cA010979FB49155FF",
+          "startBlock": "17198625",
+          "symbol": "tricrypto"
+        },
+        {
+          "address": "0x2dd7C9371965472E5A5fD28fbE165007c61439E1",
+          "startBlock": "17190969",
+          "symbol": "3poolV2-f-1"
+        },
+        {
+          "address": "0x38D0dD9d036ce6f291442c258F1cc2FC0d10e682",
+          "startBlock": "17200027",
+          "symbol": "scUSD-f-4"
+        },
+        {
+          "address": "0x5AAC39FD59300f913096afafaa7b8E0be143f1b0",
+          "startBlock": "18652474",
+          "symbol": "TryMIM-f-9"
+        },
+        {
+          "address": "0xB407481462ec40b706DF0D22e11d8BEFbc2Adf54",
+          "startBlock": "23926164",
+          "symbol": "3PoolV1337-f-34"
+        }
+      ]
+    },
+    {
+      "contract": "PoolX4",
+      "abis": [
+        "PoolX4",
+        "Registry",
+        "LiquidityGauge",
+        "LiquidityGaugeV2",
+        "StakingLiquidityGauge",
+        "StakingRewards",
+        "MultiRewards",
+        "Rewards",
+        "ERC20",
+        "AaveIncentivesController"
+      ],
+      "entities": ["CurvePoolData", "CurveExtraReward"],
+      "events": [
+        {
+          "event-name": "AddLiquidity",
+          "event-params": "(indexed address,uint256[4],uint256[4],uint256,uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidity",
+          "event-params": "(indexed address,uint256[4],uint256[4],uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidityImbalance",
+          "event-params": "(indexed address,uint256[4],uint256[4],uint256,uint256)"
+        },
+        {
+          "event-name": "TokenExchange",
+          "event-params": "(indexed address,int128,uint256,int128,uint256)"
+        },
+        {
+          "event-name": "TokenExchangeUnderlying",
+          "event-params": "(indexed address,int128,uint256,int128,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "address": "0xad71Fc10Fca8Ce6a98843A64b95E0C63516CA7F3",
+          "startBlock": "18077641",
+          "symbol": "4pool-f-7"
+        },
+        {
+          "address": "0xC822FC64AaD7b04B2eddE961c0704AB80F9D217B",
+          "startBlock": "20934256",
+          "symbol": "SCREAMV2-f-18"
+        },
+        {
+          "address": "0xe38e2c6361c14a17219f7c00bDD93DCc945f096A",
+          "startBlock": "23095840",
+          "symbol": "TPool-f-25"
+        }
+      ]
+    }
+  ]
+}

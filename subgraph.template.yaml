@@ -1,13 +1,9 @@
 specVersion: 0.0.2
-description: Opty-Fi's DeFi Adapters subgraph
+description: Opty-Fi's {{adapter}} subgraph
 repository: https://github.com/Opty-Fi/megagraph
 schema:
   file: ./schema.graphql
 dataSources:
-{{#adapters}}
-# ----------------------------------------
-#      {{adapter}}
-# ----------------------------------------
 {{#contracts}}
   # ----------------------------------------
   #      {{adapter}} {{contract}} {{symbol}}
@@ -43,4 +39,3 @@ dataSources:
       file: ./src/{{adapter}}/mappings/{{contract}}.ts
   {{/instances}}
 {{/contracts}}
-{{/adapters}}

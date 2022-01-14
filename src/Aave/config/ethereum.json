@@ -1,0 +1,138 @@
+{
+  "network": "mainnet",
+  "adapter": "Aave",
+  "contracts": [
+    {
+      "contract": "Token",
+      "abis": ["LendingPoolAddressesProvider", "LendingPoolDataProvider", "Token"],
+      "entities": ["AaveTokenData"],
+      "events": [
+        {
+          "event-name": "BurnOnLiquidation",
+          "event-params": "(indexed address,uint256,uint256,uint256)"
+        },
+        {
+          "event-name": "MintOnDeposit",
+          "event-params": "(indexed address,uint256,uint256,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "symbol": "aAAVE",
+          "address": "0xba3D9687Cf50fE253cd2e1cFeEdE1d6787344Ed5",
+          "startBlock": 11093579
+        },
+        {
+          "symbol": "aBAT",
+          "address": "0xE1BA0FB44CCb0D11b80F92f4f8Ed94CA3fF51D00",
+          "startBlock": 9241085
+        },
+        {
+          "symbol": "aBUSD",
+          "address": "0x6Ee0f7BB50a54AB5253dA0667B0Dc2ee526C30a8",
+          "startBlock": 9747321
+        },
+        {
+          "symbol": "aDAI",
+          "address": "0xfC1E690f61EFd961294b3e1Ce3313fBD8aa4f85d",
+          "startBlock": 9241063
+        },
+        {
+          "symbol": "aENJ",
+          "address": "0x712DB54daA836B53Ef1EcBb9c6ba3b9Efb073F40",
+          "startBlock": 10471941
+        },
+        {
+          "symbol": "aETH",
+          "address": "0x3a3A65aAb0dd2A17E3F1947bA16138cd37d08c04",
+          "startBlock": 9241088
+        },
+        {
+          "symbol": "aKNC",
+          "address": "0x9D91BE44C06d373a8a226E1f3b146956083803eB",
+          "startBlock": 9241097
+        },
+        {
+          "symbol": "aLEND",
+          "address": "0x7D2D3688Df45Ce7C552E19c27e007673da9204B8",
+          "startBlock": 9241081
+        },
+        {
+          "symbol": "aLINK",
+          "address": "0xA64BD6C70Cb9051F6A9ba1F163Fdc07E0DfB5F84",
+          "startBlock": 9241091
+        },
+        {
+          "symbol": "aMANA",
+          "address": "0x6FCE4A401B6B80ACe52baAefE4421Bd188e76F6f",
+          "startBlock": 9241110
+        },
+        {
+          "symbol": "aMKR",
+          "address": "0x7deB5e830be29F91E298ba5FF1356BB7f8146998",
+          "startBlock": 9241106
+        },
+        {
+          "symbol": "aREN",
+          "address": "0x69948cC03f478B95283F7dbf1CE764d0fc7EC54C",
+          "startBlock": 10472062
+        },
+        {
+          "symbol": "aREP",
+          "address": "0x71010A9D003445aC60C4e6A7017c1E89A477B438",
+          "startBlock": 9241100
+        },
+        {
+          "symbol": "aSNX",
+          "address": "0x328C4c80BC7aCa0834Db37e6600A6c49E12Da4DE",
+          "startBlock": 9241118
+        },
+        {
+          "symbol": "aSUSD",
+          "address": "0x625aE63000f46200499120B906716420bd059240",
+          "startBlock": 9241077
+        },
+        {
+          "symbol": "aTUSD",
+          "address": "0x4DA9b813057D04BAef4e5800E36083717b4a0341",
+          "startBlock": 9241068
+        },
+        {
+          "symbol": "aUNI",
+          "address": "0xB124541127A0A657f056D9Dd06188c4F1b0e5aab",
+          "startBlock": 11132284
+        },
+        {
+          "symbol": "aUSDC",
+          "address": "0x9bA00D6856a4eDF4665BcA2C2309936572473B7E",
+          "startBlock": 9241071
+        },
+        {
+          "symbol": "aUSDT",
+          "address": "0x71fc860F7D3A592A4a98740e39dB31d25db65ae8",
+          "startBlock": 9241076
+        },
+        {
+          "symbol": "aWBTC",
+          "address": "0xFC4B8ED459e00e5400be803A9BB3954234FD50e3",
+          "startBlock": 9241225
+        },
+        {
+          "symbol": "aYFI",
+          "address": "0x12e51E77DAAA58aA0E9247db7510Ea4B46F9bEAd",
+          "startBlock": 10748286
+        },
+        {
+          "symbol": "aZRX",
+          "address": "0x6Fb0855c404E09c47C3fBCA25f08d4E41f9F062f",
+          "startBlock": 9241114
+        },
+        {
+          "symbol": "LINKUSD",
+          "address": "0x0E2EC54fC0B509F445631Bf4b91AB8168230C752",
+          "startBlock": 10812702
+        }
+      ]
+    }
+  ]
+}

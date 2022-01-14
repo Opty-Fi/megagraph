@@ -1,0 +1,113 @@
+{
+  "network": "mainnet",
+  "adapter": "Compound",
+  "contracts": [
+    {
+      "contract": "ComptrollerImplementation",
+      "abis": ["ComptrollerImplementation", "ComptrollerImplementationV2", "Token", "Underlying"],
+      "entities": ["CompoundTokenData"],
+      "events": [
+        {
+          "event-name": "CompSpeedUpdated",
+          "event-params": "(indexed address,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "symbol": "",
+          "address": "0x3d9819210A31b4961b30EF54bE2aeD79B9c9Cd3B",
+          "startBlock": 7710671
+        }
+      ]
+    },
+    {
+      "contract": "ComptrollerImplementationV2",
+      "abis": ["ComptrollerImplementation", "ComptrollerImplementationV2", "Token", "Underlying"],
+      "entities": ["CompoundTokenData"],
+      "events": [
+        {
+          "event-name": "CompBorrowSpeedUpdated",
+          "event-params": "(indexed address,uint256)"
+        },
+        {
+          "event-name": "CompSupplySpeedUpdated",
+          "event-params": "(indexed address,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "symbol": "",
+          "address": "0x3d9819210A31b4961b30EF54bE2aeD79B9c9Cd3B",
+          "startBlock": 13322798
+        }
+      ]
+    },
+    {
+      "contract": "Token",
+      "abis": ["ComptrollerImplementation", "ComptrollerImplementationV2", "Token", "Underlying"],
+      "entities": ["CompoundTokenData"],
+      "events": [
+        {
+          "event-name": "AccrueInterest",
+          "event-params": "(uint256,uint256,uint256,uint256)"
+        },
+        {
+          "event-name": "Borrow",
+          "event-params": "(address,uint256,uint256,uint256)"
+        },
+        {
+          "event-name": "LiquidateBorrow",
+          "event-params": "(address,address,uint256,address,uint256)"
+        },
+        {
+          "event-name": "Mint",
+          "event-params": "(address,uint256,uint256)"
+        },
+        {
+          "event-name": "NewReserveFactor",
+          "event-params": "(uint256,uint256)"
+        },
+        {
+          "event-name": "Redeem",
+          "event-params": "(address,uint256,uint256)"
+        },
+        {
+          "event-name": "RepayBorrow",
+          "event-params": "(address,address,uint256,uint256,uint256)"
+        },
+        {
+          "event-name": "ReservesAdded",
+          "event-params": "(address,uint256,uint256)"
+        },
+        {
+          "event-name": "ReservesReduced",
+          "event-params": "(address,uint256,uint256)"
+        },
+        {
+          "event-name": "Transfer",
+          "event-params": "(indexed address,indexed address,uint256)"
+        }
+      ],
+      "instances": [
+        { "address": "0x6C8c6b02E7b2BE14d4fA6022Dfd6d75921D90E4E", "startBlock": 7710735, "symbol": "cBAT" },
+        { "address": "0x70e36f6bf80a52b3b46b3af8e106cc0ed743e8e4", "startBlock": 10960099, "symbol": "cCOMP" },
+        { "address": "0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643", "startBlock": 8983575, "symbol": "cDAI" },
+        { "address": "0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5", "startBlock": 7710758, "symbol": "cETH" },
+        { "address": "0x158079Ee67Fce2f58472A96584A73C7Ab9AC95c1", "startBlock": 7710755, "symbol": "cREP" },
+        { "address": "0x35a18000230da775cac24873d00ff85bccded550", "startBlock": 10921410, "symbol": "cUNI" },
+        { "address": "0x39AA39c021dfbaE8faC545936693aC917d5E7563", "startBlock": 7710760, "symbol": "cUSDC" },
+        { "address": "0xf650C3d88D12dB855b8bf7D11Be6C55A4e07dCC9", "startBlock": 9879363, "symbol": "cUSDT" },
+        { "address": "0xC11b1268C1A384e55C48c2391d8d480264A3A7F4", "startBlock": 8163813, "symbol": "cWBTC" },
+        { "address": "0xb3319f5d18bc0d84dd1b4825dcde5d5f7266d407", "startBlock": 7710733, "symbol": "cZRX" },
+        { "address": "0xccf4429db6322d5c611ee964527d42e5d685dd6a", "startBlock": 12038653, "symbol": "cWBTC2" },
+        { "address": "0xf5dce57282a584d2746faf1593d3121fcac444dc", "startBlock": 7710752, "symbol": "cSAI" },
+        { "address": "0x4b0181102a0112a2ef11abee5563bb4a3176c9d7", "startBlock": 12848166, "symbol": "cSUSHI" },
+        { "address": "0x12392f67bdf24fae0af363c24ac620a2f67dad86", "startBlock": 11008385, "symbol": "cTUSD" },
+        { "address": "0xe65cdb6479bac1e22340e4e755fae7e509ecd06c", "startBlock": 12848198, "symbol": "cAAVE" },
+        { "address": "0x80a2ae356fc9ef4305676f7a3e2ed04e12c33946", "startBlock": 12848198, "symbol": "cYFI" },
+        { "address": "0xface851a4921ce59e912d19329929ce6da6eb0c7", "startBlock": 12286030, "symbol": "cLINK" },
+        { "address": "0x95b4ef2869ebd94beb4eee400a99824bf5dc325b", "startBlock": 12836064, "symbol": "cMKR" }
+      ]
+    }
+  ]
+}

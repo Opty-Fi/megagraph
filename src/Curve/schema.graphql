@@ -1,0 +1,27 @@
+type CurveExtraReward @entity {
+  id: ID!
+  token: Bytes!
+  finishPeriod: BigInt!
+  rewardRatePerSecond: BigDecimal!
+}
+
+type CurveGaugeData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  gaugeController: Bytes!
+  liquidityGauge: Bytes!
+  gaugeWeight: BigDecimal!
+  totalWeight: BigDecimal!
+}
+
+type CurvePoolData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  vault: Bytes!
+  balance: [BigDecimal!]!
+  virtualPrice: BigDecimal!
+  tokens: [Bytes!]!
+  extras: [CurveExtraReward!]
+}

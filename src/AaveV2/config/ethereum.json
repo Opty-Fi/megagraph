@@ -1,0 +1,143 @@
+{
+  "network": "mainnet",
+  "adapter": "AaveV2",
+  "contracts": [
+    {
+      "contract": "Token",
+      "abis": ["LendingPoolAddressesProvider", "AaveProtocolDataProvider", "IncentivesController", "Token"],
+      "entities": ["AaveV2TokenData", "AaveV2Reserve"],
+      "events": [
+        {
+          "event-name": "Burn",
+          "event-params": "(indexed address,indexed address,uint256,uint256)"
+        },
+        {
+          "event-name": "Mint",
+          "event-params": "(indexed address,uint256,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "symbol": "aAAVE",
+          "address": "0xFFC97d72E13E01096502Cb8Eb52dEe56f74DAD7B",
+          "startBlock": 11367184
+        },
+        {
+          "symbol": "aBAL",
+          "address": "0x272F97b7a56a387aE942350bBC7Df5700f8a4576",
+          "startBlock": 11779563
+        },
+        {
+          "symbol": "aBAT",
+          "address": "0x05Ec93c0365baAeAbF7AefFb0972ea7ECdD39CF1",
+          "startBlock": 11367184
+        },
+        {
+          "symbol": "aBUSD",
+          "address": "0xA361718326c15715591c299427c62086F69923D9",
+          "startBlock": 11367184
+        },
+        {
+          "symbol": "aCRV",
+          "address": "0x8dAE6Cb04688C62d939ed9B68d32Bc62e49970b1",
+          "startBlock": 11538358
+        },
+        {
+          "symbol": "aDAI",
+          "address": "0x028171bCA77440897B824Ca71D1c56caC55b68A3",
+          "startBlock": 11367184
+        },
+        {
+          "symbol": "aENJ",
+          "address": "0xaC6Df26a590F08dcC95D5a4705ae8abbc88509Ef",
+          "startBlock": 11367188
+        },
+        {
+          "symbol": "aGUSD",
+          "address": "0xD37EE7e4f452C6638c96536e68090De8cBcdb583",
+          "startBlock": 11576861
+        },
+        {
+          "symbol": "aKNC",
+          "address": "0x39C6b3e42d6A679d7D776778Fe880BC9487C2EDA",
+          "startBlock": 11367188
+        },
+        {
+          "symbol": "aLINK",
+          "address": "0xa06bC25B5805d5F8d82847D191Cb4Af5A3e873E0",
+          "startBlock": 11367188
+        },
+        {
+          "symbol": "aMANA",
+          "address": "0xa685a61171bb30d4072B338c80Cb7b2c865c873E",
+          "startBlock": 11367188
+        },
+        {
+          "symbol": "aMKR",
+          "address": "0xc713e5E149D5D0715DcD1c156a020976e7E56B88",
+          "startBlock": 11367197
+        },
+        {
+          "symbol": "aREN",
+          "address": "0xCC12AbE4ff81c9378D670De1b57F8e0Dd228D77a",
+          "startBlock": 11367197
+        },
+        {
+          "symbol": "aSNX",
+          "address": "0x35f6B052C598d933D69A4EEC4D04c73A191fE6c2",
+          "startBlock": 11367197
+        },
+        {
+          "symbol": "aSUSD",
+          "address": "0x6C5024Cd4F8A59110119C56f8933403A539555EB",
+          "startBlock": 11367197
+        },
+        {
+          "symbol": "aTUSD",
+          "address": "0x101cc05f4A51C0319f570d5E146a8C625198e636",
+          "startBlock": 11367200
+        },
+        {
+          "symbol": "aUNI",
+          "address": "0xB9D7CB55f463405CDfBe4E90a6D2Df01C2B92BF1",
+          "startBlock": 11362823
+        },
+        {
+          "symbol": "aUSDC",
+          "address": "0xBcca60bB61934080951369a648Fb03DF4F96263C",
+          "startBlock": 11367200
+        },
+        {
+          "symbol": "aUSDT",
+          "address": "0x3Ed3B47Dd13EC9a98b44e6204A523E766B225811",
+          "startBlock": 11362821
+        },
+        {
+          "symbol": "aWBTC",
+          "address": "0x9ff58f4fFB29fA2266Ab25e75e2A8b3503311656",
+          "startBlock": 11362821
+        },
+        {
+          "symbol": "aWETH",
+          "address": "0x030bA81f1c18d280636F32af80b9AAd02Cf0854e",
+          "startBlock": 11362821
+        },
+        {
+          "symbol": "aXSUSHI",
+          "address": "0xF256CC7847E919FAc9B808cC216cAc87CCF2f47a",
+          "startBlock": 11857246
+        },
+        {
+          "symbol": "aYFI",
+          "address": "0x5165d24277cD063F5ac44Efd447B27025e888f37",
+          "startBlock": 11362821
+        },
+        {
+          "symbol": "aZRX",
+          "address": "0xDf7FF54aAcAcbFf42dfe29DD6144A69b629f8C9e",
+          "startBlock": 11362823
+        }
+      ]
+    }
+  ]
+}
