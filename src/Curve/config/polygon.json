@@ -1,0 +1,400 @@
+{
+  "network": "matic",
+  "adapter": "Curve",
+  "contracts": [
+    {
+      "contract": "PoolX2",
+      "abis": [
+        "PoolX2",
+        "Registry",
+        "LiquidityGauge",
+        "LiquidityGaugeV2",
+        "StakingLiquidityGauge",
+        "StakingRewards",
+        "MultiRewards",
+        "Rewards",
+        "ERC20",
+        "AaveIncentivesController"
+      ],
+      "entities": ["CurvePoolData", "CurveExtraReward"],
+      "events": [
+        {
+          "event-name": "AddLiquidity",
+          "event-params": "(indexed address,uint256[2],uint256[2],uint256,uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidity",
+          "event-params": "(indexed address,uint256[2],uint256[2],uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidityOne",
+          "event-params": "(indexed address,uint256,uint256,uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidityImbalance",
+          "event-params": "(indexed address,uint256[2],uint256[2],uint256,uint256)"
+        },
+        {
+          "event-name": "TokenExchange",
+          "event-params": "(indexed address,int128,uint256,int128,uint256)"
+        },
+        {
+          "event-name": "TokenExchangeUnderlying",
+          "event-params": "(indexed address,int128,uint256,int128,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "symbol": "eurtusd",
+          "address": "0xB446BF7b8D6D4276d0c75eC0e3ee8dD7Fe15783A",
+          "startBlock": 20777058
+        },
+        {
+          "symbol": "ren",
+          "address": "0xC2d95EEF97Ec6C17551d45e77B590dc1F9117C67",
+          "startBlock": 15601242
+        },
+        {
+          "symbol": "MAI3CRV-f",
+          "address": "0xcE113ffc5B4C9F088Bb0ad9459e10387f232C3e3",
+          "startBlock": 20156127
+        },
+        {
+          "symbol": "CWM-f",
+          "address": "0x43910e07554312FC7A43e4B71D16A72dDCB5Ec5F",
+          "startBlock": 20218760
+        },
+        {
+          "symbol": "USDN3CRV-f",
+          "address": "0xc729a8bFeBB7f9089112c081565EB4A0031612Ba",
+          "startBlock": 20333029
+        },
+        {
+          "symbol": "FRAX3CRV-f3CRV-f",
+          "address": "0x5e5A23b52Cb48F5E70271Be83079cA5bC9c9e9ac",
+          "startBlock": 20355661
+        },
+        {
+          "symbol": "ibbtc3CRV-f",
+          "address": "0x4E28a18aff02Dd6D4B0986De8d32F9c2ee7cB29A",
+          "startBlock": 20357397
+        },
+        {
+          "symbol": "rUSD3CRV-f",
+          "address": "0x850e1B0b203f9B0EBFC9648EF8c7A6f211A200AE",
+          "startBlock": 20411933
+        },
+        {
+          "symbol": "ISusdt-f",
+          "address": "0xB17420458609448498BE4168E19A9bd9a0DF8b37",
+          "startBlock": 20485231
+        },
+        {
+          "symbol": "jSGD+XSGD-f",
+          "address": "0xca097d74030f40bdab9Dd1350E6FE066768210b7",
+          "startBlock": 20500706
+        },
+        {
+          "symbol": "ibbtc3CRV-f-2",
+          "address": "0x9da618900fDEa8fc300Db03254394ed8Eb07EF83",
+          "startBlock": 20643523
+        },
+        {
+          "symbol": "ibbtc3CRV-f-3",
+          "address": "0xf0016fA1b5CB0036425AE47510aC9DEb40d3f273",
+          "startBlock": 20643552
+        },
+        {
+          "symbol": "crv2euro-f",
+          "address": "0x9Cd96405Ae301d4Ba833eeB98fCf5F4A31D4029a",
+          "startBlock": 20650978
+        },
+        {
+          "symbol": "AUSD3CRV-f",
+          "address": "0xe5C9C1782220138F871C48ebfE20be708f948d51",
+          "startBlock": 20714581
+        },
+        {
+          "symbol": "jSGD+XSGD-f-2",
+          "address": "0xeF75E9C7097842AcC5D0869E1dB4e5fDdf4BFDDA",
+          "startBlock": 20717226
+        },
+        {
+          "symbol": "jCAD+CADC-f",
+          "address": "0xA69b0D5c0C401BBA2d5162138613B5E38584F63F",
+          "startBlock": 20717884
+        },
+        {
+          "symbol": "PK3CRV-f",
+          "address": "0xf3FC2bba74f0B73f6264E3543e896e0b86f1F257",
+          "startBlock": 20834465
+        },
+        {
+          "symbol": "PK3CRV-f-2",
+          "address": "0x209ebE1aaC73205F1e8AFf02DB71160ec1Dd1aBd",
+          "startBlock": 20834480
+        },
+        {
+          "symbol": "MEG3CRV-f",
+          "address": "0xE4Eb7E0eCB5099fCe9505fA0DaE72EFaFF73c4cb",
+          "startBlock": 21007051
+        },
+        {
+          "symbol": "TEST_POOL-f",
+          "address": "0x3e1f3D078e9abb8A08De99958a69096B53DfA9b3",
+          "startBlock": 21106546
+        },
+        {
+          "symbol": "USDT/FLSH3CRV-f",
+          "address": "0x5A128e53debc0FCd514FAcc40F01c5D7C39BBBE2",
+          "startBlock": 21140636
+        },
+        {
+          "symbol": "moUSD3CRV-f",
+          "address": "0x162B21ba1a90Dd9384C615192FA4053217D2A8Db",
+          "startBlock": 21242050
+        },
+        {
+          "symbol": "TxPUSTSw-f",
+          "address": "0xE374dbE255128fce05096798048e69B90d9b9F8a",
+          "startBlock": 21348959
+        },
+        {
+          "symbol": "aavesarco3CRV-f",
+          "address": "0xfADDd2D1d4902a0EBa8678e47102Bfa5c5fA1846",
+          "startBlock": 21440464
+        },
+        {
+          "symbol": "PopBTCETH-f",
+          "address": "0xD7847265c971996b2f74ce6fC27038488bd8F67D",
+          "startBlock": 21534746
+        },
+        {
+          "symbol": "ATETRACRYP-f",
+          "address": "0xb283E8afF7379b48556192bd10DcDA562b28D95f",
+          "startBlock": 21738026
+        },
+        {
+          "symbol": "am3CRVAMIS-f",
+          "address": "0x3dE32B6949B0A000e831c98354e93261725A22f7",
+          "startBlock": 21738731
+        },
+        {
+          "symbol": "sMVI3CRV-f",
+          "address": "0x0E9b542172200dF93eaF4C6EDC919F9923567517",
+          "startBlock": 21741171
+        },
+        {
+          "symbol": "bMVI3CRV-f",
+          "address": "0xBeFFf04ec3E332CA0347A7ad056e8F7945f926cf",
+          "startBlock": 21741176
+        },
+        {
+          "symbol": "aTri TONI3CRV-f",
+          "address": "0xcc3520A1DDb017740f1a7a267FFBeD797aDf9d49",
+          "startBlock": 21742904
+        },
+        {
+          "symbol": "bBtc TONI3CRV-f",
+          "address": "0x52296ec05Ad119bc77baf48e9C9e7109AaE7c276",
+          "startBlock": 21743503
+        },
+        {
+          "symbol": "bBtc MARCO3CRV-f",
+          "address": "0xB00680Df0B1f3F39Ef1FbB9ec1AA0a7Fa14b4Cd9",
+          "startBlock": 21743537
+        },
+        {
+          "symbol": "bTri MARCO3CRV-f",
+          "address": "0x20e3f345E229bE9CE08488Ae79E906955183EBAB",
+          "startBlock": 21743537
+        },
+        {
+          "symbol": "2JPY-f",
+          "address": "0x982558c80abDD126795F920DE5653804e9eF884A",
+          "startBlock": 21756934
+        },
+        {
+          "symbol": "2JPY-f-2",
+          "address": "0x1F93F301F7DFb0c301199DB35062945bE35d0aE6",
+          "startBlock": 21757060
+        },
+        {
+          "symbol": "jEUR-4eur-f",
+          "address": "0xc53FF3BB1848443C4737277C00F907e6BeE04a64",
+          "startBlock": 21767752
+        },
+        {
+          "symbol": "jEUR-4eur-f-2",
+          "address": "0xB6E8fC97625cf1dED48026622EfC8c1524bBD3Ff",
+          "startBlock": 21767752
+        }
+      ]
+    },
+    {
+      "contract": "PoolX3",
+      "abis": [
+        "PoolX3",
+        "Registry",
+        "LiquidityGauge",
+        "LiquidityGaugeV2",
+        "StakingLiquidityGauge",
+        "StakingRewards",
+        "MultiRewards",
+        "Rewards",
+        "ERC20",
+        "AaveIncentivesController"
+      ],
+      "entities": ["CurvePoolData", "CurveExtraReward"],
+      "events": [
+        {
+          "event-name": "AddLiquidity",
+          "event-params": "(indexed address,uint256[3],uint256[3],uint256,uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidity",
+          "event-params": "(indexed address,uint256[3],uint256[3],uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidityOne",
+          "event-params": "(indexed address,uint256,uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidityImbalance",
+          "event-params": "(indexed address,uint256[3],uint256[3],uint256,uint256)"
+        },
+        {
+          "event-name": "TokenExchange",
+          "event-params": "(indexed address,int128,uint256,int128,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "symbol": "aave",
+          "address": "0x445FE580eF8d70FF569aB36e80c647af338db351",
+          "startBlock": 13479484
+        },
+        {
+          "symbol": "atricrypto",
+          "address": "0x751B1e21756bDbc307CBcC5085c042a0e9AaEf36",
+          "startBlock": 14884869
+        },
+        {
+          "symbol": "3EUR-f",
+          "address": "0x62619F1091CD0261b7C16199C6c58DA694248CFF",
+          "startBlock": 20148851
+        },
+        {
+          "symbol": "MAI3pool-f",
+          "address": "0xaC974E619888342Dada8B50B3Ad02F0D04CEE6db",
+          "startBlock": 20164644
+        },
+        {
+          "symbol": "illMATIK-f",
+          "address": "0x2da80fCF352aF73e3524E90E382B6866768ad076",
+          "startBlock": 20926341
+        },
+        {
+          "symbol": "CJS-f",
+          "address": "0xC007b1Ef592DdEC342f377234E0B7a78cb915Cc1",
+          "startBlock": 21717634
+        },
+        {
+          "symbol": "am3CRVItal-f",
+          "address": "0x89FAa4A7c39f4399a68a1a2cCDB177654880A26d",
+          "startBlock": 21743537
+        }
+      ]
+    },
+    {
+      "contract": "PoolX4",
+      "abis": [
+        "PoolX4",
+        "Registry",
+        "LiquidityGauge",
+        "LiquidityGaugeV2",
+        "StakingLiquidityGauge",
+        "StakingRewards",
+        "MultiRewards",
+        "Rewards",
+        "ERC20",
+        "AaveIncentivesController"
+      ],
+      "entities": ["CurvePoolData", "CurveExtraReward"],
+      "events": [
+        {
+          "event-name": "AddLiquidity",
+          "event-params": "(indexed address,uint256[4],uint256[4],uint256,uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidity",
+          "event-params": "(indexed address,uint256[4],uint256[4],uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidityImbalance",
+          "event-params": "(indexed address,uint256[4],uint256[4],uint256,uint256)"
+        },
+        {
+          "event-name": "TokenExchange",
+          "event-params": "(indexed address,int128,uint256,int128,uint256)"
+        },
+        {
+          "event-name": "TokenExchangeUnderlying",
+          "event-params": "(indexed address,int128,uint256,int128,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "symbol": "crvAUR-JRT-f",
+          "address": "0x890aa074E82cCA6EbCf0E4789d4660330F2A5060",
+          "startBlock": 20621943
+        },
+        {
+          "symbol": "4MT100-f",
+          "address": "0x79B72D2AFA7b9636E54bF8B7c1DD5E039e4c1D20",
+          "startBlock": 20926192
+        },
+        {
+          "symbol": "4MT100-f-2",
+          "address": "0x488c848CE020723B0b4235edAC5ffDB47B53672E",
+          "startBlock": 20926214
+        },
+        {
+          "symbol": "StSwTrPo-f",
+          "address": "0xe8f661f157b0E3a1acbF2D0aAE8Ac07436490667",
+          "startBlock": 21351599
+        },
+        {
+          "symbol": "4eur-f",
+          "address": "0xAd326c253A84e9805559b73A08724e11E49ca651",
+          "startBlock": 21450685
+        },
+        {
+          "symbol": "wCJS-f",
+          "address": "0xb731E7cEd547A636f7CD3eee3972EB32b0402893",
+          "startBlock": 21718109
+        },
+        {
+          "symbol": "AMISam3CRV-f",
+          "address": "0x19b4ff57Ccd45e7B0a22a454619921eF284460fe",
+          "startBlock": 21734241
+        },
+        {
+          "symbol": "AMISamUEM-f",
+          "address": "0x737a0Ca14F488518Ca85261db9a591138EDF2Ce5",
+          "startBlock": 21734406
+        },
+        {
+          "symbol": "AMISamUEB-f",
+          "address": "0x39F01809fAe5755b6F0c190dd47eCbfE81713769",
+          "startBlock": 21734460
+        },
+        {
+          "symbol": "3CRVUAMIS-f",
+          "address": "0xE0Eb3CA0b2759344477a7D4E0F8F1f3944Da1Ba7",
+          "startBlock": 21742612
+        }
+      ]
+    }
+  ]
+}

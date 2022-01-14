@@ -1,0 +1,134 @@
+{
+  "network": "mainnet",
+  "adapter": "Cream",
+  "contracts": [
+    {
+      "contract": "ComptrollerImplementation",
+      "abis": ["ComptrollerImplementation", "Token", "Underlying"],
+      "entities": ["CreamTokenData"],
+      "events": [
+        {
+          "event-name": "CompSpeedUpdated",
+          "event-params": "(indexed address,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "symbol": "",
+          "address": "0x3d5BC3c8d13dcB8bF317092d84783c2697AE9258",
+          "startBlock": 10579797
+        }
+      ]
+    },
+    {
+      "contract": "Token",
+      "abis": ["ComptrollerImplementation", "Token", "Underlying"],
+      "entities": ["CreamTokenData"],
+      "events": [
+        {
+          "event-name": "AccrueInterest",
+          "event-params": "(uint256,uint256,uint256,uint256)"
+        },
+        {
+          "event-name": "Borrow",
+          "event-params": "(address,uint256,uint256,uint256)"
+        },
+        {
+          "event-name": "Flashloan",
+          "event-params": "(indexed address,uint256,uint256,uint256)"
+        },
+        {
+          "event-name": "LiquidateBorrow",
+          "event-params": "(address,address,uint256,address,uint256)"
+        },
+        {
+          "event-name": "Mint",
+          "event-params": "(address,uint256,uint256)"
+        },
+        {
+          "event-name": "Redeem",
+          "event-params": "(address,uint256,uint256)"
+        },
+        {
+          "event-name": "RepayBorrow",
+          "event-params": "(address,address,uint256,uint256,uint256)"
+        },
+        {
+          "event-name": "ReservesAdded",
+          "event-params": "(address,uint256,uint256)"
+        },
+        {
+          "event-name": "ReservesReduced",
+          "event-params": "(address,uint256,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "symbol": "crAAVE",
+          "address": "0x3225E3C669B39C7c8B3e204a8614bB218c5e31BC",
+          "startBlock": 11222225
+        },
+        {
+          "symbol": "crBBTC",
+          "address": "0x7ea9C63E216D5565c3940A2B3d150e59C2907Db3",
+          "startBlock": 11202982
+        },
+        {
+          "symbol": "crBOND",
+          "address": "0xf55BbE0255f7f4E70f63837Ff72A577fbDDbE924",
+          "startBlock": 11248400
+        },
+        {
+          "symbol": "crCEL",
+          "address": "0x8b3ff1ed4f36c2c2be675afb13cc3aa5d73685a5",
+          "startBlock": 11132874
+        },
+        {
+          "symbol": "crCOVER",
+          "address": "0x21011BC93d9E515B9511A817A1eD1D6d468f49Fc",
+          "startBlock": 11658727
+        },
+        {
+          "symbol": "crCRETH2",
+          "address": "0xfd609a03B393F1A1cFcAcEdaBf068CAD09a924E2",
+          "startBlock": 11326940
+        },
+        {
+          "symbol": "crDAI",
+          "address": "0x92B767185fB3B04F881e3aC8e5B0662a027A1D9f",
+          "startBlock": 11371388
+        },
+        {
+          "symbol": "crESD",
+          "address": "0x3C6C553A95910F9FC81c98784736bd628636D296",
+          "startBlock": 11554497
+        },
+        {
+          "symbol": "crHBTC",
+          "address": "0x054B7ed3F45714d3091e82aAd64A1588dC4096Ed",
+          "startBlock": 11287429
+        },
+        {
+          "symbol": "crHFIL",
+          "address": "0xd5103AfcD0B3fA865997Ef2984C66742c51b2a8b",
+          "startBlock": 11287588
+        },
+        {
+          "symbol": "crKP3R",
+          "address": "0x903560b1CcE601794C584F58898dA8a8b789Fc5d",
+          "startBlock": 11248495
+        },
+        {
+          "symbol": "crUNI",
+          "address": "0xe89a6D0509faF730BD707bf868d9A2A744a363C7",
+          "startBlock": 10877282
+        },
+        {
+          "symbol": "crYCRV",
+          "address": "0x9baF8a5236d44AC410c0186Fe39178d5AAD0Bb87",
+          "startBlock": 10580322
+        }
+      ]
+    }
+  ]
+}

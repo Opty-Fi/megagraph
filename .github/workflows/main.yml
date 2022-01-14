@@ -29,9 +29,8 @@ jobs:
         run: yarn lint
       - name: Formatting
         run: yarn prettier:check
-      - name: Build
-        run: |
-            CONFIG=ethereum yarn mustache-yaml:dev
-            yarn graph codegen
-            ./script/add-symlinks.sh
-            yarn graph build
+      - name: Build Curve (Ethereum)
+        run: yarn build:dev
+        env:
+          ADAPTER: Curve
+          CONFIG: ethereum

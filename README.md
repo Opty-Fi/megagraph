@@ -46,7 +46,6 @@ The subgraph for the DeFi protocols that are integrated with [OptyFi](https://op
     - format:
       ```json
       {
-        "blockchain": "ethereum",
         "network": "$CONFIG",
         "adapters": [
           {
