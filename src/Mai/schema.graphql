@@ -7,6 +7,7 @@ type MaiCamTokenData @entity {
   blockTimestamp: BigInt!  
   vault: Bytes
   totalSupply: BigInt
+  symbol: String
   rewardRate: BigDecimal
 }
 type MaiPoolData @entity {

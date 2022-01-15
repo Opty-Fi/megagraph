@@ -49,26 +49,6 @@
           "symbol": "camWBTC"
         }
       ]
-    },
-    {
-      "contract": "Farm",
-      "abis": ["Farm", "CamToken"],
-      "entities": ["MaiCamTokenData", "MaiPoolData"],
-      "events": [
-        {
-          "event-name": "Withdraw",
-          "event-params": "(indexed address,indexed uint256,uint256)"
-        },
-        {
-          "event-name": "Deposit",
-          "event-params": "(indexed address,indexed uint256,uint256)"
-        },
-        {
-          "event-name": "EmergencyWithdraw",
-          "event-params": "(indexed address,indexed uint256,uint256)"
-        }
-      ],
-      "instances": [{ "address": "0x574Fe4E8120C4Da1741b5Fd45584de7A5b521F0F", "startBlock": "14126699", "symbol": "" }]
     }
   ]
 }
