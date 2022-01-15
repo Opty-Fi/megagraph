@@ -5,6 +5,9 @@ type MaiCamTokenData @entity {
   id: ID!
   blockNumber: BigInt!
   blockTimestamp: BigInt!  
+  vault: Bytes
+  totalSupply: BigInt
+  rewardRate: BigDecimal
 }
 type MaiPoolData @entity {
   id: ID!
