@@ -1,0 +1,21 @@
+# ----------------------------------------
+#      Mai Finance
+# ----------------------------------------
+type MaiCamTokenData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!  
+}
+type MaiPoolData @entity {
+  id: ID!
+  blockNumber: BigInt
+  blockTimestamp: BigInt
+  vault: Bytes  
+  deposited: BigInt
+  borrowed: BigInt
+  closingFees: BigInt
+  symbol: String
+  txHash: String
+  tokenPrice: BigInt
+  ethPrice: BigInt  
+}
