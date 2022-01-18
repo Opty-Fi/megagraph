@@ -22,7 +22,10 @@ type MaiCamTokenData @entity {
 
 type MaiAmTokenData @entity {
   id: ID!  
+  blockNumber: BigInt
+  blockTimestamp: BigInt
   symbol: String
   totalLiquidity: BigInt!
   decimals: Int
+  
 }

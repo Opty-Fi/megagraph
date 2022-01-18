@@ -81,21 +81,23 @@ export function handleCamToken(
       amToken.totalLiquidity = BigInt.fromI32(0);
       amToken.decimals = 0;
     }
+    amToken.blockNumber = blockNumber;
+    amToken.blockTimestamp = timestamp;
 
-    let aTokenScaledTotalSupplyResult = amATokenContract.try_scaledTotalSupply();
+    // let aTokenScaledTotalSupplyResult = amATokenContract.try_scaledTotalSupply();
 
     let aTokenDecimalsResult = amATokenContract.try_decimals();
-
-    if (aTokenScaledTotalSupplyResult.reverted) {
-      log.warning("total_supply() reverted", []);
+    if (aTokenDecimalsResult.reverted) {
+      log.warning("aToken.try_decimals() reverted", []);
     } else {
-      if (aTokenDecimalsResult.reverted) {
-        log.warning("aToken.try_decimals() reverted", []);
-      } else {
-        amLiquidity = aTokenScaledTotalSupplyResult.value;
-        amToken.decimals = aTokenDecimalsResult.value;
-      }
+      amToken.decimals = aTokenDecimalsResult.value;
     }
+
+    // if (aTokenScaledTotalSupplyResult.reverted) {
+    //   log.warning("total_supply() reverted", []);
+    // } else {
+    //
+    // }
 
     let incentivesControllerResult = camContract.try_AaveContract();
     if (incentivesControllerResult.reverted) {
@@ -116,8 +118,8 @@ export function handleCamToken(
       }
     }
 
-    //amToken.totalLiquidity = amToken.totalLiquidity.plus(value);
-    amToken.totalLiquidity = amLiquidity;
+    amToken.totalLiquidity = amToken.totalLiquidity.plus(value);
+    //amToken.totalLiquidity = amLiquidity;
     amToken.save();
     entity.aTvl = convertBINumToDesiredDecimals(amToken.totalLiquidity, entity.decimals);
     // get camToken info through it's lending controller
