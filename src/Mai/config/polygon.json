@@ -4,8 +4,8 @@
   "contracts": [
     {
       "contract": "CamToken",
-      "abis": ["CamToken"],
-      "entities": ["MaiCamTokenData"],
+      "abis": ["CamToken", "LendingPool", "IncentivesController", "CamAave", "CamWMatic", "AToken"],
+      "entities": ["MaiCamTokenData, MaiAmTokenData"],
       "events": [
         {
           "event-name": "Transfer",

@@ -6,7 +6,8 @@ export function handleTransfer(event: TransferEvent): void {
   let to = event.params.to;
   let value = event.params.value;
   if (from == ZERO_ADDRESS) {
+    handleCamToken(event.transaction.hash, event.block.number, event.block.timestamp, event.address, value);
   } else if (to == ZERO_ADDRESS) {
+    handleCamToken(event.transaction.hash, event.block.number, event.block.timestamp, event.address, value.neg());
   }
-  handleCamToken(event.transaction.hash, event.block.number, event.block.timestamp, event.address);
 }

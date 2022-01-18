@@ -4,22 +4,25 @@
 type MaiCamTokenData @entity {
   id: ID!
   blockNumber: BigInt!
-  blockTimestamp: BigInt!  
-  vault: Bytes
-  totalSupply: BigInt
-  symbol: String
-  rewardRate: BigDecimal
+  blockTimestamp: BigInt!    
+  decimals: Int
+  symbol: String  
+  totalLiquidity: BigInt
+  aEmissionPerSecond: BigInt 
+  aTvl: BigDecimal!
+  
+  aTokenAddress: Bytes
+  liquidityRate: BigDecimal
+  stableBorrowRate: BigDecimal
+  variableBorrowRate: BigDecimal
+  liquidityIndex: BigDecimal
+
+
 }
-type MaiPoolData @entity {
-  id: ID!
-  blockNumber: BigInt
-  blockTimestamp: BigInt
-  vault: Bytes  
-  deposited: BigInt
-  borrowed: BigInt
-  closingFees: BigInt
+
+type MaiAmTokenData @entity {
+  id: ID!  
   symbol: String
-  txHash: String
-  tokenPrice: BigInt
-  ethPrice: BigInt  
+  totalLiquidity: BigInt!
+  decimals: Int
 }
