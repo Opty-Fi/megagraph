@@ -2,21 +2,20 @@
 #      Mai Finance
 # ----------------------------------------
 type MaiCamTokenData @entity {
-  id: ID!
+  id: ID! #camToken address
   blockNumber: BigInt!
-  blockTimestamp: BigInt!    
+  blockTimestamp: BigInt!   
+  aTvl: BigDecimal! 
   decimals: Int
   symbol: String  
   totalLiquidity: BigInt
   aEmissionPerSecond: BigInt 
-  aTvl: BigDecimal!
-  
+  txHash: Bytes
   aTokenAddress: Bytes
   liquidityRate: BigDecimal
   stableBorrowRate: BigDecimal
   variableBorrowRate: BigDecimal
   liquidityIndex: BigDecimal
-
 
 }
 

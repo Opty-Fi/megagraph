@@ -1,14 +1,18 @@
 import { Address, BigInt, Bytes, log } from "@graphprotocol/graph-ts";
 import { MaiCamTokenData, MaiAmTokenData } from "../../../generated/schema";
 import { MaiCamToken } from "../../../generated/MaiCamTokencamUSDC/MaiCamToken";
-import { MaiCamWMatic } from "../../../generated/MaiCamTokencamWMATIC/MaiCamWMatic";
-import { MaiCamAave } from "../../../generated/MaiCamTokencamWMATIC/MaiCamAave";
-import { MaiAToken } from "../../../generated/MaiCamTokencamWMATIC/MaiAToken";
-import { MaiLendingPool } from "../../../generated/MaiCamTokencamWMATIC/MaiLendingPool";
-import { convertBINumToDesiredDecimals } from "../../utils/converters";
+import { MaiCamWMatic } from "../../../generated/MaiCamWMaticcamWMATIC/MaiCamWMatic";
+import { MaiCamAave } from "../../../generated/MaiCamAavecamAAVE/MaiCamAave";
+import { MaiAToken } from "../../../generated/MaiCamAavecamAAVE/MaiAToken";
+import { MaiLendingPool } from "../../../generated/MaiCamAavecamAAVE/MaiLendingPool";
+import { convertBINumToDesiredDecimals, toAddress } from "../../utils/converters";
 
-import { MaiIncentivesController } from "../../../generated/MaiCamTokencamWMATIC/MaiIncentivesController";
+import { MaiIncentivesController } from "../../../generated/MaiCamWMaticcamWMATIC/MaiIncentivesController";
 import { ZERO_ADDRESS, ZERO_BI } from "../../utils/constants";
+// TODO: Mapping for the reserve address
+// get balance of the amToken so I don't use a state entity
+let CAM_INCENTIVES_CONTROLLER_ADDRESS: Address = toAddress("0x357D51124f59836DeD84c8a1730D72B749d8BC23");
+let CAM_LENDING_POOL_ADDRESS: Address = toAddress("0x8dFf5E27EA6b7AC08EbFdf9eB090F32ee9a30fcf");
 
 export function handleCamToken(
   txnHash: Bytes,
@@ -16,40 +20,17 @@ export function handleCamToken(
   timestamp: BigInt,
   camTokenAddress: Address,
   value: BigInt,
+  camType: string,
+  reserveAddress: Address,
 ): void {
   let entity = MaiCamTokenData.load(txnHash.toHex());
   if (!entity) entity = new MaiCamTokenData(txnHash.toHex());
   entity.blockNumber = blockNumber;
   entity.blockTimestamp = timestamp;
+  let balanceOfCam = ZERO_BI;
 
   // lending pool is the same for camToken, camAave and camWMatic
   let camContract = MaiCamToken.bind(camTokenAddress);
-
-  // get correct underlying reserve contract address.
-  let reserveAddress = ZERO_ADDRESS;
-  let amTokenResult = camContract.try_usdc();
-  if (amTokenResult.reverted) {
-    log.warning("try_usdc() reverted", []);
-    // try aave
-    let camAaveContract = MaiCamAave.bind(camTokenAddress);
-    let amAaveResult = camAaveContract.try_aave();
-    if (amAaveResult.reverted) {
-      log.warning("try_weth() reverted", []);
-      // try WMatic
-      let camWMaticContract = MaiCamWMatic.bind(camTokenAddress);
-      let amWMaticResult = camWMaticContract.try_wMatic();
-      if (amWMaticResult.reverted) {
-        log.warning("try_wmatic() reverted", []);
-      } else {
-        reserveAddress = amWMaticResult.value;
-      }
-    } else {
-      reserveAddress = amAaveResult.value;
-    }
-  } else {
-    reserveAddress = amTokenResult.value;
-  }
-  // reserveAddress found
 
   // updating entity symbol
   let symbolResult = camContract.try_symbol();
@@ -84,6 +65,12 @@ export function handleCamToken(
     amToken.blockNumber = blockNumber;
     amToken.blockTimestamp = timestamp;
 
+    let amBalanceResult = amATokenContract.try_balanceOf(camTokenAddress);
+    if (amBalanceResult.reverted) {
+    } else {
+      balanceOfCam = amBalanceResult.value;
+    }
+
     let aTokenDecimalsResult = amATokenContract.try_decimals();
     if (aTokenDecimalsResult.reverted) {
       log.warning("aToken.try_decimals() reverted", []);
@@ -116,7 +103,7 @@ export function handleCamToken(
       }
     }
 
-    entity.aTvl = convertBINumToDesiredDecimals(amToken.totalLiquidity, entity.decimals);
+    entity.aTvl = convertBINumToDesiredDecimals(balanceOfCam, entity.decimals);
     // get camToken info through it's lending controller
     let lendingControllerResult = camContract.try_LENDING_POOL();
     if (lendingControllerResult.reverted) {

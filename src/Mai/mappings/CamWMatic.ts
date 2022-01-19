@@ -1,7 +1,8 @@
-import { Transfer as TransferEvent } from "../../../generated/MaiCamTokencamDAI/MaiCamToken";
+import { Transfer as TransferEvent } from "../../../generated/MaiCamWMaticcamWMATIC/MaiCamWMatic";
 import { ZERO_ADDRESS } from "../../utils/constants";
-import { MaiCamToken } from "../../../generated/MaiCamTokencamUSDC/MaiCamToken";
 import { log } from "@graphprotocol/graph-ts";
+
+import { MaiCamWMatic } from "../../../generated/MaiCamWMaticcamWMATIC/MaiCamWMatic";
 
 import { handleCamToken } from "./handlers";
 export function handleTransfer(event: TransferEvent): void {
@@ -20,14 +21,15 @@ export function handleTransfer(event: TransferEvent): void {
     // burn
     value = value.neg();
   }
+  let camContract = MaiCamWMatic.bind(event.address);
   let reserveAddress = ZERO_ADDRESS;
-  let camContract = MaiCamToken.bind(event.address);
-  let reserveResult = camContract.try_usdc();
+  let reserveResult = camContract.try_wMatic();
   if (reserveResult.reverted) {
     log.error("try_usdc() reverted", []);
   } else {
     reserveAddress = reserveResult.value;
   }
+
   handleCamToken(
     event.transaction.hash,
     event.block.number,
