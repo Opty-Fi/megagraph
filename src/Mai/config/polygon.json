@@ -1,0 +1,80 @@
+{
+  "network": "matic",
+  "adapter": "Mai",
+  "contracts": [
+    {
+      "contract": "CamToken",
+      "abis": ["CamToken", "LendingPool", "IncentivesController", "AToken"],
+      "entities": ["MaiCamTokenData, MaiAmTokenData"],
+      "events": [
+        {
+          "event-name": "Transfer",
+          "event-params": "(indexed address,indexed address,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "address": "0x22965e296d9a0Cd0E917d6D70EF2573009F8a1bB",
+          "startBlock": "15723190",
+          "symbol": "camUSDC"
+        },
+        {
+          "address": "0xE6C23289Ba5A9F0Ef31b8EB36241D5c800889b7b",
+          "startBlock": "15723203",
+          "symbol": "camDAI"
+        },
+        {
+          "address": "0xB3911259f435b28EC072E4Ff6fF5A2C604fea0Fb",
+          "startBlock": "16062135",
+          "symbol": "camUSDT"
+        },
+        {
+          "address": "0xBa6273A78a23169e01317bd0f6338547F869E8Df",
+          "startBlock": "17151483",
+          "symbol": "camWBTC"
+        },
+        {
+          "address": "0x0470CD31C8FcC42671465880BA81D631F0B76C1D",
+          "startBlock": "15723236",
+          "symbol": "camWETH"
+        }
+      ]
+    },
+    {
+      "contract": "CamAave",
+      "abis": ["CamAave", "LendingPool", "IncentivesController", "AToken"],
+      "entities": ["MaiCamTokenData, MaiAmTokenData"],
+      "events": [
+        {
+          "event-name": "Transfer",
+          "event-params": "(indexed address,indexed address,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "address": "0xeA4040B21cb68afb94889cB60834b13427CFc4EB",
+          "startBlock": "17151560",
+          "symbol": "camAAVE"
+        }
+      ]
+    },
+    {
+      "contract": "CamWMATIC",
+      "abis": ["CamWMATIC", "LendingPool", "IncentivesController", "AToken"],
+      "entities": ["MaiCamTokenData, MaiAmTokenData"],
+      "events": [
+        {
+          "event-name": "Transfer",
+          "event-params": "(indexed address,indexed address,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "address": "0x7068Ea5255cb05931EFa8026Bd04b18F3DeB8b0B",
+          "startBlock": "15683191",
+          "symbol": "camWMATIC"
+        }
+      ]
+    }
+  ]
+}
