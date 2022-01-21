@@ -60,8 +60,8 @@
       ]
     },
     {
-      "contract": "CamWMatic",
-      "abis": ["LendingPool", "IncentivesController", "CamWMatic", "AToken"],
+      "contract": "CamWMATIC",
+      "abis": ["CamWMATIC", "LendingPool", "IncentivesController", "AToken"],
       "entities": ["MaiCamTokenData, MaiAmTokenData"],
       "events": [
         {

@@ -1,8 +1,7 @@
-import { Transfer as TransferEvent } from "../../../generated/MaiCamWMaticcamWMATIC/MaiCamWMatic";
+import { Transfer as TransferEvent } from "../../../generated/MaiCamWMATICcamWMATIC/MaiCamWMATIC";
 import { ZERO_ADDRESS } from "../../utils/constants";
 import { log } from "@graphprotocol/graph-ts";
-
-import { MaiCamWMatic } from "../../../generated/MaiCamWMaticcamWMATIC/MaiCamWMatic";
+import { MaiCamWMATIC } from "../../../generated/MaiCamWMATICcamWMATIC/MaiCamWMATIC";
 
 import { handleCamToken } from "./handlers";
 export function handleTransfer(event: TransferEvent): void {
@@ -21,7 +20,7 @@ export function handleTransfer(event: TransferEvent): void {
     // burn
     value = value.neg();
   }
-  let camContract = MaiCamWMatic.bind(event.address);
+  let camContract = MaiCamWMATIC.bind(event.address);
   let reserveAddress = ZERO_ADDRESS;
   let reserveResult = camContract.try_wMatic();
   if (reserveResult.reverted) {

@@ -1,14 +1,12 @@
 import { Address, BigInt, Bytes, log } from "@graphprotocol/graph-ts";
 import { MaiCamTokenData, MaiAmTokenData } from "../../../generated/schema";
 import { MaiCamToken } from "../../../generated/MaiCamTokencamUSDC/MaiCamToken";
-import { MaiCamWMatic } from "../../../generated/MaiCamWMaticcamWMATIC/MaiCamWMatic";
-import { MaiCamAave } from "../../../generated/MaiCamAavecamAAVE/MaiCamAave";
 import { MaiAToken } from "../../../generated/MaiCamAavecamAAVE/MaiAToken";
 import { MaiLendingPool } from "../../../generated/MaiCamAavecamAAVE/MaiLendingPool";
 import { convertBINumToDesiredDecimals, toAddress } from "../../utils/converters";
 
 import { MaiIncentivesController } from "../../../generated/MaiCamWMaticcamWMATIC/MaiIncentivesController";
-import { ZERO_ADDRESS, ZERO_BI } from "../../utils/constants";
+import { ZERO_BI } from "../../utils/constants";
 // TODO: Mapping for the reserve address
 // get balance of the amToken so I don't use a state entity
 let CAM_INCENTIVES_CONTROLLER_ADDRESS: Address = toAddress("0x357D51124f59836DeD84c8a1730D72B749d8BC23");
