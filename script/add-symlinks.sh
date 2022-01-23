@@ -25,9 +25,15 @@ then
   ln -s CurvePoolX3aave         generated/CurvePoolX3
   ln -s CurvePoolX4crvAUR-JRT-f generated/CurvePoolX4
 
+  ln -s AaveV2TokenamDAI generated/AaveV2Token
+  ln -s constants-polygon.ts src/AaveV2/mappings/constants.ts
+
   ln -s SushiKashiPairMediumRiskV1kmWBTC\&\#x2F\;WMATIC-LINK generated/SushiKashiPairMediumRiskV1
 else # Ethereum
   ln -s CurvePoolX2ankrCRV            generated/CurvePoolX2
   ln -s CurvePoolX3aDAI+aUSDC+aUSDT   generated/CurvePoolX3
   ln -s CurvePoolX4DAI+USDC+USDT+sUSD generated/CurvePoolX4
+
+  ln -s AaveV2TokenaDAI generated/AaveV2Token
+  ln -s constants-ethereum.ts src/AaveV2/mappings/constants.ts
 fi

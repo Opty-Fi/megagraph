@@ -1,11 +1,11 @@
 import { log, Address, Bytes, BigInt } from "@graphprotocol/graph-ts";
-import { AaveV2Token, Burn as BurnEvent, Mint as MintEvent } from "../../../generated/AaveV2TokenaDAI/AaveV2Token";
+import { AaveV2Token, Burn as BurnEvent, Mint as MintEvent } from "../../../generated/AaveV2Token/AaveV2Token";
 import { AaveV2TokenData, AaveV2Reserve } from "../../../generated/schema";
-import { AaveV2LendingPoolAddressesProvider } from "../../../generated/AaveV2TokenaDAI/AaveV2LendingPoolAddressesProvider";
-import { AaveV2IncentivesController } from "../../../generated/AaveV2TokenaDAI/AaveV2IncentivesController";
-import { AaveV2AaveProtocolDataProvider } from "../../../generated/AaveV2TokenaDAI/AaveV2AaveProtocolDataProvider";
+import { AaveV2LendingPoolAddressesProvider } from "../../../generated/AaveV2Token/AaveV2LendingPoolAddressesProvider";
+import { AaveV2IncentivesController } from "../../../generated/AaveV2Token/AaveV2IncentivesController";
+import { AaveV2AaveProtocolDataProvider } from "../../../generated/AaveV2Token/AaveV2AaveProtocolDataProvider";
 import { convertBINumToDesiredDecimals } from "../../utils/converters";
-import { AaveV2_POOL_PROVIDER_ADDRESS, AaveV2_DATA_PROVIDER_INDEX } from "../../utils/constants";
+import { AaveV2_POOL_PROVIDER_ADDRESS, AaveV2_DATA_PROVIDER_INDEX } from "./constants";
 
 function handleAaveV2Token(
   transactionHash: Bytes,

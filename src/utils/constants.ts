@@ -9,10 +9,6 @@ export let ZERO_BD: BigDecimal = BigDecimal.fromString("0");
 export let Aave_POOL_PROVIDER_ADDRESS: Address = toAddress("0x24a42fD28C976A61Df5D00D0599C34c4f90748c8");
 
 export let AaveV2_INCENTIVES_CONTROLLER_ADDRESS: Address = toAddress("0xd784927Ff2f95ba542BfC824c8a8a98F3495f6b5");
-export let AaveV2_POOL_PROVIDER_ADDRESS: Address = toAddress("0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5");
-export let AaveV2_DATA_PROVIDER_INDEX: Bytes = toBytes(
-  "0x0100000000000000000000000000000000000000000000000000000000000000",
-);
 
 export let ConvexBoosterAddress = toAddress("0xf403c135812408bfbe8713b5a23a04b3d48aae31");
 export let ConvexTokenAddress = toAddress("0x4e3FBD56CD56c3e72c1403e103b45Db9da5B9D2B");
