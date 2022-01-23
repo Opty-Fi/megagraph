@@ -5,12 +5,7 @@ import { MaiLendingPool } from "../../../generated/MaiCamAavecamAAVE/MaiLendingP
 import { convertBINumToDesiredDecimals, toAddress } from "../../utils/converters";
 
 import { MaiIncentivesController } from "../../../generated/MaiCamTokencamUSDC/MaiIncentivesController";
-import { ZERO_BD, ZERO_BI } from "../../utils/constants";
-
-let CAM_INCENTIVES_CONTROLLER_ADDRESS: Address = toAddress("0x357D51124f59836DeD84c8a1730D72B749d8BC23");
-let CAM_LENDING_POOL_ADDRESS: Address = toAddress("0x8dFf5E27EA6b7AC08EbFdf9eB090F32ee9a30fcf");
-// Rates: https://docs.aave.com/developers/guides/apy-and-apr
-let DECIMALS: i32 = 27;
+import { ZERO_BD, ZERO_BI, CAM_INCENTIVES_CONTROLLER_ADDRESS, CAM_LENDING_POOL_ADDRESS } from "../../utils/constants";
 
 export function handleCamToken(
   txnHash: Bytes,
@@ -56,6 +51,8 @@ export function handleCamToken(
     log.error("try_getReserveData() reverted", []);
   } else {
     let camTokenConfiguration = camTokenReserveDataResult.value;
+    // Rates: https://docs.aave.com/developers/guides/apy-and-apr
+    let DECIMALS: i32 = 27;
     liquidityIndex = convertBINumToDesiredDecimals(camTokenConfiguration.liquidityIndex, DECIMALS);
     liquidityRate = convertBINumToDesiredDecimals(camTokenConfiguration.currentLiquidityRate, DECIMALS);
     stableBorrowRate = convertBINumToDesiredDecimals(camTokenConfiguration.currentStableBorrowRate, DECIMALS);
