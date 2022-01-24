@@ -14,6 +14,9 @@ then
   ln -s CurvePoolX2MIM3CRV-f-0  generated/CurvePoolX2
   ln -s CurvePoolX3atricrypto   generated/CurvePoolX3
   ln -s CurvePoolX4U.TOKEN-f-19 generated/CurvePoolX4
+
+  ln -s AaveV2TokenavDAI generated/AaveV2Token
+  ln -sf constants-avalanche.ts src/AaveV2/mappings/constants.ts
 elif [[ "$CONFIG" == "fantom" ]]
 then
   ln -s CurvePoolX2ren       generated/CurvePoolX2
@@ -26,7 +29,7 @@ then
   ln -s CurvePoolX4crvAUR-JRT-f generated/CurvePoolX4
 
   ln -s AaveV2TokenamDAI generated/AaveV2Token
-  ln -s constants-polygon.ts src/AaveV2/mappings/constants.ts
+  ln -sf constants-polygon.ts src/AaveV2/mappings/constants.ts
 
   ln -s SushiKashiPairMediumRiskV1kmWBTC\&\#x2F\;WMATIC-LINK generated/SushiKashiPairMediumRiskV1
 else # Ethereum
@@ -35,5 +38,5 @@ else # Ethereum
   ln -s CurvePoolX4DAI+USDC+USDT+sUSD generated/CurvePoolX4
 
   ln -s AaveV2TokenaDAI generated/AaveV2Token
-  ln -s constants-ethereum.ts src/AaveV2/mappings/constants.ts
+  ln -sf constants-ethereum.ts src/AaveV2/mappings/constants.ts
 fi

@@ -70,7 +70,7 @@ function handleAaveV2Token(
 
     let tried_getReserveData = dataProviderContract.try_getReserveData(underlyingAssetAddr);
     if (tried_getReserveData.reverted) {
-      log.error("dataProvider at {} call getReserveConfigurationData({}) reverted", [
+      log.error("dataProvider at {} call getReserveData({}) reverted", [
         dataProviderContract._address.toHex(),
         underlyingAssetAddr.toHex(),
       ]);
@@ -89,7 +89,7 @@ function handleAaveV2Token(
     }
   }
 
-  //get aEmissionsPerSecond
+  // get aEmissionsPerSecond
   let tried_getIncentivesController = tokenContract.try_getIncentivesController();
   if (tried_getIncentivesController.reverted) {
     log.error("tokenContract at {} call getIncentivesController() reverted", [tokenContract._address.toHex()]);
@@ -109,7 +109,7 @@ function handleAaveV2Token(
     }
   }
 
-  //get totalLiquidity per token
+  // get totalLiquidity per token
   let reserveId = address.toHexString();
   let reserve = AaveV2Reserve.load(reserveId);
 
