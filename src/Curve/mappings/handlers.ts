@@ -85,7 +85,7 @@ function getBalance(address: Address, coinIndex: BigInt, poolType: string): BigD
     let tokenContract = CurveERC20.bind(token.value);
     let decimal = tokenContract.try_decimals();
     return decimal.reverted
-      ? balance.value.toBigDecimal()
+      ? convertBINumToDesiredDecimals(balance.value, 18) // ETH
       : convertBINumToDesiredDecimals(balance.value, decimal.value);
   }
   return ZERO_BD;
