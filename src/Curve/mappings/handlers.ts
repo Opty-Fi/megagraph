@@ -81,7 +81,17 @@ function getBalance(address: Address, coinIndex: BigInt, poolType: string): BigD
     return ZERO_BD;
   }
 
-  if (!balance.reverted && !token.reverted) {
+  if (balance.reverted) {
+    log.warning(
+      '{} ({}) balances({}) reverted',
+      [poolType, address.toHexString(), coinIndex.toString()]
+    )
+  } else if (token.reverted) {
+    log.warning(
+      '{} ({}) coins({}) reverted',
+      [poolType, address.toHexString(), coinIndex.toString()]
+    )
+  } else {
     let tokenContract = CurveERC20.bind(token.value);
     let decimal = tokenContract.try_decimals();
     return decimal.reverted
