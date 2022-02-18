@@ -5,7 +5,7 @@
     {
       "contract": "Token",
       "abis": ["LendingPoolAddressesProvider", "AaveProtocolDataProvider", "IncentivesController", "Token"],
-      "entities": ["AaveV2TokenData", "AaveV2Reserve"],
+      "entities": ["AaveV2TokenData"],
       "events": [
         {
           "event-name": "Burn",

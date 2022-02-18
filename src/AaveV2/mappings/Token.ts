@@ -1,6 +1,6 @@
 import { log, Address, Bytes, BigInt } from "@graphprotocol/graph-ts";
 import { AaveV2Token, Burn as BurnEvent, Mint as MintEvent } from "../../../generated/AaveV2Token/AaveV2Token";
-import { AaveV2TokenData, AaveV2Reserve } from "../../../generated/schema";
+import { AaveV2TokenData } from "../../../generated/schema";
 import { AaveV2LendingPoolAddressesProvider } from "../../../generated/AaveV2Token/AaveV2LendingPoolAddressesProvider";
 import { AaveV2IncentivesController } from "../../../generated/AaveV2Token/AaveV2IncentivesController";
 import { AaveV2AaveProtocolDataProvider } from "../../../generated/AaveV2Token/AaveV2AaveProtocolDataProvider";
@@ -12,7 +12,6 @@ function handleAaveV2Token(
   blockNumber: BigInt,
   blockTimestamp: BigInt,
   address: Address,
-  value: BigInt,
 ): void {
   let tokenContract = AaveV2Token.bind(address);
 
@@ -20,7 +19,6 @@ function handleAaveV2Token(
 
   if (!entity) {
     entity = new AaveV2TokenData(transactionHash.toHex());
-    entity.totalLiquidity = BigInt.fromI32(0);
   }
 
   entity.transactionHash = transactionHash;
@@ -109,21 +107,7 @@ function handleAaveV2Token(
     }
   }
 
-  // get totalLiquidity per token
-  let reserveId = address.toHexString();
-  let reserve = AaveV2Reserve.load(reserveId);
-
-  if (!reserve) {
-    reserve = new AaveV2Reserve(reserveId);
-    reserve.address = address;
-    reserve.symbol = entity.symbol;
-    reserve.totalLiquidity = BigInt.fromI32(0);
-  }
-
-  reserve.totalLiquidity = reserve.totalLiquidity.plus(value);
-  entity.totalLiquidity = reserve.totalLiquidity;
-
-  reserve.save();
+  entity.totalLiquidity = entity.availableLiquidity.plus(entity.totalStableDebt).plus(entity.totalVariableDebt);
   entity.save();
 }
 
@@ -133,7 +117,6 @@ export function handleBurn(event: BurnEvent): void {
     event.block.number,
     event.block.timestamp,
     event.address,
-    event.params.value.neg(),
   );
 }
 
@@ -143,6 +126,5 @@ export function handleMint(event: MintEvent): void {
     event.block.number,
     event.block.timestamp,
     event.address,
-    event.params.value,
   );
 }

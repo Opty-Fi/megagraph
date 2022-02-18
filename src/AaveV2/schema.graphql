@@ -17,9 +17,9 @@ type AaveV2TokenData @entity {
   isActive: Boolean
   isFrozen: Boolean
 
-  availableLiquidity: BigDecimal
-  totalStableDebt: BigDecimal
-  totalVariableDebt: BigDecimal
+  availableLiquidity: BigDecimal!
+  totalStableDebt: BigDecimal!
+  totalVariableDebt: BigDecimal!
   liquidityRate: BigDecimal
   variableBorrowRate: BigDecimal
   stableBorrowRate: BigDecimal
@@ -29,12 +29,5 @@ type AaveV2TokenData @entity {
   lastUpdateTimestamp: BigInt
 
   aEmissionPerSecond: BigInt
-  totalLiquidity: BigInt!
-}
-
-type AaveV2Reserve @entity {
-  id: ID!
-  address: Bytes!
-  symbol: String!
-  totalLiquidity: BigInt!
+  totalLiquidity: BigDecimal!
 }
