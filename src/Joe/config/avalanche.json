@@ -1,0 +1,86 @@
+{
+  "network": "avalanche",
+  "adapter": "Joe",
+  "contracts": [
+    {
+      "contract": "MasterChefJoeV2",
+      "abis": ["MasterChefJoeV2"],
+      "entities": ["JoeFarmData"],
+      "events": [
+        {
+          "event-name": "Deposit",
+          "event-params": "(indexed address,indexed uint256,uint256)"
+        },
+        {
+          "event-name": "EmergencyWithdraw",
+          "event-params": "(indexed address,indexed uint256,uint256)"
+        },
+        {
+          "event-name": "OwnershipTransferred",
+          "event-params": "(indexed address,indexed address)"
+        },
+        {
+          "event-name": "Withdraw",
+          "event-params": "(indexed address,indexed uint256,uint256)"
+        },
+        {
+          "event-name": "Add",
+          "event-params": "(indexed uint256,uint256,indexed address,indexed address)"
+        },
+        {
+          "event-name": "Set",
+          "event-params": "(indexed uint256,uint256,indexed address,bool)"
+        },
+        {
+          "event-name": "UpdateEmissionRate",
+          "event-params": "(indexed address,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "symbol": "",
+          "address": "0xd6a4f121ca35509af06a0be99093d08462f53052",
+          "startBlock": 2486000
+        }
+      ]
+    },
+    {
+      "contract": "MasterChefJoeV3",
+      "abis": ["MasterChefJoeV3"],
+      "entities": ["JoeFarmData"],
+      "events": [
+        {
+          "event-name": "Deposit",
+          "event-params": "(indexed address,indexed uint256,uint256)"
+        },
+        {
+          "event-name": "EmergencyWithdraw",
+          "event-params": "(indexed address,indexed uint256,uint256)"
+        },
+        {
+          "event-name": "OwnershipTransferred",
+          "event-params": "(indexed address,indexed address)"
+        },
+        {
+          "event-name": "Withdraw",
+          "event-params": "(indexed address,indexed uint256,uint256)"
+        },
+        {
+          "event-name": "Add",
+          "event-params": "(indexed uint256,uint256,indexed address,indexed address)"
+        },
+        {
+          "event-name": "Set",
+          "event-params": "(indexed uint256,uint256,indexed address,bool)"
+        }
+      ],
+      "instances": [
+        {
+          "symbol": "",
+          "address": "0x188bed1968b795d5c9022f6a0bb5931ac4c18f00",
+          "startBlock": 6000000
+        }
+      ]
+    }
+  ]
+}
