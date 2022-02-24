@@ -1,4 +1,5 @@
 import { Address, Bytes, BigInt, BigDecimal } from "@graphprotocol/graph-ts";
+import { Add } from "../../generated/JoeMasterChefJoeV2/JoeMasterChefJoeV2";
 import { toAddress, toBytes } from "./converters";
 
 export let ZERO_ADDRESS: Address = toAddress("0x0000000000000000000000000000000000000000");
@@ -41,3 +42,6 @@ export let SushiMiniChefAddress = toAddress("0x0769fd68dFb93167989C6f7254cd0D766
 
 export let CAM_INCENTIVES_CONTROLLER_ADDRESS: Address = toAddress("0x357D51124f59836DeD84c8a1730D72B749d8BC23");
 export let CAM_LENDING_POOL_ADDRESS: Address = toAddress("0x8dFf5E27EA6b7AC08EbFdf9eB090F32ee9a30fcf");
+
+export let JoeMasterChefV2Address: Address = toAddress("0xd6a4f121ca35509af06a0be99093d08462f53052");
+export let JoeMasterChefV3Address: Address = toAddress("0x188bed1968b795d5c9022f6a0bb5931ac4c18f00");

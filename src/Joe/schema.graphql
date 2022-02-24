@@ -15,7 +15,9 @@ type JoeFarmData @entity {
   id: ID!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
-  pool: Bytes!
+  lpToken: Bytes
+  poolId: BigInt
+
   version: String
   joePerSecond: BigDecimal
   rewardToken: Bytes

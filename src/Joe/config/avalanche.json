@@ -15,10 +15,7 @@
           "event-name": "EmergencyWithdraw",
           "event-params": "(indexed address,indexed uint256,uint256)"
         },
-        {
-          "event-name": "OwnershipTransferred",
-          "event-params": "(indexed address,indexed address)"
-        },
+
         {
           "event-name": "Withdraw",
           "event-params": "(indexed address,indexed uint256,uint256)"
@@ -30,10 +27,6 @@
         {
           "event-name": "Set",
           "event-params": "(indexed uint256,uint256,indexed address,bool)"
-        },
-        {
-          "event-name": "UpdateEmissionRate",
-          "event-params": "(indexed address,uint256)"
         }
       ],
       "instances": [
@@ -57,10 +50,7 @@
           "event-name": "EmergencyWithdraw",
           "event-params": "(indexed address,indexed uint256,uint256)"
         },
-        {
-          "event-name": "OwnershipTransferred",
-          "event-params": "(indexed address,indexed address)"
-        },
+
         {
           "event-name": "Withdraw",
           "event-params": "(indexed address,indexed uint256,uint256)"
