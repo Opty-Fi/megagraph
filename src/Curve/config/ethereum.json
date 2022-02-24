@@ -33,9 +33,63 @@
       ]
     },
     {
-      "contract": "PoolX2",
+      "contract": "PoolX2_128",
       "abis": [
-        "PoolX2",
+        "PoolX2_128",
+        "Registry",
+        "LiquidityGauge",
+        "LiquidityGaugeV2",
+        "StakingLiquidityGauge",
+        "StakingRewards",
+        "MultiRewards",
+        "Rewards",
+        "ERC20",
+        "AaveIncentivesController"
+      ],
+      "entities": ["CurvePoolData", "CurveExtraReward"],
+      "events": [
+        {
+          "event-name": "AddLiquidity",
+          "event-params": "(indexed address,uint256[2],uint256[2],uint256,uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidity",
+          "event-params": "(indexed address,uint256[2],uint256[2],uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidityOne",
+          "event-params": "(indexed address,uint256,uint256,uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidityImbalance",
+          "event-params": "(indexed address,uint256[2],uint256[2],uint256,uint256)"
+        },
+        {
+          "event-name": "TokenExchange",
+          "event-params": "(indexed address,int128,uint256,int128,uint256)"
+        },
+        {
+          "event-name": "TokenExchangeUnderlying",
+          "event-params": "(indexed address,int128,uint256,int128,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "symbol": "cDAI+cUSDC",
+          "address": "0xA2B47E3D5c44877cca798226B7B8118F9BFb7A56",
+          "startBlock": 9554040
+        },
+        {
+          "symbol": "crvRenWBTC",
+          "address": "0x93054188d876f558f4a66B2EF1d97d16eDf0895B",
+          "startBlock": 10151385
+        }
+      ]
+    },
+    {
+      "contract": "PoolX2_256",
+      "abis": [
+        "PoolX2_256",
         "Registry",
         "LiquidityGauge",
         "LiquidityGaugeV2",
@@ -83,16 +137,6 @@
           "symbol": "bbtc",
           "address": "0x071c661B4DeefB59E2a3DdB20Db036821eeE8F4b",
           "startBlock": 11455022
-        },
-        {
-          "symbol": "cDAI+cUSDC",
-          "address": "0xA2B47E3D5c44877cca798226B7B8118F9BFb7A56",
-          "startBlock": 9554040
-        },
-        {
-          "symbol": "crvRenWBTC",
-          "address": "0x93054188d876f558f4a66B2EF1d97d16eDf0895B",
-          "startBlock": 10151385
         },
         {
           "symbol": "dusd3CRV",
@@ -172,9 +216,54 @@
       ]
     },
     {
-      "contract": "PoolX3",
+      "contract": "PoolX3_128",
       "abis": [
-        "PoolX3",
+        "PoolX3_128",
+        "Registry",
+        "LiquidityGauge",
+        "LiquidityGaugeV2",
+        "StakingLiquidityGauge",
+        "StakingRewards",
+        "MultiRewards",
+        "Rewards",
+        "ERC20",
+        "AaveIncentivesController"
+      ],
+      "entities": ["CurvePoolData", "CurveExtraReward"],
+      "events": [
+        {
+          "event-name": "AddLiquidity",
+          "event-params": "(indexed address,uint256[3],uint256[3],uint256,uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidity",
+          "event-params": "(indexed address,uint256[3],uint256[3],uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidityOne",
+          "event-params": "(indexed address,uint256,uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidityImbalance",
+          "event-params": "(indexed address,uint256[3],uint256[3],uint256,uint256)"
+        },
+        {
+          "event-name": "TokenExchange",
+          "event-params": "(indexed address,int128,uint256,int128,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "symbol": "renBTC+WBTC+sBTC",
+          "address": "0x7fC77b5c7614E1533320Ea6DDc2Eb61fa00A9714",
+          "startBlock": 10276641
+        }
+      ]
+    },
+    {
+      "contract": "PoolX3_256",
+      "abis": [
+        "PoolX3_256",
         "Registry",
         "LiquidityGauge",
         "LiquidityGaugeV2",
@@ -218,18 +307,13 @@
           "symbol": "DAI+USDC+USDT",
           "address": "0xbEbc44782C7dB0a1A60Cb6fe97d0b483032FF1C7",
           "startBlock": 10809473
-        },
-        {
-          "symbol": "renBTC+WBTC+sBTC",
-          "address": "0x7fC77b5c7614E1533320Ea6DDc2Eb61fa00A9714",
-          "startBlock": 10276641
         }
       ]
     },
     {
-      "contract": "PoolX4",
+      "contract": "PoolX4_128",
       "abis": [
-        "PoolX4",
+        "PoolX4_128",
         "Registry",
         "LiquidityGauge",
         "LiquidityGaugeV2",

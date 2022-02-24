@@ -1,8 +1,10 @@
 import { log, ethereum, Address, Bytes, BigInt, BigDecimal } from "@graphprotocol/graph-ts";
-import { CurvePoolX2 } from "../../../generated/CurvePoolX2/CurvePoolX2";
-import { CurvePoolX3 } from "../../../generated/CurvePoolX3/CurvePoolX3";
-import { CurvePoolX4 } from "../../../generated/CurvePoolX4/CurvePoolX4";
-import { CurveERC20 } from "../../../generated/CurvePoolX2/CurveERC20";
+import { CurvePoolX2_128 } from "../../../generated/CurvePoolX2_128/CurvePoolX2_128";
+import { CurvePoolX2_256 } from "../../../generated/CurvePoolX2_256/CurvePoolX2_256";
+import { CurvePoolX3_128 } from "../../../generated/CurvePoolX3_128/CurvePoolX3_128";
+import { CurvePoolX3_256 } from "../../../generated/CurvePoolX3_256/CurvePoolX3_256";
+import { CurvePoolX4_128 } from "../../../generated/CurvePoolX4_128/CurvePoolX4_128";
+import { CurveERC20 } from "../../../generated/CurvePoolX2_128/CurveERC20";
 import { CurvePoolData } from "../../../generated/schema";
 import { convertBINumToDesiredDecimals, toBytes } from "../../utils/converters";
 import { ZERO_BYTES, ZERO_BD } from "../../utils/constants";
@@ -39,14 +41,20 @@ export function handlePoolEntity(
   // virtual price
 
   let virtualPrice: ethereum.CallResult<BigInt>;
-  if (poolType === "Curve2Pool") {
-    let contract = CurvePoolX2.bind(vault);
+  if (poolType === "Curve2Pool_128") {
+    let contract = CurvePoolX2_128.bind(vault);
     virtualPrice = contract.try_get_virtual_price();
-  } else if (poolType === "Curve3Pool") {
-    let contract = CurvePoolX3.bind(vault);
+  } else if (poolType === "Curve2Pool_256") {
+    let contract = CurvePoolX2_256.bind(vault);
     virtualPrice = contract.try_get_virtual_price();
-  } else if (poolType === "Curve4Pool") {
-    let contract = CurvePoolX4.bind(vault);
+  } else if (poolType === "Curve3Pool_128") {
+    let contract = CurvePoolX3_128.bind(vault);
+    virtualPrice = contract.try_get_virtual_price();
+  } else if (poolType === "Curve3Pool_256") {
+    let contract = CurvePoolX3_256.bind(vault);
+    virtualPrice = contract.try_get_virtual_price();
+  } else if (poolType === "Curve4Pool_128") {
+    let contract = CurvePoolX4_128.bind(vault);
     virtualPrice = contract.try_get_virtual_price();
   } else {
     log.error("Unknown poolType {}", [poolType]);
@@ -65,16 +73,24 @@ function getBalance(address: Address, coinIndex: BigInt, poolType: string): BigD
   let balance: ethereum.CallResult<BigInt>;
   let token: ethereum.CallResult<Address>;
 
-  if (poolType === "Curve2Pool") {
-    let contract = CurvePoolX2.bind(address);
+  if (poolType === "Curve2Pool_128") {
+    let contract = CurvePoolX2_128.bind(address);
     balance = contract.try_balances(coinIndex);
     token = contract.try_coins(coinIndex);
-  } else if (poolType === "Curve3Pool") {
-    let contract = CurvePoolX3.bind(address);
+  } else if (poolType === "Curve2Pool_256") {
+    let contract = CurvePoolX2_256.bind(address);
     balance = contract.try_balances(coinIndex);
     token = contract.try_coins(coinIndex);
-  } else if (poolType === "Curve4Pool") {
-    let contract = CurvePoolX4.bind(address);
+  } else if (poolType === "Curve3Pool_128") {
+    let contract = CurvePoolX3_128.bind(address);
+    balance = contract.try_balances(coinIndex);
+    token = contract.try_coins(coinIndex);
+  } else if (poolType === "Curve3Pool_256") {
+    let contract = CurvePoolX3_256.bind(address);
+    balance = contract.try_balances(coinIndex);
+    token = contract.try_coins(coinIndex);
+  } else if (poolType === "Curve4Pool_128") {
+    let contract = CurvePoolX4_128.bind(address);
     balance = contract.try_balances(coinIndex);
     token = contract.try_coins(coinIndex);
   } else {
@@ -104,14 +120,20 @@ function getBalance(address: Address, coinIndex: BigInt, poolType: string): BigD
 function getToken(address: Address, coinIndex: BigInt, poolType: string): Bytes {
   let token: ethereum.CallResult<Address>;
 
-  if (poolType === "Curve2Pool") {
-    let contract = CurvePoolX2.bind(address);
+  if (poolType === "Curve2Pool_128") {
+    let contract = CurvePoolX2_128.bind(address);
     token = contract.try_coins(coinIndex);
-  } else if (poolType === "Curve3Pool") {
-    let contract = CurvePoolX3.bind(address);
+  } else if (poolType === "Curve2Pool_256") {
+    let contract = CurvePoolX2_256.bind(address);
     token = contract.try_coins(coinIndex);
-  } else if (poolType === "Curve4Pool") {
-    let contract = CurvePoolX4.bind(address);
+  } else if (poolType === "Curve3Pool_128") {
+    let contract = CurvePoolX3_128.bind(address);
+    token = contract.try_coins(coinIndex);
+  } else if (poolType === "Curve3Pool_256") {
+    let contract = CurvePoolX3_256.bind(address);
+    token = contract.try_coins(coinIndex);
+  } else if (poolType === "Curve4Pool_128") {
+    let contract = CurvePoolX4_128.bind(address);
     token = contract.try_coins(coinIndex);
   } else {
     return ZERO_BYTES;

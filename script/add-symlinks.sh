@@ -27,7 +27,9 @@ then
 
   ln -s SushiKashiPairMediumRiskV1kmWBTC\&\#x2F\;WMATIC-LINK generated/SushiKashiPairMediumRiskV1
 else # Ethereum
-  ln -s CurvePoolX2ankrCRV            generated/CurvePoolX2
-  ln -s CurvePoolX3aDAI+aUSDC+aUSDT   generated/CurvePoolX3
-  ln -s CurvePoolX4DAI+USDC+USDT+sUSD generated/CurvePoolX4
+  ln -s CurvePoolX2_128cDAI+cUSDC         generated/CurvePoolX2_128
+  ln -s CurvePoolX2_256ankrCRV            generated/CurvePoolX2_256
+  ln -s CurvePoolX3_128renBTC+WBTC+sBTC   generated/CurvePoolX3_128
+  ln -s CurvePoolX3_256aDAI+aUSDC+aUSDT   generated/CurvePoolX3_256
+  ln -s CurvePoolX4_128DAI+USDC+USDT+sUSD generated/CurvePoolX4_128
 fi

@@ -5,8 +5,8 @@ import {
   RemoveLiquidityImbalance as RemoveLiquidityImbalanceEvent,
   TokenExchange as TokenExchangeEvent,
   TokenExchangeUnderlying as TokenExchangeUnderlyingEvent,
-} from "../../../generated/CurvePoolX3/CurvePoolX3";
-import { Curve_N_COINS_CURVE3POOL } from "../../utils/constants";
+} from "../../../generated/CurvePoolX2_256/CurvePoolX2_256";
+import { Curve_N_COINS_CURVE2POOL } from "../../utils/constants";
 import { handlePoolEntity } from "./handlers";
 
 export function handleAddLiquidity(event: AddLiquidityEvent): void {
@@ -15,8 +15,8 @@ export function handleAddLiquidity(event: AddLiquidityEvent): void {
     event.block.number,
     event.block.timestamp,
     event.address, // vault
-    Curve_N_COINS_CURVE3POOL,
-    "Curve3Pool",
+    Curve_N_COINS_CURVE2POOL,
+    "Curve2Pool_256",
   );
 }
 
@@ -26,8 +26,8 @@ export function handleRemoveLiquidity(event: RemoveLiquidityEvent): void {
     event.block.number,
     event.block.timestamp,
     event.address, // vault
-    Curve_N_COINS_CURVE3POOL,
-    "Curve3Pool",
+    Curve_N_COINS_CURVE2POOL,
+    "Curve2Pool_256",
   );
 }
 
@@ -37,8 +37,8 @@ export function handleRemoveLiquidityOne(event: RemoveLiquidityOneEvent): void {
     event.block.number,
     event.block.timestamp,
     event.address, // vault
-    Curve_N_COINS_CURVE3POOL,
-    "Curve3Pool",
+    Curve_N_COINS_CURVE2POOL,
+    "Curve2Pool_256",
   );
 }
 
@@ -48,8 +48,8 @@ export function handleRemoveLiquidityImbalance(event: RemoveLiquidityImbalanceEv
     event.block.number,
     event.block.timestamp,
     event.address, // vault
-    Curve_N_COINS_CURVE3POOL,
-    "Curve3Pool",
+    Curve_N_COINS_CURVE2POOL,
+    "Curve2Pool_256",
   );
 }
 
@@ -59,8 +59,8 @@ export function handleTokenExchange(event: TokenExchangeEvent): void {
     event.block.number,
     event.block.timestamp,
     event.address, // vault
-    Curve_N_COINS_CURVE3POOL,
-    "Curve3Pool",
+    Curve_N_COINS_CURVE2POOL,
+    "Curve2Pool_256",
   );
 }
 
@@ -70,7 +70,7 @@ export function handleTokenExchangeUnderlying(event: TokenExchangeUnderlyingEven
     event.block.number,
     event.block.timestamp,
     event.address, // vault
-    Curve_N_COINS_CURVE3POOL,
-    "Curve3Pool",
+    Curve_N_COINS_CURVE2POOL,
+    "Curve2Pool_256",
   );
 }
