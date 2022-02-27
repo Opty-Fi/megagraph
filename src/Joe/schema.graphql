@@ -19,6 +19,7 @@ type JoeFarmData @entity {
   poolId: BigInt
 
   version: String
+  accJoePerShare: BigDecimal
   joePerSecond: BigDecimal
   rewardToken: Bytes
   rewardPerSecond: BigDecimal

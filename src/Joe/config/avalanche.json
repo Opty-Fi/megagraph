@@ -4,7 +4,7 @@
   "contracts": [
     {
       "contract": "MasterChefJoeV2",
-      "abis": ["MasterChefJoeV2"],
+      "abis": ["MasterChefJoeV2", "SimpleRewarderPerSec"],
       "entities": ["JoeFarmData"],
       "events": [
         {
@@ -39,7 +39,7 @@
     },
     {
       "contract": "MasterChefJoeV3",
-      "abis": ["MasterChefJoeV3"],
+      "abis": ["MasterChefJoeV3", "SimpleRewarderPerSec"],
       "entities": ["JoeFarmData"],
       "events": [
         {
