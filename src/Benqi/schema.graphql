@@ -1,0 +1,15 @@
+type QiTokenData @entity {
+  id: ID!
+  blockNumber: BigInt
+  blockTimestamp: BigInt
+  borrowIndex: BigDecimal
+  cTokenSymbol: String
+  cTokenAddress: Bytes
+  exchangeRate: BigDecimal
+  totalCash: BigDecimal
+  totalBorrows: BigDecimal
+  totalSupply: BigInt
+  totalReserves: BigDecimal
+  SupplyReserveRatio: BigDecimal
+  supplyRatePerTimestamp: BigDecimal
+}
