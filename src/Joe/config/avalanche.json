@@ -71,6 +71,56 @@
           "startBlock": 6000000
         }
       ]
+    },
+    {
+      "contract": "Joetroller",
+      "abis": ["Joetroller"],
+      "entities": ["JoeLendingData"],
+      "events": []
+    },
+    {
+      "contract": "JToken",
+      "abis": ["JToken"],
+      "entities": ["JoeLendingData"],
+      "events": [
+        {
+          "event-name": "AccrueInterest",
+          "event-params": "(uint256,uint256,uint256,uint256)"
+        },
+        {
+          "event-name": "Borrow",
+          "event-params": "(address,uint256,uint256,uint256)"
+        },
+
+        {
+          "event-name": "LiquidateBorrow",
+          "event-params": "(address,address,uint256,address,uint256)"
+        },
+        {
+          "event-name": "Mint",
+          "event-params": "(address,uint256,uint256)"
+        },
+        {
+          "event-name": "Redeem",
+          "event-params": "(address,uint256,uint256)"
+        },
+        {
+          "event-name": "RepayBorrow",
+          "event-params": "(address,address,uint256,uint256,uint256)"
+        },
+
+        {
+          "event-name": "ReservesReduced",
+          "event-params": "(address,uint256,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "symbol": "",
+          "address": "0x3225E3C669B39C7c8B3e204a8614bB218c5e31BC",
+          "startBlock": 11222225
+        }
+      ]
     }
   ]
 }

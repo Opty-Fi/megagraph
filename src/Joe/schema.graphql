@@ -1,10 +1,21 @@
+type JoeLendingData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  vault: Bytes!
+  symbol: String
+  decimals: Int!
+  assetToken: Bytes!
+  collateralToken: Bytes!
+  interestPerSecond: BigDecimal
+  totalAssetBase: BigDecimal
+}
 type JoeFarmData @entity {
   id: ID!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   lpToken: Bytes
   poolId: BigInt
-
   version: String
   accJoePerShare: BigDecimal
   joePerSecond: BigDecimal
