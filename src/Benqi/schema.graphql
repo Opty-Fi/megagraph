@@ -1,4 +1,4 @@
-type QiTokenData @entity {
+type BenqiTokenData @entity {
   id: ID!
   blockNumber: BigInt
   blockTimestamp: BigInt

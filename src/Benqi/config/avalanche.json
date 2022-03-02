@@ -1,11 +1,11 @@
 {
     "network": "avalanche",
-    "adapter": "benqi.fi",
+    "adapter": "Benqi",
     "contracts": [
       {
         "contract": "Token",
         "abis": ["Comptroller","Token"],
-        "entities": ["QiTokenData"],
+        "entities": ["BenqiTokenData"],
         "events": [
           {
             "event-name": "AccrueInterest",

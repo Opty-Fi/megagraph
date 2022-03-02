@@ -1,0 +1,329 @@
+specVersion: 0.0.2
+description: Opty-Fi's Benqi subgraph
+repository: https://github.com/Opty-Fi/megagraph
+schema:
+  file: ./schema.graphql
+dataSources:
+  # ----------------------------------------
+  #      Benqi Token 
+  # ----------------------------------------
+  - kind: ethereum/contract
+    name: BenqiTokenqiAVAX
+    network: avalanche
+    source:
+      address: "0x5C0401e81Bc07Ca70fAD469b451682c0d747Ef1c"
+      startBlock: 7710735
+      abi: BenqiToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - BenqiTokenData
+      abis:
+        - name: BenqiComptroller
+          file: ./src/Benqi/abis/Comptroller.json
+        - name: BenqiToken
+          file: ./src/Benqi/abis/Token.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/Benqi/mappings/Token.ts
+  - kind: ethereum/contract
+    name: BenqiTokenqiBTC
+    network: avalanche
+    source:
+      address: "0xe194c4c5aC32a3C9ffDb358d9Bfd523a0B6d1568"
+      startBlock: 10960099
+      abi: BenqiToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - BenqiTokenData
+      abis:
+        - name: BenqiComptroller
+          file: ./src/Benqi/abis/Comptroller.json
+        - name: BenqiToken
+          file: ./src/Benqi/abis/Token.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/Benqi/mappings/Token.ts
+  - kind: ethereum/contract
+    name: BenqiTokenqiETH
+    network: avalanche
+    source:
+      address: "0x334AD834Cd4481BB02d09615E7c11a00579A7909"
+      startBlock: 8983575
+      abi: BenqiToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - BenqiTokenData
+      abis:
+        - name: BenqiComptroller
+          file: ./src/Benqi/abis/Comptroller.json
+        - name: BenqiToken
+          file: ./src/Benqi/abis/Token.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/Benqi/mappings/Token.ts
+  - kind: ethereum/contract
+    name: BenqiTokenqiUSDT
+    network: avalanche
+    source:
+      address: "0xc9e5999b8e75C3fEB117F6f73E664b9f3C8ca65C"
+      startBlock: 7710758
+      abi: BenqiToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - BenqiTokenData
+      abis:
+        - name: BenqiComptroller
+          file: ./src/Benqi/abis/Comptroller.json
+        - name: BenqiToken
+          file: ./src/Benqi/abis/Token.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/Benqi/mappings/Token.ts
+  - kind: ethereum/contract
+    name: BenqiTokenqiLINK
+    network: avalanche
+    source:
+      address: "0x4e9f683A27a6BdAD3FC2764003759277e93696e6"
+      startBlock: 7710755
+      abi: BenqiToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - BenqiTokenData
+      abis:
+        - name: BenqiComptroller
+          file: ./src/Benqi/abis/Comptroller.json
+        - name: BenqiToken
+          file: ./src/Benqi/abis/Token.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/Benqi/mappings/Token.ts
+  - kind: ethereum/contract
+    name: BenqiTokenqiUSDC
+    network: avalanche
+    source:
+      address: "0xBEb5d47A3f720Ec0a390d04b4d41ED7d9688bC7F"
+      startBlock: 10921410
+      abi: BenqiToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - BenqiTokenData
+      abis:
+        - name: BenqiComptroller
+          file: ./src/Benqi/abis/Comptroller.json
+        - name: BenqiToken
+          file: ./src/Benqi/abis/Token.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/Benqi/mappings/Token.ts
+  - kind: ethereum/contract
+    name: BenqiTokenqiDAI
+    network: avalanche
+    source:
+      address: "0x835866d37AFB8CB8F8334dCCdaf66cf01832Ff5D"
+      startBlock: 7710760
+      abi: BenqiToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - BenqiTokenData
+      abis:
+        - name: BenqiComptroller
+          file: ./src/Benqi/abis/Comptroller.json
+        - name: BenqiToken
+          file: ./src/Benqi/abis/Token.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/Benqi/mappings/Token.ts
+  - kind: ethereum/contract
+    name: BenqiTokenqiQI
+    network: avalanche
+    source:
+      address: "0x35Bd6aedA81a7E5FC7A7832490e71F757b0cD9Ce"
+      startBlock: 9879363
+      abi: BenqiToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - BenqiTokenData
+      abis:
+        - name: BenqiComptroller
+          file: ./src/Benqi/abis/Comptroller.json
+        - name: BenqiToken
+          file: ./src/Benqi/abis/Token.json
+      eventHandlers:
+        - event: AccrueInterest(uint256,uint256,uint256,uint256)
+          handler: handleAccrueInterest
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: LiquidateBorrow(address,address,uint256,address,uint256)
+          handler: handleLiquidateBorrow
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: NewReserveFactor(uint256,uint256)
+          handler: handleNewReserveFactor
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+        - event: ReservesAdded(address,uint256,uint256)
+          handler: handleReservesAdded
+        - event: ReservesReduced(address,uint256,uint256)
+          handler: handleReservesReduced
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/Benqi/mappings/Token.ts
