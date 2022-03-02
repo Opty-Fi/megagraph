@@ -5,7 +5,7 @@ import {
   Deposit as DepositEvent,
   EmergencyWithdraw as EmergencyWithdrawEvent,
   Withdraw as WithdrawEvent,
-} from "../../../generated/JoeMasterChefJoeV3/JoeMasterChefJoeV3";
+} from "../../../generated/TraderJoeMasterChefJoeV3/TraderJoeMasterChefJoeV3";
 import { handlePool } from "./handlerFarm";
 
 export function handleAdd(event: AddEvent): void {

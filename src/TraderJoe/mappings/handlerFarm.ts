@@ -1,10 +1,10 @@
 import { Address, BigDecimal, BigInt, Bytes, log } from "@graphprotocol/graph-ts";
-import { JoeFarmData } from "../../../generated/schema";
-import { JoeMasterChefJoeV3 as MasterChefJoeV3Contract } from "../../../generated/JoeMasterChefJoeV3/JoeMasterChefJoeV3";
-import { JoeMasterChefJoeV2 as MasterChefJoeV2Contract } from "../../../generated/JoeMasterChefJoeV2/JoeMasterChefJoeV2";
+import { TraderJoeFarmData } from "../../../generated/schema";
+import { TraderJoeMasterChefJoeV3 as MasterChefJoeV3Contract } from "../../../generated/TraderJoeMasterChefJoeV3/TraderJoeMasterChefJoeV3";
+import { TraderJoeMasterChefJoeV2 as MasterChefJoeV2Contract } from "../../../generated/TraderJoeMasterChefJoeV2/TraderJoeMasterChefJoeV2";
 
 // Is the same abi for both versions
-import { JoeSimpleRewarderPerSec as RewarderContract } from "../../../generated/JoeMasterChefJoeV2/JoeSimpleRewarderPerSec";
+import { TraderJoeSimpleRewarderPerSec as RewarderContract } from "../../../generated/TraderJoeMasterChefJoeV2/TraderJoeSimpleRewarderPerSec";
 import { convertBINumToDesiredDecimals, convertBytesToAddress } from "../../utils/converters";
 import {
   JOE_MASTER_CHEF_V2_ADDRESS,
@@ -23,8 +23,8 @@ export function handlePool(
   version: string,
   lpToken: Address,
 ): void {
-  let entity = JoeFarmData.load(txnHash.toHex());
-  if (!entity) entity = new JoeFarmData(txnHash.toHex());
+  let entity = TraderJoeFarmData.load(txnHash.toHex());
+  if (!entity) entity = new TraderJoeFarmData(txnHash.toHex());
 
   entity.blockNumber = blockNumber;
   entity.blockTimestamp = timestamp;
@@ -34,9 +34,9 @@ export function handlePool(
   entity.version = version;
 
   if (version == "V2") {
-    entity = updateEntityV2(entity as JoeFarmData, poolId);
+    entity = updateEntityV2(entity as TraderJoeFarmData, poolId);
   } else if (version == "V3") {
-    entity = updateEntityV3(entity as JoeFarmData, poolId);
+    entity = updateEntityV3(entity as TraderJoeFarmData, poolId);
   }
 
   // Rewards
@@ -64,7 +64,7 @@ export function handlePool(
   entity.save();
 }
 
-function updateEntityV2(entity: JoeFarmData, poolId: BigInt): JoeFarmData {
+function updateEntityV2(entity: TraderJoeFarmData, poolId: BigInt): TraderJoeFarmData {
   let poolAllocPoints = ZERO_BI;
   let totalJoePerSec = ZERO_BD;
   let totalAllocPoints = ZERO_BI;
@@ -99,7 +99,7 @@ function updateEntityV2(entity: JoeFarmData, poolId: BigInt): JoeFarmData {
   return entity;
 }
 
-function updateEntityV3(entity: JoeFarmData, poolId: BigInt): JoeFarmData {
+function updateEntityV3(entity: TraderJoeFarmData, poolId: BigInt): TraderJoeFarmData {
   let poolAllocPoints = ZERO_BI;
   let totalJoePerSec = ZERO_BD;
   let totalAllocPoints = ZERO_BI;

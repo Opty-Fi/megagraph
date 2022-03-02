@@ -5,7 +5,7 @@ import {
   Deposit as DepositEvent,
   EmergencyWithdraw as EmergencyWithdrawEvent,
   Withdraw as WithdrawEvent,
-} from "../../../generated/JoeMasterChefJoeV2/JoeMasterChefJoeV2";
+} from "../../../generated/TraderJoeMasterChefJoeV2/TraderJoeMasterChefJoeV2";
 
 import { handlePool } from "./handlerFarm";
 

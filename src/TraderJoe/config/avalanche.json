@@ -1,11 +1,11 @@
 {
   "network": "avalanche",
-  "adapter": "Joe",
+  "adapter": "TraderJoe",
   "contracts": [
     {
       "contract": "MasterChefJoeV2",
       "abis": ["MasterChefJoeV2", "SimpleRewarderPerSec"],
-      "entities": ["JoeFarmData"],
+      "entities": ["TraderJoeFarmData"],
       "events": [
         {
           "event-name": "Deposit",
@@ -40,7 +40,7 @@
     {
       "contract": "MasterChefJoeV3",
       "abis": ["MasterChefJoeV3", "SimpleRewarderPerSec"],
-      "entities": ["JoeFarmData"],
+      "entities": ["TraderJoeFarmData"],
       "events": [
         {
           "event-name": "Deposit",
@@ -75,13 +75,29 @@
     {
       "contract": "Joetroller",
       "abis": ["Joetroller"],
-      "entities": ["JoeLendingData"],
-      "events": []
+      "entities": ["TraderJoeLendingData"],
+      "events": [
+        {
+          "event-name": "",
+          "event-params": ""
+        },
+        {
+          "event-name": "",
+          "event-params": ""
+        }
+      ],
+      "instances": [
+        {
+          "symbol": "",
+          "address": "0xdc13687554205E5b89Ac783db14bb5bba4A1eDaC",
+          "startBlock": 5449252
+        }
+      ]
     },
     {
       "contract": "JToken",
       "abis": ["JToken"],
-      "entities": ["JoeLendingData"],
+      "entities": ["TraderJoeLendingData"],
       "events": [
         {
           "event-name": "AccrueInterest",

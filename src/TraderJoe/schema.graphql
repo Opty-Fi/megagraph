@@ -1,4 +1,4 @@
-type JoeLendingData @entity {
+type TraderJoeLendingData @entity {
   id: ID!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
@@ -10,7 +10,7 @@ type JoeLendingData @entity {
   interestPerSecond: BigDecimal
   totalAssetBase: BigDecimal
 }
-type JoeFarmData @entity {
+type TraderJoeFarmData @entity {
   id: ID!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
