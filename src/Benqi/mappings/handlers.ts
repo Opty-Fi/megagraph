@@ -1,6 +1,6 @@
-import { BigInt, Address, log, Bytes } from "@graphprotocol/graph-ts";
-import { Token } from "../../../generated/BenqiTokenqiAVAX/BenqiToken";
-import { QiTokenData } from "../../../generated/schema";
+import { BigInt, Address, log, Bytes, BigDecimal } from "@graphprotocol/graph-ts";
+import { BenqiToken } from "../../../generated/BenqiTokenqiAVAX/BenqiToken";
+import { BenqiTokenData } from "../../../generated/schema";
 import { convertBINumToDesiredDecimals, convertToLowerCase } from "../../utils/converters";
 
 //  Function to add/update the cToken Entity
@@ -12,12 +12,12 @@ export function handleEntity(
   borrowIndex: BigInt,
   totalBorrows: BigInt,
 ): void {
-  let cTokenContract = Token.bind(cTokenAddress);
+  let cTokenContract = BenqiToken.bind(cTokenAddress);
 
   ////  Load CTokenData Entity for not having duplicates
-  let cTokenDataEntity = QiTokenData.load(transactionHash.toHex());
+  let cTokenDataEntity = BenqiTokenData.load(transactionHash.toHex());
   if (cTokenDataEntity == null) {
-    cTokenDataEntity = new QiTokenData(transactionHash.toHex());
+    cTokenDataEntity = new BenqiTokenData(transactionHash.toHex());
   }
 
   cTokenDataEntity.blockNumber = blockNumber;
@@ -68,13 +68,16 @@ export function handleEntity(
   } else {
     cTokenDataEntity.totalSupply = convertBINumToDesiredDecimals(cTokenContract.totalSupply(), 18);
   }
+
+  if(cTokenDataEntity.totalSupply == null || cTokenDataEntity.totalReserves == null )
+    cTokenDataEntity.SupplyReserveRatio  = null
+  else
+      cTokenDataEntity.SupplyReserveRatio = cTokenDataEntity.totalSupply.div(cTokenDataEntity.totalReserves)
   
-  cTokenDataEntity.SupplyReserveRatio = cTokenDataEntity.totalSupply / cTokenDataEntity.totalReserves
-  
-  if (cTokenContract.try_supplyRatePerBlock().reverted) {
+  if (cTokenContract.try_supplyRatePerTimestamp().reverted) {
     cTokenDataEntity.supplyRatePerTimestamp = null;
   } else {
-    cTokenDataEntity.supplyRatePerTimestamp = convertBINumToDesiredDecimals(cTokenContract.supplyRatePerBlock(), 18);
+    cTokenDataEntity.supplyRatePerTimestamp = convertBINumToDesiredDecimals(cTokenContract.supplyRatePerTimestamp(), 18);
   }
 
   log.info("Saving data for cToken: {} - {} for block: {} with transaction hash: {}", [

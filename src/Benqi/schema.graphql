@@ -8,8 +8,8 @@ type BenqiTokenData @entity {
   exchangeRate: BigDecimal
   totalCash: BigDecimal
   totalBorrows: BigDecimal
-  totalSupply: BigInt
-  totalReserves: BigDecimal
+  totalSupply: BigDecimal
+  totalReserves: BigDecimal!
   SupplyReserveRatio: BigDecimal
   supplyRatePerTimestamp: BigDecimal
 }
