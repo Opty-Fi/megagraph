@@ -14,13 +14,15 @@ type JoeFarmData @entity {
   id: ID!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
-  lpToken: Bytes
-  poolId: BigInt
+  lpToken: Bytes!
+  poolId: BigInt!
   version: String
   accJoePerShare: BigDecimal
   joePerSecond: BigDecimal
   rewardToken: Bytes
+  rewarder: Bytes!
   rewardPerSecond: BigDecimal
   lastRewardTime: BigInt
   event: String
+  
 }
