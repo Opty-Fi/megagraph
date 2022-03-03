@@ -1,92 +1,92 @@
 import { BigInt, Address, log, Bytes, BigDecimal } from "@graphprotocol/graph-ts";
 import { BenqiToken } from "../../../generated/BenqiTokenqiAVAX/BenqiToken";
 import { BenqiTokenData } from "../../../generated/schema";
-import { convertBINumToDesiredDecimals, convertToLowerCase } from "../../utils/converters";
+import { convertBINumToDesiredDecimals } from "../../utils/converters";
 
-//  Function to add/update the cToken Entity
+//  Function to add/update the qiToken Entity
 export function handleEntity(
   transactionHash: Bytes,
   blockNumber: BigInt,
   blockTimestamp: BigInt,
-  cTokenAddress: Address,
+  qiTokenAddress: Address,
   borrowIndex: BigInt,
   totalBorrows: BigInt,
 ): void {
-  let cTokenContract = BenqiToken.bind(cTokenAddress);
+  let qiTokenContract = BenqiToken.bind(qiTokenAddress);
 
-  ////  Load CTokenData Entity for not having duplicates
-  let cTokenDataEntity = BenqiTokenData.load(transactionHash.toHex());
-  if (cTokenDataEntity == null) {
-    cTokenDataEntity = new BenqiTokenData(transactionHash.toHex());
+  ////  Load qiTokenData Entity for not having duplicates
+  let entity = BenqiTokenData.load(transactionHash.toHex());
+  if (entity == null) {
+    entity = new BenqiTokenData(transactionHash.toHex());
   }
 
-  cTokenDataEntity.blockNumber = blockNumber;
-  cTokenDataEntity.blockTimestamp = blockTimestamp;
-  cTokenDataEntity.cTokenAddress = cTokenAddress;
-  cTokenDataEntity.cTokenSymbol = cTokenContract.try_symbol().reverted ? null : cTokenContract.symbol();
+  entity.blockNumber = blockNumber;
+  entity.blockTimestamp = blockTimestamp;
+  entity.qiTokenAddress = qiTokenAddress;
+  entity.qiTokenSymbol = qiTokenContract.try_symbol().reverted ? null : qiTokenContract.symbol();
 
   if (totalBorrows == null) {
-    if (cTokenContract.try_totalBorrows().reverted){
-      cTokenDataEntity.totalBorrows = null;
+    if (qiTokenContract.try_totalBorrows().reverted){
+      entity.totalBorrows = null;
     } else {
-      cTokenDataEntity.totalBorrows = convertBINumToDesiredDecimals(cTokenContract.totalBorrows(), 18);
+      entity.totalBorrows = convertBINumToDesiredDecimals(qiTokenContract.totalBorrows(), 18);
     }
   } else {
-    cTokenDataEntity.totalBorrows = convertBINumToDesiredDecimals(totalBorrows, 18);
+    entity.totalBorrows = convertBINumToDesiredDecimals(totalBorrows, 18);
   }
   
   if (borrowIndex == null) {
-    if (cTokenContract.try_borrowIndex().reverted){
-      cTokenDataEntity.totalBorrows = null;
+    if (qiTokenContract.try_borrowIndex().reverted){
+      entity.totalBorrows = null;
     } else {
-      cTokenDataEntity.totalBorrows = convertBINumToDesiredDecimals(cTokenContract.borrowIndex(), 18);
+      entity.totalBorrows = convertBINumToDesiredDecimals(qiTokenContract.borrowIndex(), 18);
     }
   } else {
-    cTokenDataEntity.totalBorrows = convertBINumToDesiredDecimals(borrowIndex, 18);
+    entity.totalBorrows = convertBINumToDesiredDecimals(borrowIndex, 18);
   }
 
-  if (cTokenContract.try_getCash().reverted) {
-    cTokenDataEntity.totalCash = null;
+  if (qiTokenContract.try_getCash().reverted) {
+    entity.totalCash = null;
   } else {
-    cTokenDataEntity.totalCash = convertBINumToDesiredDecimals(cTokenContract.getCash(), 18);
+    entity.totalCash = convertBINumToDesiredDecimals(qiTokenContract.getCash(), 18);
   }
   
-  if (cTokenContract.try_exchangeRateStored().reverted) {
-    cTokenDataEntity.exchangeRate = null;
+  if (qiTokenContract.try_exchangeRateStored().reverted) {
+    entity.exchangeRate = null;
   } else {
-    cTokenDataEntity.exchangeRate = convertBINumToDesiredDecimals(cTokenContract.exchangeRateStored(), 18);
+    entity.exchangeRate = convertBINumToDesiredDecimals(qiTokenContract.exchangeRateStored(), 18);
   }
   
-  if (cTokenContract.try_totalReserves().reverted) {
-    cTokenDataEntity.totalReserves = null;
+  if (qiTokenContract.try_totalReserves().reverted) {
+    entity.totalReserves = null;
   } else {
-    cTokenDataEntity.totalReserves = convertBINumToDesiredDecimals(cTokenContract.totalReserves(), 18);
+    entity.totalReserves = convertBINumToDesiredDecimals(qiTokenContract.totalReserves(), 18);
   }
   
-  if (cTokenContract.try_totalSupply().reverted) {
-    cTokenDataEntity.totalSupply = null;
+  if (qiTokenContract.try_totalSupply().reverted) {
+    entity.totalSupply = null;
   } else {
-    cTokenDataEntity.totalSupply = convertBINumToDesiredDecimals(cTokenContract.totalSupply(), 18);
+    entity.totalSupply = convertBINumToDesiredDecimals(qiTokenContract.totalSupply(), 18);
   }
 
-  if(cTokenDataEntity.totalSupply == null || cTokenDataEntity.totalReserves == null )
-    cTokenDataEntity.SupplyReserveRatio  = null
+  if(entity.totalSupply == null || entity.totalReserves == null )
+    entity.SupplyReserveRatio  = null
   else
-      cTokenDataEntity.SupplyReserveRatio = cTokenDataEntity.totalSupply.div(cTokenDataEntity.totalReserves)
+      entity.SupplyReserveRatio = entity.totalSupply.div(entity.totalReserves)
   
-  if (cTokenContract.try_supplyRatePerTimestamp().reverted) {
-    cTokenDataEntity.supplyRatePerTimestamp = null;
+  if (qiTokenContract.try_supplyRatePerTimestamp().reverted) {
+    entity.supplyRatePerTimestamp = null;
   } else {
-    cTokenDataEntity.supplyRatePerTimestamp = convertBINumToDesiredDecimals(cTokenContract.supplyRatePerTimestamp(), 18);
+    entity.supplyRatePerTimestamp = convertBINumToDesiredDecimals(qiTokenContract.supplyRatePerTimestamp(), 18);
   }
 
-  log.info("Saving data for cToken: {} - {} for block: {} with transaction hash: {}", [
-    cTokenDataEntity.cTokenAddress.toHex(),
-    cTokenDataEntity.cTokenSymbol,
-    cTokenDataEntity.blockNumber.toString(),
-    cTokenDataEntity.id,
+  log.info("Saving data for qiToken: {} - {} for block: {} with transaction hash: {}", [
+    entity.qiTokenAddress.toHex(),
+    entity.qiTokenSymbol,
+    entity.blockNumber.toString(),
+    entity.id,
   ]);
 
 
-  cTokenDataEntity.save();
+  entity.save();
 }
