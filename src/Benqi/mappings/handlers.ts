@@ -26,7 +26,7 @@ export function handleEntity(
   entity.qiTokenSymbol = qiTokenContract.try_symbol().reverted ? null : qiTokenContract.symbol();
 
   if (totalBorrows == null) {
-    if (qiTokenContract.try_totalBorrows().reverted){
+    if (qiTokenContract.try_totalBorrows().reverted) {
       entity.totalBorrows = null;
     } else {
       entity.totalBorrows = convertBINumToDesiredDecimals(qiTokenContract.totalBorrows(), 18);
@@ -34,9 +34,9 @@ export function handleEntity(
   } else {
     entity.totalBorrows = convertBINumToDesiredDecimals(totalBorrows, 18);
   }
-  
+
   if (borrowIndex == null) {
-    if (qiTokenContract.try_borrowIndex().reverted){
+    if (qiTokenContract.try_borrowIndex().reverted) {
       entity.totalBorrows = null;
     } else {
       entity.totalBorrows = convertBINumToDesiredDecimals(qiTokenContract.borrowIndex(), 18);
@@ -50,30 +50,28 @@ export function handleEntity(
   } else {
     entity.totalCash = convertBINumToDesiredDecimals(qiTokenContract.getCash(), 18);
   }
-  
+
   if (qiTokenContract.try_exchangeRateStored().reverted) {
     entity.exchangeRate = null;
   } else {
     entity.exchangeRate = convertBINumToDesiredDecimals(qiTokenContract.exchangeRateStored(), 18);
   }
-  
+
   if (qiTokenContract.try_totalReserves().reverted) {
     entity.totalReserves = null;
   } else {
     entity.totalReserves = convertBINumToDesiredDecimals(qiTokenContract.totalReserves(), 18);
   }
-  
+
   if (qiTokenContract.try_totalSupply().reverted) {
     entity.totalSupply = null;
   } else {
     entity.totalSupply = convertBINumToDesiredDecimals(qiTokenContract.totalSupply(), 18);
   }
 
-  if(entity.totalSupply == null || entity.totalReserves == null )
-    entity.SupplyReserveRatio  = null
-  else
-      entity.SupplyReserveRatio = entity.totalSupply.div(entity.totalReserves)
-  
+  if (entity.totalSupply == null || entity.totalReserves == null) entity.SupplyReserveRatio = null;
+  else entity.SupplyReserveRatio = entity.totalSupply.div(entity.totalReserves);
+
   if (qiTokenContract.try_supplyRatePerTimestamp().reverted) {
     entity.supplyRatePerTimestamp = null;
   } else {
@@ -86,7 +84,6 @@ export function handleEntity(
     entity.blockNumber.toString(),
     entity.id,
   ]);
-
 
   entity.save();
 }

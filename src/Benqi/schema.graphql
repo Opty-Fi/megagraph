@@ -3,8 +3,8 @@ type BenqiTokenData @entity {
   blockNumber: BigInt
   blockTimestamp: BigInt
   borrowIndex: BigDecimal
-  cTokenSymbol: String
-  cTokenAddress: Bytes
+  qiTokenSymbol: String
+  qiTokenAddress: Bytes
   exchangeRate: BigDecimal
   totalCash: BigDecimal
   totalBorrows: BigDecimal
