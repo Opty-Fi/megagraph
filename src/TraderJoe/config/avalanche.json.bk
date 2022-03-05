@@ -73,14 +73,57 @@
       ]
     },
     {
+      "contract": "Joetroller",
+      "abis": ["Joetroller"],
+      "entities": ["TraderJoeLendingData"],
+      "events": [
+        {
+          "event-name": "MarketListed",
+          "event-params": "(address)"
+        },
+        {
+          "event-name": "MarketEntered",
+          "event-params": "(address,address)"
+        },
+        {
+          "event-name": "MarketExited",
+          "event-params": "(address,address)"
+        },
+        {
+          "event-name": "NewCloseFactor",
+          "event-params": "(uint256,uint256)"
+        },
+        {
+          "event-name": "NewCollateralFactor",
+          "event-params": "(address,uint256,uint256)"
+        },
+        {
+          "event-name": "NewLiquidationIncentive",
+          "event-params": "(uint256,uint256)"
+        },
+        {
+          "event-name": "NewPriceOracle",
+          "event-params": "(address,address)"
+        }
+      ],
+      "instances": [
+        {
+          "symbol": "",
+          "address": "0xdc13687554205E5b89Ac783db14bb5bba4A1eDaC",
+          "startBlock": 5449252
+        }
+      ]
+    },
+    {
       "contract": "JToken",
-      "abis": ["JToken", "JWrappedNative", "JCollateralCapErc20", "Joetroller", "ERC20"],
+      "abis": ["JToken", "JWrappedNative", "JCollateralCapErc20"],
       "entities": ["TraderJoeLendingData"],
       "events": [
         {
           "event-name": "Borrow",
           "event-params": "(address,uint256,uint256,uint256)"
         },
+
         {
           "event-name": "LiquidateBorrow",
           "event-params": "(address,address,uint256,address,uint256)"
@@ -97,6 +140,7 @@
           "event-name": "RepayBorrow",
           "event-params": "(address,address,uint256,uint256,uint256)"
         },
+
         {
           "event-name": "ReservesReduced",
           "event-params": "(address,uint256,uint256)"
@@ -152,6 +196,17 @@
           "symbol": "jDAI",
           "address": "0xc988c170d0E38197DC634A45bF00169C7Aa7CA19",
           "startBlock": 5450352
+        }
+      ]
+    },
+    {
+      "contract": "JCollateralCapErc20",
+      "abis": ["JToken", "JCollateralCapErc20"],
+      "entities": ["TraderJoeLendingData"],
+      "events": [
+        {
+          "event-name": "Flashloan",
+          "event-params": "(indexed address,uint256,uint256,uint256)"
         }
       ]
     }

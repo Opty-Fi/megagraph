@@ -1,14 +1,17 @@
 type TraderJoeLendingData @entity {
   id: ID!
   blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  vault: Bytes!
+  blockTimestamp: BigInt!  
   symbol: String
-  decimals: Int!
-  assetToken: Bytes!
-  collateralToken: Bytes!
-  interestPerSecond: BigDecimal
-  totalAssetBase: BigDecimal
+  address: Bytes  
+  borrowIndex: BigDecimal
+  borrowRatePerSecond: BigDecimal
+  supplyRatePerSecond: BigDecimal
+  exchangeRateStored: BigDecimal
+  totalCash: BigDecimal
+  totalBorrows: BigDecimal
+  totalSupply: BigDecimal
+  totalReserves: BigDecimal
 }
 type TraderJoeFarmData @entity {
   id: ID!
