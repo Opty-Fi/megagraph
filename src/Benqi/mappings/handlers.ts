@@ -1,4 +1,4 @@
-import { BigInt, Address, log, Bytes, BigDecimal } from "@graphprotocol/graph-ts";
+import { BigInt, Address, log, Bytes } from "@graphprotocol/graph-ts";
 import { BenqiToken } from "../../../generated/BenqiTokenqiAVAX/BenqiToken";
 import { BenqiTokenData } from "../../../generated/schema";
 import { convertBINumToDesiredDecimals } from "../../utils/converters";
@@ -14,7 +14,7 @@ export function handleEntity(
 ): void {
   let qiTokenContract = BenqiToken.bind(qiTokenAddress);
 
-  ////  Load qiTokenData Entity for not having duplicates
+  //  Load qiTokenData Entity for not having duplicates
   let entity = BenqiTokenData.load(transactionHash.toHex());
   if (entity == null) {
     entity = new BenqiTokenData(transactionHash.toHex());
