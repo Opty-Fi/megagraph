@@ -12,43 +12,23 @@ import { ZERO_BD } from "../../utils/constants";
 import { GAUGES } from "./gauges";
 
 export function handleNewGauge(event: NewGaugeEvent): void {
-  handleGaugeEntity(
-    event.block.number,
-    event.block.timestamp,
-    event.address,
-    'NewGauge',
-  );
+  handleGaugeEntity(event.block.number, event.block.timestamp, event.address, "NewGauge");
 }
 
 export function handleNewGaugeWeight(event: NewGaugeWeightEvent): void {
-  handleGaugeEntity(
-    event.block.number,
-    event.block.timestamp,
-    event.address,
-    'NewGaugeWeight',
-  );
+  handleGaugeEntity(event.block.number, event.block.timestamp, event.address, "NewGaugeWeight");
 }
 
 export function handleVoteForGauge(event: VoteForGaugeEvent): void {
-  handleGaugeEntity(
-    event.block.number,
-    event.block.timestamp,
-    event.address,
-    'VoteForGauge',
-  );
+  handleGaugeEntity(event.block.number, event.block.timestamp, event.address, "VoteForGauge");
 }
 
-function handleGaugeEntity(
-  blockNumber: BigInt,
-  timestamp: BigInt,
-  controller: Address,
-  event: string,
-): void {
+function handleGaugeEntity(blockNumber: BigInt, timestamp: BigInt, controller: Address, event: string): void {
   let gaugeControllerContract = CurveGaugeGaugeController.bind(controller);
 
   for (let i = 0; i < GAUGES.length; i++) {
     let gauge = GAUGES[i];
-    let id = gauge.toHexString() + '-' + blockNumber.toString();
+    let id = gauge.toHexString() + "-" + blockNumber.toString();
     let entity = new CurveGaugeData(id);
 
     entity.blockNumber = blockNumber;
