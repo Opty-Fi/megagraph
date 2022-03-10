@@ -5,9 +5,11 @@ import { CurvePoolX3_128 } from "../../../generated/CurvePoolX3_128/CurvePoolX3_
 import { CurvePoolX3_256 } from "../../../generated/CurvePoolX3_256/CurvePoolX3_256";
 import { CurvePoolX4_128 } from "../../../generated/CurvePoolX4_128/CurvePoolX4_128";
 import { CurveERC20 } from "../../../generated/CurvePoolX2_128/CurveERC20";
+import { CurveRegistry } from "../../../generated/CurvePoolX2_128/CurveRegistry";
+import { CurveLiquidityGaugeCommon } from "../../../generated/CurvePoolX2_128/CurveLiquidityGaugeCommon";
 import { CurvePoolData } from "../../../generated/schema";
-import { convertBINumToDesiredDecimals, toBytes } from "../../utils/converters";
-import { ZERO_BYTES, ZERO_BD } from "../../utils/constants";
+import { convertBINumToDesiredDecimals, convertBytesToAddress, toBytes } from "../../utils/converters";
+import { CurveRegistryAddress, ZERO_BYTES, ZERO_BD } from "../../utils/constants";
 import { getExtras } from "./extras";
 
 export function handlePoolEntity(
@@ -65,6 +67,25 @@ export function handlePoolEntity(
   // extra rewards
 
   entity.extras = getExtras(<CurvePoolData>entity, txnHash);
+
+  // working supply
+
+  let CurveRegistryContract = CurveRegistry.bind(CurveRegistryAddress);
+  let getGaugesResult = CurveRegistryContract.try_get_gauges(convertBytesToAddress(entity.vault));
+  if (getGaugesResult.reverted) {
+    log.warning("get_gauges reverted", []);
+    entity.workingSupply = ZERO_BD;
+  } else {
+    let gaugeAddress = convertBytesToAddress(getGaugesResult.value.value0[0]);
+    let gaugeContract = CurveLiquidityGaugeCommon.bind(gaugeAddress);
+    let workingSupplyResult = gaugeContract.try_working_supply();
+    if (workingSupplyResult.reverted) {
+      log.warning("working_supply reverted", []);
+      entity.workingSupply = ZERO_BD;
+    } else {
+      entity.workingSupply = convertBINumToDesiredDecimals(workingSupplyResult.value, 18);
+    }
+  }
 
   entity.save();
 }
