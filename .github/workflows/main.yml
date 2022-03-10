@@ -64,6 +64,11 @@ jobs:
         env:
           ADAPTER: Cream
           CONFIG: ethereum
+      - name: Build Curve (Avalanche)
+        run: yarn build:dev
+        env:
+          ADAPTER: Curve
+          CONFIG: avalanche
       - name: Build Curve (Ethereum)
         run: yarn build:dev
         env:
