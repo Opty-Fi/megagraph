@@ -30,4 +30,6 @@ else # Ethereum
   ln -s CurvePoolX2ankrCRV            generated/CurvePoolX2
   ln -s CurvePoolX3aDAI+aUSDC+aUSDT   generated/CurvePoolX3
   ln -s CurvePoolX4DAI+USDC+USDT+sUSD generated/CurvePoolX4
+
+  ln -sf gauges-ethereum.ts src/CurveGauge/mappings/gauges.ts
 fi

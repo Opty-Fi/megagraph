@@ -6,3 +6,4 @@ node_modules
 generated
 build
 src/*/config/*-dev.json
+src/CurveGauge/mappings/gauges.ts
