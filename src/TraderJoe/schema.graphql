@@ -29,3 +29,16 @@ type TraderJoeFarmData @entity {
   event: String
   
 }
+type TraderJoeStakingData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  # Total xJoe supply
+  xJoeSupply: BigDecimal  
+  # Total Joe staked
+  tvl: BigDecimal
+  # Total Joe staked in USDT
+  tvlInUSDT: BigDecimal
+  # Mint or Burn
+  event: String
+}

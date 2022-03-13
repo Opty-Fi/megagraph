@@ -44,3 +44,6 @@ export let CAM_LENDING_POOL_ADDRESS: Address = toAddress("0x8dFf5E27EA6b7AC08EbF
 
 export let JOE_MASTER_CHEF_V2_ADDRESS: Address = toAddress("0xd6a4f121ca35509af06a0be99093d08462f53052");
 export let JOE_MASTER_CHEF_V3_ADDRESS: Address = toAddress("0x188bed1968b795d5c9022f6a0bb5931ac4c18f00");
+export let JOE_BAR_ADDRESS: Address = toAddress("0x57319d41f71e81f3c65f2a47ca4e001ebafd4f33");
+export let JOE_TOKEN_ADDRESS: Address = toAddress("0x6e84a6216ea6dacc71ee8e6b0a5b7322eebc0fdd");
+export let JOE_USDT_PAIR_ADDRESS: Address = toAddress("0x1643de2efb8e35374d796297a9f95f64c082a8ce");
