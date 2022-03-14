@@ -19,6 +19,89 @@
           "startBlock": 2529703
         }
       ]
+    },
+    {
+      "contract": "JToken",
+      "abis": ["JToken", "JWrappedNative", "JCollateralCapErc20", "Joetroller", "ERC20"],
+      "entities": ["TraderJoeLendingData"],
+      "events": [
+        {
+          "event-name": "Borrow",
+          "event-params": "(address,uint256,uint256,uint256)"
+        },
+        {
+          "event-name": "LiquidateBorrow",
+          "event-params": "(address,address,uint256,address,uint256)"
+        },
+        {
+          "event-name": "Mint",
+          "event-params": "(address,uint256,uint256)"
+        },
+        {
+          "event-name": "Redeem",
+          "event-params": "(address,uint256,uint256)"
+        },
+        {
+          "event-name": "RepayBorrow",
+          "event-params": "(address,address,uint256,uint256,uint256)"
+        },
+        {
+          "event-name": "ReservesReduced",
+          "event-params": "(address,uint256,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "symbol": "jAVAX",
+          "address": "0xC22F01ddc8010Ee05574028528614634684EC29e",
+          "startBlock": 5449662
+        },
+        {
+          "symbol": "jWETH",
+          "address": "0x929f5caB61DFEc79a5431a7734a68D714C4633fa",
+          "startBlock": 5449874
+        },
+        {
+          "symbol": "jUSDC",
+          "address": "0xEd6AaF91a2B084bd594DBd1245be3691F9f637aC",
+          "startBlock": 5450040
+        },
+        {
+          "symbol": "jUSDT",
+          "address": "0x8b650e26404AC6837539ca96812f0123601E4448",
+          "startBlock": 5450118
+        },
+        {
+          "symbol": "jWBTC",
+          "address": "0x3fE38b7b610C0ACD10296fEf69d9b18eB7a9eB1F",
+          "startBlock": 5449994
+        },
+        {
+          "symbol": "jUSDCNative",
+          "address": "0x29472D511808Ce925F501D25F9Ee9efFd2328db2",
+          "startBlock": 8860572
+        },
+        {
+          "symbol": "jXJOE",
+          "address": "0xC146783a59807154F92084f9243eb139D58Da696",
+          "startBlock": 6911171
+        },
+        {
+          "symbol": "jMIM",
+          "address": "0xcE095A9657A02025081E0607c8D8b081c76A75ea",
+          "startBlock": 6073784
+        },
+        {
+          "symbol": "jLINK",
+          "address": "0x585E7bC75089eD111b656faA7aeb1104F5b96c15",
+          "startBlock": 5450478
+        },
+        {
+          "symbol": "jDAI",
+          "address": "0xc988c170d0E38197DC634A45bF00169C7Aa7CA19",
+          "startBlock": 5450352
+        }
+      ]
     }
   ]
 }
