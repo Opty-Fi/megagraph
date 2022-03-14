@@ -15,7 +15,7 @@ export function handleAdd(event: AddEvent): void {
   let poolId = event.params.pid;
   let eventType = "Add";
   let lpToken: Address = event.params.lpToken;
-  handlePool(txnHash, blockNumber, timestamp, poolId, eventType, "3", lpToken);
+  handlePool(txnHash, blockNumber, timestamp, poolId, eventType, "V3", lpToken);
 }
 export function handleSet(event: SetEvent): void {
   let txnHash = event.transaction.hash;
@@ -24,7 +24,7 @@ export function handleSet(event: SetEvent): void {
   let poolId = event.params.pid;
   let eventType = "Set";
 
-  handlePool(txnHash, blockNumber, timestamp, poolId, eventType, "3", null);
+  handlePool(txnHash, blockNumber, timestamp, poolId, eventType, "V3", null);
 }
 export function handleDeposit(event: DepositEvent): void {
   let txnHash = event.transaction.hash;
@@ -33,7 +33,7 @@ export function handleDeposit(event: DepositEvent): void {
   let poolId = event.params.pid;
   let eventType = "Deposit";
 
-  handlePool(txnHash, blockNumber, timestamp, poolId, eventType, "3", null);
+  handlePool(txnHash, blockNumber, timestamp, poolId, eventType, "V3", null);
 }
 export function handleEmergencyWithdraw(event: EmergencyWithdrawEvent): void {
   let txnHash = event.transaction.hash;
@@ -42,7 +42,7 @@ export function handleEmergencyWithdraw(event: EmergencyWithdrawEvent): void {
   let poolId = event.params.pid;
   let eventType = "EmergencyWithdraw";
 
-  handlePool(txnHash, blockNumber, timestamp, poolId, eventType, "3", null);
+  handlePool(txnHash, blockNumber, timestamp, poolId, eventType, "V3", null);
 }
 
 export function handleWithdraw(event: WithdrawEvent): void {
@@ -52,5 +52,5 @@ export function handleWithdraw(event: WithdrawEvent): void {
   let poolId = event.params.pid;
   let eventType = "Withdraw";
 
-  handlePool(txnHash, blockNumber, timestamp, poolId, eventType, "3", null);
+  handlePool(txnHash, blockNumber, timestamp, poolId, eventType, "V3", null);
 }

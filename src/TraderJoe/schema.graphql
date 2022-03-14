@@ -42,3 +42,13 @@ type TraderJoeStakingData @entity {
   # Mint or Burn
   event: String
 }
+type TraderJoeSwapData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  pair: Bytes
+  reserve0: BigDecimal
+  reserve1: BigDecimal
+  reserve0USDT: BigDecimal
+  reserve1USDT: BigDecimal
+}

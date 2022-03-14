@@ -21,6 +21,9 @@ export function handleEntity(
   to: Address,
   value: BigInt,
 ): void {
+  if (from !== ZERO_ADDRESS && to !== ZERO_ADDRESS) {
+    return;
+  }
   // incoming value in BigDecimal
   let valueBD = convertBINumToDesiredDecimals(value, 18);
   // if zero transfer, do nothing.
