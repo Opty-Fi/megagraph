@@ -39,3 +39,30 @@ dataSources:
       file: ./src/{{adapter}}/mappings/{{contract}}.ts
   {{/instances}}
 {{/contracts}}
+{{#templates}}
+templates:
+  - kind: ethereum/contract
+    name: {{name}}
+    network: {{network}}
+    source:
+      abi: {{adapter}}{{name}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/{{adapter}}/mappings/{{name}}.ts
+      entities:
+      {{#entities}}
+        - {{.}}
+      {{/entities}}
+      abis:
+        {{#abis}}
+        - name: {{adapter}}{{.}}
+          file: ./src/{{adapter}}/abis/{{.}}.json
+        {{/abis}}
+      eventHandlers:
+        {{#events}}
+        - event: {{event-name}}{{event-params}}
+          handler: handle{{event-name}}
+        {{/events}}
+{{/templates}}
