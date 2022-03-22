@@ -92,7 +92,7 @@
     },
     {
       "contract": "JToken",
-      "abis": ["JToken", "JWrappedNative", "JCollateralCapErc20", "Joetroller", "ERC20"],
+      "abis": ["JToken", "JWrappedNative", "JCollateralCapErc20", "ERC20"],
       "entities": ["TraderJoeLendingData"],
       "events": [
         {
