@@ -8,6 +8,14 @@
       "entities": ["TraderJoeFarmData"],
       "events": [
         {
+          "event-name": "Add",
+          "event-params": "(indexed uint256,uint256,indexed address,indexed address)"
+        },
+        {
+          "event-name": "Set",
+          "event-params": "(indexed uint256,uint256,indexed address,bool)"
+        },
+        {
           "event-name": "Deposit",
           "event-params": "(indexed address,indexed uint256,uint256)"
         },
@@ -19,14 +27,6 @@
         {
           "event-name": "Withdraw",
           "event-params": "(indexed address,indexed uint256,uint256)"
-        },
-        {
-          "event-name": "Add",
-          "event-params": "(indexed uint256,uint256,indexed address,indexed address)"
-        },
-        {
-          "event-name": "Set",
-          "event-params": "(indexed uint256,uint256,indexed address,bool)"
         }
       ],
       "instances": [
@@ -43,6 +43,14 @@
       "entities": ["TraderJoeFarmData"],
       "events": [
         {
+          "event-name": "Add",
+          "event-params": "(indexed uint256,uint256,indexed address,indexed address)"
+        },
+        {
+          "event-name": "Set",
+          "event-params": "(indexed uint256,uint256,indexed address,bool)"
+        },
+        {
           "event-name": "Deposit",
           "event-params": "(indexed address,indexed uint256,uint256)"
         },
@@ -54,14 +62,6 @@
         {
           "event-name": "Withdraw",
           "event-params": "(indexed address,indexed uint256,uint256)"
-        },
-        {
-          "event-name": "Add",
-          "event-params": "(indexed uint256,uint256,indexed address,indexed address)"
-        },
-        {
-          "event-name": "Set",
-          "event-params": "(indexed uint256,uint256,indexed address,bool)"
         }
       ],
       "instances": [
@@ -73,57 +73,32 @@
       ]
     },
     {
-      "contract": "Joetroller",
-      "abis": ["Joetroller"],
-      "entities": ["TraderJoeLendingData"],
+      "contract": "JoeBar",
+      "abis": ["JoeBar", "JoePair", "JoeToken"],
+      "entities": ["TraderJoeStakingData"],
       "events": [
         {
-          "event-name": "MarketListed",
-          "event-params": "(address)"
-        },
-        {
-          "event-name": "MarketEntered",
-          "event-params": "(address,address)"
-        },
-        {
-          "event-name": "MarketExited",
-          "event-params": "(address,address)"
-        },
-        {
-          "event-name": "NewCloseFactor",
-          "event-params": "(uint256,uint256)"
-        },
-        {
-          "event-name": "NewCollateralFactor",
-          "event-params": "(address,uint256,uint256)"
-        },
-        {
-          "event-name": "NewLiquidationIncentive",
-          "event-params": "(uint256,uint256)"
-        },
-        {
-          "event-name": "NewPriceOracle",
-          "event-params": "(address,address)"
+          "event-name": "Transfer",
+          "event-params": "(indexed address,indexed address,uint256)"
         }
       ],
       "instances": [
         {
           "symbol": "",
-          "address": "0xdc13687554205E5b89Ac783db14bb5bba4A1eDaC",
-          "startBlock": 5449252
+          "address": "0x57319d41F71E81F3c65F2a47CA4e001EbAFd4F33",
+          "startBlock": 2529703
         }
       ]
     },
     {
       "contract": "JToken",
-      "abis": ["JToken", "JWrappedNative", "JCollateralCapErc20"],
+      "abis": ["JToken", "JWrappedNative", "JCollateralCapErc20", "Joetroller", "ERC20"],
       "entities": ["TraderJoeLendingData"],
       "events": [
         {
           "event-name": "Borrow",
           "event-params": "(address,uint256,uint256,uint256)"
         },
-
         {
           "event-name": "LiquidateBorrow",
           "event-params": "(address,address,uint256,address,uint256)"
@@ -140,7 +115,6 @@
           "event-name": "RepayBorrow",
           "event-params": "(address,address,uint256,uint256,uint256)"
         },
-
         {
           "event-name": "ReservesReduced",
           "event-params": "(address,uint256,uint256)"
@@ -200,13 +174,33 @@
       ]
     },
     {
-      "contract": "JCollateralCapErc20",
-      "abis": ["JToken", "JCollateralCapErc20"],
-      "entities": ["TraderJoeLendingData"],
+      "contract": "JoeFactory",
+      "abis": ["JoeFactory", "JoePair"],
+      "entities": ["TraderJoeSwapData"],
       "events": [
         {
-          "event-name": "Flashloan",
-          "event-params": "(indexed address,uint256,uint256,uint256)"
+          "event-name": "PairCreated",
+          "event-params": "(indexed address,indexed address,address,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "symbol": "",
+          "address": "0x9Ad6C38BE94206cA50bb0d90783181662f0Cfa10",
+          "startBlock": 2486392
+        }
+      ]
+    }
+  ],
+  "templates": [
+    {
+      "name": "JoePair",
+      "abis": ["JoePair", "JoeFactory"],
+      "entities": ["TraderJoeSwapData"],
+      "events": [
+        {
+          "event-name": "Swap",
+          "event-params": "(indexed address,uint256,uint256,uint256,uint256,indexed address)"
         }
       ]
     }

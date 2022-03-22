@@ -42,7 +42,7 @@ dataSources:
 {{#templates}}
 templates:
   - kind: ethereum/contract
-    name: {{name}}
+    name: {{adapter}}{{name}}
     network: {{network}}
     source:
       abi: {{adapter}}{{name}}

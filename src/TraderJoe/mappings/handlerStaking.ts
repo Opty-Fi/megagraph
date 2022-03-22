@@ -82,6 +82,7 @@ export function handleEntity(
   entity.save();
 }
 function getJoePrice(): BigDecimal {
+  // instanciate with the joe-usdt address to get the reserves
   let pair = JoePairContract.bind(JOE_USDT_PAIR_ADDRESS);
   let reservesResult = pair.try_getReserves();
   if (reservesResult.reverted) {

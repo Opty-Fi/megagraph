@@ -43,12 +43,34 @@ type TraderJoeStakingData @entity {
   event: String
 }
 type TraderJoeSwapData @entity {
-  id: ID!
+  id: ID! # tx hash
+  pair: TraderJoeSwapPair
   blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  pair: Bytes
-  reserve0: BigDecimal
-  reserve1: BigDecimal
-  reserve0USDT: BigDecimal
-  reserve1USDT: BigDecimal
+  blockTimestamp: BigInt!      
+  volumeUSD: BigDecimal
+  token0Vol: BigDecimal
+  token1Vol: BigDecimal
+}
+type TraderJoeSwapPair @entity {
+  id: ID! # pool address
+  name: String!
+  token0Symbol: String!
+  token0Decimals: BigInt!
+  token1Symbol: String!
+  token1Decimals: BigInt!  
+  token0Address: Bytes!
+  token1Address: Bytes!
+  reserve0: BigDecimal!
+  reserve1: BigDecimal!
+  token0Price: BigDecimal!
+  token1Price: BigDecimal!
+  token0DerivedAVAX: BigDecimal!
+  token0DerivedUSD: BigDecimal!
+  token1DerivedAVAX: BigDecimal!
+  token1DerivedUSD: BigDecimal!
+}
+
+type TraderJoeAvaxPrice @entity {
+  id: ID!
+  avaxPrice: BigDecimal! # price of AVAX in USD, necessary to get the swap volume in USD, otherwise 
 }
