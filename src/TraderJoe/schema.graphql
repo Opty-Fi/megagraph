@@ -46,8 +46,7 @@ type TraderJoeSwapData @entity {
   id: ID! # tx hash
   pair: TraderJoeSwapPair
   blockNumber: BigInt!
-  blockTimestamp: BigInt!      
-  volumeUSD: BigDecimal
+  blockTimestamp: BigInt!
   token0Vol: BigDecimal
   token1Vol: BigDecimal
 }
@@ -60,17 +59,5 @@ type TraderJoeSwapPair @entity {
   token1Decimals: BigInt!  
   token0Address: Bytes!
   token1Address: Bytes!
-  reserve0: BigDecimal!
-  reserve1: BigDecimal!
-  token0Price: BigDecimal!
-  token1Price: BigDecimal!
-  token0DerivedAVAX: BigDecimal!
-  token0DerivedUSD: BigDecimal!
-  token1DerivedAVAX: BigDecimal!
-  token1DerivedUSD: BigDecimal!
-}
 
-type TraderJoeAvaxPrice @entity {
-  id: ID!
-  avaxPrice: BigDecimal! # price of AVAX in USD, necessary to get the swap volume in USD, otherwise 
 }
