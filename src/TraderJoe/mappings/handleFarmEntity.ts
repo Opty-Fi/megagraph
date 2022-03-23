@@ -1,4 +1,4 @@
-import { Address, BigDecimal, BigInt, Bytes, log } from "@graphprotocol/graph-ts";
+import { Address, BigInt, Bytes, log } from "@graphprotocol/graph-ts";
 import { TraderJoeFarmData } from "../../../generated/schema";
 import { TraderJoeMasterChefJoeV3 as MasterChefJoeV3Contract } from "../../../generated/TraderJoeMasterChefJoeV3/TraderJoeMasterChefJoeV3";
 import { TraderJoeMasterChefJoeV2 as MasterChefJoeV2Contract } from "../../../generated/TraderJoeMasterChefJoeV2/TraderJoeMasterChefJoeV2";
@@ -7,14 +7,14 @@ import { TraderJoeMasterChefJoeV2 as MasterChefJoeV2Contract } from "../../../ge
 import { TraderJoeSimpleRewarderPerSec as RewarderContract } from "../../../generated/TraderJoeMasterChefJoeV2/TraderJoeSimpleRewarderPerSec";
 import { convertBINumToDesiredDecimals, convertBytesToAddress } from "../../utils/converters";
 import {
-  JOE_MASTER_CHEF_V2_ADDRESS,
-  JOE_MASTER_CHEF_V3_ADDRESS,
+  TRADER_JOE_MASTER_CHEF_V2_ADDRESS,
+  TRADER_JOE_MASTER_CHEF_V3_ADDRESS,
   ZERO_ADDRESS,
   ZERO_BD,
   ZERO_BI,
 } from "../../utils/constants";
 
-export function handlePool(
+export function handlePoolEvent(
   txnHash: Bytes,
   blockNumber: BigInt,
   timestamp: BigInt,
@@ -68,7 +68,7 @@ function updateEntityV2(entity: TraderJoeFarmData, poolId: BigInt): TraderJoeFar
   let poolAllocPoints = ZERO_BI;
   let totalJoePerSec = ZERO_BD;
   let totalAllocPoints = ZERO_BI;
-  let contract = MasterChefJoeV2Contract.bind(JOE_MASTER_CHEF_V2_ADDRESS);
+  let contract = MasterChefJoeV2Contract.bind(TRADER_JOE_MASTER_CHEF_V2_ADDRESS);
 
   let totalJoePerSecResult = contract.try_joePerSec();
   if (totalJoePerSecResult.reverted) {
@@ -103,7 +103,7 @@ function updateEntityV3(entity: TraderJoeFarmData, poolId: BigInt): TraderJoeFar
   let poolAllocPoints = ZERO_BI;
   let totalJoePerSec = ZERO_BD;
   let totalAllocPoints = ZERO_BI;
-  let contract = MasterChefJoeV3Contract.bind(JOE_MASTER_CHEF_V3_ADDRESS);
+  let contract = MasterChefJoeV3Contract.bind(TRADER_JOE_MASTER_CHEF_V3_ADDRESS);
 
   let totalJoePerSecResult = contract.try_joePerSec();
   if (totalJoePerSecResult.reverted) {
