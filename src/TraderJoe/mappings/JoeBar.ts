@@ -15,9 +15,11 @@ import {
 } from "../../utils/constants";
 
 export function handleTransfer(event: TransferEvent): void {
-  if (event.params.from !== ZERO_ADDRESS && event.params.to !== ZERO_ADDRESS) {
+  if (event.params.from != ZERO_ADDRESS && event.params.to != ZERO_ADDRESS) {
+    log.debug("not mint or burn. tx: {}", [event.block.hash.toHex()]);
     return;
   }
+
   // incoming value in BigDecimal
   let valueBD = convertBINumToDesiredDecimals(event.params.value, 18);
   // if zero transfer, do nothing.
@@ -25,6 +27,7 @@ export function handleTransfer(event: TransferEvent): void {
     log.warning("Transfer zero value!", []);
     return;
   }
+
   // create stake entity
   let entity = TraderJoeStakingData.load(event.transaction.hash.toHex());
   if (!entity) entity = new TraderJoeStakingData(event.transaction.hash.toHex());
