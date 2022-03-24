@@ -1,0 +1,9 @@
+[
+  {
+    "name": "inflation_rate",
+    "outputs": [{ "type": "uint256", "name": "" }],
+    "inputs": [],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
