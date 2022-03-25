@@ -17,12 +17,10 @@ type PangolinStakingData @entity {
   id: ID!
   blockNumber: BigInt!
   blockTimestamp: BigInt!  
-  xJoeSupply: BigDecimal    
-  totalStakedPNG: BigDecimal
-  # Total Joe staked in USDT
-  tvlInUSDT: BigDecimal
-  # Mint or Burn
+  rewardRate: BigDecimal
+  totalStakedPNG: BigDecimal    
   event: String
+  totalSupply: BigDecimal
 }
 type PangolinSwapData @entity {
   id: ID!
