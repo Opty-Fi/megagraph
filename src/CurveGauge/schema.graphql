@@ -1,0 +1,9 @@
+type CurveGaugeData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  liquidityGauge: Bytes!
+  relativeWeight: BigDecimal!
+  inflationRate: BigDecimal!
+  event: String!
+}
