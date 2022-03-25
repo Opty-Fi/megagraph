@@ -1,0 +1,37 @@
+{
+  "network": "avalanche",
+  "adapter": "Pangolin",
+  "contracts": [
+    {
+      "contract": "Factory",
+      "abis": ["Factory", "Pair"],
+      "entities": ["PangolinSwapPair"],
+      "events": [
+        {
+          "event-name": "PairCreated",
+          "event-params": "(indexed address,indexed address,address,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "symbol": "",
+          "address": "0xefa94DE7a4656D787667C749f7E1223D71E9FD88",
+          "startBlock": 56877
+        }
+      ]
+    }
+  ],
+  "templates": [
+    {
+      "name": "Pair",
+      "abis": ["Pair", "Factory", "ERC20"],
+      "entities": ["PangolinSwapData"],
+      "events": [
+        {
+          "event-name": "Swap",
+          "event-params": "(indexed address,uint256,uint256,uint256,uint256,indexed address)"
+        }
+      ]
+    }
+  ]
+}
