@@ -14,6 +14,13 @@ type SushiKashiData @entity {
 type SushiPoolData @entity {
   id: ID!
   lpToken: Bytes!
+  decimals: Int!
+  token0: Bytes!
+  token1: Bytes!
+  decimals0: Int!
+  decimals1: Int!
+  symbol0: String!
+  symbol1: String!
 }
 
 type SushiTokenData @entity {
@@ -21,7 +28,11 @@ type SushiTokenData @entity {
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   pool: SushiPoolData!
+  reserve0: BigDecimal
+  reserve1: BigDecimal
   sushiPerSecond: BigDecimal
   rewardPerSecond: BigDecimal
   lastRewardTime: BigInt
+  totalSupply: BigDecimal
+  stakedSupply: BigDecimal
 }
