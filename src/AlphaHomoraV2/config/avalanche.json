@@ -4,7 +4,7 @@
   "contracts": [
     {
       "contract": "HomoraBank",
-      "abis": ["HomoraBank", "MasterChef", "MasterChefPNG", "CyToken", "BonusTokenRewarder","ERC20"],
+      "abis": ["HomoraBank", "MasterChef", "MasterChefPNG", "CyToken", "BonusTokenRewarder", "ERC20"],
       "entities": ["AlphaHomoraV2FarmData"],
       "events": [
         {
