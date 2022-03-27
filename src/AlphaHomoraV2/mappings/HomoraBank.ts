@@ -168,13 +168,13 @@ function savePngPoolInfo(
 export function handlePutCollateral(event: PutCollateral): void {
   let farmData = new AlphaHomoraV2FarmData(event.transaction.hash.toHexString());
   let wChef = AlphaHomoraV2WMasterChef.load(event.params.token.toHexString());
-  if (!wChef){
-    return
+  if (!wChef) {
+    return;
   }
   if (event.params.id.toHexString() == "0x0") {
     return;
   }
-  let pid = parseInt(event.params.id.toHexString().slice(0,4)) as u32
+  let pid = parseInt(event.params.id.toHexString().slice(0, 4)) as u32;
   if (pid) {
     if (wChef.id == "0x1f806f7c8ded893fd3cae279191ad7aa3798e928") {
       savePngPoolInfo(
@@ -211,13 +211,13 @@ export function handlePutCollateral(event: PutCollateral): void {
 export function handleTakeCollateral(event: TakeCollateral): void {
   let farmData = new AlphaHomoraV2FarmData(event.transaction.hash.toHexString());
   let wChef = AlphaHomoraV2WMasterChef.load(event.params.token.toHexString());
-  if (!wChef){
-    return
+  if (!wChef) {
+    return;
   }
   if (event.params.id.toHexString() == "0x0") {
     return;
   }
-  let pid = parseInt(event.params.id.toHexString().slice(0,4)) as u32
+  let pid = parseInt(event.params.id.toHexString().slice(0, 4)) as u32;
   if (pid) {
     if (wChef.id == "0x1f806f7c8ded893fd3cae279191ad7aa3798e928") {
       savePngPoolInfo(
