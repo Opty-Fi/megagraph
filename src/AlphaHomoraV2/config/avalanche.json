@@ -1,0 +1,56 @@
+{
+  "network": "avalanche",
+  "adapter": "AlphaHomoraV2",
+  "contracts": [
+    {
+      "contract": "HomoraBank",
+      "abis": ["HomoraBank", "MasterChef", "MasterChefPNG", "CyToken", "BonusTokenRewarder"],
+      "entities": ["AlphaHomoraV2FarmData"],
+      "events": [
+        {
+          "event-name": "PutCollateral",
+          "event-params": "(uint256,address,address,uint256,uint256)"
+        },
+        {
+          "event-name": "TakeCollateral",
+          "event-params": "(uint256,address,address,uint256,uint256)"
+        },
+        {
+          "event-name": "Borrow",
+          "event-params": "(uint256,address,address,uint256,uint256)"
+        },
+        {
+          "event-name": "Repay",
+          "event-params": "(uint256,address,address,uint256,uint256)"
+        },
+        {
+          "event-name": "Liquidate",
+          "event-params": "(uint256,address,address,uint256,uint256,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "address": "0x376d16c7de138b01455a51da79ad65806e9cd694",
+          "symbol": ""
+        }
+      ]
+    },
+    {
+      "contract": "PoolRegistry",
+      "abis": ["PoolRegistry", "ERC20", "LpToken", "MasterChef", "MasterChefPNG", "CyToken"],
+      "entities": ["AlphaHomoraV2Token"],
+      "events": [
+        {
+          "event-name": "OwnershipTransferred",
+          "event-params": "(indexed address,indexed address)"
+        }
+      ],
+      "instances": [
+        {
+          "address": "0x0c2cBF80f43B50fdd99DA0471814C82863E582b8",
+          "symbol": ""
+        }
+      ]
+    }
+  ]
+}
