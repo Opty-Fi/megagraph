@@ -39,6 +39,11 @@ jobs:
         env:
           ADAPTER: AaveV2
           CONFIG: ethereum
+      - name: Build AaveV2 (Polygon)
+        run: yarn build:dev
+        env:
+          ADAPTER: AaveV2
+          CONFIG: polygon
       - name: Build Beefy (Polygon)
         run: yarn build:dev
         env:
