@@ -1,8 +1,6 @@
-import { Transfer as TransferEvent } from "../../../generated/MaiCamWMATICcamWMATIC/MaiCamWMATIC";
-
 import { log } from "@graphprotocol/graph-ts";
+import { MaiCamWMATIC, Transfer as TransferEvent } from "../../../generated/MaiCamWMATICcamWMATIC/MaiCamWMATIC";
 import { ZERO_ADDRESS, ZERO_BI } from "../../utils/constants";
-import { MaiCamWMATIC } from "../../../generated/MaiCamWMATICcamWMATIC/MaiCamWMATIC";
 import { handleCamToken } from "./handlers";
 
 export function handleTransfer(event: TransferEvent): void {

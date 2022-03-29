@@ -29,8 +29,108 @@ jobs:
         run: yarn lint
       - name: Formatting
         run: yarn prettier:check
+      - name: Build Aave (Ethereum)
+        run: yarn build:dev
+        env:
+          ADAPTER: Aave
+          CONFIG: ethereum
+      - name: Build AaveV2 (Ethereum)
+        run: yarn build:dev
+        env:
+          ADAPTER: AaveV2
+          CONFIG: ethereum
+      - name: Build AaveV2 (Polygon)
+        run: yarn build:dev
+        env:
+          ADAPTER: AaveV2
+          CONFIG: polygon
+      - name: Build Beefy (Polygon)
+        run: yarn build:dev
+        env:
+          ADAPTER: Beefy
+          CONFIG: polygon
+      - name: Build Benqi (Avalanche)
+        run: yarn build:dev
+        env:
+          ADAPTER: Benqi
+          CONFIG: avalanche
+      - name: Build Compound (Ethereum)
+        run: yarn build:dev
+        env:
+          ADAPTER: Compound
+          CONFIG: ethereum
+      - name: Build Convex (Ethereum)
+        run: yarn build:dev
+        env:
+          ADAPTER: Convex
+          CONFIG: ethereum
+      - name: Build Cream (Ethereum)
+        run: yarn build:dev
+        env:
+          ADAPTER: Cream
+          CONFIG: ethereum
+      - name: Build Curve (Avalanche)
+        run: yarn build:dev
+        env:
+          ADAPTER: Curve
+          CONFIG: avalanche
       - name: Build Curve (Ethereum)
         run: yarn build:dev
         env:
           ADAPTER: Curve
+          CONFIG: ethereum
+      - name: Build Curve (Fantom)
+        run: yarn build:dev
+        env:
+          ADAPTER: Curve
+          CONFIG: fantom
+      - name: Build Curve (Polygon)
+        run: yarn build:dev
+        env:
+          ADAPTER: Curve
+          CONFIG: polygon
+      - name: Build CurveGauge (Ethereum)
+        run: yarn build:dev
+        env:
+          ADAPTER: CurveGauge
+          CONFIG: ethereum
+      - name: Build DForce (Ethereum)
+        run: yarn build:dev
+        env:
+          ADAPTER: DForce
+          CONFIG: ethereum
+      - name: Build Fulcrum (Ethereum)
+        run: yarn build:dev
+        env:
+          ADAPTER: Fulcrum
+          CONFIG: ethereum
+      - name: Build Harvest (Ethereum)
+        run: yarn build:dev
+        env:
+          ADAPTER: Harvest
+          CONFIG: ethereum
+      - name: Build Lido (Ethereum)
+        run: yarn build:dev
+        env:
+          ADAPTER: Lido
+          CONFIG: ethereum
+      - name: Build Mai (Polygon)
+        run: yarn build:dev
+        env:
+          ADAPTER: Mai
+          CONFIG: polygon
+      - name: Build QuickSwap (Polygon)
+        run: yarn build:dev
+        env:
+          ADAPTER: QuickSwap
+          CONFIG: polygon
+      - name: Build Sushi (Polygon)
+        run: yarn build:dev
+        env:
+          ADAPTER: Sushi
+          CONFIG: polygon
+      - name: Build Yearn (Ethereum)
+        run: yarn build:dev
+        env:
+          ADAPTER: Yearn
           CONFIG: ethereum
