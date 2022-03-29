@@ -34,6 +34,11 @@ jobs:
         env:
           ADAPTER: Aave
           CONFIG: ethereum
+      - name: Build AaveV2 (Avalanche)
+        run: yarn build:dev
+        env:
+          ADAPTER: AaveV2
+          CONFIG: avalanche
       - name: Build AaveV2 (Ethereum)
         run: yarn build:dev
         env:

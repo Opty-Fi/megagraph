@@ -1,0 +1,30 @@
+{
+  "network": "avalanche",
+  "adapter": "AaveV2",
+  "contracts": [
+    {
+      "contract": "Token",
+      "abis": ["LendingPoolAddressesProvider", "AaveProtocolDataProvider", "IncentivesController", "Token"],
+      "entities": ["AaveV2TokenData", "AaveV2Reserve"],
+      "events": [
+        {
+          "event-name": "Burn",
+          "event-params": "(indexed address,indexed address,uint256,uint256)"
+        },
+        {
+          "event-name": "Mint",
+          "event-params": "(indexed address,uint256,uint256)"
+        }
+      ],
+      "instances": [
+        { "address": "0x53f7c5869a859F0AeC3D334ee8B4Cf01E3492f21", "startBlock": 4607207, "symbol": "avWETH" },
+        { "address": "0x47AFa96Cdc9fAb46904A55a6ad4bf6660B53c38a", "startBlock": 4607215, "symbol": "avDAI" },
+        { "address": "0x532E6537FEA298397212F09A61e03311686f548e", "startBlock": 4607217, "symbol": "avUSDT" },
+        { "address": "0x46A51127C3ce23fb7AB1DE06226147F446e4a857", "startBlock": 4607220, "symbol": "avUSDC" },
+        { "address": "0xD45B7c061016102f9FA220502908f2c0f1add1D7", "startBlock": 4607228, "symbol": "avAAVE" },
+        { "address": "0x686bEF2417b6Dc32C50a3cBfbCC3bb60E1e9a15D", "startBlock": 4607230, "symbol": "avWBTC" },
+        { "address": "0xDFE521292EcE2A4f44242efBcD66Bc594CA9714B", "startBlock": 4607232, "symbol": "avWAVAX" }
+      ]
+    }
+  ]
+}
