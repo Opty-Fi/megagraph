@@ -4,13 +4,6 @@ type AlphaHomoraV2Token @entity {
   symbol: String!
 }
 
-type AlphaHomoraV2RewardToken @entity {
-  id: ID!
-  address: String!
-  token: AlphaHomoraV2Token!
-  lpToken: AlphaHomoraV2LpPair!
-}
-
 type AlphaHomoraV2LpPair @entity {
   id: ID!
   name: String!
@@ -19,12 +12,11 @@ type AlphaHomoraV2LpPair @entity {
   exchange: String!
   pid: Int!
   wMasterChef: AlphaHomoraV2WMasterChef!
-  rewardTokens: [AlphaHomoraV2RewardToken!]! @derivedFrom(field: "lpToken")
+  factory: String!
 }
 
 type AlphaHomoraV2WMasterChef @entity {
   id: ID!
-  key: String!
   pairs: [AlphaHomoraV2LpPair!]! @derivedFrom(field: "wMasterChef")
   chef: String!
 }
@@ -63,4 +55,6 @@ type AlphaHomoraV2LendData @entity {
   supplyRatePerBlock: BigDecimal!
   borrowBalance: BigDecimal!
   cyTokenExchangeRate: BigDecimal!
+  blockNumber: BigInt!
+  timestamp: BigInt!
 }
