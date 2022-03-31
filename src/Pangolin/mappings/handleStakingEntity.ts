@@ -5,13 +5,7 @@ import { PangolinPngToken as PngTokenContract } from "../../../generated/Pangoli
 import { convertBINumToDesiredDecimals } from "../../utils/converters";
 import { PANGOLIN_STAKING_REWARDS_ADDRESS, PANGOLIN_PNG_TOKEN_ADDRESS } from "../../utils/constants";
 
-export function handleStakingEntity(
-  txHash: Bytes,
-  blockNumber: BigInt,
-  timestamp: BigInt,
-  eventType: string,
-  amount: BigInt,
-): void {
+export function handleStakingEntity(txHash: Bytes, blockNumber: BigInt, timestamp: BigInt, eventType: string): void {
   let entity = PangolinStakingData.load(txHash.toHex());
   if (!entity) entity = new PangolinStakingData(txHash.toHex());
   entity.blockNumber = blockNumber;
@@ -40,11 +34,6 @@ export function handleStakingEntity(
   } else {
     entity.totalStakedPNG = convertBINumToDesiredDecimals(stakedPngResult.value, 18);
   }
-  let actualAmount = convertBINumToDesiredDecimals(amount, 18);
-  if (eventType == "Withdraw") {
-    entity.totalStakedPNG = entity.totalStakedPNG.minus(actualAmount);
-  } else {
-    entity.totalStakedPNG = entity.totalStakedPNG.plus(actualAmount);
-  }
+
   entity.save();
 }
