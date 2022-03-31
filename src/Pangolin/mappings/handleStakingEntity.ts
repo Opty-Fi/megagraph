@@ -40,5 +40,11 @@ export function handleStakingEntity(
   } else {
     entity.totalStakedPNG = convertBINumToDesiredDecimals(stakedPngResult.value, 18);
   }
+  let actualAmount = convertBINumToDesiredDecimals(amount, 18);
+  if (eventType == "Withdraw") {
+    entity.totalStakedPNG = entity.totalStakedPNG.minus(actualAmount);
+  } else {
+    entity.totalStakedPNG = entity.totalStakedPNG.plus(actualAmount);
+  }
   entity.save();
 }
