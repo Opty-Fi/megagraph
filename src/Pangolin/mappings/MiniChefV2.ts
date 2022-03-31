@@ -1,42 +1,42 @@
 import { Address } from "@graphprotocol/graph-ts";
 import {
-  Deposit as DepositEvent,
-  Withdraw as WithdrawEvent,
-  Harvest as HarvestEvent,
+  // Deposit as DepositEvent,
+  // Withdraw as WithdrawEvent,
+  // Harvest as HarvestEvent,
   PoolAdded as PoolAddedEvent,
   PoolSet as PoolSetEvent,
   PoolUpdate as PoolUpdateEvent,
 } from "../../../generated/PangolinMiniChefV2/PangolinMiniChefV2";
 import { handleFarmEvent } from "./handleFarmEntity";
 
-export function handleDeposit(event: DepositEvent): void {
-  let txnHash = event.transaction.hash;
-  let blockNumber = event.block.number;
-  let timestamp = event.block.timestamp;
-  let poolId = event.params.pid;
-  let amount = event.params.amount;
-  let eventType = "Deposit";
+// export function handleDeposit(event: DepositEvent): void {
+//   let txnHash = event.transaction.hash;
+//   let blockNumber = event.block.number;
+//   let timestamp = event.block.timestamp;
+//   let poolId = event.params.pid;
+//   let amount = event.params.amount;
+//   let eventType = "Deposit";
 
-  handleFarmEvent(txnHash, blockNumber, timestamp, poolId, eventType, null, amount, null);
-}
-export function handleWithdraw(event: WithdrawEvent): void {
-  let txnHash = event.transaction.hash;
-  let blockNumber = event.block.number;
-  let timestamp = event.block.timestamp;
-  let poolId = event.params.pid;
-  let eventType = "Withdraw";
-  let amount = event.params.amount;
-  handleFarmEvent(txnHash, blockNumber, timestamp, poolId, eventType, null, amount, null);
-}
-export function handleHarvest(event: HarvestEvent): void {
-  let txnHash = event.transaction.hash;
-  let blockNumber = event.block.number;
-  let timestamp = event.block.timestamp;
-  let poolId = event.params.pid;
-  let amount = event.params.amount;
-  let eventType = "Harvest";
-  handleFarmEvent(txnHash, blockNumber, timestamp, poolId, eventType, null, amount, null);
-}
+//   handleFarmEvent(txnHash, blockNumber, timestamp, poolId, eventType, null, amount, null);
+// }
+// export function handleWithdraw(event: WithdrawEvent): void {
+//   let txnHash = event.transaction.hash;
+//   let blockNumber = event.block.number;
+//   let timestamp = event.block.timestamp;
+//   let poolId = event.params.pid;
+//   let eventType = "Withdraw";
+//   let amount = event.params.amount;
+//   handleFarmEvent(txnHash, blockNumber, timestamp, poolId, eventType, null, amount, null);
+// }
+// export function handleHarvest(event: HarvestEvent): void {
+//   let txnHash = event.transaction.hash;
+//   let blockNumber = event.block.number;
+//   let timestamp = event.block.timestamp;
+//   let poolId = event.params.pid;
+//   let amount = event.params.amount;
+//   let eventType = "Harvest";
+//   handleFarmEvent(txnHash, blockNumber, timestamp, poolId, eventType, null, amount, null);
+// }
 export function handlePoolAdded(event: PoolAddedEvent): void {
   let txnHash = event.transaction.hash;
   let blockNumber = event.block.number;

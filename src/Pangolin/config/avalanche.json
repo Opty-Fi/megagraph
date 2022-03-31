@@ -8,18 +8,6 @@
       "entities": ["PangolinFarmData"],
       "events": [
         {
-          "event-name": "Deposit",
-          "event-params": "(indexed address,indexed uint256,uint256,indexed address)"
-        },
-        {
-          "event-name": "Withdraw",
-          "event-params": "(indexed address,indexed uint256,uint256,indexed address)"
-        },
-        {
-          "event-name": "Harvest",
-          "event-params": "(indexed address,indexed uint256,uint256)"
-        },
-        {
           "event-name": "PoolUpdate",
           "event-params": "(indexed uint256,uint64,uint256,uint256)"
         },
@@ -36,7 +24,7 @@
         {
           "symbol": "",
           "address": "0x1f806f7C8dED893fd3caE279191ad7Aa3798E928",
-          "startBlock": 6987996
+          "startBlock": 9805993
         }
       ]
     }

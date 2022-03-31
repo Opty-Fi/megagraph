@@ -1,17 +1,20 @@
 type PangolinFarmData @entity {
-  id: ID!
+  id: ID!  
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   lpToken: Bytes!
-  poolId: BigInt!
-  version: String
-  accJoePerShare: BigDecimal
-  joePerSecond: BigDecimal
-  rewardToken: Bytes
-  rewarder: Bytes!
-  rewardPerSecond: BigDecimal
+  poolId: BigInt!  
+  accRewardPerShare: BigDecimal
+  pngPerSecond: BigDecimal  
   lastRewardTime: BigInt
-  event: String  
+  event: String    
+  additionalRewards: [PangolinFarmReward!]
+}
+type PangolinFarmReward @entity {
+  id: ID! # poolId - reward token address
+  rewardMultiplier: BigDecimal
+  rewardTokenPerSecond: BigDecimal
+  rewardToken: Bytes!
 }
 type PangolinStakingData @entity {
   id: ID!
@@ -39,5 +42,4 @@ type PangolinSwapPair @entity {
   token1Decimals: BigInt!  
   token0Symbol: String!
   token1Symbol: String!
-
 }
