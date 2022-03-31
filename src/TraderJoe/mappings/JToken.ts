@@ -144,7 +144,21 @@ function handleLendingEntity(
   } else {
     let assetContractAddress = underlyingAddressResult.value;
     let underlyingContract = TraderJoeERC20.bind(assetContractAddress as Address);
-    underlyingAssetDecimals = underlyingContract.decimals();
+    let underlyingDecimalsResult = underlyingContract.try_decimals();
+    if (underlyingDecimalsResult.reverted) {
+      log.warning("try_decimals() reverted on {}", [assetContractAddress.toHex()]);
+      return;
+    } else {
+      underlyingAssetDecimals = underlyingDecimalsResult.value;
+    }
+    let underlyingSymbolResult = underlyingContract.try_symbol();
+    if (underlyingSymbolResult.reverted) {
+      log.warning("try_symbol() on {}", [assetContractAddress.toHex()]);
+    } else {
+      entity.underlyingSymbol = underlyingSymbolResult.value;
+    }
+
+    entity.underlyingAddress = assetContractAddress;
   }
 
   entity.blockNumber = blockNumber;
