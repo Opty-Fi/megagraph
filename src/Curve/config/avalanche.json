@@ -3,42 +3,13 @@
   "adapter": "Curve",
   "contracts": [
     {
-      "contract": "GaugeController",
-      "abis": ["GaugeController"],
-      "entities": ["CurveGaugeData"],
-      "events": [
-        {
-          "event-name": "NewGauge",
-          "event-params": "(address,int128,uint256)"
-        },
-        {
-          "event-name": "NewGaugeWeight",
-          "event-params": "(address,uint256,uint256,uint256)"
-        },
-        {
-          "event-name": "NewTypeWeight",
-          "event-params": "(int128,uint256,uint256,uint256)"
-        },
-        {
-          "event-name": "VoteForGauge",
-          "event-params": "(uint256,address,address,uint256)"
-        }
-      ],
-      "instances": [
-        {
-          "symbol": "",
-          "address": "0x2F50D538606Fa9EDD2B11E2446BEb18C9D5846bB",
-          "startBlock": 10647875
-        }
-      ]
-    },
-    {
-      "contract": "PoolX2",
+      "contract": "PoolX2_256",
       "abis": [
-        "PoolX2",
+        "PoolX2_256",
         "Registry",
         "LiquidityGauge",
         "LiquidityGaugeV2",
+        "LiquidityGaugeCommon",
         "StakingLiquidityGauge",
         "StakingRewards",
         "MultiRewards",
@@ -183,12 +154,13 @@
       ]
     },
     {
-      "contract": "PoolX3",
+      "contract": "PoolX3_256",
       "abis": [
-        "PoolX3",
+        "PoolX3_256",
         "Registry",
         "LiquidityGauge",
         "LiquidityGaugeV2",
+        "LiquidityGaugeCommon",
         "StakingLiquidityGauge",
         "StakingRewards",
         "MultiRewards",
@@ -208,7 +180,7 @@
         },
         {
           "event-name": "RemoveLiquidityOne",
-          "event-params": "(indexed address,uint256,uint256)"
+          "event-params": "(indexed address,uint256,uint256,uint256)"
         },
         {
           "event-name": "RemoveLiquidityImbalance",
@@ -225,7 +197,11 @@
           "startBlock": "5219877",
           "symbol": "atricrypto"
         },
-        { "address": "0x7f90122BF0700F9E7e1F688fe926940E8839F353", "startBlock": "5208779", "symbol": "aave" },
+        {
+          "address": "0x7f90122BF0700F9E7e1F688fe926940E8839F353",
+          "startBlock": "5208779",
+          "symbol": "aave"
+        },
         {
           "address": "0xAEA2E71b631fA93683BCF256A8689dFa0e094fcD",
           "startBlock": "6926450",
@@ -234,12 +210,13 @@
       ]
     },
     {
-      "contract": "PoolX4",
+      "contract": "PoolX4_256",
       "abis": [
-        "PoolX4",
+        "PoolX4_256",
         "Registry",
         "LiquidityGauge",
         "LiquidityGaugeV2",
+        "LiquidityGaugeCommon",
         "StakingLiquidityGauge",
         "StakingRewards",
         "MultiRewards",
@@ -256,6 +233,10 @@
         {
           "event-name": "RemoveLiquidity",
           "event-params": "(indexed address,uint256[4],uint256[4],uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidityOne",
+          "event-params": "(indexed address,uint256,uint256,uint256)"
         },
         {
           "event-name": "RemoveLiquidityImbalance",
