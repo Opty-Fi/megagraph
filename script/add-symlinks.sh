@@ -26,9 +26,10 @@ then
   ln -s CurvePoolX4_2564pool-f-7 generated/CurvePoolX4_256
 elif test "$CONFIG" = "polygon"
 then
-  ln -s CurvePoolX2eurtusd      generated/CurvePoolX2
-  ln -s CurvePoolX3aave         generated/CurvePoolX3
-  ln -s CurvePoolX4crvAUR-JRT-f generated/CurvePoolX4
+  ln -s CurvePoolX2_256eurtusd      generated/Curve
+  ln -s CurvePoolX2_256eurtusd      generated/CurvePoolX2_256
+  ln -s CurvePoolX3_256aave         generated/CurvePoolX3_256
+  ln -s CurvePoolX4_256crvAUR-JRT-f generated/CurvePoolX4_256
 
   ln -s AaveV2TokenamDAI generated/AaveV2Token
   ln -sf constants-polygon.ts src/AaveV2/mappings/constants.ts
