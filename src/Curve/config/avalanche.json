@@ -235,6 +235,10 @@
           "event-params": "(indexed address,uint256[4],uint256[4],uint256)"
         },
         {
+          "event-name": "RemoveLiquidityOne",
+          "event-params": "(indexed address,uint256,uint256,uint256)"
+        },
+        {
           "event-name": "RemoveLiquidityImbalance",
           "event-params": "(indexed address,uint256[4],uint256[4],uint256,uint256)"
         },

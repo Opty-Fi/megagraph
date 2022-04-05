@@ -315,6 +315,10 @@
           "event-params": "(indexed address,uint256[4],uint256[4],uint256)"
         },
         {
+          "event-name": "RemoveLiquidityOne",
+          "event-params": "(indexed address,uint256,uint256,uint256)"
+        },
+        {
           "event-name": "RemoveLiquidityImbalance",
           "event-params": "(indexed address,uint256[4],uint256[4],uint256,uint256)"
         },
@@ -348,6 +352,53 @@
           "address": "0x45F783CCE6B7FF23B2ab2D70e416cdb7D6055f51",
           "startBlock": 9476468
         }
+      ]
+    },
+    {
+      "contract": "PoolX4_128",
+      "abis": [
+        "PoolX4_128",
+        "Registry",
+        "LiquidityGauge",
+        "LiquidityGaugeV2",
+        "LiquidityGaugeCommon",
+        "StakingLiquidityGauge",
+        "StakingRewards",
+        "MultiRewards",
+        "Rewards",
+        "ERC20",
+        "AaveIncentivesController"
+      ],
+      "entities": ["CurvePoolData", "CurveExtraReward"],
+      "events": [
+        {
+          "event-name": "AddLiquidity",
+          "event-params": "(indexed address,uint256[4],uint256[4],uint256,uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidity",
+          "event-params": "(indexed address,uint256[4],uint256[4],uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidityOne",
+          "event-params": "(indexed address,uint256,uint256,uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidityImbalance",
+          "event-params": "(indexed address,uint256[4],uint256[4],uint256,uint256)"
+        },
+        {
+          "event-name": "TokenExchange",
+          "event-params": "(indexed address,int128,uint256,int128,uint256)"
+        },
+        {
+          "event-name": "TokenExchangeUnderlying",
+          "event-params": "(indexed address,int128,uint256,int128,uint256)"
+        }
+      ],
+      "instances": [
+        { "address": "0xDa5B670CcD418a187a3066674A8002Adc9356Ad1", "startBlock": 12986346, "symbol": "crvCRV-f-7" },
+        { "address": "0x3CFAa1596777CAD9f5004F9a0c443d912E262243", "startBlock": 13069248, "symbol": "mEUR-f-24" }
       ]
     }
   ]
