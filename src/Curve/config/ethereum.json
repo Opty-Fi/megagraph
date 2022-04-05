@@ -184,6 +184,11 @@
           "symbol": "ust3CRV",
           "address": "0x890f4e345B1dAED0367A877a1612f86A1f86985f",
           "startBlock": 11466568
+        },
+        {
+          "symbol": "MIM-3LP3CRV-f-20",
+          "address": "0x5a6A4D54456819380173272A5E8E9B9904BdF41B",
+          "startBlock": 12557139
         }
       ]
     },
