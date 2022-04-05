@@ -3,12 +3,13 @@
   "adapter": "Curve",
   "contracts": [
     {
-      "contract": "PoolX2",
+      "contract": "PoolX2_256",
       "abis": [
-        "PoolX2",
+        "PoolX2_256",
         "Registry",
         "LiquidityGauge",
         "LiquidityGaugeV2",
+        "LiquidityGaugeCommon",
         "StakingLiquidityGauge",
         "StakingRewards",
         "MultiRewards",
@@ -153,12 +154,13 @@
       ]
     },
     {
-      "contract": "PoolX3",
+      "contract": "PoolX3_256",
       "abis": [
-        "PoolX3",
+        "PoolX3_256",
         "Registry",
         "LiquidityGauge",
         "LiquidityGaugeV2",
+        "LiquidityGaugeCommon",
         "StakingLiquidityGauge",
         "StakingRewards",
         "MultiRewards",
@@ -195,7 +197,11 @@
           "startBlock": "5219877",
           "symbol": "atricrypto"
         },
-        { "address": "0x7f90122BF0700F9E7e1F688fe926940E8839F353", "startBlock": "5208779", "symbol": "aave" },
+        {
+          "address": "0x7f90122BF0700F9E7e1F688fe926940E8839F353",
+          "startBlock": "5208779",
+          "symbol": "aave"
+        },
         {
           "address": "0xAEA2E71b631fA93683BCF256A8689dFa0e094fcD",
           "startBlock": "6926450",
@@ -204,12 +210,13 @@
       ]
     },
     {
-      "contract": "PoolX4",
+      "contract": "PoolX4_256",
       "abis": [
-        "PoolX4",
+        "PoolX4_256",
         "Registry",
         "LiquidityGauge",
         "LiquidityGaugeV2",
+        "LiquidityGaugeCommon",
         "StakingLiquidityGauge",
         "StakingRewards",
         "MultiRewards",
