@@ -3,12 +3,13 @@
   "adapter": "Curve",
   "contracts": [
     {
-      "contract": "PoolX2",
+      "contract": "PoolX2_256",
       "abis": [
-        "PoolX2",
+        "PoolX2_256",
         "Registry",
         "LiquidityGauge",
         "LiquidityGaugeV2",
+        "LiquidityGaugeCommon",
         "StakingLiquidityGauge",
         "StakingRewards",
         "MultiRewards",
@@ -167,12 +168,13 @@
       ]
     },
     {
-      "contract": "PoolX3",
+      "contract": "PoolX3_256",
       "abis": [
-        "PoolX3",
+        "PoolX3_256",
         "Registry",
         "LiquidityGauge",
         "LiquidityGaugeV2",
+        "LiquidityGaugeCommon",
         "StakingLiquidityGauge",
         "StakingRewards",
         "MultiRewards",
@@ -192,7 +194,7 @@
         },
         {
           "event-name": "RemoveLiquidityOne",
-          "event-params": "(indexed address,uint256,uint256)"
+          "event-params": "(indexed address,uint256,uint256,uint256)"
         },
         {
           "event-name": "RemoveLiquidityImbalance",
@@ -233,12 +235,13 @@
       ]
     },
     {
-      "contract": "PoolX4",
+      "contract": "PoolX4_256",
       "abis": [
-        "PoolX4",
+        "PoolX4_256",
         "Registry",
         "LiquidityGauge",
         "LiquidityGaugeV2",
+        "LiquidityGaugeCommon",
         "StakingLiquidityGauge",
         "StakingRewards",
         "MultiRewards",
@@ -255,6 +258,10 @@
         {
           "event-name": "RemoveLiquidity",
           "event-params": "(indexed address,uint256[4],uint256[4],uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidityOne",
+          "event-params": "(indexed address,uint256,uint256,uint256)"
         },
         {
           "event-name": "RemoveLiquidityImbalance",

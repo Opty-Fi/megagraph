@@ -20,9 +20,10 @@ then
   ln -sf constants-avalanche.ts src/AaveV2/mappings/constants.ts
 elif test "$CONFIG" = "fantom"
 then
-  ln -s CurvePoolX2ren       generated/CurvePoolX2
-  ln -s CurvePoolX3tricrypto generated/CurvePoolX3
-  ln -s CurvePoolX44pool-f-7 generated/CurvePoolX4
+  ln -s CurvePoolX2_256ren       generated/Curve
+  ln -s CurvePoolX2_256ren       generated/CurvePoolX2_256
+  ln -s CurvePoolX3_256tricrypto generated/CurvePoolX3_256
+  ln -s CurvePoolX4_2564pool-f-7 generated/CurvePoolX4_256
 elif test "$CONFIG" = "polygon"
 then
   ln -s CurvePoolX2eurtusd      generated/CurvePoolX2
