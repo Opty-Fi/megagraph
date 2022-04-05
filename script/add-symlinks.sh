@@ -11,15 +11,6 @@ then
   ln -s CurvePoolX3.ts       generated/CurvePoolX4/CurvePoolX4.ts
 elif test "$CONFIG" = "avalanche"
 then
-  mkdir generated/CurvePoolX2_128
-  touch generated/CurvePoolX2_128/CurvePoolX2_128.ts
-
-  mkdir generated/CurvePoolX3_128
-  touch generated/CurvePoolX3_128/CurvePoolX3_128.ts
-
-  mkdir generated/CurvePoolX4_128
-  touch generated/CurvePoolX4_128/CurvePoolX4_128.ts
-
   ln -s CurvePoolX2_256MIM3CRV-f-0  generated/Curve
   ln -s CurvePoolX2_256MIM3CRV-f-0  generated/CurvePoolX2_256
   ln -s CurvePoolX3_256atricrypto   generated/CurvePoolX3_256
@@ -43,9 +34,6 @@ then
 
   ln -s SushiKashiPairMediumRiskV1kmWBTC\&\#x2F\;WMATIC-LINK generated/SushiKashiPairMediumRiskV1
 else # Ethereum
-  mkdir generated/CurvePoolX4_256
-  touch generated/CurvePoolX4_256/CurvePoolX4_256.ts
-
   ln -s CurvePoolX2_128cDAI+cUSDC         generated/Curve
   ln -s CurvePoolX2_128cDAI+cUSDC         generated/CurvePoolX2_128
   ln -s CurvePoolX2_256ankrCRV            generated/CurvePoolX2_256

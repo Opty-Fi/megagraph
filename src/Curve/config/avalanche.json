@@ -180,7 +180,7 @@
         },
         {
           "event-name": "RemoveLiquidityOne",
-          "event-params": "(indexed address,uint256,uint256)"
+          "event-params": "(indexed address,uint256,uint256,uint256)"
         },
         {
           "event-name": "RemoveLiquidityImbalance",
