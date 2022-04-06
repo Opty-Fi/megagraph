@@ -3,12 +3,68 @@
   "adapter": "Curve",
   "contracts": [
     {
-      "contract": "PoolX2",
+      "contract": "PoolX2_128",
       "abis": [
-        "PoolX2",
+        "PoolX2_128",
         "Registry",
         "LiquidityGauge",
         "LiquidityGaugeV2",
+        "LiquidityGaugeCommon",
+        "StakingLiquidityGauge",
+        "StakingRewards",
+        "MultiRewards",
+        "Rewards",
+        "ERC20",
+        "AaveIncentivesController"
+      ],
+      "entities": ["CurvePoolData", "CurveExtraReward"],
+      "events": [
+        {
+          "event-name": "AddLiquidity",
+          "event-params": "(indexed address,uint256[2],uint256[2],uint256,uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidity",
+          "event-params": "(indexed address,uint256[2],uint256[2],uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidityOne",
+          "event-params": "(indexed address,uint256,uint256,uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidityImbalance",
+          "event-params": "(indexed address,uint256[2],uint256[2],uint256,uint256)"
+        },
+        {
+          "event-name": "TokenExchange",
+          "event-params": "(indexed address,int128,uint256,int128,uint256)"
+        },
+        {
+          "event-name": "TokenExchangeUnderlying",
+          "event-params": "(indexed address,int128,uint256,int128,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "symbol": "cDAI+cUSDC",
+          "address": "0xA2B47E3D5c44877cca798226B7B8118F9BFb7A56",
+          "startBlock": 9554040
+        },
+        {
+          "symbol": "crvRenWBTC",
+          "address": "0x93054188d876f558f4a66B2EF1d97d16eDf0895B",
+          "startBlock": 10151385
+        }
+      ]
+    },
+    {
+      "contract": "PoolX2_256",
+      "abis": [
+        "PoolX2_256",
+        "Registry",
+        "LiquidityGauge",
+        "LiquidityGaugeV2",
+        "LiquidityGaugeCommon",
         "StakingLiquidityGauge",
         "StakingRewards",
         "MultiRewards",
@@ -53,16 +109,6 @@
           "symbol": "bbtc",
           "address": "0x071c661B4DeefB59E2a3DdB20Db036821eeE8F4b",
           "startBlock": 11455022
-        },
-        {
-          "symbol": "cDAI+cUSDC",
-          "address": "0xA2B47E3D5c44877cca798226B7B8118F9BFb7A56",
-          "startBlock": 9554040
-        },
-        {
-          "symbol": "crvRenWBTC",
-          "address": "0x93054188d876f558f4a66B2EF1d97d16eDf0895B",
-          "startBlock": 10151385
         },
         {
           "symbol": "dusd3CRV",
@@ -138,16 +184,258 @@
           "symbol": "ust3CRV",
           "address": "0x890f4e345B1dAED0367A877a1612f86A1f86985f",
           "startBlock": 11466568
+        },
+        { "address": "0xFD5dB7463a3aB53fD211b4af195c5BCCC1A03890", "startBlock": 12914704, "symbol": "EURT-f-1" },
+        { "address": "0x8461A004b50d321CB22B7d034969cE6803911899", "startBlock": 12925098, "symbol": "ibKRW+sKRW-f-2" },
+        { "address": "0x19b080FE1ffA0553469D20Ca36219F17Fcf03859", "startBlock": 12931794, "symbol": "ibEUR+sEUR-f-3" },
+        { "address": "0xED24FE718EFFC6B2Fc59eeaA5C5f51dD079AB6ED", "startBlock": 12983888, "symbol": "jGBP+TGBP-f-5" },
+        { "address": "0x87650D7bbfC3A9F10587d7778206671719d9910D", "startBlock": 12860905, "symbol": "OUSD3CRV-f-9" },
+        {
+          "address": "0x6A274dE3e2462c7614702474D64d376729831dCa",
+          "startBlock": 13042152,
+          "symbol": "aUSDC+aDAI-f-10"
+        },
+        {
+          "address": "0x06cb22615BA53E60D67Bf6C341a0fD5E718E1655",
+          "startBlock": 13044095,
+          "symbol": "FEI3CRV3CRV-f-11"
+        },
+        { "address": "0x43b4FdFD4Ff969587185cDB6f0BD875c5Fc83f8c", "startBlock": 11955333, "symbol": "alUSD3CRV-f-12" },
+        { "address": "0xd632f22692FaC7611d2AA1C0D552930D43CAEd3B", "startBlock": 11968730, "symbol": "FRAX3CRV-f-13" },
+        {
+          "address": "0xf5A95ccDe486B5fE98852bB02d8eC80a4b9422BD",
+          "startBlock": 11976084,
+          "symbol": "GrapeFUSD3CRV-f-14"
+        },
+        { "address": "0xEd279fDD11cA84bEef15AF5D39BB4d4bEE23F0cA", "startBlock": 12184843, "symbol": "LUSD3CRV-f-16" },
+        {
+          "address": "0x5a6A4D54456819380173272A5E8E9B9904BdF41B",
+          "startBlock": 12557139,
+          "symbol": "MIM-3LP3CRV-f-20"
+        },
+        { "address": "0x67d9eAe741944D4402eB0D1cB3bC3a168EC1764c", "startBlock": 12733698, "symbol": "nUSD3CRV-f-21" },
+        { "address": "0x9D0464996170c6B9e75eED71c68B99dDEDf279e8", "startBlock": 13056724, "symbol": "cvxcrv-f-22" },
+        { "address": "0x5B3b5DF2BF2B6543f78e053bD91C4Bdd820929f1", "startBlock": 13057190, "symbol": "USDM3CRV-f-23" },
+        { "address": "0x9f6664205988C3bf4B12B851c075102714869535", "startBlock": 12087938, "symbol": "waUSD3CRV-f-25" },
+        {
+          "address": "0xAA5A67c256e27A5d80712c51971408db3370927D",
+          "startBlock": 13097116,
+          "symbol": "DOLA3POOL3CRV-f-27"
+        },
+        {
+          "address": "0x8818a9bb44Fbf33502bE7c15c500d0C783B73067",
+          "startBlock": 13099579,
+          "symbol": "ibJPY+sJPY-f-28"
+        },
+        {
+          "address": "0x3F1B0278A9ee595635B61817630cC19DE792f506",
+          "startBlock": 13099582,
+          "symbol": "ibAUD+sAUD-f-29"
+        },
+        {
+          "address": "0xD6Ac1CB9019137a896343Da59dDE6d097F710538",
+          "startBlock": 13099589,
+          "symbol": "ibGBP+sGBP-f-30"
+        },
+        {
+          "address": "0x9c2C8910F113181783c249d8F6Aa41b51Cde0f0c",
+          "startBlock": 13099601,
+          "symbol": "ibCHF+sCHF-f-31"
+        },
+        {
+          "address": "0xc8a7C1c4B748970F57cA59326BcD49F5c9dc43E3",
+          "startBlock": 13105712,
+          "symbol": "OPEN MATIC-f-32"
+        },
+        { "address": "0x3Fb78e61784C9c637D560eDE23Ad57CA1294c14a", "startBlock": 13125980, "symbol": "EURN/EURT-f-33" },
+        { "address": "0x737bC004136f66aE3F8fd5a1199e81c18388097B", "startBlock": 13139209, "symbol": "sdCRV-f-34" },
+        {
+          "address": "0x4e52Cfc80679F402d10f7766fa3f85351A7C2530",
+          "startBlock": 13180236,
+          "symbol": "BTCpx/sbtcCRV-f-35"
+        },
+        { "address": "0xC4C319E2D4d66CcA4464C0c2B32c9Bd23ebe784e", "startBlock": 13227441, "symbol": "alETH+ETH-f-38" },
+        {
+          "address": "0xfa65aa60a9D45623c57D383fb4cf8Fb8b854cC4D",
+          "startBlock": 13274349,
+          "symbol": "tbtc2/sbtcCRV-f-41"
+        },
+        {
+          "address": "0xeD09ca8275dFfb09c632B6EA58C035a851F73616",
+          "startBlock": 13281194,
+          "symbol": "kusd3pool3CRV-f-42"
+        },
+        {
+          "address": "0xAc5f019a302c4c8caAC0a7F28183ac62E6e80034",
+          "startBlock": 13281334,
+          "symbol": "tusd3pool3CRV-f-43"
+        },
+        { "address": "0xbcb91E689114B9Cc865AD7871845C95241Df4105", "startBlock": 13314289, "symbol": "PWRD3CRV-f-44" },
+        { "address": "0xC2F5FeA5197a3d92736500Fd7733Fcc7a3bBDf3F", "startBlock": 13319634, "symbol": "fUSD3CRV-f-45" },
+        { "address": "0x6870F9b4DD5d34C7FC53D0d85D9dBd1aAB339BF7", "startBlock": 13333943, "symbol": "DEI3CRV-f-47" },
+        { "address": "0x55A8a39bc9694714E2874c1ce77aa1E599461E18", "startBlock": 13338726, "symbol": "MIM-UST-f-48" },
+        { "address": "0xf03bD3cfE85f00bF5819AC20f0870cE8a8d1F0D8", "startBlock": 13384216, "symbol": "ETH/vETH2-f-49" },
+        {
+          "address": "0xC8781F2193e2CB861c9325677D98297F94a0dfd3",
+          "startBlock": 13393925,
+          "symbol": "QBITWELLS3CRV-f-50"
+        },
+        {
+          "address": "0x9f4A88da14F2b6DBc785C1Db3511A53B8F342bde",
+          "startBlock": 13395935,
+          "symbol": "QWell13CRV-f-51"
+        },
+        {
+          "address": "0x04c90C198b2eFF55716079bc06d7CCc4aa4d7512",
+          "startBlock": 13410303,
+          "symbol": "bveCVX-CVX-f-52"
+        },
+        {
+          "address": "0xCEAF7747579696A2F0bb206a14210e3c9e6fB269",
+          "startBlock": 13415127,
+          "symbol": "UST_whv23CRV-f-53"
+        },
+        { "address": "0xf0C081020B9d06EB1b33e357767c00Ccc138bE7c", "startBlock": 13416433, "symbol": "DSU3CRV-f-55" },
+        { "address": "0xFB9a265b5a1f52d97838Ec7274A0b1442efAcC87", "startBlock": 13420467, "symbol": "aETHb-f-56" },
+        { "address": "0x1F6bb2a7a2A84d08bb821B89E38cA651175aeDd4", "startBlock": 13447607, "symbol": "aMATICb-f-58" },
+        {
+          "address": "0xc270b3B858c335B6BA5D5b10e2Da8a09976005ad",
+          "startBlock": 13456433,
+          "symbol": "pax-usdp3CRV-f-59"
+        },
+        {
+          "address": "0xFbdCA68601f835b27790D98bbb8eC7f05FDEaA9B",
+          "startBlock": 13495087,
+          "symbol": "ibbtc/sbtcCRV-f-60"
+        },
+        { "address": "0x8DF0713B2a047c45a0BEf21c3B309bcEF91afd34", "startBlock": 13572001, "symbol": "fxEUR_CRV-f-61" },
+        {
+          "address": "0x148a88719bA0B34F16e0f5A7537DA73Bdc9C2A2A",
+          "startBlock": 13576673,
+          "symbol": "ORK/sbtcCRV-f-62"
+        },
+        {
+          "address": "0x45a8CC73EC100306af64AB2CcB7B12E70EC549A8",
+          "startBlock": 13583113,
+          "symbol": "agEUR/sEUR-f-63"
+        },
+        {
+          "address": "0xcbD5cC53C5b846671C6434Ab301AD4d210c21184",
+          "startBlock": 13588113,
+          "symbol": "ibZAR+ZARP-f-64"
+        },
+        {
+          "address": "0x06d39e95977349431E3d800d49C63B4D472e10FB",
+          "startBlock": 13647028,
+          "symbol": "tWETH+WETH-f-67"
+        },
+        {
+          "address": "0x1033812EFeC8716BBaE0c19e5678698D25E26eDf",
+          "startBlock": 13653478,
+          "symbol": "XSTUSD3CRV-f-68"
+        },
+        {
+          "address": "0x679CE2A8B3180f5a00e0DCCA26783016799e9A58",
+          "startBlock": 13679040,
+          "symbol": "XIM3CRV3CRV-f-69"
+        },
+        { "address": "0x6d8fF88973b15dF3e2dc6ABb9aF29Cad8C2B5Ef5", "startBlock": 13679055, "symbol": "XIM3CRV-f-70" },
+        {
+          "address": "0x8083b047E962CA45B210E28aC755fbdA3D773c5B",
+          "startBlock": 13688701,
+          "symbol": "RAMP rUSD3CRV-f-71"
+        },
+        { "address": "0x3b22B869ba3c0a495Cead0B8A009b70886d37fAC", "startBlock": 13716114, "symbol": "bhome3CRV-f-72" },
+        {
+          "address": "0xbB2dC673E1091abCA3eaDB622b18f6D4634b2CD9",
+          "startBlock": 13763779,
+          "symbol": "JPYC+ibJPY-f-73"
+        },
+        { "address": "0x1c65bA665ce39cfe85639227eccf17Be2B167058", "startBlock": 13763823, "symbol": "UST-FRAX-f-74" },
+        { "address": "0xf083FBa98dED0f9C970e5a418500bad08D8b9732", "startBlock": 13771105, "symbol": "bentcvx-f-76" },
+        {
+          "address": "0x76264772707c8Bc24261516b560cBF3Cbe6F7819",
+          "startBlock": 13782504,
+          "symbol": "USX3CRV3CRV-f-77"
+        },
+        { "address": "0xB37D6c07482Bc11cd28a1f11f1a6ad7b66Dec933", "startBlock": 13815271, "symbol": "ag+ib-EUR-f-78" },
+        {
+          "address": "0x694650a0B2866472c2EEA27827CE6253C1D13074",
+          "startBlock": 13923282,
+          "symbol": "tFRAX+FRAX-f-79"
+        },
+        {
+          "address": "0x8ed10E4e307822b969BCDaffD49095235f6F892b",
+          "startBlock": 13944616,
+          "symbol": "ELONXSWAP3CRV-f-80"
+        },
+        { "address": "0x3a70DfA7d2262988064A2D051dd47521E43c9BdD", "startBlock": 13954026, "symbol": "BEAN3CRV-f-81" },
+        { "address": "0x7abD51BbA7f9F6Ae87aC77e1eA1C5783adA56e5c", "startBlock": 14093320, "symbol": "USDV3CRV-f-82" },
+        {
+          "address": "0x5b78b93Fa851c357586915c7bA7258b762eB1ba0",
+          "startBlock": 14133562,
+          "symbol": "PARUSDC3CRV-f-83"
+        },
+        {
+          "address": "0x0FaFaFD3C393ead5F5129cFC7e0E12367088c473",
+          "startBlock": 14138164,
+          "symbol": "baoUSD-3CRV-f-84"
+        },
+        { "address": "0xd05ce4AB1f4fb0C0e1b65ebE3Ed7F2dcFc6ccf20", "startBlock": 14201290, "symbol": "sUSD3CRV-f-85" },
+        {
+          "address": "0x97aEB34ac6561146DD9cE191EFD5634F6465DeF4",
+          "startBlock": 14210371,
+          "symbol": "AETHV13CRV-f-86"
+        },
+        { "address": "0x9462F2b3C9bEeA8afc334Cdb1D1382B072e494eA", "startBlock": 14258103, "symbol": "tGAMMA-f-87" },
+        { "address": "0x50B0D9171160d6EB8Aa39E090Da51E7e078E81c4", "startBlock": 14258201, "symbol": "tSNX-f-88" },
+        {
+          "address": "0x447Ddd4960d9fdBF6af9a790560d0AF76795CB08",
+          "startBlock": 14258216,
+          "symbol": "rETHwstETH-f-89"
+        },
+        { "address": "0xCaf8703f8664731cEd11f63bB0570E53Ab4600A9", "startBlock": 14258246, "symbol": "tAPW-f-90" },
+        { "address": "0x01FE650EF2f8e2982295489AE6aDc1413bF6011F", "startBlock": 14258254, "symbol": "tTCR-f-91" },
+        { "address": "0xC250B22d15e43d95fBE27B12d98B6098f8493eaC", "startBlock": 14258264, "symbol": "tFOX-f-92" },
+        { "address": "0x0437ac6109e8A366A1F4816edF312A36952DB856", "startBlock": 14258291, "symbol": "tSUSHI-f-93" },
+        { "address": "0x9001a452d39A8710D27ED5c2E10431C13F5Fba74", "startBlock": 14258305, "symbol": "tALCX-f-94" },
+        { "address": "0x961226B64AD373275130234145b96D100Dc0b655", "startBlock": 14258326, "symbol": "tFXS-f-95" },
+        { "address": "0xe7E4366f6ED6aFd23e88154C00B532BDc0352333", "startBlock": 14320969, "symbol": "TestOnly-f-96" },
+        { "address": "0x9809f2B973bDB056D24bC2b6571EA1f23dB4e861", "startBlock": 14350627, "symbol": "GBSD3CRV-f-97" },
+        {
+          "address": "0x04EcD49246bf5143E43e2305136c46AeB6fAd400",
+          "startBlock": 14352521,
+          "symbol": "DYDXstDYDX-f-98"
+        },
+        {
+          "address": "0xC9467E453620f16b57a34a770C6bceBECe002587",
+          "startBlock": 14353005,
+          "symbol": "pbtc/sbtcCRV-f-99"
+        },
+        { "address": "0x8c524635d52bd7b1Bd55E062303177a7d916C046", "startBlock": 14359804, "symbol": "sdFXSFXS-f-100" },
+        { "address": "0x48fF31bBbD8Ab553Ebe7cBD84e1eA3dBa8f54957", "startBlock": 14359842, "symbol": "sdAGAG-f-101" },
+        { "address": "0x9CA41a2DaB3CEE15308998868ca644e2e3be5C59", "startBlock": 14437811, "symbol": "dfx2CAD-f-102" },
+        { "address": "0xD652c40fBb3f06d6B58Cb9aa9CFF063eE63d465D", "startBlock": 14450075, "symbol": "BEANLUSD-f-103" },
+        {
+          "address": "0xd1011B637F979a5d9093Df1B32e7736c289024F5",
+          "startBlock": 14482675,
+          "symbol": "sETH2stETH-f-104"
+        },
+        {
+          "address": "0xE95E4c2dAC312F31Dc605533D5A4d0aF42579308",
+          "startBlock": 14482785,
+          "symbol": "sETH2stETH-f-105"
         }
       ]
     },
     {
-      "contract": "PoolX3",
+      "contract": "PoolX3_128",
       "abis": [
-        "PoolX3",
+        "PoolX3_128",
         "Registry",
         "LiquidityGauge",
         "LiquidityGaugeV2",
+        "LiquidityGaugeCommon",
         "StakingLiquidityGauge",
         "StakingRewards",
         "MultiRewards",
@@ -167,7 +455,53 @@
         },
         {
           "event-name": "RemoveLiquidityOne",
-          "event-params": "(indexed address,uint256,uint256)"
+          "event-params": "(indexed address,uint256,uint256,uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidityImbalance",
+          "event-params": "(indexed address,uint256[3],uint256[3],uint256,uint256)"
+        },
+        {
+          "event-name": "TokenExchange",
+          "event-params": "(indexed address,int128,uint256,int128,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "symbol": "renBTC+WBTC+sBTC",
+          "address": "0x7fC77b5c7614E1533320Ea6DDc2Eb61fa00A9714",
+          "startBlock": 10276641
+        }
+      ]
+    },
+    {
+      "contract": "PoolX3_256",
+      "abis": [
+        "PoolX3_256",
+        "Registry",
+        "LiquidityGauge",
+        "LiquidityGaugeV2",
+        "LiquidityGaugeCommon",
+        "StakingLiquidityGauge",
+        "StakingRewards",
+        "MultiRewards",
+        "Rewards",
+        "ERC20",
+        "AaveIncentivesController"
+      ],
+      "entities": ["CurvePoolData", "CurveExtraReward"],
+      "events": [
+        {
+          "event-name": "AddLiquidity",
+          "event-params": "(indexed address,uint256[3],uint256[3],uint256,uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidity",
+          "event-params": "(indexed address,uint256[3],uint256[3],uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidityOne",
+          "event-params": "(indexed address,uint256,uint256,uint256)"
         },
         {
           "event-name": "RemoveLiquidityImbalance",
@@ -189,20 +523,21 @@
           "address": "0xbEbc44782C7dB0a1A60Cb6fe97d0b483032FF1C7",
           "startBlock": 10809473
         },
-        {
-          "symbol": "renBTC+WBTC+sBTC",
-          "address": "0x7fC77b5c7614E1533320Ea6DDc2Eb61fa00A9714",
-          "startBlock": 10276641
-        }
+        { "address": "0x08Eaf78d40abFA6C341F05692eB48eDCA425Ce04", "startBlock": 13218109, "symbol": "sansUSDT-f-37" },
+        { "address": "0xBaaa1F5DbA42C3389bDbc2c9D2dE134F5cD0Dc89", "startBlock": 13437673, "symbol": "D3-f-57" },
+        { "address": "0xb9446c4Ef5EBE66268dA6700D26f96273DE3d571", "startBlock": 13627050, "symbol": "3EURpool-f-66" },
+        { "address": "0xa0D35fAead5299Bf18eFbB5dEfd1Ec6D4AB4Ef3B", "startBlock": 13764838, "symbol": "FEIPCV-1-f-75" },
+        { "address": "0x6577b46a566aDe492ad551a315c04DE3Fbe3DbFa", "startBlock": 14485339, "symbol": "TriCRV-f-106" }
       ]
     },
     {
-      "contract": "PoolX4",
+      "contract": "PoolX4_128",
       "abis": [
-        "PoolX4",
+        "PoolX4_128",
         "Registry",
         "LiquidityGauge",
         "LiquidityGaugeV2",
+        "LiquidityGaugeCommon",
         "StakingLiquidityGauge",
         "StakingRewards",
         "MultiRewards",
@@ -219,6 +554,10 @@
         {
           "event-name": "RemoveLiquidity",
           "event-params": "(indexed address,uint256[4],uint256[4],uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidityOne",
+          "event-params": "(indexed address,uint256,uint256,uint256)"
         },
         {
           "event-name": "RemoveLiquidityImbalance",
@@ -254,6 +593,53 @@
           "address": "0x45F783CCE6B7FF23B2ab2D70e416cdb7D6055f51",
           "startBlock": 9476468
         }
+      ]
+    },
+    {
+      "contract": "PoolX4_128",
+      "abis": [
+        "PoolX4_128",
+        "Registry",
+        "LiquidityGauge",
+        "LiquidityGaugeV2",
+        "LiquidityGaugeCommon",
+        "StakingLiquidityGauge",
+        "StakingRewards",
+        "MultiRewards",
+        "Rewards",
+        "ERC20",
+        "AaveIncentivesController"
+      ],
+      "entities": ["CurvePoolData", "CurveExtraReward"],
+      "events": [
+        {
+          "event-name": "AddLiquidity",
+          "event-params": "(indexed address,uint256[4],uint256[4],uint256,uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidity",
+          "event-params": "(indexed address,uint256[4],uint256[4],uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidityOne",
+          "event-params": "(indexed address,uint256,uint256,uint256)"
+        },
+        {
+          "event-name": "RemoveLiquidityImbalance",
+          "event-params": "(indexed address,uint256[4],uint256[4],uint256,uint256)"
+        },
+        {
+          "event-name": "TokenExchange",
+          "event-params": "(indexed address,int128,uint256,int128,uint256)"
+        },
+        {
+          "event-name": "TokenExchangeUnderlying",
+          "event-params": "(indexed address,int128,uint256,int128,uint256)"
+        }
+      ],
+      "instances": [
+        { "address": "0xDa5B670CcD418a187a3066674A8002Adc9356Ad1", "startBlock": 12986346, "symbol": "crvCRV-f-7" },
+        { "address": "0x3CFAa1596777CAD9f5004F9a0c443d912E262243", "startBlock": 13069248, "symbol": "mEUR-f-24" }
       ]
     }
   ]

@@ -6,4 +6,5 @@ node_modules
 generated
 build
 src/*/config/*-dev.json
+src/AaveV2/mappings/constants.ts
 src/CurveGauge/mappings/gauges.ts

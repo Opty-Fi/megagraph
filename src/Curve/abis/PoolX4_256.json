@@ -47,6 +47,17 @@
     "type": "event"
   },
   {
+    "name": "RemoveLiquidityOne",
+    "inputs": [
+      { "type": "address", "name": "provider", "indexed": true },
+      { "type": "uint256", "name": "token_amount", "indexed": false },
+      { "type": "uint256", "name": "coin_amount", "indexed": false },
+      { "type": "uint256", "name": "token_supply", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
     "name": "RemoveLiquidityImbalance",
     "inputs": [
       { "type": "address", "name": "provider", "indexed": true },
@@ -69,7 +80,7 @@
   {
     "name": "coins",
     "outputs": [{ "type": "address", "name": "out" }],
-    "inputs": [{ "type": "int128", "name": "arg0" }],
+    "inputs": [{ "type": "uint256", "name": "arg0" }],
     "constant": true,
     "payable": false,
     "type": "function"
@@ -77,7 +88,7 @@
   {
     "name": "balances",
     "outputs": [{ "type": "uint256", "name": "out" }],
-    "inputs": [{ "type": "int128", "name": "arg0" }],
+    "inputs": [{ "type": "uint256", "name": "arg0" }],
     "constant": true,
     "payable": false,
     "type": "function"
