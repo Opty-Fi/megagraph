@@ -134,6 +134,11 @@ jobs:
         env:
           ADAPTER: Sushi
           CONFIG: polygon
+      - name: Build TraderJoe (Avalanche)
+        run: yarn build:dev
+        env:
+          ADAPTER: TraderJoe
+          CONFIG: avalanche
       - name: Build Yearn (Ethereum)
         run: yarn build:dev
         env:
