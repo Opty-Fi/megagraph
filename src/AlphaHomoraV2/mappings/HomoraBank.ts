@@ -410,7 +410,8 @@ export function handleBorrow(event: Borrow): void {
   let crTokenAddressCall = homoraBankContract.try_banks(event.params.token);
   let underlyingDecimals = 18;
   underlyingDecimals = getOrCreateToken(event.params.token.toHexString()).decimals;
-  if (!crTokenAddressCall.reverted) {
+  let feeBPSCall = homoraBankContract.try_feeBps()
+  if (!crTokenAddressCall.reverted && !feeBPSCall.reverted) {
     let alphaLendData = new AlphaHomoraV2LendData(event.transaction.hash.toHexString());
     let crToken = getOrCreateCyToken(crTokenAddressCall.value.value2.toHexString());
     let crTokenContract = AlphaHomoraV2CyToken.bind(crTokenAddressCall.value.value2);
@@ -427,6 +428,7 @@ export function handleBorrow(event: Borrow): void {
         accountSnapshotCall.value.value3,
         10 + underlyingDecimals,
       );
+      alphaLendData.feeBPS = convertBINumToDesiredDecimals(feeBPSCall.value,4)
       alphaLendData.blockNumber = event.block.number;
       alphaLendData.timestamp = event.block.timestamp;
       alphaLendData.save();
@@ -439,7 +441,8 @@ export function handleRepay(event: Repay): void {
   let underlyingDecimals = 18;
   let crTokenAddressCall = homoraBankContract.try_banks(event.params.token);
   underlyingDecimals = getOrCreateToken(event.params.token.toHexString()).decimals;
-  if (!crTokenAddressCall.reverted) {
+  let feeBPSCall = homoraBankContract.try_feeBps()
+  if (!crTokenAddressCall.reverted && !feeBPSCall.reverted) {
     let alphaLendData = new AlphaHomoraV2LendData(event.transaction.hash.toHexString());
     let crToken = getOrCreateCyToken(crTokenAddressCall.value.value2.toHexString());
     let crTokenContract = AlphaHomoraV2CyToken.bind(crTokenAddressCall.value.value2);
@@ -456,6 +459,7 @@ export function handleRepay(event: Repay): void {
         accountSnapshotCall.value.value3,
         10 + underlyingDecimals,
       );
+      alphaLendData.feeBPS = convertBINumToDesiredDecimals(feeBPSCall.value,4)
       alphaLendData.blockNumber = event.block.number;
       alphaLendData.timestamp = event.block.timestamp;
       alphaLendData.save();
@@ -468,7 +472,8 @@ export function handleLiquidate(event: Liquidate): void {
   let crTokenAddressCall = homoraBankContract.try_banks(event.params.debtToken);
   let underlyingDecimals = 18;
   underlyingDecimals = getOrCreateToken(event.params.debtToken.toHexString()).decimals;
-  if (!crTokenAddressCall.reverted) {
+  let feeBPSCall = homoraBankContract.try_feeBps()
+  if (!crTokenAddressCall.reverted && !feeBPSCall.reverted) {
     let alphaLendData = new AlphaHomoraV2LendData(event.transaction.hash.toHexString());
     let crToken = getOrCreateCyToken(crTokenAddressCall.value.value2.toHexString());
     let crTokenContract = AlphaHomoraV2CyToken.bind(crTokenAddressCall.value.value2);
@@ -485,6 +490,7 @@ export function handleLiquidate(event: Liquidate): void {
         accountSnapshotCall.value.value3,
         10 + underlyingDecimals,
       );
+      alphaLendData.feeBPS = convertBINumToDesiredDecimals(feeBPSCall.value,4)
       alphaLendData.blockNumber = event.block.number;
       alphaLendData.timestamp = event.block.timestamp;
       alphaLendData.save();

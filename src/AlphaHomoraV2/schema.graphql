@@ -55,6 +55,7 @@ type AlphaHomoraV2LendData @entity {
   supplyRatePerBlock: BigDecimal!
   borrowBalance: BigDecimal!
   cyTokenExchangeRate: BigDecimal!
+  feeBPS: BigDecimal!
   blockNumber: BigInt!
   timestamp: BigInt!
 }
