@@ -42,7 +42,8 @@
       "instances": [
         {
           "address": "0x376d16c7de138b01455a51da79ad65806e9cd694",
-          "symbol": ""
+          "symbol": "",
+          "startBlock": 5658898
         }
       ]
     }
