@@ -1,0 +1,58 @@
+{
+  "network": "matic",
+  "adapter": "AaveV2",
+  "contracts": [
+    {
+      "contract": "Token",
+      "abis": ["LendingPoolAddressesProvider", "AaveProtocolDataProvider", "IncentivesController", "Token"],
+      "entities": ["AaveV2TokenData", "AaveV2Reserve"],
+      "events": [
+        {
+          "event-name": "Burn",
+          "event-params": "(indexed address,indexed address,uint256,uint256)"
+        },
+        {
+          "event-name": "Mint",
+          "event-params": "(indexed address,uint256,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "address": "0x1d2a0E5EC8E5bBDCA5CB219e649B565d8e5c3360",
+          "startBlock": 13141825,
+          "symbol": "amAAVE"
+        },
+        {
+          "address": "0x27F8D03b3a2196956ED754baDc28D73be8830A6e",
+          "startBlock": 12913730,
+          "symbol": "amDAI"
+        },
+        {
+          "address": "0x1a13F4Ca1d028320A707D99520AbFefca3998b7F",
+          "startBlock": 20153368,
+          "symbol": "amUSDC"
+        },
+        {
+          "address": "0x60D55F02A771d515e077c9C2403a1ef324885CeC",
+          "startBlock": 12987015,
+          "symbol": "amUSDT"
+        },
+        {
+          "address": "0x5c2ed810328349100A66B82b78a1791B101C9D61",
+          "startBlock": 13031238,
+          "symbol": "amWBTC"
+        },
+        {
+          "address": "0x28424507fefb6f7f8E9D3860F56504E4e5f5f390",
+          "startBlock": 13031228,
+          "symbol": "amWETH"
+        },
+        {
+          "address": "0x8dF3aad3a84da6b69A4DA8aeC3eA40d9091B2Ac4",
+          "startBlock": 17180050,
+          "symbol": "amWMATIC"
+        }
+      ]
+    }
+  ]
+}

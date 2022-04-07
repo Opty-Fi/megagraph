@@ -4,7 +4,7 @@
   "contracts": [
     {
       "contract": "MiniChefV2",
-      "abis": ["MiniChefV2", "ComplexRewarderTime"],
+      "abis": ["MiniChefV2", "UniswapV2Pair", "ERC20Minimal", "ComplexRewarderTime"],
       "entities": ["SushiPoolData", "SushiTokenData"],
       "events": [
         {

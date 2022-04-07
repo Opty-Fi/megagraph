@@ -1,0 +1,96 @@
+[
+  {
+    "name": "TokenExchange",
+    "inputs": [
+      { "type": "address", "name": "buyer", "indexed": true },
+      { "type": "int128", "name": "sold_id", "indexed": false },
+      { "type": "uint256", "name": "tokens_sold", "indexed": false },
+      { "type": "int128", "name": "bought_id", "indexed": false },
+      { "type": "uint256", "name": "tokens_bought", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "TokenExchangeUnderlying",
+    "inputs": [
+      { "type": "address", "name": "buyer", "indexed": true },
+      { "type": "int128", "name": "sold_id", "indexed": false },
+      { "type": "uint256", "name": "tokens_sold", "indexed": false },
+      { "type": "int128", "name": "bought_id", "indexed": false },
+      { "type": "uint256", "name": "tokens_bought", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "AddLiquidity",
+    "inputs": [
+      { "type": "address", "name": "provider", "indexed": true },
+      { "type": "uint256[4]", "name": "token_amounts", "indexed": false },
+      { "type": "uint256[4]", "name": "fees", "indexed": false },
+      { "type": "uint256", "name": "invariant", "indexed": false },
+      { "type": "uint256", "name": "token_supply", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "RemoveLiquidity",
+    "inputs": [
+      { "type": "address", "name": "provider", "indexed": true },
+      { "type": "uint256[4]", "name": "token_amounts", "indexed": false },
+      { "type": "uint256[4]", "name": "fees", "indexed": false },
+      { "type": "uint256", "name": "token_supply", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "RemoveLiquidityOne",
+    "inputs": [
+      { "type": "address", "name": "provider", "indexed": true },
+      { "type": "uint256", "name": "token_amount", "indexed": false },
+      { "type": "uint256", "name": "coin_amount", "indexed": false },
+      { "type": "uint256", "name": "token_supply", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "RemoveLiquidityImbalance",
+    "inputs": [
+      { "type": "address", "name": "provider", "indexed": true },
+      { "type": "uint256[4]", "name": "token_amounts", "indexed": false },
+      { "type": "uint256[4]", "name": "fees", "indexed": false },
+      { "type": "uint256", "name": "invariant", "indexed": false },
+      { "type": "uint256", "name": "token_supply", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "get_virtual_price",
+    "outputs": [{ "type": "uint256", "name": "out" }],
+    "inputs": [],
+    "constant": true,
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "name": "coins",
+    "outputs": [{ "type": "address", "name": "out" }],
+    "inputs": [{ "type": "int128", "name": "arg0" }],
+    "constant": true,
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "name": "balances",
+    "outputs": [{ "type": "uint256", "name": "out" }],
+    "inputs": [{ "type": "int128", "name": "arg0" }],
+    "constant": true,
+    "payable": false,
+    "type": "function"
+  }
+]

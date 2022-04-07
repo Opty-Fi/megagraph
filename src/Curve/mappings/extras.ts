@@ -1,12 +1,12 @@
 import { log, Bytes, Address, BigInt } from "@graphprotocol/graph-ts";
-import { CurveLiquidityGauge } from "../../../generated/CurvePoolX2/CurveLiquidityGauge";
-import { CurveLiquidityGaugeV2 } from "../../../generated/CurvePoolX2/CurveLiquidityGaugeV2";
-import { CurveStakingLiquidityGauge } from "../../../generated/CurvePoolX2/CurveStakingLiquidityGauge";
-import { CurveRegistry } from "../../../generated/CurvePoolX2/CurveRegistry";
-import { CurveRewards } from "../../../generated/CurvePoolX2/CurveRewards";
-import { CurveMultiRewards } from "../../../generated/CurvePoolX2/CurveMultiRewards";
-import { CurveStakingRewards } from "../../../generated/CurvePoolX2/CurveStakingRewards";
-import { CurveAaveIncentivesController } from "../../../generated/CurvePoolX2/CurveAaveIncentivesController";
+import { CurveLiquidityGauge } from "../../../generated/Curve/CurveLiquidityGauge";
+import { CurveLiquidityGaugeV2 } from "../../../generated/Curve/CurveLiquidityGaugeV2";
+import { CurveStakingLiquidityGauge } from "../../../generated/Curve/CurveStakingLiquidityGauge";
+import { CurveRegistry } from "../../../generated/Curve/CurveRegistry";
+import { CurveRewards } from "../../../generated/Curve/CurveRewards";
+import { CurveMultiRewards } from "../../../generated/Curve/CurveMultiRewards";
+import { CurveStakingRewards } from "../../../generated/Curve/CurveStakingRewards";
+import { CurveAaveIncentivesController } from "../../../generated/Curve/CurveAaveIncentivesController";
 import { CurveExtraReward, CurvePoolData } from "../../../generated/schema";
 import {
   convertBINumToDesiredDecimals,
@@ -98,6 +98,11 @@ let factoryPools: Array<string> = [
 ];
 
 export function getExtras(entity: CurvePoolData, txnHash: Bytes): string[] {
+  // the first gauge was set at this block
+  if (entity.blockNumber.lt(BigInt.fromI32(12195852))) {
+    return [];
+  }
+
   let address = convertToLowerCase(entity.vault.toHexString());
   let index = factoryPools.indexOf(address);
   if (v1Pools.includes(address)) {
