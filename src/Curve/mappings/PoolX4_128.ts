@@ -12,7 +12,7 @@ import { CurveERC20 } from "../../../generated/Curve/CurveERC20";
 import { CurveRegistry } from "../../../generated/Curve/CurveRegistry";
 import { CurveLiquidityGaugeCommon } from "../../../generated/Curve/CurveLiquidityGaugeCommon";
 import { CurvePoolData } from "../../../generated/schema";
-import { CurveRegistryAddress, ZERO_BD, ZERO_BYTES } from "../../utils/constants";
+import { CurveRegistryAddress, CURVE_REGISTRY_START_BLOCK, ZERO_BD, ZERO_BYTES } from "../../utils/constants";
 import { convertBINumToDesiredDecimals, convertBytesToAddress, toBytes } from "../../utils/converters";
 import { getExtras } from "./extras";
 
@@ -140,20 +140,21 @@ function handlePoolEntity(
 
   // working supply
 
-  let CurveRegistryContract = CurveRegistry.bind(CurveRegistryAddress);
-  let getGaugesResult = CurveRegistryContract.try_get_gauges(convertBytesToAddress(entity.vault));
-  if (getGaugesResult.reverted) {
-    log.warning("get_gauges reverted", []);
-    entity.workingSupply = ZERO_BD;
-  } else {
-    let gaugeAddress = convertBytesToAddress(getGaugesResult.value.value0[0]);
-    let gaugeContract = CurveLiquidityGaugeCommon.bind(gaugeAddress);
-    let workingSupplyResult = gaugeContract.try_working_supply();
-    if (workingSupplyResult.reverted) {
-      log.warning("working_supply reverted", []);
-      entity.workingSupply = ZERO_BD;
+  entity.workingSupply = ZERO_BD;
+  if (blockNumber > CURVE_REGISTRY_START_BLOCK) {
+    let CurveRegistryContract = CurveRegistry.bind(CurveRegistryAddress);
+    let getGaugesResult = CurveRegistryContract.try_get_gauges(convertBytesToAddress(entity.vault));
+    if (getGaugesResult.reverted) {
+      log.warning("get_gauges reverted", []);
     } else {
-      entity.workingSupply = convertBINumToDesiredDecimals(workingSupplyResult.value, 18);
+      let gaugeAddress = convertBytesToAddress(getGaugesResult.value.value0[0]);
+      let gaugeContract = CurveLiquidityGaugeCommon.bind(gaugeAddress);
+      let workingSupplyResult = gaugeContract.try_working_supply();
+      if (workingSupplyResult.reverted) {
+        log.warning("working_supply reverted", []);
+      } else {
+        entity.workingSupply = convertBINumToDesiredDecimals(workingSupplyResult.value, 18);
+      }
     }
   }
 
