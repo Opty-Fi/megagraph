@@ -1,4 +1,4 @@
-import { Address, BigDecimal, BigInt, Bytes, ethereum, log } from "@graphprotocol/graph-ts";
+import { Address, BigDecimal, BigInt, Bytes, log } from "@graphprotocol/graph-ts";
 import {
   CurvePoolX3_256,
   AddLiquidity as AddLiquidityEvent,
@@ -9,12 +9,11 @@ import {
   TokenExchangeUnderlying as TokenExchangeUnderlyingEvent,
 } from "../../../generated/CurvePoolX3_256/CurvePoolX3_256";
 import { CurveERC20 } from "../../../generated/Curve/CurveERC20";
-import { CurveRegistry } from "../../../generated/Curve/CurveRegistry";
-import { CurveLiquidityGaugeCommon } from "../../../generated/Curve/CurveLiquidityGaugeCommon";
 import { CurvePoolData } from "../../../generated/schema";
-import { CurveRegistryAddress, CURVE_REGISTRY_START_BLOCK, ZERO_BD, ZERO_BYTES } from "../../utils/constants";
-import { convertBINumToDesiredDecimals, convertBytesToAddress, toBytes } from "../../utils/converters";
+import { ZERO_BD, ZERO_BYTES } from "../../utils/constants";
+import { convertBINumToDesiredDecimals, toBytes } from "../../utils/converters";
 import { getExtras } from "./extras";
+import { getWorkingSupply } from "./shared";
 
 export function handleAddLiquidity(event: AddLiquidityEvent): void {
   handlePoolEntity(
@@ -140,23 +139,7 @@ function handlePoolEntity(
 
   // working supply
 
-  entity.workingSupply = ZERO_BD;
-  if (blockNumber > CURVE_REGISTRY_START_BLOCK) {
-    let CurveRegistryContract = CurveRegistry.bind(CurveRegistryAddress);
-    let getGaugesResult = CurveRegistryContract.try_get_gauges(convertBytesToAddress(entity.vault));
-    if (getGaugesResult.reverted) {
-      log.warning("get_gauges reverted", []);
-    } else {
-      let gaugeAddress = convertBytesToAddress(getGaugesResult.value.value0[0]);
-      let gaugeContract = CurveLiquidityGaugeCommon.bind(gaugeAddress);
-      let workingSupplyResult = gaugeContract.try_working_supply();
-      if (workingSupplyResult.reverted) {
-        log.warning("working_supply reverted", []);
-      } else {
-        entity.workingSupply = convertBINumToDesiredDecimals(workingSupplyResult.value, 18);
-      }
-    }
-  }
+  entity.workingSupply = getWorkingSupply(vault, blockNumber);
 
   entity.save();
 }
