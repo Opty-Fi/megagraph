@@ -10,7 +10,7 @@ import {
 } from "../../../generated/CurvePoolX2_128/CurvePoolX2_128";
 import { CurveERC20 } from "../../../generated/Curve/CurveERC20";
 import { CurvePoolData } from "../../../generated/schema";
-import { ZERO_BD, ZERO_BYTES } from "../../utils/constants";
+import { CURVE_CALC_WITHDRAW_ONE_COIN_AMOUNT, ZERO_BD, ZERO_BYTES } from "../../utils/constants";
 import { convertBINumToDesiredDecimals, toBytes } from "../../utils/converters";
 import { getExtras } from "./extras";
 import { getWorkingSupply } from "./shared";
@@ -93,21 +93,27 @@ function handlePoolEntity(
 
   let contract = CurvePoolX2_128.bind(vault);
 
-  // balance and tokens arrays
+  // balance, tokens and underlying per LP arrays
 
   let balances: Array<BigDecimal> = [];
   let tokens: Array<Bytes> = [];
-  for (let i = 0; i < 2; i++) {
+  let underlyingPerLpTokens: Array<BigDecimal> = [];
+  for (let i = 0; i < 4; i++) {
     let balanceResult = contract.try_balances(BigInt.fromI32(i));
     let tokenResult = contract.try_coins(BigInt.fromI32(i));
+    let calcWithdrawOneCoinResult = contract.try_calc_withdraw_one_coin(
+      CURVE_CALC_WITHDRAW_ONE_COIN_AMOUNT,
+      BigInt.fromI32(i),
+    );
 
     let balance = ZERO_BD;
     let token = ZERO_BYTES;
+    let underlyingPerLpToken = ZERO_BD;
 
     if (balanceResult.reverted) {
-      log.warning("{} ({}) balances({}) reverted", [poolType, vault.toHexString(), `${i}`]);
+      log.warning("{} ({}) balances({}) reverted", [poolType, vault.toHexString(), i.toString()]);
     } else if (tokenResult.reverted) {
-      log.warning("{} ({}) coins({}) reverted", [poolType, vault.toHexString(), `${i}`]);
+      log.warning("{} ({}) coins({}) reverted", [poolType, vault.toHexString(), i.toString()]);
     } else {
       let tokenContract = CurveERC20.bind(tokenResult.value);
       let decimalResult = tokenContract.try_decimals();
@@ -119,11 +125,27 @@ function handlePoolEntity(
       token = toBytes(tokenResult.value.toHex());
     }
 
+    if (calcWithdrawOneCoinResult.reverted) {
+      log.warning("{} ({}) calc_withdraw_one_coin({}, {}) reverted", [
+        poolType,
+        vault.toHexString(),
+        CURVE_CALC_WITHDRAW_ONE_COIN_AMOUNT.toString(),
+        i.toString(),
+      ]);
+    } else {
+      underlyingPerLpToken = calcWithdrawOneCoinResult.value
+        .toBigDecimal()
+        .div(CURVE_CALC_WITHDRAW_ONE_COIN_AMOUNT.toBigDecimal());
+    }
+
     balances.push(balance);
     tokens.push(token);
+    underlyingPerLpTokens.push(underlyingPerLpToken);
   }
+
   entity.balance = balances;
   entity.tokens = tokens;
+  entity.underlyingPerLpToken = underlyingPerLpTokens;
 
   // virtual price
 

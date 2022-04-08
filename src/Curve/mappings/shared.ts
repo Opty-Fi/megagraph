@@ -4,7 +4,6 @@ import { CurveLiquidityGaugeCommon } from "../../../generated/Curve/CurveLiquidi
 import { CurveRegistryAddress, CURVE_REGISTRY_START_BLOCK, ZERO_BD } from "../../utils/constants";
 import { convertBINumToDesiredDecimals, convertBytesToAddress } from "../../utils/converters";
 
-
 export function getWorkingSupply(vault: Address, blockNumber: BigInt): BigDecimal {
   if (blockNumber.lt(CURVE_REGISTRY_START_BLOCK)) {
     return ZERO_BD;

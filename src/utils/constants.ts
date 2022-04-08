@@ -14,7 +14,8 @@ export let ConvexBoosterAddress = toAddress("0xf403c135812408bfbe8713b5a23a04b3d
 export let ConvexTokenAddress = toAddress("0x4e3FBD56CD56c3e72c1403e103b45Db9da5B9D2B");
 
 export let CurveRegistryAddress = toAddress("0x90e00ace148ca3b23ac1bc8c240c2a7dd9c2d7f5");
-export const CURVE_REGISTRY_START_BLOCK = BigInt.fromI32(12195750);
+export let CURVE_REGISTRY_START_BLOCK = BigInt.fromI32(12195750);
+export let CURVE_CALC_WITHDRAW_ONE_COIN_AMOUNT = BigInt.fromI32(1000000);
 
 export let DForce_dDAI: Address = toAddress("0x02285AcaafEB533e03A7306C55EC031297df9224");
 export let DForce_dDAI_Staking: Address = toAddress("0xD2fA07cD6Cd4A5A96aa86BacfA6E50bB3aaDBA8B");
