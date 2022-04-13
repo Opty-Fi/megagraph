@@ -1,0 +1,45 @@
+type PangolinFarmData @entity {
+  id: ID!  
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  lpToken: Bytes!
+  poolId: BigInt!  
+  accRewardPerShare: BigDecimal
+  pngPerSecond: BigDecimal  
+  lastRewardTime: BigInt
+  event: String    
+  additionalRewards: [PangolinFarmReward!]
+}
+type PangolinFarmReward @entity {
+  id: ID! # poolId - reward token address
+  rewardMultiplier: BigDecimal
+  rewardTokenPerSecond: BigDecimal
+  rewardToken: Bytes!
+}
+type PangolinStakingData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!  
+  rewardRate: BigDecimal
+  totalStakedPNG: BigDecimal    
+  event: String
+  totalSupply: BigDecimal
+}
+type PangolinSwapData @entity {
+  id: ID!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  pair: PangolinSwapPair
+  token0Vol: BigDecimal
+  token1Vol: BigDecimal
+}
+type PangolinSwapPair @entity {
+  id: ID! # pool address
+  name: String!
+  token0Address: Bytes!
+  token1Address: Bytes!  
+  token0Decimals: BigInt!  
+  token1Decimals: BigInt!  
+  token0Symbol: String!
+  token1Symbol: String!
+}
