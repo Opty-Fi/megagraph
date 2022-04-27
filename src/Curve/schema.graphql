@@ -12,6 +12,7 @@ type CurvePoolData @entity {
   vault: Bytes!
   balance: [BigDecimal!]!
   virtualPrice: BigDecimal!
+  underlyingPerLpToken: [BigDecimal!]!
   tokens: [Bytes!]!
   extras: [CurveExtraReward!]
   workingSupply: BigDecimal!
