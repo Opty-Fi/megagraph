@@ -139,8 +139,8 @@ function saveJoePoolInfo(
       farmData.poolAccRewardTokenPerShare = convertBINumToDesiredDecimals(poolInfo.value3, 18);
       farmData.rewardTokenPerSec = convertBINumToDesiredDecimals(rewardPerSecondCall.value, 18);
       farmData.lpLocked = convertBINumToDesiredDecimals(userInfoCall.value.value0, 18);
-      farmData.pendingRewardtoken = convertBINumToDesiredDecimals(userInfoCall.value.value0, 18)
-        .times(convertBINumToDesiredDecimals(poolInfo.value3, 18))
+      farmData.pendingRewardtoken = (convertBINumToDesiredDecimals(userInfoCall.value.value0, 18)
+        .times(convertBINumToDesiredDecimals(poolInfo.value3, 18)))
         .minus(convertBINumToDesiredDecimals(userInfoCall.value.value1, 18));
       farmData.pendingBonusToken = BigDecimal.fromString("0");
       farmData.poolAccBonusTokenPerShare = BigDecimal.fromString("0");
