@@ -425,6 +425,11 @@
           "address": "0xE95E4c2dAC312F31Dc605533D5A4d0aF42579308",
           "startBlock": 14482785,
           "symbol": "sETH2stETH-f-105"
+        },
+        {
+          "address": "0xe6b5CC1B4b47305c58392CE3D359B10282FC36Ea",
+          "startBlock": 14697860,
+          "symbol": "USDD3CRV3CRV-f-116"
         }
       ]
     },
