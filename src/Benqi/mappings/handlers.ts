@@ -1,7 +1,8 @@
-import { BigInt, Address, log, Bytes } from "@graphprotocol/graph-ts";
+import { BigInt, Address, log, Bytes, BigDecimal } from "@graphprotocol/graph-ts";
 import { BenqiToken } from "../../../generated/BenqiTokenqiAVAX/BenqiToken";
 import { BenqiTokenData } from "../../../generated/schema";
 import { convertBINumToDesiredDecimals } from "../../utils/converters";
+import { ZERO_BYTES, ZERO_BI, ZERO_BD } from "../../utils/constants";
 
 //  Function to add/update the qiToken Entity
 export function handleEntity(
@@ -9,8 +10,8 @@ export function handleEntity(
   blockNumber: BigInt,
   blockTimestamp: BigInt,
   qiTokenAddress: Address,
-  borrowIndex: BigInt,
-  totalBorrows: BigInt,
+  borrowIndex: BigInt | null,
+  totalBorrows: BigInt | null,
 ): void {
   let qiTokenContract = BenqiToken.bind(qiTokenAddress);
 
@@ -23,9 +24,9 @@ export function handleEntity(
   entity.blockNumber = blockNumber;
   entity.blockTimestamp = blockTimestamp;
   entity.qiTokenAddress = qiTokenAddress;
-  entity.qiTokenSymbol = qiTokenContract.try_symbol().reverted ? null : qiTokenContract.symbol();
+  entity.qiTokenSymbol = qiTokenContract.try_symbol().reverted ? "" : qiTokenContract.symbol();
 
-  if (totalBorrows == null) {
+  if (totalBorrows === null) {
     if (qiTokenContract.try_totalBorrows().reverted) {
       entity.totalBorrows = null;
     } else {
@@ -35,15 +36,14 @@ export function handleEntity(
     entity.totalBorrows = convertBINumToDesiredDecimals(totalBorrows, 18);
   }
 
-  if (borrowIndex == null) {
-    if (qiTokenContract.try_borrowIndex().reverted) {
-      entity.totalBorrows = null;
-    } else {
-      entity.totalBorrows = convertBINumToDesiredDecimals(qiTokenContract.borrowIndex(), 18);
-    }
-  } else {
-    entity.totalBorrows = convertBINumToDesiredDecimals(borrowIndex, 18);
-  }
+  entity.totalBorrows = convertBINumToDesiredDecimals(
+    borrowIndex === null
+      ? qiTokenContract.try_borrowIndex().reverted
+        ? ZERO_BI
+        : qiTokenContract.borrowIndex()
+      : borrowIndex,
+    18,
+  );
 
   if (qiTokenContract.try_getCash().reverted) {
     entity.totalCash = null;
@@ -57,20 +57,19 @@ export function handleEntity(
     entity.exchangeRate = convertBINumToDesiredDecimals(qiTokenContract.exchangeRateStored(), 18);
   }
 
-  if (qiTokenContract.try_totalReserves().reverted) {
-    entity.totalReserves = null;
-  } else {
-    entity.totalReserves = convertBINumToDesiredDecimals(qiTokenContract.totalReserves(), 18);
-  }
+  entity.totalReserves = convertBINumToDesiredDecimals(
+    qiTokenContract.try_totalReserves().reverted ? ZERO_BI : qiTokenContract.totalReserves(),
+    18,
+  );
 
-  if (qiTokenContract.try_totalSupply().reverted) {
-    entity.totalSupply = null;
-  } else {
-    entity.totalSupply = convertBINumToDesiredDecimals(qiTokenContract.totalSupply(), 18);
-  }
+  entity.totalSupply = convertBINumToDesiredDecimals(
+    qiTokenContract.try_totalSupply().reverted ? ZERO_BI : qiTokenContract.totalSupply(),
+    18,
+  );
 
-  if (entity.totalSupply == null || entity.totalReserves == null) entity.SupplyReserveRatio = null;
-  else entity.SupplyReserveRatio = entity.totalSupply.div(entity.totalReserves);
+  entity.supplyReserveRatio = (!entity.totalSupply ? ZERO_BD : entity.totalSupply).div(
+    !entity.totalReserves ? BigDecimal.fromString("1") : entity.totalReserves,
+  );
 
   if (qiTokenContract.try_supplyRatePerTimestamp().reverted) {
     entity.supplyRatePerTimestamp = null;
