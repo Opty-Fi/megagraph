@@ -33,6 +33,7 @@
     "postmustache-yaml:local-replace": "cp src/${ADAPTER}/schema.graphql schema.graphql",
     "codegen:local": "yarn mustache-yaml:local && rm -rf build generated && ./node_modules/@graphprotocol/graph-cli/bin/graph codegen",
     "postcodegen:local": "./node_modules/.bin/dotenv -- ./script/add-symlinks.sh",
+    "build:dev": "yarn codegen:local && ./node_modules/@graphprotocol/graph-cli/bin/graph build",
     "create:local": "./node_modules/.bin/dotenv -- yarn create:local-replace",
     "create:local-replace": "./node_modules/@graphprotocol/graph-cli/bin/graph create --studio --node http://localhost:8020/ ${STUDIO_DEPLOY_KEY}",
     "deploy:local": "./node_modules/.bin/dotenv -- yarn deploy:local-replace",
