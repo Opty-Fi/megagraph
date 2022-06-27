@@ -4,6 +4,7 @@ import { CompoundComptrollerImplementation } from "../../../generated/CompoundTo
 import { CompoundComptrollerImplementationV2 } from "../../../generated/CompoundTokencDAI/CompoundComptrollerImplementationV2";
 import { CompoundUnderlying } from "../../../generated/CompoundTokencDAI/CompoundUnderlying";
 import { CompoundTokenData } from "../../../generated/schema";
+import { ZERO_ADDRESS, ZERO_BI } from "../../utils/constants";
 import { convertBINumToDesiredDecimals, convertToLowerCase } from "../../utils/converters";
 
 //  Function to add/update the cToken Entity
@@ -11,18 +12,18 @@ export function handleEntity(
   transactionHash: Bytes,
   blockNumber: BigInt,
   blockTimestamp: BigInt,
-  comptrollerAddress: Address,
-  newBorrowSpeed: BigInt,
-  newSupplySpeed: BigInt,
+  comptrollerAddress: Address | null,
+  newBorrowSpeed: BigInt | null,
+  newSupplySpeed: BigInt | null,
   cTokenAddress: Address,
-  borrowIndex: BigInt,
-  totalBorrows: BigInt,
+  borrowIndex: BigInt | null,
+  totalBorrows: BigInt | null,
 ): void {
   let cTokenContract = CompoundToken.bind(cTokenAddress);
 
   //  Get the underlying token decimals
   let underlyingTokenAddress = cTokenContract.try_underlying();
-  let underlyingTokenDecimals = null;
+  let underlyingTokenDecimals = 0;
   if (!underlyingTokenAddress.reverted) {
     let underlyingTokenContract = CompoundUnderlying.bind(underlyingTokenAddress.value);
     underlyingTokenDecimals = underlyingTokenContract.decimals();
@@ -30,22 +31,23 @@ export function handleEntity(
 
   //  Load CTokenData Entity for not having duplicates
   let cTokenDataEntity = CompoundTokenData.load(transactionHash.toHex());
-  if (cTokenDataEntity == null) {
+  if (cTokenDataEntity === null) {
     cTokenDataEntity = new CompoundTokenData(transactionHash.toHex());
   }
 
   cTokenDataEntity.blockNumber = blockNumber;
   cTokenDataEntity.blockTimestamp = blockTimestamp;
   cTokenDataEntity.cTokenAddress = cTokenAddress;
-  cTokenDataEntity.cTokenSymbol = cTokenContract.try_symbol().reverted ? null : cTokenContract.symbol();
+  cTokenDataEntity.cTokenSymbol = cTokenContract.try_symbol().reverted ? "" : cTokenContract.symbol();
+  cTokenDataEntity.cTokenSymbol = cTokenDataEntity.cTokenSymbol === null ? "" : cTokenDataEntity.cTokenSymbol;
 
   cTokenDataEntity.totalBorrows =
-    totalBorrows == null
+    totalBorrows === null
       ? cTokenContract.try_totalBorrows().reverted
         ? null
         : convertBINumToDesiredDecimals(
             cTokenContract.totalBorrows(),
-            underlyingTokenDecimals == null
+            underlyingTokenDecimals === 0
               ? convertToLowerCase(cTokenDataEntity.cTokenSymbol) == "ceth"
                 ? 18
                 : convertToLowerCase(cTokenDataEntity.cTokenSymbol) == "crep"
@@ -55,7 +57,7 @@ export function handleEntity(
           )
       : convertBINumToDesiredDecimals(
           totalBorrows,
-          underlyingTokenDecimals == null
+          underlyingTokenDecimals === 0
             ? convertToLowerCase(cTokenDataEntity.cTokenSymbol) == "ceth"
               ? 18
               : convertToLowerCase(cTokenDataEntity.cTokenSymbol) == "crep"
@@ -65,7 +67,7 @@ export function handleEntity(
         );
 
   cTokenDataEntity.borrowIndex =
-    borrowIndex == null
+    borrowIndex === null
       ? cTokenContract.try_borrowIndex().reverted
         ? null
         : convertBINumToDesiredDecimals(cTokenContract.borrowIndex(), 18)
@@ -75,7 +77,7 @@ export function handleEntity(
     ? null
     : convertBINumToDesiredDecimals(
         cTokenContract.getCash(),
-        underlyingTokenDecimals == null
+        underlyingTokenDecimals === 0
           ? convertToLowerCase(cTokenDataEntity.cTokenSymbol) == "ceth"
             ? 18
             : convertToLowerCase(cTokenDataEntity.cTokenSymbol) == "crep"
@@ -88,7 +90,7 @@ export function handleEntity(
     ? null
     : convertBINumToDesiredDecimals(
         cTokenContract.exchangeRateStored(),
-        underlyingTokenDecimals == null
+        underlyingTokenDecimals === 0
           ? convertToLowerCase(cTokenDataEntity.cTokenSymbol) == "ceth"
             ? 18 + 10
             : convertToLowerCase(cTokenDataEntity.cTokenSymbol) == "crep"
@@ -109,9 +111,9 @@ export function handleEntity(
     : convertBINumToDesiredDecimals(cTokenContract.supplyRatePerBlock(), 18);
 
   comptrollerAddress =
-    comptrollerAddress == null
+    comptrollerAddress === null
       ? cTokenContract.try_comptroller().reverted
-        ? null
+        ? ZERO_ADDRESS
         : cTokenContract.comptroller()
       : comptrollerAddress;
   if (comptrollerAddress) {
@@ -123,7 +125,7 @@ export function handleEntity(
         newBorrowSpeed
           ? newBorrowSpeed
           : comptrollerContract.try_compBorrowSpeeds(cTokenAddress).reverted
-          ? null
+          ? ZERO_BI
           : comptrollerContract.compBorrowSpeeds(cTokenAddress),
         18,
       );
@@ -131,7 +133,7 @@ export function handleEntity(
         newSupplySpeed
           ? newSupplySpeed
           : comptrollerContract.try_compSupplySpeeds(cTokenAddress).reverted
-          ? null
+          ? ZERO_BI
           : comptrollerContract.compSupplySpeeds(cTokenAddress),
         18,
       );
@@ -141,7 +143,7 @@ export function handleEntity(
         newBorrowSpeed
           ? newBorrowSpeed
           : comptrollerContract.try_compSpeeds(cTokenAddress).reverted
-          ? null
+          ? ZERO_BI
           : comptrollerContract.compSpeeds(cTokenAddress),
         18,
       );
@@ -149,7 +151,7 @@ export function handleEntity(
         newSupplySpeed
           ? newSupplySpeed
           : comptrollerContract.try_compSpeeds(cTokenAddress).reverted
-          ? null
+          ? ZERO_BI
           : comptrollerContract.compSpeeds(cTokenAddress),
         18,
       );

@@ -10,8 +10,8 @@ export function handleCompBorrowSpeedUpdated(event: CompBorrowSpeedUpdatedEvent)
     event.block.number,
     event.block.timestamp,
     event.address, // comptrollerAddress
-    event.params.newSpeed,
-    null,
+    event.params.newSpeed, // newBorrowSpeed
+    null, // newSupplySpeed
     event.params.cToken,
     null, // borrowIndex
     null, // totalBorrows
@@ -24,8 +24,8 @@ export function handleCompSupplySpeedUpdated(event: CompSupplySpeedUpdatedEvent)
     event.block.number,
     event.block.timestamp,
     event.address, // comptrollerAddress
-    null,
-    event.params.newSpeed,
+    null, // newBorrowSpeed
+    event.params.newSpeed, // newSupplySpeed
     event.params.cToken,
     null, // borrowIndex
     null, // totalBorrows
