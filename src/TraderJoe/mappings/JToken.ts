@@ -120,9 +120,9 @@ function handleLendingEntity(
   blockNumber: BigInt,
   blockTimestamp: BigInt,
   address: Address,
-  borrowIndex: BigInt,
-  totalBorrows: BigInt,
-  totalReserves: BigInt,
+  borrowIndex: BigInt | null,
+  totalBorrows: BigInt | null,
+  totalReserves: BigInt | null,
 ): void {
   let tokenContract = TraderJoeJToken.bind(address);
 

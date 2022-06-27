@@ -21,7 +21,7 @@ export function handlePoolEvent(
   poolId: BigInt,
   eventType: string,
   version: string,
-  lpToken: Address,
+  lpToken: Address | null,
 ): void {
   let entity = TraderJoeFarmData.load(txnHash.toHex());
   if (!entity) entity = new TraderJoeFarmData(txnHash.toHex());
@@ -58,7 +58,7 @@ export function handlePoolEvent(
     entity.rewardPerSecond = convertBINumToDesiredDecimals(poolRewardPerSecondResult.value, 18);
   }
 
-  if (lpToken != null) {
+  if (lpToken !== null) {
     entity.lpToken = lpToken;
   }
   entity.save();
