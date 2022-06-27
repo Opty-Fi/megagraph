@@ -10,16 +10,18 @@ import {
   DForce_dUSDC_Staking,
   DForce_dUSDT,
   DForce_dUSDT_Staking,
+  ZERO_ADDRESS,
 } from "../../utils/constants";
 
 export function handleDTokenEntity(
-  dTokenAddress: Address,
-  dforceStakingVaultAddress: Address,
+  dTokenAddress: Address | null,
+  dforceStakingVaultAddress: Address | null,
   transactionHash: Bytes,
   blockNumber: BigInt,
   blockTimestamp: BigInt,
 ): void {
-  if (dTokenAddress == null) {
+  dforceStakingVaultAddress = !dforceStakingVaultAddress ? ZERO_ADDRESS : dforceStakingVaultAddress;
+  if (dTokenAddress === null) {
     if (convertToLowerCase(dforceStakingVaultAddress.toHex()) == convertToLowerCase(DForce_dDAI_Staking.toHex())) {
       dTokenAddress = DForce_dDAI;
       createDTokenData(dTokenAddress, dforceStakingVaultAddress, transactionHash, blockNumber, blockTimestamp);
@@ -35,7 +37,7 @@ export function handleDTokenEntity(
       createDTokenData(dTokenAddress, dforceStakingVaultAddress, transactionHash, blockNumber, blockTimestamp);
     }
   } else {
-    if (dforceStakingVaultAddress == null) {
+    if (dforceStakingVaultAddress === null) {
       if (convertToLowerCase(dTokenAddress.toHex()) == convertToLowerCase(DForce_dDAI.toHex())) {
         dforceStakingVaultAddress = DForce_dDAI_Staking;
         log.info("dDAI Staking Vault contract address: {}", [dforceStakingVaultAddress.toHex()]);
@@ -62,16 +64,16 @@ function createDTokenData(
 
   // Load DTokenData Entity for not having duplicates
   let dTokenDataEntity = DForceTokenData.load(transactionHash.toHex());
-  if (dTokenDataEntity == null) {
+  if (dTokenDataEntity === null) {
     dTokenDataEntity = new DForceTokenData(transactionHash.toHex());
   }
 
   dTokenDataEntity.blockNumber = blockNumber;
   dTokenDataEntity.blockTimestamp = blockTimestamp;
   dTokenDataEntity.dTokenAddress = dTokenAddress;
-  dTokenDataEntity.dTokenSymbol = dTokenContract.try_symbol().reverted ? null : dTokenContract.symbol();
+  dTokenDataEntity.dTokenSymbol = dTokenContract.try_symbol().reverted ? "" : dTokenContract.symbol();
   log.info("dToken address: {} and symbol: {}", [
-    dTokenDataEntity.dTokenAddress.toHex(),
+    dTokenContract._address.toHex(),
     dTokenDataEntity.dTokenSymbol.toString(),
   ]);
 
