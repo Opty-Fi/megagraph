@@ -5,7 +5,7 @@ import { CompoundComptrollerImplementationV2 } from "../../../generated/Compound
 import { CompoundUnderlying } from "../../../generated/CompoundTokencDAI/CompoundUnderlying";
 import { CompoundTokenData } from "../../../generated/schema";
 import { ZERO_ADDRESS, ZERO_BI } from "../../utils/constants";
-import { convertBINumToDesiredDecimals, convertToLowerCase } from "../../utils/converters";
+import { convertBINumToDesiredDecimals } from "../../utils/converters";
 
 //  Function to add/update the cToken Entity
 export function handleEntity(
@@ -48,9 +48,9 @@ export function handleEntity(
         : convertBINumToDesiredDecimals(
             cTokenContract.totalBorrows(),
             underlyingTokenDecimals === 0
-              ? convertToLowerCase(cTokenDataEntity.cTokenSymbol) == "ceth"
+              ? cTokenDataEntity.cTokenSymbol.toLowerCase() == "ceth"
                 ? 18
-                : convertToLowerCase(cTokenDataEntity.cTokenSymbol) == "crep"
+                : cTokenDataEntity.cTokenSymbol.toLowerCase() == "crep"
                 ? 18
                 : 0
               : underlyingTokenDecimals,
@@ -58,9 +58,9 @@ export function handleEntity(
       : convertBINumToDesiredDecimals(
           totalBorrows,
           underlyingTokenDecimals === 0
-            ? convertToLowerCase(cTokenDataEntity.cTokenSymbol) == "ceth"
+            ? cTokenDataEntity.cTokenSymbol.toLowerCase() == "ceth"
               ? 18
-              : convertToLowerCase(cTokenDataEntity.cTokenSymbol) == "crep"
+              : cTokenDataEntity.cTokenSymbol.toLowerCase() == "crep"
               ? 18
               : 0
             : underlyingTokenDecimals,
@@ -78,9 +78,9 @@ export function handleEntity(
     : convertBINumToDesiredDecimals(
         cTokenContract.getCash(),
         underlyingTokenDecimals === 0
-          ? convertToLowerCase(cTokenDataEntity.cTokenSymbol) == "ceth"
+          ? cTokenDataEntity.cTokenSymbol.toLowerCase() == "ceth"
             ? 18
-            : convertToLowerCase(cTokenDataEntity.cTokenSymbol) == "crep"
+            : cTokenDataEntity.cTokenSymbol.toLowerCase() == "crep"
             ? 18
             : 0
           : underlyingTokenDecimals,
@@ -91,9 +91,9 @@ export function handleEntity(
     : convertBINumToDesiredDecimals(
         cTokenContract.exchangeRateStored(),
         underlyingTokenDecimals === 0
-          ? convertToLowerCase(cTokenDataEntity.cTokenSymbol) == "ceth"
+          ? cTokenDataEntity.cTokenSymbol.toLowerCase() == "ceth"
             ? 18 + 10
-            : convertToLowerCase(cTokenDataEntity.cTokenSymbol) == "crep"
+            : cTokenDataEntity.cTokenSymbol.toLowerCase() == "crep"
             ? 18 + 10
             : 0
           : underlyingTokenDecimals + 10,

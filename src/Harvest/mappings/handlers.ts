@@ -2,7 +2,7 @@ import { log, Address, BigInt } from "@graphprotocol/graph-ts";
 import { HarvestNoMintRewardPool } from "../../../generated/HarvestNoMintRewardPool/HarvestNoMintRewardPool";
 import { HarvestToken as Vault } from "../../../generated/HarvestTokenfDAI/HarvestToken";
 import { HarvestTokenData } from "../../../generated/schema";
-import { convertToLowerCase, convertBINumToDesiredDecimals } from "../../utils/converters";
+import { convertBINumToDesiredDecimals } from "../../utils/converters";
 import { ZERO_ADDRESS, ZERO_BI, ZERO_BD, Harvest_POOL, Harvest_fDAI } from "../../utils/constants";
 
 export function handleEntity(
@@ -20,9 +20,7 @@ export function handleEntity(
   entity.blockTimestamp = timestamp;
 
   if (poolAddr === null) {
-    if (
-      convertToLowerCase((!vaultAddr ? ZERO_ADDRESS : vaultAddr).toHex()) == convertToLowerCase(Harvest_fDAI.toHex())
-    ) {
+    if ((!vaultAddr ? ZERO_ADDRESS : vaultAddr).toHex().toLowerCase() === Harvest_fDAI.toHex().toLowerCase()) {
       log.debug("Found fDAI, setting Pool to {}", [Harvest_POOL.toHex()]);
       poolAddr = Harvest_POOL;
     }

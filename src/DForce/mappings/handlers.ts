@@ -2,7 +2,7 @@ import { BigInt, log, Bytes, Address } from "@graphprotocol/graph-ts";
 import { DForceToken as DTokenContract } from "../../../generated/DForceTokendDAI/DForceToken";
 import { DForceStakingVault as DForceStakingVaultContract } from "../../../generated/DForceTokendDAI/DForceStakingVault";
 import { DForceTokenData } from "../../../generated/schema";
-import { convertBINumToDesiredDecimals, convertToLowerCase } from "../../utils/converters";
+import { convertBINumToDesiredDecimals } from "../../utils/converters";
 import {
   DForce_dDAI,
   DForce_dDAI_Staking,
@@ -22,29 +22,25 @@ export function handleDTokenEntity(
 ): void {
   dforceStakingVaultAddress = !dforceStakingVaultAddress ? ZERO_ADDRESS : dforceStakingVaultAddress;
   if (dTokenAddress === null) {
-    if (convertToLowerCase(dforceStakingVaultAddress.toHex()) == convertToLowerCase(DForce_dDAI_Staking.toHex())) {
+    if (dforceStakingVaultAddress.toHex().toLowerCase() == DForce_dDAI_Staking.toHex().toLowerCase()) {
       dTokenAddress = DForce_dDAI;
       createDTokenData(dTokenAddress, dforceStakingVaultAddress, transactionHash, blockNumber, blockTimestamp);
-    } else if (
-      convertToLowerCase(dforceStakingVaultAddress.toHex()) == convertToLowerCase(DForce_dUSDC_Staking.toHex())
-    ) {
+    } else if (dforceStakingVaultAddress.toHex().toLowerCase() == DForce_dUSDC_Staking.toHex().toLowerCase()) {
       dTokenAddress = DForce_dUSDC;
       createDTokenData(dTokenAddress, dforceStakingVaultAddress, transactionHash, blockNumber, blockTimestamp);
-    } else if (
-      convertToLowerCase(dforceStakingVaultAddress.toHex()) == convertToLowerCase(DForce_dUSDT_Staking.toHex())
-    ) {
+    } else if (dforceStakingVaultAddress.toHex().toLowerCase() == DForce_dUSDT_Staking.toHex().toLowerCase()) {
       dTokenAddress = DForce_dUSDT;
       createDTokenData(dTokenAddress, dforceStakingVaultAddress, transactionHash, blockNumber, blockTimestamp);
     }
   } else {
     if (dforceStakingVaultAddress === null) {
-      if (convertToLowerCase(dTokenAddress.toHex()) == convertToLowerCase(DForce_dDAI.toHex())) {
+      if (dTokenAddress.toHex().toLowerCase() == DForce_dDAI.toHex().toLowerCase()) {
         dforceStakingVaultAddress = DForce_dDAI_Staking;
         log.info("dDAI Staking Vault contract address: {}", [dforceStakingVaultAddress.toHex()]);
-      } else if (convertToLowerCase(dTokenAddress.toHex()) == convertToLowerCase(DForce_dUSDC.toHex())) {
+      } else if (dTokenAddress.toHex().toLowerCase() == DForce_dUSDC.toHex().toLowerCase()) {
         dforceStakingVaultAddress = DForce_dUSDC_Staking;
         log.info("dUSDC Staking Vault contract address: {}", [dforceStakingVaultAddress.toHex()]);
-      } else if (convertToLowerCase(dTokenAddress.toHex()) == convertToLowerCase(DForce_dUSDT.toHex())) {
+      } else if (dTokenAddress.toHex().toLowerCase() == DForce_dUSDT.toHex().toLowerCase()) {
         dforceStakingVaultAddress = DForce_dUSDT_Staking;
         log.info("dUSDT Staking Vault contract address: {}", [dforceStakingVaultAddress.toHex()]);
       }
