@@ -7,13 +7,14 @@ import {
 } from "../../../generated/FulcrumTokeniDAI/FulcrumToken";
 import { FulcrumTokenData } from "../../../generated/schema";
 import { convertBINumToDesiredDecimals } from "../../utils/converters";
+import { ZERO_BI } from "../../utils/constants";
 
 function handleFulcrumToken(
   transactionHash: Bytes,
   blockNumber: BigInt,
   blockTimestamp: BigInt,
   address: Address,
-  tokenPrice: BigInt,
+  tokenPrice: BigInt | null,
 ): void {
   let tokenContract = FulcrumToken.bind(address);
 
@@ -26,7 +27,7 @@ function handleFulcrumToken(
   entity.blockNumber = blockNumber;
   entity.blockTimestamp = blockTimestamp;
   entity.address = address;
-  entity.symbol = tokenContract.try_symbol().reverted ? null : tokenContract.symbol();
+  entity.symbol = tokenContract.try_symbol().reverted ? "" : tokenContract.symbol();
 
   log.debug("Saving Fulcrum Token {} at address {} in block {} with txHash {}", [
     entity.symbol,
@@ -44,7 +45,7 @@ function handleFulcrumToken(
   else entity.borrowInterestRate = convertBINumToDesiredDecimals(tried_borrowInterestRate.value, 20);
 
   if (tokenPrice) {
-    entity.tokenPrice = convertBINumToDesiredDecimals(tokenPrice, 18);
+    entity.tokenPrice = convertBINumToDesiredDecimals(!tokenPrice ? ZERO_BI : tokenPrice, 18);
   } else {
     let tried_tokenPrice = tokenContract.try_tokenPrice();
     if (tried_tokenPrice.reverted) log.error("tokenPrice() reverted", []);

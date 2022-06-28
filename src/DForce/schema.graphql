@@ -2,9 +2,9 @@ type DForceTokenData @entity {
   id: ID!
   pricePerFullShare: BigDecimal
   balance: BigDecimal
-  blockNumber: BigInt
+  blockNumber: BigInt!
   blockTimestamp: BigInt
-  dTokenSymbol: String
-  dTokenAddress: Bytes
+  dTokenSymbol: String!
+  dTokenAddress: Bytes!
   rewardRate: BigInt
 }

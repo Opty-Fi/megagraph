@@ -1,15 +1,15 @@
 type BenqiTokenData @entity {
   id: ID!
-  blockNumber: BigInt
+  blockNumber: BigInt!
   blockTimestamp: BigInt
   borrowIndex: BigDecimal
-  qiTokenSymbol: String
-  qiTokenAddress: Bytes
+  qiTokenSymbol: String!
+  qiTokenAddress: Bytes!
   exchangeRate: BigDecimal
   totalCash: BigDecimal
   totalBorrows: BigDecimal
-  totalSupply: BigDecimal
+  totalSupply: BigDecimal!
   totalReserves: BigDecimal!
-  SupplyReserveRatio: BigDecimal
+  supplyReserveRatio: BigDecimal!
   supplyRatePerTimestamp: BigDecimal
 }

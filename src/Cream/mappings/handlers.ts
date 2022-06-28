@@ -3,18 +3,19 @@ import { CreamComptrollerImplementation } from "../../../generated/CreamComptrol
 import { CreamToken } from "../../../generated/CreamTokencrDAI/CreamToken";
 import { CreamUnderlying } from "../../../generated/CreamTokencrDAI/CreamUnderlying";
 import { CreamTokenData } from "../../../generated/schema";
+import { ZERO_BI } from "../../utils/constants";
 import { convertBINumToDesiredDecimals } from "../../utils/converters";
 
 export function handleEntity(
   transactionHash: Bytes,
   blockNumber: BigInt,
   blockTimestamp: BigInt,
-  comptrollerAddr: Address,
-  newSpeed: BigInt,
+  comptrollerAddr: Address | null,
+  newSpeed: BigInt | null,
   address: Address,
-  borrowIndex: BigInt,
-  totalBorrows: BigInt,
-  totalReserves: BigInt,
+  borrowIndex: BigInt | null,
+  totalBorrows: BigInt | null,
+  totalReserves: BigInt | null,
 ): void {
   let tokenContract = CreamToken.bind(address);
 
@@ -22,9 +23,9 @@ export function handleEntity(
   if (!entity) entity = new CreamTokenData(transactionHash.toHex());
 
   if (comptrollerAddr) {
-    entity.compSpeeds = convertBINumToDesiredDecimals(newSpeed, 18);
+    entity.compSpeeds = convertBINumToDesiredDecimals(!newSpeed ? ZERO_BI : newSpeed, 18);
   } else {
-    let comptrollerContract: CreamComptrollerImplementation = null;
+    let comptrollerContract: CreamComptrollerImplementation | null = null;
     let tried_comptroller = tokenContract.try_comptroller();
     if (!tried_comptroller.reverted) comptrollerContract = CreamComptrollerImplementation.bind(tried_comptroller.value);
     if (comptrollerContract) {
@@ -52,7 +53,7 @@ export function handleEntity(
   entity.blockNumber = blockNumber;
   entity.blockTimestamp = blockTimestamp;
   entity.address = address;
-  entity.symbol = tokenContract.try_symbol().reverted ? null : tokenContract.symbol();
+  entity.symbol = tokenContract.try_symbol().reverted ? "" : tokenContract.symbol();
 
   log.debug("Saving Cream Token {} at address {} in block {} with txHash {}", [
     entity.symbol,

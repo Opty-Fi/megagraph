@@ -1,9 +1,9 @@
 type TraderJoeLendingData @entity {
   id: ID!
   blockNumber: BigInt!
-  blockTimestamp: BigInt!  
+  blockTimestamp: BigInt!
   symbol: String
-  address: Bytes  
+  address: Bytes
   borrowIndex: BigDecimal
   borrowRatePerSecond: BigDecimal
   supplyRatePerSecond: BigDecimal
@@ -15,6 +15,7 @@ type TraderJoeLendingData @entity {
   underlyingSymbol: String
   underlyingAddress: Bytes
 }
+
 type TraderJoeFarmData @entity {
   id: ID!
   blockNumber: BigInt!
@@ -29,17 +30,18 @@ type TraderJoeFarmData @entity {
   rewardPerSecond: BigDecimal
   lastRewardTime: BigInt
   event: String
-  
 }
+
 type TraderJoeStakingData @entity {
   id: ID!
   blockNumber: BigInt!
-  blockTimestamp: BigInt!  
-  xJoeSupply: BigDecimal    
-  tvl: BigDecimal  
-  tvlInUSDT: BigDecimal  
+  blockTimestamp: BigInt!
+  xJoeSupply: BigDecimal
+  tvl: BigDecimal!
+  tvlInUSDT: BigDecimal
   event: String
 }
+
 type TraderJoeSwapData @entity {
   id: ID! # tx hash
   pair: TraderJoeSwapPair
@@ -48,13 +50,14 @@ type TraderJoeSwapData @entity {
   token0Vol: BigDecimal
   token1Vol: BigDecimal
 }
+
 type TraderJoeSwapPair @entity {
   id: ID! # pool address
   name: String!
   token0Symbol: String!
   token0Decimals: BigInt!
   token1Symbol: String!
-  token1Decimals: BigInt!  
+  token1Decimals: BigInt!
   token0Address: Bytes!
   token1Address: Bytes!
 }

@@ -1,10 +1,10 @@
-import { Swap as SwapEvent } from "../../../generated/templates/TraderJoeJoePair/TraderJoeJoePair";
 import { Address, BigInt, log } from "@graphprotocol/graph-ts";
+import { Swap as SwapEvent } from "../../../generated/templates/TraderJoeJoePair/TraderJoeJoePair";
 import { TraderJoeSwapData, TraderJoeSwapPair } from "../../../generated/schema";
 import { TraderJoeJoePair as PairContract } from "../../../generated/templates/TraderJoeJoePair/TraderJoeJoePair";
 import { TraderJoeERC20 as ERC20Contract } from "../../../generated/templates/TraderJoeJoePair/TraderJoeERC20";
-
 import { convertBINumToDesiredDecimals } from "../../utils/converters";
+import { ZERO_ADDRESS } from "../../utils/constants";
 
 export function handleSwap(event: SwapEvent): void {
   let entity = TraderJoeSwapData.load(event.transaction.hash.toHex());
@@ -13,6 +13,7 @@ export function handleSwap(event: SwapEvent): void {
   entity.blockNumber = event.block.number;
   entity.blockTimestamp = event.block.timestamp;
   let pair = getPair(event.address);
+  if (pair === null) return;
 
   let token0In = convertBINumToDesiredDecimals(event.params.amount0In, pair.token0Decimals.toI32());
   let token1In = convertBINumToDesiredDecimals(event.params.amount1In, pair.token1Decimals.toI32());
@@ -40,7 +41,7 @@ export function getPair(address: Address): TraderJoeSwapPair | null {
       return null;
     } else {
       pair.token0Address = token0AddresResult.value;
-      pair = updatePairTokens(pair as TraderJoeSwapPair, token0AddresResult.value, null);
+      pair = updatePairTokens(pair as TraderJoeSwapPair, token0AddresResult.value, ZERO_ADDRESS);
     }
     let token1AddresResult = pairContract.try_token1();
     if (token1AddresResult.reverted) {
@@ -48,7 +49,7 @@ export function getPair(address: Address): TraderJoeSwapPair | null {
       return null;
     } else {
       pair.token1Address = token1AddresResult.value;
-      pair = updatePairTokens(pair as TraderJoeSwapPair, null, token1AddresResult.value);
+      pair = updatePairTokens(pair as TraderJoeSwapPair, ZERO_ADDRESS, token1AddresResult.value);
     }
     pair.name = pair.token0Symbol.concat("-").concat(pair.token1Symbol);
 
@@ -57,15 +58,16 @@ export function getPair(address: Address): TraderJoeSwapPair | null {
 
   return pair as TraderJoeSwapPair;
 }
+
 function updatePairTokens(pair: TraderJoeSwapPair, token0: Address, token1: Address): TraderJoeSwapPair {
-  let tokenAddress = token0 == null ? token1 : token0;
+  let tokenAddress = token0 === ZERO_ADDRESS ? token1 : token0;
 
   let tokenContract = ERC20Contract.bind(tokenAddress);
   let tokenSymbolResult = tokenContract.try_symbol();
   if (tokenSymbolResult.reverted) {
     log.warning("try_symbol() {} reverted", [tokenAddress.toHex()]);
   } else {
-    if (token0 != null) {
+    if (token0 !== null) {
       pair.token0Symbol = tokenSymbolResult.value;
     } else {
       pair.token1Symbol = tokenSymbolResult.value;
@@ -75,7 +77,7 @@ function updatePairTokens(pair: TraderJoeSwapPair, token0: Address, token1: Addr
   if (tokenDecimalsResult.reverted) {
     log.warning("try_symbol() token0 reverted", []);
   } else {
-    if (token0 != null) {
+    if (token0 !== null) {
       pair.token0Decimals = BigInt.fromI32(tokenDecimalsResult.value);
     } else {
       pair.token1Decimals = BigInt.fromI32(tokenDecimalsResult.value);

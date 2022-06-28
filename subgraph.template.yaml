@@ -20,7 +20,7 @@ dataSources:
       abi: {{adapter}}{{contract}}
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
         {{#entities}}
@@ -48,7 +48,7 @@ templates:
       abi: {{adapter}}{{name}}
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       file: ./src/{{adapter}}/mappings/{{name}}.ts
       entities:

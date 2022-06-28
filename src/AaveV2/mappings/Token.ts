@@ -27,7 +27,7 @@ function handleAaveV2Token(
   entity.blockNumber = blockNumber;
   entity.blockTimestamp = blockTimestamp;
   entity.address = address;
-  entity.symbol = tokenContract.try_symbol().reverted ? null : tokenContract.symbol();
+  entity.symbol = tokenContract.try_symbol().reverted ? "" : tokenContract.symbol();
 
   log.debug("Saving AaveV2 Token {} at address {} in block {} with txHash {}", [
     entity.symbol,

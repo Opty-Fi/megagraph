@@ -1,13 +1,13 @@
 type CompoundTokenData @entity {
   id: ID!
-  blockNumber: BigInt
-  blockTimestamp: BigInt
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
   borrowIndex: BigDecimal
   borrowRatePerBlock: BigDecimal
   compBorrowSpeed: BigDecimal
   compSupplySpeed: BigDecimal
-  cTokenSymbol: String
-  cTokenAddress: Bytes
+  cTokenSymbol: String!
+  cTokenAddress: Bytes!
   exchangeRate: BigDecimal
   supplyRatePerBlock: BigDecimal
   totalCash: BigDecimal

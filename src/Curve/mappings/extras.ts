@@ -8,12 +8,7 @@ import { CurveMultiRewards } from "../../../generated/Curve/CurveMultiRewards";
 import { CurveStakingRewards } from "../../../generated/Curve/CurveStakingRewards";
 import { CurveAaveIncentivesController } from "../../../generated/Curve/CurveAaveIncentivesController";
 import { CurveExtraReward, CurvePoolData } from "../../../generated/schema";
-import {
-  convertBINumToDesiredDecimals,
-  convertBytesToAddress,
-  convertToLowerCase,
-  toAddress,
-} from "../../utils/converters";
+import { convertBINumToDesiredDecimals, convertBytesToAddress, toAddress } from "../../utils/converters";
 import {
   CurveRegistryAddress,
   ZERO_BI,
@@ -23,45 +18,45 @@ import {
 
 // Liquidity Gauge - reward_tokens, reward_data
 let v1Pools: Array<string> = [
-  convertToLowerCase("0x5a6A4D54456819380173272A5E8E9B9904BdF41B"), // mim -> SPELL
+  "0x5a6A4D54456819380173272A5E8E9B9904BdF41B".toLowerCase(), // mim -> SPELL
 ];
 
 // Liquidity Gauge V2 - reward_tokens, reward_contract
 let v2Pools: Array<string> = [
-  convertToLowerCase("0xDC24316b9AE028F1497c275EB9192a3Ea0f67022"), // steth -> LDO
-  convertToLowerCase("0xd632f22692FaC7611d2AA1C0D552930D43CAEd3B"), // frax -> FXS
-  convertToLowerCase("0x42d7025938bEc20B69cBae5A77421082407f053A"), // usdp -> DUCK
-  convertToLowerCase("0xd81dA8D904b52208541Bade1bD6595D8a251F8dd"), // obtc -> BOR
-  convertToLowerCase("0xd7d147c6Bb90A718c3De8C0568F9B560C79fa416"), // pbtc -> PNT
+  "0xDC24316b9AE028F1497c275EB9192a3Ea0f67022".toLowerCase(), // steth -> LDO
+  "0xd632f22692FaC7611d2AA1C0D552930D43CAEd3B".toLowerCase(), // frax -> FXS
+  "0x42d7025938bEc20B69cBae5A77421082407f053A".toLowerCase(), // usdp -> DUCK
+  "0xd81dA8D904b52208541Bade1bD6595D8a251F8dd".toLowerCase(), // obtc -> BOR
+  "0xd7d147c6Bb90A718c3De8C0568F9B560C79fa416".toLowerCase(), // pbtc -> PNT
 ];
 
 // Liquidity Gauge V2 + MultiRewards
 let v2PoolsMulti: Array<string> = [
-  convertToLowerCase("0xA96A65c051bF88B4095Ee1f2451C2A9d43F53Ae2"), // ankreth -> ANKR + ONX
+  "0xA96A65c051bF88B4095Ee1f2451C2A9d43F53Ae2".toLowerCase(), // ankreth -> ANKR + ONX
 ];
 
 // Liquidity Gauge V3 - reward_tokens, reward_contract (same as V2)
 let v3Pools: Array<string> = [
-  convertToLowerCase("0x43b4FdFD4Ff969587185cDB6f0BD875c5Fc83f8c"), // alusd -> ALCX
-  convertToLowerCase("0xF9440930043eb3997fc70e1339dBb11F341de7A8"), // reth -> FIS
+  "0x43b4FdFD4Ff969587185cDB6f0BD875c5Fc83f8c".toLowerCase(), // alusd -> ALCX
+  "0xF9440930043eb3997fc70e1339dBb11F341de7A8".toLowerCase(), // reth -> FIS
 ];
 
 // Staking Liqudity Gauge - rewarded_token, reward_contract
 let stakingPools: Array<string> = [
-  convertToLowerCase("0xA5407eAE9Ba41422680e2e00537571bcC53efBfD"), // susdv2 -> SNX
-  convertToLowerCase("0x8474DdbE98F5aA3179B3B3F5942D724aFcdec9f6"), // musd -> MTA
-  convertToLowerCase("0xC18cC39da8b11dA8c3541C598eE022258F9744da"), // rsv -> RSR
-  convertToLowerCase("0x8038C01A0390a8c547446a0b2c18fc9aEFEcc10c"), // dusd -> DFD
+  "0xA5407eAE9Ba41422680e2e00537571bcC53efBfD".toLowerCase(), // susdv2 -> SNX
+  "0x8474DdbE98F5aA3179B3B3F5942D724aFcdec9f6".toLowerCase(), // musd -> MTA
+  "0xC18cC39da8b11dA8c3541C598eE022258F9744da".toLowerCase(), // rsv -> RSR
+  "0x8038C01A0390a8c547446a0b2c18fc9aEFEcc10c".toLowerCase(), // dusd -> DFD
 ];
 
 // TODO: Aave Pools
 let aavePools: Array<string> = [
   // saave -> stkAAVE
-  convertToLowerCase("0xEB16Ae0052ed37f479f7fe63849198Df1765a733"),
+  "0xEB16Ae0052ed37f479f7fe63849198Df1765a733".toLowerCase(),
   "TODO",
 
   // aave -> stkAAVE
-  convertToLowerCase("0xDeBF20617708857ebe4F679508E7b7863a8A8EeE"),
+  "0xDeBF20617708857ebe4F679508E7b7863a8A8EeE".toLowerCase(),
   "TODO",
 ];
 
@@ -69,31 +64,31 @@ let aavePools: Array<string> = [
 let factoryPools: Array<string> = [
   // TODO: object gives compile error
   // 2: f-ibkrw -> rKP3R
-  convertToLowerCase("0x8461A004b50d321CB22B7d034969cE6803911899"),
+  "0x8461A004b50d321CB22B7d034969cE6803911899".toLowerCase(),
   "0x1750a3a3d80A3F5333BBe9c4695B0fAd41061ab1",
 
   // 3: f-ibeur -> rKP3R
-  convertToLowerCase("0x19b080FE1ffA0553469D20Ca36219F17Fcf03859"),
+  "0x19b080FE1ffA0553469D20Ca36219F17Fcf03859".toLowerCase(),
   "0x99fb76F75501039089AAC8f20f487bf84E51d76F",
 
   // 9: ousd -> OGN
-  convertToLowerCase("0x87650D7bbfC3A9F10587d7778206671719d9910D"),
+  "0x87650D7bbfC3A9F10587d7778206671719d9910D".toLowerCase(),
   "0x25f0cE4E2F8dbA112D9b115710AC297F816087CD",
 
   // 28: f-ibjpy -> rKP3R
-  convertToLowerCase("0x8818a9bb44Fbf33502bE7c15c500d0C783B73067"),
+  "0x8818a9bb44Fbf33502bE7c15c500d0C783B73067".toLowerCase(),
   "0xeFF437A56A22D7dD86C1202A308536ED8C7da7c1",
 
   // 29: f-ibaud -> rKP3R
-  convertToLowerCase("0x3F1B0278A9ee595635B61817630cC19DE792f506"),
+  "0x3F1B0278A9ee595635B61817630cC19DE792f506".toLowerCase(),
   "0x05ca5c01629a8E5845f12ea3A03fF7331932233A",
 
   // 30: f-ibgbp -> rKP3R
-  convertToLowerCase("0xD6Ac1CB9019137a896343Da59dDE6d097F710538"),
+  "0xD6Ac1CB9019137a896343Da59dDE6d097F710538".toLowerCase(),
   "0x63d9f3aB7d0c528797A12a0684E50C397E9e79dC",
 
   // 31: f-ibchf -> rKP3R
-  convertToLowerCase("0x9c2C8910F113181783c249d8F6Aa41b51Cde0f0c"),
+  "0x9c2C8910F113181783c249d8F6Aa41b51Cde0f0c".toLowerCase(),
   "0x2fA53e8fa5fAdb81f4332C8EcE39Fe62eA2f919E",
 ];
 
@@ -103,7 +98,7 @@ export function getExtras(entity: CurvePoolData, txnHash: Bytes): string[] {
     return [];
   }
 
-  let address = convertToLowerCase(entity.vault.toHexString());
+  let address = entity.vault.toHexString().toLowerCase();
   let index = factoryPools.indexOf(address);
   if (v1Pools.includes(address)) {
     return v1Pool(entity, txnHash);
