@@ -45,7 +45,7 @@ export function handleTransfer(event: TransferEvent): void {
   if (priceResult.reverted) {
     log.warning("getPricePerFullShare() reverted for {}", [vault.toString()]);
   } else {
-    entity.virtualPrice = convertBINumToDesiredDecimals(balanceResult.value, decimals);
+    entity.virtualPrice = convertBINumToDesiredDecimals(priceResult.value, decimals);
   }
 
   let wantResult = contract.try_want();

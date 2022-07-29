@@ -50,7 +50,7 @@ export function handleTransfer(event: TransferEvent): void {
   if (priceResult.reverted) {
     log.warning("getPricePerFullShare() reverted for {}", [vault.toString()]);
   } else {
-    entity.virtualPrice = convertBINumToDesiredDecimals(balanceResult.value, decimals);
+    entity.virtualPrice = convertBINumToDesiredDecimals(priceResult.value, decimals);
   }
 
   let wmaticResult = contract.try_wmatic();
