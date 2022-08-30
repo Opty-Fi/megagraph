@@ -185,6 +185,11 @@
           "address": "0x890f4e345B1dAED0367A877a1612f86A1f86985f",
           "startBlock": 11466568
         },
+        {
+          "symbol": "fraxusdc",
+          "address": "0xDcEF968d416a41Cdac0ED8702fAC8128A64241A2",
+          "startBlock": 14939588
+        },
         { "address": "0xFD5dB7463a3aB53fD211b4af195c5BCCC1A03890", "startBlock": 12914704, "symbol": "EURT-f-1" },
         { "address": "0x8461A004b50d321CB22B7d034969cE6803911899", "startBlock": 12925098, "symbol": "ibKRW+sKRW-f-2" },
         { "address": "0x19b080FE1ffA0553469D20Ca36219F17Fcf03859", "startBlock": 12931794, "symbol": "ibEUR+sEUR-f-3" },
