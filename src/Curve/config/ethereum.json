@@ -369,7 +369,6 @@
           "startBlock": 13944616,
           "symbol": "ELONXSWAP3CRV-f-80"
         },
-        { "address": "0x3a70DfA7d2262988064A2D051dd47521E43c9BdD", "startBlock": 13954026, "symbol": "BEAN3CRV-f-81" },
         { "address": "0x7abD51BbA7f9F6Ae87aC77e1eA1C5783adA56e5c", "startBlock": 14093320, "symbol": "USDV3CRV-f-82" },
         {
           "address": "0x5b78b93Fa851c357586915c7bA7258b762eB1ba0",
@@ -415,7 +414,6 @@
         { "address": "0x8c524635d52bd7b1Bd55E062303177a7d916C046", "startBlock": 14359804, "symbol": "sdFXSFXS-f-100" },
         { "address": "0x48fF31bBbD8Ab553Ebe7cBD84e1eA3dBa8f54957", "startBlock": 14359842, "symbol": "sdAGAG-f-101" },
         { "address": "0x9CA41a2DaB3CEE15308998868ca644e2e3be5C59", "startBlock": 14437811, "symbol": "dfx2CAD-f-102" },
-        { "address": "0xD652c40fBb3f06d6B58Cb9aa9CFF063eE63d465D", "startBlock": 14450075, "symbol": "BEANLUSD-f-103" },
         {
           "address": "0xd1011B637F979a5d9093Df1B32e7736c289024F5",
           "startBlock": 14482675,
@@ -427,9 +425,319 @@
           "symbol": "sETH2stETH-f-105"
         },
         {
+          "address": "0xDB8Cc7eCeD700A4bfFdE98013760Ff31FF9408D8",
+          "startBlock": 14575216,
+          "symbol": "FIAT+3Crv3CRV-f-107"
+        },
+        {
+          "address": "0x323b3a6e7a71c1b8C257606Ef0364D61df8AA525",
+          "startBlock": 14577663,
+          "symbol": "sdCRVCRV-f-108"
+        },
+        {
+          "address": "0xf7b55C3732aD8b2c2dA7c24f30A69f55c54FB717",
+          "startBlock": 14577668,
+          "symbol": "sdCRVCRV-f-109"
+        },
+        {
+          "address": "0xF74bEc4bcf432A17470e9C4F71542f2677B9AF6a",
+          "startBlock": 14591188,
+          "symbol": "mCRV-CRV-f-110"
+        },
+        {
+          "address": "0x5a59Fd6018186471727FAAeAE4e57890aBC49B08",
+          "startBlock": 14605874,
+          "symbol": "FRAXARTHu-f-111"
+        },
+        {
+          "address": "0xeb07FcD7A8627281845ba3aCbed24435802d4B52",
+          "startBlock": 14643506,
+          "symbol": "PUSd-3CRV3CRV-f-112"
+        },
+        {
+          "address": "0x8EE017541375F6Bcd802ba119bdDC94dad6911A1",
+          "startBlock": 14644045,
+          "symbol": "PUSd-3CRV-f-113"
+        },
+        {
+          "address": "0xaa6a4f8DDcca7d3B9E7ad38C8338a2FCfdB1E713",
+          "startBlock": 14671320,
+          "symbol": "clevCVX-f-114"
+        },
+        {
+          "address": "0x8c1de7a8F8852197B109Daf75A6fbB685C013315",
+          "startBlock": 14671376,
+          "symbol": "clevCVX-f-115"
+        },
+        {
           "address": "0xe6b5CC1B4b47305c58392CE3D359B10282FC36Ea",
           "startBlock": 14697860,
           "symbol": "USDD3CRV3CRV-f-116"
+        },
+        {
+          "address": "0x828b154032950C8ff7CF8085D841723Db2696056",
+          "startBlock": 14759666,
+          "symbol": "STETHETH_C-f-117"
+        },
+        {
+          "address": "0x6F80b9543Dd5A0408F162Fe2A1675dB70A2cb77D",
+          "startBlock": 14778528,
+          "symbol": "$Pc3CRV-f-118"
+        },
+        {
+          "address": "0xbf5D9DeCCCC762fA7B5eb9faC668c803D42D97b6",
+          "startBlock": 14781237,
+          "symbol": "CRVUST3CRV-f-119"
+        },
+        {
+          "address": "0x1977870a4c18a728C19Dd4eB6542451DF06e0A4b",
+          "startBlock": 14793277,
+          "symbol": "ApeUSDFRAX-f-120"
+        },
+        {
+          "address": "0x07350D8c30D463179DE6A58764C21558DB66Dd9c",
+          "startBlock": 14795619,
+          "symbol": "FPIVOLT-f-121"
+        },
+        {
+          "address": "0xC38cA214c7a82b1EE977232F045aFb6d425cfFf0",
+          "startBlock": 14795672,
+          "symbol": "FPIVOLT-f-122"
+        },
+        {
+          "address": "0x5c6A6Cf9Ae657A73b98454D17986AF41fC7b44ee",
+          "startBlock": 14813335,
+          "symbol": "HOME+3crv3CRV-f-123"
+        },
+        {
+          "address": "0x9558b18f021FC3cBa1c9B777603829A42244818b",
+          "startBlock": 14818087,
+          "symbol": "uAD3crv3CRV-f-124"
+        },
+        {
+          "address": "0xee60f4A3487c07b4570cCfFEF315401C4c5744c8",
+          "startBlock": 14856935,
+          "symbol": "MBSC3CRV-f-125"
+        },
+        { "address": "0xF38a67dA7a3A12aA12A9981ae6a79C0fdDdd71aB", "startBlock": 14881457, "symbol": "pxCVX-f-126" },
+        {
+          "address": "0xdaDfD00A2bBEb1abc4936b1644a3033e1B653228",
+          "startBlock": 14887899,
+          "symbol": "xFraxTplLP-f-127"
+        },
+        {
+          "address": "0xeE98d56f60A5905CbB52348c8719B247DaFe60ec",
+          "startBlock": 14902604,
+          "symbol": "WOMIOMI-f-128"
+        },
+        {
+          "address": "0x8116E7c29f60FdacF3954891A038f845565EF5A0",
+          "startBlock": 14905568,
+          "symbol": "OMIUSD3CRV-f-129"
+        },
+        {
+          "address": "0xdE495223F7cD7EE0cDe1AddbD6836046bBdf3ad3",
+          "startBlock": 14911500,
+          "symbol": "USDS3CRV3CRV-f-130"
+        },
+        {
+          "address": "0x943b7e761f34866DA12c9b84C99888Fe2Ef607c5",
+          "startBlock": 14916537,
+          "symbol": "dfx2SGD-f-131"
+        },
+        { "address": "0x7E46fd8a30869aa9ed55af031067Df666EfE87da", "startBlock": 14979164, "symbol": "yvecrv-f-132" },
+        {
+          "address": "0x63594B2011a0F2616586Bf3EeF8096d42272F916",
+          "startBlock": 15004989,
+          "symbol": "USDi-3CRV3CRV-f-133"
+        },
+        {
+          "address": "0x67C7f0a63BA70a2dAc69477B716551FC921aed00",
+          "startBlock": 15040862,
+          "symbol": "CRVlvUSD3CRV-f-134"
+        },
+        {
+          "address": "0x4606326b4Db89373F5377C316d3b0F6e55Bc6A20",
+          "startBlock": 15048352,
+          "symbol": "USDDFRAXBP3CRV-f-135"
+        },
+        {
+          "address": "0xe3c190c57b5959Ae62EfE3B6797058B76bA2f5eF",
+          "startBlock": 15048382,
+          "symbol": "SUSDFRAXBP3CRV-f-136"
+        },
+        {
+          "address": "0x497CE58F34605B9944E6b15EcafE6b001206fd25",
+          "startBlock": 15048549,
+          "symbol": "LUSDFRAXBP3CRV-f-137"
+        },
+        {
+          "address": "0x04b727C7e246CA70d496ecF52E6b6280f3c8077D",
+          "startBlock": 15049114,
+          "symbol": "APEUSDBP3CRV-f-138"
+        },
+        {
+          "address": "0x2Ed1D3E7771D64feeD7AE8F25b4032c8dd2D0B99",
+          "startBlock": 15049655,
+          "symbol": "ALUSDFRXBP3CRV-f-139"
+        },
+        {
+          "address": "0x4e43151b78b5fbb16298C1161fcbF7531d5F8D93",
+          "startBlock": 15052018,
+          "symbol": "GUSDFRAXBP3CRV-f-140"
+        },
+        {
+          "address": "0x8fdb0bB9365a46B145Db80D0B1C5C5e979C84190",
+          "startBlock": 15052140,
+          "symbol": "BUSDFRAXBP3CRV-f-141"
+        },
+        {
+          "address": "0x50C8F34CEA0E65535fC2525B637ccd8a07c90896",
+          "startBlock": 15059895,
+          "symbol": "crvMXNT3CRV-f-142"
+        },
+        {
+          "address": "0x642562115cf5A5e72Ab517E6448EC8b61843dac9",
+          "startBlock": 15062665,
+          "symbol": "EUROC/3CRV3CRV-f-143"
+        },
+        {
+          "address": "0x33baeDa08b8afACc4d3d07cf31d49FC1F1f3E893",
+          "startBlock": 15075182,
+          "symbol": "TUSDFRAXBP3CRV-f-144"
+        },
+        {
+          "address": "0xD7C10449A6D134A9ed37e2922F8474EAc6E5c100",
+          "startBlock": 15096952,
+          "symbol": "MATICFLEET-f-146"
+        },
+        {
+          "address": "0xB30dA2376F63De30b42dC055C93fa474F31330A5",
+          "startBlock": 15125488,
+          "symbol": "alUSDFRAXB3CRV-f-147"
+        },
+        {
+          "address": "0x649c1B0e70A80210bcFB3C4eb5DDAd175B90BE4d",
+          "startBlock": 15212873,
+          "symbol": "GCDUSDP-f-149"
+        },
+        {
+          "address": "0x875DF0bA24ccD867f8217593ee27253280772A97",
+          "startBlock": 15229861,
+          "symbol": "stETHaETHb-f-150"
+        },
+        {
+          "address": "0xC69b00366F07840fF939cc9fdF866C3dCCB10804",
+          "startBlock": 15270000,
+          "symbol": "sdLFTLFT-f-151"
+        },
+        {
+          "address": "0xc9C32cd16Bf7eFB85Ff14e0c8603cc90F6F2eE49",
+          "startBlock": 15278082,
+          "symbol": "BEAN3CRV-f-152"
+        },
+        {
+          "address": "0x48fcFFa86fb24bDEB45B5739F7Ced24095A7c8e8",
+          "startBlock": 15349986,
+          "symbol": "MAIpool3CRV-f-153"
+        },
+        {
+          "address": "0xb3bC1833aC51aAcEA92acd551FBe1Ab7eDc59EdF",
+          "startBlock": 15351645,
+          "symbol": "MIMFRAXBP3CRV-f-154"
+        },
+        { "address": "0x7c0316C925E12eBfC55e0f325794B43eaD425157", "startBlock": 15356244, "symbol": "frxETH-f-155" },
+        { "address": "0x83D78bf3f861e898cCA47BD076b3839Ab5469d70", "startBlock": 15372345, "symbol": "tMYC-f-156" },
+        {
+          "address": "0x0AaCe9b6c491d5cD9F80665A2fCc1af09e9CCf00",
+          "startBlock": 15393259,
+          "symbol": "fxUSD3CRV-f-157"
+        },
+        {
+          "address": "0x92Da88e2e6f96cC7c667Cd1367BD090ADF3c6053",
+          "startBlock": 15394144,
+          "symbol": "xUSD13CRV-f-158"
+        },
+        {
+          "address": "0x85F102bE3a76165Be9668bE0bF36E906a488FD33",
+          "startBlock": 15394155,
+          "symbol": "xUSD13CRV-f-159"
+        },
+        {
+          "address": "0x87872BE0c56Ef97156f2617b3083D22423Fc62E9",
+          "startBlock": 15394163,
+          "symbol": "xUSD13CRV-f-160"
+        },
+        {
+          "address": "0xc5481720517e1B170CF1d19cEaaBE07c37896Eb2",
+          "startBlock": 15394167,
+          "symbol": "xUSD13CRV-f-161"
+        },
+        {
+          "address": "0x8b3138DF9aA1F60648C65C67D6Ff646BE305788B",
+          "startBlock": 15394237,
+          "symbol": "xUSD13CRV-f-162"
+        },
+        {
+          "address": "0xBA866791F98098df41C3187D4D5433be29215c79",
+          "startBlock": 15395326,
+          "symbol": "agEUREUROC-f-163"
+        },
+        {
+          "address": "0xBa3436Fd341F2C8A928452Db3C5A3670d1d5Cc73",
+          "startBlock": 15395627,
+          "symbol": "agEUREUROC-f-164"
+        },
+        {
+          "address": "0x6e8d2b6Fb24117c675C2fABC524f28CC5D81f18a",
+          "startBlock": 15403834,
+          "symbol": "cbETHETH-f-165"
+        },
+        { "address": "0xc22936D5ECE78C048D6E7fe5d9F77fb6cAA16Dbb", "startBlock": 15406232, "symbol": "aETH-f-166" },
+        {
+          "address": "0xb548E49Bb6f33A77885836723b73EF9C8dBC047B",
+          "startBlock": 15408822,
+          "symbol": "USDTDAI_OP3CRV-f-167"
+        },
+        {
+          "address": "0x3DcC3AC50cB42F7e443d7F548DD2c48EDaa8f59a",
+          "startBlock": 15408878,
+          "symbol": "USDT/DAI_M3CRV-f-168"
+        },
+        {
+          "address": "0x172A54Ba45783049216F90F85FE5E5f6BC1c08fe",
+          "startBlock": 15409456,
+          "symbol": "CRVGNOOK3CRV-f-169"
+        },
+        {
+          "address": "0xF08dBD81Fcc712004e6943454c83C52DE963cdEC",
+          "startBlock": 15409466,
+          "symbol": "CRVGNOOK3CRV-f-170"
+        },
+        {
+          "address": "0x6788f608CfE5CfCD02e6152eC79505341E0774be",
+          "startBlock": 15415514,
+          "symbol": "sdAPWAPW-f-171"
+        },
+        {
+          "address": "0x9fE520E629A7F0deC773A3199BFE87620E5aeA74",
+          "startBlock": 15417156,
+          "symbol": "DOLAFRAXB3CRV-f-172"
+        },
+        {
+          "address": "0xb2111b55Edd1Cb5D2C18a6817e21D473FE0E5Ba1",
+          "startBlock": 15422178,
+          "symbol": "pUSDFRAXBP3CRV-f-173"
+        },
+        {
+          "address": "0xC47EBd6c0f68fD5963005D28D0ba533750E5C11B",
+          "startBlock": 15422251,
+          "symbol": "pUSDFRAXBP3CRV-f-174"
+        },
+        {
+          "address": "0x66E335622ad7a6C9c72c98dbfCCE684996a20Ef9",
+          "startBlock": 15438269,
+          "symbol": "MAIPool3CRV-f-175"
         }
       ]
     },
@@ -532,7 +840,9 @@
         { "address": "0xBaaa1F5DbA42C3389bDbc2c9D2dE134F5cD0Dc89", "startBlock": 13437673, "symbol": "D3-f-57" },
         { "address": "0xb9446c4Ef5EBE66268dA6700D26f96273DE3d571", "startBlock": 13627050, "symbol": "3EURpool-f-66" },
         { "address": "0xa0D35fAead5299Bf18eFbB5dEfd1Ec6D4AB4Ef3B", "startBlock": 13764838, "symbol": "FEIPCV-1-f-75" },
-        { "address": "0x6577b46a566aDe492ad551a315c04DE3Fbe3DbFa", "startBlock": 14485339, "symbol": "TriCRV-f-106" }
+        { "address": "0x6577b46a566aDe492ad551a315c04DE3Fbe3DbFa", "startBlock": 14485339, "symbol": "TriCRV-f-106" },
+        { "address": "0xe7A3b38c39F97E977723bd1239C3470702568e7B", "startBlock": 15083432, "symbol": "europool-f-145" },
+        { "address": "0xF70c5c65CF6A28E7a4483F52511e5a29678e4fFD", "startBlock": 15182665, "symbol": "europool-f-148" }
       ]
     },
     {
