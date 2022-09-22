@@ -98,7 +98,7 @@ function handlePoolEntity(
   let balances: Array<BigDecimal> = [];
   let tokens: Array<Bytes> = [];
   let underlyingPerLpTokens: Array<BigDecimal> = [];
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 2; i++) {
     let balanceResult = contract.try_balances(BigInt.fromI32(i));
     let tokenResult = contract.try_coins(BigInt.fromI32(i));
     let calcWithdrawOneCoinResult = contract.try_calc_withdraw_one_coin(

@@ -59,7 +59,7 @@ function handleAaveToken(transactionHash: Bytes, blockNumber: BigInt, blockTimes
 
     let tried_getReserveData = dataProviderContract.try_getReserveData(underlyingAssetAddr);
     if (tried_getReserveData.reverted)
-      log.error("dataProvider at {} call getReserveConfigurationData({}) reverted", [
+      log.error("dataProvider at {} call getReserveData({}) reverted", [
         dataProviderContract._address.toHex(),
         underlyingAssetAddr.toHex(),
       ]);
