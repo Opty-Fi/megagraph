@@ -15,7 +15,8 @@ export function handleTransfer(event: Transfer): void {
   let fromZeros = event.params.from == ZERO_ADDRESS;
 
   let lidoRewards = LidoRewardData.load(event.transaction.hash.toHex());
-  let totals = LidoTotals.load("") as LidoTotals;
+  let totalsLoad = LidoTotals.load("");
+  let totals = !totalsLoad ? new LidoTotals("") : totalsLoad;
   let totalPooledEther = totals.totalPooledEther;
   let totalShares = totals.totalShares;
 
@@ -46,20 +47,22 @@ export function handleTransfer(event: Transfer): void {
 
   entity.save();
 }
-export function handleSubmitted(event: Submitted): void {
-  let totals = LidoTotals.load("");
 
-  let isFirstSubmission = !totals;
+export function handleSubmitted(event: Submitted): void {
+  let totalsLoad = LidoTotals.load("");
+
+  let isFirstSubmission = !totalsLoad;
 
   if (isFirstSubmission) {
-    totals = new LidoTotals("");
-    totals.totalPooledEther = ZERO_BI;
-    totals.totalShares = ZERO_BI;
+    totalsLoad = new LidoTotals("");
+    totalsLoad.totalPooledEther = ZERO_BI;
+    totalsLoad.totalShares = ZERO_BI;
   }
+  let totals = totalsLoad as LidoTotals;
 
   // creating a new LidoTokenData entity
   let entity = LidoTokenData.load(event.transaction.hash.toHex());
-  if (entity == null) {
+  if (entity === null) {
     entity = new LidoTokenData(event.transaction.hash.toHex());
   }
 
@@ -81,13 +84,15 @@ export function handleSubmitted(event: Submitted): void {
   entity.save();
   totals.save();
 }
+
 export function handleWithdrawal(event: Withdrawal): void {
   // creating a new LidoTokenData if not existent already
   let entity = LidoTokenData.load(event.transaction.hash.toHex());
-  if (entity == null) {
+  if (entity === null) {
     entity = new LidoTokenData(event.transaction.hash.toHex());
   }
-  let totals = LidoTotals.load("");
+  let totalsLoad = LidoTotals.load("");
+  let totals = !totalsLoad ? new LidoTotals("") : totalsLoad;
 
   entity.totalPooledEther = totals.totalPooledEther;
 

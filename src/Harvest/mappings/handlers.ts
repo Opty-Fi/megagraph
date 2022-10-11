@@ -2,12 +2,12 @@ import { log, Address, BigInt } from "@graphprotocol/graph-ts";
 import { HarvestNoMintRewardPool } from "../../../generated/HarvestNoMintRewardPool/HarvestNoMintRewardPool";
 import { HarvestToken as Vault } from "../../../generated/HarvestTokenfDAI/HarvestToken";
 import { HarvestTokenData } from "../../../generated/schema";
-import { convertToLowerCase, convertBINumToDesiredDecimals } from "../../utils/converters";
+import { convertBINumToDesiredDecimals } from "../../utils/converters";
 import { ZERO_ADDRESS, ZERO_BI, ZERO_BD, Harvest_POOL, Harvest_fDAI } from "../../utils/constants";
 
 export function handleEntity(
-  poolAddr: Address,
-  vaultAddr: Address,
+  poolAddr: Address | null,
+  vaultAddr: Address | null,
   txnHash: string,
   blockNumber: BigInt,
   timestamp: BigInt,
@@ -19,13 +19,13 @@ export function handleEntity(
   entity.blockNumber = blockNumber;
   entity.blockTimestamp = timestamp;
 
-  if (poolAddr == null) {
-    if (convertToLowerCase(vaultAddr.toHex()) == convertToLowerCase(Harvest_fDAI.toHex())) {
+  if (poolAddr === null) {
+    if ((!vaultAddr ? ZERO_ADDRESS : vaultAddr).toHex().toLowerCase() === Harvest_fDAI.toHex().toLowerCase()) {
       log.debug("Found fDAI, setting Pool to {}", [Harvest_POOL.toHex()]);
       poolAddr = Harvest_POOL;
     }
   }
-  if (poolAddr != null) {
+  if (poolAddr !== null) {
     let poolContract = HarvestNoMintRewardPool.bind(poolAddr);
     let lastUpdateTime = poolContract.try_lastUpdateTime();
     let rewardRate = poolContract.try_rewardRate();
@@ -41,12 +41,12 @@ export function handleEntity(
     entity.pool = ZERO_ADDRESS;
   }
 
-  if (vaultAddr == null) {
-    let poolContract = HarvestNoMintRewardPool.bind(poolAddr);
+  if (vaultAddr === null) {
+    let poolContract = HarvestNoMintRewardPool.bind(!poolAddr ? ZERO_ADDRESS : poolAddr);
     let vault = poolContract.try_lpToken();
     vaultAddr = vault.reverted ? null : vault.value;
   }
-  if (vaultAddr != null) {
+  if (vaultAddr !== null) {
     let contract = Vault.bind(vaultAddr);
     let pricePerFullShare = contract.try_getPricePerFullShare();
     let underlyingBalanceWithInvestment = contract.try_underlyingBalanceWithInvestment();

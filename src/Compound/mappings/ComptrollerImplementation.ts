@@ -7,8 +7,8 @@ export function handleCompSpeedUpdated(event: CompSpeedUpdatedEvent): void {
     event.block.number,
     event.block.timestamp,
     event.address, // comptrollerAddress
-    event.params.newSpeed,
-    event.params.newSpeed,
+    event.params.newSpeed, // newBorrowSpeed
+    event.params.newSpeed, // newSupplySpeed
     event.params.cToken,
     null, // borrowIndex
     null, // totalBorrows
