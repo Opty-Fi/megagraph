@@ -1,0 +1,61 @@
+type AlphaHomoraV2Token @entity {
+  id: ID!
+  decimals: Int!
+  symbol: String!
+}
+
+type AlphaHomoraV2LpPair @entity {
+  id: ID!
+  name: String!
+  token0: AlphaHomoraV2Token!
+  token1: AlphaHomoraV2Token!
+  exchange: String!
+  pid: Int!
+  wMasterChef: AlphaHomoraV2WMasterChef!
+  factory: String!
+}
+
+type AlphaHomoraV2WMasterChef @entity {
+  id: ID!
+  pairs: [AlphaHomoraV2LpPair!]! @derivedFrom(field: "wMasterChef")
+  chef: String!
+}
+
+type AlphaHomoraV2FarmData @entity {
+  id: ID!
+  pid: Int!
+  lpToken: AlphaHomoraV2LpPair!
+  poolAlloc: BigInt!
+  totalAlloc: BigInt!
+  timestamp: BigInt!
+  blockNumber:BigInt!
+  rewardToken: String!
+  bonusToken: String!
+  poolAccRewardTokenPerShare: BigDecimal!
+  lastRewardTimestamp: BigInt!
+  rewardTokenPerSec:BigDecimal!
+  poolAccBonusTokenPerShare: BigDecimal!
+  bonusTokenPerSec:BigDecimal!
+  lpLocked:BigDecimal!
+  pendingBonusToken: BigDecimal!
+  pendingRewardtoken: BigDecimal!
+  wMasterChef: AlphaHomoraV2WMasterChef!
+}
+
+type AlphaHomoraV2CreamToken @entity {
+  id: ID!
+  underlying:AlphaHomoraV2Token!
+}
+
+type AlphaHomoraV2LendData @entity {
+  id: ID!
+  collateral: AlphaHomoraV2Token!
+  cyToken: AlphaHomoraV2CreamToken!
+  borrowRatePerBlock: BigDecimal!
+  supplyRatePerBlock: BigDecimal!
+  borrowBalance: BigDecimal!
+  cyTokenExchangeRate: BigDecimal!
+  feeBPS: BigDecimal!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}

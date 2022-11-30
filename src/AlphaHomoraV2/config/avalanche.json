@@ -1,0 +1,51 @@
+{
+  "network": "avalanche",
+  "adapter": "AlphaHomoraV2",
+  "contracts": [
+    {
+      "contract": "HomoraBank",
+      "abis": [
+        "HomoraBank",
+        "MasterChef",
+        "MasterChefPNG",
+        "CyToken",
+        "BonusTokenRewarder",
+        "ERC20",
+        "WMasterChef",
+        "LpToken",
+        "CyToken",
+        "BoostedMasterChef"
+      ],
+      "entities": ["AlphaHomoraV2FarmData", "AlphaHomoraV2LendData"],
+      "events": [
+        {
+          "event-name": "PutCollateral",
+          "event-params": "(uint256,address,address,uint256,uint256)"
+        },
+        {
+          "event-name": "TakeCollateral",
+          "event-params": "(uint256,address,address,uint256,uint256)"
+        },
+        {
+          "event-name": "Borrow",
+          "event-params": "(uint256,address,address,uint256,uint256)"
+        },
+        {
+          "event-name": "Repay",
+          "event-params": "(uint256,address,address,uint256,uint256)"
+        },
+        {
+          "event-name": "Liquidate",
+          "event-params": "(uint256,address,address,uint256,uint256,uint256)"
+        }
+      ],
+      "instances": [
+        {
+          "address": "0x376d16c7de138b01455a51da79ad65806e9cd694",
+          "symbol": "",
+          "startBlock": 5658898
+        }
+      ]
+    }
+  ]
+}

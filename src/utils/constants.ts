@@ -37,6 +37,8 @@ export let SushiMiniChefAddress = toAddress("0x0769fd68dFb93167989C6f7254cd0D766
 export let CAM_INCENTIVES_CONTROLLER_ADDRESS: Address = toAddress("0x357D51124f59836DeD84c8a1730D72B749d8BC23");
 export let CAM_LENDING_POOL_ADDRESS: Address = toAddress("0x8dFf5E27EA6b7AC08EbFdf9eB090F32ee9a30fcf");
 
+export let HOMORA_BANK_ADDRESS = toAddress("0x376d16c7de138b01455a51da79ad65806e9cd694");
+
 export let TRADER_JOE_MASTER_CHEF_V2_ADDRESS: Address = toAddress("0xd6a4f121ca35509af06a0be99093d08462f53052");
 export let TRADER_JOE_MASTER_CHEF_V3_ADDRESS: Address = toAddress("0x188bed1968b795d5c9022f6a0bb5931ac4c18f00");
 export let TRADER_JOE_BAR_ADDRESS: Address = toAddress("0x57319d41f71e81f3c65f2a47ca4e001ebafd4f33");

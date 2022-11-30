@@ -49,6 +49,11 @@ jobs:
         env:
           ADAPTER: AaveV2
           CONFIG: polygon
+      - name: Build Alpha Homora V2 (Avalanche)
+        run: yarn build:dev
+        env:
+          ADAPTER: AlphaHomoraV2
+          CONFIG: avalanche
       - name: Build Beefy (Polygon)
         run: yarn build:dev
         env:
