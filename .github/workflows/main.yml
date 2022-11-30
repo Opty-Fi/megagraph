@@ -2,10 +2,9 @@ name: Megagraph CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
-
+    branches: [master]
 
 jobs:
   build:
@@ -17,7 +16,7 @@ jobs:
         uses: actions/cache@v2
         id: cache
         with:
-          path: '**/node_modules'
+          path: "**/node_modules"
           key: npm-v2-${{ hashFiles('**/yarn.lock') }}
           restore-keys: npm-v2-
       - name: Install
@@ -124,6 +123,11 @@ jobs:
         env:
           ADAPTER: Mai
           CONFIG: polygon
+      - name: Build Pangolin (Avalanche)
+        run: yarn build:dev
+        env:
+          ADAPTER: Pangolin
+          CONFIG: avalanche
       - name: Build QuickSwap (Polygon)
         run: yarn build:dev
         env:
